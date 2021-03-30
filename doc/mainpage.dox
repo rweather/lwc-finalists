@@ -25,9 +25,9 @@
 \mainpage
 \tableofcontents
 
-This <a href="https://github.com/rweather/lightweight-crypto">repository</a>
-contains implementations of many of the second round submissions to the 
-<a href="https://csrc.nist.gov/projects/lightweight-cryptography/round-2-candidates">NIST lightweight cryptography competition</a>.
+This <a href="https://github.com/rweather/lwc-finalists">repository</a>
+contains implementations of the 10 finalists in the
+<a href="https://csrc.nist.gov/projects/lightweight-cryptography">NIST lightweight cryptography competition</a>: ASCON, Elephant, GIFT-COFB, Grain128-AEAD, ISAP, Photon-Beetle, Romulus, Sparkle, TinyJambu, and Xoodyak.
 
 The implementations here are focused on efficient implementation for 32-bit
 and 8-bit embedded architectures, particularly ARM and AVR.  The reference
@@ -84,7 +84,7 @@ side channel leakage in the code, then please let me know.
 
 The \ref performance "32-bit performance page" contains comparisons of all
 implemented algorithms on ARM Cortex M3 and ESP32 Arduino devices.  The
-32-bit implementations are in plain C.
+32-bit implementations are in plain C with some ARM assembly code.
 
 The \ref performance_avr "AVR performance page" contains comparisons of all
 implemented algorithms on 8-bit AVR platforms, with the assistance of

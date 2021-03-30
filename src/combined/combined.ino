@@ -29,46 +29,18 @@ of flash memory.
 */
 
 #include "aead-common.h"
-#include "ace.h"
-#include "gascon128.h"
 #include "ascon128.h"
 #include "ascon128-masked.h"
-#include "comet.h"
-#include "drygascon.h"
 #include "elephant.h"
-#include "estate.h"
-#include "forkae.h"
 #include "gift-cofb.h"
 #include "gift-cofb-masked.h"
-#include "gimli24.h"
-#include "gimli24-masked.h"
 #include "grain128.h"
-#include "hyena.h"
 #include "isap.h"
-#include "knot.h"
-#include "knot-masked.h"
-#include "lotus-locus.h"
-#include "orange.h"
-#include "oribatida.h"
 #include "photon-beetle.h"
-#include "pyjamask.h"
-#include "pyjamask-masked.h"
 #include "romulus.h"
-#include "saturnin.h"
-#include "skinny-aead.h"
-#include "skinny-hash.h"
 #include "sparkle.h"
-#include "spix.h"
-#include "spix-masked.h"
-#include "spoc.h"
-#include "spoc-masked.h"
-#include "spook.h"
-#include "spook-masked.h"
-#include "subterranean.h"
-#include "sundae-gift.h"
 #include "tinyjambu.h"
 #include "tinyjambu-masked.h"
-#include "wage.h"
 #include "xoodyak.h"
 #include "xoodyak-masked.h"
 #include "internal-blake2s.h"
@@ -495,117 +467,39 @@ void setup()
     hash_16_ref = hash_16_time;
 
     // Run performance tests on the NIST AEAD algorithms.
-    perfCipher(&ace_cipher);
-    perfCipher(&gascon128_cipher);
-    perfCipher(&gascon128a_cipher);
-    perfCipher(&gascon80pq_cipher);
     perfCipher(&ascon128_cipher);
     perfCipher(&ascon128a_cipher);
     perfCipher(&ascon80pq_cipher);
     perfCipher(&ascon128_masked_cipher);
     perfCipher(&ascon128a_masked_cipher);
     perfCipher(&ascon80pq_masked_cipher);
-    perfCipher(&comet_128_cham_cipher);
-    perfCipher(&comet_64_cham_cipher);
-    perfCipher(&comet_64_speck_cipher);
-    perfCipher(&drygascon128k16_cipher);
-    perfCipher(&drygascon128k32_cipher);
-    perfCipher(&drygascon128k56_cipher);
-    perfCipher(&drygascon256_cipher);
-    perfCipher(&estate_twegift_cipher);
-    perfCipher(&forkae_paef_64_192_cipher);
-    perfCipher(&forkae_paef_128_192_cipher);
-    perfCipher(&forkae_paef_128_256_cipher);
-    perfCipher(&forkae_paef_128_288_cipher);
-    perfCipher(&forkae_saef_128_192_cipher);
-    perfCipher(&forkae_saef_128_256_cipher);
     perfCipher(&gift_cofb_cipher);
     perfCipher(&gift_cofb_masked_cipher);
-    perfCipher(&gimli24_cipher);
-    perfCipher(&gimli24_masked_cipher);
     perfCipher(&grain128_aead_cipher);
-    perfCipher(&hyena_v1_cipher);
-    perfCipher(&hyena_v2_cipher);
-    perfCipher(&knot_aead_128_256_cipher);
-    perfCipher(&knot_aead_128_384_cipher);
-    perfCipher(&knot_aead_192_384_cipher);
-    perfCipher(&knot_aead_256_512_cipher);
-    perfCipher(&knot_aead_128_256_masked_cipher);
-    perfCipher(&knot_aead_128_384_masked_cipher);
-    perfCipher(&knot_aead_192_384_masked_cipher);
-    perfCipher(&knot_aead_256_512_masked_cipher);
-    perfCipher(&lotus_aead_cipher);
-    perfCipher(&locus_aead_cipher);
-    perfCipher(&orange_zest_cipher);
-    perfCipher(&oribatida_256_cipher);
-    perfCipher(&oribatida_192_cipher);
-    perfCipher(&pyjamask_128_cipher);
-    perfCipher(&pyjamask_96_cipher);
     perfCipher(&romulus_n1_cipher);
     perfCipher(&romulus_n2_cipher);
     perfCipher(&romulus_n3_cipher);
     perfCipher(&romulus_m1_cipher);
     perfCipher(&romulus_m2_cipher);
     perfCipher(&romulus_m3_cipher);
-    perfCipher(&saturnin_cipher);
-    perfCipherShort(&saturnin_short_cipher, 15);
     perfCipher(&schwaemm_256_128_cipher);
     perfCipher(&schwaemm_192_192_cipher);
     perfCipher(&schwaemm_128_128_cipher);
     perfCipher(&schwaemm_256_256_cipher);
-    perfCipher(&skinny_aead_m1_cipher);
-    perfCipher(&skinny_aead_m2_cipher);
-    perfCipher(&skinny_aead_m3_cipher);
-    perfCipher(&skinny_aead_m4_cipher);
-    perfCipher(&skinny_aead_m5_cipher);
-    perfCipher(&skinny_aead_m6_cipher);
-    perfCipher(&spix_cipher);
-    perfCipher(&spix_masked_cipher);
-    perfCipher(&spoc_128_cipher);
-    perfCipher(&spoc_64_cipher);
-    perfCipher(&spoc_128_masked_cipher);
-    perfCipher(&spoc_64_masked_cipher);
-    perfCipher(&spook_128_512_su_cipher);
-    perfCipher(&spook_128_384_su_cipher);
-    perfCipher(&spook_128_512_mu_cipher);
-    perfCipher(&spook_128_384_mu_cipher);
-    perfCipher(&spook_128_512_su_masked_cipher);
-    perfCipher(&spook_128_384_su_masked_cipher);
-    perfCipher(&spook_128_512_mu_masked_cipher);
-    perfCipher(&spook_128_384_mu_masked_cipher);
-    perfCipher(&subterranean_cipher);
-    perfCipher(&sundae_gift_0_cipher);
-    perfCipher(&sundae_gift_64_cipher);
-    perfCipher(&sundae_gift_96_cipher);
-    perfCipher(&sundae_gift_128_cipher);
     perfCipher(&tiny_jambu_128_cipher);
     perfCipher(&tiny_jambu_192_cipher);
     perfCipher(&tiny_jambu_256_cipher);
     perfCipher(&tiny_jambu_128_masked_cipher);
     perfCipher(&tiny_jambu_192_masked_cipher);
     perfCipher(&tiny_jambu_256_masked_cipher);
-    perfCipher(&wage_cipher);
     perfCipher(&xoodyak_cipher);
     perfCipher(&xoodyak_masked_cipher);
 
     // Run performance tests on the NIST hash algorithms.
-    perfHash(&ace_hash_algorithm);
     perfHash(&ascon_hash_algorithm);
-    perfHash(&drygascon128_hash_algorithm);
-    perfHash(&drygascon256_hash_algorithm);
     perfHash(&esch_256_hash_algorithm);
     perfHash(&esch_384_hash_algorithm);
-    perfHash(&gimli24_hash_algorithm);
-    perfHash(&knot_hash_256_256_algorithm);
-    perfHash(&knot_hash_256_384_algorithm);
-    perfHash(&knot_hash_384_384_algorithm);
-    perfHash(&knot_hash_512_512_algorithm);
-    perfHash(&orangish_hash_algorithm);
     perfHash(&photon_beetle_hash_algorithm);
-    perfHash(&saturnin_hash_algorithm);
-    perfHash(&skinny_tk2_hash_algorithm);
-    perfHash(&skinny_tk3_hash_algorithm);
-    perfHash(&subterranean_hash_algorithm);
     perfHash(&xoodyak_hash_algorithm);
 
     // Algorithms that are very slow.  Adjust loop counters and do them last.
@@ -624,8 +518,6 @@ void setup()
     perfCipher(&isap_keccak_128_cipher);
     perfCipher(&photon_beetle_128_cipher);
     perfCipher(&photon_beetle_32_cipher);
-    perfCipher(&pyjamask_masked_128_cipher);
-    perfCipher(&pyjamask_masked_96_cipher);
 
     // Comparison of masked and unmasked versions of ciphers.
     PERF_LOOPS = DEFAULT_PERF_LOOPS / 10;
@@ -635,20 +527,6 @@ void setup()
     perfMasked(&ascon128a_cipher, &ascon128a_masked_cipher);
     perfMasked(&ascon80pq_cipher, &ascon80pq_masked_cipher);
     perfMasked(&gift_cofb_cipher, &gift_cofb_masked_cipher);
-    perfMasked(&gimli24_cipher, &gimli24_masked_cipher);
-    perfMasked(&knot_aead_128_256_cipher, &knot_aead_128_256_masked_cipher);
-    perfMasked(&knot_aead_128_384_cipher, &knot_aead_128_384_masked_cipher);
-    perfMasked(&knot_aead_192_384_cipher, &knot_aead_192_384_masked_cipher);
-    perfMasked(&knot_aead_256_512_cipher, &knot_aead_256_512_masked_cipher);
-    perfMasked(&pyjamask_128_cipher, &pyjamask_masked_128_cipher);
-    perfMasked(&pyjamask_96_cipher, &pyjamask_masked_96_cipher);
-    perfMasked(&spix_cipher, &spix_masked_cipher);
-    perfMasked(&spoc_128_cipher, &spoc_128_masked_cipher);
-    perfMasked(&spoc_64_cipher, &spoc_64_masked_cipher);
-    perfMasked(&spook_128_512_su_cipher, &spook_128_512_su_masked_cipher);
-    perfMasked(&spook_128_384_su_cipher, &spook_128_384_su_masked_cipher);
-    perfMasked(&spook_128_512_mu_cipher, &spook_128_512_mu_masked_cipher);
-    perfMasked(&spook_128_384_mu_cipher, &spook_128_384_mu_masked_cipher);
     perfMasked(&tiny_jambu_128_cipher, &tiny_jambu_128_masked_cipher);
     perfMasked(&tiny_jambu_192_cipher, &tiny_jambu_192_masked_cipher);
     perfMasked(&tiny_jambu_256_cipher, &tiny_jambu_256_masked_cipher);

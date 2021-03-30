@@ -21,46 +21,18 @@
  */
 
 #include "algorithms.h"
-#include "ace.h"
 #include "ascon128.h"
 #include "ascon128-masked.h"
-#include "comet.h"
-#include "drygascon.h"
 #include "elephant.h"
-#include "estate.h"
-#include "forkae.h"
-#include "gascon128.h"
 #include "gift-cofb.h"
 #include "gift-cofb-masked.h"
-#include "gimli24.h"
-#include "gimli24-masked.h"
 #include "grain128.h"
-#include "hyena.h"
 #include "isap.h"
-#include "knot.h"
-#include "knot-masked.h"
-#include "lotus-locus.h"
-#include "orange.h"
-#include "oribatida.h"
 #include "photon-beetle.h"
-#include "pyjamask.h"
-#include "pyjamask-masked.h"
 #include "romulus.h"
-#include "saturnin.h"
 #include "sparkle.h"
-#include "skinny-aead.h"
-#include "skinny-hash.h"
-#include "spix.h"
-#include "spix-masked.h"
-#include "spoc.h"
-#include "spoc-masked.h"
-#include "spook.h"
-#include "spook-masked.h"
-#include "subterranean.h"
-#include "sundae-gift.h"
 #include "tinyjambu.h"
 #include "tinyjambu-masked.h"
-#include "wage.h"
 #include "xoodyak.h"
 #include "xoodyak-masked.h"
 #include <string.h>
@@ -68,107 +40,40 @@
 
 /* List of all AEAD ciphers that we can run KAT tests for */
 static const aead_cipher_t *const ciphers[] = {
-    &ace_cipher,
     &ascon128_cipher,
     &ascon128a_cipher,
     &ascon80pq_cipher,
     &ascon128_masked_cipher,
     &ascon128a_masked_cipher,
     &ascon80pq_masked_cipher,
-    &comet_128_cham_cipher,
-    &comet_64_cham_cipher,
-    &comet_64_speck_cipher,
-    &drygascon128k16_cipher,
-    &drygascon128k32_cipher,
-    &drygascon128k56_cipher,
-    &drygascon256_cipher,
     &dumbo_cipher,
     &jumbo_cipher,
     &delirium_cipher,
-    &estate_twegift_cipher,
-    &forkae_paef_64_192_cipher,
-    &forkae_paef_128_192_cipher,
-    &forkae_paef_128_256_cipher,
-    &forkae_paef_128_288_cipher,
-    &forkae_saef_128_192_cipher,
-    &forkae_saef_128_256_cipher,
-    &gascon128_cipher,
-    &gascon128a_cipher,
-    &gascon80pq_cipher,
     &gift_cofb_cipher,
     &gift_cofb_masked_cipher,
-    &gimli24_cipher,
-    &gimli24_masked_cipher,
     &grain128_aead_cipher,
-    &hyena_v1_cipher,
-    &hyena_v2_cipher,
     &isap_keccak_128a_cipher,
     &isap_ascon_128a_cipher,
     &isap_keccak_128_cipher,
     &isap_ascon_128_cipher,
-    &knot_aead_128_256_cipher,
-    &knot_aead_128_384_cipher,
-    &knot_aead_192_384_cipher,
-    &knot_aead_256_512_cipher,
-    &knot_aead_128_256_masked_cipher,
-    &knot_aead_128_384_masked_cipher,
-    &knot_aead_192_384_masked_cipher,
-    &knot_aead_256_512_masked_cipher,
-    &locus_aead_cipher,
-    &lotus_aead_cipher,
-    &orange_zest_cipher,
-    &oribatida_256_cipher,
-    &oribatida_192_cipher,
     &photon_beetle_128_cipher,
     &photon_beetle_32_cipher,
-    &pyjamask_128_cipher,
-    &pyjamask_96_cipher,
-    &pyjamask_masked_128_cipher,
-    &pyjamask_masked_96_cipher,
     &romulus_m1_cipher,
     &romulus_m2_cipher,
     &romulus_m3_cipher,
     &romulus_n1_cipher,
     &romulus_n2_cipher,
     &romulus_n3_cipher,
-    &saturnin_cipher,
-    &saturnin_short_cipher,
     &schwaemm_256_128_cipher,
     &schwaemm_192_192_cipher,
     &schwaemm_128_128_cipher,
     &schwaemm_256_256_cipher,
-    &skinny_aead_m1_cipher,
-    &skinny_aead_m2_cipher,
-    &skinny_aead_m3_cipher,
-    &skinny_aead_m4_cipher,
-    &skinny_aead_m5_cipher,
-    &skinny_aead_m6_cipher,
-    &spix_cipher,
-    &spix_masked_cipher,
-    &spoc_128_cipher,
-    &spoc_64_cipher,
-    &spoc_128_masked_cipher,
-    &spoc_64_masked_cipher,
-    &spook_128_512_su_cipher,
-    &spook_128_384_su_cipher,
-    &spook_128_512_mu_cipher,
-    &spook_128_384_mu_cipher,
-    &spook_128_512_su_masked_cipher,
-    &spook_128_384_su_masked_cipher,
-    &spook_128_512_mu_masked_cipher,
-    &spook_128_384_mu_masked_cipher,
-    &subterranean_cipher,
-    &sundae_gift_0_cipher,
-    &sundae_gift_64_cipher,
-    &sundae_gift_96_cipher,
-    &sundae_gift_128_cipher,
     &tiny_jambu_128_cipher,
     &tiny_jambu_192_cipher,
     &tiny_jambu_256_cipher,
     &tiny_jambu_128_masked_cipher,
     &tiny_jambu_192_masked_cipher,
     &tiny_jambu_256_masked_cipher,
-    &wage_cipher,
     &xoodyak_cipher,
     &xoodyak_masked_cipher,
     0
@@ -176,24 +81,11 @@ static const aead_cipher_t *const ciphers[] = {
 
 /* List of all hash algorithms that we can run KAT tests for */
 static const aead_hash_algorithm_t *const hashes[] = {
-    &ace_hash_algorithm,
     &ascon_hash_algorithm,
     &ascon_xof_algorithm,
-    &drygascon128_hash_algorithm,
-    &drygascon256_hash_algorithm,
     &esch_256_hash_algorithm,
     &esch_384_hash_algorithm,
-    &gimli24_hash_algorithm,
-    &knot_hash_256_256_algorithm,
-    &knot_hash_256_384_algorithm,
-    &knot_hash_384_384_algorithm,
-    &knot_hash_512_512_algorithm,
-    &orangish_hash_algorithm,
     &photon_beetle_hash_algorithm,
-    &saturnin_hash_algorithm,
-    &skinny_tk2_hash_algorithm,
-    &skinny_tk3_hash_algorithm,
-    &subterranean_hash_algorithm,
     &xoodyak_hash_algorithm,
     0
 };
