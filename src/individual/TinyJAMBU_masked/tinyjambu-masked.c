@@ -300,12 +300,16 @@ int tiny_jambu_128_masked_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_MASKED_TAG_SIZE;
 
-    /* Unpack the key */
+    /* Unpack the key and invert it */
     aead_random_init();
     mask_input(key[0], le_load_word32(k));
     mask_input(key[1], le_load_word32(k + 4));
     mask_input(key[2], le_load_word32(k + 8));
     mask_input(key[3], le_load_word32(k + 12));
+    mask_not(key[0]);
+    mask_not(key[1]);
+    mask_not(key[2]);
+    mask_not(key[3]);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_masked
@@ -340,12 +344,16 @@ int tiny_jambu_128_masked_aead_decrypt
         return -1;
     *mlen = clen - TINY_JAMBU_MASKED_TAG_SIZE;
 
-    /* Unpack the key */
+    /* Unpack the key and invert it */
     aead_random_init();
     mask_input(key[0], le_load_word32(k));
     mask_input(key[1], le_load_word32(k + 4));
     mask_input(key[2], le_load_word32(k + 8));
     mask_input(key[3], le_load_word32(k + 12));
+    mask_not(key[0]);
+    mask_not(key[1]);
+    mask_not(key[2]);
+    mask_not(key[3]);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_masked
@@ -391,6 +399,18 @@ int tiny_jambu_192_masked_aead_encrypt
     mask_input(key[9],  le_load_word32(k + 12));
     mask_input(key[10], le_load_word32(k + 16));
     mask_input(key[11], le_load_word32(k + 20));
+    mask_not(key[0]);
+    mask_not(key[1]);
+    mask_not(key[2]);
+    mask_not(key[3]);
+    mask_not(key[4]);
+    mask_not(key[5]);
+    mask_not(key[6]);
+    mask_not(key[7]);
+    mask_not(key[8]);
+    mask_not(key[9]);
+    mask_not(key[10]);
+    mask_not(key[11]);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_masked
@@ -439,6 +459,18 @@ int tiny_jambu_192_masked_aead_decrypt
     mask_input(key[9],  le_load_word32(k + 12));
     mask_input(key[10], le_load_word32(k + 16));
     mask_input(key[11], le_load_word32(k + 20));
+    mask_not(key[0]);
+    mask_not(key[1]);
+    mask_not(key[2]);
+    mask_not(key[3]);
+    mask_not(key[4]);
+    mask_not(key[5]);
+    mask_not(key[6]);
+    mask_not(key[7]);
+    mask_not(key[8]);
+    mask_not(key[9]);
+    mask_not(key[10]);
+    mask_not(key[11]);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_masked
@@ -470,7 +502,7 @@ int tiny_jambu_256_masked_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_MASKED_TAG_SIZE;
 
-    /* Unpack the key */
+    /* Unpack the key and invert it */
     aead_random_init();
     mask_input(key[0], le_load_word32(k));
     mask_input(key[1], le_load_word32(k + 4));
@@ -480,6 +512,14 @@ int tiny_jambu_256_masked_aead_encrypt
     mask_input(key[5], le_load_word32(k + 20));
     mask_input(key[6], le_load_word32(k + 24));
     mask_input(key[7], le_load_word32(k + 28));
+    mask_not(key[0]);
+    mask_not(key[1]);
+    mask_not(key[2]);
+    mask_not(key[3]);
+    mask_not(key[4]);
+    mask_not(key[5]);
+    mask_not(key[6]);
+    mask_not(key[7]);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_masked
@@ -514,7 +554,7 @@ int tiny_jambu_256_masked_aead_decrypt
         return -1;
     *mlen = clen - TINY_JAMBU_MASKED_TAG_SIZE;
 
-    /* Unpack the key */
+    /* Unpack the key and invert it */
     aead_random_init();
     mask_input(key[0], le_load_word32(k));
     mask_input(key[1], le_load_word32(k + 4));
@@ -524,6 +564,14 @@ int tiny_jambu_256_masked_aead_decrypt
     mask_input(key[5], le_load_word32(k + 20));
     mask_input(key[6], le_load_word32(k + 24));
     mask_input(key[7], le_load_word32(k + 28));
+    mask_not(key[0]);
+    mask_not(key[1]);
+    mask_not(key[2]);
+    mask_not(key[3]);
+    mask_not(key[4]);
+    mask_not(key[5]);
+    mask_not(key[6]);
+    mask_not(key[7]);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_masked

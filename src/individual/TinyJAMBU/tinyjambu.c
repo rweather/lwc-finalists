@@ -302,11 +302,11 @@ int tiny_jambu_128_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_TAG_SIZE;
 
-    /* Unpack the key */
-    key[0] = le_load_word32(k);
-    key[1] = le_load_word32(k + 4);
-    key[2] = le_load_word32(k + 8);
-    key[3] = le_load_word32(k + 12);
+    /* Unpack the key and invert it for later */
+    key[0] = ~le_load_word32(k);
+    key[1] = ~le_load_word32(k + 4);
+    key[2] = ~le_load_word32(k + 8);
+    key[3] = ~le_load_word32(k + 12);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_128(state, key, npub, ad, adlen);
@@ -376,11 +376,11 @@ int tiny_jambu_128_aead_decrypt
         return -1;
     *mlen = clen - TINY_JAMBU_TAG_SIZE;
 
-    /* Unpack the key */
-    key[0] = le_load_word32(k);
-    key[1] = le_load_word32(k + 4);
-    key[2] = le_load_word32(k + 8);
-    key[3] = le_load_word32(k + 12);
+    /* Unpack the key and invert it for later */
+    key[0] = ~le_load_word32(k);
+    key[1] = ~le_load_word32(k + 4);
+    key[2] = ~le_load_word32(k + 8);
+    key[3] = ~le_load_word32(k + 12);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_128(state, key, npub, ad, adlen);
@@ -448,13 +448,13 @@ int tiny_jambu_192_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_TAG_SIZE;
 
-    /* Unpack the key */
-    key[0] = le_load_word32(k);
-    key[1] = le_load_word32(k + 4);
-    key[2] = le_load_word32(k + 8);
-    key[3] = le_load_word32(k + 12);
-    key[4] = le_load_word32(k + 16);
-    key[5] = le_load_word32(k + 20);
+    /* Unpack the key and invert it for later */
+    key[0] = ~le_load_word32(k);
+    key[1] = ~le_load_word32(k + 4);
+    key[2] = ~le_load_word32(k + 8);
+    key[3] = ~le_load_word32(k + 12);
+    key[4] = ~le_load_word32(k + 16);
+    key[5] = ~le_load_word32(k + 20);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_192(state, key, npub, ad, adlen);
@@ -524,13 +524,13 @@ int tiny_jambu_192_aead_decrypt
         return -1;
     *mlen = clen - TINY_JAMBU_TAG_SIZE;
 
-    /* Unpack the key */
-    key[0] = le_load_word32(k);
-    key[1] = le_load_word32(k + 4);
-    key[2] = le_load_word32(k + 8);
-    key[3] = le_load_word32(k + 12);
-    key[4] = le_load_word32(k + 16);
-    key[5] = le_load_word32(k + 20);
+    /* Unpack the key and invert it for later */
+    key[0] = ~le_load_word32(k);
+    key[1] = ~le_load_word32(k + 4);
+    key[2] = ~le_load_word32(k + 8);
+    key[3] = ~le_load_word32(k + 12);
+    key[4] = ~le_load_word32(k + 16);
+    key[5] = ~le_load_word32(k + 20);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_192(state, key, npub, ad, adlen);
@@ -598,15 +598,15 @@ int tiny_jambu_256_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_TAG_SIZE;
 
-    /* Unpack the key */
-    key[0] = le_load_word32(k);
-    key[1] = le_load_word32(k + 4);
-    key[2] = le_load_word32(k + 8);
-    key[3] = le_load_word32(k + 12);
-    key[4] = le_load_word32(k + 16);
-    key[5] = le_load_word32(k + 20);
-    key[6] = le_load_word32(k + 24);
-    key[7] = le_load_word32(k + 28);
+    /* Unpack the key and invert it for later */
+    key[0] = ~le_load_word32(k);
+    key[1] = ~le_load_word32(k + 4);
+    key[2] = ~le_load_word32(k + 8);
+    key[3] = ~le_load_word32(k + 12);
+    key[4] = ~le_load_word32(k + 16);
+    key[5] = ~le_load_word32(k + 20);
+    key[6] = ~le_load_word32(k + 24);
+    key[7] = ~le_load_word32(k + 28);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_256(state, key, npub, ad, adlen);
@@ -676,15 +676,15 @@ int tiny_jambu_256_aead_decrypt
         return -1;
     *mlen = clen - TINY_JAMBU_TAG_SIZE;
 
-    /* Unpack the key */
-    key[0] = le_load_word32(k);
-    key[1] = le_load_word32(k + 4);
-    key[2] = le_load_word32(k + 8);
-    key[3] = le_load_word32(k + 12);
-    key[4] = le_load_word32(k + 16);
-    key[5] = le_load_word32(k + 20);
-    key[6] = le_load_word32(k + 24);
-    key[7] = le_load_word32(k + 28);
+    /* Unpack the key and invert it for later */
+    key[0] = ~le_load_word32(k);
+    key[1] = ~le_load_word32(k + 4);
+    key[2] = ~le_load_word32(k + 8);
+    key[3] = ~le_load_word32(k + 12);
+    key[4] = ~le_load_word32(k + 16);
+    key[5] = ~le_load_word32(k + 20);
+    key[6] = ~le_load_word32(k + 24);
+    key[7] = ~le_load_word32(k + 28);
 
     /* Set up the TinyJAMBU state with the key, nonce, and associated data */
     tiny_jambu_setup_256(state, key, npub, ad, adlen);
