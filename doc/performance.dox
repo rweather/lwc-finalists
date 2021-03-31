@@ -92,11 +92,11 @@ assembly code.
 <tr><td><b><i>Xoodyak</i></b> (*)</td><td>128</td><td>128</td><td>128</td><td>1.66</td><td>1.51</td><td>1.73</td><td>1.60</td><td>1.62</td></tr>
 <tr><td><b><i>ASCON-128</i></b> (*)</td><td>128</td><td>128</td><td>128</td><td>1.54</td><td>1.44</td><td>1.78</td><td>1.68</td><td>1.61</td></tr>
 <tr><td>ASCON-80pq (*)</td><td>160</td><td>128</td><td>128</td><td>1.52</td><td>1.43</td><td>1.71</td><td>1.65</td><td>1.57</td></tr>
-<tr><td><b><i>TinyJAMBU-128</i></b> (*)</td><td>128</td><td>96</td><td>64</td><td>0.93</td><td>0.95</td><td>1.63</td><td>1.61</td><td>1.21</td></tr>
+<tr><td><b><i>TinyJAMBU-128</i></b> (*)</td><td>128</td><td>96</td><td>64</td><td>0.98</td><td>1.00</td><td>1.80</td><td>1.76</td><td>1.31</td></tr>
 <tr><td>Schwaemm256-256 (SPARKLE) (*)</td><td>256</td><td>256</td><td>256</td><td>1.18</td><td>1.16</td><td>1.15</td><td>1.09</td><td>1.14</td></tr>
+<tr><td>TinyJAMBU-192 (*)</td><td>192</td><td>96</td><td>64</td><td>0.83</td><td>0.85</td><td>1.55</td><td>1.53</td><td>1.12</td></tr>
 <tr><td><b><i>GIFT-COFB</i></b> (*)<td>128</td><td>128</td><td>128</td><td>1.01</td><td>1.01</td><td>1.16</td><td>1.15</td><td>1.08</td></tr>
-<tr><td>TinyJAMBU-192 (*)</td><td>192</td><td>96</td><td>64</td><td>0.81</td><td>0.84</td><td>1.45</td><td>1.44</td><td>1.08</td></tr>
-<tr><td>TinyJAMBU-256 (*)</td><td>256</td><td>96</td><td>64</td><td>0.70</td><td>0.73</td><td>1.28</td><td>1.29</td><td>0.94</td></tr>
+<tr><td>TinyJAMBU-256 (*)</td><td>256</td><td>96</td><td>64</td><td>0.77</td><td>0.79</td><td>1.44</td><td>1.43</td><td>1.04</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.26</td><td>0.26</td><td>0.56</td><td>0.56</td><td>0.37</td></tr>
 <tr><td>Romulus-N3</td><td>128</td><td>96</td><td>128</td><td>0.19</td><td>0.20</td><td>0.30</td><td>0.31</td><td>0.24</td></tr>
 <tr><td>Romulus-N2</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.23</td><td>0.24</td><td>0.19</td></tr>

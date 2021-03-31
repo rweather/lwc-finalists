@@ -111,9 +111,8 @@ void tiny_jambu_permutation_masked
                 /* t2 = (s2 >> 6)  | (s3 << 26) */ \
                 /* t3 = (s2 >> 21) | (s3 << 11) */ \
                 /* t4 = (s2 >> 27) | (s3 << 5)  */ \
-                /* s0 ^= t1 ^ (~(t2 & t3)) ^ t4 ^ k[offset] */ \
+                /* s0 ^= t1 ^ (t2 & t3) ^ t4 ^ k[offset] */ \
                 tiny_jambu_steps_32_masked_all_shares(s0, s1, s2, s3, offset); \
-                mask_not(s0); \
                 mask_and(s0, t2, t3); \
             } while (0)
         tiny_jambu_steps_32_masked(s0, s1, s2, s3, 0);

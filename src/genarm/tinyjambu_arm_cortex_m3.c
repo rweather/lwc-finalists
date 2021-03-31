@@ -98,12 +98,13 @@ static void tinyjambu_steps_32
     printf("\teor\t%s, %s, %s, lsl #5\n",  s0, s0, s3);
 
     /* s0 ^= ~(t2 & t3) */
+    /* Note: We assume that the key is inverted so we can avoid the NOT */
     printf("\tlsr\t%s, %s, #6\n", regs->t0, s2);
     printf("\tlsr\t%s, %s, #21\n", regs->t1, s2);
     printf("\teor\t%s, %s, %s, lsl #26\n", regs->t0, regs->t0, s3);
     printf("\teor\t%s, %s, %s, lsl #11\n", regs->t1, regs->t1, s3);
     binop("and", regs->t0, regs->t1);
-    binop("mvn", regs->t0, regs->t0);
+    /*binop("mvn", regs->t0, regs->t0); -- avoided */
     binop("eor", s0, regs->t0);
 
     /* XOR the key word from a register or memory offset */

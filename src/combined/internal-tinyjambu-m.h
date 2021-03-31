@@ -60,6 +60,10 @@ extern "C" {
  * The number of key words should be 4 for TinyJAMBU-128, 12 for TinyJAMBU-192,
  * and 8 for TinuJAMBU-256.  The TinyJAMBU-192 key is duplicated so that the
  * \a key_words parameter is a multiple of 4.
+ *
+ * \note The words of the \a key must be the inverted version of the
+ * actual key so that we can replace NAND with AND operations when
+ * evaluating the permutation.
  */
 void tiny_jambu_permutation_masked
     (mask_uint32_t state[TINY_JAMBU_MASKED_STATE_SIZE],

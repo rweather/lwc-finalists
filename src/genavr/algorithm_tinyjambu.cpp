@@ -65,6 +65,7 @@ static void gen_tinyjambu_steps_32
     // t2 = (s2 >> 6)  | (s3 << 26);
     // t3 = (s2 >> 21) | (s3 << 11);
     // s0 ^= ~(t2 & t3);
+    // Note: We assume that the key is inverted so we can avoid the NOT.
     code.move(Reg(t, 0, 3), Reg(s2, 1, 3));
     code.move(Reg(t, 3, 1), Reg(s3, 0, 1));
     code.tworeg(Insn::MOV, TEMP_REG, s2.reg(0));
@@ -82,7 +83,7 @@ static void gen_tinyjambu_steps_32
     code.move(Reg(u, 0, 2), Reg(s3, 1, 2));
     code.lsl(Reg(u, 0, 2), 3);
     code.logand(Reg(t, 3, 1), Reg(u, 1, 1));
-    code.lognot(t);
+    // code.lognot(t); -- avoided
     code.logxor(s0, t);
 
     // t4 = (s2 >> 27) | (s3 << 5);
@@ -195,6 +196,22 @@ void gen_tinyjambu256_permutation(Code &code)
     gen_tinyjambu_permutation(code, "tiny_jambu_permutation_256", 8);
 }
 
+/**
+ * \brief Inverts a TinyJAMBU key.
+ *
+ * \param out Output key.
+ * \param in Input key.
+ * \param count Number of bytes in the key.
+ */
+static void invert_key
+    (unsigned char *out, const unsigned char *in, unsigned count)
+{
+    while (count > 0) {
+        *out++ = ~(*in++);
+        --count;
+    }
+}
+
 bool test_tinyjambu128_permutation(Code &code)
 {
     static unsigned char const input[16] = {
@@ -210,8 +227,10 @@ bool test_tinyjambu128_permutation(Code &code)
         0x5c, 0xfe, 0x2b, 0xc4, 0x16, 0x50, 0x1e, 0x36
     };
     unsigned char state[16];
+    unsigned char invkey[16];
     memcpy(state, input, 16);
-    code.exec_tinyjambu(state, 16, key, 16, 1024);
+    invert_key(invkey, key, 16);
+    code.exec_tinyjambu(state, 16, invkey, 16, 1024);
     return !memcmp(output, state, 16);
 }
 
@@ -231,8 +250,10 @@ bool test_tinyjambu192_permutation(Code &code)
         0x4d, 0xba, 0xd7, 0xb0, 0xa6, 0x53, 0x5b, 0x02
     };
     unsigned char state[16];
+    unsigned char invkey[24];
     memcpy(state, input, 16);
-    code.exec_tinyjambu(state, 16, key, 24, 1152);
+    invert_key(invkey, key, 24);
+    code.exec_tinyjambu(state, 16, invkey, 24, 1152);
     return !memcmp(output, state, 16);
 }
 
@@ -253,7 +274,9 @@ bool test_tinyjambu256_permutation(Code &code)
         0xb9, 0x2e, 0x6f, 0xd4, 0x4a, 0x5e, 0x4c, 0xbd
     };
     unsigned char state[16];
+    unsigned char invkey[32];
     memcpy(state, input, 16);
-    code.exec_tinyjambu(state, 16, key, 32, 1280);
+    invert_key(invkey, key, 32);
+    code.exec_tinyjambu(state, 16, invkey, 32, 1280);
     return !memcmp(output, state, 16);
 }

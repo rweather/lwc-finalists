@@ -28,7 +28,6 @@ tiny_jambu_permutation_128:
 	eor	r1, r1, r6, lsl #26
 	eor	ip, ip, r6, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r3, r1
 	eors	r3, r7
 	eor	r4, r4, r5, lsr #15
@@ -40,7 +39,6 @@ tiny_jambu_permutation_128:
 	eor	r1, r1, r3, lsl #26
 	eor	ip, ip, r3, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r4, r1
 	eor	r4, r8
 	eor	r5, r5, r6, lsr #15
@@ -52,7 +50,6 @@ tiny_jambu_permutation_128:
 	eor	r1, r1, r4, lsl #26
 	eor	ip, ip, r4, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r5, r1
 	eor	r5, r9
 	eor	r6, r6, r3, lsr #15
@@ -64,7 +61,6 @@ tiny_jambu_permutation_128:
 	eor	r1, r1, r5, lsl #26
 	eor	ip, ip, r5, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r6, r1
 	eor	r6, r10
 	subs	r2, r2, #1
@@ -104,7 +100,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r6, lsl #26
 	eor	ip, ip, r6, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r3, r1
 	eors	r3, r7
 	eor	r4, r4, r5, lsr #15
@@ -116,7 +111,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r3, lsl #26
 	eor	ip, ip, r3, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r4, r1
 	eor	r4, r8
 	eor	r5, r5, r6, lsr #15
@@ -128,7 +122,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r4, lsl #26
 	eor	ip, ip, r4, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r5, r1
 	eor	r5, r9
 	eor	r6, r6, r3, lsr #15
@@ -140,7 +133,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r5, lsl #26
 	eor	ip, ip, r5, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r6, r1
 	eor	r6, r10
 	subs	r2, r2, #1
@@ -154,7 +146,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r6, lsl #26
 	eor	ip, ip, r6, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r3, r1
 	eor	r3, fp
 	eor	r4, r4, r5, lsr #15
@@ -166,7 +157,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r3, lsl #26
 	eor	ip, ip, r3, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r4, r1
 	eor	r4, lr
 	eor	r5, r5, r6, lsr #15
@@ -178,7 +168,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r4, lsl #26
 	eor	ip, ip, r4, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r5, r1
 	eors	r5, r7
 	eor	r6, r6, r3, lsr #15
@@ -190,7 +179,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r5, lsl #26
 	eor	ip, ip, r5, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r6, r1
 	eor	r6, r8
 	subs	r2, r2, #1
@@ -204,7 +192,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r6, lsl #26
 	eor	ip, ip, r6, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r3, r1
 	eor	r3, r9
 	eor	r4, r4, r5, lsr #15
@@ -216,7 +203,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r3, lsl #26
 	eor	ip, ip, r3, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r4, r1
 	eor	r4, r10
 	eor	r5, r5, r6, lsr #15
@@ -228,7 +214,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r4, lsl #26
 	eor	ip, ip, r4, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r5, r1
 	eor	r5, fp
 	eor	r6, r6, r3, lsr #15
@@ -240,7 +225,6 @@ tiny_jambu_permutation_192:
 	eor	r1, r1, r5, lsl #26
 	eor	ip, ip, r5, lsl #11
 	and	r1, ip
-	mvns	r1, r1
 	eors	r6, r1
 	eor	r6, lr
 	subs	r2, r2, #1
@@ -279,7 +263,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r6, lsl #26
 	eor	ip, ip, r6, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r3, r7
 	eor	r3, r8
 	eor	r4, r4, r5, lsr #15
@@ -291,7 +274,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r3, lsl #26
 	eor	ip, ip, r3, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r4, r7
 	eor	r4, r9
 	eor	r5, r5, r6, lsr #15
@@ -303,7 +285,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r4, lsl #26
 	eor	ip, ip, r4, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r5, r7
 	eor	r5, r10
 	eor	r6, r6, r3, lsr #15
@@ -315,7 +296,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r5, lsl #26
 	eor	ip, ip, r5, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r6, r7
 	eor	r6, fp
 	subs	r2, r2, #1
@@ -329,7 +309,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r6, lsl #26
 	eor	ip, ip, r6, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r3, r7
 	eor	r3, lr
 	eor	r4, r4, r5, lsr #15
@@ -341,7 +320,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r3, lsl #26
 	eor	ip, ip, r3, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r4, r7
 	ldr	r7, [r1, #20]
 	eors	r4, r7
@@ -354,7 +332,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r4, lsl #26
 	eor	ip, ip, r4, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r5, r7
 	ldr	r7, [r1, #24]
 	eors	r5, r7
@@ -367,7 +344,6 @@ tiny_jambu_permutation_256:
 	eor	r7, r7, r5, lsl #26
 	eor	ip, ip, r5, lsl #11
 	and	r7, ip
-	mvns	r7, r7
 	eors	r6, r7
 	ldr	r7, [r1, #28]
 	eors	r6, r7

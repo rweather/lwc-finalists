@@ -55,6 +55,10 @@ extern "C" {
  * \param state TinyJAMBU-128 state to be permuted.
  * \param key Points to the 4 key words.
  * \param rounds The number of rounds to perform.
+ *
+ * \note The words of the \a key must be the inverted version of the
+ * actual key so that we can replace NAND with AND operations when
+ * evaluating the permutation.
  */
 void tiny_jambu_permutation_128
     (uint32_t state[TINY_JAMBU_STATE_SIZE], const uint32_t *key,
@@ -66,6 +70,10 @@ void tiny_jambu_permutation_128
  * \param state TinyJAMBU-192 state to be permuted.
  * \param key Points to the 6 key words.
  * \param rounds The number of rounds to perform.
+ *
+ * \note The words of the \a key must be the inverted version of the
+ * actual key so that we can replace NAND with AND operations when
+ * evaluating the permutation.
  */
 void tiny_jambu_permutation_192
     (uint32_t state[TINY_JAMBU_STATE_SIZE], const uint32_t *key,
@@ -77,6 +85,10 @@ void tiny_jambu_permutation_192
  * \param state TinyJAMBU-256 state to be permuted.
  * \param key Points to the 8 key words.
  * \param rounds The number of rounds to perform.
+ *
+ * \note The words of the \a key must be the inverted version of the
+ * actual key so that we can replace NAND with AND operations when
+ * evaluating the permutation.
  */
 void tiny_jambu_permutation_256
     (uint32_t state[TINY_JAMBU_STATE_SIZE], const uint32_t *key,
