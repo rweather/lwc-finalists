@@ -41,11 +41,11 @@ fairly similar.  Performance figures for 32-bit platforms can be found
 <tr><td><b><i>GIFT-COFB</i></b><td>128</td><td>128</td><td>128</td></td><td>2.61</td><td>2.41</td><td>3.88</td><td>3.70</td><td>2.83</td></tr>
 <tr><td><b><i>ASCON-128</i></b></td><td>128</td><td>128</td><td>128</td><td>2.05</td><td>1.95</td><td>3.65</td><td>3.50</td><td>2.36</td></tr>
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>2.05</td><td>1.95</td><td>3.65</td><td>3.52</td><td>2.36</td></tr>
+<tr><td><b><i>TinyJAMBU-128</i></b></td><td>128</td><td>96</td><td>64</td><td>1.82</td><td>1.77</td><td>4.37</td><td>4.20</td><td>2.25</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>1.89</td><td>1.77</td><td>3.60</td><td>3.52</td><td>2.20</td></tr>
 <tr><td>Romulus-N3</td><td>128</td><td>96</td><td>128</td><td>1.78</td><td>1.72</td><td>4.11</td><td>3.92</td><td>2.17</td></tr>
-<tr><td><b><i>TinyJAMBU-128</i></b></td><td>128</td><td>96</td><td>64</td><td>1.76</td><td>1.71</td><td>4.23</td><td>4.07</td><td>2.17</td></tr>
-<tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>1.59</td><td>1.55</td><td>3.89</td><td>3.75</td><td>1.97</td></tr>
-<tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>1.45</td><td>1.42</td><td>3.60</td><td>3.48</td><td>1.80</td></tr>
+<tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>1.65</td><td>1.60</td><td>4.03</td><td>3.88</td><td>2.04</td></tr>
+<tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>1.50</td><td>1.47</td><td>3.73</td><td>3.59</td><td>1.87</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>1.64</td><td>1.58</td><td>1.99</td><td>1.95</td><td>1.72</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>1.16</td><td>1.15</td><td>2.82</td><td>2.76</td><td>1.45</td></tr>
 <tr><td>Romulus-N2</td><td>128</td><td>96</td><td>128</td><td>1.16</td><td>1.15</td><td>2.69</td><td>2.63</td><td>1.44</td></tr>
@@ -83,7 +83,7 @@ AEAD algorithm rankings:
 <tr><td>44</td><td>SPARKLE</td></tr>
 <tr><td>28</td><td>GIFT-COFB</td></tr>
 <tr><td>23</td><td>ASCON</td></tr>
-<tr><td>21</td><td>TinyJAMBU</td></tr>
+<tr><td>22</td><td>TinyJAMBU</td></tr>
 <tr><td>17</td><td>Xoodyak</td></tr>
 <tr><td>14</td><td>Romulus, PHOTON-Beetle</td></tr>
 <tr><td>7</td><td>Grain-128AEAD</td></tr>

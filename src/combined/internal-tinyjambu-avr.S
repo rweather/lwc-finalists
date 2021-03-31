@@ -97,10 +97,6 @@ tiny_jambu_permutation_128:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r18,r14
 	eor r19,r15
 	eor r22,r24
@@ -190,10 +186,6 @@ tiny_jambu_permutation_128:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r2,r14
 	eor r3,r15
 	eor r4,r24
@@ -283,10 +275,6 @@ tiny_jambu_permutation_128:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r6,r14
 	eor r7,r15
 	eor r8,r24
@@ -376,10 +364,6 @@ tiny_jambu_permutation_128:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r10,r14
 	eor r11,r15
 	eor r12,r24
@@ -415,10 +399,10 @@ tiny_jambu_permutation_128:
 	ldd r0,Z+15
 	eor r13,r0
 	dec r20
-	breq 5390f
+	breq 5374f
 	rjmp 16b
-5390:
-391:
+5374:
+375:
 	st -X,r13
 	st -X,r12
 	st -X,r11
@@ -549,10 +533,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r18,r14
 	eor r19,r15
 	eor r22,r24
@@ -642,10 +622,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r2,r14
 	eor r3,r15
 	eor r4,r24
@@ -735,10 +711,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r6,r14
 	eor r7,r15
 	eor r8,r24
@@ -828,10 +800,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r10,r14
 	eor r11,r15
 	eor r12,r24
@@ -867,9 +835,9 @@ tiny_jambu_permutation_192:
 	ldd r0,Z+15
 	eor r13,r0
 	dec r20
-	brne 5390f
-	rjmp 1139f
-5390:
+	brne 5374f
+	rjmp 1091f
+5374:
 	movw r24,r4
 	movw r16,r6
 	mov r15,r3
@@ -925,10 +893,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r18,r14
 	eor r19,r15
 	eor r22,r24
@@ -1018,10 +982,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r2,r14
 	eor r3,r15
 	eor r4,r24
@@ -1111,10 +1071,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r6,r14
 	eor r7,r15
 	eor r8,r24
@@ -1204,10 +1160,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r10,r14
 	eor r11,r15
 	eor r12,r24
@@ -1243,9 +1195,9 @@ tiny_jambu_permutation_192:
 	ldd r0,Z+7
 	eor r13,r0
 	dec r20
-	brne 5764f
-	rjmp 1139f
-5764:
+	brne 5732f
+	rjmp 1091f
+5732:
 	movw r24,r4
 	movw r16,r6
 	mov r15,r3
@@ -1301,10 +1253,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r18,r14
 	eor r19,r15
 	eor r22,r24
@@ -1394,10 +1342,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r2,r14
 	eor r3,r15
 	eor r4,r24
@@ -1487,10 +1431,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r6,r14
 	eor r7,r15
 	eor r8,r24
@@ -1580,10 +1520,6 @@ tiny_jambu_permutation_192:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r10,r14
 	eor r11,r15
 	eor r12,r24
@@ -1619,10 +1555,10 @@ tiny_jambu_permutation_192:
 	ldd r0,Z+23
 	eor r13,r0
 	dec r20
-	breq 6138f
+	breq 6090f
 	rjmp 16b
-6138:
-1139:
+6090:
+1091:
 	st -X,r13
 	st -X,r12
 	st -X,r11
@@ -1753,10 +1689,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r18,r14
 	eor r19,r15
 	eor r22,r24
@@ -1846,10 +1778,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r2,r14
 	eor r3,r15
 	eor r4,r24
@@ -1939,10 +1867,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r6,r14
 	eor r7,r15
 	eor r8,r24
@@ -2032,10 +1956,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r10,r14
 	eor r11,r15
 	eor r12,r24
@@ -2071,9 +1991,9 @@ tiny_jambu_permutation_256:
 	ldd r0,Z+15
 	eor r13,r0
 	dec r20
-	brne 5390f
-	rjmp 765f
-5390:
+	brne 5374f
+	rjmp 733f
+5374:
 	movw r24,r4
 	movw r16,r6
 	mov r15,r3
@@ -2129,10 +2049,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r18,r14
 	eor r19,r15
 	eor r22,r24
@@ -2222,10 +2138,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r2,r14
 	eor r3,r15
 	eor r4,r24
@@ -2315,10 +2227,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r6,r14
 	eor r7,r15
 	eor r8,r24
@@ -2408,10 +2316,6 @@ tiny_jambu_permutation_256:
 	lsl r16
 	rol r17
 	and r25,r17
-	com r14
-	com r15
-	com r24
-	com r25
 	eor r10,r14
 	eor r11,r15
 	eor r12,r24
@@ -2447,10 +2351,10 @@ tiny_jambu_permutation_256:
 	ldd r0,Z+31
 	eor r13,r0
 	dec r20
-	breq 5764f
+	breq 5732f
 	rjmp 16b
-5764:
-765:
+5732:
+733:
 	st -X,r13
 	st -X,r12
 	st -X,r11
