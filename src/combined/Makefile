@@ -14,7 +14,9 @@ OBJS = \
         ascon128-masked.o \
         ascon-hash.o \
         ascon-xof.o \
-        elephant.o \
+        elephant-delirium.o \
+        elephant-dumbo.o \
+        elephant-jumbo.o \
         gift-cofb.o \
         gift-cofb-masked.o \
 	grain128.o \
@@ -64,7 +66,9 @@ ascon128.o: ascon128.h aead-common.h internal-ascon.h internal-util.h
 ascon128-masked.o: ascon128-masked.h aead-common.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
 ascon-hash.o: ascon128.h aead-common.h internal-ascon.h internal-util.h
 ascon-xof.o: ascon128.h aead-common.h internal-ascon.h internal-util.h
-elephant.o: elephant.h aead-common.h internal-keccakp-200.h internal-spongent.h internal-util.h
+elephant-delirium.o: elephant-delirium.h aead-common.h internal-keccakp-200.h internal-util.h
+elephant-dumbo.o: elephant-dumbo.h aead-common.h internal-spongent.h internal-util.h
+elephant-jumbo.o: elephant-jumbo.h aead-common.h internal-spongent.h internal-util.h
 gift-cofb.o: gift-cofb.h aead-common.h internal-gift128.h internal-gift128-config.h internal-util.h
 gift-cofb-masked.o: gift-cofb.h aead-common.h internal-gift128-m.h internal-gift128-config.h internal-util.h aead-random.h internal-masking.h
 grain128.o: grain128.h internal-grain128.h aead-common.h internal-util.h

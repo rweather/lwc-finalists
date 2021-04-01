@@ -33,12 +33,23 @@ ASCON_MASKED_FILES = \
     internal-ascon-arm-cm3.S \
     internal-ascon-avr.S \
     $(COMMON_MASKING_FILES)
-ELEPHANT_FILES = \
-    elephant.c \
-    elephant.h \
+ELEPHANT_DELIRIUM_FILES = \
+    elephant-delirium.c \
+    elephant-delirium.h \
     internal-keccakp-200.c \
     internal-keccakp-200.h \
     internal-keccakp-200-avr.S \
+    $(COMMON_FILES)
+ELEPHANT_DUMBO_FILES = \
+    elephant-dumbo.c \
+    elephant-dumbo.h \
+    internal-spongent.c \
+    internal-spongent.h \
+    internal-spongent-avr.S \
+    $(COMMON_FILES)
+ELEPHANT_JUMBO_FILES = \
+    elephant-jumbo.c \
+    elephant-jumbo.h \
     internal-spongent.c \
     internal-spongent.h \
     internal-spongent-avr.S \
@@ -141,7 +152,9 @@ XOODYAK_MASKED_FILES = \
 ALL_ALGORITHMS = \
     ascon \
     ascon_masked \
-    elephant \
+    elephant_delirium \
+    elephant_dumbo \
+    elephant_jumbo \
     gift_cofb \
     gift_cofb_masked \
     grain128 \
@@ -164,8 +177,14 @@ ascon:
 ascon_masked:
 	cp $(foreach file,$(ASCON_MASKED_FILES),$(SRCDIR)/$(file)) ASCON_masked
 
-elephant:
-	cp $(foreach file,$(ELEPHANT_FILES),$(SRCDIR)/$(file)) Elephant
+elephant_delirium:
+	cp $(foreach file,$(ELEPHANT_DELIRIUM_FILES),$(SRCDIR)/$(file)) Elephant-Delirium
+
+elephant_dumbo:
+	cp $(foreach file,$(ELEPHANT_DUMBO_FILES),$(SRCDIR)/$(file)) Elephant-Dumbo
+
+elephant_jumbo:
+	cp $(foreach file,$(ELEPHANT_JUMBO_FILES),$(SRCDIR)/$(file)) Elephant-Jumbo
 
 gift_cofb:
 	cp $(foreach file,$(GIFT_COFB_FILES),$(SRCDIR)/$(file)) GIFT-COFB
