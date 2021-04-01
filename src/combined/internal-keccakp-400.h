@@ -20,14 +20,14 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LW_INTERNAL_KECCAK_H
-#define LW_INTERNAL_KECCAK_H
+#ifndef LW_INTERNAL_KECCAKP_400_H
+#define LW_INTERNAL_KECCAKP_400_H
 
 #include "internal-util.h"
 
 /**
- * \file internal-keccak.h
- * \brief Internal implementation of the Keccak-p permutation.
+ * \file internal-keccakp-400.h
+ * \brief Internal implementation of the Keccak-p[400] permutation.
  */
 
 #ifdef __cplusplus
@@ -35,24 +35,9 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the state for the Keccak-p[200] permutation.
- */
-#define KECCAKP_200_STATE_SIZE 25
-
-/**
  * \brief Size of the state for the Keccak-p[400] permutation.
  */
 #define KECCAKP_400_STATE_SIZE 50
-
-/**
- * \brief Structure of the internal state of the Keccak-p[200] permutation.
- */
-typedef union
-{
-    uint8_t A[5][5];    /**< Keccak-p[200] state as a 5x5 array of lanes */
-    uint8_t B[25];      /**< Keccak-p[200] state as a byte array */
-
-} keccakp_200_state_t;
 
 /**
  * \brief Structure of the internal state of the Keccak-p[400] permutation.
@@ -63,13 +48,6 @@ typedef union
     uint8_t B[50];      /**< Keccak-p[400] state as a byte array */
 
 } keccakp_400_state_t;
-
-/**
- * \brief Permutes the Keccak-p[200] state.
- *
- * \param state The Keccak-p[200] state to be permuted.
- */
-void keccakp_200_permute(keccakp_200_state_t *state);
 
 /**
  * \brief Permutes the Keccak-p[400] state, which is assumed to be in

@@ -36,9 +36,9 @@ ASCON_MASKED_FILES = \
 ELEPHANT_FILES = \
     elephant.c \
     elephant.h \
-    internal-keccak.c \
-    internal-keccak.h \
-    internal-keccak-avr.S \
+    internal-keccakp-200.c \
+    internal-keccakp-200.h \
+    internal-keccakp-200-avr.S \
     internal-spongent.c \
     internal-spongent.h \
     internal-spongent-avr.S \
@@ -78,9 +78,9 @@ ISAP_FILES = \
     internal-ascon-arm-cm3.S \
     internal-ascon-avr.S \
     internal-isap.h \
-    internal-keccak.c \
-    internal-keccak.h \
-    internal-keccak-avr.S \
+    internal-keccakp-400.c \
+    internal-keccakp-400.h \
+    internal-keccakp-400-avr.S \
     $(COMMON_FILES)
 PHOTON_BEETLE_FILES = \
     photon-beetle.c \

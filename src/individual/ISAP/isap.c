@@ -21,7 +21,7 @@
  */
 
 #include "isap.h"
-#include "internal-keccak.h"
+#include "internal-keccakp-400.h"
 #include "internal-ascon.h"
 #include <string.h>
 

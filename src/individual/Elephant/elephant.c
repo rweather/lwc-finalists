@@ -21,7 +21,7 @@
  */
 
 #include "elephant.h"
-#include "internal-keccak.h"
+#include "internal-keccakp-200.h"
 #include "internal-spongent.h"
 #include <string.h>
 

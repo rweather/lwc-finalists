@@ -33,7 +33,8 @@ OBJS = \
 	internal-gift128.o \
 	internal-gift128-m.o \
 	internal-grain128.o \
-	internal-keccak.o \
+	internal-keccakp-200.o \
+	internal-keccakp-400.o \
 	internal-photon256.o \
 	internal-skinny128.o \
         internal-sparkle.o \
@@ -63,11 +64,11 @@ ascon128.o: ascon128.h aead-common.h internal-ascon.h internal-util.h
 ascon128-masked.o: ascon128-masked.h aead-common.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
 ascon-hash.o: ascon128.h aead-common.h internal-ascon.h internal-util.h
 ascon-xof.o: ascon128.h aead-common.h internal-ascon.h internal-util.h
-elephant.o: elephant.h aead-common.h internal-keccak.h internal-spongent.h internal-util.h
+elephant.o: elephant.h aead-common.h internal-keccakp-200.h internal-spongent.h internal-util.h
 gift-cofb.o: gift-cofb.h aead-common.h internal-gift128.h internal-gift128-config.h internal-util.h
 gift-cofb-masked.o: gift-cofb.h aead-common.h internal-gift128-m.h internal-gift128-config.h internal-util.h aead-random.h internal-masking.h
 grain128.o: grain128.h internal-grain128.h aead-common.h internal-util.h
-isap.o: isap.h aead-common.h internal-isap.h internal-ascon.h internal-keccak.h internal-util.h
+isap.o: isap.h aead-common.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
 photon-beetle.o: photon-beetle.h internal-photon256.h internal-util.h
 romulus.o: romulus.h internal-skinny128.h aead-common.h internal-util.h
 sparkle.o: sparkle.h internal-sparkle.h aead-common.h internal-util.h
@@ -82,7 +83,8 @@ internal-chachapoly.o: internal-chachapoly.h internal-util.h
 internal-gift128.o: internal-gift128.h internal-gift128-config.h internal-util.h
 internal-gift128-m.o: internal-gift128-m.h internal-gift128-config.h aead-random.h internal-masking.h internal-util.h
 internal-grain128.o: internal-grain128.h internal-util.h
-internal-keccak.o: internal-keccak.h internal-util.h
+internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
+internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
 internal-photon256.o: internal-photon256.h internal-util.h
 internal-skinny128.o: internal-skinny128.h internal-skinnyutil.h internal-util.h
 internal-sparkle.o: internal-sparkle.h internal-util.h

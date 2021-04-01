@@ -1196,6 +1196,10 @@ int main(int argc, char *argv[])
         } else if (!strcmp(argv[1], "Keccak")) {
             gen1 = keccakp_200;
             gen2 = keccakp_400;
+        } else if (!strcmp(argv[1], "Keccakp-200")) {
+            gen1 = keccakp_200;
+        } else if (!strcmp(argv[1], "Keccakp-400")) {
+            gen1 = keccakp_400;
         } else if (!strcmp(argv[1], "PHOTON-256")) {
             gen1 = photon256;
         } else if (!strcmp(argv[1], "SKINNY-128")) {

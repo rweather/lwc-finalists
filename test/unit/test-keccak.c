@@ -20,7 +20,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "internal-keccak.h"
+#include "internal-keccakp-200.h"
+#include "internal-keccakp-400.h"
 #include "test-cipher.h"
 #include <stdio.h>
 #include <string.h>

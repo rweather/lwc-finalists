@@ -56,7 +56,8 @@ generate: $(TARGET)
 	./$(TARGET) GIFT-COFB-128b-fs-20 >../combined/internal-gift128b-small-avr.S
 	./$(TARGET) GIFT-COFB-128b-fs-80 >../combined/internal-gift128b-full-avr.S
 	./$(TARGET) Grain-128 >../combined/internal-grain128-avr.S
-	./$(TARGET) Keccak >../combined/internal-keccak-avr.S
+	./$(TARGET) Keccakp-200 >../combined/internal-keccakp-200-avr.S
+	./$(TARGET) Keccakp-400 >../combined/internal-keccakp-400-avr.S
 	./$(TARGET) PHOTON-256 >../combined/internal-photon256-avr.S
 	./$(TARGET) SKINNY-128 >../combined/internal-skinny128-avr.S
 	./$(TARGET) SPARKLE >../combined/internal-sparkle-avr.S
