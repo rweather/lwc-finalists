@@ -36,9 +36,7 @@ static uint32_t const GIFT128_RC_fixsliced[40] = {
     0xc001a000, 0x14500002, 0x01020181, 0x8000001a
 };
 
-#endif
-
-#if GIFT128_VARIANT != GIFT128_VARIANT_FULL
+#else
 
 /* Round constants for GIFT-128 in the bitsliced representation */
 static uint8_t const GIFT128_RC[40] = {
@@ -98,39 +96,6 @@ static uint8_t const GIFT128_RC[40] = {
 #define PERM3(x) \
     do { \
         PERM3_INNER((x)); \
-    } while (0)
-
-#define INV_PERM3_INNER(x) \
-    do { \
-        mask_swap_move(x, x, 0x00550055, 9); \
-        mask_swap_move(x, x, 0x00003333, 18); \
-        mask_swap_move(x, x, 0x000f000f, 12); \
-        mask_swap_move(x, x, 0x000000ff, 24); \
-    } while (0)
-#define INV_PERM0(x) \
-    do { \
-        mask_uint32_t _x; \
-        mask_ror(_x, (x), 8); \
-        INV_PERM3_INNER(_x); \
-        (x) = _x; \
-    } while (0)
-#define INV_PERM1(x) \
-    do { \
-        mask_uint32_t _x; \
-        mask_ror(_x, (x), 16); \
-        INV_PERM3_INNER(_x); \
-        (x) = _x; \
-    } while (0)
-#define INV_PERM2(x) \
-    do { \
-        mask_uint32_t _x; \
-        mask_ror(_x, (x), 24); \
-        INV_PERM3_INNER(_x); \
-        (x) = _x; \
-    } while (0)
-#define INV_PERM3(x) \
-    do { \
-        INV_PERM3_INNER((x)); \
     } while (0)
 
 #define rotate_mask_top(shift) \
@@ -230,136 +195,6 @@ static uint8_t const GIFT128_RC[40] = {
 #error "Unknown number of shares"
 #endif
 
-/**
- * \brief Converts the GIFT-128 nibble-based representation into word-based.
- *
- * \param output Output buffer to write the word-based version to.
- * \param input Input buffer to read the nibble-based version from.
- *
- * The \a input and \a output buffers can be the same buffer.
- */
-static void gift128n_to_words
-    (unsigned char *output, const unsigned char *input)
-{
-    uint32_t s0, s1, s2, s3;
-
-    /* Load the input buffer into 32-bit words.  We use the nibble order
-     * from the HYENA submission to NIST which is byte-reversed with respect
-     * to the nibble order of the original GIFT-128 paper.  Nibble zero is in
-     * the first byte instead of the last, which means little-endian order. */
-    s0 = le_load_word32(input + 12);
-    s1 = le_load_word32(input + 8);
-    s2 = le_load_word32(input + 4);
-    s3 = le_load_word32(input);
-
-    /* Rearrange the bits so that bits 0..3 of each nibble are
-     * scattered to bytes 0..3 of each word.  The permutation is:
-     *
-     * 0 8 16 24 1 9 17 25 2 10 18 26 3 11 19 27 4 12 20 28 5 13 21 29 6 14 22 30 7 15 23 31
-     *
-     * Generated with "http://programming.sirrida.de/calcperm.php".
-     */
-    #define PERM_WORDS(x) \
-        do { \
-            uint32_t temp; \
-            mask_swap_move_internal(x, x, 0x0a0a0a0a, 3); \
-            mask_swap_move_internal(x, x, 0x00cc00cc, 6); \
-            mask_swap_move_internal(x, x, 0x0000f0f0, 12); \
-            mask_swap_move_internal(x, x, 0x0000ff00, 8); \
-        } while (0)
-    PERM_WORDS(s0);
-    PERM_WORDS(s1);
-    PERM_WORDS(s2);
-    PERM_WORDS(s3);
-
-    /* Rearrange the bytes and write them to the output buffer */
-    output[0]  = (uint8_t)s0;
-    output[1]  = (uint8_t)s1;
-    output[2]  = (uint8_t)s2;
-    output[3]  = (uint8_t)s3;
-    output[4]  = (uint8_t)(s0 >> 8);
-    output[5]  = (uint8_t)(s1 >> 8);
-    output[6]  = (uint8_t)(s2 >> 8);
-    output[7]  = (uint8_t)(s3 >> 8);
-    output[8]  = (uint8_t)(s0 >> 16);
-    output[9]  = (uint8_t)(s1 >> 16);
-    output[10] = (uint8_t)(s2 >> 16);
-    output[11] = (uint8_t)(s3 >> 16);
-    output[12] = (uint8_t)(s0 >> 24);
-    output[13] = (uint8_t)(s1 >> 24);
-    output[14] = (uint8_t)(s2 >> 24);
-    output[15] = (uint8_t)(s3 >> 24);
-}
-
-/**
- * \brief Converts the GIFT-128 word-based representation into nibble-based.
- *
- * \param output Output buffer to write the nibble-based version to.
- * \param input Input buffer to read the word-based version from.
- */
-static void gift128n_to_nibbles
-    (unsigned char *output, const unsigned char *input)
-{
-    uint32_t s0, s1, s2, s3;
-
-    /* Load the input bytes and rearrange them so that s0 contains the
-     * most significant nibbles and s3 contains the least significant */
-    s0 = (((uint32_t)(input[12])) << 24) |
-         (((uint32_t)(input[8]))  << 16) |
-         (((uint32_t)(input[4]))  <<  8) |
-          ((uint32_t)(input[0]));
-    s1 = (((uint32_t)(input[13])) << 24) |
-         (((uint32_t)(input[9]))  << 16) |
-         (((uint32_t)(input[5]))  <<  8) |
-          ((uint32_t)(input[1]));
-    s2 = (((uint32_t)(input[14])) << 24) |
-         (((uint32_t)(input[10])) << 16) |
-         (((uint32_t)(input[6]))  <<  8) |
-          ((uint32_t)(input[2]));
-    s3 = (((uint32_t)(input[15])) << 24) |
-         (((uint32_t)(input[11])) << 16) |
-         (((uint32_t)(input[7]))  <<  8) |
-          ((uint32_t)(input[3]));
-
-    /* Apply the inverse of PERM_WORDS() from the function above */
-    #define INV_PERM_WORDS(x) \
-        do { \
-            uint32_t temp; \
-            mask_swap_move_internal(x, x, 0x00aa00aa, 7); \
-            mask_swap_move_internal(x, x, 0x0000cccc, 14); \
-            mask_swap_move_internal(x, x, 0x00f000f0, 4); \
-            mask_swap_move_internal(x, x, 0x0000ff00, 8); \
-        } while (0)
-    INV_PERM_WORDS(s0);
-    INV_PERM_WORDS(s1);
-    INV_PERM_WORDS(s2);
-    INV_PERM_WORDS(s3);
-
-    /* Store the result into the output buffer as 32-bit words */
-    le_store_word32(output + 12, s0);
-    le_store_word32(output + 8,  s1);
-    le_store_word32(output + 4,  s2);
-    le_store_word32(output,      s3);
-}
-
-void gift128n_encrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    gift128n_to_words(output, input);
-    gift128b_encrypt_masked(ks, output, output);
-    gift128n_to_nibbles(output, output);
-}
-
-void gift128n_decrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    gift128n_to_words(output, input);
-    gift128b_decrypt_masked(ks, output, output);
-    gift128n_to_nibbles(output, output);
-}
-
 #if GIFT128_VARIANT != GIFT128_VARIANT_TINY
 
 /**
@@ -453,18 +288,8 @@ static void gift128b_derive_keys_masked
     }
 }
 
-/**
- * \brief Compute the round keys for GIFT-128 in the fixsliced representation.
- *
- * \param ks Points to the key schedule to initialize.
- * \param k0 First key word.
- * \param k1 Second key word.
- * \param k2 Third key word.
- * \param k3 Fourth key word.
- */
-static void gift128b_compute_round_keys_masked
-    (gift128b_masked_key_schedule_t *ks,
-     uint32_t k0, uint32_t k1, uint32_t k2, uint32_t k3)
+void gift128b_init_masked
+    (gift128b_masked_key_schedule_t *ks, const unsigned char *key)
 {
     uint32_t *k = &(ks->k[0].a);
     unsigned share, index;
@@ -472,10 +297,10 @@ static void gift128b_compute_round_keys_masked
 
     /* Set the regular key with k0 and k3 pre-swapped for the round function */
     aead_random_init();
-    mask_input(ks->k[0], k3);
-    mask_input(ks->k[1], k1);
-    mask_input(ks->k[2], k2);
-    mask_input(ks->k[3], k0);
+    mask_input(ks->k[0], be_load_word32(key + 12));
+    mask_input(ks->k[1], be_load_word32(key + 4));
+    mask_input(ks->k[2], be_load_word32(key + 8));
+    mask_input(ks->k[3], be_load_word32(key));
 
     /* Pre-compute the keys for rounds 3..10 and permute into fixsliced form */
     for (share = 0; share < AEAD_MASKING_SHARES; ++share, ++k) {
@@ -562,23 +387,6 @@ static void gift128b_compute_round_keys_masked
         gift128b_derive_keys_masked(ks->k + index, ks->k + index - 20);
     }
 #endif
-}
-
-void gift128b_init_masked
-    (gift128b_masked_key_schedule_t *ks, const unsigned char *key)
-{
-    gift128b_compute_round_keys_masked
-        (ks, be_load_word32(key), be_load_word32(key + 4),
-             be_load_word32(key + 8), be_load_word32(key + 12));
-}
-
-void gift128n_init_masked
-    (gift128n_masked_key_schedule_t *ks, const unsigned char *key)
-{
-    /* Use the little-endian key byte order from the HYENA submission */
-    gift128b_compute_round_keys_masked
-        (ks, le_load_word32(key + 12), le_load_word32(key + 8),
-             le_load_word32(key + 4), le_load_word32(key));
 }
 
 /**
@@ -892,57 +700,10 @@ void gift128b_init_masked
     mask_input(ks->k[3], be_load_word32(key));
 }
 
-void gift128n_init_masked
-    (gift128n_masked_key_schedule_t *ks, const unsigned char *key)
-{
-    /* Use the little-endian key byte order from the HYENA submission
-     * and mirror the fixslicing word order of 3, 1, 2, 0 */
-    aead_random_init();
-    mask_input(ks->k[0], le_load_word32(key));
-    mask_input(ks->k[1], le_load_word32(key + 8));
-    mask_input(ks->k[2], le_load_word32(key + 4));
-    mask_input(ks->k[3], le_load_word32(key + 12));
-}
-
 #endif /* GIFT128_VARIANT_TINY */
 
 #if GIFT128_VARIANT == GIFT128_VARIANT_SMALL
 
-void gift128b_encrypt_masked
-    (const gift128b_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    const mask_uint32_t *kin = ks->k;
-    const uint32_t *rc = GIFT128_RC_fixsliced;
-    mask_uint32_t s0, s1, s2, s3;
-    mask_uint32_t k[20];
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from big endian */
-    mask_input(s0, be_load_word32(input));
-    mask_input(s1, be_load_word32(input + 4));
-    mask_input(s2, be_load_word32(input + 8));
-    mask_input(s3, be_load_word32(input + 12));
-
-    /* Perform all 40 rounds ten at a time using the fixsliced method */
-    for (round = 0; round < 4; ++round, rc += 10) {
-        gift128b_encrypt_5_rounds(kin, rc);
-        gift128b_encrypt_5_rounds(kin + 10, rc + 5);
-        if (round != 3) {
-            gift128b_derive_keys_masked(k, kin);
-            gift128b_derive_keys_masked(k + 10, kin + 10);
-            kin = k;
-        }
-    }
-
-    /* Pack the state into the ciphertext buffer in big endian */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-}
-
 void gift128b_encrypt_preloaded_masked
     (const gift128b_masked_key_schedule_t *ks, mask_uint32_t output[4],
      const mask_uint32_t input[4])
@@ -976,77 +737,10 @@ void gift128b_encrypt_preloaded_masked
     output[1] = s1;
     output[2] = s2;
     output[3] = s3;
-}
-
-void gift128t_encrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, uint32_t tweak)
-{
-    const mask_uint32_t *kin = ks->k;
-    const uint32_t *rc = GIFT128_RC_fixsliced;
-    mask_uint32_t s0, s1, s2, s3;
-    mask_uint32_t k[20];
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from nibbles */
-    gift128n_to_words(output, input);
-    mask_input(s0, be_load_word32(output));
-    mask_input(s1, be_load_word32(output + 4));
-    mask_input(s2, be_load_word32(output + 8));
-    mask_input(s3, be_load_word32(output + 12));
-
-    /* Perform all 40 rounds ten at a time using the fixsliced method.
-     * Every 5 rounds except the last we add the tweak value to the state */
-    for (round = 0; round < 4; ++round, rc += 10) {
-        gift128b_encrypt_5_rounds(kin, rc);
-        mask_xor_const(s0, tweak);
-        gift128b_encrypt_5_rounds(kin + 10, rc + 5);
-        if (round != 3) {
-            mask_xor_const(s0, tweak);
-            gift128b_derive_keys_masked(k, kin);
-            gift128b_derive_keys_masked(k + 10, kin + 10);
-            kin = k;
-        }
-    }
-
-    /* Pack the state into the ciphertext buffer in nibble form */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-    gift128n_to_nibbles(output, output);
 }
 
 #elif GIFT128_VARIANT == GIFT128_VARIANT_FULL
 
-void gift128b_encrypt_masked
-    (const gift128b_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    const mask_uint32_t *k = ks->k;
-    const uint32_t *rc = GIFT128_RC_fixsliced;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from big endian */
-    mask_input(s0, be_load_word32(input));
-    mask_input(s1, be_load_word32(input + 4));
-    mask_input(s2, be_load_word32(input + 8));
-    mask_input(s3, be_load_word32(input + 12));
-
-    /* Perform all 40 rounds five at a time using the fixsliced method */
-    for (round = 0; round < 8; ++round, k += 10, rc += 5)
-        gift128b_encrypt_5_rounds(k, rc);
-
-    /* Pack the state into the ciphertext buffer in big endian */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-}
-
 void gift128b_encrypt_preloaded_masked
     (const gift128b_masked_key_schedule_t *ks, mask_uint32_t output[4],
      const mask_uint32_t input[4])
@@ -1074,99 +768,7 @@ void gift128b_encrypt_preloaded_masked
     output[3] = s3;
 }
 
-void gift128t_encrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, uint32_t tweak)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    const mask_uint32_t *k = ks->k;
-    const uint32_t *rc = GIFT128_RC_fixsliced;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from nibbles */
-    gift128n_to_words(output, input);
-    mask_input(s0, be_load_word32(output));
-    mask_input(s1, be_load_word32(output + 4));
-    mask_input(s2, be_load_word32(output + 8));
-    mask_input(s3, be_load_word32(output + 12));
-
-    /* Perform all 40 rounds five at a time using the fixsliced method.
-     * Every 5 rounds except the last we add the tweak value to the state */
-    for (round = 0; round < 8; ++round, k += 10, rc += 5) {
-        gift128b_encrypt_5_rounds(k, rc);
-        if (round != 7)
-            mask_xor_const(s0, tweak);
-    }
-
-    /* Pack the state into the ciphertext buffer in nibble form */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-    gift128n_to_nibbles(output, output);
-}
-
 #else /* GIFT128_VARIANT_TINY */
-
-void gift128b_encrypt_masked
-    (const gift128b_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    mask_uint32_t w0, w1, w2, w3, t;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from big endian */
-    mask_input(s0, be_load_word32(input));
-    mask_input(s1, be_load_word32(input + 4));
-    mask_input(s2, be_load_word32(input + 8));
-    mask_input(s3, be_load_word32(input + 12));
-
-    /* The key schedule is initialized with the key itself */
-    w0 = ks->k[3];
-    w1 = ks->k[1];
-    w2 = ks->k[2];
-    w3 = ks->k[0];
-
-    /* Perform all 40 rounds */
-    for (round = 0; round < 40; ++round) {
-        /* SubCells - apply the S-box */
-        mask_and(s1, s0, s2);
-        mask_and(s0, s1, s3);
-        mask_or(s2, s0, s1);
-        mask_xor(s3, s2);
-        mask_xor(s1, s3);
-        mask_not(s3);
-        mask_and(s2, s0, s1);
-        mask_swap(s0, s3);
-
-        /* PermBits - apply the 128-bit permutation */
-        PERM0(s0);
-        PERM1(s1);
-        PERM2(s2);
-        PERM3(s3);
-
-        /* AddRoundKey - XOR in the key schedule and the round constant */
-        mask_xor(s2, w1);
-        mask_xor(s1, w3);
-        mask_xor_const(s3, 0x80000000U ^ GIFT128_RC[round]);
-
-        /* Rotate the key schedule */
-        t = w3;
-        w3 = w2;
-        w2 = w1;
-        w1 = w0;
-        mask_rotate_subwords(w0, t, 2, 4);
-    }
-
-    /* Pack the state into the ciphertext buffer in big endian */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-}
 
 void gift128b_encrypt_preloaded_masked
     (const gift128b_masked_key_schedule_t *ks, mask_uint32_t output[4],
@@ -1227,333 +829,4 @@ void gift128b_encrypt_preloaded_masked
     output[3] = s3;
 }
 
-void gift128t_encrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, uint32_t tweak)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    mask_uint32_t w0, w1, w2, w3, t;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from nibbles */
-    gift128n_to_words(output, input);
-    mask_input(s0, be_load_word32(output));
-    mask_input(s1, be_load_word32(output + 4));
-    mask_input(s2, be_load_word32(output + 8));
-    mask_input(s3, be_load_word32(output + 12));
-
-    /* The key schedule is initialized with the key itself */
-    w0 = ks->k[3];
-    w1 = ks->k[1];
-    w2 = ks->k[2];
-    w3 = ks->k[0];
-
-    /* Perform all 40 rounds */
-    for (round = 0; round < 40; ++round) {
-        /* SubCells - apply the S-box */
-        mask_and(s1, s0, s2);
-        mask_and(s0, s1, s3);
-        mask_or(s2, s0, s1);
-        mask_xor(s3, s2);
-        mask_xor(s1, s3);
-        mask_not(s3);
-        mask_and(s2, s0, s1);
-        mask_swap(s0, s3);
-
-        /* PermBits - apply the 128-bit permutation */
-        PERM0(s0);
-        PERM1(s1);
-        PERM2(s2);
-        PERM3(s3);
-
-        /* AddRoundKey - XOR in the key schedule and the round constant */
-        mask_xor(s2, w1);
-        mask_xor(s1, w3);
-        mask_xor_const(s3, 0x80000000U ^ GIFT128_RC[round]);
-
-        /* AddTweak - XOR in the tweak every 5 rounds except the last */
-        if (((round + 1) % 5) == 0 && round < 39)
-            mask_xor_const(s0, tweak);
-
-        /* Rotate the key schedule */
-        t = w3;
-        w3 = w2;
-        w2 = w1;
-        w1 = w0;
-        mask_rotate_subwords(w0, t, 2, 4);
-    }
-
-    /* Pack the state into the ciphertext buffer in nibble form */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-    gift128n_to_nibbles(output, output);
-}
-
 #endif /* GIFT128_VARIANT_TINY */
-
-#if GIFT128_VARIANT == GIFT128_VARIANT_FULL
-
-void gift128b_decrypt_masked
-    (const gift128b_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    const mask_uint32_t *k = ks->k + 70;
-    const uint32_t *rc = GIFT128_RC_fixsliced + 35;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from big endian */
-    mask_input(s0, be_load_word32(input));
-    mask_input(s1, be_load_word32(input + 4));
-    mask_input(s2, be_load_word32(input + 8));
-    mask_input(s3, be_load_word32(input + 12));
-
-    /* Perform all 40 rounds five at a time using the fixsliced method */
-    for (round = 0; round < 8; ++round, k -= 10, rc -= 5)
-        gift128b_decrypt_5_rounds(k, rc);
-
-    /* Pack the state into the ciphertext buffer in big endian */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-}
-
-void gift128t_decrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, uint32_t tweak)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    const mask_uint32_t *k = ks->k + 70;
-    const uint32_t *rc = GIFT128_RC_fixsliced + 35;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the ciphertext into the state buffer and convert from nibbles */
-    gift128n_to_words(output, input);
-    mask_input(s0, be_load_word32(output));
-    mask_input(s1, be_load_word32(output + 4));
-    mask_input(s2, be_load_word32(output + 8));
-    mask_input(s3, be_load_word32(output + 12));
-
-    /* Perform all 40 rounds five at a time using the fixsliced method.
-     * Every 5 rounds except the first we add the tweak value to the state */
-    for (round = 0; round < 8; ++round, k -= 10, rc -= 5) {
-        gift128b_decrypt_5_rounds(k, rc);
-        if (round != 7)
-            mask_xor_const(s0, tweak);
-    }
-
-    /* Pack the state into the plaintext buffer in nibble form */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-    gift128n_to_nibbles(output, output);
-}
-
-#else /* GIFT128_VARIANT_SMALL || GIFT128_VARIANT_TINY */
-
-/* The small variant uses fixslicing for encryption, but we need to change
- * to bitslicing for decryption because of the difficulty of fast-forwarding
- * the fixsliced key schedule to the end.  So the tiny variant is used for
- * decryption when the small variant is selected.  Since the NIST AEAD modes
- * for GIFT-128 only use the block encrypt operation, the inefficiencies
- * in decryption don't matter all that much */
-
-/**
- * \def gift128b_load_and_forward_schedule()
- * \brief Generate the decryption key at the end of the last round.
- *
- * To do that, we run the block operation forward to determine the
- * final state of the key schedule after the last round:
- *
- * w0 = ks->k[0];
- * w1 = ks->k[1];
- * w2 = ks->k[2];
- * w3 = ks->k[3];
- * for (round = 0; round < 40; ++round) {
- *     temp = w3;
- *     w3 = w2;
- *     w2 = w1;
- *     w1 = w0;
- *     w0 = ((temp & 0xFFFC0000U) >> 2) | ((temp & 0x00030000U) << 14) |
- *          ((temp & 0x00000FFFU) << 4) | ((temp & 0x0000F000U) >> 12);
- * }
- *
- * We can short-cut all of the above by noticing that we don't need
- * to do the word rotations.  Every 4 rounds, the rotation alignment
- * returns to the original position and each word has been rotated
- * by applying the "2 right and 4 left" bit-rotation step to it.
- * We then repeat that 10 times for the full 40 rounds.  The overall
- * effect is to apply a "20 right and 40 left" bit-rotation to every
- * word in the key schedule.  That is equivalent to "4 right and 8 left"
- * on the 16-bit sub-words.
- */
-#if GIFT128_VARIANT != GIFT128_VARIANT_SMALL
-#define gift128b_load_and_forward_schedule() \
-    do { \
-        w0 = ks->k[3]; \
-        w1 = ks->k[1]; \
-        w2 = ks->k[2]; \
-        w3 = ks->k[0]; \
-        mask_rotate_subwords(w0, w0, 4, 8); \
-        mask_rotate_subwords(w1, w1, 4, 8); \
-        mask_rotate_subwords(w2, w2, 4, 8); \
-        mask_rotate_subwords(w3, w3, 4, 8); \
-    } while (0)
-#else
-/* The small variant needs to also undo some of the rotations that were
- * done to generate the fixsliced version of the key schedule */
-#define gift128b_load_and_forward_schedule() \
-    do { \
-        w0 = ks->k[3]; \
-        w1 = ks->k[1]; \
-        w2 = ks->k[2]; \
-        w3 = ks->k[0]; \
-        mask_swap_move(w3, w3, 0x000000FFU, 24); \
-        mask_swap_move(w3, w3, 0x00003333U, 18); \
-        mask_swap_move(w3, w3, 0x000F000FU, 12); \
-        mask_swap_move(w3, w3, 0x00550055U, 9);  \
-        mask_swap_move(w1, w1, 0x000000FFU, 24); \
-        mask_swap_move(w1, w1, 0x00003333U, 18); \
-        mask_swap_move(w1, w1, 0x000F000FU, 12); \
-        mask_swap_move(w1, w1, 0x00550055U, 9);  \
-        mask_swap_move(w2, w2, 0x000000FFU, 24); \
-        mask_swap_move(w2, w2, 0x000F000FU, 12); \
-        mask_swap_move(w2, w2, 0x03030303U, 6);  \
-        mask_swap_move(w2, w2, 0x11111111U, 3);  \
-        mask_swap_move(w0, w0, 0x000000FFU, 24); \
-        mask_swap_move(w0, w0, 0x000F000FU, 12); \
-        mask_swap_move(w0, w0, 0x03030303U, 6);  \
-        mask_swap_move(w0, w0, 0x11111111U, 3);  \
-        mask_rotate_subwords(w0, w0, 4, 8); \
-        mask_rotate_subwords(w1, w1, 4, 8); \
-        mask_rotate_subwords(w2, w2, 4, 8); \
-        mask_rotate_subwords(w3, w3, 4, 8); \
-    } while (0)
-#endif
-
-void gift128b_decrypt_masked
-    (const gift128b_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    mask_uint32_t w0, w1, w2, w3, t;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the ciphertext into the state buffer and convert from big endian */
-    mask_input(s0, be_load_word32(input));
-    mask_input(s1, be_load_word32(input + 4));
-    mask_input(s2, be_load_word32(input + 8));
-    mask_input(s3, be_load_word32(input + 12));
-
-    /* Generate the decryption key at the end of the last round */
-    gift128b_load_and_forward_schedule();
-
-    /* Perform all 40 rounds */
-    for (round = 40; round > 0; --round) {
-        /* Rotate the key schedule backwards */
-        t = w0;
-        w0 = w1;
-        w1 = w2;
-        w2 = w3;
-        mask_rotate_subwords(w3, t, 14, 12);
-
-        /* AddRoundKey - XOR in the key schedule and the round constant */
-        mask_xor(s2, w1);
-        mask_xor(s1, w3);
-        mask_xor_const(s3, 0x80000000U ^ GIFT128_RC[round - 1]);
-
-        /* InvPermBits - apply the inverse of the 128-bit permutation */
-        INV_PERM0(s0);
-        INV_PERM1(s1);
-        INV_PERM2(s2);
-        INV_PERM3(s3);
-
-        /* InvSubCells - apply the inverse of the S-box */
-        mask_swap(s0, s3);
-        mask_and(s2, s0, s1);
-        mask_not(s3);
-        mask_xor(s1, s3);
-        mask_xor(s3, s2);
-        mask_or(s2, s0, s1);
-        mask_and(s0, s1, s3);
-        mask_and(s1, s0, s2);
-    }
-
-    /* Pack the state into the plaintext buffer in big endian */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-}
-
-void gift128t_decrypt_masked
-    (const gift128n_masked_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, uint32_t tweak)
-{
-    mask_uint32_t s0, s1, s2, s3;
-    mask_uint32_t w0, w1, w2, w3, t;
-    uint32_t temp;
-    uint8_t round;
-
-    /* Copy the plaintext into the state buffer and convert from nibbles */
-    gift128n_to_words(output, input);
-    mask_input(s0, be_load_word32(output));
-    mask_input(s1, be_load_word32(output + 4));
-    mask_input(s2, be_load_word32(output + 8));
-    mask_input(s3, be_load_word32(output + 12));
-
-    /* Generate the decryption key at the end of the last round */
-    gift128b_load_and_forward_schedule();
-
-    /* Perform all 40 rounds */
-    for (round = 40; round > 0; --round) {
-        /* Rotate the key schedule backwards */
-        t = w0;
-        w0 = w1;
-        w1 = w2;
-        w2 = w3;
-        mask_rotate_subwords(w3, t, 14, 12);
-
-        /* AddTweak - XOR in the tweak every 5 rounds except the last */
-        if ((round % 5) == 0 && round < 40)
-            mask_xor_const(s0, tweak);
-
-        /* AddRoundKey - XOR in the key schedule and the round constant */
-        mask_xor(s2, w1);
-        mask_xor(s1, w3);
-        mask_xor_const(s3, 0x80000000U ^ GIFT128_RC[round - 1]);
-
-        /* InvPermBits - apply the inverse of the 128-bit permutation */
-        INV_PERM0(s0);
-        INV_PERM1(s1);
-        INV_PERM2(s2);
-        INV_PERM3(s3);
-
-        /* InvSubCells - apply the inverse of the S-box */
-        mask_swap(s0, s3);
-        mask_and(s2, s0, s1);
-        mask_not(s3);
-        mask_xor(s1, s3);
-        mask_xor(s3, s2);
-        mask_or(s2, s0, s1);
-        mask_and(s0, s1, s3);
-        mask_and(s1, s0, s2);
-    }
-
-    /* Pack the state into the plaintext buffer in nibble form */
-    be_store_word32(output,      mask_output(s0));
-    be_store_word32(output + 4,  mask_output(s1));
-    be_store_word32(output + 8,  mask_output(s2));
-    be_store_word32(output + 12, mask_output(s3));
-    gift128n_to_nibbles(output, output);
-}
-
-#endif /* GIFT128_VARIANT_SMALL || GIFT128_VARIANT_TINY */

@@ -52,12 +52,9 @@ interpret.o: code.h
 
 generate: $(TARGET)
 	./$(TARGET) ASCON >../combined/internal-ascon-avr.S
-	./$(TARGET) GIFT-128b-fs-4 >../combined/internal-gift128b-tiny-avr.S
-	./$(TARGET) GIFT-128b-fs-20 >../combined/internal-gift128b-small-avr.S
-	./$(TARGET) GIFT-128b-fs-80 >../combined/internal-gift128b-full-avr.S
-	./$(TARGET) GIFT-128n-fs-4 >../combined/internal-gift128n-tiny-avr.S
-	./$(TARGET) GIFT-128n-fs-20 >../combined/internal-gift128n-small-avr.S
-	./$(TARGET) GIFT-128n-fs-80 >../combined/internal-gift128n-full-avr.S
+	./$(TARGET) GIFT-COFB-128b-fs-4 >../combined/internal-gift128b-tiny-avr.S
+	./$(TARGET) GIFT-COFB-128b-fs-20 >../combined/internal-gift128b-small-avr.S
+	./$(TARGET) GIFT-COFB-128b-fs-80 >../combined/internal-gift128b-full-avr.S
 	./$(TARGET) Grain-128 >../combined/internal-grain128-avr.S
 	./$(TARGET) Keccak >../combined/internal-keccak-avr.S
 	./$(TARGET) PHOTON-256 >../combined/internal-photon256-avr.S

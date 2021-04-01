@@ -1736,10 +1736,11 @@ int main(int argc, char *argv[])
 {
     const char *variant_name;
     const char *order_name;
+    int cofb_only = 0;
 
     /* Determine which variant to generate */
     if (argc < 3) {
-        fprintf(stderr, "Usage: %s (full|small|tiny) (bitsliced|nibble)\n",
+        fprintf(stderr, "Usage: %s (full|small|tiny) (bitsliced|nibble) [cofb-only]\n",
                 argv[0]);
         return 1;
     }
@@ -1760,6 +1761,9 @@ int main(int argc, char *argv[])
         is_nibble_based = 0;
         order_name = "gift128b";
     }
+    if (argc > 3 && !strcmp(argv[3], "cofb-only")) {
+        cofb_only = 1;
+    }
 
     /* Output the file header */
     printf("#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7\n");
@@ -1779,12 +1783,14 @@ int main(int argc, char *argv[])
         gen_rc("rconst");
 
     /* Output the primary GIFT-128 encryption function */
-    function_header(order_name, "encrypt");
-    if (variant != GIFT128_VARIANT_TINY)
-        gen_gift128_encrypt_fixsliced();
-    else
-        gen_gift128_encrypt_tiny();
-    function_footer(order_name, "encrypt");
+    if (!cofb_only) {
+        function_header(order_name, "encrypt");
+        if (variant != GIFT128_VARIANT_TINY)
+            gen_gift128_encrypt_fixsliced();
+        else
+            gen_gift128_encrypt_tiny();
+        function_footer(order_name, "encrypt");
+    }
 
     /* Output the preloaded GIFT-128 encryption function */
     if (!is_nibble_based) {
@@ -1799,14 +1805,16 @@ int main(int argc, char *argv[])
     }
 
     /* Output the primary GIFT-128 decryption function */
-    if (variant == GIFT128_VARIANT_SMALL)
-        gen_rc("rconst");
-    function_header(order_name, "decrypt");
-    if (variant == GIFT128_VARIANT_FULL)
-        gen_gift128_decrypt_fixsliced();
-    else
-        gen_gift128_decrypt_tiny();
-    function_footer(order_name, "decrypt");
+    if (!cofb_only) {
+        if (variant == GIFT128_VARIANT_SMALL)
+            gen_rc("rconst");
+        function_header(order_name, "decrypt");
+        if (variant == GIFT128_VARIANT_FULL)
+            gen_gift128_decrypt_fixsliced();
+        else
+            gen_gift128_decrypt_tiny();
+        function_footer(order_name, "decrypt");
+    }
 
     /* Output the tweaked encryption and decryption functions in nibble mode */
     if (is_nibble_based) {

@@ -143,6 +143,16 @@ static bool gift128b(enum Mode mode)
     return ok;
 }
 
+static bool gift128b_cofb_only(enum Mode mode)
+{
+    bool ok = true;
+    if (!gift128b_setup_key(mode))
+        ok = false;
+    if (!gift128b_encrypt_block_preloaded(mode))
+        ok = false;
+    return ok;
+}
+
 static bool gift128b_setup_key_alt(enum Mode mode)
 {
     Code code;
@@ -418,7 +428,7 @@ static bool gift128b_fs_decrypt_block(enum Mode mode, int num_keys)
     return true;
 }
 
-static bool gift128b_fs(enum Mode mode, int num_keys)
+static bool gift128b_fs(enum Mode mode, int num_keys, bool cofb_only)
 {
     bool ok = true;
     if (mode == Generate) {
@@ -435,11 +445,11 @@ static bool gift128b_fs(enum Mode mode, int num_keys)
     }
     if (!gift128b_fs_setup_key(mode, num_keys))
         ok = false;
-    if (!gift128b_fs_encrypt_block(mode, num_keys))
+    if (!cofb_only && !gift128b_fs_encrypt_block(mode, num_keys))
         ok = false;
     if (!gift128b_fs_encrypt_block_preloaded(mode, num_keys))
         ok = false;
-    if (!gift128b_fs_decrypt_block(mode, num_keys))
+    if (!cofb_only && !gift128b_fs_decrypt_block(mode, num_keys))
         ok = false;
     if (mode == Generate) {
         std::cout << std::endl;
@@ -450,17 +460,32 @@ static bool gift128b_fs(enum Mode mode, int num_keys)
 
 static bool gift128b_fs_4(enum Mode mode)
 {
-    return gift128b_fs(mode, 4);
+    return gift128b_fs(mode, 4, false);
+}
+
+static bool gift128b_fs_4_cofb_only(enum Mode mode)
+{
+    return gift128b_fs(mode, 4, true);
 }
 
 static bool gift128b_fs_20(enum Mode mode)
 {
-    return gift128b_fs(mode, 20);
+    return gift128b_fs(mode, 20, false);
+}
+
+static bool gift128b_fs_20_cofb_only(enum Mode mode)
+{
+    return gift128b_fs(mode, 20, true);
 }
 
 static bool gift128b_fs_80(enum Mode mode)
 {
-    return gift128b_fs(mode, 80);
+    return gift128b_fs(mode, 80, false);
+}
+
+static bool gift128b_fs_80_cofb_only(enum Mode mode)
+{
+    return gift128b_fs(mode, 80, true);
 }
 
 static bool gift128n_fs_setup_key(enum Mode mode, int num_keys)
@@ -1136,6 +1161,8 @@ int main(int argc, char *argv[])
             gen1 = ascon;
         } else if (!strcmp(argv[1], "GIFT-128b")) {
             gen1 = gift128b;
+        } else if (!strcmp(argv[1], "GIFT-COFB-128b")) {
+            gen1 = gift128b_cofb_only;
         } else if (!strcmp(argv[1], "GIFT-128n")) {
             gen1 = gift128n;
         } else if (!strcmp(argv[1], "GIFT-128-alt")) {
@@ -1146,6 +1173,12 @@ int main(int argc, char *argv[])
             gen1 = gift128b_fs_20;
         } else if (!strcmp(argv[1], "GIFT-128b-fs-80")) {
             gen1 = gift128b_fs_80;
+        } else if (!strcmp(argv[1], "GIFT-COFB-128b-fs-4")) {
+            gen1 = gift128b_fs_4_cofb_only;
+        } else if (!strcmp(argv[1], "GIFT-COFB-128b-fs-20")) {
+            gen1 = gift128b_fs_20_cofb_only;
+        } else if (!strcmp(argv[1], "GIFT-COFB-128b-fs-80")) {
+            gen1 = gift128b_fs_80_cofb_only;
         } else if (!strcmp(argv[1], "GIFT-128n-fs-4")) {
             gen1 = gift128n_fs_4;
         } else if (!strcmp(argv[1], "GIFT-128n-fs-20")) {

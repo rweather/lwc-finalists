@@ -42,12 +42,9 @@ check:
 
 generate: all
 	bin/ascon_arm_cortex_m3 >../combined/internal-ascon-arm-cm3.S
-	bin/gift128_arm_cortex_m3 full bitsliced >../combined/internal-gift128b-full-arm-cm3.S
-	bin/gift128_arm_cortex_m3 small bitsliced >../combined/internal-gift128b-small-arm-cm3.S
-	bin/gift128_arm_cortex_m3 tiny bitsliced >../combined/internal-gift128b-tiny-arm-cm3.S
-	bin/gift128_arm_cortex_m3 full nibble >../combined/internal-gift128n-full-arm-cm3.S
-	bin/gift128_arm_cortex_m3 small nibble >../combined/internal-gift128n-small-arm-cm3.S
-	bin/gift128_arm_cortex_m3 tiny nibble >../combined/internal-gift128n-tiny-arm-cm3.S
+	bin/gift128_arm_cortex_m3 full bitsliced cofb-only >../combined/internal-gift128b-full-arm-cm3.S
+	bin/gift128_arm_cortex_m3 small bitsliced cofb-only >../combined/internal-gift128b-small-arm-cm3.S
+	bin/gift128_arm_cortex_m3 tiny bitsliced cofb-only >../combined/internal-gift128b-tiny-arm-cm3.S
 	bin/tinyjambu_arm_cortex_m3 >../combined/internal-tinyjambu-arm-cm3.S
 	bin/sparkle_arm_cortex_m3 >../combined/internal-sparkle-arm-cm3.S
 	bin/xoodoo_arm_cortex_m3 >../combined/internal-xoodoo-arm-cm3.S
