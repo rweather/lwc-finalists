@@ -31,14 +31,14 @@ static block_cipher_t const skinny128_256 = {
     sizeof(skinny_128_256_key_schedule_t),
     (block_cipher_init_t)skinny_128_256_init,
     (block_cipher_encrypt_t)skinny_128_256_encrypt,
-    (block_cipher_decrypt_t)skinny_128_256_decrypt
+    (block_cipher_decrypt_t)0
 };
 static block_cipher_t const skinny128_384 = {
     "SKINNY-128-384",
     sizeof(skinny_128_384_key_schedule_t),
     (block_cipher_init_t)skinny_128_384_init,
     (block_cipher_encrypt_t)skinny_128_384_encrypt,
-    (block_cipher_decrypt_t)skinny_128_384_decrypt
+    (block_cipher_decrypt_t)0
 };
 
 /* Test vectors for SKINNY-128 from https://eprint.iacr.org/2016/660.pdf */
