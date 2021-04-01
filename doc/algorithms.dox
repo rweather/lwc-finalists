@@ -185,7 +185,7 @@ This library also provides a masked implementation of ASCON.
 
 \section alg_elephant Elephant
 
-<b>Definition:</b> \ref elephant.h
+<b>Definition:</b> \ref elephant-delirium.h, \ref elephant-dumbo.h, \ref elephant-jumbo.h
 
 Elephant is a family of authenticated encryption algorithms based
 around the Spongent-pi and Keccak permutations.

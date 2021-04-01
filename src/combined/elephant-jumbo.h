@@ -26,7 +26,7 @@
 #include "aead-common.h"
 
 /**
- * \file elephant.h
+ * \file elephant-jumbo.h
  * \brief Jumbo authenticated encryption algorithm.
  *
  * Jumbo has a 128-bit key, a 96-bit nonce, and a 64-bit authentication
