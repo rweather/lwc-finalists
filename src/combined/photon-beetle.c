@@ -45,19 +45,6 @@ aead_cipher_t const photon_beetle_32_cipher = {
     photon_beetle_32_aead_decrypt
 };
 
-aead_hash_algorithm_t const photon_beetle_hash_algorithm = {
-    "PHOTON-Beetle-HASH",
-    sizeof(int),
-    PHOTON_BEETLE_HASH_SIZE,
-    AEAD_FLAG_NONE,
-    photon_beetle_hash,
-    (aead_hash_init_t)0,
-    (aead_hash_update_t)0,
-    (aead_hash_finalize_t)0,
-    (aead_xof_absorb_t)0,
-    (aead_xof_squeeze_t)0
-};
-
 /**
  * \brief Rate of operation for PHOTON-Beetle-AEAD-ENC-128.
  */
@@ -393,59 +380,4 @@ int photon_beetle_32_aead_decrypt
     /* Check the authentication tag */
     photon256_permute(state);
     return aead_check_tag(m, clen, state, c + clen, PHOTON_BEETLE_TAG_SIZE);
-}
-
-int photon_beetle_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
-{
-    unsigned char state[PHOTON256_STATE_SIZE];
-    unsigned temp;
-
-    /* Absorb the input data */
-    if (inlen == 0) {
-        /* No input data at all */
-        memset(state, 0, sizeof(state) - 1);
-        state[PHOTON256_STATE_SIZE - 1] = DOMAIN(1);
-    } else if (inlen <= PHOTON_BEETLE_128_RATE) {
-        /* Only one block of input data, which may require padding */
-        temp = (unsigned)inlen;
-        memcpy(state, in, temp);
-        memset(state + temp, 0, sizeof(state) - temp - 1);
-        if (temp < PHOTON_BEETLE_128_RATE) {
-            state[temp] = 0x01;
-            state[PHOTON256_STATE_SIZE - 1] = DOMAIN(1);
-        } else {
-            state[PHOTON256_STATE_SIZE - 1] = DOMAIN(2);
-        }
-    } else {
-        /* Initialize the state with the first block, then absorb the rest */
-        memcpy(state, in, PHOTON_BEETLE_128_RATE);
-        memset(state + PHOTON_BEETLE_128_RATE, 0,
-               sizeof(state) - PHOTON_BEETLE_128_RATE);
-        in += PHOTON_BEETLE_128_RATE;
-        inlen -= PHOTON_BEETLE_128_RATE;
-        while (inlen > PHOTON_BEETLE_32_RATE) {
-            photon256_permute(state);
-            lw_xor_block(state, in, PHOTON_BEETLE_32_RATE);
-            in += PHOTON_BEETLE_32_RATE;
-            inlen -= PHOTON_BEETLE_32_RATE;
-        }
-        photon256_permute(state);
-        temp = (unsigned)inlen;
-        if (temp == PHOTON_BEETLE_32_RATE) {
-            lw_xor_block(state, in, PHOTON_BEETLE_32_RATE);
-            state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
-        } else {
-            lw_xor_block(state, in, temp);
-            state[temp] ^= 0x01;
-            state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
-        }
-    }
-
-    /* Generate the output hash */
-    photon256_permute(state);
-    memcpy(out, state, 16);
-    photon256_permute(state);
-    memcpy(out + 16, state, 16);
-    return 0;
 }

@@ -22,6 +22,7 @@ OBJS = \
 	grain128.o \
         isap.o \
         photon-beetle.o \
+        photon-beetle-hash.o \
         romulus.o \
         sparkle.o \
         tinyjambu.o \
@@ -74,6 +75,7 @@ gift-cofb-masked.o: gift-cofb.h aead-common.h internal-gift128-m.h internal-gift
 grain128.o: grain128.h internal-grain128.h aead-common.h internal-util.h
 isap.o: isap.h aead-common.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
 photon-beetle.o: photon-beetle.h internal-photon256.h internal-util.h
+photon-beetle-hash.o: photon-beetle.h internal-photon256.h internal-util.h
 romulus.o: romulus.h internal-skinny128.h aead-common.h internal-util.h
 sparkle.o: sparkle.h internal-sparkle.h aead-common.h internal-util.h
 tinyjambu.o: tinyjambu.h internal-tinyjambu.h aead-common.h internal-util.h
