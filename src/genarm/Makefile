@@ -9,6 +9,7 @@ LDFLAGS += $(COMMON_LDFLAGS)
 TARGETS = \
 	bin/ascon_arm_cortex_m3 \
 	bin/gift128_arm_cortex_m3 \
+	bin/keccakp_200_arm_cortex_m3 \
 	bin/tinyjambu_arm_cortex_m3 \
 	bin/sparkle_arm_cortex_m3 \
 	bin/xoodoo_arm_cortex_m3
@@ -20,6 +21,10 @@ bin/ascon_arm_cortex_m3: ascon_arm_cortex_m3.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 bin/gift128_arm_cortex_m3: gift128_arm_cortex_m3.c
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+bin/keccakp_200_arm_cortex_m3: keccakp_200_arm_cortex_m3.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -45,6 +50,7 @@ generate: all
 	bin/gift128_arm_cortex_m3 full bitsliced cofb-only >../combined/internal-gift128b-full-arm-cm3.S
 	bin/gift128_arm_cortex_m3 small bitsliced cofb-only >../combined/internal-gift128b-small-arm-cm3.S
 	bin/gift128_arm_cortex_m3 tiny bitsliced cofb-only >../combined/internal-gift128b-tiny-arm-cm3.S
+	bin/keccakp_200_arm_cortex_m3 >../combined/internal-keccakp-200-arm-cm3.S
 	bin/tinyjambu_arm_cortex_m3 >../combined/internal-tinyjambu-arm-cm3.S
 	bin/sparkle_arm_cortex_m3 >../combined/internal-sparkle-arm-cm3.S
 	bin/xoodoo_arm_cortex_m3 >../combined/internal-xoodoo-arm-cm3.S

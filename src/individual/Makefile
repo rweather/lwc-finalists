@@ -38,6 +38,7 @@ ELEPHANT_DELIRIUM_FILES = \
     elephant-delirium.h \
     internal-keccakp-200.c \
     internal-keccakp-200.h \
+    internal-keccakp-200-arm-cm3.S \
     internal-keccakp-200-avr.S \
     $(COMMON_FILES)
 ELEPHANT_DUMBO_FILES = \

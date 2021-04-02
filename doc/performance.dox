@@ -98,6 +98,7 @@ assembly code.
 <tr><td><b><i>GIFT-COFB</i></b> (*)<td>128</td><td>128</td><td>128</td><td>1.01</td><td>1.01</td><td>1.16</td><td>1.15</td><td>1.08</td></tr>
 <tr><td>TinyJAMBU-256 (*)</td><td>256</td><td>96</td><td>64</td><td>0.77</td><td>0.79</td><td>1.44</td><td>1.43</td><td>1.04</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.26</td><td>0.26</td><td>0.56</td><td>0.56</td><td>0.37</td></tr>
+<tr><td>Delirium (Elephant) (*)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33</td></tr>
 <tr><td>Romulus-N3</td><td>128</td><td>96</td><td>128</td><td>0.19</td><td>0.20</td><td>0.30</td><td>0.31</td><td>0.24</td></tr>
 <tr><td>Romulus-N2</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.23</td><td>0.24</td><td>0.19</td></tr>
 <tr><td><b><i>Romulus-N1</i></b></td><td>128</td><td>128</td><td>128</td><td>0.15</td><td>0.17</td><td>0.21</td><td>0.22</td><td>0.19</td></tr>
@@ -107,7 +108,6 @@ assembly code.
 <tr><td>Romulus-M1</td><td>128</td><td>128</td><td>128</td><td>0.10</td><td>0.11</td><td>0.15</td><td>0.16</td><td>0.13</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.06</td><td>0.07</td><td>0.11</td><td>0.12</td><td>0.08</td></tr>
 <tr><td>ISAP-A-128 (*)</td><td>128</td><td>128</td><td>128</td><td>0.08</td><td>0.08</td><td>0.03</td><td>0.04</td><td>0.05</td></tr>
-<tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.04</td><td>0.05</td><td>0.06</td><td>0.07</td><td>0.05</td></tr>
 <tr><td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.02</td><td>0.02</td><td>0.05</td><td>0.05</td><td>0.03</td></tr>
 <tr><td><b><i>ISAP-K-128A</i></b></td><td>128</td><td>128</td><td>128</td><td>0.02</td><td>0.02</td><td>0.01</td><td>0.01</td><td>0.02</td></tr>
 <tr><td><b><i>Dumbo</i></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.02</td></tr>
@@ -138,15 +138,16 @@ where the architectural differences gives some algorithms an added advantage.
 <tr><td><b><i>Schwaemm256-128</i></b> (SPARKLE)</td><td>128</td><td>256</td><td>128</td><td>1.11</td><td>1.09</td><td>1.04</td><td>1.04</td><td>1.06</td></tr>
 <tr><td>Schwaemm192-192 (SPARKLE)</td><td>192</td><td>192</td><td>192</td><td>0.87</td><td>0.90</td><td>1.02</td><td>1.00</td><td>0.95</td></tr>
 <tr><td>ASCON-128a</td><td>128</td><td>128</td><td>128</td><td>0.86</td><td>0.88</td><td>0.92</td><td>0.93</td><td>0.90</td></tr>
+<tr><td><b><i>TinyJAMBU-128</i></b></td><td>128</td><td>96</td><td>64</td><td>0.64</td><td>0.68</td><td>1.23</td><td>1.22</td><td>0.88</td></tr>
 <tr><td><b><i>GIFT-COFB</i></b></td><td>128</td><td>128</td><td>128</td><td>0.80</td><td>0.83</td><td>0.90</td><td>0.90</td><td>0.86</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>0.84</td><td>0.86</td><td>0.80</td><td>0.82</td><td>0.83</td></tr>
-<tr><td><b><i>TinyJAMBU-128</i></b></td><td>128</td><td>96</td><td>64</td><td>0.60</td><td>0.64</td><td>1.16</td><td>1.15</td><td>0.83</td></tr>
-<tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.54</td><td>0.58</td><td>1.06</td><td>1.06</td><td>0.75</td></tr>
+<tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.57</td><td>0.61</td><td>1.11</td><td>1.11</td><td>0.79</td></tr>
 <tr><td>Schwaemm256-256 (SPARKLE)</td><td>256</td><td>256</td><td>256</td><td>0.77</td><td>0.78</td><td>0.70</td><td>0.70</td><td>0.73</td></tr>
-<tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>0.47</td><td>0.51</td><td>0.94</td><td>0.95</td><td>0.67</td></tr>
+<tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>0.49</td><td>0.53</td><td>0.98</td><td>0.98</td><td>0.69</td></tr>
 <tr><td><b><i>ASCON-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.67</td><td>0.46</td><td>0.86</td><td>0.66</td><td>0.63</td></tr>
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>0.67</td><td>0.44</td><td>0.84</td><td>0.61</td><td>0.61</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.33</td><td>0.30</td><td>0.65</td><td>0.59</td><td>0.43</td></tr>
+<tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.22</td><td>0.24</td><td>0.19</td></tr>
 <tr><td>Romulus-N3</td><td>128</td><td>96</td><td>128</td><td>0.10</td><td>0.12</td><td>0.17</td><td>0.19</td><td>0.14</td></tr>
 <tr><td>Romulus-N2</td><td>128</td><td>96</td><td>128</td><td>0.09</td><td>1.10</td><td>0.13</td><td>0.14</td><td>0.11</td></tr>
 <tr><td><b><i>Romulus-N1</i></b></td><td>128</td><td>128</td><td>128</td><td>0.09</td><td>0.10</td><td>0.12</td><td>0.13</td><td>0.11</td></tr>
@@ -155,7 +156,6 @@ where the architectural differences gives some algorithms an added advantage.
 <tr><td>Romulus-M2</td><td>128</td><td>96</td><td>128</td><td>0.06</td><td>0.07</td><td>0.09</td><td>0.10</td><td>0.08</td></tr>
 <tr><td>Romulus-M1</td><td>128</td><td>128</td><td>128</td><td>0.06</td><td>0.07</td><td>0.09</td><td>0.10</td><td>0.08</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.10</td><td>0.11</td><td>0.08</td></tr>
-<tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.05</td><td>0.06</td><td>0.07</td><td>0.08</td><td>0.06</td></tr>
 <tr><td><b><i>ISAP-K-128A</i></b></td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.02</td><td>0.02</td><td>0.02</td></tr>
 <tr><td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.01</td><td>0.02</td><td>0.02</td></tr>
 <tr><td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.01</td><td>0.02</td><td>0.04</td><td>0.04</td><td>0.02</td></tr>

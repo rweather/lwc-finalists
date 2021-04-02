@@ -22,7 +22,16 @@
 
 #include "internal-keccakp-200.h"
 
-#if !defined(__AVR__)
+/* Determine if Keccak-p[200] should be accelerated with assembly code */
+#if defined(__AVR__)
+#define KECCAKP_200_ASM 1
+#elif defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+#define KECCAKP_200_ASM 1
+#else
+#define KECCAKP_200_ASM 0
+#endif
+
+#if !KECCAKP_200_ASM
 
 /* Define to 1 to select the optimised 32-bit version of Keccak-p[200] */
 #define KECCAKP_200_OPT32 1
@@ -482,4 +491,4 @@ void keccakp_200_permute(keccakp_200_state_t *state)
 
 #endif /* !KECCAKP_200_OPT32 && !KECCAKP_200_OPT64 */
 
-#endif /* !__AVR__ */
+#endif /* !KECCAKP_200_ASM */
