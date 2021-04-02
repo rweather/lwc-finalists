@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['schwaemm_5f128_5f128_5fkey_5fsize',['SCHWAEMM_128_128_KEY_SIZE',['../sparkle_8h.html#a19afa831c822834439f72f77a92434ed',1,'sparkle.h']]],
+  ['schwaemm_5f128_5f128_5fnonce_5fsize',['SCHWAEMM_128_128_NONCE_SIZE',['../sparkle_8h.html#ad013633ede6ebbb12384fe42e83e27d7',1,'sparkle.h']]],
+  ['schwaemm_5f128_5f128_5ftag_5fsize',['SCHWAEMM_128_128_TAG_SIZE',['../sparkle_8h.html#a2ea734e9c6f1ff111fdc318d247e16e1',1,'sparkle.h']]],
+  ['schwaemm_5f192_5f192_5fkey_5fsize',['SCHWAEMM_192_192_KEY_SIZE',['../sparkle_8h.html#a6a33cc9dfecd2798494c2fd0d15403a3',1,'sparkle.h']]],
+  ['schwaemm_5f192_5f192_5fnonce_5fsize',['SCHWAEMM_192_192_NONCE_SIZE',['../sparkle_8h.html#ab065ad488b98b1180a4c6f504ed35304',1,'sparkle.h']]],
+  ['schwaemm_5f192_5f192_5ftag_5fsize',['SCHWAEMM_192_192_TAG_SIZE',['../sparkle_8h.html#a064f49cf800bb6bb09218a2006563466',1,'sparkle.h']]],
+  ['schwaemm_5f256_5f128_5fkey_5fsize',['SCHWAEMM_256_128_KEY_SIZE',['../sparkle_8h.html#a27c994d66e9f9ac1b422a302bfa858f9',1,'sparkle.h']]],
+  ['schwaemm_5f256_5f128_5fnonce_5fsize',['SCHWAEMM_256_128_NONCE_SIZE',['../sparkle_8h.html#aec5d9da7bcba2187cfe6936df9b270b9',1,'sparkle.h']]],
+  ['schwaemm_5f256_5f128_5ftag_5fsize',['SCHWAEMM_256_128_TAG_SIZE',['../sparkle_8h.html#aeb3b0b2faf0fad43d1697a97b2ebbfe1',1,'sparkle.h']]],
+  ['schwaemm_5f256_5f256_5fkey_5fsize',['SCHWAEMM_256_256_KEY_SIZE',['../sparkle_8h.html#ac7beccfbb69fb74c351a1b36833f1e46',1,'sparkle.h']]],
+  ['schwaemm_5f256_5f256_5fnonce_5fsize',['SCHWAEMM_256_256_NONCE_SIZE',['../sparkle_8h.html#a4625028203a96a99037e1383b2c03004',1,'sparkle.h']]],
+  ['schwaemm_5f256_5f256_5ftag_5fsize',['SCHWAEMM_256_256_TAG_SIZE',['../sparkle_8h.html#a0e42d91ec395cf46481c1240091bd1c8',1,'sparkle.h']]],
+  ['skinny_5f128_5f256_5frounds',['SKINNY_128_256_ROUNDS',['../internal-skinny128_8h.html#ab7839829b5d51a753a0b0d5c3591fe3d',1,'internal-skinny128.h']]],
+  ['skinny_5f128_5f384_5frounds',['SKINNY_128_384_ROUNDS',['../internal-skinny128_8h.html#a581f88323f87d8431f85b37d8c9849d8',1,'internal-skinny128.h']]],
+  ['skinny_5f128_5fblock_5fsize',['SKINNY_128_BLOCK_SIZE',['../internal-skinny128_8h.html#a7009d76b39577d0e0302b976568c5cf5',1,'internal-skinny128.h']]],
+  ['skinny_5f128_5fsmall_5fschedule',['SKINNY_128_SMALL_SCHEDULE',['../internal-skinny128_8h.html#a2ea256f6ee218ae968ca0eb71d691ad0',1,'internal-skinny128.h']]],
+  ['sparkle_5f256_5fstate_5fsize',['SPARKLE_256_STATE_SIZE',['../internal-sparkle_8h.html#a4aaa77b483ba02db49d559f01edf4c49',1,'internal-sparkle.h']]],
+  ['sparkle_5f384_5fstate_5fsize',['SPARKLE_384_STATE_SIZE',['../internal-sparkle_8h.html#aa759ba6e42456a0d40e827eac48335a3',1,'internal-sparkle.h']]],
+  ['sparkle_5f512_5fstate_5fsize',['SPARKLE_512_STATE_SIZE',['../internal-sparkle_8h.html#a2c848a045e79b1c9962ca6189079d753',1,'internal-sparkle.h']]],
+  ['spongent160_5fstate_5fsize',['SPONGENT160_STATE_SIZE',['../internal-spongent_8h.html#af8dea11d6dc0d4912a240f911c74ef89',1,'internal-spongent.h']]],
+  ['spongent176_5fstate_5fsize',['SPONGENT176_STATE_SIZE',['../internal-spongent_8h.html#aeb571b31ec890cfc0991a0e9902285b5',1,'internal-spongent.h']]]
+];

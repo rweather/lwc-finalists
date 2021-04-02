@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['schwaemm_5f128_5f128_5faead_5fdecrypt',['schwaemm_128_128_aead_decrypt',['../sparkle_8h.html#a2a7d23f1c0d75f849b7f1d875ace7160',1,'sparkle.c']]],
+  ['schwaemm_5f128_5f128_5faead_5fencrypt',['schwaemm_128_128_aead_encrypt',['../sparkle_8h.html#aae7ca156b78ed3a83e9dc2b2ab326920',1,'sparkle.c']]],
+  ['schwaemm_5f192_5f192_5faead_5fdecrypt',['schwaemm_192_192_aead_decrypt',['../sparkle_8h.html#a1441ae441101b7123b82f3f6bf595e83',1,'sparkle.c']]],
+  ['schwaemm_5f192_5f192_5faead_5fencrypt',['schwaemm_192_192_aead_encrypt',['../sparkle_8h.html#a41cd61d9029e2a61b92cae945c76bab7',1,'sparkle.c']]],
+  ['schwaemm_5f256_5f128_5faead_5fdecrypt',['schwaemm_256_128_aead_decrypt',['../sparkle_8h.html#a42caa97b2e0868b0a5188d868ac42195',1,'sparkle.c']]],
+  ['schwaemm_5f256_5f128_5faead_5fencrypt',['schwaemm_256_128_aead_encrypt',['../sparkle_8h.html#ad3c9320b6006a7c5502cb741dc1b4b78',1,'sparkle.c']]],
+  ['schwaemm_5f256_5f256_5faead_5fdecrypt',['schwaemm_256_256_aead_decrypt',['../sparkle_8h.html#a941ff77b27a2ad50fb5f0338a229bef3',1,'sparkle.c']]],
+  ['schwaemm_5f256_5f256_5faead_5fencrypt',['schwaemm_256_256_aead_encrypt',['../sparkle_8h.html#a9940883671504792086ea6e8ca79652a',1,'sparkle.c']]],
+  ['skinny_5f128_5f256_5fencrypt',['skinny_128_256_encrypt',['../internal-skinny128_8h.html#a39a2669da1b8a4f3d092ae9a4d7fbd88',1,'internal-skinny128.c']]],
+  ['skinny_5f128_5f256_5fencrypt_5ftk_5ffull',['skinny_128_256_encrypt_tk_full',['../internal-skinny128_8h.html#a0dd35042229652078b4ebc515e7547d2',1,'internal-skinny128.c']]],
+  ['skinny_5f128_5f256_5finit',['skinny_128_256_init',['../internal-skinny128_8h.html#ada18a32670eb0952493476cce0ee411f',1,'internal-skinny128.c']]],
+  ['skinny_5f128_5f384_5fencrypt',['skinny_128_384_encrypt',['../internal-skinny128_8h.html#ad61230c5c7b47daccdf14549cc4b8cba',1,'internal-skinny128.c']]],
+  ['skinny_5f128_5f384_5fencrypt_5ftk2',['skinny_128_384_encrypt_tk2',['../internal-skinny128_8h.html#abcbcc4ebe73d0531023cca4c72cb3152',1,'internal-skinny128.c']]],
+  ['skinny_5f128_5f384_5fencrypt_5ftk_5ffull',['skinny_128_384_encrypt_tk_full',['../internal-skinny128_8h.html#ac0310f7b99e37d06e9565c2b89797d15',1,'internal-skinny128.c']]],
+  ['skinny_5f128_5f384_5finit',['skinny_128_384_init',['../internal-skinny128_8h.html#a4f12f4037087069e81486dd28cd0a28f',1,'internal-skinny128.c']]],
+  ['sparkle_5f256',['sparkle_256',['../internal-sparkle_8h.html#a884429517da8779224d67062ba0529fd',1,'internal-sparkle.c']]],
+  ['sparkle_5f384',['sparkle_384',['../internal-sparkle_8h.html#a60673aec7703700fce1993a1e40b1153',1,'internal-sparkle.c']]],
+  ['sparkle_5f512',['sparkle_512',['../internal-sparkle_8h.html#a61563dfabadfb1e76b102b8a49e6c13b',1,'internal-sparkle.c']]],
+  ['spongent160_5fpermute',['spongent160_permute',['../internal-spongent_8h.html#af58f5f6935a19127b6368df032b75c1e',1,'internal-spongent.c']]],
+  ['spongent176_5fpermute',['spongent176_permute',['../internal-spongent_8h.html#ae08b1dea724f97477b5ad2cf27751a61',1,'internal-spongent.c']]]
+];

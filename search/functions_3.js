@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['gift128b_5fencrypt_5fpreloaded',['gift128b_encrypt_preloaded',['../internal-gift128_8h.html#ac7269b3484146e77aebe0e69254e3e95',1,'internal-gift128.c']]],
+  ['gift128b_5fencrypt_5fpreloaded_5fmasked',['gift128b_encrypt_preloaded_masked',['../internal-gift128-m_8h.html#ada59ccbc42583dbb8d89fa7e232a9e65',1,'internal-gift128-m.c']]],
+  ['gift128b_5finit',['gift128b_init',['../internal-gift128_8h.html#a263702f9f1840fa07a2c7f9bb13df8c1',1,'internal-gift128.c']]],
+  ['gift128b_5finit_5fmasked',['gift128b_init_masked',['../internal-gift128-m_8h.html#a9a44ed20923ff5efa640cdc626423b53',1,'internal-gift128-m.c']]],
+  ['gift_5fcofb_5faead_5fdecrypt',['gift_cofb_aead_decrypt',['../gift-cofb_8h.html#a3b20843c68272bbb0ec9f23a8bc69f7b',1,'gift-cofb.c']]],
+  ['gift_5fcofb_5faead_5fencrypt',['gift_cofb_aead_encrypt',['../gift-cofb_8h.html#a5be1044e72e09c65c6ecbc328b943f4d',1,'gift-cofb.c']]],
+  ['gift_5fcofb_5fmasked_5faead_5fdecrypt',['gift_cofb_masked_aead_decrypt',['../gift-cofb-masked_8h.html#aa03f36b1b78cf5407da76dddde513887',1,'gift-cofb-masked.c']]],
+  ['gift_5fcofb_5fmasked_5faead_5fencrypt',['gift_cofb_masked_aead_encrypt',['../gift-cofb-masked_8h.html#a254b068935980576910b7f1421b2f324',1,'gift-cofb-masked.c']]],
+  ['grain128_5faead_5fdecrypt',['grain128_aead_decrypt',['../grain128_8h.html#a2fad29d2e493e26a7f3a1667ce09cc62',1,'grain128.c']]],
+  ['grain128_5faead_5fencrypt',['grain128_aead_encrypt',['../grain128_8h.html#ab7ae0b5a3bc56b377b57f549c89cbea2',1,'grain128.c']]],
+  ['grain128_5fauthenticate',['grain128_authenticate',['../internal-grain128_8h.html#aff9aa77629794aea8a81ecf38267173a',1,'internal-grain128.c']]],
+  ['grain128_5fcompute_5ftag',['grain128_compute_tag',['../internal-grain128_8h.html#a88947e94b7050dc5ec8719ff0971a4bc',1,'internal-grain128.c']]],
+  ['grain128_5fcore',['grain128_core',['../internal-grain128_8h.html#a543569e98a702cbcac8df915b481c810',1,'internal-grain128.c']]],
+  ['grain128_5fdecrypt',['grain128_decrypt',['../internal-grain128_8h.html#a73cf4ed4bc18154d07d71c8ffb8e1e1d',1,'internal-grain128.c']]],
+  ['grain128_5fencrypt',['grain128_encrypt',['../internal-grain128_8h.html#a5eea18f1ba3dea68807b402432d2c431',1,'internal-grain128.c']]],
+  ['grain128_5fpreoutput',['grain128_preoutput',['../internal-grain128_8h.html#a049382592272d9a27bf3c1f3c68007c2',1,'internal-grain128.h']]],
+  ['grain128_5fsetup',['grain128_setup',['../internal-grain128_8h.html#ab8badf7d15868acb24c26bd3f78cd125',1,'internal-grain128.c']]]
+];
