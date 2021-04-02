@@ -7,36 +7,36 @@ CFLAGS += $(COMMON_CFLAGS) -Wno-unused-parameter
 LDFLAGS += $(COMMON_LDFLAGS)
 
 TARGETS = \
-	bin/ascon_arm_cortex_m3 \
-	bin/gift128_arm_cortex_m3 \
-	bin/keccakp_200_arm_cortex_m3 \
-	bin/tinyjambu_arm_cortex_m3 \
-	bin/sparkle_arm_cortex_m3 \
-	bin/xoodoo_arm_cortex_m3
+	bin/ascon_armv7m \
+	bin/gift128_armv7m \
+	bin/keccakp_200_armv7m \
+	bin/tinyjambu_armv7m \
+	bin/sparkle_armv7m \
+	bin/xoodoo_armv7m
 
 all: $(TARGETS)
 
-bin/ascon_arm_cortex_m3: ascon_arm_cortex_m3.c
+bin/ascon_armv7m: ascon_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/gift128_arm_cortex_m3: gift128_arm_cortex_m3.c
+bin/gift128_armv7m: gift128_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/keccakp_200_arm_cortex_m3: keccakp_200_arm_cortex_m3.c
+bin/keccakp_200_armv7m: keccakp_200_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/tinyjambu_arm_cortex_m3: tinyjambu_arm_cortex_m3.c
+bin/tinyjambu_armv7m: tinyjambu_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/sparkle_arm_cortex_m3: sparkle_arm_cortex_m3.c
+bin/sparkle_armv7m: sparkle_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/xoodoo_arm_cortex_m3: xoodoo_arm_cortex_m3.c
+bin/xoodoo_armv7m: xoodoo_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -46,11 +46,11 @@ clean:
 check:
 
 generate: all
-	bin/ascon_arm_cortex_m3 >../combined/internal-ascon-arm-cm3.S
-	bin/gift128_arm_cortex_m3 full bitsliced cofb-only >../combined/internal-gift128b-full-arm-cm3.S
-	bin/gift128_arm_cortex_m3 small bitsliced cofb-only >../combined/internal-gift128b-small-arm-cm3.S
-	bin/gift128_arm_cortex_m3 tiny bitsliced cofb-only >../combined/internal-gift128b-tiny-arm-cm3.S
-	bin/keccakp_200_arm_cortex_m3 >../combined/internal-keccakp-200-arm-cm3.S
-	bin/tinyjambu_arm_cortex_m3 >../combined/internal-tinyjambu-arm-cm3.S
-	bin/sparkle_arm_cortex_m3 >../combined/internal-sparkle-arm-cm3.S
-	bin/xoodoo_arm_cortex_m3 >../combined/internal-xoodoo-arm-cm3.S
+	bin/ascon_armv7m >../combined/internal-ascon-armv7m.S
+	bin/gift128_armv7m full bitsliced cofb-only >../combined/internal-gift128b-full-armv7m.S
+	bin/gift128_armv7m small bitsliced cofb-only >../combined/internal-gift128b-small-armv7m.S
+	bin/gift128_armv7m tiny bitsliced cofb-only >../combined/internal-gift128b-tiny-armv7m.S
+	bin/keccakp_200_armv7m >../combined/internal-keccakp-200-armv7m.S
+	bin/tinyjambu_armv7m >../combined/internal-tinyjambu-armv7m.S
+	bin/sparkle_armv7m >../combined/internal-sparkle-armv7m.S
+	bin/xoodoo_armv7m >../combined/internal-xoodoo-armv7m.S

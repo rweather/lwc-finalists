@@ -20,7 +20,7 @@ ASCON_FILES = \
     ascon-xof.c \
     internal-ascon.c \
     internal-ascon.h \
-    internal-ascon-arm-cm3.S \
+    internal-ascon-armv7m.S \
     internal-ascon-avr.S \
     $(COMMON_FILES)
 ASCON_MASKED_FILES = \
@@ -30,7 +30,7 @@ ASCON_MASKED_FILES = \
     internal-ascon.h \
     internal-ascon-m.c \
     internal-ascon-m.h \
-    internal-ascon-arm-cm3.S \
+    internal-ascon-armv7m.S \
     internal-ascon-avr.S \
     $(COMMON_MASKING_FILES)
 ELEPHANT_DELIRIUM_FILES = \
@@ -38,7 +38,7 @@ ELEPHANT_DELIRIUM_FILES = \
     elephant-delirium.h \
     internal-keccakp-200.c \
     internal-keccakp-200.h \
-    internal-keccakp-200-arm-cm3.S \
+    internal-keccakp-200-armv7m.S \
     internal-keccakp-200-avr.S \
     $(COMMON_FILES)
 ELEPHANT_DUMBO_FILES = \
@@ -61,9 +61,9 @@ GIFT_COFB_FILES = \
     internal-gift128.c \
     internal-gift128.h \
     internal-gift128-config.h \
-    internal-gift128b-full-arm-cm3.S \
-    internal-gift128b-small-arm-cm3.S \
-    internal-gift128b-tiny-arm-cm3.S \
+    internal-gift128b-full-armv7m.S \
+    internal-gift128b-small-armv7m.S \
+    internal-gift128b-tiny-armv7m.S \
     internal-gift128b-full-avr.S \
     internal-gift128b-small-avr.S \
     internal-gift128b-tiny-avr.S \
@@ -87,7 +87,7 @@ ISAP_FILES = \
     isap.h \
     internal-ascon.c \
     internal-ascon.h \
-    internal-ascon-arm-cm3.S \
+    internal-ascon-armv7m.S \
     internal-ascon-avr.S \
     internal-isap.h \
     internal-keccakp-400.c \
@@ -115,7 +115,7 @@ SPARKLE_FILES = \
     sparkle.h \
     internal-sparkle.c \
     internal-sparkle.h \
-    internal-sparkle-arm-cm3.S \
+    internal-sparkle-armv7m.S \
     internal-sparkle-avr.S \
     $(COMMON_FILES)
 TINYJAMBU_FILES = \
@@ -123,7 +123,7 @@ TINYJAMBU_FILES = \
     tinyjambu.h \
     internal-tinyjambu.c \
     internal-tinyjambu.h \
-    internal-tinyjambu-arm-cm3.S \
+    internal-tinyjambu-armv7m.S \
     internal-tinyjambu-avr.S \
     $(COMMON_FILES)
 TINYJAMBU_MASKED_FILES = \
@@ -137,7 +137,7 @@ XOODYAK_FILES = \
     xoodyak.h \
     internal-xoodoo.c \
     internal-xoodoo.h \
-    internal-xoodoo-arm-cm3.S \
+    internal-xoodoo-armv7m.S \
     internal-xoodoo-avr.S \
     $(COMMON_FILES)
 XOODYAK_MASKED_FILES = \
@@ -147,7 +147,7 @@ XOODYAK_MASKED_FILES = \
     internal-xoodoo.h \
     internal-xoodoo-m.c \
     internal-xoodoo-m.h \
-    internal-xoodoo-arm-cm3.S \
+    internal-xoodoo-armv7m.S \
     internal-xoodoo-avr.S \
     $(COMMON_MASKING_FILES)
 

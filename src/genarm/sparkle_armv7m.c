@@ -22,7 +22,7 @@
 
 /*
  * This program is used to generate the assembly code version of the
- * SPARKLE permutation for ARM Cortex M3 microprocessors.  With minor
+ * SPARKLE permutation for ARM v7m microprocessors.  With minor
  * modifications, this can probably also be used to generate assembly
  * code versions for other Cortex M variants such as M4, M7, M33, etc.
  */
