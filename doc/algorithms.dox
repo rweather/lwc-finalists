@@ -25,107 +25,60 @@
 \page algorithms Algorithms
 \tableofcontents
 
-This page lists all of the submissions to the second round of the
-<a href="https://csrc.nist.gov/projects/lightweight-cryptography/round-2-candidates">NIST Lightweight Cryptography Competition</a>
+This page lists all 10 finalists of the <a href="https://csrc.nist.gov/projects/lightweight-cryptography/round-2-candidates">NIST Lightweight Cryptography Competition</a>
 and the degree of support for each algorithm in the library.
 
 \section alg_which_one Which algorithm should I use?
 
-This is a tough question given that as of early-2020 the NIST competition has
-not yet whittled the list down or decided on final candidates.  But if you want
-to get encrypting now:
+This is a tough question given that as of early-2021 the NIST competition has
+whittled the list down to 10 final candidates but there is still a lot of
+variation in the candidates.  But if you want to get encrypting now:
 
 \li \ref alg_ascon "ASCON-128" was already selected as a finalist for the
 <a href="https://competitions.cr.yp.to/caesar-submissions.html">CAESAR
 AEAD competition</a> (128-bit key).
-\li \ref alg_tinyjambu "TinyJAMBU-128" has comparable performance to
-GIMLI-24 with a small RAM and flash memory footprint (128-bit key,
-with options for 192-bit and 256-bit keys as well).
-\li (others may be added here as I implement more algorithms)
+\li \ref alg_tinyjambu "TinyJAMBU-128" has exceptional performance
+with a small RAM and flash memory footprint (128-bit key, with options
+for 192-bit and 256-bit keys as well).
+\li \ref alg_gift_cofb "GIFT-COFB" is the fastest finalist that uses a
+block cipher rather than a permutation.  RAM usage for the default
+"full" variant in this library can be a bit large (320 bytes for the
+key schedule), but the "small" and "tiny" variants provide convenient
+space-vs-time tradeoffs (80 bytes and 16 bytes respectively for the
+key schedules).
 
 Note that these are my own personal preferences and are not based on any
 in-depth security analysis.  The above algorithms could fall to an attack
 tomorrow but for now they have good space and speed trade-offs when
 implemented in software on 32-bit platforms.
 
-\section alg_nonces Notes on AEAD algorithms and nonces
-
-Every submission to the NIST competition takes the form of an
-Authenticated Encryption with Associated Data (AEAD) scheme.
-Such schemes typically take as input a key and a packet-specific nonce
-to encrypt a given plaintext and to authenticate the ciphertext plus some
-associated data (AD) that is not encrypted.
-
-In the documentation for most AEAD schemes you will prominently find a
-prescription that "The nonce must be unique for every packet.  If it isn't,
-then the scheme is not secure".  Beginners to encryption can sometimes overlook
-this and not take sufficient care to make the nonce unique (usually a
-constantly-incrementing packet sequence number is sufficient).
-
-To demonstrate why nonce reuse is bad, I'll briefly describe how AES-GCM
-works as it is typical of AEAD schemes:
-
-\li Generate a key stream KS from the Key and Nonce using AES in counter
-mode where the nonce is used as the high-order bits of the counter.
-In other words, KS = AES-CTR-STREAM(Key, Nonce).
-\li XOR KS with the plaintext to produce the ciphertext.
-\li Run the GCM authenticator over the associated data and ciphertext to
-produce the authentication tag.
-
-Now let's see what happens when we reuse the nonce.  We will have two
-packets with the same keystream:
-
-\li Ciphertext1 = Plaintext1 XOR KS
-\li Ciphertext2 = Plaintext2 XOR KS
-
-If an attacker was able to guess Plaintext1 because it is a standard
-protocol header or similar, then they can trivially determine the
-keystream and the other plaintext with:
-
-\li KS = Ciphertext1 XOR Guessed-Plaintext1
-\li Plaintext2 = Ciphertext2 XOR KS
-
-This is why it is so important that the nonce be unique for every packet.
-It is trivial to break many AEAD schemes if the nonce is chosen poorly.
-
-Not all AEAD schemes are as vulnerable to nonce reuse.  SUNDAE-GIFT has a
-variant with a zero-length nonce!  The SUNDAE-GIFT specification states
-that as long as the combination (AD, Plaintext) is unique for each packet,
-then there is no need for a nonce: the associated data AD acts like
-a nonce.  But obviously you still need to be careful to make the
-combination (AD, Plaintext) unique!
-
-Below we will state any special considerations if the algorithm is
-resistant against nonce reuse.  In the absence of any special considerations,
-you should assume that changing the nonce for each packet is vital for
-security.
-
 \section alg_properties Summary
 
-The following table summarises the interesting properties of all
-(non-AES) NIST submissions.  More details are provided in the sections below.
+The following table summarises the interesting properties of the 10
+finalists to the NIST Lightweight Cryptography competition.  More
+details are provided in the sections below.
 
 <table>
-<tr><td>Algorithm</td><td>Key Sizes</td><td>Core</td><td>Mode</td><td>Inverse Free</td><td>Nonce Reuse</td><td>Side Channels</td><td>Post Quantum</td><td>Hashing</td></tr>
-<tr><td>ASCON</td><td>128/160</td><td>ASCON</td><td>MonkeyDuplex</td><td> </td><td> </td><td> </td><td>K</td><td>Digest/XOF</td></tr>
-<tr><td>Elephant</td><td>128</td><td>Spongent/Keccak</td><td>Elephant</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-<tr><td>GIFT-COFB</td><td>128</td><td>GIFT-128</td><td>COFB</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-<tr><td>Grain-128AEAD</td><td>128</td><td>Grain-128</td><td>Grain-128AEAD</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-<tr><td>ISAP</td><td>128</td><td>ASCON/Keccak</td><td>Duplex</td><td> </td><td> </td><td>Y</td><td> </td><td> </td></tr>
-<tr><td>PHOTON-Beetle</td><td>128</td><td>PHOTON-256</td><td>Beetle</td><td> </td><td> </td><td> </td><td> </td><td>Digest</td></tr>
-<tr><td>Romulus-N</td><td>128</td><td>SKINNY-128</td><td>Romulus-N</td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-<tr><td>Romulus-M</td><td>128</td><td>SKINNY-128</td><td>Romulus-M</td><td> </td><td>Y</td><td> </td><td> </td><td> </td></tr>
-<tr><td>SPARKLE</td><td>128/192/256</td><td>SPARKLE</td><td>Beetle</td><td> </td><td> </td><td> </td><td>K</td><td>Digest</td></tr>
-<tr><td>TinyJAMBU</td><td>128/192/256</td><td>TinyJAMBU</td><td>TinyJAMBU</td><td> </td><td> </td><td> </td><td>K</td><td> </td></tr>
-<tr><td>Xoodyak</td><td>128</td><td>Xoodoo</td><td>Cyclist</td><td> </td><td> </td><td>R</td><td> </td><td>Digest/XOF</td></tr>
+<tr><td>Algorithm</td><td>Key Sizes</td><td>Core</td><td>Mode</td><td>Nonce Reuse</td><td>Side Channels</td><td>Post Quantum</td><td>Hashing</td></tr>
+<tr><td>ASCON</td><td>128/160</td><td>ASCON</td><td>MonkeyDuplex</td><td> </td><td>M</td><td>K</td><td>Digest/XOF</td></tr>
+<tr><td>Elephant</td><td>128</td><td>Spongent/Keccak</td><td>Elephant</td><td> </td><td> </td><td> </td><td> </td></tr>
+<tr><td>GIFT-COFB</td><td>128</td><td>GIFT-128</td><td>COFB</td><td> </td><td>M</td><td> </td><td> </td></tr>
+<tr><td>Grain-128AEAD</td><td>128</td><td>Grain-128</td><td>Grain-128AEAD</td><td> </td><td> </td><td> </td><td> </td></tr>
+<tr><td>ISAP</td><td>128</td><td>ASCON/Keccak</td><td>Duplex</td><td> </td><td>Y</td><td> </td><td> </td></tr>
+<tr><td>PHOTON-Beetle</td><td>128</td><td>PHOTON-256</td><td>Beetle</td><td> </td><td> </td><td> </td><td>Digest</td></tr>
+<tr><td>Romulus-N</td><td>128</td><td>SKINNY-128</td><td>Romulus-N</td><td> </td><td> </td><td> </td><td> </td></tr>
+<tr><td>Romulus-M</td><td>128</td><td>SKINNY-128</td><td>Romulus-M</td><td>Y</td><td> </td><td> </td><td> </td></tr>
+<tr><td>SPARKLE</td><td>128/192/256</td><td>SPARKLE</td><td>Beetle</td><td> </td><td> </td><td>K</td><td>Digest</td></tr>
+<tr><td>TinyJAMBU</td><td>128/192/256</td><td>TinyJAMBU</td><td>TinyJAMBU</td><td> </td><td>M</td><td>K</td><td> </td></tr>
+<tr><td>Xoodyak</td><td>128</td><td>Xoodoo</td><td>Cyclist</td><td> </td><td>R</td><td> </td><td>Digest/XOF</td></tr>
 </table>
 
 "Core" indicates the core block operation that the sponge or block cipher
 mode is built around, and "Mode" indicates the mode itself.
 
-"Inverse Free" is "N" to indicate that the core block operation is used
-in both the encryption and decryption directions, or blank if the
-AEAD mode only needs encryption.
+All 10 finalists to the competition are inverse-free.  In particular,
+the finalists that use block ciphers (GIFT-COFB and Romulus) only use
+the block encryption operation.
 
 "Nonce Reuse" indicates that the algorithm provides some resistance against
 nonce reuse.
@@ -161,7 +114,7 @@ side by side with the original unprotected versions.
 
 \section alg_ascon ASCON
 
-<b>Definition:</b> \ref ascon128.h
+<b>Definition:</b> \ref ascon128.h, \ref ascon128-masked.h
 
 The ASCON family consists of the following AEAD algorithms:
 
@@ -336,7 +289,7 @@ variants from the NIST submission.
 
 \section alg_tinyjambu TinyJAMBU
 
-<b>Definition:</b> \ref tinyjambu.h
+<b>Definition:</b> \ref tinyjambu.h, \ref tinyjambu-masked.h
 
 TinyJAMBU is a family of encryption algorithms that are built around a
 lightweight 128-bit permutation.  There are three variants of TinyJAMBU
@@ -348,14 +301,14 @@ with different key sizes:
 
 TinyJAMBU has one of the smallest RAM and flash memory footprints
 out of all of the NIST algorithms.  Performance of TinyJAMBU-128 is
-comparable to this library's implementation of GIMLI-24.
+also excellent.
 
 <b>Recommendation:</b> TinyJAMBU-128 is the recommended variant in the
 NIST submission.  Use TinyJAMBU-256 if you need a greater security margin.
 
 \section alg_xoodyak Xoodyak
 
-<b>Definition:</b> \ref xoodyak.h
+<b>Definition:</b> \ref xoodyak.h, \ref xoodyak-masked.h
 
 Xoodyak is an authenticated encryption and hash algorithm pair based
 around the 384-bit Xoodoo permutation that is similar in structure to

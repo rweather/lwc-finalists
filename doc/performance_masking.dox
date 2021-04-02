@@ -25,6 +25,11 @@
 \page performance_masking Performance of Masked Algorithms
 \tableofcontents
 
+\note These performance figures are out of date.  They are based on previous
+implementations of the baseline algorithms in plain C.  Some of the algorithms
+have since been rewritten in assembly code but the figures have not been
+updated yet.
+
 \section perf_masking_intro Introduction
 
 This page lists performance figures for masked implementations of
