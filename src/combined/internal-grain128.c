@@ -108,7 +108,8 @@ void grain128_core
 
 /* For some reason, the AVR assembly preoutput doesn't work for key setup
  * but does work everywhere else.  Investigate and fix this later. */
-uint32_t grain128_preoutput(const grain128_state_t *state);
+/*uint32_t grain128_preoutput(const grain128_state_t *state);*/
+#define grain128_preoutput(state) grain128_preoutput_inner((state))
 #define grain128_preoutput_setup(state) grain128_preoutput_inner((state))
 
 #endif /* __AVR__ */
