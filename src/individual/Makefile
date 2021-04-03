@@ -106,9 +106,9 @@ PHOTON_BEETLE_FILES = \
 ROMULUS_FILES = \
     romulus.c \
     romulus.h \
+    internal-skinny-plus-config.h \
     internal-skinny128.c \
     internal-skinny128.h \
-    internal-skinnyutil.h \
     internal-skinny128-avr.S \
     $(COMMON_FILES)
 SPARKLE_FILES = \

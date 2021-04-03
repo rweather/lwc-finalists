@@ -33,19 +33,10 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include "internal-skinny-plus-config.h"
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-/**
- * \def SKINNY_128_SMALL_SCHEDULE
- * \brief Defined to 1 to use the small key schedule version of SKINNY-128.
- */
-#if defined(__AVR__)
-#define SKINNY_128_SMALL_SCHEDULE 1
-#else
-#define SKINNY_128_SMALL_SCHEDULE 0
 #endif
 
 /**
@@ -66,7 +57,7 @@ typedef struct
     /** TK1 for the tweakable part of the key schedule */
     uint8_t TK1[16];
 
-#if SKINNY_128_SMALL_SCHEDULE
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
     /** TK2 for the small key schedule */
     uint8_t TK2[16];
 
@@ -142,71 +133,6 @@ void skinny_128_384_encrypt_tk2
  */
 void skinny_128_384_encrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
-     const unsigned char *input);
-
-/**
- * \brief Number of rounds for SKINNY-128-256.
- */
-#define SKINNY_128_256_ROUNDS 48
-
-/**
- * \brief Structure of the key schedule for SKINNY-128-256.
- */
-typedef struct
-{
-    /** TK1 for the tweakable part of the key schedule */
-    uint8_t TK1[16];
-
-#if SKINNY_128_SMALL_SCHEDULE
-    /** TK2 for the small key schedule */
-    uint8_t TK2[16];
-#else
-    /** Words of the full key schedule */
-    uint32_t k[SKINNY_128_256_ROUNDS * 2];
-#endif
-
-} skinny_128_256_key_schedule_t;
-
-/**
- * \brief Initializes the key schedule for SKINNY-128-256.
- *
- * \param ks Points to the key schedule to initialize.
- * \param key Points to the key data.
- */
-void skinny_128_256_init
-    (skinny_128_256_key_schedule_t *ks, const unsigned char key[32]);
-
-/**
- * \brief Encrypts a 128-bit block with SKINNY-128-256.
- *
- * \param ks Points to the SKINNY-128-256 key schedule.
- * \param output Output buffer which must be at least 16 bytes in length.
- * \param input Input buffer which must be at least 16 bytes in length.
- *
- * The \a input and \a output buffers can be the same buffer for
- * in-place encryption.
- */
-void skinny_128_256_encrypt
-    (const skinny_128_256_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input);
-
-/**
- * \brief Encrypts a 128-bit block with SKINNY-128-256 and a
- * fully specified tweakey value.
- *
- * \param key Points to the 256-bit tweakey value.
- * \param output Output buffer which must be at least 16 bytes in length.
- * \param input Input buffer which must be at least 16 bytes in length.
- *
- * The \a input and \a output buffers can be the same buffer for
- * in-place encryption.
- *
- * This version is useful when the entire tweakey changes from block to
- * block.  It is slower than the other versions of SKINNY-128-256 but
- * more memory-efficient.
- */
-void skinny_128_256_encrypt_tk_full
-    (const unsigned char key[32], unsigned char *output,
      const unsigned char *input);
 
 #ifdef __cplusplus

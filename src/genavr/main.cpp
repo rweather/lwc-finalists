@@ -1001,6 +1001,17 @@ static bool skinny128_enc_only(enum Mode mode)
     return ok;
 }
 
+static bool skinny128_plus(enum Mode mode)
+{
+    bool ok = true;
+    skinny128_sboxes(mode);
+    if (!skinny128_384_setup_key(mode))
+        ok = false;
+    if (!skinny128_384_encrypt(mode))
+        ok = false;
+    return ok;
+}
+
 static bool sparkle256(enum Mode mode)
 {
     Code code;
@@ -1221,6 +1232,8 @@ int main(int argc, char *argv[])
             gen1 = skinny128;
         } else if (!strcmp(argv[1], "SKINNY-128-Enc-Only")) {
             gen1 = skinny128_enc_only;
+        } else if (!strcmp(argv[1], "SKINNY-128-Plus")) {
+            gen1 = skinny128_plus;
         } else if (!strcmp(argv[1], "SPARKLE")) {
             gen1 = sparkle256;
             gen2 = sparkle384;

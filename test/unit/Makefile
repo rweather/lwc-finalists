@@ -51,7 +51,7 @@ test-grain128.o: $(LIBSRC_DIR)/internal-grain128.h $(TEST_CIPHER_INC)
 test-keccak.o: $(LIBSRC_DIR)/internal-keccakp-200.h $(LIBSRC_DIR)/internal-keccakp-400.h $(TEST_CIPHER_INC)
 test-masking.o: $(LIBSRC_DIR)/aead-random.h $(LIBSRC_DIR)/internal-masking.h $(TEST_CIPHER_INC) test-masking-common.c
 test-photon256.o: $(LIBSRC_DIR)/internal-photon256.h $(TEST_CIPHER_INC)
-test-skinny128.o: $(LIBSRC_DIR)/internal-skinny128.h $(LIBSRC_DIR)/internal-skinnyutil.h $(TEST_CIPHER_INC)
+test-skinny128.o: $(LIBSRC_DIR)/internal-skinny128.h $(LIBSRC_DIR)/internal-skinny-plus-config.h $(TEST_CIPHER_INC)
 test-sparkle.o: $(LIBSRC_DIR)/internal-sparkle.h $(TEST_CIPHER_INC)
 test-spongent.o: $(LIBSRC_DIR)/internal-spongent.h $(TEST_CIPHER_INC)
 test-tinyjambu.o: $(LIBSRC_DIR)/internal-tinyjambu.h $(LIBSRC_DIR)/internal-tinyjambu-m.h $(TEST_CIPHER_MASKING_INC)

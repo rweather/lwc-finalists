@@ -26,13 +26,6 @@
 #include <string.h>
 
 /* Information blocks for the SKINNY-128 block cipher variants */
-static block_cipher_t const skinny128_256 = {
-    "SKINNY-128-256",
-    sizeof(skinny_128_256_key_schedule_t),
-    (block_cipher_init_t)skinny_128_256_init,
-    (block_cipher_encrypt_t)skinny_128_256_encrypt,
-    (block_cipher_decrypt_t)0
-};
 static block_cipher_t const skinny128_384 = {
     "SKINNY-128-384",
     sizeof(skinny_128_384_key_schedule_t),
@@ -42,18 +35,6 @@ static block_cipher_t const skinny128_384 = {
 };
 
 /* Test vectors for SKINNY-128 from https://eprint.iacr.org/2016/660.pdf */
-static block_cipher_test_vector_128_t const skinny128_256_1 = {
-    "Test Vector",
-    {0x00, 0x9c, 0xec, 0x81, 0x60, 0x5d, 0x4a, 0xc1,    /* key */
-     0xd2, 0xae, 0x9e, 0x30, 0x85, 0xd7, 0xa1, 0xf3,
-     0x1a, 0xc1, 0x23, 0xeb, 0xfc, 0x00, 0xfd, 0xdc,
-     0xf0, 0x10, 0x46, 0xce, 0xed, 0xdf, 0xca, 0xb3},
-    32,                                                 /* key_len */
-    {0x3a, 0x0c, 0x47, 0x76, 0x7a, 0x26, 0xa6, 0x8d,    /* plaintext */
-     0xd3, 0x82, 0xa6, 0x95, 0xe7, 0x02, 0x2e, 0x25},
-    {0xb7, 0x31, 0xd9, 0x8a, 0x4b, 0xde, 0x14, 0x7a,    /* ciphertext */
-     0x7e, 0xd4, 0xa6, 0xf1, 0x6b, 0x9b, 0x58, 0x7f}
-};
 static block_cipher_test_vector_128_t const skinny128_384_1 = {
     "Test Vector",
     {0xdf, 0x88, 0x95, 0x48, 0xcf, 0xc7, 0xea, 0x52,    /* key */
@@ -109,30 +90,8 @@ static block_cipher_t const skinny128_384_tk_full = {
     (block_cipher_decrypt_t)0
 };
 
-/* Alternative version of SKINNY-128-256 where everything is tweakable */
-static void tk_full_skinny_128_256_init
-    (unsigned char ks[32], const unsigned char *key)
-{
-    memcpy(ks, key, 32);
-}
-static block_cipher_t const skinny128_256_tk_full = {
-    "SKINNY-128-256-TK-FULL",
-    32,
-    (block_cipher_init_t)tk_full_skinny_128_256_init,
-    (block_cipher_encrypt_t)skinny_128_256_encrypt_tk_full,
-    (block_cipher_decrypt_t)0
-};
-
 void test_skinny128(void)
 {
-    test_block_cipher_start(&skinny128_256);
-    test_block_cipher_128(&skinny128_256, &skinny128_256_1);
-    test_block_cipher_end(&skinny128_256);
-
-    test_block_cipher_start(&skinny128_256_tk_full);
-    test_block_cipher_128(&skinny128_256_tk_full, &skinny128_256_1);
-    test_block_cipher_end(&skinny128_256_tk_full);
-
     test_block_cipher_start(&skinny128_384);
     test_block_cipher_128(&skinny128_384, &skinny128_384_1);
     test_block_cipher_end(&skinny128_384);
