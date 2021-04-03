@@ -10,6 +10,7 @@ TARGETS = \
 	bin/ascon_armv7m \
 	bin/gift128_armv7m \
 	bin/keccakp_200_armv7m \
+	bin/keccakp_400_armv7m \
 	bin/tinyjambu_armv7m \
 	bin/sparkle_armv7m \
 	bin/xoodoo_armv7m
@@ -25,6 +26,10 @@ bin/gift128_armv7m: gift128_armv7m.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 bin/keccakp_200_armv7m: keccakp_200_armv7m.c
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+bin/keccakp_400_armv7m: keccakp_400_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -51,6 +56,7 @@ generate: all
 	bin/gift128_armv7m small bitsliced cofb-only >../combined/internal-gift128b-small-armv7m.S
 	bin/gift128_armv7m tiny bitsliced cofb-only >../combined/internal-gift128b-tiny-armv7m.S
 	bin/keccakp_200_armv7m >../combined/internal-keccakp-200-armv7m.S
+	bin/keccakp_400_armv7m >../combined/internal-keccakp-400-armv7m.S
 	bin/tinyjambu_armv7m >../combined/internal-tinyjambu-armv7m.S
 	bin/sparkle_armv7m >../combined/internal-sparkle-armv7m.S
 	bin/xoodoo_armv7m >../combined/internal-xoodoo-armv7m.S
