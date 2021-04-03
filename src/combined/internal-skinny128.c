@@ -27,36 +27,6 @@
 
 #if !defined(__AVR__)
 
-STATIC_INLINE void skinny128_fast_forward_tk(uint32_t *tk)
-{
-    /* This function is used to fast-forward the TK1 tweak value
-     * to the value at the end of the key schedule for decryption.
-     *
-     * The tweak permutation repeats every 16 rounds, so SKINNY-128-256
-     * with 48 rounds does not need any fast forwarding applied.
-     * SKINNY-128-128 with 40 rounds and SKINNY-128-384 with 56 rounds
-     * are equivalent to applying the permutation 8 times:
-     *
-     * PT*8 = [5, 6, 3, 2, 7, 0, 1, 4, 13, 14, 11, 10, 15, 8, 9, 12]
-     */
-    uint32_t row0 = tk[0];
-    uint32_t row1 = tk[1];
-    uint32_t row2 = tk[2];
-    uint32_t row3 = tk[3];
-    tk[0] = ((row1 >>  8) & 0x0000FFFFU) |
-            ((row0 >>  8) & 0x00FF0000U) |
-            ((row0 <<  8) & 0xFF000000U);
-    tk[1] = ((row1 >> 24) & 0x000000FFU) |
-            ((row0 <<  8) & 0x00FFFF00U) |
-            ((row1 << 24) & 0xFF000000U);
-    tk[2] = ((row3 >>  8) & 0x0000FFFFU) |
-            ((row2 >>  8) & 0x00FF0000U) |
-            ((row2 <<  8) & 0xFF000000U);
-    tk[3] = ((row3 >> 24) & 0x000000FFU) |
-            ((row2 <<  8) & 0x00FFFF00U) |
-            ((row3 << 24) & 0xFF000000U);
-}
-
 void skinny_128_384_init
     (skinny_128_384_key_schedule_t *ks, const unsigned char key[48])
 {
