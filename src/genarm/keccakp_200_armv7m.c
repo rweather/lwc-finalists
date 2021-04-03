@@ -22,9 +22,7 @@
 
 /*
  * This program is used to generate the assembly code version of the
- * Keccak-p[200] permutation for ARM v7m microprocessors.  With minor
- * modifications, this can probably also be used to generate assembly
- * code versions for other Cortex M variants such as M4, M7, M33, etc.
+ * Keccak-p[200] permutation for ARM v7m microprocessors.
  */
 
 #include <stdio.h>
@@ -380,7 +378,7 @@ int main(int argc, char *argv[])
     /* Output the round constant table */
     gen_keccakp_200_rc();
 
-    /* Output the Xoodoo permutation function */
+    /* Output the permutation function */
     function_header("keccakp_200_permute");
     gen_keccakp_200_permute();
     function_footer("keccakp_200_permute");

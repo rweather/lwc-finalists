@@ -25,8 +25,8 @@
 /* Determine if Keccak-p[400] should be accelerated with assembly code */
 #if defined(__AVR__)
 #define KECCAKP_400_ASM 1
-/*#elif defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7*/
-/*#define KECCAKP_400_ASM 1*/
+#elif defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+#define KECCAKP_400_ASM 1
 #else
 #define KECCAKP_400_ASM 0
 #endif

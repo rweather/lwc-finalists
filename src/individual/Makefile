@@ -92,7 +92,7 @@ ISAP_FILES = \
     internal-isap.h \
     internal-keccakp-400.c \
     internal-keccakp-400.h \
-    internal-keccakp-400-armv7.S \
+    internal-keccakp-400-armv7m.S \
     internal-keccakp-400-avr.S \
     $(COMMON_FILES)
 PHOTON_BEETLE_FILES = \

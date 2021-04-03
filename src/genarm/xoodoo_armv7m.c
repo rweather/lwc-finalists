@@ -22,9 +22,7 @@
 
 /*
  * This program is used to generate the assembly code version of the
- * Xoodoo permutation for ARM v7m microprocessors.  With minor
- * modifications, this can probably also be used to generate assembly
- * code versions for other Cortex M variants such as M4, M7, M33, etc.
+ * Xoodoo permutation for ARM v7m microprocessors.
  */
 
 #include <stdio.h>
