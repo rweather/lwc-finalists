@@ -38,9 +38,9 @@ extern "C" {
 #endif
 
 /**
- * \brief Defined to 1 if the 32-bit sliced version of ASCON is available.
+ * \brief Defined to 1 if the 32-bit sliced version of ASCON is preferred.
  */
-#if !defined(__AVR__)
+#if !defined(__AVR__) && !defined(LW_UTIL_CPU_IS_64BIT)
 #define ASCON_SLICED 1
 #else
 #define ASCON_SLICED 0

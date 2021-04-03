@@ -34,14 +34,10 @@
 #if !KECCAKP_400_ASM
 
 /* Define to 1 to select the optimised 64-bit version of Keccak-p[400] */
-#define KECCAKP_400_OPT64 0
-
-/* Detect known 64-bit platforms */
-#if defined(__x86_64) || defined(__x86_64__) || \
-    defined(__aarch64__) || defined(__ARM_ARCH_ISA_A64) || \
-    defined(_M_AMD64) || defined(_M_X64) || defined(_M_IA64)
-#undef KECCAKP_400_OPT64
+#if defined(LW_UTIL_CPU_IS_64BIT)
 #define KECCAKP_400_OPT64 1
+#else
+#define KECCAKP_400_OPT64 0
 #endif
 
 #if KECCAKP_400_OPT64

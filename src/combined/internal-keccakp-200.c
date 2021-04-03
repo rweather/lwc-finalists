@@ -33,18 +33,13 @@
 
 #if !KECCAKP_200_ASM
 
+#if !defined(LW_UTIL_CPU_IS_64BIT)
 /* Define to 1 to select the optimised 32-bit version of Keccak-p[200] */
 #define KECCAKP_200_OPT32 1
 
 /* Define to 1 to select the optimised 64-bit version of Keccak-p[200] */
 #define KECCAKP_200_OPT64 0
-
-/* Detect known 64-bit platforms */
-#if defined(__x86_64) || defined(__x86_64__) || \
-    defined(__aarch64__) || defined(__ARM_ARCH_ISA_A64) || \
-    defined(_M_AMD64) || defined(_M_X64) || defined(_M_IA64)
-#undef KECCAKP_200_OPT32
-#undef KECCAKP_200_OPT64
+#else
 #define KECCAKP_200_OPT32 0
 #define KECCAKP_200_OPT64 1
 #endif

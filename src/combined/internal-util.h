@@ -53,6 +53,13 @@
 #error "Cannot determine the endianess of this platform"
 #endif
 
+/* Determine if we are compiling for a 64-bit CPU */
+#if defined(__x86_64) || defined(__x86_64__) || \
+    defined(__aarch64__) || defined(__ARM_ARCH_ISA_A64) || \
+    defined(_M_AMD64) || defined(_M_X64) || defined(_M_IA64)
+#define LW_UTIL_CPU_IS_64BIT 1
+#endif
+
 /* Helper macros to load and store values while converting endian-ness */
 
 /* Load a big-endian 32-bit word from a byte buffer */
