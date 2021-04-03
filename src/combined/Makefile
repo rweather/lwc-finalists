@@ -39,7 +39,7 @@ OBJS = \
 	internal-keccakp-200.o \
 	internal-keccakp-400.o \
 	internal-photon256.o \
-	internal-skinny128.o \
+	internal-skinny-plus.o \
         internal-sparkle.o \
         internal-spongent.o \
         internal-tinyjambu.o \
@@ -76,7 +76,7 @@ grain128.o: grain128.h internal-grain128.h aead-common.h internal-util.h
 isap.o: isap.h aead-common.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
 photon-beetle.o: photon-beetle.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle.h internal-photon256.h internal-util.h
-romulus.o: romulus.h internal-skinny128.h aead-common.h internal-util.h
+romulus.o: romulus.h internal-skinny-plus.h aead-common.h internal-util.h
 sparkle.o: sparkle.h internal-sparkle.h aead-common.h internal-util.h
 tinyjambu.o: tinyjambu.h internal-tinyjambu.h aead-common.h internal-util.h
 tinyjambu-masked.o: tinyjambu-masked.h internal-tinyjambu-m.h aead-common.h aead-random.h internal-masking.h internal-util.h
@@ -92,7 +92,7 @@ internal-grain128.o: internal-grain128.h internal-util.h
 internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
 internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
 internal-photon256.o: internal-photon256.h internal-util.h
-internal-skinny128.o: internal-skinny128.h internal-skinny-plus-config.h internal-util.h
+internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-sparkle.o: internal-sparkle.h internal-util.h
 internal-spongent.o: internal-spongent.h internal-util.h
 internal-tinyjambu.o: internal-tinyjambu.h

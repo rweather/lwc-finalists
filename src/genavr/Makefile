@@ -59,7 +59,7 @@ generate: $(TARGET)
 	./$(TARGET) Keccakp-200 >../combined/internal-keccakp-200-avr.S
 	./$(TARGET) Keccakp-400 >../combined/internal-keccakp-400-avr.S
 	./$(TARGET) PHOTON-256 >../combined/internal-photon256-avr.S
-	./$(TARGET) SKINNY-128-Plus >../combined/internal-skinny128-avr.S
+	./$(TARGET) SKINNY-128-384-Plus >../combined/internal-skinny-plus-avr.S
 	./$(TARGET) SPARKLE >../combined/internal-sparkle-avr.S
 	./$(TARGET) Spongent-pi >../combined/internal-spongent-avr.S
 	./$(TARGET) TinyJAMBU >../combined/internal-tinyjambu-avr.S

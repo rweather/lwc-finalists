@@ -20,22 +20,22 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "internal-skinny128.h"
+#include "internal-skinny-plus.h"
 #include "test-cipher.h"
 #include <stdio.h>
 #include <string.h>
 
-/* Information blocks for the SKINNY-128 block cipher variants */
-static block_cipher_t const skinny128_384 = {
-    "SKINNY-128-384",
-    sizeof(skinny_128_384_key_schedule_t),
-    (block_cipher_init_t)skinny_128_384_init,
-    (block_cipher_encrypt_t)skinny_128_384_encrypt,
+/* Information blocks for the SKINNY-128-384+ block cipher */
+static block_cipher_t const skinny_plus = {
+    "SKINNY-128-384+",
+    sizeof(skinny_plus_key_schedule_t),
+    (block_cipher_init_t)skinny_plus_init,
+    (block_cipher_encrypt_t)skinny_plus_encrypt,
     (block_cipher_decrypt_t)0
 };
 
-/* Test vectors for SKINNY-128 from https://eprint.iacr.org/2016/660.pdf */
-static block_cipher_test_vector_128_t const skinny128_384_1 = {
+/* Test vectors for SKINNY-128-384+ */
+static block_cipher_test_vector_128_t const skinny_plus_1 = {
     "Test Vector",
     {0xdf, 0x88, 0x95, 0x48, 0xcf, 0xc7, 0xea, 0x52,    /* key */
      0xd2, 0x96, 0x33, 0x93, 0x01, 0x79, 0x74, 0x49,
@@ -46,61 +46,61 @@ static block_cipher_test_vector_128_t const skinny128_384_1 = {
     48,                                                 /* key_len */
     {0xa3, 0x99, 0x4b, 0x66, 0xad, 0x85, 0xa3, 0x45,    /* plaintext */
      0x9f, 0x44, 0xe9, 0x2b, 0x08, 0xf5, 0x50, 0xcb},
-    {0x94, 0xec, 0xf5, 0x89, 0xe2, 0x01, 0x7c, 0x60,    /* ciphertext */
-     0x1b, 0x38, 0xc6, 0x34, 0x6a, 0x10, 0xdc, 0xfa}
+    {0xff, 0x38, 0xd1, 0xd2, 0x4c, 0x86, 0x4c, 0x43,    /* ciphertext */
+     0x52, 0xa8, 0x53, 0x69, 0x0f, 0xe3, 0x6e, 0x5e}
 };
 
 /* Alternative version of SKINNY-128-384 where TK2 is also tweakable */
 static unsigned char TK2[16];
-static void tk2_skinny_128_384_init
-    (skinny_128_384_key_schedule_t *ks, const unsigned char *key)
+static void tk2_skinny_plus_init
+    (skinny_plus_key_schedule_t *ks, const unsigned char *key)
 {
     unsigned char tk[48];
     memcpy(tk, key, 48);
     memset(tk + 16, 0, 16);
     memcpy(TK2, key + 16, 16);
-    skinny_128_384_init(ks, tk);
+    skinny_plus_init(ks, tk);
 }
-static void tk2_skinny_128_384_encrypt
-    (const skinny_128_384_key_schedule_t *ks, unsigned char *output,
+static void tk2_skinny_plus_encrypt
+    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input)
 {
-    skinny_128_384_key_schedule_t ks2 = *ks;
-    skinny_128_384_encrypt_tk2(&ks2, output, input, TK2);
+    skinny_plus_key_schedule_t ks2 = *ks;
+    skinny_plus_encrypt_tk2(&ks2, output, input, TK2);
 }
-static block_cipher_t const skinny128_384_tk2 = {
-    "SKINNY-128-384-TK2",
-    sizeof(skinny_128_384_key_schedule_t),
-    (block_cipher_init_t)tk2_skinny_128_384_init,
-    (block_cipher_encrypt_t)tk2_skinny_128_384_encrypt,
+static block_cipher_t const skinny_plus_tk2 = {
+    "SKINNY-128-384-TK2+",
+    sizeof(skinny_plus_key_schedule_t),
+    (block_cipher_init_t)tk2_skinny_plus_init,
+    (block_cipher_encrypt_t)tk2_skinny_plus_encrypt,
     (block_cipher_decrypt_t)0
 };
 
 /* Alternative version of SKINNY-128-384 where everything is tweakable */
-static void tk_full_skinny_128_384_init
+static void tk_full_skinny_plus_init
     (unsigned char ks[48], const unsigned char *key)
 {
     memcpy(ks, key, 48);
 }
-static block_cipher_t const skinny128_384_tk_full = {
-    "SKINNY-128-384-TK-FULL",
+static block_cipher_t const skinny_plus_tk_full = {
+    "SKINNY-128-384-TK-FULL+",
     48,
-    (block_cipher_init_t)tk_full_skinny_128_384_init,
-    (block_cipher_encrypt_t)skinny_128_384_encrypt_tk_full,
+    (block_cipher_init_t)tk_full_skinny_plus_init,
+    (block_cipher_encrypt_t)skinny_plus_encrypt_tk_full,
     (block_cipher_decrypt_t)0
 };
 
 void test_skinny128(void)
 {
-    test_block_cipher_start(&skinny128_384);
-    test_block_cipher_128(&skinny128_384, &skinny128_384_1);
-    test_block_cipher_end(&skinny128_384);
+    test_block_cipher_start(&skinny_plus);
+    test_block_cipher_128(&skinny_plus, &skinny_plus_1);
+    test_block_cipher_end(&skinny_plus);
 
-    test_block_cipher_start(&skinny128_384_tk2);
-    test_block_cipher_128(&skinny128_384_tk2, &skinny128_384_1);
-    test_block_cipher_end(&skinny128_384_tk2);
+    test_block_cipher_start(&skinny_plus_tk2);
+    test_block_cipher_128(&skinny_plus_tk2, &skinny_plus_1);
+    test_block_cipher_end(&skinny_plus_tk2);
 
-    test_block_cipher_start(&skinny128_384_tk_full);
-    test_block_cipher_128(&skinny128_384_tk_full, &skinny128_384_1);
-    test_block_cipher_end(&skinny128_384_tk_full);
+    test_block_cipher_start(&skinny_plus_tk_full);
+    test_block_cipher_128(&skinny_plus_tk_full, &skinny_plus_1);
+    test_block_cipher_end(&skinny_plus_tk_full);
 }

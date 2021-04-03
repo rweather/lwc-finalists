@@ -1169,9 +1169,9 @@ table_4:
 	.byte	0
 
 	.text
-.global skinny_128_384_init
-	.type skinny_128_384_init, @function
-skinny_128_384_init:
+.global skinny_plus_init
+	.type skinny_plus_init, @function
+skinny_plus_init:
 	movw r30,r24
 	movw r26,r22
 .L__stack_usage = 2
@@ -1188,12 +1188,12 @@ skinny_128_384_init:
 	dec r22
 	brne 1b
 	ret
-	.size skinny_128_384_init, .-skinny_128_384_init
+	.size skinny_plus_init, .-skinny_plus_init
 
 	.text
-.global skinny_128_384_encrypt
-	.type skinny_128_384_encrypt, @function
-skinny_128_384_encrypt:
+.global skinny_plus_encrypt
+	.type skinny_plus_encrypt, @function
+skinny_plus_encrypt:
 	push r28
 	push r29
 	push r2
@@ -3217,7 +3217,7 @@ skinny_128_384_encrypt:
 	eor r19,r9
 	eor r20,r10
 	eor r21,r11
-	cpi r26,112
+	cpi r26,80
 	brne 5721f
 	rjmp 790f
 5721:
@@ -3512,9 +3512,9 @@ skinny_128_384_encrypt:
 	pop r29
 	pop r28
 	ret
-	.size skinny_128_384_encrypt, .-skinny_128_384_encrypt
+	.size skinny_plus_encrypt, .-skinny_plus_encrypt
 
 .global skinny_128_384_encrypt_tk_full
-	.set skinny_128_384_encrypt_tk_full,skinny_128_384_encrypt
+	.set skinny_128_384_encrypt_tk_full,skinny_plus_encrypt
 
 #endif

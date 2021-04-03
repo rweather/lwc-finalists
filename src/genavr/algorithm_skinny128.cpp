@@ -226,7 +226,8 @@ static void gen_skinny128_setup_key(Code &code, const char *name, int ks_size)
 
 // Generate the SKINNY-128 encryption function.  We assume that the key
 // schedule is always "ks_size" bytes and expanded on the fly.
-static void gen_skinny128_encrypt(Code &code, const char *name, int ks_size)
+static void gen_skinny128_encrypt
+    (Code &code, const char *name, int ks_size, int round_count = 0)
 {
     // Set up the function prologue with ks_size bytes of local variables.
     // X will point to the input, Z points to the key, Y is local variables.
@@ -260,7 +261,7 @@ static void gen_skinny128_encrypt(Code &code, const char *name, int ks_size)
     // reduce the permutation overhead from round to round.
     unsigned char top_label = 0;
     unsigned char end_label = 0;
-    int rounds = (ks_size == 48) ? 56 : 48;
+    int rounds = (round_count ? round_count : ((ks_size == 48) ? 56 : 48));
     Reg round = code.allocateHighReg(1);
     code.move(round, 0);
     code.label(top_label);
@@ -354,7 +355,8 @@ static void gen_skinny128_encrypt(Code &code, const char *name, int ks_size)
 
 // Generate the SKINNY-128 decryption function.  We assume that the key
 // schedule is always "ks_size" bytes and expanded on the fly.
-static void gen_skinny128_decrypt(Code &code, const char *name, int ks_size)
+static void gen_skinny128_decrypt
+    (Code &code, const char *name, int ks_size, int round_count = 0)
 {
     // Set up the function prologue with ks_size bytes of local variables.
     // X will point to the input, Z points to the key, Y is local variables.
@@ -414,7 +416,7 @@ static void gen_skinny128_decrypt(Code &code, const char *name, int ks_size)
 
     // Apply LFSR2 and LFSR3 to every byte of TK2 and TK3 "rounds / 2" times.
     // We set things up to leave the LFSR3 pointer in the Z register.
-    int rounds = (ks_size == 48) ? 56 : 48;
+    int rounds = (round_count ? round_count : ((ks_size == 48) ? 56 : 48));
     if (ks_size == 48) {
         code.sbox_setup(SBOX_LFSR2, get_skinny128_sbox(SBOX_LFSR2));
         skinny128_apply_lfsr(code, 16, rounds);
@@ -518,9 +520,12 @@ static void gen_skinny128_decrypt(Code &code, const char *name, int ks_size)
     code.stx(s3, POST_INC);
 }
 
-void gen_skinny128_384_setup_key(Code &code)
+void gen_skinny128_384_setup_key(Code &code, int rounds)
 {
-    gen_skinny128_setup_key(code, "skinny_128_384_init", 48);
+    if (rounds == 40)
+        gen_skinny128_setup_key(code, "skinny_plus_init", 48);
+    else
+        gen_skinny128_setup_key(code, "skinny_128_384_init", 48);
 }
 
 void gen_skinny128_256_setup_key(Code &code)
@@ -528,9 +533,12 @@ void gen_skinny128_256_setup_key(Code &code)
     gen_skinny128_setup_key(code, "skinny_128_256_init", 32);
 }
 
-void gen_skinny128_384_encrypt(Code &code)
+void gen_skinny128_384_encrypt(Code &code, int rounds)
 {
-    gen_skinny128_encrypt(code, "skinny_128_384_encrypt", 48);
+    if (rounds == 40)
+        gen_skinny128_encrypt(code, "skinny_plus_encrypt", 48, rounds);
+    else
+        gen_skinny128_encrypt(code, "skinny_128_384_encrypt", 48, rounds);
 }
 
 void gen_skinny128_256_encrypt(Code &code)
@@ -538,9 +546,12 @@ void gen_skinny128_256_encrypt(Code &code)
     gen_skinny128_encrypt(code, "skinny_128_256_encrypt", 32);
 }
 
-void gen_skinny128_384_decrypt(Code &code)
+void gen_skinny128_384_decrypt(Code &code, int rounds)
 {
-    gen_skinny128_decrypt(code, "skinny_128_384_decrypt", 48);
+    if (rounds == 40)
+        gen_skinny128_decrypt(code, "skinny_plus_decrypt", 48, rounds);
+    else
+        gen_skinny128_decrypt(code, "skinny_128_384_decrypt", 48, rounds);
 }
 
 void gen_skinny128_256_decrypt(Code &code)

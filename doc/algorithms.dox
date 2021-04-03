@@ -66,8 +66,8 @@ details are provided in the sections below.
 <tr><td>Grain-128AEAD</td><td>128</td><td>Grain-128</td><td>Grain-128AEAD</td><td> </td><td> </td><td> </td><td> </td></tr>
 <tr><td>ISAP</td><td>128</td><td>ASCON/Keccak</td><td>Duplex</td><td> </td><td>Y</td><td> </td><td> </td></tr>
 <tr><td>PHOTON-Beetle</td><td>128</td><td>PHOTON-256</td><td>Beetle</td><td> </td><td> </td><td> </td><td>Digest</td></tr>
-<tr><td>Romulus-N</td><td>128</td><td>SKINNY-128</td><td>Romulus-N</td><td> </td><td> </td><td> </td><td> </td></tr>
-<tr><td>Romulus-M</td><td>128</td><td>SKINNY-128</td><td>Romulus-M</td><td>Y</td><td> </td><td> </td><td> </td></tr>
+<tr><td>Romulus-N+</td><td>128</td><td>SKINNY-128-384+</td><td>Romulus-N</td><td> </td><td> </td><td> </td><td> </td></tr>
+<tr><td>Romulus-M+</td><td>128</td><td>SKINNY-128-384+</td><td>Romulus-M</td><td>Y</td><td> </td><td> </td><td> </td></tr>
 <tr><td>SPARKLE</td><td>128/192/256</td><td>SPARKLE</td><td>Beetle</td><td> </td><td> </td><td>K</td><td>Digest</td></tr>
 <tr><td>TinyJAMBU</td><td>128/192/256</td><td>TinyJAMBU</td><td>TinyJAMBU</td><td> </td><td>M</td><td>K</td><td> </td></tr>
 <tr><td>Xoodyak</td><td>128</td><td>Xoodoo</td><td>Cyclist</td><td> </td><td>R</td><td> </td><td>Digest/XOF</td></tr>
@@ -235,25 +235,7 @@ of the associated data (AD) and plaintext is unique.
 
 Romulus is a family of authenticated encryption algorithms that
 are built around the SKINNY-128 tweakable block cipher.  There
-were six members in the family in round 2 of the competition:
-
-\li Romulus-N1 has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
-based around the SKINNY-128-384 tweakable block cipher.  This is the
-primary member of the family.
-\li Romulus-N2 has a 128-bit key, a 96-bit nonce, and a 128-bit tag,
-based around the SKINNY-128-384 tweakable block cipher.
-\li Romulus-N3 has a 128-bit key, a 96-bit nonce, and a 128-bit tag,
-based around the SKINNY-128-256 tweakable block cipher.
-\li Romulus-M1 has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
-based around the SKINNY-128-384 tweakable block cipher.
-\li Romulus-M2 has a 128-bit key, a 96-bit nonce, and a 128-bit tag,
-based around the SKINNY-128-384 tweakable block cipher.
-\li Romulus-M3 has a 128-bit key, a 96-bit nonce, and a 128-bit tag,
-based around the SKINNY-128-256 tweakable block cipher.
-
-This list has been reduced to two in round 3 by removing the variants
-based on SKINNY-128-256 and replacing SKINNY-128-384 with the
-reduced-round version SKINNY-128-384+:
+are two members in the family in round 3 of the competition:
 
 \li Romulus-N+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
 based around the SKINNY-128-384+ tweakable block cipher.  This is the

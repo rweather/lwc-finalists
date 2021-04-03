@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "internal-skinny128.h"
+#include "internal-skinny-plus.h"
 #include "internal-util.h"
 #include <string.h>
 
@@ -28,7 +28,7 @@
 
 /** @cond skinnyutil */
 
-/* Utilities for implementing SKINNY-128 */
+/* Utilities for implementing SKINNY-128 and its variants */
 
 #define skinny128_LFSR2(x) \
     do { \
@@ -134,8 +134,8 @@ do { \
 
 /** @endcond */
 
-void skinny_128_384_init
-    (skinny_128_384_key_schedule_t *ks, const unsigned char key[48])
+void skinny_plus_init
+    (skinny_plus_key_schedule_t *ks, const unsigned char key[48])
 {
 #if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_SMALL
     uint32_t TK2[4];
@@ -167,7 +167,7 @@ void skinny_128_384_init
      * schedule during encryption operations */
     schedule = ks->k;
     rc = 0;
-    for (round = 0; round < SKINNY_128_384_ROUNDS; round += 2, schedule += 4) {
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 2, schedule += 4) {
         /* XOR the round constants with the current schedule words.
          * The round constants for the 3rd and 4th rows are
          * fixed and will be applied during encryption. */
@@ -214,7 +214,7 @@ void skinny_128_384_init
  * \param half 0 for the bottom half and 1 for the top half of the TK values.
  * \param offset Offset between 0 and 3 of the current unrolled round.
  */
-#define skinny_128_384_round(s0, s1, s2, s3, half, offset) \
+#define skinny_plus_round(s0, s1, s2, s3, half, offset) \
     do { \
         /* Apply the S-box to all bytes in the state */ \
         skinny128_sbox(s0); \
@@ -254,7 +254,7 @@ void skinny_128_384_init
  * \param s3 Fourth word of the state.
  * \param half 0 for the bottom half and 1 for the top half of the TK values.
  */
-#define skinny_128_384_round_tk_full(s0, s1, s2, s3, half) \
+#define skinny_plus_round_tk_full(s0, s1, s2, s3, half) \
     do { \
         /* Apply the S-box to all bytes in the state */ \
         skinny128_sbox(s0); \
@@ -295,8 +295,8 @@ void skinny_128_384_init
         skinny128_LFSR3(TK3[(1 - half) * 2 + 1]); \
     } while (0)
 
-void skinny_128_384_encrypt
-    (const skinny_128_384_key_schedule_t *ks, unsigned char *output,
+void skinny_plus_encrypt
+    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input)
 {
     uint32_t s0, s1, s2, s3;
@@ -333,17 +333,17 @@ void skinny_128_384_encrypt
 #endif
 
     /* Perform all encryption rounds four at a time */
-    for (round = 0; round < SKINNY_128_384_ROUNDS; round += 4) {
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
 #if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
-        skinny_128_384_round_tk_full(s0, s1, s2, s3, 0);
-        skinny_128_384_round_tk_full(s3, s0, s1, s2, 1);
-        skinny_128_384_round_tk_full(s2, s3, s0, s1, 0);
-        skinny_128_384_round_tk_full(s1, s2, s3, s0, 1);
+        skinny_plus_round_tk_full(s0, s1, s2, s3, 0);
+        skinny_plus_round_tk_full(s3, s0, s1, s2, 1);
+        skinny_plus_round_tk_full(s2, s3, s0, s1, 0);
+        skinny_plus_round_tk_full(s1, s2, s3, s0, 1);
 #else
-        skinny_128_384_round(s0, s1, s2, s3, 0, 0);
-        skinny_128_384_round(s3, s0, s1, s2, 1, 1);
-        skinny_128_384_round(s2, s3, s0, s1, 0, 2);
-        skinny_128_384_round(s1, s2, s3, s0, 1, 3);
+        skinny_plus_round(s0, s1, s2, s3, 0, 0);
+        skinny_plus_round(s3, s0, s1, s2, 1, 1);
+        skinny_plus_round(s2, s3, s0, s1, 0, 2);
+        skinny_plus_round(s1, s2, s3, s0, 1, 3);
         schedule += 8;
 #endif
     }
@@ -356,8 +356,8 @@ void skinny_128_384_encrypt
 }
 
 /**
- * \def skinny_128_384_round_tk2(s0, s1, s2, s3, half)
- * \brief Performs an unrolled round for skinny_128_384_encrypt_tk2().
+ * \def skinny_plus_round_tk2(s0, s1, s2, s3, half)
+ * \brief Performs an unrolled round for skinny_plus_encrypt_tk2().
  *
  * \param s0 First word of the state.
  * \param s1 Second word of the state.
@@ -367,10 +367,10 @@ void skinny_128_384_encrypt
  * \param offset Offset between 0 and 3 of the current unrolled round.
  */
 #if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
-#define skinny_128_384_round_tk2(s0, s1, s2, s3, half, offset) \
-    skinny_128_384_round_tk_full(s0, s1, s2, s3, half)
+#define skinny_plus_round_tk2(s0, s1, s2, s3, half, offset) \
+    skinny_plus_round_tk_full(s0, s1, s2, s3, half)
 #else /* !SKINNY_PLUS_VARIANT_SMALL */
-#define skinny_128_384_round_tk2(s0, s1, s2, s3, half, offset) \
+#define skinny_plus_round_tk2(s0, s1, s2, s3, half, offset) \
     do { \
         /* Apply the S-box to all bytes in the state */ \
         skinny128_sbox(s0); \
@@ -406,8 +406,8 @@ void skinny_128_384_encrypt
     } while (0)
 #endif /* !SKINNY_PLUS_VARIANT_SMALL */
 
-void skinny_128_384_encrypt_tk2
-    (skinny_128_384_key_schedule_t *ks, unsigned char *output,
+void skinny_plus_encrypt_tk2
+    (skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input, const unsigned char *tk2)
 {
     uint32_t s0, s1, s2, s3;
@@ -444,11 +444,11 @@ void skinny_128_384_encrypt_tk2
 #endif
 
     /* Perform all encryption rounds four at a time */
-    for (round = 0; round < SKINNY_128_384_ROUNDS; round += 4) {
-        skinny_128_384_round_tk2(s0, s1, s2, s3, 0, 0);
-        skinny_128_384_round_tk2(s3, s0, s1, s2, 1, 1);
-        skinny_128_384_round_tk2(s2, s3, s0, s1, 0, 2);
-        skinny_128_384_round_tk2(s1, s2, s3, s0, 1, 3);
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
+        skinny_plus_round_tk2(s0, s1, s2, s3, 0, 0);
+        skinny_plus_round_tk2(s3, s0, s1, s2, 1, 1);
+        skinny_plus_round_tk2(s2, s3, s0, s1, 0, 2);
+        skinny_plus_round_tk2(s1, s2, s3, s0, 1, 3);
 #if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_SMALL
         schedule += 8;
 #endif
@@ -461,7 +461,7 @@ void skinny_128_384_encrypt_tk2
     le_store_word32(output + 12, s3);
 }
 
-void skinny_128_384_encrypt_tk_full
+void skinny_plus_encrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
      const unsigned char *input)
 {
@@ -493,11 +493,11 @@ void skinny_128_384_encrypt_tk_full
     TK3[3] = le_load_word32(key + 44);
 
     /* Perform all encryption rounds four at a time */
-    for (round = 0; round < SKINNY_128_384_ROUNDS; round += 4) {
-        skinny_128_384_round_tk_full(s0, s1, s2, s3, 0);
-        skinny_128_384_round_tk_full(s3, s0, s1, s2, 1);
-        skinny_128_384_round_tk_full(s2, s3, s0, s1, 0);
-        skinny_128_384_round_tk_full(s1, s2, s3, s0, 1);
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
+        skinny_plus_round_tk_full(s0, s1, s2, s3, 0);
+        skinny_plus_round_tk_full(s3, s0, s1, s2, 1);
+        skinny_plus_round_tk_full(s2, s3, s0, s1, 0);
+        skinny_plus_round_tk_full(s1, s2, s3, s0, 1);
     }
 
     /* Pack the result into the output buffer */
@@ -509,12 +509,12 @@ void skinny_128_384_encrypt_tk_full
 
 #else /* __AVR__ */
 
-void skinny_128_384_encrypt_tk2
-    (skinny_128_384_key_schedule_t *ks, unsigned char *output,
+void skinny_plus_encrypt_tk2
+    (skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input, const unsigned char *tk2)
 {
     memcpy(ks->TK2, tk2, 16);
-    skinny_128_384_encrypt(ks, output, input);
+    skinny_plus_encrypt(ks, output, input);
 }
 
 #endif /* __AVR__ */

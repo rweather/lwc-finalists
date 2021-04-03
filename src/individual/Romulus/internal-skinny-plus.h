@@ -20,15 +20,15 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LW_INTERNAL_SKINNY128_H
-#define LW_INTERNAL_SKINNY128_H
+#ifndef LW_INTERNAL_SKINNY_PLUS_H
+#define LW_INTERNAL_SKINNY_PLUS_H
 
 /**
- * \file internal-skinny128.h
- * \brief SKINNY-128 block cipher family.
+ * \file internal-skinny-plus.h
+ * \brief SKINNY-128-384+ block cipher.
  *
  * References: https://eprint.iacr.org/2016/660.pdf,
- * https://sites.google.com/site/skinnycipher/
+ * https://romulusae.github.io/romulus/
  */
 
 #include <stddef.h>
@@ -40,17 +40,17 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of a block for SKINNY-128 block ciphers.
+ * \brief Size of a block for SKINNY-128-384+.
  */
-#define SKINNY_128_BLOCK_SIZE 16
+#define SKINNY_PLUS_BLOCK_SIZE 16
 
 /**
- * \brief Number of rounds for SKINNY-128-384.
+ * \brief Number of rounds for SKINNY-128-384+.
  */
-#define SKINNY_128_384_ROUNDS 56
+#define SKINNY_PLUS_ROUNDS 40
 
 /**
- * \brief Structure of the key schedule for SKINNY-128-384.
+ * \brief Structure of the key schedule for SKINNY-128-384+.
  */
 typedef struct
 {
@@ -65,39 +65,39 @@ typedef struct
     uint8_t TK3[16];
 #else
     /** Words of the full key schedule */
-    uint32_t k[SKINNY_128_384_ROUNDS * 2];
+    uint32_t k[SKINNY_PLUS_ROUNDS * 2];
 #endif
 
-} skinny_128_384_key_schedule_t;
+} skinny_plus_key_schedule_t;
 
 /**
- * \brief Initializes the key schedule for SKINNY-128-384.
+ * \brief Initializes the key schedule for SKINNY-128-384+.
  *
  * \param ks Points to the key schedule to initialize.
  * \param key Points to the key data.
  */
-void skinny_128_384_init
-    (skinny_128_384_key_schedule_t *ks, const unsigned char key[48]);
+void skinny_plus_init
+    (skinny_plus_key_schedule_t *ks, const unsigned char key[48]);
 
 /**
- * \brief Encrypts a 128-bit block with SKINNY-128-384.
+ * \brief Encrypts a 128-bit block with SKINNY-128-384+.
  *
- * \param ks Points to the SKINNY-128-384 key schedule.
+ * \param ks Points to the SKINNY-128-384+ key schedule.
  * \param output Output buffer which must be at least 16 bytes in length.
  * \param input Input buffer which must be at least 16 bytes in length.
  *
  * The \a input and \a output buffers can be the same buffer for
  * in-place encryption.
  */
-void skinny_128_384_encrypt
-    (const skinny_128_384_key_schedule_t *ks, unsigned char *output,
+void skinny_plus_encrypt
+    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input);
 
 /**
- * \brief Encrypts a 128-bit block with SKINNY-128-384 and an explicitly
+ * \brief Encrypts a 128-bit block with SKINNY-128-384+ and an explicitly
  * provided TK2 value.
  *
- * \param ks Points to the SKINNY-128-384 key schedule.
+ * \param ks Points to the SKINNY-128-384+ key schedule.
  * \param output Output buffer which must be at least 16 bytes in length.
  * \param input Input buffer which must be at least 16 bytes in length.
  * \param tk2 TK2 value that should be updated on the fly.
@@ -106,18 +106,18 @@ void skinny_128_384_encrypt
  * in-place encryption.
  *
  * This version is useful when both TK1 and TK2 change from block to block.
- * When the key is initialized with skinny_128_384_init(), the TK2 part of
+ * When the key is initialized with skinny_plus_init(), the TK2 part of
  * the key value should be set to zero.
  *
  * \note Some versions of this function may modify the key schedule to
  * copy tk2 into place.
  */
-void skinny_128_384_encrypt_tk2
-    (skinny_128_384_key_schedule_t *ks, unsigned char *output,
+void skinny_plus_encrypt_tk2
+    (skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input, const unsigned char *tk2);
 
 /**
- * \brief Encrypts a 128-bit block with SKINNY-128-384 and a
+ * \brief Encrypts a 128-bit block with SKINNY-128-384+ and a
  * fully specified tweakey value.
  *
  * \param key Points to the 384-bit tweakey value.
@@ -128,10 +128,10 @@ void skinny_128_384_encrypt_tk2
  * in-place encryption.
  *
  * This version is useful when the entire tweakey changes from block to
- * block.  It is slower than the other versions of SKINNY-128-384 but
+ * block.  It is slower than the other versions of SKINNY-128-384+ but
  * more memory-efficient.
  */
-void skinny_128_384_encrypt_tk_full
+void skinny_plus_encrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
      const unsigned char *input);
 

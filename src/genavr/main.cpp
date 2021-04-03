@@ -879,19 +879,19 @@ static void skinny128_sboxes(enum Mode mode)
     }
 }
 
-static bool skinny128_384_setup_key(enum Mode mode)
+static bool skinny128_384_setup_key(enum Mode mode, int rounds = 56)
 {
     Code code;
-    gen_skinny128_384_setup_key(code);
+    gen_skinny128_384_setup_key(code, rounds);
     if (mode == Generate)
         code.write(std::cout);
     return true;
 }
 
-static bool skinny128_384_encrypt(enum Mode mode)
+static bool skinny128_384_encrypt(enum Mode mode, int rounds = 56)
 {
     Code code;
-    gen_skinny128_384_encrypt(code);
+    gen_skinny128_384_encrypt(code, rounds);
     if (mode == Generate) {
         code.write(std::cout);
         code.write_alias(std::cout, "skinny_128_384_encrypt_tk_full");
@@ -906,10 +906,10 @@ static bool skinny128_384_encrypt(enum Mode mode)
     return true;
 }
 
-static bool skinny128_384_decrypt(enum Mode mode)
+static bool skinny128_384_decrypt(enum Mode mode, int rounds = 56)
 {
     Code code;
-    gen_skinny128_384_decrypt(code);
+    gen_skinny128_384_decrypt(code, rounds);
     if (mode == Generate) {
         code.write(std::cout);
     } else {
@@ -1001,13 +1001,13 @@ static bool skinny128_enc_only(enum Mode mode)
     return ok;
 }
 
-static bool skinny128_plus(enum Mode mode)
+static bool skinny_plus(enum Mode mode)
 {
     bool ok = true;
     skinny128_sboxes(mode);
-    if (!skinny128_384_setup_key(mode))
+    if (!skinny128_384_setup_key(mode, 40))
         ok = false;
-    if (!skinny128_384_encrypt(mode))
+    if (!skinny128_384_encrypt(mode, 40))
         ok = false;
     return ok;
 }
@@ -1232,8 +1232,8 @@ int main(int argc, char *argv[])
             gen1 = skinny128;
         } else if (!strcmp(argv[1], "SKINNY-128-Enc-Only")) {
             gen1 = skinny128_enc_only;
-        } else if (!strcmp(argv[1], "SKINNY-128-Plus")) {
-            gen1 = skinny128_plus;
+        } else if (!strcmp(argv[1], "SKINNY-128-384-Plus")) {
+            gen1 = skinny_plus;
         } else if (!strcmp(argv[1], "SPARKLE")) {
             gen1 = sparkle256;
             gen2 = sparkle384;

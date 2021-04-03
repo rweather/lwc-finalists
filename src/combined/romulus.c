@@ -21,34 +21,34 @@
  */
 
 #include "romulus.h"
-#include "internal-skinny128.h"
+#include "internal-skinny-plus.h"
 #include "internal-util.h"
 #include <string.h>
 
-aead_cipher_t const romulus_n1_cipher = {
-    "Romulus-N1",
+aead_cipher_t const romulus_np_cipher = {
+    "Romulus-N+",
     ROMULUS_KEY_SIZE,
     ROMULUS_NONCE_SIZE,
     ROMULUS_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_n1_aead_encrypt,
-    romulus_n1_aead_decrypt
+    romulus_np_aead_encrypt,
+    romulus_np_aead_decrypt
 };
 
-aead_cipher_t const romulus_m1_cipher = {
-    "Romulus-M1",
+aead_cipher_t const romulus_mp_cipher = {
+    "Romulus-M+",
     ROMULUS_KEY_SIZE,
     ROMULUS_NONCE_SIZE,
     ROMULUS_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_m1_aead_encrypt,
-    romulus_m1_aead_decrypt
+    romulus_mp_aead_encrypt,
+    romulus_mp_aead_decrypt
 };
 
 /**
  * \brief Limit on the number of bytes of message or associated data (128Mb).
  *
- * Romulus-N1 and Romulus-M1 use a 56-bit block counter which allows for
+ * Romulus-N+ and Romulus-M+ use a 56-bit block counter which allows for
  * payloads well into the petabyte range.  It is unlikely that an embedded
  * device will have that much memory to store a contiguous packet!
  *
@@ -62,10 +62,10 @@ aead_cipher_t const romulus_m1_cipher = {
  * counter can never exceed 2^24 - 1.
  */
 #define ROMULUS_DATA_LIMIT \
-    ((unsigned long long)((1ULL << 23) * SKINNY_128_BLOCK_SIZE))
+    ((unsigned long long)((1ULL << 23) * SKINNY_PLUS_BLOCK_SIZE))
 
 /**
- * \brief Initializes the key schedule for Romulus-N1 or Romulus-M1.
+ * \brief Initializes the key schedule for Romulus-N+ or Romulus-M+.
  *
  * \param ks Points to the key schedule to initialize.
  * \param k Points to the 16 bytes of the key.
@@ -73,7 +73,7 @@ aead_cipher_t const romulus_m1_cipher = {
  * if the nonce will be updated on the fly.
  */
 static void romulus1_init
-    (skinny_128_384_key_schedule_t *ks,
+    (skinny_plus_key_schedule_t *ks,
      const unsigned char *k, const unsigned char *npub)
 {
     unsigned char TK[48];
@@ -84,11 +84,11 @@ static void romulus1_init
     else
         memset(TK + 16, 0, 16);
     memcpy(TK + 32, k, 16);
-    skinny_128_384_init(ks, TK);
+    skinny_plus_init(ks, TK);
 }
 
 /**
- * \brief Sets the domain separation value for Romulus-N1 and M1.
+ * \brief Sets the domain separation value for Romulus-N+ and M+.
  *
  * \param ks The key schedule to set the domain separation value into.
  * \param domain The domain separation value.
@@ -96,7 +96,7 @@ static void romulus1_init
 #define romulus1_set_domain(ks, domain) ((ks)->TK1[7] = (domain))
 
 /**
- * \brief Updates the 56-bit LFSR block counter for Romulus-N1 and M1.
+ * \brief Updates the 56-bit LFSR block counter for Romulus-N+ and M+.
  *
  * \param TK1 Points to the TK1 part of the key schedule containing the LFSR.
  */
@@ -113,7 +113,7 @@ STATIC_INLINE void romulus1_update_counter(uint8_t TK1[16])
 }
 
 /**
- * \brief Process the asssociated data for Romulus-N1.
+ * \brief Process the asssociated data for Romulus-N+.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -121,8 +121,8 @@ STATIC_INLINE void romulus1_update_counter(uint8_t TK1[16])
  * \param ad Points to the associated data.
  * \param adlen Length of the associated data in bytes.
  */
-static void romulus_n1_process_ad
-    (skinny_128_384_key_schedule_t *ks,
+static void romulus_np_process_ad
+    (skinny_plus_key_schedule_t *ks,
      unsigned char S[16], const unsigned char *npub,
      const unsigned char *ad, unsigned long long adlen)
 {
@@ -132,7 +132,7 @@ static void romulus_n1_process_ad
     if (adlen == 0) {
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x1A);
-        skinny_128_384_encrypt_tk2(ks, S, S, npub);
+        skinny_plus_encrypt_tk2(ks, S, S, npub);
         return;
     }
 
@@ -141,7 +141,7 @@ static void romulus_n1_process_ad
     while (adlen > 32) {
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, ad, 16);
-        skinny_128_384_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
         romulus1_update_counter(ks->TK1);
         ad += 32;
         adlen -= 32;
@@ -153,7 +153,7 @@ static void romulus_n1_process_ad
     if (temp == 32) {
         /* Left-over complete double block */
         lw_xor_block(S, ad, 16);
-        skinny_128_384_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x18);
     } else if (temp > 16) {
@@ -164,7 +164,7 @@ static void romulus_n1_process_ad
         memcpy(pad, ad + 16, temp);
         memset(pad + temp, 0, 15 - temp);
         pad[15] = temp;
-        skinny_128_384_encrypt_tk2(ks, S, S, pad);
+        skinny_plus_encrypt_tk2(ks, S, S, pad);
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x1A);
     } else if (temp == 16) {
@@ -177,7 +177,7 @@ static void romulus_n1_process_ad
         S[15] ^= temp;
         romulus1_set_domain(ks, 0x1A);
     }
-    skinny_128_384_encrypt_tk2(ks, S, S, npub);
+    skinny_plus_encrypt_tk2(ks, S, S, npub);
 }
 
 /**
@@ -243,7 +243,7 @@ static uint8_t romulus_m_final_ad_domain
 }
 
 /**
- * \brief Process the asssociated data for Romulus-M1.
+ * \brief Process the asssociated data for Romulus-M+.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -253,8 +253,8 @@ static uint8_t romulus_m_final_ad_domain
  * \param m Points to the message plaintext.
  * \param mlen Length of the message plaintext.
  */
-static void romulus_m1_process_ad
-    (skinny_128_384_key_schedule_t *ks,
+static void romulus_mp_process_ad
+    (skinny_plus_key_schedule_t *ks,
      unsigned char S[16], const unsigned char *npub,
      const unsigned char *ad, unsigned long long adlen,
      const unsigned char *m, unsigned long long mlen)
@@ -271,7 +271,7 @@ static void romulus_m1_process_ad
     while (adlen > 32) {
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, ad, 16);
-        skinny_128_384_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
         romulus1_update_counter(ks->TK1);
         ad += 32;
         adlen -= 32;
@@ -283,7 +283,7 @@ static void romulus_m1_process_ad
         /* Last associated data double block is full */
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, ad, 16);
-        skinny_128_384_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
         romulus1_update_counter(ks->TK1);
     } else if (temp > 16) {
         /* Last associated data double block is partial */
@@ -293,7 +293,7 @@ static void romulus_m1_process_ad
         memcpy(pad, ad + 16, temp);
         memset(pad + temp, 0, sizeof(pad) - temp - 1);
         pad[sizeof(pad) - 1] = (unsigned char)temp;
-        skinny_128_384_encrypt_tk2(ks, S, S, pad);
+        skinny_plus_encrypt_tk2(ks, S, S, pad);
         romulus1_update_counter(ks->TK1);
     } else {
         /* Last associated data block is single.  Needs to be combined
@@ -307,12 +307,12 @@ static void romulus_m1_process_ad
             S[15] ^= (unsigned char)temp;
         }
         if (mlen > 16) {
-            skinny_128_384_encrypt_tk2(ks, S, S, m);
+            skinny_plus_encrypt_tk2(ks, S, S, m);
             romulus1_update_counter(ks->TK1);
             m += 16;
             mlen -= 16;
         } else if (mlen == 16) {
-            skinny_128_384_encrypt_tk2(ks, S, S, m);
+            skinny_plus_encrypt_tk2(ks, S, S, m);
             m += 16;
             mlen -= 16;
         } else {
@@ -320,7 +320,7 @@ static void romulus_m1_process_ad
             memcpy(pad, m, temp);
             memset(pad + temp, 0, sizeof(pad) - temp - 1);
             pad[sizeof(pad) - 1] = (unsigned char)temp;
-            skinny_128_384_encrypt_tk2(ks, S, S, pad);
+            skinny_plus_encrypt_tk2(ks, S, S, pad);
             mlen = 0;
         }
     }
@@ -330,7 +330,7 @@ static void romulus_m1_process_ad
     while (mlen > 32) {
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, m, 16);
-        skinny_128_384_encrypt_tk2(ks, S, S, m + 16);
+        skinny_plus_encrypt_tk2(ks, S, S, m + 16);
         romulus1_update_counter(ks->TK1);
         m += 32;
         mlen -= 32;
@@ -342,7 +342,7 @@ static void romulus_m1_process_ad
         /* Last message double block is full */
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, m, 16);
-        skinny_128_384_encrypt_tk2(ks, S, S, m + 16);
+        skinny_plus_encrypt_tk2(ks, S, S, m + 16);
     } else if (temp > 16) {
         /* Last message double block is partial */
         temp -= 16;
@@ -351,7 +351,7 @@ static void romulus_m1_process_ad
         memcpy(pad, m + 16, temp);
         memset(pad + temp, 0, sizeof(pad) - temp - 1);
         pad[sizeof(pad) - 1] = (unsigned char)temp;
-        skinny_128_384_encrypt_tk2(ks, S, S, pad);
+        skinny_plus_encrypt_tk2(ks, S, S, pad);
     } else if (temp == 16) {
         /* Last message single block is full */
         lw_xor_block(S, m, 16);
@@ -364,7 +364,7 @@ static void romulus_m1_process_ad
     /* Process the last partial block */
     romulus1_set_domain(ks, final_domain);
     romulus1_update_counter(ks->TK1);
-    skinny_128_384_encrypt_tk2(ks, S, S, npub);
+    skinny_plus_encrypt_tk2(ks, S, S, npub);
 }
 
 /**
@@ -450,7 +450,7 @@ STATIC_INLINE void romulus_rho_inverse_short
 }
 
 /**
- * \brief Encrypts a plaintext message with Romulus-N1.
+ * \brief Encrypts a plaintext message with Romulus-N+.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -458,8 +458,8 @@ STATIC_INLINE void romulus_rho_inverse_short
  * \param m Points to the buffer containing the plaintext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_n1_encrypt
-    (skinny_128_384_key_schedule_t *ks, unsigned char S[16],
+static void romulus_np_encrypt
+    (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *c, const unsigned char *m, unsigned long long mlen)
 {
     unsigned temp;
@@ -468,7 +468,7 @@ static void romulus_n1_encrypt
     if (mlen == 0) {
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x15);
-        skinny_128_384_encrypt(ks, S, S);
+        skinny_plus_encrypt(ks, S, S);
         return;
     }
 
@@ -477,7 +477,7 @@ static void romulus_n1_encrypt
     while (mlen > 16) {
         romulus_rho(S, c, m);
         romulus1_update_counter(ks->TK1);
-        skinny_128_384_encrypt(ks, S, S);
+        skinny_plus_encrypt(ks, S, S);
         c += 16;
         m += 16;
         mlen -= 16;
@@ -493,11 +493,11 @@ static void romulus_n1_encrypt
         romulus_rho(S, c, m);
         romulus1_set_domain(ks, 0x14);
     }
-    skinny_128_384_encrypt(ks, S, S);
+    skinny_plus_encrypt(ks, S, S);
 }
 
 /**
- * \brief Decrypts a ciphertext message with Romulus-N1.
+ * \brief Decrypts a ciphertext message with Romulus-N+.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -505,8 +505,8 @@ static void romulus_n1_encrypt
  * \param c Points to the buffer containing the ciphertext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_n1_decrypt
-    (skinny_128_384_key_schedule_t *ks, unsigned char S[16],
+static void romulus_np_decrypt
+    (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *m, const unsigned char *c, unsigned long long mlen)
 {
     unsigned temp;
@@ -515,7 +515,7 @@ static void romulus_n1_decrypt
     if (mlen == 0) {
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x15);
-        skinny_128_384_encrypt(ks, S, S);
+        skinny_plus_encrypt(ks, S, S);
         return;
     }
 
@@ -524,7 +524,7 @@ static void romulus_n1_decrypt
     while (mlen > 16) {
         romulus_rho_inverse(S, m, c);
         romulus1_update_counter(ks->TK1);
-        skinny_128_384_encrypt(ks, S, S);
+        skinny_plus_encrypt(ks, S, S);
         c += 16;
         m += 16;
         mlen -= 16;
@@ -540,11 +540,11 @@ static void romulus_n1_decrypt
         romulus_rho_inverse(S, m, c);
         romulus1_set_domain(ks, 0x14);
     }
-    skinny_128_384_encrypt(ks, S, S);
+    skinny_plus_encrypt(ks, S, S);
 }
 
 /**
- * \brief Encrypts a plaintext message with Romulus-M1.
+ * \brief Encrypts a plaintext message with Romulus-M+.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -552,8 +552,8 @@ static void romulus_n1_decrypt
  * \param m Points to the buffer containing the plaintext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_m1_encrypt
-    (skinny_128_384_key_schedule_t *ks, unsigned char S[16],
+static void romulus_mp_encrypt
+    (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *c, const unsigned char *m, unsigned long long mlen)
 {
     /* Nothing to do if the message is empty */
@@ -563,7 +563,7 @@ static void romulus_m1_encrypt
     /* Process all block except the last */
     romulus1_set_domain(ks, 0x24);
     while (mlen > 16) {
-        skinny_128_384_encrypt(ks, S, S);
+        skinny_plus_encrypt(ks, S, S);
         romulus_rho(S, c, m);
         romulus1_update_counter(ks->TK1);
         c += 16;
@@ -572,12 +572,12 @@ static void romulus_m1_encrypt
     }
 
     /* Handle the last block */
-    skinny_128_384_encrypt(ks, S, S);
+    skinny_plus_encrypt(ks, S, S);
     romulus_rho_short(S, c, m, (unsigned)mlen);
 }
 
 /**
- * \brief Decrypts a ciphertext message with Romulus-M1.
+ * \brief Decrypts a ciphertext message with Romulus-M+.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -585,8 +585,8 @@ static void romulus_m1_encrypt
  * \param c Points to the buffer containing the ciphertext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_m1_decrypt
-    (skinny_128_384_key_schedule_t *ks, unsigned char S[16],
+static void romulus_mp_decrypt
+    (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *m, const unsigned char *c, unsigned long long mlen)
 {
     /* Nothing to do if the message is empty */
@@ -596,7 +596,7 @@ static void romulus_m1_decrypt
     /* Process all block except the last */
     romulus1_set_domain(ks, 0x24);
     while (mlen > 16) {
-        skinny_128_384_encrypt(ks, S, S);
+        skinny_plus_encrypt(ks, S, S);
         romulus_rho_inverse(S, m, c);
         romulus1_update_counter(ks->TK1);
         c += 16;
@@ -605,7 +605,7 @@ static void romulus_m1_decrypt
     }
 
     /* Handle the last block */
-    skinny_128_384_encrypt(ks, S, S);
+    skinny_plus_encrypt(ks, S, S);
     romulus_rho_inverse_short(S, m, c, (unsigned)mlen);
 }
 
@@ -625,7 +625,7 @@ STATIC_INLINE void romulus_generate_tag
     }
 }
 
-int romulus_n1_aead_encrypt
+int romulus_np_aead_encrypt
     (unsigned char *c, unsigned long long *clen,
      const unsigned char *m, unsigned long long mlen,
      const unsigned char *ad, unsigned long long adlen,
@@ -633,7 +633,7 @@ int romulus_n1_aead_encrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    skinny_128_384_key_schedule_t ks;
+    skinny_plus_key_schedule_t ks;
     unsigned char S[16];
     (void)nsec;
 
@@ -650,20 +650,20 @@ int romulus_n1_aead_encrypt
 
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_n1_process_ad(&ks, S, npub, ad, adlen);
+    romulus_np_process_ad(&ks, S, npub, ad, adlen);
 
     /* Re-initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
 
     /* Encrypts the plaintext to produce the ciphertext */
-    romulus_n1_encrypt(&ks, S, c, m, mlen);
+    romulus_np_encrypt(&ks, S, c, m, mlen);
 
     /* Generate the authentication tag */
     romulus_generate_tag(c + mlen, S);
     return 0;
 }
 
-int romulus_n1_aead_decrypt
+int romulus_np_aead_decrypt
     (unsigned char *m, unsigned long long *mlen,
      unsigned char *nsec,
      const unsigned char *c, unsigned long long clen,
@@ -671,7 +671,7 @@ int romulus_n1_aead_decrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    skinny_128_384_key_schedule_t ks;
+    skinny_plus_key_schedule_t ks;
     unsigned char S[16];
     (void)nsec;
 
@@ -691,21 +691,21 @@ int romulus_n1_aead_decrypt
 
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_n1_process_ad(&ks, S, npub, ad, adlen);
+    romulus_np_process_ad(&ks, S, npub, ad, adlen);
 
     /* Re-initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
 
     /* Decrypt the ciphertext to produce the plaintext */
     clen -= ROMULUS_TAG_SIZE;
-    romulus_n1_decrypt(&ks, S, m, c, clen);
+    romulus_np_decrypt(&ks, S, m, c, clen);
 
     /* Check the authentication tag */
     romulus_generate_tag(S, S);
     return aead_check_tag(m, clen, S, c + clen, ROMULUS_TAG_SIZE);
 }
 
-int romulus_m1_aead_encrypt
+int romulus_mp_aead_encrypt
     (unsigned char *c, unsigned long long *clen,
      const unsigned char *m, unsigned long long mlen,
      const unsigned char *ad, unsigned long long adlen,
@@ -713,7 +713,7 @@ int romulus_m1_aead_encrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    skinny_128_384_key_schedule_t ks;
+    skinny_plus_key_schedule_t ks;
     unsigned char S[16];
     (void)nsec;
 
@@ -730,7 +730,7 @@ int romulus_m1_aead_encrypt
 
     /* Process the associated data and the plaintext message */
     memset(S, 0, sizeof(S));
-    romulus_m1_process_ad(&ks, S, npub, ad, adlen, m, mlen);
+    romulus_mp_process_ad(&ks, S, npub, ad, adlen, m, mlen);
 
     /* Generate the authentication tag, which is also the initialization
      * vector for the encryption portion of the packet processing */
@@ -741,11 +741,11 @@ int romulus_m1_aead_encrypt
     romulus1_init(&ks, k, npub);
 
     /* Encrypt the plaintext to produce the ciphertext */
-    romulus_m1_encrypt(&ks, S, c, m, mlen);
+    romulus_mp_encrypt(&ks, S, c, m, mlen);
     return 0;
 }
 
-int romulus_m1_aead_decrypt
+int romulus_mp_aead_decrypt
     (unsigned char *m, unsigned long long *mlen,
      unsigned char *nsec,
      const unsigned char *c, unsigned long long clen,
@@ -753,7 +753,7 @@ int romulus_m1_aead_decrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    skinny_128_384_key_schedule_t ks;
+    skinny_plus_key_schedule_t ks;
     unsigned char S[16];
     (void)nsec;
 
@@ -774,7 +774,7 @@ int romulus_m1_aead_decrypt
      * authentication tag as the initialization vector for decryption */
     clen -= ROMULUS_TAG_SIZE;
     memcpy(S, c + clen, ROMULUS_TAG_SIZE);
-    romulus_m1_decrypt(&ks, S, m, c, clen);
+    romulus_mp_decrypt(&ks, S, m, c, clen);
 
     /* Re-initialize the key schedule with the key and no nonce.  Associated
      * data processing varies the nonce from block to block */
@@ -782,7 +782,7 @@ int romulus_m1_aead_decrypt
 
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_m1_process_ad(&ks, S, npub, ad, adlen, m, clen);
+    romulus_mp_process_ad(&ks, S, npub, ad, adlen, m, clen);
 
     /* Check the authentication tag */
     romulus_generate_tag(S, S);
