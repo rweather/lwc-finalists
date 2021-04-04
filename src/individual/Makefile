@@ -110,7 +110,7 @@ ROMULUS_FILES = \
     internal-skinny-plus.h \
     internal-skinny-small-armv7m.S \
     internal-skinny-tiny-armv7m.S \
-    internal-skinny-plus-avr.S \
+    internal-skinny-tiny-avr.S \
     internal-skinny-plus-config.h \
     $(COMMON_FILES)
 SPARKLE_FILES = \
