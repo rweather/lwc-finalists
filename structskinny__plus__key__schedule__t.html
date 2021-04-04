@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Lightweight Cryptography Primitives: esch_384_hash_state_t Union Reference</title>
+<title>Lightweight Cryptography Primitives: skinny_plus_key_schedule_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,99 +84,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">esch_384_hash_state_t Union Reference</div>  </div>
+<div class="title">skinny_plus_key_schedule_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>State information for the Esch384 incremental hash mode.  
- <a href="unionesch__384__hash__state__t.html#details">More...</a></p>
+<p>Structure of the key schedule for SKINNY-128-384+.  
+ <a href="structskinny__plus__key__schedule__t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="sparkle_8h_source.html">sparkle.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="internal-skinny-plus_8h_source.html">internal-skinny-plus.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a0f31fa9bb38e40e170385a61d05dd32e"><td class="memItemLeft" >struct {</td></tr>
-<tr class="memitem:a8cd92151abe73e5ab0678d1ce9eeac48"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionesch__384__hash__state__t.html#afb354a6c4d669822800d3c03b89a7356">state</a> [64]</td></tr>
-<tr class="separator:a8cd92151abe73e5ab0678d1ce9eeac48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2854bf36e26e6ade5f44266f1ef07ba"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionesch__384__hash__state__t.html#ab01bca980474ef0e416d67e98cf8e03f">block</a> [16]</td></tr>
-<tr class="separator:aa2854bf36e26e6ade5f44266f1ef07ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dcaba070c624aeef737429e9518f81d"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionesch__384__hash__state__t.html#acf49a94ae0dbe84a74fec1d1f421fc4c">count</a></td></tr>
-<tr class="separator:a6dcaba070c624aeef737429e9518f81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f31fa9bb38e40e170385a61d05dd32e"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionesch__384__hash__state__t.html#a0f31fa9bb38e40e170385a61d05dd32e">s</a></td></tr>
-<tr class="separator:a0f31fa9bb38e40e170385a61d05dd32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a984dedbe8531567e9a778c70e3509fae"><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionesch__384__hash__state__t.html#a984dedbe8531567e9a778c70e3509fae">align</a></td></tr>
-<tr class="separator:a984dedbe8531567e9a778c70e3509fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664c568427bea744f9c34e4eef8af779"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structskinny__plus__key__schedule__t.html#a664c568427bea744f9c34e4eef8af779">TK1</a> [16]</td></tr>
+<tr class="separator:a664c568427bea744f9c34e4eef8af779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab114d88630ef0a5381cfbb0d49edd769"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structskinny__plus__key__schedule__t.html#ab114d88630ef0a5381cfbb0d49edd769">k</a> [<a class="el" href="internal-skinny-plus_8h.html#ac100df8e41f75038e92e1126e33ac2dd">SKINNY_PLUS_ROUNDS</a> *2]</td></tr>
+<tr class="separator:ab114d88630ef0a5381cfbb0d49edd769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>State information for the Esch384 incremental hash mode. </p>
+<div class="textblock"><p>Structure of the key schedule for SKINNY-128-384+. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="a984dedbe8531567e9a778c70e3509fae"></a>
+<a class="anchor" id="ab114d88630ef0a5381cfbb0d49edd769"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long long esch_384_hash_state_t::align</td>
+          <td class="memname">uint32_t skinny_plus_key_schedule_t::k[<a class="el" href="internal-skinny-plus_8h.html#ac100df8e41f75038e92e1126e33ac2dd">SKINNY_PLUS_ROUNDS</a> *2]</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>For alignment of this structure </p>
+<p>Words of the full key schedule </p>
 
 </div>
 </div>
-<a class="anchor" id="ab01bca980474ef0e416d67e98cf8e03f"></a>
+<a class="anchor" id="a664c568427bea744f9c34e4eef8af779"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char esch_384_hash_state_t::block[16]</td>
+          <td class="memname">uint8_t skinny_plus_key_schedule_t::TK1[16]</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Partial input data block </p>
+<p>TK1 for the tweakable part of the key schedule </p>
 
 </div>
 </div>
-<a class="anchor" id="acf49a94ae0dbe84a74fec1d1f421fc4c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned char esch_384_hash_state_t::count</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Number of bytes in the current block </p>
-
-</div>
-</div>
-<a class="anchor" id="a0f31fa9bb38e40e170385a61d05dd32e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct { ... }   esch_384_hash_state_t::s</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>State </p>
-
-</div>
-</div>
-<a class="anchor" id="afb354a6c4d669822800d3c03b89a7356"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned char esch_384_hash_state_t::state[64]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Current hash state </p>
-
-</div>
-</div>
-<hr/>The documentation for this union was generated from the following file:<ul>
-<li><a class="el" href="sparkle_8h_source.html">sparkle.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="internal-skinny-plus_8h_source.html">internal-skinny-plus.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

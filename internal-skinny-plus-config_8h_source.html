@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Lightweight Cryptography Primitives: internal-photon256.h Source File</title>
+<title>Lightweight Cryptography Primitives: internal-skinny-plus-config.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,11 +85,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">internal-photon256.h</div>  </div>
+<div class="title">internal-skinny-plus-config.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="internal-photon256_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (C) 2020 Southern Storm Software, Pty Ltd.</span></div>
+<a href="internal-skinny-plus-config_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (C) 2021 Southern Storm Software, Pty Ltd.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Permission is hereby granted, free of charge, to any person obtaining a</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span></div>
@@ -110,24 +110,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * DEALINGS IN THE SOFTWARE.</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LW_INTERNAL_PHOTON256_H</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LW_INTERNAL_PHOTON256_H</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LW_INTERNAL_SKINNY_PLUS_CONFIG_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LW_INTERNAL_SKINNY_PLUS_CONFIG_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">   41</a></span>&#160;<span class="preprocessor">#define PHOTON256_STATE_SIZE 32</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="internal-photon256_8h.html#a91ad3cb2dfa78b59264054725f2ba87c">photon256_permute</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> state[<a class="code" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>]);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="internal-photon256_8h_html_aa3976af78abc8f7b8fa200a8695e95fc"><div class="ttname"><a href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a></div><div class="ttdeci">#define PHOTON256_STATE_SIZE</div><div class="ttdoc">Size of the PHOTON-256 permutation state in bytes. </div><div class="ttdef"><b>Definition:</b> internal-photon256.h:41</div></div>
-<div class="ttc" id="internal-photon256_8h_html_a91ad3cb2dfa78b59264054725f2ba87c"><div class="ttname"><a href="internal-photon256_8h.html#a91ad3cb2dfa78b59264054725f2ba87c">photon256_permute</a></div><div class="ttdeci">void photon256_permute(unsigned char state[PHOTON256_STATE_SIZE])</div><div class="ttdoc">Permutes the PHOTON-256 state. </div><div class="ttdef"><b>Definition:</b> internal-photon256.c:371</div></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="internal-skinny-plus-config_8h.html#adee779b2d582f8d4e34ac168d3ca9939">   37</a></span>&#160;<span class="preprocessor">#define SKINNY_PLUS_VARIANT_FULL 0</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="internal-skinny-plus-config_8h.html#ae1116a0e5d8bbefbab08f7cbf4ac2b0f">   45</a></span>&#160;<span class="preprocessor">#define SKINNY_PLUS_VARIANT_SMALL 1</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="internal-skinny-plus-config_8h.html#a90acf01378421cb5f9f5c600c87af11f">   54</a></span>&#160;<span class="preprocessor">#define SKINNY_PLUS_VARIANT_TINY 2</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#if defined(__AVR__)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define SKINNY_PLUS_VARIANT_ASM 1</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_TINY</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if defined(__ARM_ARCH_ISA_THUMB) &amp;&amp; __ARM_ARCH == 7</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define SKINNY_PLUS_VARIANT_ASM 1</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_SMALL</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if !defined(SKINNY_PLUS_VARIANT)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="internal-skinny-plus-config_8h.html#a70ccc31feadf06e2f1caed727149c052">   75</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_SMALL</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#if !defined(SKINNY_PLUS_VARIANT_ASM)</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="internal-skinny-plus-config_8h.html#adf25f65cc670191ac3eb3a959edc07b7">   78</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define SKINNY_PLUS_VARIANT_ASM 0</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

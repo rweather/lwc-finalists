@@ -124,9 +124,9 @@ Summary</h1>
 <tr>
 <td>PHOTON-Beetle</td><td>128</td><td>PHOTON-256</td><td>Beetle</td><td></td><td></td><td></td><td>Digest </td></tr>
 <tr>
-<td>Romulus-N</td><td>128</td><td>SKINNY-128</td><td>Romulus-N</td><td></td><td></td><td></td><td></td></tr>
+<td>Romulus-N+</td><td>128</td><td>SKINNY-128-384+</td><td>Romulus-N</td><td></td><td></td><td></td><td></td></tr>
 <tr>
-<td>Romulus-M</td><td>128</td><td>SKINNY-128</td><td>Romulus-M</td><td>Y</td><td></td><td></td><td></td></tr>
+<td>Romulus-M+</td><td>128</td><td>SKINNY-128-384+</td><td>Romulus-M</td><td>Y</td><td></td><td></td><td></td></tr>
 <tr>
 <td>SPARKLE</td><td>128/192/256</td><td>SPARKLE</td><td>Beetle</td><td></td><td></td><td>K</td><td>Digest </td></tr>
 <tr>
@@ -211,18 +211,14 @@ PHOTON-Beetle</h1>
 Romulus</h1>
 <p><b>Definition:</b> <a class="el" href="romulus_8h.html">romulus.h</a></p>
 <p><b>Nonce Reuse:</b> Resistant against nonce reuse as long as the combination of the associated data (AD) and plaintext is unique.</p>
-<p>Romulus is a family of authenticated encryption algorithms that are built around the SKINNY-128 tweakable block cipher. There are six members in the family:</p>
+<p>Romulus is a family of authenticated encryption algorithms that are built around the SKINNY-128 tweakable block cipher. There are two members in the family in round 3 of the competition:</p>
 <ul>
-<li>Romulus-N1 has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384 tweakable block cipher. This is the primary member of the family. </li>
-<li>Romulus-N2 has a 128-bit key, a 96-bit nonce, and a 128-bit tag, based around the SKINNY-128-384 tweakable block cipher. </li>
-<li>Romulus-N3 has a 128-bit key, a 96-bit nonce, and a 128-bit tag, based around the SKINNY-128-256 tweakable block cipher. </li>
-<li>Romulus-M1 has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384 tweakable block cipher. </li>
-<li>Romulus-M2 has a 128-bit key, a 96-bit nonce, and a 128-bit tag, based around the SKINNY-128-384 tweakable block cipher. </li>
-<li>Romulus-M3 has a 128-bit key, a 96-bit nonce, and a 128-bit tag, based around the SKINNY-128-256 tweakable block cipher.</li>
+<li>Romulus-N+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384+ tweakable block cipher. This is the primary member of the family. </li>
+<li>Romulus-M+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384+ tweakable block cipher.</li>
 </ul>
 <p>The Romulus-M variants are resistant to nonce reuse as long as the combination of the associated data and plaintext is unique. If the same associated data and plaintext are reused under the same nonce, then the scheme will leak that the same plaintext has been sent for a second time but will not reveal the plaintext itself.</p>
 <p>The Romulus block padding and domain separation schemes are quite complex, so it is one of the larger algorithms to implement in software.</p>
-<p><b>Recommendation:</b> The specification recommends Romulus-N1, or Romulus-M1 if resistance against nonce reuse is desirable. The specification recommends that Romulus should be paired with the SKINNY-tk2-HASH and SKINNY-tk3-HASH algorithms from the SKINNY-AEAD submission if hashing is required.</p>
+<p><b>Recommendation:</b> The specification recommends Romulus-N+, or Romulus-M+ if resistance against nonce reuse is desirable.</p>
 <h1><a class="anchor" id="alg_sparkle"></a>
 SPARKLE</h1>
 <p><b>Definition:</b> <a class="el" href="sparkle_8h.html">sparkle.h</a></p>
@@ -264,7 +260,7 @@ Internal block operations</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 3 2021 13:54:33 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 5 2021 04:14:29 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
