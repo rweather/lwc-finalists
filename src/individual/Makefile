@@ -108,6 +108,8 @@ ROMULUS_FILES = \
     romulus.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
+    internal-skinny-small-armv7m.S \
+    internal-skinny-tiny-armv7m.S \
     internal-skinny-plus-avr.S \
     internal-skinny-plus-config.h \
     $(COMMON_FILES)

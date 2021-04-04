@@ -57,11 +57,11 @@ typedef struct
     /** TK1 for the tweakable part of the key schedule */
     uint8_t TK1[16];
 
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
-    /** TK2 for the small key schedule */
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+    /** TK2 for the tiny key schedule */
     uint8_t TK2[16];
 
-    /** TK3 for the small key schedule */
+    /** TK3 for the tiny key schedule */
     uint8_t TK3[16];
 #else
     /** Words of the full key schedule */

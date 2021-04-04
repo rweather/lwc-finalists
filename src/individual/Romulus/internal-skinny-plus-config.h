@@ -29,12 +29,12 @@
  */
 
 /**
- * \brief Select the fixsliced variant of SKINNY-128-384+.
+ * \brief Select the full fixsliced variant of SKINNY-128-384+.
  *
  * The fixsliced variant requires 656 bytes for the key schedule and uses the
  * fixslicing method to implement encryption.
  */
-#define SKINNY_PLUS_VARIANT_FIXSLICED 0
+#define SKINNY_PLUS_VARIANT_FULL 0
 
 /**
  * \brief Select the standard variant of SKINNY-128-384+.
@@ -42,16 +42,16 @@
  * The standard variant requires 336 bytes to expand the key schedule ahead
  * of time and uses the regular method to implement encryption.
  */
-#define SKINNY_PLUS_VARIANT_STANDARD 1
+#define SKINNY_PLUS_VARIANT_SMALL 1
 
 /**
- * \brief Select the small variant of SKINNY-128-384+.
+ * \brief Select the tiny variant of SKINNY-128-384+.
  *
- * The small variant requires 48 bytes for the key schedule and uses the
+ * The tiny variant requires 48 bytes for the key schedule and uses the
  * regular method to implement encryption.  The key schedule is expanded
  * on the fly during encryption.
  */
-#define SKINNY_PLUS_VARIANT_SMALL 2
+#define SKINNY_PLUS_VARIANT_TINY 2
 
 /**
  * \def SKINNY_PLUS_VARIANT
@@ -65,14 +65,14 @@
  */
 #if defined(__AVR__)
 #define SKINNY_PLUS_VARIANT_ASM 1
+#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_TINY
+#endif
+#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+#define SKINNY_PLUS_VARIANT_ASM 1
 #define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_SMALL
 #endif
-/*#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7 && !defined(SKINNY_PLUS_VARIANT_ASM)*/
-/*#define SKINNY_PLUS_VARIANT_ASM 1*/
-/*#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_STANDARD*/
-/*#endif*/
 #if !defined(SKINNY_PLUS_VARIANT)
-#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_STANDARD
+#define SKINNY_PLUS_VARIANT SKINNY_PLUS_VARIANT_SMALL
 #endif
 #if !defined(SKINNY_PLUS_VARIANT_ASM)
 #define SKINNY_PLUS_VARIANT_ASM 0

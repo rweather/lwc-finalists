@@ -24,7 +24,7 @@
 #include "internal-util.h"
 #include <string.h>
 
-#if !defined(__AVR__)
+#if !SKINNY_PLUS_VARIANT_ASM
 
 /** @cond skinnyutil */
 
@@ -43,23 +43,6 @@
         uint32_t _x = (x); \
         (x) = ((_x >> 1) & 0x7F7F7F7FU) ^ \
               (((_x << 7) ^ (_x << 1)) & 0x80808080U); \
-    } while (0)
-
-#define skinny128_permute_tk(tk) \
-    do { \
-        /* PT = [9, 15, 8, 13, 10, 14, 12, 11, 0, 1, 2, 3, 4, 5, 6, 7] */ \
-        uint32_t row2 = tk[2]; \
-        uint32_t row3 = tk[3]; \
-        tk[2] = tk[0]; \
-        tk[3] = tk[1]; \
-        row3 = (row3 << 16) | (row3 >> 16); \
-        tk[0] = ((row2 >>  8) & 0x000000FFU) | \
-                ((row2 << 16) & 0x00FF0000U) | \
-                ( row3        & 0xFF00FF00U); \
-        tk[1] = ((row2 >> 16) & 0x000000FFU) | \
-                 (row2        & 0xFF000000U) | \
-                ((row3 <<  8) & 0x0000FF00U) | \
-                ( row3        & 0x00FF0000U); \
     } while (0)
 
 #define skinny128_permute_tk_half(tk2, tk3) \
@@ -137,7 +120,7 @@ do { \
 void skinny_plus_init
     (skinny_plus_key_schedule_t *ks, const unsigned char key[48])
 {
-#if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_TINY
     uint32_t TK2[4];
     uint32_t TK3[4];
     uint32_t *schedule;
@@ -145,8 +128,8 @@ void skinny_plus_init
     uint8_t rc;
 #endif
 
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
-    /* Copy the input key as-is when using the small key schedule version */
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+    /* Copy the input key as-is when using the tiny key schedule version */
     memcpy(ks->TK1, key, sizeof(ks->TK1));
     memcpy(ks->TK2, key + 16, sizeof(ks->TK2));
     memcpy(ks->TK3, key + 32, sizeof(ks->TK3));
@@ -301,7 +284,7 @@ void skinny_plus_encrypt
 {
     uint32_t s0, s1, s2, s3;
     uint32_t TK1[4];
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
     uint32_t TK2[4];
     uint32_t TK3[4];
     uint8_t rc = 0;
@@ -321,7 +304,7 @@ void skinny_plus_encrypt
     TK1[1] = le_load_word32(ks->TK1 + 4);
     TK1[2] = le_load_word32(ks->TK1 + 8);
     TK1[3] = le_load_word32(ks->TK1 + 12);
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
     TK2[0] = le_load_word32(ks->TK2);
     TK2[1] = le_load_word32(ks->TK2 + 4);
     TK2[2] = le_load_word32(ks->TK2 + 8);
@@ -334,7 +317,7 @@ void skinny_plus_encrypt
 
     /* Perform all encryption rounds four at a time */
     for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
         skinny_plus_round_tk_full(s0, s1, s2, s3, 0);
         skinny_plus_round_tk_full(s3, s0, s1, s2, 1);
         skinny_plus_round_tk_full(s2, s3, s0, s1, 0);
@@ -366,10 +349,10 @@ void skinny_plus_encrypt
  * \param half 0 for the bottom half and 1 for the top half of the TK values.
  * \param offset Offset between 0 and 3 of the current unrolled round.
  */
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
 #define skinny_plus_round_tk2(s0, s1, s2, s3, half, offset) \
     skinny_plus_round_tk_full(s0, s1, s2, s3, half)
-#else /* !SKINNY_PLUS_VARIANT_SMALL */
+#else /* !SKINNY_PLUS_VARIANT_TINY */
 #define skinny_plus_round_tk2(s0, s1, s2, s3, half, offset) \
     do { \
         /* Apply the S-box to all bytes in the state */ \
@@ -404,7 +387,7 @@ void skinny_plus_encrypt
         skinny128_LFSR2(TK2[(1 - half) * 2]); \
         skinny128_LFSR2(TK2[(1 - half) * 2 + 1]); \
     } while (0)
-#endif /* !SKINNY_PLUS_VARIANT_SMALL */
+#endif /* !SKINNY_PLUS_VARIANT_TINY */
 
 void skinny_plus_encrypt_tk2
     (skinny_plus_key_schedule_t *ks, unsigned char *output,
@@ -413,7 +396,7 @@ void skinny_plus_encrypt_tk2
     uint32_t s0, s1, s2, s3;
     uint32_t TK1[4];
     uint32_t TK2[4];
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
     uint32_t TK3[4];
     uint8_t rc = 0;
 #else
@@ -436,7 +419,7 @@ void skinny_plus_encrypt_tk2
     TK2[1] = le_load_word32(tk2 + 4);
     TK2[2] = le_load_word32(tk2 + 8);
     TK2[3] = le_load_word32(tk2 + 12);
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
     TK3[0] = le_load_word32(ks->TK3);
     TK3[1] = le_load_word32(ks->TK3 + 4);
     TK3[2] = le_load_word32(ks->TK3 + 8);
@@ -449,7 +432,7 @@ void skinny_plus_encrypt_tk2
         skinny_plus_round_tk2(s3, s0, s1, s2, 1, 1);
         skinny_plus_round_tk2(s2, s3, s0, s1, 0, 2);
         skinny_plus_round_tk2(s1, s2, s3, s0, 1, 3);
-#if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_SMALL
+#if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_TINY
         schedule += 8;
 #endif
     }
@@ -507,7 +490,9 @@ void skinny_plus_encrypt_tk_full
     le_store_word32(output + 12, s3);
 }
 
-#else /* __AVR__ */
+#endif /* !SKINNY_PLUS_VARIANT_ASM */
+
+#if SKINNY_PLUS_VARIANT_ASM && SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
 
 void skinny_plus_encrypt_tk2
     (skinny_plus_key_schedule_t *ks, unsigned char *output,
@@ -517,4 +502,4 @@ void skinny_plus_encrypt_tk2
     skinny_plus_encrypt(ks, output, input);
 }
 
-#endif /* __AVR__ */
+#endif /* SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY */
