@@ -97,7 +97,7 @@ assembly code.
 <tr><td>TinyJAMBU-192 (*)</td><td>192</td><td>96</td><td>64</td><td>0.83</td><td>0.85</td><td>1.55</td><td>1.53</td><td>1.12</td></tr>
 <tr><td><b><i>GIFT-COFB</i></b> (*)<td>128</td><td>128</td><td>128</td><td>1.01</td><td>1.01</td><td>1.16</td><td>1.15</td><td>1.08</td></tr>
 <tr><td>TinyJAMBU-256 (*)</td><td>256</td><td>96</td><td>64</td><td>0.77</td><td>0.79</td><td>1.44</td><td>1.43</td><td>1.04</td></tr>
-<tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.26</td><td>0.26</td><td>0.56</td><td>0.56</td><td>0.37</td></tr>
+<tr><td><b><i>Grain-128AEAD</i></b> (*)<td>128</td><td>96</td><td>64</td></td><td>0.28</td><td>0.34</td><td>0.61</td><td>0.67</td><td>0.43</td></tr>
 <tr><td>Delirium (Elephant) (*)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33</td></tr>
 <tr><td><b><i>Romulus-N+</i></b> (*)</td><td>128</td><td>128</td><td>128</td><td>0.21</td><td>0.24</td><td>0.29</td><td>0.31</td><td>0.26</td></tr>
 <tr><td>ISAP-A-128A (*)</td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18</td></tr>

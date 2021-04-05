@@ -9,6 +9,7 @@ LDFLAGS += $(COMMON_LDFLAGS)
 TARGETS = \
 	bin/ascon_armv7m \
 	bin/gift128_armv7m \
+	bin/grain128_armv7m \
 	bin/keccakp_200_armv7m \
 	bin/keccakp_400_armv7m \
 	bin/tinyjambu_armv7m \
@@ -23,6 +24,10 @@ bin/ascon_armv7m: ascon_armv7m.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 bin/gift128_armv7m: gift128_armv7m.c
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+bin/grain128_armv7m: grain128_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -60,6 +65,7 @@ generate: all
 	bin/gift128_armv7m full bitsliced cofb-only >../combined/internal-gift128b-full-armv7m.S
 	bin/gift128_armv7m small bitsliced cofb-only >../combined/internal-gift128b-small-armv7m.S
 	bin/gift128_armv7m tiny bitsliced cofb-only >../combined/internal-gift128b-tiny-armv7m.S
+	bin/grain128_armv7m >../combined/internal-grain128-armv7m.S
 	bin/keccakp_200_armv7m >../combined/internal-keccakp-200-armv7m.S
 	bin/keccakp_400_armv7m >../combined/internal-keccakp-400-armv7m.S
 	bin/tinyjambu_armv7m >../combined/internal-tinyjambu-armv7m.S
