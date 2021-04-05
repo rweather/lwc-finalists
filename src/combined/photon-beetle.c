@@ -68,7 +68,7 @@ aead_cipher_t const photon_beetle_32_cipher = {
  * \param mempty Non-zero if the message is empty.
  */
 static void photon_beetle_process_ad
-    (unsigned char state[PHOTON256_STATE_SIZE],
+    (photon256_state_t *state,
      const unsigned char *ad, unsigned long long adlen,
      unsigned rate, int mempty)
 {
@@ -77,7 +77,7 @@ static void photon_beetle_process_ad
     /* Absorb as many full rate blocks as possible */
     while (adlen > rate) {
         photon256_permute(state);
-        lw_xor_block(state, ad, rate);
+        lw_xor_block(state->B, ad, rate);
         ad += rate;
         adlen -= rate;
     }
@@ -85,19 +85,19 @@ static void photon_beetle_process_ad
     /* Pad and absorb the last block */
     temp = (unsigned)adlen;
     photon256_permute(state);
-    lw_xor_block(state, ad, temp);
+    lw_xor_block(state->B, ad, temp);
     if (temp < rate)
-        state[temp] ^= 0x01; /* padding */
+        state->B[temp] ^= 0x01; /* padding */
 
     /* Add the domain constant to finalize associated data processing */
     if (mempty && temp == rate)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(3);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(3);
     else if (mempty)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(4);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(4);
     else if (temp == rate)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     else
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
 }
 
 /**
@@ -127,8 +127,8 @@ static void photon_beetle_rotate1
  * \param adempty Non-zero if the associated data is empty.
  */
 static void photon_beetle_encrypt
-    (unsigned char state[PHOTON256_STATE_SIZE],
-     unsigned char *c, const unsigned char *m, unsigned long long mlen,
+    (photon256_state_t *state, unsigned char *c,
+     const unsigned char *m, unsigned long long mlen,
      unsigned rate, int adempty)
 {
     unsigned char shuffle[PHOTON_BEETLE_128_RATE]; /* Block of max rate size */
@@ -137,9 +137,9 @@ static void photon_beetle_encrypt
     /* Process all plaintext blocks except the last */
     while (mlen > rate) {
         photon256_permute(state);
-        memcpy(shuffle, state + rate / 2, rate / 2);
-        photon_beetle_rotate1(shuffle + rate / 2, state, rate / 2);
-        lw_xor_block(state, m, rate);
+        memcpy(shuffle, state->B + rate / 2, rate / 2);
+        photon_beetle_rotate1(shuffle + rate / 2, state->B, rate / 2);
+        lw_xor_block(state->B, m, rate);
         lw_xor_block_2_src(c, m, shuffle, rate);
         c += rate;
         m += rate;
@@ -149,26 +149,26 @@ static void photon_beetle_encrypt
     /* Pad and process the last block */
     temp = (unsigned)mlen;
     photon256_permute(state);
-    memcpy(shuffle, state + rate / 2, rate / 2);
-    photon_beetle_rotate1(shuffle + rate / 2, state, rate / 2);
+    memcpy(shuffle, state->B + rate / 2, rate / 2);
+    photon_beetle_rotate1(shuffle + rate / 2, state->B, rate / 2);
     if (temp == rate) {
-        lw_xor_block(state, m, rate);
+        lw_xor_block(state->B, m, rate);
         lw_xor_block_2_src(c, m, shuffle, rate);
     } else {
-        lw_xor_block(state, m, temp);
-        state[temp] ^= 0x01; /* padding */
+        lw_xor_block(state->B, m, temp);
+        state->B[temp] ^= 0x01; /* padding */
         lw_xor_block_2_src(c, m, shuffle, temp);
     }
 
     /* Add the domain constant to finalize message processing */
     if (adempty && temp == rate)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(5);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(5);
     else if (adempty)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(6);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(6);
     else if (temp == rate)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     else
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
 }
 
 /**
@@ -182,8 +182,8 @@ static void photon_beetle_encrypt
  * \param adempty Non-zero if the associated data is empty.
  */
 static void photon_beetle_decrypt
-    (unsigned char state[PHOTON256_STATE_SIZE],
-     unsigned char *m, const unsigned char *c, unsigned long long mlen,
+    (photon256_state_t *state, unsigned char *m,
+     const unsigned char *c, unsigned long long mlen,
      unsigned rate, int adempty)
 {
     unsigned char shuffle[PHOTON_BEETLE_128_RATE]; /* Block of max rate size */
@@ -192,10 +192,10 @@ static void photon_beetle_decrypt
     /* Process all plaintext blocks except the last */
     while (mlen > rate) {
         photon256_permute(state);
-        memcpy(shuffle, state + rate / 2, rate / 2);
-        photon_beetle_rotate1(shuffle + rate / 2, state, rate / 2);
+        memcpy(shuffle, state->B + rate / 2, rate / 2);
+        photon_beetle_rotate1(shuffle + rate / 2, state->B, rate / 2);
         lw_xor_block_2_src(m, c, shuffle, rate);
-        lw_xor_block(state, m, rate);
+        lw_xor_block(state->B, m, rate);
         c += rate;
         m += rate;
         mlen -= rate;
@@ -204,26 +204,26 @@ static void photon_beetle_decrypt
     /* Pad and process the last block */
     temp = (unsigned)mlen;
     photon256_permute(state);
-    memcpy(shuffle, state + rate / 2, rate / 2);
-    photon_beetle_rotate1(shuffle + rate / 2, state, rate / 2);
+    memcpy(shuffle, state->B + rate / 2, rate / 2);
+    photon_beetle_rotate1(shuffle + rate / 2, state->B, rate / 2);
     if (temp == rate) {
         lw_xor_block_2_src(m, c, shuffle, rate);
-        lw_xor_block(state, m, rate);
+        lw_xor_block(state->B, m, rate);
     } else {
         lw_xor_block_2_src(m, c, shuffle, temp);
-        lw_xor_block(state, m, temp);
-        state[temp] ^= 0x01; /* padding */
+        lw_xor_block(state->B, m, temp);
+        state->B[temp] ^= 0x01; /* padding */
     }
 
     /* Add the domain constant to finalize message processing */
     if (adempty && temp == rate)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(5);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(5);
     else if (adempty)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(6);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(6);
     else if (temp == rate)
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     else
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
+        state->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
 }
 
 int photon_beetle_128_aead_encrypt
@@ -234,33 +234,33 @@ int photon_beetle_128_aead_encrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    unsigned char state[PHOTON256_STATE_SIZE];
+    photon256_state_t state;
     (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + PHOTON_BEETLE_TAG_SIZE;
 
     /* Initialize the state by concatenating the nonce and the key */
-    memcpy(state, npub, 16);
-    memcpy(state + 16, k, 16);
+    memcpy(state.B, npub, 16);
+    memcpy(state.B + 16, k, 16);
 
     /* Process the associated data */
     if (adlen > 0) {
         photon_beetle_process_ad
-            (state, ad, adlen, PHOTON_BEETLE_128_RATE, mlen == 0);
+            (&state, ad, adlen, PHOTON_BEETLE_128_RATE, mlen == 0);
     } else if (mlen == 0) {
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state.B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     }
 
     /* Encrypt the plaintext to produce the ciphertext */
     if (mlen > 0) {
         photon_beetle_encrypt
-            (state, c, m, mlen, PHOTON_BEETLE_128_RATE, adlen == 0);
+            (&state, c, m, mlen, PHOTON_BEETLE_128_RATE, adlen == 0);
     }
 
     /* Generate the authentication tag */
-    photon256_permute(state);
-    memcpy(c + mlen, state, PHOTON_BEETLE_TAG_SIZE);
+    photon256_permute(&state);
+    memcpy(c + mlen, state.B, PHOTON_BEETLE_TAG_SIZE);
     return 0;
 }
 
@@ -272,7 +272,7 @@ int photon_beetle_128_aead_decrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    unsigned char state[PHOTON256_STATE_SIZE];
+    photon256_state_t state;
     (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
@@ -281,27 +281,27 @@ int photon_beetle_128_aead_decrypt
     *mlen = clen - PHOTON_BEETLE_TAG_SIZE;
 
     /* Initialize the state by concatenating the nonce and the key */
-    memcpy(state, npub, 16);
-    memcpy(state + 16, k, 16);
+    memcpy(state.B, npub, 16);
+    memcpy(state.B + 16, k, 16);
 
     /* Process the associated data */
     clen -= PHOTON_BEETLE_TAG_SIZE;
     if (adlen > 0) {
         photon_beetle_process_ad
-            (state, ad, adlen, PHOTON_BEETLE_128_RATE, clen == 0);
+            (&state, ad, adlen, PHOTON_BEETLE_128_RATE, clen == 0);
     } else if (clen == 0) {
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state.B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     }
 
     /* Decrypt the ciphertext to produce the plaintext */
     if (clen > 0) {
         photon_beetle_decrypt
-            (state, m, c, clen, PHOTON_BEETLE_128_RATE, adlen == 0);
+            (&state, m, c, clen, PHOTON_BEETLE_128_RATE, adlen == 0);
     }
 
     /* Check the authentication tag */
-    photon256_permute(state);
-    return aead_check_tag(m, clen, state, c + clen, PHOTON_BEETLE_TAG_SIZE);
+    photon256_permute(&state);
+    return aead_check_tag(m, clen, state.B, c + clen, PHOTON_BEETLE_TAG_SIZE);
 }
 
 int photon_beetle_32_aead_encrypt
@@ -312,33 +312,33 @@ int photon_beetle_32_aead_encrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    unsigned char state[PHOTON256_STATE_SIZE];
+    photon256_state_t state;
     (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + PHOTON_BEETLE_TAG_SIZE;
 
     /* Initialize the state by concatenating the nonce and the key */
-    memcpy(state, npub, 16);
-    memcpy(state + 16, k, 16);
+    memcpy(state.B, npub, 16);
+    memcpy(state.B + 16, k, 16);
 
     /* Process the associated data */
     if (adlen > 0) {
         photon_beetle_process_ad
-            (state, ad, adlen, PHOTON_BEETLE_32_RATE, mlen == 0);
+            (&state, ad, adlen, PHOTON_BEETLE_32_RATE, mlen == 0);
     } else if (mlen == 0) {
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state.B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     }
 
     /* Encrypt the plaintext to produce the ciphertext */
     if (mlen > 0) {
         photon_beetle_encrypt
-            (state, c, m, mlen, PHOTON_BEETLE_32_RATE, adlen == 0);
+            (&state, c, m, mlen, PHOTON_BEETLE_32_RATE, adlen == 0);
     }
 
     /* Generate the authentication tag */
-    photon256_permute(state);
-    memcpy(c + mlen, state, PHOTON_BEETLE_TAG_SIZE);
+    photon256_permute(&state);
+    memcpy(c + mlen, state.B, PHOTON_BEETLE_TAG_SIZE);
     return 0;
 }
 
@@ -350,7 +350,7 @@ int photon_beetle_32_aead_decrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    unsigned char state[PHOTON256_STATE_SIZE];
+    photon256_state_t state;
     (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
@@ -359,25 +359,25 @@ int photon_beetle_32_aead_decrypt
     *mlen = clen - PHOTON_BEETLE_TAG_SIZE;
 
     /* Initialize the state by concatenating the nonce and the key */
-    memcpy(state, npub, 16);
-    memcpy(state + 16, k, 16);
+    memcpy(state.B, npub, 16);
+    memcpy(state.B + 16, k, 16);
 
     /* Process the associated data */
     clen -= PHOTON_BEETLE_TAG_SIZE;
     if (adlen > 0) {
         photon_beetle_process_ad
-            (state, ad, adlen, PHOTON_BEETLE_32_RATE, clen == 0);
+            (&state, ad, adlen, PHOTON_BEETLE_32_RATE, clen == 0);
     } else if (clen == 0) {
-        state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        state.B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     }
 
     /* Decrypt the ciphertext to produce the plaintext */
     if (clen > 0) {
         photon_beetle_decrypt
-            (state, m, c, clen, PHOTON_BEETLE_32_RATE, adlen == 0);
+            (&state, m, c, clen, PHOTON_BEETLE_32_RATE, adlen == 0);
     }
 
     /* Check the authentication tag */
-    photon256_permute(state);
-    return aead_check_tag(m, clen, state, c + clen, PHOTON_BEETLE_TAG_SIZE);
+    photon256_permute(&state);
+    return aead_check_tag(m, clen, state.B, c + clen, PHOTON_BEETLE_TAG_SIZE);
 }

@@ -91,7 +91,7 @@ internal-gift128-m.o: internal-gift128-m.h internal-gift128-config.h aead-random
 internal-grain128.o: internal-grain128.h internal-util.h
 internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
 internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
-internal-photon256.o: internal-photon256.h internal-util.h
+internal-photon256.o: internal-photon256.h internal-photon256-mix.h internal-util.h
 internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-sparkle.o: internal-sparkle.h internal-util.h
 internal-spongent.o: internal-spongent.h internal-util.h

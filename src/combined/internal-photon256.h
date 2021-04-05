@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Southern Storm Software, Pty Ltd.
+ * Copyright (C) 2021 Southern Storm Software, Pty Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -26,10 +26,9 @@
 /**
  * \file internal-photon256.h
  * \brief Internal implementation of the PHOTON-256 permutation.
- *
- * Warning: The current implementation of PHOTON-256 is constant-time
- * but not constant-cache.
  */
+
+#include "internal-util.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,11 +40,21 @@ extern "C" {
 #define PHOTON256_STATE_SIZE 32
 
 /**
+ * \brief Structure of the internal state of the PHOTON-256 permutation.
+ */
+typedef union
+{
+    uint32_t W[PHOTON256_STATE_SIZE / 4];   /**< 32-bit words of the state */
+    uint8_t B[PHOTON256_STATE_SIZE];        /**< Bytes of the state */
+
+} photon256_state_t;
+
+/**
  * \brief Permutes the PHOTON-256 state.
  *
  * \param state The state to be permuted.
  */
-void photon256_permute(unsigned char state[PHOTON256_STATE_SIZE]);
+void photon256_permute(photon256_state_t *state);
 
 #ifdef __cplusplus
 }

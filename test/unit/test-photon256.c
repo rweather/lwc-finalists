@@ -41,15 +41,15 @@ static unsigned char const photon256_output[] = {
 
 void test_photon256(void)
 {
-    unsigned char state[32];
+    photon256_state_t state;
 
     printf("PHOTON-256 Permutation:\n");
 
     printf("    Test Vector ... ");
     fflush(stdout);
-    memcpy(state, photon256_input, sizeof(photon256_input));
-    photon256_permute(state);
-    if (!test_memcmp(state, photon256_output, sizeof(photon256_output))) {
+    memcpy(state.B, photon256_input, sizeof(photon256_input));
+    photon256_permute(&state);
+    if (!test_memcmp(state.B, photon256_output, sizeof(photon256_output))) {
         printf("ok\n");
     } else {
         printf("failed\n");

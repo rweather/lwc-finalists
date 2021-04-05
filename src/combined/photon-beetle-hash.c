@@ -54,55 +54,55 @@ aead_hash_algorithm_t const photon_beetle_hash_algorithm = {
 int photon_beetle_hash
     (unsigned char *out, const unsigned char *in, unsigned long long inlen)
 {
-    unsigned char state[PHOTON256_STATE_SIZE];
+    photon256_state_t state;
     unsigned temp;
 
     /* Absorb the input data */
     if (inlen == 0) {
         /* No input data at all */
-        memset(state, 0, sizeof(state) - 1);
-        state[PHOTON256_STATE_SIZE - 1] = DOMAIN(1);
+        memset(state.B, 0, PHOTON256_STATE_SIZE - 1);
+        state.B[PHOTON256_STATE_SIZE - 1] = DOMAIN(1);
     } else if (inlen <= PHOTON_BEETLE_128_RATE) {
         /* Only one block of input data, which may require padding */
         temp = (unsigned)inlen;
-        memcpy(state, in, temp);
-        memset(state + temp, 0, sizeof(state) - temp - 1);
+        memcpy(state.B, in, temp);
+        memset(state.B + temp, 0, PHOTON256_STATE_SIZE - temp - 1);
         if (temp < PHOTON_BEETLE_128_RATE) {
-            state[temp] = 0x01;
-            state[PHOTON256_STATE_SIZE - 1] = DOMAIN(1);
+            state.B[temp] = 0x01;
+            state.B[PHOTON256_STATE_SIZE - 1] = DOMAIN(1);
         } else {
-            state[PHOTON256_STATE_SIZE - 1] = DOMAIN(2);
+            state.B[PHOTON256_STATE_SIZE - 1] = DOMAIN(2);
         }
     } else {
         /* Initialize the state with the first block, then absorb the rest */
-        memcpy(state, in, PHOTON_BEETLE_128_RATE);
-        memset(state + PHOTON_BEETLE_128_RATE, 0,
-               sizeof(state) - PHOTON_BEETLE_128_RATE);
+        memcpy(state.B, in, PHOTON_BEETLE_128_RATE);
+        memset(state.B + PHOTON_BEETLE_128_RATE, 0,
+               PHOTON256_STATE_SIZE - PHOTON_BEETLE_128_RATE);
         in += PHOTON_BEETLE_128_RATE;
         inlen -= PHOTON_BEETLE_128_RATE;
         while (inlen > PHOTON_BEETLE_32_RATE) {
-            photon256_permute(state);
-            lw_xor_block(state, in, PHOTON_BEETLE_32_RATE);
+            photon256_permute(&state);
+            lw_xor_block(state.B, in, PHOTON_BEETLE_32_RATE);
             in += PHOTON_BEETLE_32_RATE;
             inlen -= PHOTON_BEETLE_32_RATE;
         }
-        photon256_permute(state);
+        photon256_permute(&state);
         temp = (unsigned)inlen;
         if (temp == PHOTON_BEETLE_32_RATE) {
-            lw_xor_block(state, in, PHOTON_BEETLE_32_RATE);
-            state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+            lw_xor_block(state.B, in, PHOTON_BEETLE_32_RATE);
+            state.B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
         } else {
-            lw_xor_block(state, in, temp);
-            state[temp] ^= 0x01;
-            state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
+            lw_xor_block(state.B, in, temp);
+            state.B[temp] ^= 0x01;
+            state.B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
         }
     }
 
     /* Generate the output hash */
-    photon256_permute(state);
-    memcpy(out, state, 16);
-    photon256_permute(state);
-    memcpy(out + 16, state, 16);
+    photon256_permute(&state);
+    memcpy(out, state.B, 16);
+    photon256_permute(&state);
+    memcpy(out + 16, state.B, 16);
     return 0;
 }
 
@@ -118,10 +118,11 @@ void photon_beetle_hash_update
     (photon_beetle_hash_state_t *state, const unsigned char *in,
      unsigned long long inlen)
 {
+    photon256_state_t *st = (photon256_state_t *)(state->s.state);
     unsigned temp;
     while (inlen > 0) {
         if (state->s.posn >= state->s.rate) {
-            photon256_permute(state->s.state);
+            photon256_permute(st);
             state->s.posn = 0;
             state->s.rate = PHOTON_BEETLE_32_RATE;
             state->s.first = 0;
@@ -129,7 +130,7 @@ void photon_beetle_hash_update
         temp = state->s.rate - state->s.posn;
         if (temp > inlen)
             temp = (unsigned)inlen;
-        lw_xor_block(state->s.state + state->s.posn, in, temp);
+        lw_xor_block(st->B + state->s.posn, in, temp);
         state->s.posn += temp;
         in += temp;
         inlen -= temp;
@@ -140,25 +141,26 @@ void photon_beetle_hash_finalize
     (photon_beetle_hash_state_t *state, unsigned char *out)
 {
     /* Pad the final block */
+    photon256_state_t *st = (photon256_state_t *)(state->s.state);
     if (state->s.first) {
         if (state->s.posn == 0) {
-            state->s.state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+            st->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
         } else if (state->s.posn < state->s.rate) {
-            state->s.state[state->s.posn] = 0x01;
-            state->s.state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+            st->B[state->s.posn] = 0x01;
+            st->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
         } else {
-            state->s.state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
+            st->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
         }
     } else if (state->s.posn >= state->s.rate) {
-        state->s.state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
+        st->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(1);
     } else {
-        state->s.state[state->s.posn] ^= 0x01;
-        state->s.state[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
+        st->B[state->s.posn] ^= 0x01;
+        st->B[PHOTON256_STATE_SIZE - 1] ^= DOMAIN(2);
     }
 
     /* Generate the hash output */
-    photon256_permute(state->s.state);
-    memcpy(out, state->s.state, 16);
-    photon256_permute(state->s.state);
-    memcpy(out + 16, state->s.state, 16);
+    photon256_permute(st);
+    memcpy(out, st->B, 16);
+    photon256_permute(st);
+    memcpy(out + 16, st->B, 16);
 }

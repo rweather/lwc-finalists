@@ -102,6 +102,7 @@ PHOTON_BEETLE_FILES = \
     photon-beetle-hash.c \
     internal-photon256.c \
     internal-photon256.h \
+    internal-photon256-mix.h \
     internal-photon256-avr.S \
     $(COMMON_FILES)
 ROMULUS_FILES = \
