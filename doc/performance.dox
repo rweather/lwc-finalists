@@ -203,4 +203,46 @@ Hash algorithm rankings:
 <tr><td>0</td><td>PHOTON-Beetle</td></tr>
 </table>
 
+\section perf_changes Changes in ARM Cortex M3 performance since Round 2
+
+There have been many improvements to the performance of my implementations
+since Round 2, and some tweaks to the algorithms themselves to change
+the number of rounds or other aspects of the algorithms.  This section
+summarises the changes.
+
+ARM Cortex M3 has seen the greatest performance improvement with the
+introduction of assembly code versions of most algorithms.  We compare
+the <a href="file:///home/rweather/new_work/lightweight-crypto/doc/html/performance_baseline.html">baseline C versions from Round 2</a> with the
+current ChaChaPoly figures.
+
+I did have some ARM Cortex M3 assembly code versions in my Round 2 repository,
+but they were implemented after the cut-off date for Round 2 status updates.
+
+Changes in the primary AEAD algorithm performance for ARM Cortex M3,
+ordered from highest to lowest "New" ChaChaPoly values:
+
+<table>
+<tr><td>Algorithm</td><td>Round 2</td><td>New</td></tr>
+<tr><td>SPARKLE</td><td>1.09</td><td>1.80</td></tr>
+<tr><td>Xoodyak</td><td>0.86</td><td>1.62</td></tr>
+<tr><td>ASCON</td><td>1.11</td><td>1.61</td></tr>
+<tr><td>TinyJAMBU</td><td>0.81</td><td>1.31</td></tr>
+<tr><td>GIFT-COFB</td><td>1.05</td><td>1.08</td></tr>
+<tr><td>Grain128-AEAD</td><td>0.37</td><td>0.43</td></tr>
+<tr><td>Romulus</td><td>0.19</td><td>0.26</td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.23</td></tr>
+<tr><td>ISAP</td><td>0.02</td><td>0.05</td></tr>
+<tr><td>Elephant</td><td>0.02</td><td>0.02</td></tr>
+</table>
+
+Changes in the primary hash algorithm performance for ARM Cortex M3:
+
+<table>
+<tr><td>Algorithm</td><td>Round 2</td><td>New</td></tr>
+<tr><td>SPARKLE</td><td>0.46</td><td>1.06</td></tr>
+<tr><td>Xoodyak</td><td>0.51</td><td>0.93</td></tr>
+<tr><td>ASCON</td><td>0.30</td><td>0.52</td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.06</td></tr>
+</table>
+
 */
