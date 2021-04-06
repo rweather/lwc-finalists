@@ -203,7 +203,7 @@ Hash algorithm rankings:
 <tr><td>0</td><td>PHOTON-Beetle</td></tr>
 </table>
 
-\section perf_changes Changes in ARM Cortex M3 performance since Round 2
+\section perf_changes_arm Changes in ARM Cortex M3 performance since Round 2
 
 There have been many improvements to the performance of my implementations
 since Round 2, and some tweaks to the algorithms themselves to change
@@ -247,6 +247,36 @@ Changes in the primary hash algorithm performance for ARM Cortex M3:
 <tr><td>Xoodyak</td><td>0.51</td><td>0.93</td></tr>
 <tr><td>ASCON</td><td>0.30</td><td>0.52</td></tr>
 <tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.07</td></tr>
+</table>
+
+\section perf_changes_esp32 Changes in ESP32 performance since Round 2
+
+The ESP32 implementations are still in C, so the improvements in
+the AEAD encryption schemes were more modest with a few notable changes:
+
+<table>
+<tr><td>Algorithm</td><td>Round 2</td><td>New</td><td>Notable changes</td></tr>
+<tr><td>SPARKLE</td><td>1.06</td><td>1.06</td><td> </td></tr>
+<tr><td>TinyJAMBU</td><td>0.71</td><td>0.88</td><td>Separate the permutations for 128, 192, and 256 bit key sizes and unroll</td></tr>
+<tr><td>GIFT-COFB</td><td>0.86</td><td>0.86</td><td> </td></tr>
+<tr><td>Xoodyak</td><td>0.83</td><td>0.83</td><td> </td></tr>
+<tr><td>ASCON</td><td>0.63</td><td>0.63</td><td> </td></tr>
+<tr><td>Grain128-AEAD</td><td>0.43</td><td>0.43</td><td> </td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.23</td><td>Highly unrolled 32-bit version in C</td></tr>
+<tr><td>Romulus</td><td>0.11</td><td>0.15</td><td>Switched to SKINNY-128-384+</td></tr>
+<tr><td>Elephant (Delirium)</td><td>0.06</td><td>0.19</td><td>Optimised 32-bit version of Keccak-p[200] in C</td></tr>
+<tr><td>ISAP</td><td>0.02</td><td>0.02</td><td> </td></tr>
+<tr><td>Elephant (Dumbo)</td><td>0.02</td><td>0.02</td><td> </td></tr>
+</table>
+
+Changes in the primary hash algorithm performance for ESP32:
+
+<table>
+<tr><td>Algorithm</td><td>Round 2</td><td>New</td></tr>
+<tr><td>Xoodyak</td><td>0.47</td><td>0.47</td></tr>
+<tr><td>SPARKLE</td><td>0.45</td><td>0.45</td></tr>
+<tr><td>ASCON</td><td>0.20</td><td>0.20</td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.06</td></tr>
 </table>
 
 */
