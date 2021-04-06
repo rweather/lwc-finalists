@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['photon256_5fpermute',['photon256_permute',['../internal-photon256_8h.html#a91ad3cb2dfa78b59264054725f2ba87c',1,'internal-photon256.c']]],
+  ['photon256_5fpermute',['photon256_permute',['../internal-photon256_8h.html#af241b29bfcf76d78f4406b68e24d550f',1,'internal-photon256.c']]],
   ['photon_5fbeetle_5f128_5faead_5fdecrypt',['photon_beetle_128_aead_decrypt',['../photon-beetle_8h.html#ac1f65f17be0b06e0654c30779ef22bd1',1,'photon-beetle.c']]],
   ['photon_5fbeetle_5f128_5faead_5fencrypt',['photon_beetle_128_aead_encrypt',['../photon-beetle_8h.html#ae33ee087b0728c0d56ef4de0bccc9e35',1,'photon-beetle.c']]],
   ['photon_5fbeetle_5f32_5faead_5fdecrypt',['photon_beetle_32_aead_decrypt',['../photon-beetle_8h.html#ad4cc9d299286ff44a6af97546f71d14d',1,'photon-beetle.c']]],

@@ -83,6 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li class="level1"><a href="#perf_cortex_m3">Performance on ARM Cortex M3</a></li>
 <li class="level1"><a href="#perf_esp32">Performance on ESP32</a></li>
 <li class="level1"><a href="#perf_overall">Overall group rankings</a></li>
+<li class="level1"><a href="#perf_changes">Changes in ARM Cortex M3 performance since Round 2</a></li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="perf_intro"></a>
@@ -135,17 +136,17 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td><b><em>Romulus-N+</em></b></td><td>128</td><td>128</td><td>128</td><td>0.21</td><td>0.24</td><td>0.29</td><td>0.31</td><td>0.26 </td></tr>
 <tr>
+<td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.33</td><td>0.35</td><td>0.25 </td></tr>
+<tr>
 <td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18 </td></tr>
 <tr>
 <td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.14</td><td>0.16</td><td>0.21</td><td>0.22</td><td>0.18 </td></tr>
 <tr>
-<td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b> (*)</td><td>128</td><td>128</td><td>128</td><td>0.06</td><td>0.07</td><td>0.11</td><td>0.12</td><td>0.08 </td></tr>
+<td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.13</td><td>0.14</td><td>0.08 </td></tr>
 <tr>
 <td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.08</td><td>0.08</td><td>0.03</td><td>0.04</td><td>0.05 </td></tr>
 <tr>
 <td><b><em>ISAP-K-128A</em></b></td><td>128</td><td>128</td><td>128</td><td>0.07</td><td>0.07</td><td>0.04</td><td>0.04</td><td>0.05 </td></tr>
-<tr>
-<td>PHOTON-Beetle-AEAD-ENC-32 (*)</td><td>128</td><td>128</td><td>128</td><td>0.02</td><td>0.02</td><td>0.05</td><td>0.05</td><td>0.03 </td></tr>
 <tr>
 <td><b><em>Dumbo</em></b> (Elephant) (*)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.02 </td></tr>
 <tr>
@@ -166,7 +167,7 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>Esch384 (SPARKLE)</td><td>384</td><td>0.45</td><td>0.37</td><td>1.50</td><td>0.47 </td></tr>
 <tr>
-<td><b><em>PHOTON-Beetle-HASH</em></b> (*)</td><td>256</td><td>0.01</td><td>0.01</td><td>0.05</td><td>0.02 </td></tr>
+<td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.16</td><td>0.07 </td></tr>
 </table>
 <h1><a class="anchor" id="perf_esp32"></a>
 Performance on ESP32</h1>
@@ -201,6 +202,8 @@ Performance on ESP32</h1>
 <tr>
 <td><b><em>Grain-128AEAD</em></b></td><td>128</td><td>96</td><td>64</td><td>0.33</td><td>0.30</td><td>0.65</td><td>0.59</td><td>0.43 </td></tr>
 <tr>
+<td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23 </td></tr>
+<tr>
 <td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.22</td><td>0.24</td><td>0.19 </td></tr>
 <tr>
 <td><b><em>Romulus-N+</em></b></td><td>128</td><td>128</td><td>128</td><td>0.12</td><td>0.14</td><td>0.17</td><td>0.18</td><td>0.15 </td></tr>
@@ -209,13 +212,11 @@ Performance on ESP32</h1>
 <tr>
 <td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.13</td><td>0.15</td><td>0.08</td><td>0.09</td><td>0.10 </td></tr>
 <tr>
-<td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.10</td><td>0.11</td><td>0.08 </td></tr>
+<td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.04</td><td>0.05</td><td>0.12</td><td>0.13</td><td>0.07 </td></tr>
 <tr>
 <td><b><em>ISAP-K-128A</em></b></td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
 <td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.01</td><td>0.02</td><td>0.02 </td></tr>
-<tr>
-<td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.01</td><td>0.02</td><td>0.04</td><td>0.04</td><td>0.02 </td></tr>
 <tr>
 <td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
@@ -236,7 +237,7 @@ Performance on ESP32</h1>
 <tr>
 <td><b><em>ASCON-HASH</em></b></td><td>256</td><td>0.19</td><td>0.16</td><td>0.25</td><td>0.20 </td></tr>
 <tr>
-<td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.01</td><td>0.01</td><td>0.05</td><td>0.02 </td></tr>
+<td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.15</td><td>0.06 </td></tr>
 </table>
 <h1><a class="anchor" id="perf_overall"></a>
 Overall group rankings</h1>
@@ -259,9 +260,9 @@ Overall group rankings</h1>
 <tr>
 <td>4</td><td>Grain128-AEAD </td></tr>
 <tr>
-<td>2</td><td>Romulus </td></tr>
+<td>2</td><td>PHOTON-Beetle, Romulus </td></tr>
 <tr>
-<td>0</td><td>Elephant, ISAP, PHOTON-Beetle </td></tr>
+<td>0</td><td>Elephant, ISAP </td></tr>
 </table>
 <p>Hash algorithm rankings:</p>
 <table class="doxtable">
@@ -274,10 +275,53 @@ Overall group rankings</h1>
 <tr>
 <td>0</td><td>PHOTON-Beetle </td></tr>
 </table>
+<h1><a class="anchor" id="perf_changes"></a>
+Changes in ARM Cortex M3 performance since Round 2</h1>
+<p>There have been many improvements to the performance of my implementations since Round 2, and some tweaks to the algorithms themselves to change the number of rounds or other aspects of the algorithms. This section summarises the changes.</p>
+<p>ARM Cortex M3 has seen the greatest performance improvement with the introduction of assembly code versions of most algorithms. We compare the <a href="file:///home/rweather/new_work/lightweight-crypto/doc/html/performance_baseline.html">baseline C versions from Round 2</a> with the current ChaChaPoly figures.</p>
+<p>I did have some ARM Cortex M3 assembly code versions in my Round 2 repository, but they were implemented after the cut-off date for Round 2 status updates.</p>
+<p>Changes in the primary AEAD algorithm performance for ARM Cortex M3, ordered from highest to lowest "New" ChaChaPoly values:</p>
+<table class="doxtable">
+<tr>
+<td>Algorithm</td><td>Round 2</td><td>New </td></tr>
+<tr>
+<td>SPARKLE</td><td>1.09</td><td>1.80 </td></tr>
+<tr>
+<td>Xoodyak</td><td>0.86</td><td>1.62 </td></tr>
+<tr>
+<td>ASCON</td><td>1.11</td><td>1.61 </td></tr>
+<tr>
+<td>TinyJAMBU</td><td>0.81</td><td>1.31 </td></tr>
+<tr>
+<td>GIFT-COFB</td><td>1.05</td><td>1.08 </td></tr>
+<tr>
+<td>Grain128-AEAD</td><td>0.37</td><td>0.43 </td></tr>
+<tr>
+<td>Romulus</td><td>0.19</td><td>0.26 </td></tr>
+<tr>
+<td>PHOTON-Beetle</td><td>0.08</td><td>0.25 </td></tr>
+<tr>
+<td>ISAP</td><td>0.02</td><td>0.05 </td></tr>
+<tr>
+<td>Elephant</td><td>0.02</td><td>0.02 </td></tr>
+</table>
+<p>Changes in the primary hash algorithm performance for ARM Cortex M3:</p>
+<table class="doxtable">
+<tr>
+<td>Algorithm</td><td>Round 2</td><td>New </td></tr>
+<tr>
+<td>SPARKLE</td><td>0.46</td><td>1.06 </td></tr>
+<tr>
+<td>Xoodyak</td><td>0.51</td><td>0.93 </td></tr>
+<tr>
+<td>ASCON</td><td>0.30</td><td>0.52 </td></tr>
+<tr>
+<td>PHOTON-Beetle</td><td>0.02</td><td>0.07 </td></tr>
+</table>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 5 2021 15:08:20 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 6 2021 19:30:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="internal-photon256_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (C) 2020 Southern Storm Software, Pty Ltd.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (C) 2021 Southern Storm Software, Pty Ltd.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Permission is hereby granted, free of charge, to any person obtaining a</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span></div>
@@ -113,25 +113,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LW_INTERNAL_PHOTON256_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LW_INTERNAL_PHOTON256_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">   41</a></span>&#160;<span class="preprocessor">#define PHOTON256_STATE_SIZE 32</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="internal-photon256_8h.html#a91ad3cb2dfa78b59264054725f2ba87c">photon256_permute</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> state[<a class="code" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>]);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="internal-photon256_8h_html_aa3976af78abc8f7b8fa200a8695e95fc"><div class="ttname"><a href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a></div><div class="ttdeci">#define PHOTON256_STATE_SIZE</div><div class="ttdoc">Size of the PHOTON-256 permutation state in bytes. </div><div class="ttdef"><b>Definition:</b> internal-photon256.h:41</div></div>
-<div class="ttc" id="internal-photon256_8h_html_a91ad3cb2dfa78b59264054725f2ba87c"><div class="ttname"><a href="internal-photon256_8h.html#a91ad3cb2dfa78b59264054725f2ba87c">photon256_permute</a></div><div class="ttdeci">void photon256_permute(unsigned char state[PHOTON256_STATE_SIZE])</div><div class="ttdoc">Permutes the PHOTON-256 state. </div><div class="ttdef"><b>Definition:</b> internal-photon256.c:371</div></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;internal-util.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">   40</a></span>&#160;<span class="preprocessor">#define PHOTON256_STATE_SIZE 32</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="unionphoton256__state__t.html">   45</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">union</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="unionphoton256__state__t.html#abcbf716937541587530dffca6037d48e">   47</a></span>&#160;    uint32_t W[<a class="code" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a> / 4];   </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="unionphoton256__state__t.html#ab1f09d5ce589efdf5cb27ef6091ab993">   48</a></span>&#160;    uint8_t B[<a class="code" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>];        </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;} <a class="code" href="unionphoton256__state__t.html">photon256_state_t</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> <a class="code" href="internal-photon256_8h.html#af241b29bfcf76d78f4406b68e24d550f">photon256_permute</a>(<a class="code" href="unionphoton256__state__t.html">photon256_state_t</a> *state);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="unionphoton256__state__t_html"><div class="ttname"><a href="unionphoton256__state__t.html">photon256_state_t</a></div><div class="ttdoc">Structure of the internal state of the PHOTON-256 permutation. </div><div class="ttdef"><b>Definition:</b> internal-photon256.h:45</div></div>
+<div class="ttc" id="internal-photon256_8h_html_aa3976af78abc8f7b8fa200a8695e95fc"><div class="ttname"><a href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a></div><div class="ttdeci">#define PHOTON256_STATE_SIZE</div><div class="ttdoc">Size of the PHOTON-256 permutation state in bytes. </div><div class="ttdef"><b>Definition:</b> internal-photon256.h:40</div></div>
+<div class="ttc" id="internal-photon256_8h_html_af241b29bfcf76d78f4406b68e24d550f"><div class="ttname"><a href="internal-photon256_8h.html#af241b29bfcf76d78f4406b68e24d550f">photon256_permute</a></div><div class="ttdeci">void photon256_permute(photon256_state_t *state)</div><div class="ttdoc">Permutes the PHOTON-256 state. </div><div class="ttdef"><b>Definition:</b> internal-photon256.c:337</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 5 2021 15:08:20 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 6 2021 19:30:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
