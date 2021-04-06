@@ -24,7 +24,16 @@
 #include "internal-photon256-mix.h"
 #include "internal-util.h"
 
-#if !defined(__AVR__)
+/* Determine if PHOTON-256 should be accelerated with assembly code */
+#if defined(__AVR__)
+#define PHOTON128_ASM 1
+#elif defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+#define PHOTON128_ASM 1
+#else
+#define PHOTON128_ASM 0
+#endif
+
+#if !PHOTON128_ASM
 
 /**
  * \brief Number of rounds in the PHOTON-256 permutation in bit-sliced form.
@@ -395,7 +404,6 @@ void photon256_permute(photon256_state_t *state)
         S.W[7] = s3;
 
         /* Mixing the columns; process the left half of the state */
-        #define MUL(a, x) (photon256_field_multiply((a), (x)))
         s0 = READ_ROW0();
         s1 = READ_ROW1();
         s2 = READ_ROW2();
@@ -447,4 +455,4 @@ void photon256_permute(photon256_state_t *state)
     photon256_from_sliced_half(state->B + 16, s0, s1, s2, s3);
 }
 
-#endif /* !__AVR__ */
+#endif /* !PHOTON128_ASM */

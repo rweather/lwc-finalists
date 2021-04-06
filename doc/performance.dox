@@ -100,10 +100,10 @@ to some degree with armv7m-compatible assembly code.
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.28</td><td>0.34</td><td>0.61</td><td>0.67</td><td>0.43</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33</td></tr>
 <tr><td><b><i>Romulus-N+</i></b></td><td>128</td><td>128</td><td>128</td><td>0.21</td><td>0.24</td><td>0.29</td><td>0.31</td><td>0.26</td></tr>
-<tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b> (*)</td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23</td></tr>
+<tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.33</td><td>0.35</td><td>0.25</td></tr>
 <tr><td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18</td></tr>
 <tr><td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.14</td><td>0.16</td><td>0.21</td><td>0.22</td><td>0.18</td></tr>
-<tr><td>PHOTON-Beetle-AEAD-ENC-32 (*)</td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.05</td><td>0.12</td><td>0.13</td><td>0.07</td></tr>
+<tr><td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.13</td><td>0.14</td><td>0.08</td></tr>
 <tr><td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.08</td><td>0.08</td><td>0.03</td><td>0.04</td><td>0.05</td></tr>
 <tr><td><b><i>ISAP-K-128A</i></b></td><td>128</td><td>128</td><td>128</td><td>0.07</td><td>0.07</td><td>0.04</td><td>0.04</td><td>0.05</td></tr>
 <tr><td><b><i>Dumbo</i></b> (Elephant) (*)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.02</td></tr>
@@ -119,7 +119,7 @@ The hash algorithms are compared against BLAKE2s instead of ChaChaPoly:
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.71</td><td>0.65</td><td>1.43</td><td>0.93</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.45</td><td>0.37</td><td>1.50</td><td>0.47</td></tr>
-<tr><td><b><i>PHOTON-Beetle-HASH</i></b> (*)</td><td>256</td><td>0.02</td><td>0.02</td><td>0.15</td><td>0.06</td></tr>
+<tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.16</td><td>0.07</td></tr>
 </table>
 
 \section perf_esp32 Performance on ESP32
@@ -230,7 +230,7 @@ ordered from highest to lowest "New" ChaChaPoly values:
 <tr><td>GIFT-COFB</td><td>1.05</td><td>1.08</td></tr>
 <tr><td>Grain128-AEAD</td><td>0.37</td><td>0.43</td></tr>
 <tr><td>Romulus</td><td>0.19</td><td>0.26</td></tr>
-<tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.23</td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.25</td></tr>
 <tr><td>ISAP</td><td>0.02</td><td>0.05</td></tr>
 <tr><td>Elephant</td><td>0.02</td><td>0.02</td></tr>
 </table>
@@ -242,7 +242,7 @@ Changes in the primary hash algorithm performance for ARM Cortex M3:
 <tr><td>SPARKLE</td><td>0.46</td><td>1.06</td></tr>
 <tr><td>Xoodyak</td><td>0.51</td><td>0.93</td></tr>
 <tr><td>ASCON</td><td>0.30</td><td>0.52</td></tr>
-<tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.06</td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.07</td></tr>
 </table>
 
 */
