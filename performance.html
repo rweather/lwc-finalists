@@ -101,7 +101,7 @@ Performance on ARM Cortex M3</h1>
 <p>Each algorithm was tested with two packet sizes: 128 and 16 bytes. Some algorithms can have better performance on small packet sizes. The associated data is always zero-length.</p>
 <p>The value in the table below indicates the number of times faster than ChaChaPoly on the same packet. Higher numbers mean better performance. The table is ordered from best average performance down.</p>
 <p>Where a NIST submission contains multiple algorithms in a family, <b><em>bold italics</em></b> indicates the primary algorithm in the family.</p>
-<p>All algorithms except those that are marked with (*) have been accelerated to some degree with armv7m-compatible assembly code.</p>
+<p>All algorithms have been accelerated to some degree with armv7m-compatible assembly code.</p>
 <table class="doxtable">
 <tr>
 <td>Algorithm</td><td>Key Bits</td><td>Nonce Bits</td><td>Tag Bits</td><td>Encrypt 128 bytes</td><td>Decrypt 128 bytes</td><td>Encrypt 16 bytes</td><td>Decrypt 16 bytes</td><td>Average </td></tr>
@@ -148,9 +148,9 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td><b><em>ISAP-K-128A</em></b></td><td>128</td><td>128</td><td>128</td><td>0.07</td><td>0.07</td><td>0.04</td><td>0.04</td><td>0.05 </td></tr>
 <tr>
-<td><b><em>Dumbo</em></b> (Elephant) (*)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.02 </td></tr>
+<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.03</td><td>0.04</td><td>0.04</td><td>0.03 </td></tr>
 <tr>
-<td>Jumbo (Elephant) (*)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
+<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.03 </td></tr>
 <tr>
 <td>ISAP-K-128</td><td>128</td><td>128</td><td>128</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01 </td></tr>
 </table>
@@ -220,7 +220,7 @@ Performance on ESP32</h1>
 <tr>
 <td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
-<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.01 </td></tr>
+<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.01 </td></tr>
 <tr>
 <td>ISAP-K-128</td><td>128</td><td>128</td><td>128</td><td>0.0040</td><td>0.0047</td><td>0.0018</td><td>0.0020</td><td>0.0025 </td></tr>
 </table>
@@ -303,7 +303,7 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <tr>
 <td>ISAP</td><td>0.02</td><td>0.05 </td></tr>
 <tr>
-<td>Elephant</td><td>0.02</td><td>0.02 </td></tr>
+<td>Elephant</td><td>0.02</td><td>0.03 </td></tr>
 </table>
 <p>Changes in the primary hash algorithm performance for ARM Cortex M3:</p>
 <table class="doxtable">
@@ -321,7 +321,7 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 6 2021 19:30:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 7 2021 07:59:41 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
