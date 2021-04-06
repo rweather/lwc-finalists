@@ -22,7 +22,16 @@
 
 #include "internal-spongent.h"
 
-#if !defined(__AVR__)
+/* Determine if Spongent-pi should be accelerated with assembly code */
+#if defined(__AVR__)
+#define SPONGENT_ASM 1
+#elif defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+#define SPONGENT_ASM 1
+#else
+#define SPONGENT_ASM 0
+#endif
+
+#if !SPONGENT_ASM
 
 /**
  * \brief Applies the Spongent-pi S-box in parallel to the 8 nibbles
@@ -346,4 +355,4 @@ void spongent176_permute(spongent176_state_t *state)
 #endif
 }
 
-#endif /* !__AVR__ */
+#endif /* !SPONGENT_ASM */

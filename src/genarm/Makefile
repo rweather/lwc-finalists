@@ -16,6 +16,7 @@ TARGETS = \
 	bin/photon256_armv7m \
 	bin/skinny128_armv7m \
 	bin/sparkle_armv7m \
+	bin/spongent_armv7m \
 	bin/xoodoo_armv7m
 
 all: $(TARGETS)
@@ -40,6 +41,10 @@ bin/keccakp_400_armv7m: keccakp_400_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
+bin/photon256_armv7m: photon256_armv7m.c
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 bin/skinny128_armv7m: skinny128_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
@@ -48,11 +53,11 @@ bin/sparkle_armv7m: sparkle_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/tinyjambu_armv7m: tinyjambu_armv7m.c
+bin/spongent_armv7m: spongent_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/photon256_armv7m: photon256_armv7m.c
+bin/tinyjambu_armv7m: tinyjambu_armv7m.c
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -78,4 +83,5 @@ generate: all
 	bin/skinny128_armv7m small plus >../combined/internal-skinny-small-armv7m.S
 	bin/skinny128_armv7m tiny plus >../combined/internal-skinny-tiny-armv7m.S
 	bin/sparkle_armv7m >../combined/internal-sparkle-armv7m.S
+	bin/spongent_armv7m >../combined/internal-spongent-armv7m.S
 	bin/xoodoo_armv7m >../combined/internal-xoodoo-armv7m.S

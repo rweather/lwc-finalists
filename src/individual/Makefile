@@ -46,6 +46,7 @@ ELEPHANT_DUMBO_FILES = \
     elephant-dumbo.h \
     internal-spongent.c \
     internal-spongent.h \
+    internal-spongent-armv7m.S \
     internal-spongent-avr.S \
     $(COMMON_FILES)
 ELEPHANT_JUMBO_FILES = \
@@ -53,6 +54,7 @@ ELEPHANT_JUMBO_FILES = \
     elephant-jumbo.h \
     internal-spongent.c \
     internal-spongent.h \
+    internal-spongent-armv7m.S \
     internal-spongent-avr.S \
     $(COMMON_FILES)
 GIFT_COFB_FILES = \
