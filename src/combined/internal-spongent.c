@@ -28,9 +28,8 @@
  * \brief Applies the Spongent-pi S-box in parallel to the 8 nibbles
  * of a 32-bit word.
  *
+ * \param out The output values from the parallel S-boxes.
  * \param x3 The input values to the parallel S-boxes.
- *
- * \return The output values from the parallel S-boxes.
  *
  * Based on the bit-sliced S-box implementation from here:
  * https://github.com/DadaIsCrazy/usuba/blob/master/data/sboxes/spongent.ua
@@ -38,27 +37,27 @@
  * Note that spongent.ua numbers bits from highest to lowest, so x0 is the
  * high bit of each nibble and x3 is the low bit.
  */
-static uint32_t spongent_sbox(uint32_t x3)
-{
-    uint32_t q0, q1, q2, q3, t0, t1, t2, t3;
-    uint32_t x2 = (x3 >> 1);
-    uint32_t x1 = (x2 >> 1);
-    uint32_t x0 = (x1 >> 1);
-    q0 = x0 ^ x2;
-    q1 = x1 ^ x2;
-    t0 = q0 & q1;
-    q2 = ~(x0 ^ x1 ^ x3 ^ t0);
-    t1 = q2 & ~x0;
-    q3 = x1 ^ t1;
-    t2 = q3 & (q3 ^ x2 ^ x3 ^ t0);
-    t3 = (x2 ^ t0) & ~(x1 ^ t0);
-    q0 = x1 ^ x2 ^ x3 ^ t2;
-    q1 = x0 ^ x2 ^ x3 ^ t0 ^ t1;
-    q2 = x0 ^ x1 ^ x2 ^ t1;
-    q3 = x0 ^ x3 ^ t0 ^ t3;
-    return ((q0 << 3) & 0x88888888U) | ((q1 << 2) & 0x44444444U) |
-           ((q2 << 1) & 0x22222222U) |  (q3       & 0x11111111U);
-}
+#define spongent_sbox(out, b3) \
+    do { \
+        uint32_t q0, q1, q2, q3, u0, u1, u2, u3; \
+        uint32_t b2 = ((b3) >> 1); \
+        uint32_t b1 = (b2 >> 1); \
+        uint32_t b0 = (b1 >> 1); \
+        q0 = b0 ^ b2; \
+        q1 = b1 ^ b2; \
+        u0 = q0 & q1; \
+        q2 = ~(b0 ^ b1 ^ (b3) ^ u0); \
+        u1 = q2 & ~b0; \
+        q3 = b1 ^ u1; \
+        u2 = q3 & (q3 ^ b2 ^ (b3) ^ u0); \
+        u3 = (b2 ^ u0) & ~(b1 ^ u0); \
+        q0 = b1 ^ b2 ^ (b3) ^ u2; \
+        q1 = b0 ^ b2 ^ (b3) ^ u0 ^ u1; \
+        q2 = b0 ^ b1 ^ b2 ^ u1; \
+        q3 = b0 ^ (b3) ^ u0 ^ u3; \
+        (out) = ((q0 << 3) & 0x88888888U) | ((q1 << 2) & 0x44444444U) | \
+                ((q2 << 1) & 0x22222222U) |  (q3       & 0x11111111U); \
+    } while (0)
 
 void spongent160_permute(spongent160_state_t *state)
 {
@@ -112,11 +111,11 @@ void spongent160_permute(spongent160_state_t *state)
         x4 ^= ((uint32_t)(rc[1])) << 24;
 
         /* Apply the S-box to all 4-bit groups in the state */
-        t0 = spongent_sbox(x0);
-        t1 = spongent_sbox(x1);
-        t2 = spongent_sbox(x2);
-        t3 = spongent_sbox(x3);
-        t4 = spongent_sbox(x4);
+        spongent_sbox(t0, x0);
+        spongent_sbox(t1, x1);
+        spongent_sbox(t2, x2);
+        spongent_sbox(t3, x3);
+        spongent_sbox(t4, x4);
 
         /* Permute the bits of the state.  Bit i is moved to (40 * i) % 159
          * for all bits except the last which is left where it is.
@@ -256,12 +255,12 @@ void spongent176_permute(spongent176_state_t *state)
         x5 ^= ((uint32_t)(rc[1])) << 8;
 
         /* Apply the S-box to all 4-bit groups in the state */
-        t0 = spongent_sbox(x0);
-        t1 = spongent_sbox(x1);
-        t2 = spongent_sbox(x2);
-        t3 = spongent_sbox(x3);
-        t4 = spongent_sbox(x4);
-        t5 = spongent_sbox(x5);
+        spongent_sbox(t0, x0);
+        spongent_sbox(t1, x1);
+        spongent_sbox(t2, x2);
+        spongent_sbox(t3, x3);
+        spongent_sbox(t4, x4);
+        spongent_sbox(t5, x5);
 
         /* Permute the bits of the state.  Bit i is moved to (44 * i) % 175
          * for all bits except the last which is left where it is.
