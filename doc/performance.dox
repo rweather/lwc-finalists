@@ -222,18 +222,22 @@ Changes in the primary AEAD algorithm performance for ARM Cortex M3,
 ordered from highest to lowest "New" ChaChaPoly values:
 
 <table>
-<tr><td>Algorithm</td><td>Round 2</td><td>New</td></tr>
-<tr><td>SPARKLE</td><td>1.09</td><td>1.80</td></tr>
-<tr><td>Xoodyak</td><td>0.86</td><td>1.62</td></tr>
-<tr><td>ASCON</td><td>1.11</td><td>1.61</td></tr>
-<tr><td>TinyJAMBU</td><td>0.81</td><td>1.31</td></tr>
-<tr><td>GIFT-COFB</td><td>1.05</td><td>1.08</td></tr>
-<tr><td>Grain128-AEAD</td><td>0.37</td><td>0.43</td></tr>
-<tr><td>Romulus</td><td>0.19</td><td>0.26</td></tr>
-<tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.25</td></tr>
-<tr><td>ISAP</td><td>0.02</td><td>0.05</td></tr>
-<tr><td>Elephant</td><td>0.02</td><td>0.03</td></tr>
+<tr><td>Algorithm</td><td>Round 2</td><td>New</td><td>Notable changes other than the use of assembly code</td></tr>
+<tr><td>SPARKLE</td><td>1.09</td><td>1.80</td><td> </td></tr>
+<tr><td>Xoodyak</td><td>0.86</td><td>1.62</td><td> </td></tr>
+<tr><td>ASCON</td><td>1.11</td><td>1.61</td><td> </td></tr>
+<tr><td>TinyJAMBU</td><td>0.81</td><td>1.31</td><td> </td></tr>
+<tr><td>GIFT-COFB</td><td>1.05</td><td>1.08</td><td> </td></tr>
+<tr><td>Grain128-AEAD</td><td>0.37</td><td>0.43</td><td> </td></tr>
+<tr><td>Romulus</td><td>0.19</td><td>0.26</td><td>Switched to SKINNY-128-384+</td></tr>
+<tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.25</td><td>Highly unrolled 32-bit version in C</td></tr>
+<tr><td>Elephant (Delirium)</td><td>0.05</td><td>0.19</td><td>Optimised 32-bit and 64-bit versions of Keccak-p[200] in C</td></tr>
+<tr><td>ISAP</td><td>0.02</td><td>0.05</td><td>Optimised 64-bit version of Keccak-p[400] in C</td></tr>
+<tr><td>Elephant (Dumbo)</td><td>0.02</td><td>0.03</td><td> </td></tr>
 </table>
+
+Note: The primary version of Elephant is the Spongent-based Dumbo, but the
+Keccak-based Delirium has improved significantly so I included that as well.
 
 Changes in the primary hash algorithm performance for ARM Cortex M3:
 
