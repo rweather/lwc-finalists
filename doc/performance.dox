@@ -119,6 +119,7 @@ The hash algorithms are compared against BLAKE2s instead of ChaChaPoly:
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.71</td><td>0.65</td><td>1.43</td><td>0.93</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.45</td><td>0.37</td><td>1.50</td><td>0.47</td></tr>
+<tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.07</td><td>0.06</td><td>0.15</td><td>0.09</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.16</td><td>0.07</td></tr>
 </table>
 
@@ -165,6 +166,7 @@ Hash algorithms:
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.24</td><td>0.20</td><td>0.30</td><td>0.25</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.19</td><td>0.16</td><td>0.25</td><td>0.20</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.15</td><td>0.06</td></tr>
+<tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.04</td><td>0.03</td><td>0.09</td><td>0.05</td></tr>
 </table>
 
 \section perf_overall Overall group rankings
@@ -200,7 +202,7 @@ Hash algorithm rankings:
 <tr><td>Rank</td><td>Algorithms</td></tr>
 <tr><td>7</td><td>SPARKLE, Xoodyak</td></tr>
 <tr><td>3</td><td>ASCON</td></tr>
-<tr><td>0</td><td>PHOTON-Beetle</td></tr>
+<tr><td>0</td><td>PHOTON-Beetle, Romulus</td></tr>
 </table>
 
 \section perf_changes_arm Changes in ARM Cortex M3 performance since Round 2
@@ -246,6 +248,7 @@ Changes in the primary hash algorithm performance for ARM Cortex M3:
 <tr><td>SPARKLE</td><td>0.46</td><td>1.06</td></tr>
 <tr><td>Xoodyak</td><td>0.51</td><td>0.93</td></tr>
 <tr><td>ASCON</td><td>0.30</td><td>0.52</td></tr>
+<tr><td>Romulus</td><td>N/A</td><td>0.09</td></tr>
 <tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.07</td></tr>
 </table>
 
@@ -277,6 +280,7 @@ Changes in the primary hash algorithm performance for ESP32:
 <tr><td>SPARKLE</td><td>0.45</td><td>0.45</td></tr>
 <tr><td>ASCON</td><td>0.20</td><td>0.20</td></tr>
 <tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.06</td></tr>
+<tr><td>Romulus</td><td>N/A</td><td>0.05</td></tr>
 </table>
 
 */

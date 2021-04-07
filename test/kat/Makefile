@@ -58,6 +58,7 @@ check: $(TARGET1) $(TARGET2)
 	@$(RUN_KAT) PHOTON-Beetle-AEAD-ENC-128 PHOTON-Beetle-AEAD-ENC-128.txt
 	@$(RUN_KAT) PHOTON-Beetle-AEAD-ENC-32 PHOTON-Beetle-AEAD-ENC-32.txt
 	@$(RUN_KAT) PHOTON-Beetle-HASH PHOTON-Beetle-HASH.txt
+	@$(RUN_KAT) Romulus-H+ Romulus-H+.txt
 	@$(RUN_KAT) Romulus-N+ Romulus-N+.txt
 	@$(RUN_KAT) Romulus-M+ Romulus-M+.txt
 	@$(RUN_KAT) Schwaemm256-128 Schwaemm256-128.txt

@@ -32,6 +32,7 @@
 #include "isap.h"
 #include "photon-beetle.h"
 #include "romulus.h"
+#include "romulus-hash.h"
 #include "sparkle.h"
 #include "tinyjambu.h"
 #include "tinyjambu-masked.h"
@@ -84,6 +85,7 @@ static const aead_hash_algorithm_t *const hashes[] = {
     &esch_256_hash_algorithm,
     &esch_384_hash_algorithm,
     &photon_beetle_hash_algorithm,
+    &romulus_hash_algorithm,
     &xoodyak_hash_algorithm,
     0
 };

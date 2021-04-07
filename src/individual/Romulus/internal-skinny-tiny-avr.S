@@ -3514,7 +3514,7 @@ skinny_plus_encrypt:
 	ret
 	.size skinny_plus_encrypt, .-skinny_plus_encrypt
 
-.global skinny_128_384_encrypt_tk_full
-	.set skinny_128_384_encrypt_tk_full,skinny_plus_encrypt
+.global skinny_plus_encrypt_tk_full
+	.set skinny_plus_encrypt_tk_full,skinny_plus_encrypt
 
 #endif

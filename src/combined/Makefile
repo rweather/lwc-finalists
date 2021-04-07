@@ -24,6 +24,7 @@ OBJS = \
         photon-beetle.o \
         photon-beetle-hash.o \
         romulus.o \
+        romulus-hash.o \
         sparkle.o \
         tinyjambu.o \
         tinyjambu-masked.o \
@@ -77,6 +78,7 @@ isap.o: isap.h aead-common.h internal-isap.h internal-ascon.h internal-keccakp-4
 photon-beetle.o: photon-beetle.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle.h internal-photon256.h internal-util.h
 romulus.o: romulus.h internal-skinny-plus.h aead-common.h internal-util.h
+romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h aead-common.h
 sparkle.o: sparkle.h internal-sparkle.h aead-common.h internal-util.h
 tinyjambu.o: tinyjambu.h internal-tinyjambu.h aead-common.h internal-util.h
 tinyjambu-masked.o: tinyjambu-masked.h internal-tinyjambu-m.h aead-common.h aead-random.h internal-masking.h internal-util.h

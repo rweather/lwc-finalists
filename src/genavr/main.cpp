@@ -894,7 +894,7 @@ static bool skinny128_384_encrypt(enum Mode mode, int rounds = 56)
     gen_skinny128_384_encrypt(code, rounds);
     if (mode == Generate) {
         code.write(std::cout);
-        code.write_alias(std::cout, "skinny_128_384_encrypt_tk_full");
+        code.write_alias(std::cout, "skinny_plus_encrypt_tk_full");
     } else {
         if (!test_skinny128_384_encrypt(code)) {
             std::cout << "SKINNY-128-384 encrypt tests FAILED" << std::endl;

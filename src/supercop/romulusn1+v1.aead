@@ -8,3 +8,4 @@ aead_tag_size=16
 aead_encrypt=romulus_np_aead_encrypt
 aead_decrypt=romulus_np_aead_decrypt
 aead_header=romulus.h
+aead_exclude="romulus-hash.c romulus-hash.h"

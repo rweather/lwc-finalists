@@ -111,6 +111,8 @@ PHOTON_BEETLE_FILES = \
 ROMULUS_FILES = \
     romulus.c \
     romulus.h \
+    romulus-hash.c \
+    romulus-hash.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
     internal-skinny-small-armv7m.S \
