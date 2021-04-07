@@ -25,9 +25,7 @@
 /* Determine which primitives should be accelerated with assembly code */
 #if defined(__AVR__)
 #define GRAIN128_ASM_CORE 1
-/* For some reason, the AVR assembly preoutput doesn't work at the moment.
- * Investigate and fix this later. */
-#define GRAIN128_ASM_PREOUTPUT 0
+#define GRAIN128_ASM_PREOUTPUT 1
 #define GRAIN128_ASM_KEYSTREAM 0
 #define GRAIN128_ASM_HELPERS 1
 #elif defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
