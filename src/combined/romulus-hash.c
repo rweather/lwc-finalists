@@ -32,7 +32,13 @@
  * faster because it avoids expanding the key schedule twice in the
  * skinny_plus_encrypt_tk_full() calls within romulus_hash_process_chunk().
  */
+#if defined(__AVR__)
 #define ROMULUS_HASH_KEY_SCHEDULE 0
+#elif SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_FULL
+#define ROMULUS_HASH_KEY_SCHEDULE 1
+#else
+#define ROMULUS_HASH_KEY_SCHEDULE 0
+#endif
 
 /**
  * \brief Number of bytes in a rate block for Romulus-H+.

@@ -63,8 +63,11 @@ typedef struct
 
     /** TK3 for the tiny key schedule */
     uint8_t TK3[16];
-#else
+#elif SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_FULL
     /** Words of the full key schedule */
+    uint32_t k[SKINNY_PLUS_ROUNDS * 4];
+#else
+    /** Words of the small key schedule */
     uint32_t k[SKINNY_PLUS_ROUNDS * 2];
 #endif
 
