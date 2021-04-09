@@ -291,11 +291,13 @@ static void gen_next_rc(const reg_names *regs, const char *rc)
 }
 
 /* Generate the key setup function for the tiny version */
-static void gen_skinny_128_384_init_tiny(void)
+static void gen_skinny_128_384_init_tiny(int without_tk1)
 {
     /*
      * r0 holds the pointer to the output key schedule.
      * r1 points to the input key.
+     *
+     * For the "without_tk1" version, "r1" points to TK2 and "r2" to TK3.
      *
      * r0, r1, r2, r3, and ip can be used as scratch registers without saving,
      * but the value of ip may not survive across a branch instruction.
@@ -309,23 +311,35 @@ static void gen_skinny_128_384_init_tiny(void)
     regs.t1 = "r2";
     regs.t2 = "r3";
 
-    /* Copy the 48 bytes of the tweakey directly to the key schedule */
-    for (index = 0; index < 48; index += 8) {
-        printf("\tldr\t%s, [r1, #%d]\n", regs.t1, index);
-        printf("\tldr\t%s, [r1, #%d]\n", regs.t2, index + 4);
-        printf("\tstr\t%s, [r0, #%d]\n", regs.t1, index);
-        printf("\tstr\t%s, [r0, #%d]\n", regs.t2, index + 4);
+    if (without_tk1) {
+        /* Copy the 32 bytes of TK2 and TK3 directly to the key schedule */
+        for (index = 0; index < 16; index += 4) {
+            printf("\tldr\t%s, [r1, #%d]\n", regs.t1, index);
+            printf("\tldr\t%s, [r2, #%d]\n", regs.t2, index + 16);
+            printf("\tstr\t%s, [r0, #%d]\n", regs.t1, index + 16);
+            printf("\tstr\t%s, [r0, #%d]\n", regs.t2, index + 32);
+        }
+    } else {
+        /* Copy the 48 bytes of the tweakey directly to the key schedule */
+        for (index = 0; index < 48; index += 8) {
+            printf("\tldr\t%s, [r1, #%d]\n", regs.t1, index);
+            printf("\tldr\t%s, [r1, #%d]\n", regs.t2, index + 4);
+            printf("\tstr\t%s, [r0, #%d]\n", regs.t1, index);
+            printf("\tstr\t%s, [r0, #%d]\n", regs.t2, index + 4);
+        }
     }
 
     printf("\tbx\tlr\n");
 }
 
 /* Generate the key setup function for the standard version */
-static void gen_skinny_128_384_init_standard(void)
+static void gen_skinny_128_384_init_standard(int without_tk1)
 {
     /*
      * r0 holds the pointer to the output key schedule.
      * r1 points to the input key.
+     *
+     * For the "without_tk1" version, "r1" points to TK2 and "r2" to TK3.
      *
      * r0, r1, r2, r3, and ip can be used as scratch registers without saving,
      * but the value of ip may not survive across a branch instruction.
@@ -336,14 +350,14 @@ static void gen_skinny_128_384_init_standard(void)
      */
     int top_label;
     reg_names regs = { .s0 = 0 };
-    regs.tk2[0] = "r2";
-    regs.tk2[1] = "r3";
-    regs.tk2[2] = "r4";
-    regs.tk2[3] = "r5";
-    regs.tk3[0] = "r6";
-    regs.tk3[1] = "r7";
-    regs.tk3[2] = "r8";
-    regs.tk3[3] = "r9";
+    regs.tk2[0] = "r3";
+    regs.tk2[1] = "r4";
+    regs.tk2[2] = "r5";
+    regs.tk2[3] = "r6";
+    regs.tk3[0] = "r7";
+    regs.tk3[1] = "r8";
+    regs.tk3[2] = "r9";
+    regs.tk3[3] = "r2";
     regs.t1 = "r10";
     regs.t2 = "ip";
     regs.t3 = "lr";
@@ -352,24 +366,37 @@ static void gen_skinny_128_384_init_standard(void)
     printf("\tpush\t{r4, r5, r6, r7, r8, r9, r10, lr}\n");
 
     /* Copy the value of TK1 directly to the key schedule */
-    printf("\tldr\t%s, [r1, #0]\n", regs.t1);
-    printf("\tldr\t%s, [r1, #4]\n", regs.t2);
-    printf("\tstr\t%s, [r0, #0]\n", regs.t1);
-    printf("\tstr\t%s, [r0, #4]\n", regs.t2);
-    printf("\tldr\t%s, [r1, #8]\n", regs.t1);
-    printf("\tldr\t%s, [r1, #12]\n", regs.t2);
-    printf("\tstr\t%s, [r0, #8]\n", regs.t1);
-    printf("\tstr\t%s, [r0, #12]\n", regs.t2);
+    if (!without_tk1) {
+        printf("\tldr\t%s, [r1, #0]\n", regs.t1);
+        printf("\tldr\t%s, [r1, #4]\n", regs.t2);
+        printf("\tstr\t%s, [r0, #0]\n", regs.t1);
+        printf("\tstr\t%s, [r0, #4]\n", regs.t2);
+        printf("\tldr\t%s, [r1, #8]\n", regs.t1);
+        printf("\tldr\t%s, [r1, #12]\n", regs.t2);
+        printf("\tstr\t%s, [r0, #8]\n", regs.t1);
+        printf("\tstr\t%s, [r0, #12]\n", regs.t2);
+    }
 
     /* Load the initial values of TK2 and TK3 into registers */
-    printf("\tldr\t%s, [r1, #16]\n", regs.tk2[0]);
-    printf("\tldr\t%s, [r1, #20]\n", regs.tk2[1]);
-    printf("\tldr\t%s, [r1, #24]\n", regs.tk2[2]);
-    printf("\tldr\t%s, [r1, #28]\n", regs.tk2[3]);
-    printf("\tldr\t%s, [r1, #32]\n", regs.tk3[0]);
-    printf("\tldr\t%s, [r1, #36]\n", regs.tk3[1]);
-    printf("\tldr\t%s, [r1, #40]\n", regs.tk3[2]);
-    printf("\tldr\t%s, [r1, #44]\n", regs.tk3[3]);
+    if (!without_tk1) {
+        printf("\tldr\t%s, [r1, #16]\n", regs.tk2[0]);
+        printf("\tldr\t%s, [r1, #20]\n", regs.tk2[1]);
+        printf("\tldr\t%s, [r1, #24]\n", regs.tk2[2]);
+        printf("\tldr\t%s, [r1, #28]\n", regs.tk2[3]);
+        printf("\tldr\t%s, [r1, #32]\n", regs.tk3[0]);
+        printf("\tldr\t%s, [r1, #36]\n", regs.tk3[1]);
+        printf("\tldr\t%s, [r1, #40]\n", regs.tk3[2]);
+        printf("\tldr\t%s, [r1, #44]\n", regs.tk3[3]);
+    } else {
+        printf("\tldr\t%s, [r1, #0]\n",  regs.tk2[0]);
+        printf("\tldr\t%s, [r1, #4]\n",  regs.tk2[1]);
+        printf("\tldr\t%s, [r1, #8]\n",  regs.tk2[2]);
+        printf("\tldr\t%s, [r1, #12]\n", regs.tk2[3]);
+        printf("\tldr\t%s, [r2, #0]\n",  regs.tk3[0]);
+        printf("\tldr\t%s, [r2, #4]\n",  regs.tk3[1]);
+        printf("\tldr\t%s, [r2, #8]\n",  regs.tk3[2]);
+        printf("\tldr\t%s, [r2, #12]\n", regs.tk3[3]);
+    }
 
     /* r1 can now be used as an extra temporary register */
     regs.t4 = "r1";
@@ -907,13 +934,23 @@ int main(int argc, char *argv[])
     printf("\t.thumb\n");
     printf("\t.text\n");
 
+#if 0 /* Not used any more */
     /* Output the SKINNY-128-384+ key setup function */
     function_header(prefix, "init");
     if (variant == SKINNY128_VARIANT_TINY)
-        gen_skinny_128_384_init_tiny();
+        gen_skinny_128_384_init_tiny(0);
     else
-        gen_skinny_128_384_init_standard();
+        gen_skinny_128_384_init_standard(0);
     function_footer(prefix, "init");
+#endif
+
+    /* Output the SKINNY-128-384+ key setup function with TK2/TK3 only */
+    function_header(prefix, "init_without_tk1");
+    if (variant == SKINNY128_VARIANT_TINY)
+        gen_skinny_128_384_init_tiny(1);
+    else
+        gen_skinny_128_384_init_standard(1);
+    function_footer(prefix, "init_without_tk1");
 
     /* Output the primary SKINNY-128-384+ encryption function */
     function_header(prefix, "encrypt");
@@ -924,7 +961,7 @@ int main(int argc, char *argv[])
     function_footer(prefix, "encrypt");
 
     /* Output the TK2 SKINNY-128-384+ encryption function */
-    if (variant != SKINNY128_VARIANT_TINY) {
+    if (0 && variant != SKINNY128_VARIANT_TINY) { /* Not used any more */
         function_header(prefix, "encrypt_tk2");
         gen_skinny_128_384_encrypt_tk2();
         function_footer(prefix, "encrypt_tk2");

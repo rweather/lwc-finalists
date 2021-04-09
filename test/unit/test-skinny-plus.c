@@ -50,32 +50,6 @@ static block_cipher_test_vector_128_t const skinny_plus_1 = {
      0x52, 0xa8, 0x53, 0x69, 0x0f, 0xe3, 0x6e, 0x5e}
 };
 
-/* Alternative version of SKINNY-128-384 where TK2 is also tweakable */
-static unsigned char TK2[16];
-static void tk2_skinny_plus_init
-    (skinny_plus_key_schedule_t *ks, const unsigned char *key)
-{
-    unsigned char tk[48];
-    memcpy(tk, key, 48);
-    memset(tk + 16, 0, 16);
-    memcpy(TK2, key + 16, 16);
-    skinny_plus_init(ks, tk);
-}
-static void tk2_skinny_plus_encrypt
-    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input)
-{
-    skinny_plus_key_schedule_t ks2 = *ks;
-    skinny_plus_encrypt_tk2(&ks2, output, input, TK2);
-}
-static block_cipher_t const skinny_plus_tk2 = {
-    "SKINNY-128-384-TK2+",
-    sizeof(skinny_plus_key_schedule_t),
-    (block_cipher_init_t)tk2_skinny_plus_init,
-    (block_cipher_encrypt_t)tk2_skinny_plus_encrypt,
-    (block_cipher_decrypt_t)0
-};
-
 /* Alternative version of SKINNY-128-384 where everything is tweakable */
 static void tk_full_skinny_plus_init
     (unsigned char ks[48], const unsigned char *key)
@@ -95,10 +69,6 @@ void test_skinny128(void)
     test_block_cipher_start(&skinny_plus);
     test_block_cipher_128(&skinny_plus, &skinny_plus_1);
     test_block_cipher_end(&skinny_plus);
-
-    test_block_cipher_start(&skinny_plus_tk2);
-    test_block_cipher_128(&skinny_plus_tk2, &skinny_plus_1);
-    test_block_cipher_end(&skinny_plus_tk2);
 
     test_block_cipher_start(&skinny_plus_tk_full);
     test_block_cipher_128(&skinny_plus_tk_full, &skinny_plus_1);

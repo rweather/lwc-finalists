@@ -69,22 +69,16 @@ aead_cipher_t const romulus_mp_cipher = {
  *
  * \param ks Points to the key schedule to initialize.
  * \param k Points to the 16 bytes of the key.
- * \param npub Points to the 16 bytes of the nonce.  May be NULL
+ * \param npub Points to the 16 bytes of the nonce.
  * if the nonce will be updated on the fly.
  */
 static void romulus1_init
     (skinny_plus_key_schedule_t *ks,
      const unsigned char *k, const unsigned char *npub)
 {
-    unsigned char TK[48];
-    TK[0] = 0x01; /* Initialize the 56-bit LFSR counter */
-    memset(TK + 1, 0, 15);
-    if (npub)
-        memcpy(TK + 16, npub, 16);
-    else
-        memset(TK + 16, 0, 16);
-    memcpy(TK + 32, k, 16);
-    skinny_plus_init(ks, TK);
+    ks->TK1[0] = 0x01; /* Initialize the 56-bit LFSR counter */
+    memset(ks->TK1 + 1, 0, 15);
+    skinny_plus_init_without_tk1(ks, npub, k);
 }
 
 /**
@@ -117,22 +111,28 @@ STATIC_INLINE void romulus1_update_counter(uint8_t TK1[16])
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
+ * \param k Points to the key.
  * \param npub Points to the nonce.
  * \param ad Points to the associated data.
  * \param adlen Length of the associated data in bytes.
  */
 static void romulus_np_process_ad
     (skinny_plus_key_schedule_t *ks,
-     unsigned char S[16], const unsigned char *npub,
+     unsigned char S[16], const unsigned char *k, const unsigned char *npub,
      const unsigned char *ad, unsigned long long adlen)
 {
     unsigned char temp;
+
+    /* Initialise the LFSR counter in TK1 */
+    ks->TK1[0] = 0x01;
+    memset(ks->TK1 + 1, 0, 15);
 
     /* Handle the special case of no associated data */
     if (adlen == 0) {
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x1A);
-        skinny_plus_encrypt_tk2(ks, S, S, npub);
+        skinny_plus_init_without_tk1(ks, npub, k);
+        skinny_plus_encrypt(ks, S, S);
         return;
     }
 
@@ -141,7 +141,8 @@ static void romulus_np_process_ad
     while (adlen > 32) {
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, ad, 16);
-        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_init_without_tk1(ks, ad + 16, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
         ad += 32;
         adlen -= 32;
@@ -153,7 +154,8 @@ static void romulus_np_process_ad
     if (temp == 32) {
         /* Left-over complete double block */
         lw_xor_block(S, ad, 16);
-        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_init_without_tk1(ks, ad + 16, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x18);
     } else if (temp > 16) {
@@ -164,7 +166,8 @@ static void romulus_np_process_ad
         memcpy(pad, ad + 16, temp);
         memset(pad + temp, 0, 15 - temp);
         pad[15] = temp;
-        skinny_plus_encrypt_tk2(ks, S, S, pad);
+        skinny_plus_init_without_tk1(ks, pad, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
         romulus1_set_domain(ks, 0x1A);
     } else if (temp == 16) {
@@ -177,7 +180,8 @@ static void romulus_np_process_ad
         S[15] ^= temp;
         romulus1_set_domain(ks, 0x1A);
     }
-    skinny_plus_encrypt_tk2(ks, S, S, npub);
+    skinny_plus_init_without_tk1(ks, npub, k);
+    skinny_plus_encrypt(ks, S, S);
 }
 
 /**
@@ -247,6 +251,7 @@ static uint8_t romulus_m_final_ad_domain
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
+ * \param k Points to the key.
  * \param npub Points to the nonce.
  * \param ad Points to the associated data.
  * \param adlen Length of the associated data in bytes.
@@ -255,7 +260,7 @@ static uint8_t romulus_m_final_ad_domain
  */
 static void romulus_mp_process_ad
     (skinny_plus_key_schedule_t *ks,
-     unsigned char S[16], const unsigned char *npub,
+     unsigned char S[16], const unsigned char *k, const unsigned char *npub,
      const unsigned char *ad, unsigned long long adlen,
      const unsigned char *m, unsigned long long mlen)
 {
@@ -266,12 +271,18 @@ static void romulus_mp_process_ad
     /* Determine the domain separator to use on the final block */
     final_domain ^= romulus_m_final_ad_domain(adlen, mlen, 16);
 
+    /* Initialise the LFSR counter in TK1 */
+    ks->TK1[0] = 0x01;
+    memset(ks->TK1 + 1, 0, 15);
+
+    /* Handle the special case of no associated data */
     /* Process all associated data double blocks except the last */
     romulus1_set_domain(ks, 0x28);
     while (adlen > 32) {
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, ad, 16);
-        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_init_without_tk1(ks, ad + 16, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
         ad += 32;
         adlen -= 32;
@@ -283,7 +294,8 @@ static void romulus_mp_process_ad
         /* Last associated data double block is full */
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, ad, 16);
-        skinny_plus_encrypt_tk2(ks, S, S, ad + 16);
+        skinny_plus_init_without_tk1(ks, ad + 16, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
     } else if (temp > 16) {
         /* Last associated data double block is partial */
@@ -293,7 +305,8 @@ static void romulus_mp_process_ad
         memcpy(pad, ad + 16, temp);
         memset(pad + temp, 0, sizeof(pad) - temp - 1);
         pad[sizeof(pad) - 1] = (unsigned char)temp;
-        skinny_plus_encrypt_tk2(ks, S, S, pad);
+        skinny_plus_init_without_tk1(ks, pad, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
     } else {
         /* Last associated data block is single.  Needs to be combined
@@ -307,12 +320,14 @@ static void romulus_mp_process_ad
             S[15] ^= (unsigned char)temp;
         }
         if (mlen > 16) {
-            skinny_plus_encrypt_tk2(ks, S, S, m);
+            skinny_plus_init_without_tk1(ks, m, k);
+            skinny_plus_encrypt(ks, S, S);
             romulus1_update_counter(ks->TK1);
             m += 16;
             mlen -= 16;
         } else if (mlen == 16) {
-            skinny_plus_encrypt_tk2(ks, S, S, m);
+            skinny_plus_init_without_tk1(ks, m, k);
+            skinny_plus_encrypt(ks, S, S);
             m += 16;
             mlen -= 16;
         } else {
@@ -320,7 +335,8 @@ static void romulus_mp_process_ad
             memcpy(pad, m, temp);
             memset(pad + temp, 0, sizeof(pad) - temp - 1);
             pad[sizeof(pad) - 1] = (unsigned char)temp;
-            skinny_plus_encrypt_tk2(ks, S, S, pad);
+            skinny_plus_init_without_tk1(ks, pad, k);
+            skinny_plus_encrypt(ks, S, S);
             mlen = 0;
         }
     }
@@ -330,7 +346,8 @@ static void romulus_mp_process_ad
     while (mlen > 32) {
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, m, 16);
-        skinny_plus_encrypt_tk2(ks, S, S, m + 16);
+        skinny_plus_init_without_tk1(ks, m + 16, k);
+        skinny_plus_encrypt(ks, S, S);
         romulus1_update_counter(ks->TK1);
         m += 32;
         mlen -= 32;
@@ -342,7 +359,8 @@ static void romulus_mp_process_ad
         /* Last message double block is full */
         romulus1_update_counter(ks->TK1);
         lw_xor_block(S, m, 16);
-        skinny_plus_encrypt_tk2(ks, S, S, m + 16);
+        skinny_plus_init_without_tk1(ks, m + 16, k);
+        skinny_plus_encrypt(ks, S, S);
     } else if (temp > 16) {
         /* Last message double block is partial */
         temp -= 16;
@@ -351,7 +369,8 @@ static void romulus_mp_process_ad
         memcpy(pad, m + 16, temp);
         memset(pad + temp, 0, sizeof(pad) - temp - 1);
         pad[sizeof(pad) - 1] = (unsigned char)temp;
-        skinny_plus_encrypt_tk2(ks, S, S, pad);
+        skinny_plus_init_without_tk1(ks, pad, k);
+        skinny_plus_encrypt(ks, S, S);
     } else if (temp == 16) {
         /* Last message single block is full */
         lw_xor_block(S, m, 16);
@@ -364,7 +383,8 @@ static void romulus_mp_process_ad
     /* Process the last partial block */
     romulus1_set_domain(ks, final_domain);
     romulus1_update_counter(ks->TK1);
-    skinny_plus_encrypt_tk2(ks, S, S, npub);
+    skinny_plus_init_without_tk1(ks, npub, k);
+    skinny_plus_encrypt(ks, S, S);
 }
 
 /**
@@ -644,13 +664,9 @@ int romulus_np_aead_encrypt
     if (adlen > ROMULUS_DATA_LIMIT || mlen > ROMULUS_DATA_LIMIT)
         return -2;
 
-    /* Initialize the key schedule with the key and no nonce.  Associated
-     * data processing varies the nonce from block to block */
-    romulus1_init(&ks, k, 0);
-
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_np_process_ad(&ks, S, npub, ad, adlen);
+    romulus_np_process_ad(&ks, S, k, npub, ad, adlen);
 
     /* Re-initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
@@ -685,13 +701,9 @@ int romulus_np_aead_decrypt
             clen > (ROMULUS_DATA_LIMIT + ROMULUS_TAG_SIZE))
         return -2;
 
-    /* Initialize the key schedule with the key and no nonce.  Associated
-     * data processing varies the nonce from block to block */
-    romulus1_init(&ks, k, 0);
-
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_np_process_ad(&ks, S, npub, ad, adlen);
+    romulus_np_process_ad(&ks, S, k, npub, ad, adlen);
 
     /* Re-initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
@@ -724,13 +736,9 @@ int romulus_mp_aead_encrypt
     if (adlen > ROMULUS_DATA_LIMIT || mlen > ROMULUS_DATA_LIMIT)
         return -2;
 
-    /* Initialize the key schedule with the key and no nonce.  Associated
-     * data processing varies the nonce from block to block */
-    romulus1_init(&ks, k, 0);
-
     /* Process the associated data and the plaintext message */
     memset(S, 0, sizeof(S));
-    romulus_mp_process_ad(&ks, S, npub, ad, adlen, m, mlen);
+    romulus_mp_process_ad(&ks, S, k, npub, ad, adlen, m, mlen);
 
     /* Generate the authentication tag, which is also the initialization
      * vector for the encryption portion of the packet processing */
@@ -776,13 +784,9 @@ int romulus_mp_aead_decrypt
     memcpy(S, c + clen, ROMULUS_TAG_SIZE);
     romulus_mp_decrypt(&ks, S, m, c, clen);
 
-    /* Re-initialize the key schedule with the key and no nonce.  Associated
-     * data processing varies the nonce from block to block */
-    romulus1_init(&ks, k, 0);
-
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_mp_process_ad(&ks, S, npub, ad, adlen, m, clen);
+    romulus_mp_process_ad(&ks, S, k, npub, ad, adlen, m, clen);
 
     /* Check the authentication tag */
     romulus_generate_tag(S, S);

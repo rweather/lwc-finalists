@@ -523,8 +523,7 @@ static void skinny_permute_and_expand_tk
  *
  * \param keys Output key schedule.
  * \param key_tk2 Points to the 16 byte TK2 value.
- * \param key_tk3 Points to the 16 byte TK3 value.  May be NULL if we
- * are expanding TK2 on the fly during skinny_plus_encrypt_tk2().
+ * \param key_tk3 Points to the 16 byte TK3 value.
  */
 static void skinny_plus_init_schedule
     (uint32_t *keys, const unsigned char *key_tk2, const unsigned char *key_tk3)
@@ -550,10 +549,7 @@ static void skinny_plus_init_schedule
                     (((tk0) << 1) & 0xAAAAAAAAU); \
         } while (0)
     skinny_to_fixsliced(tk2_0, tk2_1, tk2_2, tk2_3, key_tk2);
-    if (key_tk3)
-        skinny_to_fixsliced(tk3_0, tk3_1, tk3_2, tk3_3, key_tk3);
-    else
-        tk3_0 = tk3_1 = tk3_2 = tk3_3 = 0;
+    skinny_to_fixsliced(tk3_0, tk3_1, tk3_2, tk3_3, key_tk3);
     for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 8, k += 32) {
         /* Round 1 */
         if (round == 0) {
@@ -639,6 +635,14 @@ void skinny_plus_init
     skinny_plus_init_schedule(ks->k, key + 16, key + 32);
 }
 
+void skinny_plus_init_without_tk1
+    (skinny_plus_key_schedule_t *ks, const unsigned char *tk2,
+     const unsigned char *tk3)
+{
+    /* Generate the main key schedule from TK2 and TK3 */
+    skinny_plus_init_schedule(ks->k, tk2, tk3);
+}
+
 void skinny_plus_encrypt
     (const skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input)
@@ -658,111 +662,6 @@ void skinny_plus_encrypt
     /* Perform the 40 encryption rounds four at a time */
     for (r = 0; r < (SKINNY_PLUS_ROUNDS * 4); r += 16)
         skinny_encrypt_4_rounds(s0, s1, s2, s3, tk1 + (r & 63), ks->k + r);
-
-    /* Convert the ciphertext from fixsliced form and store */
-    skinny_from_fixsliced(output, s0, s1, s2, s3);
-}
-
-/**
- * \brief Performs four fixsliced encryption rounds using 16 round keys
- * and an explicitly supplied TK2 value.
- *
- * \param s0 First 32-bit word of the state to encrypt.
- * \param s1 Second 32-bit word of the state to encrypt.
- * \param s2 Third 32-bit word of the state to encrypt.
- * \param s3 Fourth 32-bit word of the state to encrypt.
- * \param tk1 Points to the 16 round keys for the TK1 part of the schedule.
- * \param tk2 Points to the 16 round keys for the TK2 part of the schedule.
- * \param tk3 Points to the 16 round keys for the TK3 part of the schedule.
- */
-#define skinny_encrypt_4_rounds_tk2(s0, s1, s2, s3, tk1, tk2, tk3) \
-    do { \
-        /* Apply the S-box for the first round */ \
-        skinny_fixsliced_sbox_1((s0), (s1), (s2), (s3)); \
-        \
-        /* XOR with the key schedule for the first round */ \
-        (s0) ^= (tk1)[0] ^ (tk2)[0] ^ (tk3)[0]; \
-        (s1) ^= (tk1)[1] ^ (tk2)[1] ^ (tk3)[1]; \
-        (s2) ^= (tk1)[2] ^ (tk2)[2] ^ (tk3)[2]; \
-        (s3) ^= (tk1)[3] ^ (tk2)[3] ^ (tk3)[3]; \
-        \
-        /* Mix the columns for the first round */ \
-        skinny_mix_columns_1_of_4((s0)); \
-        skinny_mix_columns_1_of_4((s1)); \
-        skinny_mix_columns_1_of_4((s2)); \
-        skinny_mix_columns_1_of_4((s3)); \
-        \
-        /* Apply the S-box for the second round */ \
-        skinny_fixsliced_sbox_2((s0), (s1), (s2), (s3)); \
-        \
-        /* XOR with the key schedule for the second round */ \
-        (s0) ^= (tk1)[4] ^ (tk2)[4] ^ (tk3)[4]; \
-        (s1) ^= (tk1)[5] ^ (tk2)[5] ^ (tk3)[5]; \
-        (s2) ^= (tk1)[6] ^ (tk2)[6] ^ (tk3)[6]; \
-        (s3) ^= (tk1)[7] ^ (tk2)[7] ^ (tk3)[7]; \
-        \
-        /* Mix the columns for the second round */ \
-        skinny_mix_columns_2_of_4((s0)); \
-        skinny_mix_columns_2_of_4((s1)); \
-        skinny_mix_columns_2_of_4((s2)); \
-        skinny_mix_columns_2_of_4((s3)); \
-        \
-        /* Apply the S-box for the third round */ \
-        skinny_fixsliced_sbox_1((s0), (s1), (s2), (s3)); \
-        \
-        /* XOR with the key schedule for the third round */ \
-        (s0) ^= (tk1)[8]  ^ (tk2)[8]  ^ (tk3)[8]; \
-        (s1) ^= (tk1)[9]  ^ (tk2)[9]  ^ (tk3)[9]; \
-        (s2) ^= (tk1)[10] ^ (tk2)[10] ^ (tk3)[10]; \
-        (s3) ^= (tk1)[11] ^ (tk2)[11] ^ (tk3)[11]; \
-        \
-        /* Mix the columns for the third round */ \
-        skinny_mix_columns_3_of_4((s0)); \
-        skinny_mix_columns_3_of_4((s1)); \
-        skinny_mix_columns_3_of_4((s2)); \
-        skinny_mix_columns_3_of_4((s3)); \
-        \
-        /* Apply the S-box for the fourth round */ \
-        skinny_fixsliced_sbox_2((s0), (s1), (s2), (s3)); \
-        \
-        /* XOR with the key schedule for the fourth round */ \
-        (s0) ^= (tk1)[12] ^ (tk2)[12] ^ (tk3)[12]; \
-        (s1) ^= (tk1)[13] ^ (tk2)[13] ^ (tk3)[13]; \
-        (s2) ^= (tk1)[14] ^ (tk2)[14] ^ (tk3)[14]; \
-        (s3) ^= (tk1)[15] ^ (tk2)[15] ^ (tk3)[15]; \
-        \
-        /* Mix the columns for the fourth round */ \
-        skinny_mix_columns_4_of_4((s0)); \
-        skinny_mix_columns_4_of_4((s1)); \
-        skinny_mix_columns_4_of_4((s2)); \
-        skinny_mix_columns_4_of_4((s3)); \
-    } while (0)
-
-void skinny_plus_encrypt_tk2
-    (skinny_plus_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, const unsigned char *tk2)
-{
-    uint32_t tk1[16 * 4] = {0};
-    uint32_t ks2[SKINNY_PLUS_ROUNDS * 4];
-    uint32_t s0, s1, s2, s3;
-    unsigned r;
-
-    /* Convert TK2 into a second key schedule */
-    skinny_plus_init_schedule(ks2, tk2, 0);
-
-    /* Convert TK1 into fixsliced form and expand it to 16 rounds.
-     * TK1 repeats after 16 rounds, so no need to go further. */
-    skinny_to_fixsliced(s0, s1, s2, s3, ks->TK1);
-    skinny_permute_and_expand_tk(tk1, s0, s1, s2, s3, 16);
-
-    /* Load the plaintext and convert into fixsliced form */
-    skinny_to_fixsliced(s0, s1, s2, s3, input);
-
-    /* Perform the 40 encryption rounds four at a time */
-    for (r = 0; r < (SKINNY_PLUS_ROUNDS * 4); r += 16) {
-        skinny_encrypt_4_rounds_tk2
-            (s0, s1, s2, s3, tk1 + (r & 63), ks->k + r, ks2 + r);
-    }
 
     /* Convert the ciphertext from fixsliced form and store */
     skinny_from_fixsliced(output, s0, s1, s2, s3);
@@ -889,6 +788,17 @@ do { \
 void skinny_plus_init
     (skinny_plus_key_schedule_t *ks, const unsigned char key[48])
 {
+    /* Copy TK1 as-is; it is expanded on the fly during encryption */
+    memcpy(ks->TK1, key, 16);
+
+    /* Generate the main key schedule from TK2 and TK3 */
+    skinny_plus_init_without_tk1(ks, key + 16, key + 32);
+}
+
+void skinny_plus_init_without_tk1
+    (skinny_plus_key_schedule_t *ks, const unsigned char *tk2,
+     const unsigned char *tk3)
+{
 #if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_TINY
     uint32_t TK2[4];
     uint32_t TK3[4];
@@ -899,20 +809,18 @@ void skinny_plus_init
 
 #if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
     /* Copy the input key as-is when using the tiny key schedule version */
-    memcpy(ks->TK1, key, sizeof(ks->TK1));
-    memcpy(ks->TK2, key + 16, sizeof(ks->TK2));
-    memcpy(ks->TK3, key + 32, sizeof(ks->TK3));
+    memcpy(ks->TK2, tk2, sizeof(ks->TK2));
+    memcpy(ks->TK3, tk3, sizeof(ks->TK3));
 #else
-    /* Set the initial states of TK1, TK2, and TK3 */
-    memcpy(ks->TK1, key, 16);
-    TK2[0] = le_load_word32(key + 16);
-    TK2[1] = le_load_word32(key + 20);
-    TK2[2] = le_load_word32(key + 24);
-    TK2[3] = le_load_word32(key + 28);
-    TK3[0] = le_load_word32(key + 32);
-    TK3[1] = le_load_word32(key + 36);
-    TK3[2] = le_load_word32(key + 40);
-    TK3[3] = le_load_word32(key + 44);
+    /* Set the initial states of TK2 and TK3 */
+    TK2[0] = le_load_word32(tk2);
+    TK2[1] = le_load_word32(tk2 + 4);
+    TK2[2] = le_load_word32(tk2 + 8);
+    TK2[3] = le_load_word32(tk2 + 12);
+    TK3[0] = le_load_word32(tk3);
+    TK3[1] = le_load_word32(tk3 + 4);
+    TK3[2] = le_load_word32(tk3 + 8);
+    TK3[3] = le_load_word32(tk3 + 12);
 
     /* Set up the key schedule using TK2 and TK3.  TK1 is not added
      * to the key schedule because we will derive that part of the
@@ -1107,112 +1015,6 @@ void skinny_plus_encrypt
     le_store_word32(output + 12, s3);
 }
 
-/**
- * \def skinny_plus_round_tk2(s0, s1, s2, s3, half)
- * \brief Performs an unrolled round for skinny_plus_encrypt_tk2().
- *
- * \param s0 First word of the state.
- * \param s1 Second word of the state.
- * \param s2 Third word of the state.
- * \param s3 Fourth word of the state.
- * \param half 0 for the bottom half and 1 for the top half of the TK values.
- * \param offset Offset between 0 and 3 of the current unrolled round.
- */
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
-#define skinny_plus_round_tk2(s0, s1, s2, s3, half, offset) \
-    skinny_plus_round_tk_full(s0, s1, s2, s3, half)
-#else /* !SKINNY_PLUS_VARIANT_TINY */
-#define skinny_plus_round_tk2(s0, s1, s2, s3, half, offset) \
-    do { \
-        /* Apply the S-box to all bytes in the state */ \
-        skinny128_sbox(s0); \
-        skinny128_sbox(s1); \
-        skinny128_sbox(s2); \
-        skinny128_sbox(s3); \
-        \
-        /* XOR the round constant and the subkey for this round */ \
-        s0 ^= schedule[offset * 2] ^ TK1[half * 2] ^ TK2[half * 2]; \
-        s1 ^= schedule[offset * 2 + 1] ^ TK1[half * 2 + 1] ^ \
-              TK2[half * 2 + 1]; \
-        s2 ^= 0x02; \
-        \
-        /* Shift the cells in the rows right, which moves the cell \
-         * values up closer to the MSB.  That is, we do a left rotate \
-         * on the word to rotate the cells in the word right */ \
-        s1 = leftRotate8(s1); \
-        s2 = leftRotate16(s2); \
-        s3 = leftRotate24(s3); \
-        \
-        /* Mix the columns, but don't rotate the words yet */ \
-        s1 ^= s2; \
-        s2 ^= s0; \
-        s3 ^= s2; \
-        \
-        /* Permute TK1 and TK2 in-place for the next round */ \
-        skinny128_permute_tk_half \
-            (TK1[(1 - half) * 2], TK1[(1 - half) * 2 + 1]); \
-        skinny128_permute_tk_half \
-            (TK2[(1 - half) * 2], TK2[(1 - half) * 2 + 1]); \
-        skinny128_LFSR2(TK2[(1 - half) * 2]); \
-        skinny128_LFSR2(TK2[(1 - half) * 2 + 1]); \
-    } while (0)
-#endif /* !SKINNY_PLUS_VARIANT_TINY */
-
-void skinny_plus_encrypt_tk2
-    (skinny_plus_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, const unsigned char *tk2)
-{
-    uint32_t s0, s1, s2, s3;
-    uint32_t TK1[4];
-    uint32_t TK2[4];
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
-    uint32_t TK3[4];
-    uint8_t rc = 0;
-#else
-    const uint32_t *schedule = ks->k;
-#endif
-    unsigned round;
-
-    /* Unpack the input block into the state array */
-    s0 = le_load_word32(input);
-    s1 = le_load_word32(input + 4);
-    s2 = le_load_word32(input + 8);
-    s3 = le_load_word32(input + 12);
-
-    /* Make a local copy of the tweakable part of the state */
-    TK1[0] = le_load_word32(ks->TK1);
-    TK1[1] = le_load_word32(ks->TK1 + 4);
-    TK1[2] = le_load_word32(ks->TK1 + 8);
-    TK1[3] = le_load_word32(ks->TK1 + 12);
-    TK2[0] = le_load_word32(tk2);
-    TK2[1] = le_load_word32(tk2 + 4);
-    TK2[2] = le_load_word32(tk2 + 8);
-    TK2[3] = le_load_word32(tk2 + 12);
-#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
-    TK3[0] = le_load_word32(ks->TK3);
-    TK3[1] = le_load_word32(ks->TK3 + 4);
-    TK3[2] = le_load_word32(ks->TK3 + 8);
-    TK3[3] = le_load_word32(ks->TK3 + 12);
-#endif
-
-    /* Perform all encryption rounds four at a time */
-    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
-        skinny_plus_round_tk2(s0, s1, s2, s3, 0, 0);
-        skinny_plus_round_tk2(s3, s0, s1, s2, 1, 1);
-        skinny_plus_round_tk2(s2, s3, s0, s1, 0, 2);
-        skinny_plus_round_tk2(s1, s2, s3, s0, 1, 3);
-#if SKINNY_PLUS_VARIANT != SKINNY_PLUS_VARIANT_TINY
-        schedule += 8;
-#endif
-    }
-
-    /* Pack the result into the output buffer */
-    le_store_word32(output,      s0);
-    le_store_word32(output + 4,  s1);
-    le_store_word32(output + 8,  s2);
-    le_store_word32(output + 12, s3);
-}
-
 void skinny_plus_encrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
      const unsigned char *input)
@@ -1261,16 +1063,18 @@ void skinny_plus_encrypt_tk_full
 
 #endif /* !SKINNY_PLUS_VARIANT_FULL */
 
-#endif /* !SKINNY_PLUS_VARIANT_ASM */
+#else /* SKINNY_PLUS_VARIANT_ASM */
 
-#if SKINNY_PLUS_VARIANT_ASM && SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+/* Assembly code versions have skinny_plus_init_without_tk1() only */
 
-void skinny_plus_encrypt_tk2
-    (skinny_plus_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, const unsigned char *tk2)
+void skinny_plus_init
+    (skinny_plus_key_schedule_t *ks, const unsigned char key[48])
 {
-    memcpy(ks->TK2, tk2, 16);
-    skinny_plus_encrypt(ks, output, input);
+    /* Copy TK1 as-is; it is expanded on the fly during encryption */
+    memcpy(ks->TK1, key, 16);
+
+    /* Generate the main key schedule from TK2 and TK3 */
+    skinny_plus_init_without_tk1(ks, key + 16, key + 32);
 }
 
-#endif /* SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY */
+#endif /* SKINNY_PLUS_VARIANT_ASM */

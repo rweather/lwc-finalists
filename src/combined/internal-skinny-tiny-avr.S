@@ -1169,26 +1169,84 @@ table_4:
 	.byte	0
 
 	.text
-.global skinny_plus_init
-	.type skinny_plus_init, @function
-skinny_plus_init:
+.global skinny_plus_init_without_tk1
+	.type skinny_plus_init_without_tk1, @function
+skinny_plus_init_without_tk1:
+	push r28
+	push r29
 	movw r30,r24
 	movw r26,r22
 .L__stack_usage = 2
-	ldi r22,12
-1:
+	movw r28,r20
+	adiw r30,16
 	ld r18,X+
 	ld r19,X+
-	ld r20,X+
-	ld r21,X+
+	ld r22,X+
+	ld r23,X+
 	st Z+,r18
 	st Z+,r19
-	st Z+,r20
-	st Z+,r21
-	dec r22
-	brne 1b
+	st Z+,r22
+	st Z+,r23
+	ld r18,X+
+	ld r19,X+
+	ld r22,X+
+	ld r23,X+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	ld r18,X+
+	ld r19,X+
+	ld r22,X+
+	ld r23,X+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	ld r18,X+
+	ld r19,X+
+	ld r22,X+
+	ld r23,X+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	ld r18,Y+
+	ld r19,Y+
+	ld r22,Y+
+	ld r23,Y+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	ld r18,Y+
+	ld r19,Y+
+	ld r22,Y+
+	ld r23,Y+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	ld r18,Y+
+	ld r19,Y+
+	ld r22,Y+
+	ld r23,Y+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	ld r18,Y+
+	ld r19,Y+
+	ld r22,Y+
+	ld r23,Y+
+	st Z+,r18
+	st Z+,r19
+	st Z+,r22
+	st Z+,r23
+	pop r29
+	pop r28
 	ret
-	.size skinny_plus_init, .-skinny_plus_init
+	.size skinny_plus_init_without_tk1, .-skinny_plus_init_without_tk1
 
 	.text
 .global skinny_plus_encrypt

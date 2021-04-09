@@ -63,8 +63,11 @@ typedef struct
 
     /** TK3 for the tiny key schedule */
     uint8_t TK3[16];
-#else
+#elif SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_FULL
     /** Words of the full key schedule */
+    uint32_t k[SKINNY_PLUS_ROUNDS * 4];
+#else
+    /** Words of the small key schedule */
     uint32_t k[SKINNY_PLUS_ROUNDS * 2];
 #endif
 
@@ -80,6 +83,17 @@ void skinny_plus_init
     (skinny_plus_key_schedule_t *ks, const unsigned char key[48]);
 
 /**
+ * \brief Initializes the key schedule for SKINNY-128-384+ without TK1.
+ *
+ * \param ks Points to the key schedule to initialize.
+ * \param tk2 Points to the 16 bytes of key data for TK2.
+ * \param tk3 Points to the 16 bytes of key data for TK3.
+ */
+void skinny_plus_init_without_tk1
+    (skinny_plus_key_schedule_t *ks, const unsigned char *tk2,
+     const unsigned char *tk3);
+
+/**
  * \brief Encrypts a 128-bit block with SKINNY-128-384+.
  *
  * \param ks Points to the SKINNY-128-384+ key schedule.
@@ -92,29 +106,6 @@ void skinny_plus_init
 void skinny_plus_encrypt
     (const skinny_plus_key_schedule_t *ks, unsigned char *output,
      const unsigned char *input);
-
-/**
- * \brief Encrypts a 128-bit block with SKINNY-128-384+ and an explicitly
- * provided TK2 value.
- *
- * \param ks Points to the SKINNY-128-384+ key schedule.
- * \param output Output buffer which must be at least 16 bytes in length.
- * \param input Input buffer which must be at least 16 bytes in length.
- * \param tk2 TK2 value that should be updated on the fly.
- *
- * The \a input and \a output buffers can be the same buffer for
- * in-place encryption.
- *
- * This version is useful when both TK1 and TK2 change from block to block.
- * When the key is initialized with skinny_plus_init(), the TK2 part of
- * the key value should be set to zero.
- *
- * \note Some versions of this function may modify the key schedule to
- * copy tk2 into place.
- */
-void skinny_plus_encrypt_tk2
-    (skinny_plus_key_schedule_t *ks, unsigned char *output,
-     const unsigned char *input, const unsigned char *tk2);
 
 /**
  * \brief Encrypts a 128-bit block with SKINNY-128-384+ and a

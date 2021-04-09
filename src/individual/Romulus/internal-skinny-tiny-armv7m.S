@@ -6,37 +6,29 @@
 	.text
 
 	.align	2
-	.global	skinny_plus_init
+	.global	skinny_plus_init_without_tk1
 	.thumb
 	.thumb_func
-	.type	skinny_plus_init, %function
-skinny_plus_init:
+	.type	skinny_plus_init_without_tk1, %function
+skinny_plus_init_without_tk1:
 	ldr	r2, [r1, #0]
-	ldr	r3, [r1, #4]
-	str	r2, [r0, #0]
-	str	r3, [r0, #4]
-	ldr	r2, [r1, #8]
-	ldr	r3, [r1, #12]
-	str	r2, [r0, #8]
-	str	r3, [r0, #12]
-	ldr	r2, [r1, #16]
-	ldr	r3, [r1, #20]
+	ldr	r3, [r2, #16]
 	str	r2, [r0, #16]
-	str	r3, [r0, #20]
-	ldr	r2, [r1, #24]
-	ldr	r3, [r1, #28]
-	str	r2, [r0, #24]
-	str	r3, [r0, #28]
-	ldr	r2, [r1, #32]
-	ldr	r3, [r1, #36]
-	str	r2, [r0, #32]
+	str	r3, [r0, #32]
+	ldr	r2, [r1, #4]
+	ldr	r3, [r2, #20]
+	str	r2, [r0, #20]
 	str	r3, [r0, #36]
-	ldr	r2, [r1, #40]
-	ldr	r3, [r1, #44]
-	str	r2, [r0, #40]
+	ldr	r2, [r1, #8]
+	ldr	r3, [r2, #24]
+	str	r2, [r0, #24]
+	str	r3, [r0, #40]
+	ldr	r2, [r1, #12]
+	ldr	r3, [r2, #28]
+	str	r2, [r0, #28]
 	str	r3, [r0, #44]
 	bx	lr
-	.size	skinny_plus_init, .-skinny_plus_init
+	.size	skinny_plus_init_without_tk1, .-skinny_plus_init_without_tk1
 
 	.align	2
 	.global	skinny_plus_encrypt

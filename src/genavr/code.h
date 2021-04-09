@@ -613,6 +613,9 @@ public:
     Reg arg(unsigned size);
     Reg return_value(unsigned size);
 
+    // Mark pointer registers as used when not allocated by the prologue.
+    void usedY() { allocateExplicitReg(28, 2); }
+
     // Execute generated code in the interpreter.
     void exec_setup_key(void *schedule, unsigned schedule_len,
                         const void *key, unsigned key_len);

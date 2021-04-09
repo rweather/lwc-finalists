@@ -224,6 +224,33 @@ static void gen_skinny128_setup_key(Code &code, const char *name, int ks_size)
     code.brne(label);
 }
 
+// Generate the SKINNY-128-384+ key setup function with no TK1 value.
+static void gen_skinny128_setup_key_without_tk1(Code &code, const char *name)
+{
+    // Set up the function prologue with 0 bytes of local variable storage.
+    // X points to TK2, Y points to TK3, and Z points to the key schedule.
+    code.prologue_setup_key(name, 0);
+    code.setFlag(Code::NoLocals); // Need Y but not for local variables.
+    code.setFlag(Code::TempY);
+    Reg tk3 = code.arg(2); // Pointer to TK3 from an extra argument.
+    code.move(Reg::y_ptr(), tk3);
+    code.usedY();
+
+    // Copy all of the bytes of TK2 and TK3 to the schedule.
+    // We expand the schedule on the fly so no need to do
+    // anything else but a copy.
+    Reg temp = code.allocateHighReg(4);
+    code.add_ptr_z(16); // Skip the unmodified TK1 value in the schedule.
+    for (int index = 0; index < 4; ++index) {
+        code.ldx(temp, POST_INC);
+        code.stz(temp, POST_INC);
+    }
+    for (int index = 0; index < 4; ++index) {
+        code.ldy(temp, POST_INC);
+        code.stz(temp, POST_INC);
+    }
+}
+
 // Generate the SKINNY-128 encryption function.  We assume that the key
 // schedule is always "ks_size" bytes and expanded on the fly.
 static void gen_skinny128_encrypt
@@ -522,10 +549,12 @@ static void gen_skinny128_decrypt
 
 void gen_skinny128_384_setup_key(Code &code, int rounds)
 {
-    if (rounds == 40)
-        gen_skinny128_setup_key(code, "skinny_plus_init", 48);
-    else
+    if (rounds == 40) {
+        gen_skinny128_setup_key_without_tk1
+            (code, "skinny_plus_init_without_tk1");
+    } else {
         gen_skinny128_setup_key(code, "skinny_128_384_init", 48);
+    }
 }
 
 void gen_skinny128_256_setup_key(Code &code)
