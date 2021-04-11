@@ -46,25 +46,6 @@ aead_cipher_t const romulus_mp_cipher = {
 };
 
 /**
- * \brief Limit on the number of bytes of message or associated data (128Mb).
- *
- * Romulus-N+ and Romulus-M+ use a 56-bit block counter which allows for
- * payloads well into the petabyte range.  It is unlikely that an embedded
- * device will have that much memory to store a contiguous packet!
- *
- * Romulus-N2 and Romulus-M2 use a 48-bit block counter but the upper
- * 24 bits are difficult to modify in the key schedule.  So we only
- * update the low 24 bits and leave the high 24 bits fixed.
- *
- * Romulus-N3 and Romulus-M3 use a 24-bit block counter.
- *
- * For all algorithms, we limit the block counter to 2^23 so that the block
- * counter can never exceed 2^24 - 1.
- */
-#define ROMULUS_DATA_LIMIT \
-    ((unsigned long long)((1ULL << 23) * SKINNY_PLUS_BLOCK_SIZE))
-
-/**
  * \brief Initializes the key schedule for Romulus-N+ or Romulus-M+.
  *
  * \param ks Points to the key schedule to initialize.
@@ -660,10 +641,6 @@ int romulus_np_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + ROMULUS_TAG_SIZE;
 
-    /* Validate the length of the associated data and message */
-    if (adlen > ROMULUS_DATA_LIMIT || mlen > ROMULUS_DATA_LIMIT)
-        return -2;
-
     /* Process the associated data */
     memset(S, 0, sizeof(S));
     romulus_np_process_ad(&ks, S, k, npub, ad, adlen);
@@ -696,11 +673,6 @@ int romulus_np_aead_decrypt
         return -1;
     *mlen = clen - ROMULUS_TAG_SIZE;
 
-    /* Validate the length of the associated data and message */
-    if (adlen > ROMULUS_DATA_LIMIT ||
-            clen > (ROMULUS_DATA_LIMIT + ROMULUS_TAG_SIZE))
-        return -2;
-
     /* Process the associated data */
     memset(S, 0, sizeof(S));
     romulus_np_process_ad(&ks, S, k, npub, ad, adlen);
@@ -731,10 +703,6 @@ int romulus_mp_aead_encrypt
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ROMULUS_TAG_SIZE;
-
-    /* Validate the length of the associated data and message */
-    if (adlen > ROMULUS_DATA_LIMIT || mlen > ROMULUS_DATA_LIMIT)
-        return -2;
 
     /* Process the associated data and the plaintext message */
     memset(S, 0, sizeof(S));
@@ -769,11 +737,6 @@ int romulus_mp_aead_decrypt
     if (clen < ROMULUS_TAG_SIZE)
         return -1;
     *mlen = clen - ROMULUS_TAG_SIZE;
-
-    /* Validate the length of the associated data and message */
-    if (adlen > ROMULUS_DATA_LIMIT ||
-            clen > (ROMULUS_DATA_LIMIT + ROMULUS_TAG_SIZE))
-        return -2;
 
     /* Initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
