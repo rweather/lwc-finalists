@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['skinny_5fplus_5fkey_5fschedule_5ft',['skinny_plus_key_schedule_t',['../structskinny__plus__key__schedule__t.html',1,'']]],
-  ['spongent160_5fstate_5ft',['spongent160_state_t',['../unionspongent160__state__t.html',1,'']]],
-  ['spongent176_5fstate_5ft',['spongent176_state_t',['../unionspongent176__state__t.html',1,'']]]
+  ['romulus_5fhash_5fstate_5ft',['romulus_hash_state_t',['../unionromulus__hash__state__t.html',1,'']]]
 ];

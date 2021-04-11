@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Lightweight Cryptography Primitives: photon256_state_t Union Reference</title>
+<title>Lightweight Cryptography Primitives: romulus_hash_state_t Union Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,53 +84,114 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">photon256_state_t Union Reference</div>  </div>
+<div class="title">romulus_hash_state_t Union Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Structure of the internal state of the PHOTON-256 permutation.  
- <a href="unionphoton256__state__t.html#details">More...</a></p>
+<p>State information for Romulus-H+ incremental modes.  
+ <a href="unionromulus__hash__state__t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="internal-photon256_8h_source.html">internal-photon256.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="romulus-hash_8h_source.html">romulus-hash.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:abcbf716937541587530dffca6037d48e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionphoton256__state__t.html#abcbf716937541587530dffca6037d48e">W</a> [<a class="el" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>/4]</td></tr>
-<tr class="separator:abcbf716937541587530dffca6037d48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1f09d5ce589efdf5cb27ef6091ab993"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionphoton256__state__t.html#ab1f09d5ce589efdf5cb27ef6091ab993">B</a> [<a class="el" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>]</td></tr>
-<tr class="separator:ab1f09d5ce589efdf5cb27ef6091ab993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8881310827402bf0a0f7701c4f9d87a7"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:ab63753811ed59b66823b0944b9600def"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionromulus__hash__state__t.html#a12c6d40663e51b8a19df647210b18017">tk</a> [48]</td></tr>
+<tr class="separator:ab63753811ed59b66823b0944b9600def"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45e473325cf885f207c1eb40d037413"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionromulus__hash__state__t.html#ad5ef23b91d21a83d0c6c314bab1e91f7">s2</a> [16]</td></tr>
+<tr class="separator:aa45e473325cf885f207c1eb40d037413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8131094e3ef2a19dee3ccad22d4e4245"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionromulus__hash__state__t.html#afe70701c9420c121420d0c46055438ee">count</a></td></tr>
+<tr class="separator:a8131094e3ef2a19dee3ccad22d4e4245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa326dbda8f7e42635ebd64c833478b77"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionromulus__hash__state__t.html#af54525edeeb7ae8e840476921091eb70">mode</a></td></tr>
+<tr class="separator:aa326dbda8f7e42635ebd64c833478b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8881310827402bf0a0f7701c4f9d87a7"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionromulus__hash__state__t.html#a8881310827402bf0a0f7701c4f9d87a7">s</a></td></tr>
+<tr class="separator:a8881310827402bf0a0f7701c4f9d87a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9d7749d1cb2545161ce4e94ed5e1727"><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionromulus__hash__state__t.html#ab9d7749d1cb2545161ce4e94ed5e1727">align</a></td></tr>
+<tr class="separator:ab9d7749d1cb2545161ce4e94ed5e1727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Structure of the internal state of the PHOTON-256 permutation. </p>
+<div class="textblock"><p>State information for Romulus-H+ incremental modes. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="ab1f09d5ce589efdf5cb27ef6091ab993"></a>
+<a class="anchor" id="ab9d7749d1cb2545161ce4e94ed5e1727"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t photon256_state_t::B[<a class="el" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>]</td>
+          <td class="memname">unsigned long long romulus_hash_state_t::align</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Bytes of the state </p>
+<p>For alignment of this structure </p>
 
 </div>
 </div>
-<a class="anchor" id="abcbf716937541587530dffca6037d48e"></a>
+<a class="anchor" id="afe70701c9420c121420d0c46055438ee"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t photon256_state_t::W[<a class="el" href="internal-photon256_8h.html#aa3976af78abc8f7b8fa200a8695e95fc">PHOTON256_STATE_SIZE</a>/4]</td>
+          <td class="memname">unsigned char romulus_hash_state_t::count</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>32-bit words of the state </p>
+<p>Number of bytes in the current block </p>
+
+</div>
+</div>
+<a class="anchor" id="af54525edeeb7ae8e840476921091eb70"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char romulus_hash_state_t::mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hash mode: 0 for update, 1 for final </p>
+
+</div>
+</div>
+<a class="anchor" id="a8881310827402bf0a0f7701c4f9d87a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   romulus_hash_state_t::s</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>State </p>
+
+</div>
+</div>
+<a class="anchor" id="ad5ef23b91d21a83d0c6c314bab1e91f7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char romulus_hash_state_t::s2[16]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Next state block to be encrypted </p>
+
+</div>
+</div>
+<a class="anchor" id="a12c6d40663e51b8a19df647210b18017"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char romulus_hash_state_t::tk[48]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current tweakey state for SKINNY </p>
 
 </div>
 </div>
 <hr/>The documentation for this union was generated from the following file:<ul>
-<li><a class="el" href="internal-photon256_8h_source.html">internal-photon256.h</a></li>
+<li><a class="el" href="romulus-hash_8h_source.html">romulus-hash.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

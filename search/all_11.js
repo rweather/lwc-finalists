@@ -39,5 +39,6 @@ var searchData=
   ['tinyjambu_2eh',['tinyjambu.h',['../tinyjambu_8h.html',1,'']]],
   ['tinyjambu_5fmasked_5frounds',['TINYJAMBU_MASKED_ROUNDS',['../internal-tinyjambu-m_8h.html#a9d80c207e37b0db4a658d7f0537a1bdf',1,'internal-tinyjambu-m.h']]],
   ['tinyjambu_5frounds',['TINYJAMBU_ROUNDS',['../internal-tinyjambu_8h.html#ab20aad70de3206ce2707aa66f8c1e6ac',1,'internal-tinyjambu.h']]],
+  ['tk',['tk',['../unionromulus__hash__state__t.html#a12c6d40663e51b8a19df647210b18017',1,'romulus_hash_state_t']]],
   ['tk1',['TK1',['../structskinny__plus__key__schedule__t.html#a664c568427bea744f9c34e4eef8af779',1,'skinny_plus_key_schedule_t']]]
 ];

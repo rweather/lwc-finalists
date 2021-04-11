@@ -118,5 +118,5 @@ var searchData=
   ['mask_5fxor_5fconst',['mask_xor_const',['../internal-masking_8h.html#a9c5f3758568cefa5e63b1410af15e3d7',1,'internal-masking.h']]],
   ['mask_5fzero',['mask_zero',['../internal-masking_8h.html#ada7addf3a60c905ab1c707f315883218',1,'internal-masking.h']]],
   ['masking_2edox',['masking.dox',['../masking_8dox.html',1,'']]],
-  ['mode',['mode',['../unionascon__hash__state__t.html#a4306ab1bd28e777ef86eafe4ef02e7da',1,'ascon_hash_state_t::mode()'],['../unionxoodyak__hash__state__t.html#a779d44785244d9fd6fed36209d24bb4f',1,'xoodyak_hash_state_t::mode()']]]
+  ['mode',['mode',['../unionascon__hash__state__t.html#a4306ab1bd28e777ef86eafe4ef02e7da',1,'ascon_hash_state_t::mode()'],['../unionromulus__hash__state__t.html#af54525edeeb7ae8e840476921091eb70',1,'romulus_hash_state_t::mode()'],['../unionxoodyak__hash__state__t.html#a779d44785244d9fd6fed36209d24bb4f',1,'xoodyak_hash_state_t::mode()']]]
 ];

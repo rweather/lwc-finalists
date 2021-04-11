@@ -123,12 +123,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a4b0065865943eb1c7b296c4ac9ef8426"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#a4b0065865943eb1c7b296c4ac9ef8426">skinny_plus_init</a> (<a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *ks, const unsigned char key[48])</td></tr>
 <tr class="memdesc:a4b0065865943eb1c7b296c4ac9ef8426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the key schedule for SKINNY-128-384+.  <a href="#a4b0065865943eb1c7b296c4ac9ef8426">More...</a><br/></td></tr>
 <tr class="separator:a4b0065865943eb1c7b296c4ac9ef8426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1956bdc9d6c16eb5b8a7d744c98c353"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#ab1956bdc9d6c16eb5b8a7d744c98c353">skinny_plus_init_without_tk1</a> (<a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *ks, const unsigned char *tk2, const unsigned char *tk3)</td></tr>
+<tr class="memdesc:ab1956bdc9d6c16eb5b8a7d744c98c353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the key schedule for SKINNY-128-384+ without TK1.  <a href="#ab1956bdc9d6c16eb5b8a7d744c98c353">More...</a><br/></td></tr>
+<tr class="separator:ab1956bdc9d6c16eb5b8a7d744c98c353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ffea345556e8ba9ebc7b631dbf22c73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#a0ffea345556e8ba9ebc7b631dbf22c73">skinny_plus_encrypt</a> (const <a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *ks, unsigned char *output, const unsigned char *input)</td></tr>
 <tr class="memdesc:a0ffea345556e8ba9ebc7b631dbf22c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts a 128-bit block with SKINNY-128-384+.  <a href="#a0ffea345556e8ba9ebc7b631dbf22c73">More...</a><br/></td></tr>
 <tr class="separator:a0ffea345556e8ba9ebc7b631dbf22c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254bec72acbfe642f1c82350bf6773fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#a254bec72acbfe642f1c82350bf6773fe">skinny_plus_encrypt_tk2</a> (<a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *ks, unsigned char *output, const unsigned char *input, const unsigned char *tk2)</td></tr>
-<tr class="memdesc:a254bec72acbfe642f1c82350bf6773fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts a 128-bit block with SKINNY-128-384+ and an explicitly provided TK2 value.  <a href="#a254bec72acbfe642f1c82350bf6773fe">More...</a><br/></td></tr>
-<tr class="separator:a254bec72acbfe642f1c82350bf6773fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe7f335fe95499b2c56a2f74c0405626"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#abe7f335fe95499b2c56a2f74c0405626">skinny_plus_encrypt_tk_full</a> (const unsigned char key[48], unsigned char *output, const unsigned char *input)</td></tr>
 <tr class="memdesc:abe7f335fe95499b2c56a2f74c0405626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts a 128-bit block with SKINNY-128-384+ and a fully specified tweakey value.  <a href="#abe7f335fe95499b2c56a2f74c0405626">More...</a><br/></td></tr>
 <tr class="separator:abe7f335fe95499b2c56a2f74c0405626"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,58 +177,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>The <em>input</em> and <em>output</em> buffers can be the same buffer for in-place encryption. </p>
-
-</div>
-</div>
-<a class="anchor" id="a254bec72acbfe642f1c82350bf6773fe"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void skinny_plus_encrypt_tk2 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *&#160;</td>
-          <td class="paramname"><em>ks</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>input</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>tk2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Encrypts a 128-bit block with SKINNY-128-384+ and an explicitly provided TK2 value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ks</td><td>Points to the SKINNY-128-384+ key schedule. </td></tr>
-    <tr><td class="paramname">output</td><td>Output buffer which must be at least 16 bytes in length. </td></tr>
-    <tr><td class="paramname">input</td><td>Input buffer which must be at least 16 bytes in length. </td></tr>
-    <tr><td class="paramname">tk2</td><td>TK2 value that should be updated on the fly.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>The <em>input</em> and <em>output</em> buffers can be the same buffer for in-place encryption.</p>
-<p>This version is useful when both TK1 and TK2 change from block to block. When the key is initialized with <a class="el" href="internal-skinny-plus_8h.html#a4b0065865943eb1c7b296c4ac9ef8426" title="Initializes the key schedule for SKINNY-128-384+. ">skinny_plus_init()</a>, the TK2 part of the key value should be set to zero.</p>
-<dl class="section note"><dt>Note</dt><dd>Some versions of this function may modify the key schedule to copy tk2 into place. </dd></dl>
 
 </div>
 </div>
@@ -311,10 +259,52 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ab1956bdc9d6c16eb5b8a7d744c98c353"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void skinny_plus_init_without_tk1 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *&#160;</td>
+          <td class="paramname"><em>ks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>tk2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>tk3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the key schedule for SKINNY-128-384+ without TK1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ks</td><td>Points to the key schedule to initialize. </td></tr>
+    <tr><td class="paramname">tk2</td><td>Points to the 16 bytes of key data for TK2. </td></tr>
+    <tr><td class="paramname">tk3</td><td>Points to the 16 bytes of key data for TK3. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 7 2021 14:28:24 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 11 2021 17:21:37 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

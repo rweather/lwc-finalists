@@ -135,13 +135,13 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33 </td></tr>
 <tr>
-<td><b><em>Romulus-N+</em></b></td><td>128</td><td>128</td><td>128</td><td>0.21</td><td>0.24</td><td>0.29</td><td>0.31</td><td>0.26 </td></tr>
+<td><b><em>Romulus-N+</em></b></td><td>128</td><td>128</td><td>128</td><td>0.29</td><td>0.32</td><td>0.32</td><td>0.34</td><td>0.32 </td></tr>
 <tr>
 <td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.33</td><td>0.35</td><td>0.25 </td></tr>
 <tr>
-<td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18 </td></tr>
+<td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.17</td><td>0.19</td><td>0.22</td><td>0.23</td><td>0.20 </td></tr>
 <tr>
-<td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.14</td><td>0.16</td><td>0.21</td><td>0.22</td><td>0.18 </td></tr>
+<td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18 </td></tr>
 <tr>
 <td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.13</td><td>0.14</td><td>0.08 </td></tr>
 <tr>
@@ -167,6 +167,8 @@ Performance on ARM Cortex M3</h1>
 <td><b><em>ASCON-HASH</em></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52 </td></tr>
 <tr>
 <td>Esch384 (SPARKLE)</td><td>384</td><td>0.45</td><td>0.37</td><td>1.50</td><td>0.47 </td></tr>
+<tr>
+<td><b><em>Romulus-H+</em></b></td><td>256</td><td>0.10</td><td>0.09</td><td>0.22</td><td>0.14 </td></tr>
 <tr>
 <td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.16</td><td>0.07 </td></tr>
 </table>
@@ -205,11 +207,11 @@ Performance on ESP32</h1>
 <tr>
 <td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23 </td></tr>
 <tr>
+<td><b><em>Romulus-N+</em></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.21</td><td>0.20 </td></tr>
+<tr>
 <td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.22</td><td>0.24</td><td>0.19 </td></tr>
 <tr>
-<td><b><em>Romulus-N+</em></b></td><td>128</td><td>128</td><td>128</td><td>0.12</td><td>0.14</td><td>0.17</td><td>0.18</td><td>0.15 </td></tr>
-<tr>
-<td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.08</td><td>0.09</td><td>0.12</td><td>0.13</td><td>0.11 </td></tr>
+<td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.11</td><td>0.13</td><td>0.15</td><td>0.16</td><td>0.14 </td></tr>
 <tr>
 <td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.13</td><td>0.15</td><td>0.08</td><td>0.09</td><td>0.10 </td></tr>
 <tr>
@@ -237,6 +239,8 @@ Performance on ESP32</h1>
 <td>Esch384 (SPARKLE)</td><td>384</td><td>0.24</td><td>0.20</td><td>0.30</td><td>0.25 </td></tr>
 <tr>
 <td><b><em>ASCON-HASH</em></b></td><td>256</td><td>0.19</td><td>0.16</td><td>0.25</td><td>0.20 </td></tr>
+<tr>
+<td><b><em>Romulus-H+</em></b></td><td>256</td><td>0.07</td><td>0.06</td><td>0.09</td><td>0.09 </td></tr>
 <tr>
 <td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.15</td><td>0.06 </td></tr>
 </table>
@@ -274,7 +278,7 @@ Overall group rankings</h1>
 <tr>
 <td>3</td><td>ASCON </td></tr>
 <tr>
-<td>0</td><td>PHOTON-Beetle </td></tr>
+<td>0</td><td>PHOTON-Beetle, Romulus </td></tr>
 </table>
 <h1><a class="anchor" id="perf_changes_arm"></a>
 Changes in ARM Cortex M3 performance since Round 2</h1>
@@ -298,7 +302,7 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <tr>
 <td>Grain128-AEAD</td><td>0.37</td><td>0.43</td><td></td></tr>
 <tr>
-<td>Romulus</td><td>0.19</td><td>0.26</td><td>Switched to SKINNY-128-384+ </td></tr>
+<td>Romulus</td><td>0.19</td><td>0.32</td><td>Switched to fixsliced SKINNY-128-384+ </td></tr>
 <tr>
 <td>PHOTON-Beetle</td><td>0.08</td><td>0.25</td><td>Highly unrolled 32-bit version in C </td></tr>
 <tr>
@@ -319,6 +323,8 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <td>Xoodyak</td><td>0.51</td><td>0.93 </td></tr>
 <tr>
 <td>ASCON</td><td>0.30</td><td>0.52 </td></tr>
+<tr>
+<td>Romulus</td><td>N/A</td><td>0.14 </td></tr>
 <tr>
 <td>PHOTON-Beetle</td><td>0.02</td><td>0.07 </td></tr>
 </table>
@@ -343,7 +349,7 @@ Changes in ESP32 performance since Round 2</h1>
 <tr>
 <td>PHOTON-Beetle</td><td>0.08</td><td>0.23</td><td>Highly unrolled 32-bit version in C </td></tr>
 <tr>
-<td>Romulus</td><td>0.11</td><td>0.15</td><td>Switched to SKINNY-128-384+ </td></tr>
+<td>Romulus</td><td>0.11</td><td>0.20</td><td>Switched to fixsliced SKINNY-128-384+ </td></tr>
 <tr>
 <td>Elephant (Delirium)</td><td>0.06</td><td>0.19</td><td>Optimised 32-bit version of Keccak-p[200] in C </td></tr>
 <tr>
@@ -362,12 +368,14 @@ Changes in ESP32 performance since Round 2</h1>
 <tr>
 <td>ASCON</td><td>0.20</td><td>0.20 </td></tr>
 <tr>
+<td>Romulus</td><td>N/A</td><td>0.09 </td></tr>
+<tr>
 <td>PHOTON-Beetle</td><td>0.02</td><td>0.06 </td></tr>
 </table>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 7 2021 14:28:24 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 11 2021 17:21:37 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
