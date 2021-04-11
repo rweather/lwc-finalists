@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include "copyright.h"
 
 /* Round constants for PHOTON-256 prior to being split into slices */
 static uint32_t const RC[12] = {
@@ -612,6 +613,7 @@ int main(int argc, char *argv[])
 
     /* Output the file header */
     printf("#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7\n");
+    fputs(copyright_message, stdout);
     printf("\t.syntax unified\n");
     printf("\t.thumb\n");
     printf("\t.text\n");

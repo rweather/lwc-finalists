@@ -21,47 +21,47 @@ TARGETS = \
 
 all: $(TARGETS)
 
-bin/ascon_armv7m: ascon_armv7m.c
+bin/ascon_armv7m: ascon_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/gift128_armv7m: gift128_armv7m.c
+bin/gift128_armv7m: gift128_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/grain128_armv7m: grain128_armv7m.c
+bin/grain128_armv7m: grain128_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/keccakp_200_armv7m: keccakp_200_armv7m.c
+bin/keccakp_200_armv7m: keccakp_200_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/keccakp_400_armv7m: keccakp_400_armv7m.c
+bin/keccakp_400_armv7m: keccakp_400_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/photon256_armv7m: photon256_armv7m.c
+bin/photon256_armv7m: photon256_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/skinny128_armv7m: skinny128_armv7m.c
+bin/skinny128_armv7m: skinny128_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/sparkle_armv7m: sparkle_armv7m.c
+bin/sparkle_armv7m: sparkle_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/spongent_armv7m: spongent_armv7m.c
+bin/spongent_armv7m: spongent_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/tinyjambu_armv7m: tinyjambu_armv7m.c
+bin/tinyjambu_armv7m: tinyjambu_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-bin/xoodoo_armv7m: xoodoo_armv7m.c
+bin/xoodoo_armv7m: xoodoo_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 

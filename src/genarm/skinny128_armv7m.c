@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include "copyright.h"
 
 #define SKINNY128_VARIANT_FULL 0
 #define SKINNY128_VARIANT_SMALL 1
@@ -2080,6 +2081,7 @@ int main(int argc, char *argv[])
 
     /* Output the file header */
     printf("#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7\n");
+    fputs(copyright_message, stdout);
     printf("#include \"internal-skinny-plus-config.h\"\n");
     printf("#if SKINNY_PLUS_VARIANT == %s\n", variant_name);
     printf("\t.syntax unified\n");
