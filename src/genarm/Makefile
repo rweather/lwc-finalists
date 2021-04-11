@@ -80,6 +80,7 @@ generate: all
 	bin/keccakp_400_armv7m >../combined/internal-keccakp-400-armv7m.S
 	bin/photon256_armv7m >../combined/internal-photon256-armv7m.S
 	bin/tinyjambu_armv7m >../combined/internal-tinyjambu-armv7m.S
+	bin/skinny128_armv7m full plus >../combined/internal-skinny-full-armv7m.S
 	bin/skinny128_armv7m small plus >../combined/internal-skinny-small-armv7m.S
 	bin/skinny128_armv7m tiny plus >../combined/internal-skinny-tiny-armv7m.S
 	bin/sparkle_armv7m >../combined/internal-sparkle-armv7m.S

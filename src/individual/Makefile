@@ -115,6 +115,7 @@ ROMULUS_FILES = \
     romulus-hash.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
+    internal-skinny-full-armv7m.S \
     internal-skinny-small-armv7m.S \
     internal-skinny-tiny-armv7m.S \
     internal-skinny-tiny-avr.S \

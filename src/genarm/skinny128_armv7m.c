@@ -137,6 +137,7 @@ typedef struct
     const char *t2;
     const char *t3;
     const char *t4;
+    const char *round;
 
 } reg_names;
 
@@ -456,6 +457,783 @@ static void gen_skinny_128_384_init_standard(int without_tk1)
 
     /* Pop the stack frame and return */
     printf("\tpop\t{r4, r5, r6, r7, r8, r9, r10, pc}\n");
+}
+
+/* Perform a swap and move operation on 1 to 4 groups in parallel */
+static void skinny_swap_move_parallel
+    (const reg_names *regs, const char *a1, const char *b1,
+     const char *a2, const char *b2, const char *a3, const char *b3,
+     const char *a4, const char *b4, uint32_t mask, int shift)
+{
+    /* tmp1 = (b ^ (a >> shift)) & mask; */
+    if (!is_op2_constant(mask))
+        exit(1); /* Must have a mask we can express as an immediate constant */
+    printf("\teor\t%s, %s, %s, lsr #%d\n", regs->t1, b1, a1, shift);
+    if (a2)
+        printf("\teor\t%s, %s, %s, lsr #%d\n", regs->t2, b2, a2, shift);
+    if (a3)
+        printf("\teor\t%s, %s, %s, lsr #%d\n", regs->t3, b3, a3, shift);
+    if (a4)
+        printf("\teor\t%s, %s, %s, lsr #%d\n", regs->t4, b4, a4, shift);
+    printf("\tand\t%s, %s, #%d\n", regs->t1, regs->t1, (int)mask);
+    if (a2)
+        printf("\tand\t%s, %s, #%d\n", regs->t2, regs->t2, (int)mask);
+    if (a3)
+        printf("\tand\t%s, %s, #%d\n", regs->t3, regs->t3, (int)mask);
+    if (a4)
+        printf("\tand\t%s, %s, #%d\n", regs->t4, regs->t4, (int)mask);
+
+    /* b ^= tmp; */
+    binop("eor", b1, regs->t1);
+    if (b2)
+        binop("eor", b2, regs->t2);
+    if (b3)
+        binop("eor", b3, regs->t3);
+    if (b4)
+        binop("eor", b4, regs->t4);
+
+    /* a ^= tmp << shift; */
+    printf("\teor\t%s, %s, %s, lsl #%d\n", a1, a1, regs->t1, shift);
+    if (a2)
+        printf("\teor\t%s, %s, %s, lsl #%d\n", a2, a2, regs->t2, shift);
+    if (a3)
+        printf("\teor\t%s, %s, %s, lsl #%d\n", a3, a3, regs->t3, shift);
+    if (a4)
+        printf("\teor\t%s, %s, %s, lsl #%d\n", a4, a4, regs->t4, shift);
+}
+
+/* Swap and move on a single group */
+static void skinny_swap_move
+    (const reg_names *regs, const char *a, const char *b,
+     uint32_t mask, int shift)
+{
+    skinny_swap_move_parallel(regs, a, b, 0, 0, 0, 0, 0, 0, mask, shift);
+}
+
+/* Converts four 32-bit state words into fixsliced form */
+static void skinny_to_fixsliced
+    (const reg_names *regs, const char *a, const char *b,
+     const char *c, const char *d)
+{
+    skinny_swap_move_parallel(regs, a, a, b, b, c, c, d, d, 0x0A0A0A0AU, 3);
+    skinny_swap_move(regs, c, a, 0x30303030U, 2);
+    skinny_swap_move(regs, b, a, 0x0C0C0C0CU, 4);
+    skinny_swap_move(regs, d, a, 0x03030303U, 6);
+    skinny_swap_move(regs, b, c, 0x0C0C0C0CU, 2);
+    skinny_swap_move(regs, d, c, 0x03030303U, 4);
+    skinny_swap_move(regs, d, b, 0x03030303U, 2);
+}
+
+/* Converts four 32-bit state words from fixsliced form */
+static void skinny_from_fixsliced
+    (const reg_names *regs, const char *a, const char *b,
+     const char *c, const char *d)
+{
+    skinny_swap_move(regs, d, b, 0x03030303U, 2);
+    skinny_swap_move(regs, d, c, 0x03030303U, 4);
+    skinny_swap_move(regs, b, c, 0x0C0C0C0CU, 2);
+    skinny_swap_move(regs, d, a, 0x03030303U, 6);
+    skinny_swap_move(regs, b, a, 0x0C0C0C0CU, 4);
+    skinny_swap_move(regs, c, a, 0x30303030U, 2);
+    skinny_swap_move_parallel(regs, a, a, b, b, c, c, d, d, 0x0A0A0A0AU, 3);
+}
+
+/* Generates the fixsliced version of LFSR2 */
+static void gen_fixsliced_lfsr2
+    (const reg_names *regs, const char *tk0, const char *tk1)
+{
+    /* tk0 ^= (tk1 & 0xAAAAAAAAU); */
+    printf("\tand\t%s, %s, #0xAAAAAAAA\n", regs->t1, tk1);
+    binop("eor", tk0, regs->t1);
+    /* tk0 = ((tk0 & 0xAAAAAAAAU) >> 1) | ((tk0 << 1) & 0xAAAAAAAAU); */
+    printf("\tand\t%s, %s, #0xAAAAAAAA\n", regs->t1, tk0);
+    printf("\tlsl\t%s, %s, #1\n", tk0, tk0);
+    printf("\tand\t%s, %s, #0xAAAAAAAA\n", tk0, tk0);
+    printf("\torr\t%s, %s, %s, lsr #1\n", tk0, tk0, regs->t1);
+}
+
+/* Generates the fixsliced version of LFSR3 */
+static void gen_fixsliced_lfsr3
+    (const reg_names *regs, const char *tk0, const char *tk1)
+{
+    /* tk0 ^= ((tk1 & 0xAAAAAAAAU) >> 1); */
+    printf("\tand\t%s, %s, #0xAAAAAAAA\n", regs->t1, tk1);
+    printf("\teor\t%s, %s, %s, lsr #1\n", tk0, tk0, regs->t1);
+    /* tk0 = ((tk0 & 0xAAAAAAAAU) >> 1) | ((tk0 << 1) & 0xAAAAAAAAU); */
+    printf("\tand\t%s, %s, #0xAAAAAAAA\n", regs->t1, tk0);
+    printf("\tlsl\t%s, %s, #1\n", tk0, tk0);
+    printf("\tand\t%s, %s, #0xAAAAAAAA\n", tk0, tk0);
+    printf("\torr\t%s, %s, %s, lsr #1\n", tk0, tk0, regs->t1);
+}
+
+/* Run LFSR2 and LFSR3 to generate unpermuted values for all rounds */
+static void gen_skinny_128_384_expand_lfsr
+    (const reg_names *regs, const char *ptr, int offset)
+{
+    int skip_label;
+    int top_label;
+
+    /* Round 1 LFSR values are TK2 ^ TK3 on the first pass and
+     * zero on subsequent passes.  We set the values for the
+     * first pass outside the loop and then skip ahead. */
+    top_label = label++;
+    skip_label = label++;
+    loadimm(regs->round, round_count / 8);
+    loadimm(regs->t4, 0); /* We will need some zero values below, so preload */
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[0], regs->tk3[0]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[1], regs->tk3[1]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[2], regs->tk3[2]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[3], regs->tk3[3]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 12);
+    printf("\tb\t.L%d\n", skip_label);
+    printf(".L%d:\n", top_label);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 4);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+    printf(".L%d:\n", skip_label);
+    offset += 16;
+
+    /* Round 2 */
+    gen_fixsliced_lfsr2(regs, regs->tk2[0], regs->tk2[2]);
+    gen_fixsliced_lfsr3(regs, regs->tk3[3], regs->tk3[1]);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[1], regs->tk3[3]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[2], regs->tk3[0]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[3], regs->tk3[1]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[0], regs->tk3[2]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 12);
+    offset += 16;
+
+    /* Round 3 */
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 4);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+    offset += 16;
+
+    /* Round 4 */
+    gen_fixsliced_lfsr2(regs, regs->tk2[1], regs->tk2[3]);
+    gen_fixsliced_lfsr3(regs, regs->tk3[2], regs->tk3[0]);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[2], regs->tk3[2]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[3], regs->tk3[3]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[0], regs->tk3[0]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[1], regs->tk3[1]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 12);
+    offset += 16;
+
+    /* Round 5 */
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 4);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+    offset += 16;
+
+    /* Round 6 */
+    gen_fixsliced_lfsr2(regs, regs->tk2[2], regs->tk2[0]);
+    gen_fixsliced_lfsr3(regs, regs->tk3[1], regs->tk3[3]);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[3], regs->tk3[1]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[0], regs->tk3[2]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[1], regs->tk3[3]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[2], regs->tk3[0]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 12);
+    offset += 16;
+
+    /* Round 7 */
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 4);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+    offset += 16;
+
+    /* Round 8 */
+    gen_fixsliced_lfsr2(regs, regs->tk2[3], regs->tk2[1]);
+    gen_fixsliced_lfsr3(regs, regs->tk3[0], regs->tk3[2]);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[0], regs->tk3[0]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[1], regs->tk3[1]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+    printf("\teor\t%s, %s, %s\n", regs->t1, regs->tk2[2], regs->tk3[2]);
+    printf("\teor\t%s, %s, %s\n", regs->t2, regs->tk2[3], regs->tk3[3]);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + 8);
+    printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 12);
+
+    /* Bottom of the round loop */
+    printf("\tadd\t%s, %s, #%d\n", ptr, ptr, 32 * 4);
+    printf("\tsubs\t%s, %s, #1\n", regs->round, regs->round);
+    printf("\tbne\t.L%d\n", top_label);
+}
+
+/* Load a 16-byte value from the key schedule and optionally XOR with TK1 */
+static void load_key
+    (const reg_names *regs, const char **t,
+     const char *ptr, int offset, int with_tk1)
+{
+    if (with_tk1) {
+        /* TK1 is stored in local variables just down from the fp pointer.
+         * The key schedule is assumed to be zero in this case. */
+        printf("\tldr\t%s, [fp, #-16]\n", t[0]);
+        printf("\tldr\t%s, [fp, #-12]\n", t[1]);
+        printf("\tldr\t%s, [fp, #-8]\n", t[2]);
+        printf("\tldr\t%s, [fp, #-4]\n", t[3]);
+    } else {
+        /* TK1 assumed to be zero, so load from the key schedule */
+        printf("\tldr\t%s, [%s, #%d]\n", t[0], ptr, offset);
+        printf("\tldr\t%s, [%s, #%d]\n", t[1], ptr, offset + 4);
+        printf("\tldr\t%s, [%s, #%d]\n", t[2], ptr, offset + 8);
+        printf("\tldr\t%s, [%s, #%d]\n", t[3], ptr, offset + 12);
+    }
+}
+
+/* Permute LFSR values by 2 rounds */
+static void skinny_permute_tk_2
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate14(t) & 0xCC00CC00U) |
+     *     ((t & 0x000000FFU) << 16) |
+     *     ((t & 0xCC000000U) >> 2)  |
+     *     ((t & 0x0033CC00U) >> 8)  |
+     *     ((t & 0x00CC0000U) >> 18); */
+    if (first)
+        loadimm(regs->tk3[0], 0x0033CC00U);
+    printf("\tror\t%s, %s, #14\n", regs->t1, t);
+    printf("\tand\t%s, %s, #0xCC000000\n", regs->t2, t);
+    printf("\tand\t%s, %s, #0xCC00CC00\n", regs->t1, regs->t1);
+    printf("\tand\t%s, %s, %s\n", regs->t3, t, regs->tk3[0]);
+    printf("\tbfi\t%s, %s, #16, #8\n", regs->t1, t);
+    printf("\tand\t%s, %s, #0x00CC0000\n", t, t);
+    printf("\torr\t%s, %s, %s, lsr #18\n", t, regs->t1, t);
+    printf("\torr\t%s, %s, %s, lsr #2\n", t, t, regs->t2);
+    printf("\torr\t%s, %s, %s, lsr #8\n", t, t, regs->t3);
+}
+
+/* Permute LFSR values by 4 rounds */
+static void skinny_permute_tk_4
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate22(t) & 0xCC0000CCU) |
+     *     (rightRotate16(t) & 0x3300CC00U) |
+     *     (rightRotate24(t) & 0x00CC3300U) |
+     *     ((t & 0x00CC00CCU) >> 2); */
+    if (first) {
+        loadimm(regs->tk3[0], 0xCC0000CCU);
+        loadimm(regs->tk3[1], 0x3300CC00U);
+        loadimm(regs->tk3[2], 0x00CC3300U);
+    }
+    printf("\tror\t%s, %s, #22\n", regs->t1, t);
+    printf("\tror\t%s, %s, #16\n", regs->t2, t);
+    printf("\tror\t%s, %s, #24\n", regs->t3, t);
+    printf("\tand\t%s, %s, %s\n", regs->t1, regs->t1, regs->tk3[0]);
+    printf("\tand\t%s, %s, %s\n", regs->t2, regs->t2, regs->tk3[1]);
+    printf("\tand\t%s, %s, #0x00CC00CC\n", t, t);
+    printf("\tand\t%s, %s, %s\n", regs->t3, regs->t3, regs->tk3[2]);
+    printf("\torr\t%s, %s, %s, lsr #2\n", t, regs->t1, t);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t2);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t3);
+}
+
+/* Permute LFSR values by 6 rounds */
+static void skinny_permute_tk_6
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate6((t))  & 0xCCCC0000U) |
+     *     (rightRotate24((t)) & 0x330000CCU) |
+     *     (rightRotate10((t)) & 0x00003333U) |
+     *     (((t) & 0x000000CCU) << 14) |
+     *     (((t) & 0x00003300U) << 2); */
+    if (first) {
+        loadimm(regs->tk3[0], 0xCCCC0000U);
+        loadimm(regs->tk3[1], 0x330000CCU);
+        loadimm(regs->tk3[2], 0x00003333U);
+    }
+    printf("\tror\t%s, %s, #6\n", regs->t1, t);
+    printf("\tror\t%s, %s, #24\n", regs->t2, t);
+    printf("\tror\t%s, %s, #10\n", regs->t3, t);
+    printf("\tand\t%s, %s, #0x000000CC\n", regs->t4, t);
+    printf("\tand\t%s, %s, %s\n", regs->t1, regs->t1, regs->tk3[0]);
+    printf("\tand\t%s, %s, %s\n", regs->t2, regs->t2, regs->tk3[1]);
+    printf("\tand\t%s, %s, #0x00003300\n", t, t);
+    printf("\tand\t%s, %s, %s\n", regs->t3, regs->t3, regs->tk3[2]);
+    printf("\torr\t%s, %s, %s, lsl #2\n", t, regs->t1, t);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t2);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t3);
+    printf("\torr\t%s, %s, %s, lsl #14\n", t, t, regs->t4);
+}
+
+/* Permute LFSR values by 8 rounds */
+static void skinny_permute_tk_8
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate24(t) & 0xCC000033U) |
+     *     (rightRotate8(t)  & 0x33CC0000U) |
+     *     (rightRotate26(t) & 0x00333300U) |
+     *     ((t & 0x00333300U) >> 6); */
+    if (first) {
+        loadimm(regs->tk3[0], 0xCC000033U);
+        loadimm(regs->tk3[1], 0x33CC0000U);
+        loadimm(regs->tk3[2], 0x00333300U);
+    }
+    printf("\tror\t%s, %s, #24\n", regs->t1, t);
+    printf("\tror\t%s, %s, #8\n", regs->t2, t);
+    printf("\tror\t%s, %s, #26\n", regs->t3, t);
+    printf("\tand\t%s, %s, %s\n", regs->t1, regs->t1, regs->tk3[0]);
+    printf("\tand\t%s, %s, %s\n", regs->t2, regs->t2, regs->tk3[1]);
+    printf("\tand\t%s, %s, %s\n", regs->t3, regs->t3, regs->tk3[2]);
+    printf("\tand\t%s, %s, %s\n", t, t, regs->tk3[2]);
+    printf("\torr\t%s, %s, %s, lsr #6\n", t, regs->t1, t);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t2);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t3);
+}
+
+/* Permute LFSR values by 10 rounds */
+static void skinny_permute_tk_10
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate8(t)  & 0xCC330000U) |
+     *     (rightRotate26(t) & 0x33000033U) |
+     *     (rightRotate22(t) & 0x00CCCC00U) |
+     *     ((t & 0x00330000U) >> 14) |
+     *     ((t & 0x0000CC00U) >> 2); */
+    if (first) {
+        loadimm(regs->tk3[0], 0xCC330000U);
+        loadimm(regs->tk3[1], 0x33000033U);
+        loadimm(regs->tk3[2], 0x00CCCC00U);
+    }
+    printf("\tror\t%s, %s, #8\n", regs->t1, t);
+    printf("\tror\t%s, %s, #26\n", regs->t2, t);
+    printf("\tror\t%s, %s, #22\n", regs->t3, t);
+    printf("\tand\t%s, %s, #0x00330000\n", regs->t4, t);
+    printf("\tand\t%s, %s, %s\n", regs->t1, regs->t1, regs->tk3[0]);
+    printf("\tand\t%s, %s, %s\n", regs->t2, regs->t2, regs->tk3[1]);
+    printf("\tand\t%s, %s, %s\n", regs->t3, regs->t3, regs->tk3[2]);
+    printf("\tand\t%s, %s, #0x0000CC00\n", t, t);
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->t1, regs->t2);
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->t1, regs->t3);
+    printf("\torr\t%s, %s, %s, lsr #14\n", regs->t1, regs->t1, regs->t4);
+    printf("\torr\t%s, %s, %s, lsr #2\n", t, regs->t1, t);
+}
+
+/* Permute LFSR values by 12 rounds */
+static void skinny_permute_tk_12
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate8(t)  & 0x0000CC33U) |
+     *     (rightRotate30(t) & 0x00CC00CCU) |
+     *     (rightRotate10(t) & 0x33330000U) |
+     *     (rightRotate16(t) & 0xCC003300U); */
+    if (first) {
+        loadimm(regs->tk3[0], 0x0000CC33U);
+        loadimm(regs->tk3[1], 0x33330000U);
+        loadimm(regs->tk3[2], 0x3300CC00U); /* rightRotate16(0xCC003300U) */
+    }
+    printf("\tror\t%s, %s, #8\n", regs->t1, t);
+    printf("\tror\t%s, %s, #30\n", regs->t2, t);
+    printf("\tror\t%s, %s, #10\n", regs->t3, t);
+    printf("\tand\t%s, %s, %s\n", t, t, regs->tk3[2]);
+    printf("\tand\t%s, %s, %s\n", regs->t1, regs->t1, regs->tk3[0]);
+    printf("\tand\t%s, %s, #0x00CC00CC\n", regs->t2, regs->t2);
+    printf("\tand\t%s, %s, %s\n", regs->t3, regs->t3, regs->tk3[1]);
+    printf("\torr\t%s, %s, %s, ror #16\n", t, regs->t1, t);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t2);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t3);
+}
+
+/* Permute LFSR values by 14 rounds */
+static void skinny_permute_tk_14
+    (const reg_names *regs, const char *t, int first)
+{
+    /* t = (rightRotate24((t)) & 0x0033CC00U) |
+     *     (rightRotate14((t)) & 0x00CC0000U) |
+     *     (rightRotate30((t)) & 0xCC000000U) |
+     *     (rightRotate16((t)) & 0x000000FFU) |
+     *     (rightRotate18((t)) & 0x33003300U); */
+    if (first)
+        loadimm(regs->tk3[0], 0x0033CC00U);
+    printf("\tror\t%s, %s, #24\n", regs->t1, t);
+    printf("\tror\t%s, %s, #14\n", regs->t2, t);
+    printf("\tror\t%s, %s, #30\n", regs->t3, t);
+    printf("\tror\t%s, %s, #16\n", regs->t4, t);
+    printf("\tror\t%s, %s, #18\n", t, t);
+    printf("\tand\t%s, %s, %s\n", regs->t1, regs->t1, regs->tk3[0]);
+    printf("\tand\t%s, %s, #0x00CC0000\n", regs->t2, regs->t2);
+    printf("\tand\t%s, %s, #0xCC000000\n", regs->t3, regs->t3);
+    printf("\tand\t%s, %s, #0x33003300\n", t, t);
+    printf("\tbfi\t%s, %s, #0, #8\n", t, regs->t4);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t1);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t2);
+    printf("\torr\t%s, %s, %s\n", t, t, regs->t3);
+}
+
+/* Permutes and expands a TK value */
+static void gen_skinny_permute_and_expand_tk
+    (const reg_names *regs, const char *ptr, int offset,
+     int round_count, int with_tk1)
+{
+    int top_label = -1;
+    int end_label = -1;
+    int phase, index;
+
+    /* Note: We assume that the TK2 and TK3 registers are now free
+     * for use as temporaries. */
+    const char *t[4];
+    t[0] = regs->tk2[0];
+    t[1] = regs->tk2[1];
+    t[2] = regs->tk2[2];
+    t[3] = regs->tk2[3];
+
+    /* Load the first key and optionally XOR with TK1 in s0...s3 */
+    load_key(regs, t, ptr, offset, with_tk1);
+
+    /* Top of the round loop, unrolling 16 rounds at a time */
+    if (round_count > 16) {
+        top_label = label++;
+        end_label = label++;
+        loadimm(regs->round, round_count / 8);
+        printf(".L%d:\n", top_label);
+    }
+
+    /* Unroll the rounds in two 8-round phases */
+    for (phase = 1; phase >= 0; --phase) {
+        /* Rounds 1 and 9 */
+        /* k[0] = t2 & 0xF0F0F0F0U; */
+        /* k[1] = t3 & 0xF0F0F0F0U; */
+        /* k[2] = t0 & 0xF0F0F0F0U; */
+        /* k[3] = t1 & 0xF0F0F0F0U; */
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", regs->t1, t[2]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", regs->t2, t[3]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", regs->t3, t[0]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", regs->t4, t[1]);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t3, ptr, offset + 8);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+        /* t0 = k[4] ^ s0; */
+        /* t1 = k[5] ^ s1; */
+        /* t2 = k[6] ^ s2; */
+        /* t3 = k[7] ^ s3; */
+        offset += 16;
+        load_key(regs, t, ptr, offset, with_tk1);
+
+        /* Rounds 2 and 10 */
+        if (phase) {
+            skinny_permute_tk_2(regs, t[0], 1);
+            skinny_permute_tk_2(regs, t[1], 0);
+            skinny_permute_tk_2(regs, t[2], 0);
+            skinny_permute_tk_2(regs, t[3], 0);
+        } else {
+            skinny_permute_tk_10(regs, t[0], 1);
+            skinny_permute_tk_10(regs, t[1], 0);
+            skinny_permute_tk_10(regs, t[2], 0);
+            skinny_permute_tk_10(regs, t[3], 0);
+        }
+        /* k[4] = rightRotate26(t0) & 0xC3C3C3C3U; */
+        /* k[5] = rightRotate26(t1) & 0xC3C3C3C3U; */
+        /* k[6] = rightRotate26(t2) & 0xC3C3C3C3U; */
+        /* k[7] = rightRotate26(t3) & 0xC3C3C3C3U; */
+        printf("\tror\t%s, %s, #26\n", regs->t1, t[0]);
+        printf("\tror\t%s, %s, #26\n", regs->t2, t[1]);
+        printf("\tror\t%s, %s, #26\n", regs->t3, t[2]);
+        printf("\tror\t%s, %s, #26\n", regs->t4, t[3]);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t1, regs->t1);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t2, regs->t2);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t3, regs->t3);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t4, regs->t4);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t3, ptr, offset + 8);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+        offset += 16;
+
+        /* Rounds 3 and 11 */
+        /* k[8]  = (rightRotate28(t2) & 0x03030303U) | */
+        /*         (rightRotate12(t2) & 0x0C0C0C0CU);  */
+        /* k[9]  = (rightRotate28(t3) & 0x03030303U) | */
+        /*         (rightRotate12(t3) & 0x0C0C0C0CU);  */
+        /* k[10] = (rightRotate28(t0) & 0x03030303U) | */
+        /*         (rightRotate12(t0) & 0x0C0C0C0CU);  */
+        /* k[11] = (rightRotate28(t1) & 0x03030303U) | */
+        /*         (rightRotate12(t1) & 0x0C0C0C0CU);  */
+        for (index = 0; index < 4; ++index) {
+            printf("\tror\t%s, %s, #28\n", regs->t1, t[(index + 2) % 4]);
+            printf("\tror\t%s, %s, #12\n", regs->t2, t[(index + 2) % 4]);
+            printf("\tand\t%s, %s, #0x03030303\n", regs->t1, regs->t1);
+            printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t2, regs->t2);
+            binop("orr", regs->t1, regs->t2);
+            printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + index * 4);
+        }
+        /* t0 = k[12] ^ s0; */
+        /* t1 = k[13] ^ s1; */
+        /* t2 = k[14] ^ s2; */
+        /* t3 = k[15] ^ s3; */
+        offset += 16;
+        load_key(regs, t, ptr, offset, with_tk1);
+
+        /* Rounds 4 and 12 */
+        if (phase) {
+            skinny_permute_tk_4(regs, t[0], 1);
+            skinny_permute_tk_4(regs, t[1], 0);
+            skinny_permute_tk_4(regs, t[2], 0);
+            skinny_permute_tk_4(regs, t[3], 0);
+        } else {
+            skinny_permute_tk_12(regs, t[0], 1);
+            skinny_permute_tk_12(regs, t[1], 0);
+            skinny_permute_tk_12(regs, t[2], 0);
+            skinny_permute_tk_12(regs, t[3], 0);
+        }
+        /* k[12] = (rightRotate14(t0) & 0x30303030U) |
+         *         (rightRotate6(t0)  & 0x0C0C0C0CU);
+         * k[13] = (rightRotate14(t1) & 0x30303030U) |
+         *         (rightRotate6(t1)  & 0x0C0C0C0CU);
+         * k[14] = (rightRotate14(t2) & 0x30303030U) |
+         *         (rightRotate6(t2)  & 0x0C0C0C0CU);
+         * k[15] = (rightRotate14(t3) & 0x30303030U) |
+         *         (rightRotate6(t3)  & 0x0C0C0C0CU); */
+        for (index = 0; index < 4; ++index) {
+            printf("\tror\t%s, %s, #14\n", regs->t1, t[index]);
+            printf("\tror\t%s, %s, #6\n", regs->t2, t[index]);
+            printf("\tand\t%s, %s, #0x30303030\n", regs->t1, regs->t1);
+            printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t2, regs->t2);
+            binop("orr", regs->t1, regs->t2);
+            printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + index * 4);
+        }
+        offset += 16;
+
+        /* Rounds 5 and 13 */
+        /* k[16] = rightRotate16(t2) & 0xF0F0F0F0U; */
+        /* k[17] = rightRotate16(t3) & 0xF0F0F0F0U; */
+        /* k[18] = rightRotate16(t0) & 0xF0F0F0F0U; */
+        /* k[19] = rightRotate16(t1) & 0xF0F0F0F0U; */
+        printf("\tror\t%s, %s, #16\n", t[2], t[2]);
+        printf("\tror\t%s, %s, #16\n", t[3], t[3]);
+        printf("\tror\t%s, %s, #16\n", t[0], t[0]);
+        printf("\tror\t%s, %s, #16\n", t[1], t[1]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", t[2], t[2]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", t[3], t[3]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", t[0], t[0]);
+        printf("\tand\t%s, %s, #0xF0F0F0F0\n", t[1], t[1]);
+        printf("\tstr\t%s, [%s, #%d]\n", t[2], ptr, offset);
+        printf("\tstr\t%s, [%s, #%d]\n", t[3], ptr, offset + 4);
+        printf("\tstr\t%s, [%s, #%d]\n", t[0], ptr, offset + 8);
+        printf("\tstr\t%s, [%s, #%d]\n", t[1], ptr, offset + 12);
+        offset += 16;
+        load_key(regs, t, ptr, offset, with_tk1);
+
+        /* Rounds 6 and 14 */
+        if (phase) {
+            skinny_permute_tk_6(regs, t[0], 1);
+            skinny_permute_tk_6(regs, t[1], 0);
+            skinny_permute_tk_6(regs, t[2], 0);
+            skinny_permute_tk_6(regs, t[3], 0);
+        } else {
+            skinny_permute_tk_14(regs, t[0], 1);
+            skinny_permute_tk_14(regs, t[1], 0);
+            skinny_permute_tk_14(regs, t[2], 0);
+            skinny_permute_tk_14(regs, t[3], 0);
+        }
+        /* k[20] = rightRotate10(t0) & 0xC3C3C3C3U; */
+        /* k[21] = rightRotate10(t1) & 0xC3C3C3C3U; */
+        /* k[22] = rightRotate10(t2) & 0xC3C3C3C3U; */
+        /* k[23] = rightRotate10(t3) & 0xC3C3C3C3U; */
+        printf("\tror\t%s, %s, #10\n", regs->t1, t[0]);
+        printf("\tror\t%s, %s, #10\n", regs->t2, t[1]);
+        printf("\tror\t%s, %s, #10\n", regs->t3, t[2]);
+        printf("\tror\t%s, %s, #10\n", regs->t4, t[3]);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t1, regs->t1);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t2, regs->t2);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t3, regs->t3);
+        printf("\tand\t%s, %s, #0xC3C3C3C3\n", regs->t4, regs->t4);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t2, ptr, offset + 4);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t3, ptr, offset + 8);
+        printf("\tstr\t%s, [%s, #%d]\n", regs->t4, ptr, offset + 12);
+        offset += 16;
+
+        /* Rounds 7 and 15 */
+        /* k[24] = (rightRotate12(t2) & 0x03030303U) |
+         *         (rightRotate28(t2) & 0x0C0C0C0CU);
+         * k[25] = (rightRotate12(t3) & 0x03030303U) |
+         *         (rightRotate28(t3) & 0x0C0C0C0CU);
+         * k[26] = (rightRotate12(t0) & 0x03030303U) |
+         *         (rightRotate28(t0) & 0x0C0C0C0CU);
+         * k[27] = (rightRotate12(t1) & 0x03030303U) |
+         *         (rightRotate28(t1) & 0x0C0C0C0CU); */
+        for (index = 0; index < 4; ++index) {
+            printf("\tror\t%s, %s, #12\n", regs->t1, t[(index + 2) % 4]);
+            printf("\tror\t%s, %s, #28\n", regs->t2, t[(index + 2) % 4]);
+            printf("\tand\t%s, %s, #0x03030303\n", regs->t1, regs->t1);
+            printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t2, regs->t2);
+            binop("orr", regs->t1, regs->t2);
+            printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + index * 4);
+        }
+        /* t0 = k[28] ^ s0; */
+        /* t1 = k[29] ^ s1; */
+        /* t2 = k[30] ^ s2; */
+        /* t3 = k[31] ^ s3; */
+        offset += 16;
+        load_key(regs, t, ptr, offset, with_tk1);
+
+        /* Rounds 8 and 16 */
+        if (phase) {
+            skinny_permute_tk_8(regs, t[0], 1);
+            skinny_permute_tk_8(regs, t[1], 0);
+            skinny_permute_tk_8(regs, t[2], 0);
+            skinny_permute_tk_8(regs, t[3], 0);
+        }
+        /* k[28] = (rightRotate30(t0) & 0x30303030U) |
+         *         (rightRotate22(t0) & 0x0C0C0C0CU);
+         * k[29] = (rightRotate30(t1) & 0x30303030U) |
+         *         (rightRotate22(t1) & 0x0C0C0C0CU);
+         * k[30] = (rightRotate30(t2) & 0x30303030U) |
+         *         (rightRotate22(t2) & 0x0C0C0C0CU);
+         * k[31] = (rightRotate30(t3) & 0x30303030U) |
+         *         (rightRotate22(t3) & 0x0C0C0C0CU); */
+        for (index = 0; index < 4; ++index) {
+            printf("\tror\t%s, %s, #30\n", regs->t1, t[index]);
+            printf("\tror\t%s, %s, #22\n", regs->t2, t[index]);
+            printf("\tand\t%s, %s, #0x30303030\n", regs->t1, regs->t1);
+            printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t2, regs->t2);
+            binop("orr", regs->t1, regs->t2);
+            printf("\tstr\t%s, [%s, #%d]\n", regs->t1, ptr, offset + index * 4);
+        }
+        offset += 16;
+
+        /* We unroll 16 rounds at a time, but round_count is a multiple of
+         * 8 not 16, so we may need to bail out early in the first phase. */
+        if (phase && round_count > 16) {
+            printf("\tsubs\t%s, %s, #1\n", regs->round, regs->round);
+            printf("\tbeq\t.L%d\n", end_label);
+        }
+    }
+
+    /* Bottom of the round loop */
+    if (round_count > 16) {
+        printf("\tadd\t%s, %s, #%d\n", ptr, ptr, 256);
+        printf("\tsubs\t%s, %s, #1\n", regs->round, regs->round);
+        printf("\tbne\t.L%d\n", top_label);
+        printf(".L%d:\n", end_label);
+    }
+}
+
+/* Initialize the key schedule in fixsliced form */
+static void gen_skinny_128_384_init_schedule
+    (const reg_names *regs, const char *ptr, int offset)
+{
+    int rc_label;
+
+    /* Convert TK2 and TK3 into fixsliced form */
+    skinny_to_fixsliced
+        (regs, regs->tk2[0], regs->tk2[1], regs->tk2[2], regs->tk2[3]);
+    skinny_to_fixsliced
+        (regs, regs->tk3[0], regs->tk3[1], regs->tk3[2], regs->tk3[3]);
+
+    /* Run LFSR2 and LFSR3 to generate unpermuted values for all rounds */
+    gen_skinny_128_384_expand_lfsr(regs, ptr, offset);
+
+    /* Permute the TK2 and TK3 values for all rounds */
+    loadimm(regs->t4, round_count * 16);
+    binop("sub", ptr, regs->t4);
+    gen_skinny_permute_and_expand_tk(regs, ptr, offset, round_count, 0);
+    /* Due to the early bailout, ptr increment is short */
+    printf("\tadd\t%s, %s, #%d\n", ptr, ptr, 8 * 16 + offset);
+
+    /* Add the round constants to the key schedule */
+    loadimm(regs->round, round_count * 4);
+    printf("\tadr\t%s, rconst\n", regs->t3);
+    loadimm(regs->t4, round_count * 16);
+    binop("add", regs->t3, regs->t4);
+    rc_label = label++;
+    printf(".L%d:\n", rc_label);
+    printf("\tldr\t%s, [%s, #-4]!\n", regs->t1, regs->t3);
+    printf("\tldr\t%s, [%s, #-4]!\n", regs->t2, ptr);
+    binop("eor", regs->t1, regs->t2);
+    printf("\tstr\t%s, [%s, #0]\n", regs->t1, ptr);
+    printf("\tsubs\t%s, %s, #1\n", regs->round, regs->round);
+    printf("\tbne\t.L%d\n", rc_label);
+}
+
+/* Generate the key setup function for the full fixsliced version */
+static void gen_skinny_128_384_init_full(int without_tk1)
+{
+    /*
+     * r0 holds the pointer to the output key schedule.
+     * r1 points to the input key.
+     *
+     * For the "without_tk1" version, "r1" points to TK2 and "r2" to TK3.
+     *
+     * r0, r1, r2, r3, and ip can be used as scratch registers without saving,
+     * but the value of ip may not survive across a branch instruction.
+     *
+     * r4, r5, r6, r7, r8, r9, r10, and fp must be callee-saved.
+     *
+     * lr can be used as a temporary as long as it is saved on the stack.
+     */
+    reg_names regs = { .s0 = 0 };
+    regs.tk2[0] = "r3";
+    regs.tk2[1] = "r4";
+    regs.tk2[2] = "r5";
+    regs.tk2[3] = "r6";
+    regs.tk3[0] = "r7";
+    regs.tk3[1] = "r8";
+    regs.tk3[2] = "r9";
+    regs.tk3[3] = "r2";
+    regs.t1 = "r10";
+    regs.t2 = "ip";
+    regs.t3 = "lr";
+    regs.t4 = "fp";
+    regs.round = "r1";
+
+    /* Save callee-preserved registers on the stack */
+    printf("\tpush\t{r4, r5, r6, r7, r8, r9, r10, fp, lr}\n");
+
+    /* Copy TK1 to the key schedule and then load TK2 and TK3 */
+    if (without_tk1) {
+        /* Load just TK2 and TK3 */
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[0], 0);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[1], 8);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[2], 4);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[3], 12);
+        printf("\tldr\t%s, [r2, #%d]\n", regs.tk3[0], 0);
+        printf("\tldr\t%s, [r2, #%d]\n", regs.tk3[1], 8);
+        printf("\tldr\t%s, [r2, #%d]\n", regs.tk3[2], 4);
+        printf("\tldr\t%s, [r2, #%d]\n", regs.tk3[3], 12);
+    } else {
+        /* Copy TK1 to the key schedule */
+        printf("\tldr\t%s, [r1, #%d]\n", regs.t1, 0);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.t2, 4);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.t3, 8);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.t4, 12);
+        printf("\tstr\t%s, [r0, #%d]\n", regs.t1, 0);
+        printf("\tstr\t%s, [r0, #%d]\n", regs.t2, 4);
+        printf("\tstr\t%s, [r0, #%d]\n", regs.t3, 8);
+        printf("\tstr\t%s, [r0, #%d]\n", regs.t4, 12);
+
+        /* Load TK2 and TK3 */
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[0], 16);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[1], 24);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[2], 20);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk2[3], 28);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk3[0], 32);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk3[1], 40);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk3[2], 36);
+        printf("\tldr\t%s, [r1, #%d]\n", regs.tk3[3], 44);
+    }
+
+    /* Generate the key schedule based on TK2 and TK3 */
+    gen_skinny_128_384_init_schedule(&regs, "r0", 16);
+
+    /* Pop the stack frame and return */
+    printf("\tpop\t{r4, r5, r6, r7, r8, r9, r10, fp, pc}\n");
 }
 
 /* Generate code for a standard SKINNY-128 round with TK1 expansion only */
@@ -804,6 +1582,332 @@ static void gen_skinny_128_384_encrypt_standard(void)
     printf("\tpop\t{r4, r5, r6, r7, r8, r9, r10, pc}\n");
 }
 
+/* Applies the first S-box to the fixsliced state */
+static void skinny_fixsliced_sbox_1(const reg_names *regs)
+{
+    /* s3 ^= ~(s0 | s1); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s0, regs->s1);
+    binop("mvn", regs->t1, regs->t1);
+    binop("eor", regs->s3, regs->t1);
+
+    skinny_swap_move(regs, regs->s2, regs->s1, 0x55555555U, 1);
+    skinny_swap_move(regs, regs->s3, regs->s2, 0x55555555U, 1);
+
+    /* s1 ^= ~(s2 | s3); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s2, regs->s3);
+    binop("mvn", regs->t1, regs->t1);
+    binop("eor", regs->s1, regs->t1);
+
+    skinny_swap_move(regs, regs->s1, regs->s0, 0x55555555U, 1);
+    skinny_swap_move(regs, regs->s0, regs->s3, 0x55555555U, 1);
+
+    /* s3 ^= ~(s0 | s1); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s0, regs->s1);
+    binop("mvn", regs->t1, regs->t1);
+    binop("eor", regs->s3, regs->t1);
+
+    skinny_swap_move(regs, regs->s2, regs->s1, 0x55555555U, 1);
+    skinny_swap_move(regs, regs->s3, regs->s2, 0x55555555U, 1);
+
+    /* s1 ^= (s2 | s3); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s2, regs->s3);
+    binop("eor", regs->s1, regs->t1);
+
+    skinny_swap_move(regs, regs->s3, regs->s0, 0x55555555U, 0);
+}
+
+/* Applies the second S-box to the fixsliced state */
+static void skinny_fixsliced_sbox_2(const reg_names *regs)
+{
+    /* s1 ^= ~(s2 | s3); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s2, regs->s3);
+    binop("mvn", regs->t1, regs->t1);
+    binop("eor", regs->s1, regs->t1);
+
+    skinny_swap_move(regs, regs->s1, regs->s0, 0x55555555U, 1);
+    skinny_swap_move(regs, regs->s0, regs->s3, 0x55555555U, 1);
+
+    /* s3 ^= ~(s0 | s1); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s0, regs->s1);
+    binop("mvn", regs->t1, regs->t1);
+    binop("eor", regs->s3, regs->t1);
+
+    skinny_swap_move(regs, regs->s2, regs->s1, 0x55555555U, 1);
+    skinny_swap_move(regs, regs->s3, regs->s2, 0x55555555U, 1);
+
+    /* s1 ^= ~(s2 | s3); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s2, regs->s3);
+    binop("mvn", regs->t1, regs->t1);
+    binop("eor", regs->s1, regs->t1);
+
+    skinny_swap_move(regs, regs->s1, regs->s0, 0x55555555U, 1);
+    skinny_swap_move(regs, regs->s0, regs->s3, 0x55555555U, 1);
+
+    /* s3 ^= (s0 | s1); */
+    printf("\torr\t%s, %s, %s\n", regs->t1, regs->s0, regs->s1);
+    binop("eor", regs->s3, regs->t1);
+
+    skinny_swap_move(regs, regs->s1, regs->s2, 0x55555555U, 0);
+}
+
+/* Applies the round keys to the state */
+static void skinny_fixsliced_add_key
+    (const reg_names *regs, const char *k1, const char *k2)
+{
+    printf("\tldr\t%s, [%s], #4\n", regs->t1, k1);
+    printf("\tldr\t%s, [%s], #4\n", regs->t2, k2);
+    binop("eor", regs->s0, regs->t1);
+    binop("eor", regs->s0, regs->t2);
+
+    printf("\tldr\t%s, [%s], #4\n", regs->t1, k1);
+    printf("\tldr\t%s, [%s], #4\n", regs->t2, k2);
+    binop("eor", regs->s1, regs->t1);
+    binop("eor", regs->s1, regs->t2);
+
+    printf("\tldr\t%s, [%s], #4\n", regs->t1, k1);
+    printf("\tldr\t%s, [%s], #4\n", regs->t2, k2);
+    binop("eor", regs->s2, regs->t1);
+    binop("eor", regs->s2, regs->t2);
+
+    printf("\tldr\t%s, [%s], #4\n", regs->t1, k1);
+    printf("\tldr\t%s, [%s], #4\n", regs->t2, k2);
+    binop("eor", regs->s3, regs->t1);
+    binop("eor", regs->s3, regs->t2);
+}
+
+/* Mixes the columns for the first round of 4 in the fixsliced state */
+static void skinny_mix_columns_1_of_4(const reg_names *regs, const char *s)
+{
+    /* t = rightRotate24(s) & 0x0C0C0C0CU; */
+    printf("\tror\t%s, %s, #24\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate30(t); */
+    printf("\teor\t%s, %s, %s, ror #30\n", s, s, regs->t1);
+
+    /* t = rightRotate16(s) & 0xC0C0C0C0U; */
+    printf("\tror\t%s, %s, #16\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0xC0C0C0C0\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate4(t); */
+    printf("\teor\t%s, %s, %s, ror #4\n", s, s, regs->t1);
+
+    /* t = rightRotate8(s) & 0x0C0C0C0CU; */
+    printf("\tror\t%s, %s, #8\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate2(t); */
+    printf("\teor\t%s, %s, %s, ror #2\n", s, s, regs->t1);
+}
+
+/* Mixes the columns for the second round of 4 in the fixsliced state */
+static void skinny_mix_columns_2_of_4(const reg_names *regs, const char *s)
+{
+    /* t = rightRotate16(s) & 0x30303030U; */
+    printf("\tror\t%s, %s, #16\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0x30303030\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate30(t); */
+    printf("\teor\t%s, %s, %s, ror #30\n", s, s, regs->t1);
+
+    /* t = s & 0x03030303U; */
+    printf("\tand\t%s, %s, #0x03030303\n", regs->t1, s);
+
+    /* s ^= rightRotate28(t); */
+    printf("\teor\t%s, %s, %s, ror #28\n", s, s, regs->t1);
+
+    /* t = rightRotate16(s) & 0x30303030U; */
+    printf("\tror\t%s, %s, #16\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0x30303030\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate2(t); */
+    printf("\teor\t%s, %s, %s, ror #2\n", s, s, regs->t1);
+}
+
+/* Mixes the columns for the third round of 4 in the fixsliced state */
+static void skinny_mix_columns_3_of_4(const reg_names *regs, const char *s)
+{
+    /* t = rightRotate8(s) & 0xC0C0C0C0U; */
+    printf("\tror\t%s, %s, #8\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0xC0C0C0C0\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate6(t); */
+    printf("\teor\t%s, %s, %s, ror #6\n", s, s, regs->t1);
+
+    /* t = rightRotate16(s) & 0x0C0C0C0CU; */
+    printf("\tror\t%s, %s, #16\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0x0C0C0C0C\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate28(t); */
+    printf("\teor\t%s, %s, %s, ror #28\n", s, s, regs->t1);
+
+    /* t = rightRotate24(s) & 0xC0C0C0C0U; */
+    printf("\tror\t%s, %s, #24\n", regs->t1, s);
+    printf("\tand\t%s, %s, #0xC0C0C0C0\n", regs->t1, regs->t1);
+
+    /* s ^= rightRotate2(t); */
+    printf("\teor\t%s, %s, %s, ror #2\n", s, s, regs->t1);
+}
+
+/* Mixes the columns for the fourth round of 4 in the fixsliced state */
+static void skinny_mix_columns_4_of_4(const reg_names *regs, const char *s)
+{
+    /* t = s & 0x03030303U; */
+    printf("\tand\t%s, %s, #0x03030303\n", regs->t1, s);
+
+    /* s ^= rightRotate30(t); */
+    printf("\teor\t%s, %s, %s, ror #30\n", s, s, regs->t1);
+
+    /* t = s & 0x30303030U; */
+    printf("\tand\t%s, %s, #0x30303030\n", regs->t1, s);
+
+    /* s ^= rightRotate4(t); */
+    printf("\teor\t%s, %s, %s, ror #4\n", s, s, regs->t1);
+
+    /* t = s & 0x03030303U; */
+    printf("\tand\t%s, %s, #0x03030303\n", regs->t1, s);
+
+    /* s ^= rightRotate26(t); */
+    printf("\teor\t%s, %s, %s, ror #26\n", s, s, regs->t1);
+}
+
+/* Generate the SKINNY-128 encryption code for the fixsliced key schedule */
+static void gen_skinny_128_384_encrypt_fixsliced(void)
+{
+    /*
+     * r0 holds the pointer to the key schedule.
+     * r1 points to the output buffer.
+     * r2 points to the input buffer.
+     *
+     * r0, r1, r2, r3, and ip can be used as scratch registers without saving,
+     * but the value of ip may not survive across a branch instruction.
+     *
+     * r4, r5, r6, r7, r8, r9, r10, and fp must be callee-saved.
+     *
+     * lr can be used as a temporary as long as it is saved on the stack.
+     */
+    int stack_offset;
+    int top_label;
+    const char *tk1_base;
+    const char *tk1_ptr;
+    reg_names regs = { .s0 = 0 };
+    regs.s0 = "r3";
+    regs.s1 = "r4";
+    regs.s2 = "r5";
+    regs.s3 = "r6";
+    regs.tk1[0] = regs.s0; /* Aliased registers */
+    regs.tk1[1] = regs.s1;
+    regs.tk1[2] = regs.s2;
+    regs.tk1[3] = regs.s3;
+    regs.tk2[0] = regs.s0; /* Aliased registers - extra temporaries */
+    regs.tk2[1] = regs.s1;
+    regs.tk2[2] = regs.s2;
+    regs.tk2[3] = regs.s3;
+    regs.tk3[0] = "r7";    /* Extra temporaries for TK1 expansion */
+    regs.tk3[1] = "r8";
+    regs.tk3[2] = "r9";
+    regs.tk3[3] = 0;
+    regs.t1 = "lr";
+    regs.t2 = "ip";
+    regs.t3 = "r2";
+    regs.t4 = "r10";
+    regs.round = "r1";
+
+    /* Save callee-preserved registers on the stack */
+    printf("\tpush\t{r4, r5, r6, r7, r8, r9, r10, fp, lr}\n");
+
+    /* Need space for 16 rounds of expanded TK1 schedule on the stack */
+    stack_offset = 16 *16 + 16;
+    printf("\tmov\tfp, sp\n");
+    printf("\tsub\tsp, sp, #%d\n", stack_offset);
+
+    /* Save "r1" and "r2" on the stack; we will need them later */
+    printf("\tpush\t{r1}\n");
+    printf("\tpush\t{r2}\n");
+
+    /* Load and expand the TK1 schedule */
+    printf("\tldr\t%s, [r0, #0]\n", regs.tk1[0]);
+    printf("\tldr\t%s, [r0, #4]\n", regs.tk1[2]);
+    printf("\tldr\t%s, [r0, #8]\n", regs.tk1[1]);
+    printf("\tldr\t%s, [r0, #12]\n", regs.tk1[3]);
+    skinny_to_fixsliced
+        (&regs, regs.tk1[0], regs.tk1[1], regs.tk1[2], regs.tk1[3]);
+    printf("\tstr\t%s, [fp, #-16]\n", regs.tk1[0]);
+    printf("\tstr\t%s, [fp, #-12]\n", regs.tk1[1]);
+    printf("\tstr\t%s, [fp, #-8]\n", regs.tk1[2]);
+    printf("\tstr\t%s, [fp, #-4]\n", regs.tk1[3]);
+    printf("\tsub\t%s, %s, #%d\n", "r1", "fp", stack_offset);
+    gen_skinny_permute_and_expand_tk(&regs, "r1", 0, 16, 1);
+
+    /* Load the contents of the input buffer and convert to fixsliced form */
+    printf("\tpop\t{r2}\n");
+    printf("\tldr\t%s, [r2, #0]\n", regs.s0);
+    printf("\tldr\t%s, [r2, #4]\n", regs.s2);
+    printf("\tldr\t%s, [r2, #8]\n", regs.s1);
+    printf("\tldr\t%s, [r2, #12]\n", regs.s3);
+    skinny_to_fixsliced(&regs, regs.s0, regs.s1, regs.s2, regs.s3);
+
+    /* Top of the round loop; perform the encryption rounds four at a time */
+    loadimm(regs.round, 0);
+    top_label = label++;
+    tk1_base = regs.tk3[0];
+    tk1_ptr = regs.tk3[1];
+    printf("\tsub\t%s, %s, #%d\n", tk1_base, "fp", stack_offset);
+    printf("\tadd\tr0, r0, #16\n");
+    printf(".L%d:\n", top_label);
+    printf("\tand\t%s, %s, #0xFF\n", tk1_ptr, regs.round);
+    printf("\tadd\t%s, %s, %s\n", tk1_ptr, tk1_base, tk1_ptr);
+
+    /* Round 1 of 4 */
+    skinny_fixsliced_sbox_1(&regs);
+    skinny_fixsliced_add_key(&regs, "r0", tk1_ptr);
+    skinny_mix_columns_1_of_4(&regs, regs.s0);
+    skinny_mix_columns_1_of_4(&regs, regs.s1);
+    skinny_mix_columns_1_of_4(&regs, regs.s2);
+    skinny_mix_columns_1_of_4(&regs, regs.s3);
+
+    /* Round 2 of 4 */
+    skinny_fixsliced_sbox_2(&regs);
+    skinny_fixsliced_add_key(&regs, "r0", tk1_ptr);
+    skinny_mix_columns_2_of_4(&regs, regs.s0);
+    skinny_mix_columns_2_of_4(&regs, regs.s1);
+    skinny_mix_columns_2_of_4(&regs, regs.s2);
+    skinny_mix_columns_2_of_4(&regs, regs.s3);
+
+    /* Round 3 of 4 */
+    skinny_fixsliced_sbox_1(&regs);
+    skinny_fixsliced_add_key(&regs, "r0", tk1_ptr);
+    skinny_mix_columns_3_of_4(&regs, regs.s0);
+    skinny_mix_columns_3_of_4(&regs, regs.s1);
+    skinny_mix_columns_3_of_4(&regs, regs.s2);
+    skinny_mix_columns_3_of_4(&regs, regs.s3);
+
+    /* Round 4 of 4 */
+    skinny_fixsliced_sbox_2(&regs);
+    skinny_fixsliced_add_key(&regs, "r0", tk1_ptr);
+    skinny_mix_columns_4_of_4(&regs, regs.s0);
+    skinny_mix_columns_4_of_4(&regs, regs.s1);
+    skinny_mix_columns_4_of_4(&regs, regs.s2);
+    skinny_mix_columns_4_of_4(&regs, regs.s3);
+
+    /* Bottom of the round loop */
+    printf("\tadd\t%s, %s, #64\n", regs.round, regs.round);
+    printf("\tcmp\t%s, #%d\n", regs.round, round_count * 16);
+    printf("\tbne\t.L%d\n", top_label);
+
+    /* Convert from fixsliced form and store the state to the output buffer */
+    printf("\tpop\t{r1}\n");
+    skinny_from_fixsliced(&regs, regs.s0, regs.s1, regs.s2, regs.s3);
+    printf("\tstr\t%s, [r1, #0]\n", regs.s0);
+    printf("\tstr\t%s, [r1, #4]\n", regs.s2);
+    printf("\tstr\t%s, [r1, #8]\n", regs.s1);
+    printf("\tstr\t%s, [r1, #12]\n", regs.s3);
+
+    /* Pop the stack frame and return */
+    printf("\tmov\tsp, fp\n");
+    printf("\tpop\t{r4, r5, r6, r7, r8, r9, r10, fp, pc}\n");
+}
+
 /* Generate the SKINNY-128 encryption code with both TK1 and TK2
  * expanded on the fly instead of ahead of time.  TK3 is in the
  * pre-computed key schedule. */
@@ -901,6 +2005,54 @@ static void gen_skinny_128_384_encrypt_tk2(void)
     printf("\tpop\t{r4, r5, r6, r7, r8, r9, r10, fp, pc}\n");
 }
 
+/* Generates the round constant table for the fixsliced version of SKINNY */
+static void gen_fixsliced_rc(const char *name)
+{
+    static uint32_t const skinny_fixsliced_rc[160] = {
+        0x00000004U, 0xFFFFFFBFU, 0x00000000U, 0x00000000U, 0x00000000U,
+        0x00000000U, 0x10000100U, 0xFFFFFEFFU, 0x44000000U, 0xFBFFFFFFU,
+        0x00000000U, 0x04000000U, 0x00100000U, 0x00100000U, 0x00100001U,
+        0xFFEFFFFFU, 0x00440000U, 0xFFAFFFFFU, 0x00400000U, 0x00400000U,
+        0x01000000U, 0x01000000U, 0x01401000U, 0xFFBFFFFFU, 0x01004000U,
+        0xFEFFFBFFU, 0x00000400U, 0x00000400U, 0x00000010U, 0x00000000U,
+        0x00010410U, 0xFFFFFBEFU, 0x00000054U, 0xFFFFFFAFU, 0x00000000U,
+        0x00000040U, 0x00000100U, 0x00000100U, 0x10000140U, 0xFFFFFEFFU,
+        0x44000000U, 0xFFFFFEFFU, 0x04000000U, 0x04000000U, 0x00100000U,
+        0x00100000U, 0x04000001U, 0xFBFFFFFFU, 0x00140000U, 0xFFAFFFFFU,
+        0x00400000U, 0x00000000U, 0x00000000U, 0x00000000U, 0x01401000U,
+        0xFEBFFFFFU, 0x01004400U, 0xFFFFFBFFU, 0x00000000U, 0x00000400U,
+        0x00000010U, 0x00000010U, 0x00010010U, 0xFFFFFFFFU, 0x00000004U,
+        0xFFFFFFAFU, 0x00000040U, 0x00000040U, 0x00000100U, 0x00000000U,
+        0x10000140U, 0xFFFFFFBFU, 0x40000100U, 0xFBFFFEFFU, 0x00000000U,
+        0x04000000U, 0x00100000U, 0x00000000U, 0x04100001U, 0xFFEFFFFFU,
+        0x00440000U, 0xFFEFFFFFU, 0x00000000U, 0x00400000U, 0x01000000U,
+        0x01000000U, 0x00401000U, 0xFFFFFFFFU, 0x00004000U, 0xFEFFFFFFU,
+        0x00000400U, 0x00000000U, 0x00000000U, 0x00000000U, 0x00010400U,
+        0xFFFFFBFFU, 0x00000014U, 0xFFFFFFBFU, 0x00000000U, 0x00000000U,
+        0x00000000U, 0x00000000U, 0x10000100U, 0xFFFFFFFFU, 0x40000000U,
+        0xFBFFFFFFU, 0x00000000U, 0x04000000U, 0x00100000U, 0x00000000U,
+        0x00100001U, 0xFFEFFFFFU, 0x00440000U, 0xFFAFFFFFU, 0x00000000U,
+        0x00400000U, 0x01000000U, 0x01000000U, 0x01401000U, 0xFFFFFFFFU,
+        0x00004000U, 0xFEFFFFFFU, 0x00000400U, 0x00000400U, 0x00000010U,
+        0x00000000U, 0x00010400U, 0xFFFFFBFFU, 0x00000014U, 0xFFFFFFAFU,
+        0x00000000U, 0x00000000U, 0x00000000U, 0x00000000U, 0x10000140U,
+        0xFFFFFEFFU, 0x44000000U, 0xFFFFFFFFU, 0x00000000U, 0x04000000U,
+        0x00100000U, 0x00100000U, 0x00000001U, 0xFFEFFFFFU, 0x00440000U,
+        0xFFAFFFFFU, 0x00400000U, 0x00000000U, 0x00000000U, 0x01000000U,
+        0x01401000U, 0xFFBFFFFFU, 0x01004000U, 0xFFFFFBFFU, 0x00000400U,
+        0x00000400U, 0x00000010U, 0x00000000U, 0x00010010U, 0xFFFFFBFFU
+    };
+    int index;
+    printf("\n\t.align\t4\n");
+    printf("\t.type\t%s, %%object\n", name);
+    printf("%s:\n", name);
+    for (index = 0; index < 160; ++index) {
+        printf("\t.word\t0x%08lx\n",
+               (unsigned long)(skinny_fixsliced_rc[index]));
+    }
+    printf("\t.size\t%s, .-%s\n", name, name);
+}
+
 int main(int argc, char *argv[])
 {
     const char *prefix = "skinny_plus";
@@ -939,6 +2091,8 @@ int main(int argc, char *argv[])
     function_header(prefix, "init");
     if (variant == SKINNY128_VARIANT_TINY)
         gen_skinny_128_384_init_tiny(0);
+    else if (variant == SKINNY128_VARIANT_FULL)
+        gen_skinny_128_384_init_full(0);
     else
         gen_skinny_128_384_init_standard(0);
     function_footer(prefix, "init");
@@ -948,14 +2102,22 @@ int main(int argc, char *argv[])
     function_header(prefix, "init_without_tk1");
     if (variant == SKINNY128_VARIANT_TINY)
         gen_skinny_128_384_init_tiny(1);
+    else if (variant == SKINNY128_VARIANT_FULL)
+        gen_skinny_128_384_init_full(1);
     else
         gen_skinny_128_384_init_standard(1);
     function_footer(prefix, "init_without_tk1");
+
+    /* Output the round constant table for full fixsliced version */
+    if (variant == SKINNY128_VARIANT_FULL)
+        gen_fixsliced_rc("rconst");
 
     /* Output the primary SKINNY-128-384+ encryption function */
     function_header(prefix, "encrypt");
     if (variant == SKINNY128_VARIANT_TINY)
         gen_skinny_128_384_encrypt_full();
+    else if (variant == SKINNY128_VARIANT_FULL)
+        gen_skinny_128_384_encrypt_fixsliced();
     else
         gen_skinny_128_384_encrypt_standard();
     function_footer(prefix, "encrypt");
@@ -967,13 +2129,15 @@ int main(int argc, char *argv[])
         function_footer(prefix, "encrypt_tk2");
     }
 
-    /* Output the TK-FULL SKINNY-128-384+ encryption function */
-    if (variant != SKINNY128_VARIANT_TINY) {
+    /* Output the TK-FULL SKINNY-128-384+ encryption function for the
+     * "small" and "tiny" variants.  Not needed for "full" because
+     * romulus-hash.c uses skinny_plus_encrypt() instead. */
+    if (variant == SKINNY128_VARIANT_SMALL) {
         function_header(prefix, "encrypt_tk_full");
         gen_skinny_128_384_encrypt_full();
         function_footer(prefix, "encrypt_tk_full");
-    } else {
-        /* In this variant, encrypt_tk_full() is the same as encrypt() */
+    } else if (variant == SKINNY128_VARIANT_TINY) {
+        /* In the tiny variant, encrypt_tk_full() is the same as encrypt() */
         printf("\t.global\t%s_encrypt_tk_full\n", prefix);
         printf("\t.set\t%s_encrypt_tk_full,%s_encrypt\n", prefix, prefix);
     }

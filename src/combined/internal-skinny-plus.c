@@ -618,11 +618,9 @@ static void skinny_plus_init_schedule
     /* Permute the TK2 and TK3 values for all rounds */
     skinny_permute_and_expand_tk(keys, 0, 0, 0, 0, SKINNY_PLUS_ROUNDS);
 
-    /* Add the round constants to the key schedule if we have a TK3 value */
-    if (key_tk3) {
-        for (round = 0; round < (SKINNY_PLUS_ROUNDS * 4); ++round)
-            keys[round] ^= skinny_fixsliced_rc[round];
-    }
+    /* Add the round constants to the key schedule */
+    for (round = 0; round < (SKINNY_PLUS_ROUNDS * 4); ++round)
+        keys[round] ^= skinny_fixsliced_rc[round];
 }
 
 void skinny_plus_init
