@@ -3,6 +3,7 @@
 
 # Parse the command-line parameters.
 GENERATE=1
+PERFORMANCE=""
 if test "x$1" = "x--no-generate" ; then
     GENERATE=0
     shift
@@ -15,9 +16,13 @@ shift
 shift
 shift
 shift
+if test "x$1" = "x--performance" ; then
+    PERFORMANCE="--performance"
+    shift
+fi
 
 # Run the standard KAT vectors.
-if ! "$KAT" "$ALG" "$FILE" ; then
+if ! "$KAT" $PERFORMANCE "$ALG" "$FILE" ; then
     exit 1
 fi
 

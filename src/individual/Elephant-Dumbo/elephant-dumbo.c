@@ -29,7 +29,7 @@ aead_cipher_t const dumbo_cipher = {
     DUMBO_KEY_SIZE,
     DUMBO_NONCE_SIZE,
     DUMBO_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
+    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SLOW,
     dumbo_aead_encrypt,
     dumbo_aead_decrypt
 };

@@ -26,6 +26,9 @@
 #include <stdarg.h>
 #include "aead-common.h"
 #include "algorithms.h"
+#include "timing.h"
+#include "internal-chachapoly.h"
+#include "internal-blake2s.h"
 
 /* Dynamically-allocated test string that was converted from hexadecimal */
 typedef struct {
@@ -350,6 +353,206 @@ static int test_cipher(const aead_cipher_t *alg, FILE *file)
     return fail != 0;
 }
 
+#define MAX_DATA_SIZE 128
+#define MAX_TAG_SIZE 32
+
+#define PERF_LOOPS 1000000
+#define PERF_LOOPS_SLOW 10000
+#define PERF_LOOPS_WARMUP 100
+
+static unsigned char const key[32] = {
+    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+    0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F
+};
+static unsigned char const nonce[32] = {
+    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+    0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F
+};
+
+/* Metrics that have been collected for various cipher scenarios */
+typedef struct
+{
+    perf_timer_t encrypt_128;
+    perf_timer_t decrypt_128;
+    perf_timer_t encrypt_16;
+    perf_timer_t decrypt_16;
+
+} perf_cipher_metrics_t;
+
+/* Reference metrics for the ChaChaPoly cipher */
+static perf_cipher_metrics_t cipher_ref_metrics;
+
+#define MODE_ENC128 0
+#define MODE_DEC128 1
+#define MODE_ENC16  2
+#define MODE_DEC16  3
+
+/* Generate performance metrics for a cipher algorithm: encrypt 128 bytes */
+static perf_timer_t perf_cipher_encrypt_decrypt
+    (const aead_cipher_t *alg, const char *name,
+     int mode, int report, int slow)
+{
+    unsigned char plaintext[MAX_DATA_SIZE];
+    unsigned char ciphertext[MAX_DATA_SIZE + MAX_TAG_SIZE];
+    unsigned long long plen;
+    unsigned long long clen;
+    unsigned long long len;
+    perf_timer_t start, elapsed;
+    perf_timer_t ticks_per_second = perf_timer_ticks_per_second();
+    perf_timer_t ref_time = 0;
+    int count;
+    int loops;
+    int bytes;
+
+    /* Print what we are doing now */
+    if (report) {
+        printf("   %s byte packets %s... ", name,
+               (mode == MODE_ENC16 || mode == MODE_DEC16) ? " " : "");
+        fflush(stdout);
+    }
+
+    /* Initialize the plaintext and ciphertext buffer */
+    for (count = 0; count < MAX_DATA_SIZE; ++count)
+        plaintext[count] = (unsigned char)count;
+    if (mode == MODE_ENC128 || mode == MODE_DEC128)
+        plen = 128;
+    else
+        plen = 16;
+    alg->encrypt(ciphertext, &clen, plaintext, plen, 0, 0, 0, nonce, key);
+
+    /* Run several loops without timing to force the CPU
+     * to load the code and data into internal cache to get
+     * the best speed when we measure properly later. */
+    switch (mode) {
+    case MODE_ENC128:
+        for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
+            alg->encrypt
+                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+        }
+        ref_time = cipher_ref_metrics.encrypt_128;
+        break;
+
+    case MODE_DEC128:
+        for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
+            alg->decrypt
+                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+        }
+        ref_time = cipher_ref_metrics.decrypt_128;
+        break;
+
+    case MODE_ENC16:
+        for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
+            alg->encrypt
+                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+        }
+        ref_time = cipher_ref_metrics.encrypt_16;
+        break;
+
+    case MODE_DEC16:
+        for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
+            alg->decrypt
+                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+        }
+        ref_time = cipher_ref_metrics.decrypt_16;
+        break;
+    }
+
+    /* Reduce the number of loops for slow ciphers */
+    if (slow)
+        loops = PERF_LOOPS_SLOW;
+    else
+        loops = PERF_LOOPS;
+    bytes = loops * 128;
+
+    /* Now measure the timing for real */
+    if (mode == MODE_ENC128 || mode == MODE_DEC128) {
+        start = perf_timer_get_time();
+        for (count = 0; count < loops; ++count) {
+            alg->encrypt
+                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+        }
+        elapsed = perf_timer_get_time() - start;
+    } else {
+        start = perf_timer_get_time();
+        for (count = 0; count < loops; ++count) {
+            alg->decrypt
+                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+        }
+        elapsed = perf_timer_get_time() - start;
+    }
+
+    /* Report the results */
+    if (report) {
+        if (ref_time != 0 && elapsed != 0)
+            printf("%.2fx, ", ((double)ref_time) / elapsed);
+        printf(" %.3f ns/byte, %.3f MiB/sec\n",
+               (elapsed * 1000000000.0) / (bytes * ticks_per_second),
+               (bytes * (double)ticks_per_second) / (elapsed * 1024.0 * 1024.0));
+    }
+
+    /* Return the elapsed time to the caller */
+    return elapsed;
+}
+
+/* Generate performance metrics for a cipher algorithm */
+static void perf_cipher_metrics
+    (const aead_cipher_t *alg, perf_cipher_metrics_t *metrics,
+     int report, int slow)
+{
+    if (report)
+        printf("%s:\n", alg->name);
+
+    metrics->encrypt_128 =
+        perf_cipher_encrypt_decrypt
+            (alg, "encrypt 128", MODE_ENC128, report, slow);
+
+    metrics->decrypt_128 =
+        perf_cipher_encrypt_decrypt
+            (alg, "decrypt 128", MODE_DEC128, report, slow);
+
+    metrics->encrypt_16 =
+        perf_cipher_encrypt_decrypt
+            (alg, "encrypt 16", MODE_ENC16, report, slow);
+
+    metrics->decrypt_16 =
+        perf_cipher_encrypt_decrypt
+            (alg, "decrypt 16", MODE_DEC16, report, slow);
+
+    if (report) {
+        if (metrics->encrypt_128 != 0) {
+            perf_timer_t ref_total, act_total;
+            ref_total = cipher_ref_metrics.encrypt_128 +
+                        cipher_ref_metrics.decrypt_128 +
+                        cipher_ref_metrics.encrypt_16  +
+                        cipher_ref_metrics.encrypt_16;
+            act_total = metrics->encrypt_128 +
+                        metrics->decrypt_128 +
+                        metrics->encrypt_16  +
+                        metrics->encrypt_16;
+            printf("   average ... %.2fx\n", ((double)ref_total) / act_total);
+        }
+        printf("\n");
+    }
+}
+
+/* Compare the performance of a cipher against ChaChaPoly */
+static int perf_cipher(const aead_cipher_t *alg)
+{
+    perf_cipher_metrics_t metrics;
+    int slow;
+
+    slow = (alg->flags & (AEAD_FLAG_SLOW | AEAD_FLAG_MASKED)) != 0;
+
+    perf_cipher_metrics(&internal_chachapoly_cipher, &cipher_ref_metrics, 0, slow);
+    perf_cipher_metrics(alg, &metrics, 1, slow);
+
+    return 0;
+}
+
 /* Test a hash algorithm on a specific test vector */
 static int test_hash_inner
     (const aead_hash_algorithm_t *alg, const test_vector_t *vec)
@@ -469,11 +672,122 @@ static int test_hash(const aead_hash_algorithm_t *alg, FILE *file)
     return fail != 0;
 }
 
+/* Metrics that have been collected for various hashing scenarios */
+typedef struct
+{
+    perf_timer_t hash_1024;
+    perf_timer_t hash_128;
+    perf_timer_t hash_16;
+
+} perf_hash_metrics_t;
+
+/* Reference metrics for the BLAKE2s hash algorithm */
+static perf_hash_metrics_t hash_ref_metrics;
+
+#define MAX_HASH_SIZE 64
+#define MAX_HASH_DATA_SIZE 1024
+#define PERF_HASH_LOOPS 100000
+
+/* Generate performance metrics for a cipher algorithm: encrypt 128 bytes */
+static perf_timer_t perf_hash_N
+    (const aead_hash_algorithm_t *alg, perf_timer_t ref_time,
+     int size, int report)
+{
+    unsigned char hash_buffer[MAX_HASH_DATA_SIZE];
+    unsigned char hash_output[MAX_HASH_SIZE];
+    perf_timer_t start, elapsed;
+    perf_timer_t ticks_per_second = perf_timer_ticks_per_second();
+    int count;
+    int loops;
+    int bytes;
+
+    /* Print what we are doing now */
+    if (report) {
+        printf("   hash %4d bytes ... ", size);
+        fflush(stdout);
+    }
+
+    /* Initialize the hash input buffer */
+    for (count = 0; count < MAX_HASH_DATA_SIZE; ++count)
+        hash_buffer[count] = (unsigned char)count;
+
+    /* Run several loops without timing to force the CPU
+     * to load the code and data into internal cache to get
+     * the best speed when we measure properly later. */
+    for (count = 0; count < PERF_LOOPS_WARMUP; ++count)
+        alg->hash(hash_output, hash_buffer, size);
+
+    /* Determine how many loops to do; more on the smaller sizes */
+    if (size < 1024)
+        loops = PERF_HASH_LOOPS * 4;
+    else
+        loops = PERF_HASH_LOOPS;
+
+    /* Now measure the timing for real */
+    start = perf_timer_get_time();
+    for (count = 0; count < loops; ++count)
+        alg->hash(hash_output, hash_buffer, size);
+    elapsed = perf_timer_get_time() - start;
+    bytes = size * loops;
+
+    /* Report the results */
+    if (report) {
+        if (ref_time != 0 && elapsed != 0)
+            printf("%.2fx, ", ((double)ref_time) / elapsed);
+        printf(" %.3f ns/byte, %.3f MiB/sec\n",
+               (elapsed * 1000000000.0) / (bytes * ticks_per_second),
+               (bytes * (double)ticks_per_second) / (elapsed * 1024.0 * 1024.0));
+    }
+
+    /* Return the elapsed time to the caller */
+    return elapsed;
+}
+
+/* Generate performance metrics for a hash algorithm */
+static void perf_hash_metrics
+    (const aead_hash_algorithm_t *alg, perf_hash_metrics_t *metrics, int report)
+{
+    if (report)
+        printf("%s:\n", alg->name);
+
+    metrics->hash_1024 =
+        perf_hash_N(alg, hash_ref_metrics.hash_1024, 1024, report);
+    metrics->hash_128 =
+        perf_hash_N(alg, hash_ref_metrics.hash_128, 128, report);
+    metrics->hash_16 =
+        perf_hash_N(alg, hash_ref_metrics.hash_16, 16, report);
+
+    if (report) {
+        if (metrics->hash_1024 != 0) {
+            double avg =
+                ((double)(hash_ref_metrics.hash_1024)) / metrics->hash_1024;
+            avg += ((double)(hash_ref_metrics.hash_128)) / metrics->hash_128;
+            avg += ((double)(hash_ref_metrics.hash_16)) / metrics->hash_16;
+            avg /= 3.0;
+            printf("   average ... %.2fx\n", avg);
+        }
+        printf("\n");
+    }
+}
+
+/* Generate performance metrics for a hash algorithm */
+static int perf_hash(const aead_hash_algorithm_t *alg)
+{
+    perf_hash_metrics_t metrics;
+
+    perf_hash_metrics(&internal_blake2s_hash_algorithm, &hash_ref_metrics, 0);
+    perf_hash_metrics(alg, &metrics, 1);
+
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
+    const char *progname = argv[0];
     const aead_cipher_t *cipher;
     const aead_hash_algorithm_t *hash;
     int exit_val;
+    int performance = 0;
     FILE *file;
 
     /* If "--algorithms" is supplied, then list all supported algorithms */
@@ -483,8 +797,17 @@ int main(int argc, char *argv[])
     }
 
     /* Check that we have all command-line arguments that we need */
+    if (argc > 3 && !strcmp(argv[1], "--performance")) {
+        performance = 1;
+        if (!perf_timer_init()) {
+            fprintf(stderr, "%s: do not know how to time events on this system\n", progname);
+            return 1;
+        }
+        --argc;
+        ++argv;
+    }
     if (argc < 3) {
-        fprintf(stderr, "Usage: %s Algorithm KAT-file\n", argv[0]);
+        fprintf(stderr, "Usage: %s Algorithm KAT-file [perf]\n", progname);
         return 1;
     }
 
@@ -497,16 +820,26 @@ int main(int argc, char *argv[])
     /* Look for a cipher with the specified name */
     cipher = find_cipher(argv[1]);
     if (cipher) {
-        exit_val = test_cipher(cipher, file);
-        fclose(file);
+        if (performance) {
+            fclose(file);
+            exit_val = perf_cipher(cipher);
+        } else {
+            exit_val = test_cipher(cipher, file);
+            fclose(file);
+        }
         return exit_val;
     }
 
     /* Look for a hash algorithm with the specified name */
     hash = find_hash_algorithm(argv[1]);
     if (hash) {
-        exit_val = test_hash(hash, file);
-        fclose(file);
+        if (performance) {
+            fclose(file);
+            exit_val = perf_hash(hash);
+        } else {
+            exit_val = test_hash(hash, file);
+            fclose(file);
+        }
         return exit_val;
     }
 

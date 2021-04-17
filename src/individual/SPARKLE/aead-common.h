@@ -180,6 +180,17 @@ typedef void (*aead_xof_squeeze_t)
 #define AEAD_FLAG_SC_PROTECT_ALL    0x0004
 
 /**
+ * \brief Algorithm is very slow in software, so performance frameworks
+ * may want to use a different testing approach to avoid taking too long.
+ */
+#define AEAD_FLAG_SLOW              0x0008
+
+/**
+ * \brief Algorithm uses masking to protect sensitive material.
+ */
+#define AEAD_FLAG_MASKED            0x0010
+
+/**
  * \brief Meta-information about an AEAD cipher.
  */
 typedef struct

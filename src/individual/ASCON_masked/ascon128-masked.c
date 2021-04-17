@@ -46,9 +46,9 @@ aead_cipher_t const ascon128_masked_cipher = {
     ASCON128_MASKED_NONCE_SIZE,
     ASCON128_MASKED_TAG_SIZE,
 #if AEAD_MASKING_KEY_ONLY
-    AEAD_FLAG_SC_PROTECT_KEY,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_MASKED,
 #else
-    AEAD_FLAG_SC_PROTECT_ALL,
+    AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     ascon128_masked_aead_encrypt,
     ascon128_masked_aead_decrypt
@@ -60,9 +60,9 @@ aead_cipher_t const ascon128a_masked_cipher = {
     ASCON128_MASKED_NONCE_SIZE,
     ASCON128_MASKED_TAG_SIZE,
 #if AEAD_MASKING_KEY_ONLY
-    AEAD_FLAG_SC_PROTECT_KEY,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_MASKED,
 #else
-    AEAD_FLAG_SC_PROTECT_ALL,
+    AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     ascon128a_masked_aead_encrypt,
     ascon128a_masked_aead_decrypt
@@ -74,9 +74,9 @@ aead_cipher_t const ascon80pq_masked_cipher = {
     ASCON80PQ_MASKED_NONCE_SIZE,
     ASCON80PQ_MASKED_TAG_SIZE,
 #if AEAD_MASKING_KEY_ONLY
-    AEAD_FLAG_SC_PROTECT_KEY,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_MASKED,
 #else
-    AEAD_FLAG_SC_PROTECT_ALL,
+    AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     ascon80pq_masked_aead_encrypt,
     ascon80pq_masked_aead_decrypt
