@@ -283,4 +283,25 @@ Changes in the primary hash algorithm performance for ESP32:
 <tr><td>PHOTON-Beetle</td><td>0.02</td><td>0.06</td></tr>
 </table>
 
+\section perf_64bit Algorithms with native 64-bit support
+
+My round 2 implementations were focused on 32-bit and 8-bit architectures.
+I have since added some implementations in C that are designed for 64-bit
+systems:
+
+\li ASCON defaults to using 64-bit words on 64-bit platforms (also used
+by ISAP-A).
+\li Keccak-p[200] variant that is optimised for 64-bit words, with
+each row held in a 64-bit register (used by Elephant).
+\li Keccak-p[400] variant that is optimised for 64-bit words, with
+each row held in a pair of 64-bit registers (used by ISAP-K).
+\li TinyJAMBU variant that divides the 128-bit state up into two
+64-bit words instead of four 32-bit words.  This halves the number of
+shift and OR operations that are needed to implement the permutation
+on 64-bit systems.
+
+64-bit systems are detected by the <tt>LW_UTIL_CPU_IS_64BIT define</tt> in
+\ref internal-util.h.  Currently x86-64 and arm64 platforms are
+recognized.  Patches welcome to support other 64-bit architectures.
+
 */
