@@ -97,7 +97,7 @@ internal-photon256.o: internal-photon256.h internal-photon256-mix.h internal-uti
 internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-sparkle.o: internal-sparkle.h internal-util.h
 internal-spongent.o: internal-spongent.h internal-util.h
-internal-tinyjambu.o: internal-tinyjambu.h
+internal-tinyjambu.o: internal-tinyjambu.h internal-util.h
 internal-tinyjambu-m.o: internal-tinyjambu-m.h aead-random.h internal-masking.h internal-util.h
 internal-xoodoo.o: internal-xoodoo.h internal-util.h
 internal-xoodoo-m.o: internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h

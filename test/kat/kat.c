@@ -353,7 +353,7 @@ static int test_cipher(const aead_cipher_t *alg, FILE *file)
     return fail != 0;
 }
 
-#define MAX_DATA_SIZE 128
+#define MAX_DATA_SIZE 1024
 #define MAX_TAG_SIZE 32
 
 #define PERF_LOOPS 1000000
@@ -380,16 +380,20 @@ typedef struct
     perf_timer_t decrypt_128;
     perf_timer_t encrypt_16;
     perf_timer_t decrypt_16;
+    perf_timer_t encrypt_1024;
+    perf_timer_t decrypt_1024;
 
 } perf_cipher_metrics_t;
 
 /* Reference metrics for the ChaChaPoly cipher */
 static perf_cipher_metrics_t cipher_ref_metrics;
 
-#define MODE_ENC128 0
-#define MODE_DEC128 1
-#define MODE_ENC16  2
-#define MODE_DEC16  3
+#define MODE_ENC128  0
+#define MODE_DEC128  1
+#define MODE_ENC16   2
+#define MODE_DEC16   3
+#define MODE_ENC1024 4
+#define MODE_DEC1024 5
 
 /* Generate performance metrics for a cipher algorithm: encrypt 128 bytes */
 static perf_timer_t perf_cipher_encrypt_decrypt
@@ -420,6 +424,8 @@ static perf_timer_t perf_cipher_encrypt_decrypt
         plaintext[count] = (unsigned char)count;
     if (mode == MODE_ENC128 || mode == MODE_DEC128)
         plen = 128;
+    else if (mode == MODE_ENC1024 || mode == MODE_DEC1024)
+        plen = 1024;
     else
         plen = 16;
     alg->encrypt(ciphertext, &clen, plaintext, plen, 0, 0, 0, nonce, key);
@@ -459,6 +465,22 @@ static perf_timer_t perf_cipher_encrypt_decrypt
         }
         ref_time = cipher_ref_metrics.decrypt_16;
         break;
+
+    case MODE_ENC1024:
+        for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
+            alg->encrypt
+                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+        }
+        ref_time = cipher_ref_metrics.encrypt_1024;
+        break;
+
+    case MODE_DEC1024:
+        for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
+            alg->decrypt
+                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+        }
+        ref_time = cipher_ref_metrics.decrypt_1024;
+        break;
     }
 
     /* Reduce the number of loops for slow ciphers */
@@ -466,10 +488,10 @@ static perf_timer_t perf_cipher_encrypt_decrypt
         loops = PERF_LOOPS_SLOW;
     else
         loops = PERF_LOOPS;
-    bytes = loops * 128;
+    bytes = loops * plen;
 
     /* Now measure the timing for real */
-    if (mode == MODE_ENC128 || mode == MODE_DEC128) {
+    if (mode == MODE_ENC128 || mode == MODE_ENC16 || mode == MODE_ENC1024) {
         start = perf_timer_get_time();
         for (count = 0; count < loops; ++count) {
             alg->encrypt
@@ -522,8 +544,20 @@ static void perf_cipher_metrics
         perf_cipher_encrypt_decrypt
             (alg, "decrypt 16", MODE_DEC16, report, slow);
 
+#if 0
+    metrics->encrypt_1024 =
+        perf_cipher_encrypt_decrypt
+            (alg, "encrypt 1024", MODE_ENC1024, report, slow);
+
+    metrics->decrypt_1024 =
+        perf_cipher_encrypt_decrypt
+            (alg, "decrypt 1024", MODE_DEC1024, report, slow);
+#endif
+
     if (report) {
         if (metrics->encrypt_128 != 0) {
+            /* For fair comparison with the Arduino performance framework,
+             * we don't include 1024 byte runs in the overall average. */
             perf_timer_t ref_total, act_total;
             ref_total = cipher_ref_metrics.encrypt_128 +
                         cipher_ref_metrics.decrypt_128 +

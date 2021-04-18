@@ -23,7 +23,7 @@
 #ifndef LW_INTERNAL_TINYJAMBU_H
 #define LW_INTERNAL_TINYJAMBU_H
 
-#include <stdint.h>
+#include "internal-util.h"
 
 /**
  * \file internal-tinyjambu.h
@@ -34,10 +34,61 @@
 extern "C" {
 #endif
 
+/** @cond tiny_jambu_64 */
+#if defined(LW_UTIL_CPU_IS_64BIT)
+#define TINY_JAMBU_64BIT 1
+#else
+#define TINY_JAMBU_64BIT 0
+#endif
+/** @endcond */
+
 /**
- * \brief Size of the TinyJAMBU state in 32-bit words.
+ * \brief TinyJAMBU permutation state.
  */
-#define TINY_JAMBU_STATE_SIZE 4
+typedef struct
+{
+#if TINY_JAMBU_64BIT
+    uint64_t t[2];      /** State as 64-bit words */
+#else
+    uint32_t s[4];      /** State as 32-bit words */
+#endif
+} tiny_jambu_state_t;
+
+/**
+ * \typedef tiny_jambu_key_word_t
+ * \brief Size of a word in the key schedule (32 or 64 bits).
+ */
+#if TINY_JAMBU_64BIT
+typedef uint64_t tiny_jambu_key_word_t;
+#else
+typedef uint32_t tiny_jambu_key_word_t;
+#endif
+
+/**
+ * \def tiny_jambu_key_load_even(ptr)
+ * \brief Loads an even key word for TinyJAMBU.
+ *
+ * \param ptr Points to the 4 bytes of the key word in little-endian order.
+ * \return The key word.
+ */
+/**
+ * \def tiny_jambu_key_load_odd(ptr)
+ * \brief Loads an odd key word for TinyJAMBU.
+ *
+ * \param ptr Points to the 4 bytes of the key word in little-endian order.
+ * \return The key word.
+ */
+#if TINY_JAMBU_64BIT
+#define tiny_jambu_key_load_even(ptr) \
+    ((tiny_jambu_key_word_t)(~(le_load_word32((ptr)))))
+#define tiny_jambu_key_load_odd(ptr) \
+    (((tiny_jambu_key_word_t)(~(le_load_word32((ptr))))) << 32)
+#else
+#define tiny_jambu_key_load_even(ptr) \
+    ((tiny_jambu_key_word_t)(~(le_load_word32((ptr)))))
+#define tiny_jambu_key_load_odd(ptr) \
+    ((tiny_jambu_key_word_t)(~(le_load_word32((ptr)))))
+#endif
 
 /**
  * \brief Converts a number of steps into a number of rounds, where each
@@ -61,7 +112,7 @@ extern "C" {
  * evaluating the permutation.
  */
 void tiny_jambu_permutation_128
-    (uint32_t state[TINY_JAMBU_STATE_SIZE], const uint32_t *key,
+    (tiny_jambu_state_t *state, const tiny_jambu_key_word_t *key,
      unsigned rounds);
 
 /**
@@ -76,7 +127,7 @@ void tiny_jambu_permutation_128
  * evaluating the permutation.
  */
 void tiny_jambu_permutation_192
-    (uint32_t state[TINY_JAMBU_STATE_SIZE], const uint32_t *key,
+    (tiny_jambu_state_t *state, const tiny_jambu_key_word_t *key,
      unsigned rounds);
 
 /**
@@ -91,7 +142,7 @@ void tiny_jambu_permutation_192
  * evaluating the permutation.
  */
 void tiny_jambu_permutation_256
-    (uint32_t state[TINY_JAMBU_STATE_SIZE], const uint32_t *key,
+    (tiny_jambu_state_t *state, const tiny_jambu_key_word_t *key,
      unsigned rounds);
 
 #ifdef __cplusplus
