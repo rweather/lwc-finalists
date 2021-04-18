@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li class="level1"><a href="#perf_overall">Overall group rankings</a></li>
 <li class="level1"><a href="#perf_changes_arm">Changes in ARM Cortex M3 performance since Round 2</a></li>
 <li class="level1"><a href="#perf_changes_esp32">Changes in ESP32 performance since Round 2</a></li>
+<li class="level1"><a href="#perf_64bit">Algorithms with native 64-bit support</a></li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="perf_intro"></a>
@@ -372,10 +373,20 @@ Changes in ESP32 performance since Round 2</h1>
 <tr>
 <td>PHOTON-Beetle</td><td>0.02</td><td>0.06 </td></tr>
 </table>
+<h1><a class="anchor" id="perf_64bit"></a>
+Algorithms with native 64-bit support</h1>
+<p>My round 2 implementations were focused on 32-bit and 8-bit architectures. I have since added some implementations in C that are designed for 64-bit systems:</p>
+<ul>
+<li>ASCON defaults to using 64-bit words on 64-bit platforms (also used by ISAP-A). </li>
+<li>Keccak-p[200] variant that is optimised for 64-bit words, with each row held in a 64-bit register (used by Elephant). </li>
+<li>Keccak-p[400] variant that is optimised for 64-bit words, with each row held in a pair of 64-bit registers (used by ISAP-K). </li>
+<li>TinyJAMBU variant that divides the 128-bit state up into two 64-bit words instead of four 32-bit words. This halves the number of shift and OR operations that are needed to implement the permutation on 64-bit systems.</li>
+</ul>
+<p>64-bit systems are detected by the <code>LW_UTIL_CPU_IS_64BIT define</code> in <a class="el" href="internal-util_8h_source.html">internal-util.h</a>. Currently x86-64 and arm64 platforms are recognized. Patches welcome to support other 64-bit architectures. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 11 2021 17:21:37 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 18 2021 18:00:53 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -85,7 +85,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">internal-tinyjambu.h File Reference</div>  </div>
@@ -94,35 +96,100 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Internal implementation of the TinyJAMBU permutation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br/>
+<div class="textblock"><code>#include &quot;internal-util.h&quot;</code><br/>
 </div>
 <p><a href="internal-tinyjambu_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">TinyJAMBU permutation state.  <a href="structtiny__jambu__state__t.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a6ca3a4f5b5780a290c00a85679fd2a90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ca3a4f5b5780a290c00a85679fd2a90"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a6ca3a4f5b5780a290c00a85679fd2a90">TINY_JAMBU_STATE_SIZE</a>&#160;&#160;&#160;4</td></tr>
-<tr class="memdesc:a6ca3a4f5b5780a290c00a85679fd2a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the TinyJAMBU state in 32-bit words. <br/></td></tr>
-<tr class="separator:a6ca3a4f5b5780a290c00a85679fd2a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67e0ea5d19a3f762d6e3e847e900a2f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a67e0ea5d19a3f762d6e3e847e900a2f2">tiny_jambu_key_load_even</a>(ptr)&#160;&#160;&#160;((<a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a>)(~(le_load_word32((ptr)))))</td></tr>
+<tr class="memdesc:a67e0ea5d19a3f762d6e3e847e900a2f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an even key word for TinyJAMBU.  <a href="#a67e0ea5d19a3f762d6e3e847e900a2f2">More...</a><br/></td></tr>
+<tr class="separator:a67e0ea5d19a3f762d6e3e847e900a2f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a73720588bbe09195cbc5e1c92c8d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a1a73720588bbe09195cbc5e1c92c8d25">tiny_jambu_key_load_odd</a>(ptr)&#160;&#160;&#160;((<a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a>)(~(le_load_word32((ptr)))))</td></tr>
+<tr class="memdesc:a1a73720588bbe09195cbc5e1c92c8d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an odd key word for TinyJAMBU.  <a href="#a1a73720588bbe09195cbc5e1c92c8d25">More...</a><br/></td></tr>
+<tr class="separator:a1a73720588bbe09195cbc5e1c92c8d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab20aad70de3206ce2707aa66f8c1e6ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#ab20aad70de3206ce2707aa66f8c1e6ac">TINYJAMBU_ROUNDS</a>(steps)&#160;&#160;&#160;((steps) / 128)</td></tr>
 <tr class="memdesc:ab20aad70de3206ce2707aa66f8c1e6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a number of steps into a number of rounds, where each round consists of 128 steps.  <a href="#ab20aad70de3206ce2707aa66f8c1e6ac">More...</a><br/></td></tr>
 <tr class="separator:ab20aad70de3206ce2707aa66f8c1e6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a5ff18d32dc9e0e71ba68d77cebd5c600"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ff18d32dc9e0e71ba68d77cebd5c600"></a>
+typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a></td></tr>
+<tr class="memdesc:a5ff18d32dc9e0e71ba68d77cebd5c600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a word in the key schedule (32 or 64 bits). <br/></td></tr>
+<tr class="separator:a5ff18d32dc9e0e71ba68d77cebd5c600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afc6b9428c0a360b37f4e825c038bc7c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#afc6b9428c0a360b37f4e825c038bc7c4">tiny_jambu_permutation_128</a> (uint32_t state[<a class="el" href="internal-tinyjambu_8h.html#a6ca3a4f5b5780a290c00a85679fd2a90">TINY_JAMBU_STATE_SIZE</a>], const uint32_t *key, unsigned rounds)</td></tr>
-<tr class="memdesc:afc6b9428c0a360b37f4e825c038bc7c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the TinyJAMBU-128 permutation.  <a href="#afc6b9428c0a360b37f4e825c038bc7c4">More...</a><br/></td></tr>
-<tr class="separator:afc6b9428c0a360b37f4e825c038bc7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7cfc7a4f1d7d0038770267050293ada"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#aa7cfc7a4f1d7d0038770267050293ada">tiny_jambu_permutation_192</a> (uint32_t state[<a class="el" href="internal-tinyjambu_8h.html#a6ca3a4f5b5780a290c00a85679fd2a90">TINY_JAMBU_STATE_SIZE</a>], const uint32_t *key, unsigned rounds)</td></tr>
-<tr class="memdesc:aa7cfc7a4f1d7d0038770267050293ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the TinyJAMBU-192 permutation.  <a href="#aa7cfc7a4f1d7d0038770267050293ada">More...</a><br/></td></tr>
-<tr class="separator:aa7cfc7a4f1d7d0038770267050293ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4377ab9d2746be67f9037a5fe43a262c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a4377ab9d2746be67f9037a5fe43a262c">tiny_jambu_permutation_256</a> (uint32_t state[<a class="el" href="internal-tinyjambu_8h.html#a6ca3a4f5b5780a290c00a85679fd2a90">TINY_JAMBU_STATE_SIZE</a>], const uint32_t *key, unsigned rounds)</td></tr>
-<tr class="memdesc:a4377ab9d2746be67f9037a5fe43a262c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the TinyJAMBU-256 permutation.  <a href="#a4377ab9d2746be67f9037a5fe43a262c">More...</a><br/></td></tr>
-<tr class="separator:a4377ab9d2746be67f9037a5fe43a262c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc169dcfe528e0e6cb45ab024daac1f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#afc169dcfe528e0e6cb45ab024daac1f2">tiny_jambu_permutation_128</a> (<a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a> *state, const <a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a> *key, unsigned rounds)</td></tr>
+<tr class="memdesc:afc169dcfe528e0e6cb45ab024daac1f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the TinyJAMBU-128 permutation.  <a href="#afc169dcfe528e0e6cb45ab024daac1f2">More...</a><br/></td></tr>
+<tr class="separator:afc169dcfe528e0e6cb45ab024daac1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8d17d87c061bc88da87bf31b28950e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a0e8d17d87c061bc88da87bf31b28950e">tiny_jambu_permutation_192</a> (<a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a> *state, const <a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a> *key, unsigned rounds)</td></tr>
+<tr class="memdesc:a0e8d17d87c061bc88da87bf31b28950e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the TinyJAMBU-192 permutation.  <a href="#a0e8d17d87c061bc88da87bf31b28950e">More...</a><br/></td></tr>
+<tr class="separator:a0e8d17d87c061bc88da87bf31b28950e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45cd3974480a195e48dd5c792fc335a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#ac45cd3974480a195e48dd5c792fc335a">tiny_jambu_permutation_256</a> (<a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a> *state, const <a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a> *key, unsigned rounds)</td></tr>
+<tr class="memdesc:ac45cd3974480a195e48dd5c792fc335a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the TinyJAMBU-256 permutation.  <a href="#ac45cd3974480a195e48dd5c792fc335a">More...</a><br/></td></tr>
+<tr class="separator:ac45cd3974480a195e48dd5c792fc335a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Internal implementation of the TinyJAMBU permutation. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a67e0ea5d19a3f762d6e3e847e900a2f2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define tiny_jambu_key_load_even</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr</td><td>)</td>
+          <td>&#160;&#160;&#160;((<a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a>)(~(le_load_word32((ptr)))))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads an even key word for TinyJAMBU. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Points to the 4 bytes of the key word in little-endian order. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The key word. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1a73720588bbe09195cbc5e1c92c8d25"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define tiny_jambu_key_load_odd</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr</td><td>)</td>
+          <td>&#160;&#160;&#160;((<a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a>)(~(le_load_word32((ptr)))))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads an odd key word for TinyJAMBU. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>Points to the 4 bytes of the key word in little-endian order. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The key word. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ab20aad70de3206ce2707aa66f8c1e6ac"></a>
 <div class="memitem">
 <div class="memproto">
@@ -149,20 +216,20 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="afc6b9428c0a360b37f4e825c038bc7c4"></a>
+<a class="anchor" id="afc169dcfe528e0e6cb45ab024daac1f2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void tiny_jambu_permutation_128 </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>state</em>[TINY_JAMBU_STATE_SIZE], </td>
+          <td class="paramtype"><a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramtype">const <a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a> *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -192,20 +259,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa7cfc7a4f1d7d0038770267050293ada"></a>
+<a class="anchor" id="a0e8d17d87c061bc88da87bf31b28950e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void tiny_jambu_permutation_192 </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>state</em>[TINY_JAMBU_STATE_SIZE], </td>
+          <td class="paramtype"><a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramtype">const <a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a> *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -235,20 +302,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4377ab9d2746be67f9037a5fe43a262c"></a>
+<a class="anchor" id="ac45cd3974480a195e48dd5c792fc335a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void tiny_jambu_permutation_256 </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>state</em>[TINY_JAMBU_STATE_SIZE], </td>
+          <td class="paramtype"><a class="el" href="structtiny__jambu__state__t.html">tiny_jambu_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramtype">const <a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a> *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -281,7 +348,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 11 2021 17:21:37 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 18 2021 18:00:53 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

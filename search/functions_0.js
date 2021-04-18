@@ -1,7 +1,6 @@
 var searchData=
 [
   ['aead_5fcheck_5ftag',['aead_check_tag',['../aead-common_8h.html#aee68ca38ca62dbae8e52072af87e4f0a',1,'aead-common.c']]],
-  ['aead_5fcheck_5ftag_5fprecheck',['aead_check_tag_precheck',['../aead-common_8h.html#afa549735cf9aa743dc54071ee0124af4',1,'aead-common.c']]],
   ['aead_5frandom_5ffinish',['aead_random_finish',['../aead-random_8h.html#afd82a0f33788413a176333d0afe697b3',1,'aead-random.c']]],
   ['aead_5frandom_5fgenerate',['aead_random_generate',['../aead-random_8h.html#ae4014b6affbf43fe075f3217557de259',1,'aead-random.c']]],
   ['aead_5frandom_5fgenerate_5f32',['aead_random_generate_32',['../aead-random_8h.html#a01593d6cb100e428306930561e747182',1,'aead-random.c']]],
