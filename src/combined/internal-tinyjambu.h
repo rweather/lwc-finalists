@@ -48,9 +48,9 @@ extern "C" {
 typedef struct
 {
 #if TINY_JAMBU_64BIT
-    uint64_t t[2];      /** State as 64-bit words */
+    uint64_t t[2];      /**< State as 64-bit words */
 #else
-    uint32_t s[4];      /** State as 32-bit words */
+    uint32_t s[4];      /**< State as 32-bit words */
 #endif
 } tiny_jambu_state_t;
 
