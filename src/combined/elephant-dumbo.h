@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ELEPHANT_DUMBO_H
 #define LWCRYPTO_ELEPHANT_DUMBO_H
 
-#include "aead-common.h"
-
 /**
  * \file elephant-dumbo.h
  * \brief Dumbo authenticated encryption algorithm.
@@ -54,11 +52,6 @@ extern "C" {
  * \brief Size of the nonce for Dumbo.
  */
 #define DUMBO_NONCE_SIZE 12
-
-/**
- * \brief Meta-information block for the Dumbo cipher.
- */
-extern aead_cipher_t const dumbo_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with Dumbo.

@@ -45,19 +45,6 @@
  */
 #define ROMULUS_HASH_RATE 32
 
-aead_hash_algorithm_t const romulus_hash_algorithm = {
-    "Romulus-H+",
-    sizeof(romulus_hash_state_t),
-    ROMULUS_HASH_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_hash,
-    (aead_hash_init_t)romulus_hash_init,
-    (aead_hash_update_t)romulus_hash_update,
-    (aead_hash_finalize_t)romulus_hash_finalize,
-    (aead_xof_absorb_t)0,
-    (aead_xof_squeeze_t)0
-};
-
 int romulus_hash
     (unsigned char *out, const unsigned char *in, unsigned long long inlen)
 {

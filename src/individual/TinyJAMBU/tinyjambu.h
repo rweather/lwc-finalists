@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_TINYJAMBU_H
 #define LWCRYPTO_TINYJAMBU_H
 
-#include "aead-common.h"
-
 /**
  * \file tinyjambu.h
  * \brief TinyJAMBU authenticated encryption algorithm.
@@ -70,21 +68,6 @@ extern "C" {
  * \brief Size of the nonce for all TinyJAMBU variants.
  */
 #define TINY_JAMBU_NONCE_SIZE 12
-
-/**
- * \brief Meta-information block for the TinyJAMBU-128 cipher.
- */
-extern aead_cipher_t const tiny_jambu_128_cipher;
-
-/**
- * \brief Meta-information block for the TinyJAMBU-192 cipher.
- */
-extern aead_cipher_t const tiny_jambu_192_cipher;
-
-/**
- * \brief Meta-information block for the TinyJAMBU-256 cipher.
- */
-extern aead_cipher_t const tiny_jambu_256_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with TinyJAMBU-128.

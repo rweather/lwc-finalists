@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ASCON_H
 #define LWCRYPTO_ASCON_H
 
-#include "aead-common.h"
-
 /**
  * \file ascon128.h
  * \brief ASCON-128 encryption algorithm and related family members.
@@ -96,31 +94,6 @@ typedef union
     unsigned long long align;    /**< For alignment of this structure */
 
 } ascon_hash_state_t;
-
-/**
- * \brief Meta-information block for the ASCON-128 cipher.
- */
-extern aead_cipher_t const ascon128_cipher;
-
-/**
- * \brief Meta-information block for the ASCON-128a cipher.
- */
-extern aead_cipher_t const ascon128a_cipher;
-
-/**
- * \brief Meta-information block for the ASCON-80pq cipher.
- */
-extern aead_cipher_t const ascon80pq_cipher;
-
-/**
- * \brief Meta-information block for the ASCON-HASH algorithm.
- */
-extern aead_hash_algorithm_t const ascon_hash_algorithm;
-
-/**
- * \brief Meta-information block for the ASCON-XOF algorithm.
- */
-extern aead_hash_algorithm_t const ascon_xof_algorithm;
 
 /**
  * \brief Encrypts and authenticates a packet with ASCON-128.

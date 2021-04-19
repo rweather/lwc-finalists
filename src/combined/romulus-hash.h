@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ROMULUS_HASH_H
 #define LWCRYPTO_ROMULUS_HASH_H
 
-#include "aead-common.h"
-
 /**
  * \file romulus-hash.h
  * \brief Romulus-H+ hash algorithm.
@@ -59,11 +57,6 @@ typedef union
     unsigned long long align;   /**< For alignment of this structure */
 
 } romulus_hash_state_t;
-
-/**
- * \brief Meta-information block for the Romulus-H+ hash algorithm.
- */
-extern aead_hash_algorithm_t const romulus_hash_algorithm;
 
 /**
  * \brief Hashes a block of input data with Romulus-H+.

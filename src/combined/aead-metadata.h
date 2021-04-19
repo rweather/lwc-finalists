@@ -20,18 +20,18 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_AEAD_COMMON_H
-#define LWCRYPTO_AEAD_COMMON_H
+#ifndef LWCRYPTO_AEAD_METADATA_H
+#define LWCRYPTO_AEAD_METADATA_H
 
 #include <stddef.h>
 
 /**
- * \file aead-common.h
- * \brief Definitions that are common across AEAD schemes.
+ * \file aead-metadata.h
+ * \brief Metadata defintions for AEAD and hashing schemes.
  *
- * AEAD stands for "Authenticated Encryption with Associated Data".
- * It is a standard API pattern for securely encrypting and
- * authenticating packets of data.
+ * This module provides metadata about the other implementations that
+ * is useful for testing and benchmarking frameworks, but isn't part
+ * of the main code for the algorithms.
  */
 
 #ifdef __cplusplus
@@ -226,6 +226,221 @@ typedef struct
     aead_xof_squeeze_t squeeze; /**< Incremental XOF squeeze function */
 
 } aead_hash_algorithm_t;
+
+/*------------------------- ASCON -------------------------*/
+
+/**
+ * \brief Meta-information block for the ASCON-128 cipher.
+ */
+extern aead_cipher_t const ascon128_cipher;
+
+/**
+ * \brief Meta-information block for the ASCON-128a cipher.
+ */
+extern aead_cipher_t const ascon128a_cipher;
+
+/**
+ * \brief Meta-information block for the ASCON-80pq cipher.
+ */
+extern aead_cipher_t const ascon80pq_cipher;
+
+/**
+ * \brief Meta-information block for the ASCON-HASH algorithm.
+ */
+extern aead_hash_algorithm_t const ascon_hash_algorithm;
+
+/**
+ * \brief Meta-information block for the ASCON-XOF algorithm.
+ */
+extern aead_hash_algorithm_t const ascon_xof_algorithm;
+
+/**
+ * \brief Meta-information block for the masked ASCON-128 cipher.
+ */
+extern aead_cipher_t const ascon128_masked_cipher;
+
+/**
+ * \brief Meta-information block for the masked ASCON-128a cipher.
+ */
+extern aead_cipher_t const ascon128a_masked_cipher;
+
+/**
+ * \brief Meta-information block for the masked ASCON-80pq cipher.
+ */
+extern aead_cipher_t const ascon80pq_masked_cipher;
+
+/*----------------------- Elephant ------------------------*/
+
+/**
+ * \brief Meta-information block for the Delirium cipher.
+ */
+extern aead_cipher_t const delirium_cipher;
+
+/**
+ * \brief Meta-information block for the Dumbo cipher.
+ */
+extern aead_cipher_t const dumbo_cipher;
+
+/**
+ * \brief Meta-information block for the Jumbo cipher.
+ */
+extern aead_cipher_t const jumbo_cipher;
+
+/*----------------------- GIFT-COFB -----------------------*/
+
+/**
+ * \brief Meta-information block for the GIFT-COFB cipher.
+ */
+extern aead_cipher_t const gift_cofb_cipher;
+
+/**
+ * \brief Meta-information block for the masked GIFT-COFB cipher.
+ */
+extern aead_cipher_t const gift_cofb_masked_cipher;
+
+/*--------------------- Grain128-AEAD ---------------------*/
+
+/**
+ * \brief Meta-information block for the Grain-128AEAD cipher.
+ */
+extern aead_cipher_t const grain128_aead_cipher;
+
+/*-------------------------- ISAP -------------------------*/
+
+/**
+ * \brief Meta-information block for the ISAP-K-128A cipher.
+ */
+extern aead_cipher_t const isap_keccak_128a_cipher;
+
+/**
+ * \brief Meta-information block for the ISAP-A-128A cipher.
+ */
+extern aead_cipher_t const isap_ascon_128a_cipher;
+
+/**
+ * \brief Meta-information block for the ISAP-K-128 cipher.
+ */
+extern aead_cipher_t const isap_keccak_128_cipher;
+
+/**
+ * \brief Meta-information block for the ISAP-A-128 cipher.
+ */
+extern aead_cipher_t const isap_ascon_128_cipher;
+
+/*--------------------- PHOTON-Beetle ---------------------*/
+
+/**
+ * \brief Meta-information block for the PHOTON-Beetle-AEAD-ENC-128 cipher.
+ */
+extern aead_cipher_t const photon_beetle_128_cipher;
+
+/**
+ * \brief Meta-information block for the PHOTON-Beetle-AEAD-ENC-32 cipher.
+ */
+extern aead_cipher_t const photon_beetle_32_cipher;
+
+/**
+ * \brief Meta-information block for the PHOTON-Beetle-HASH algorithm.
+ */
+extern aead_hash_algorithm_t const photon_beetle_hash_algorithm;
+
+/*------------------------ Romulus ------------------------*/
+
+/**
+ * \brief Meta-information block for the Romulus-N+ cipher.
+ */
+extern aead_cipher_t const romulus_np_cipher;
+
+/**
+ * \brief Meta-information block for the Romulus-M+ cipher.
+ */
+extern aead_cipher_t const romulus_mp_cipher;
+
+/**
+ * \brief Meta-information block for the Romulus-H+ hash algorithm.
+ */
+extern aead_hash_algorithm_t const romulus_hash_algorithm;
+
+/*------------------------ SPARKLE ------------------------*/
+
+/**
+ * \brief Meta-information block for the Schwaemm256-128 cipher.
+ */
+extern aead_cipher_t const schwaemm_256_128_cipher;
+
+/**
+ * \brief Meta-information block for the Schwaemm192-192 cipher.
+ */
+extern aead_cipher_t const schwaemm_192_192_cipher;
+
+/**
+ * \brief Meta-information block for the Schwaemm128-128 cipher.
+ */
+extern aead_cipher_t const schwaemm_128_128_cipher;
+
+/**
+ * \brief Meta-information block for the Schwaemm256-256 cipher.
+ */
+extern aead_cipher_t const schwaemm_256_256_cipher;
+
+/**
+ * \brief Meta-information block for the Esch256 hash algorithm.
+ */
+extern aead_hash_algorithm_t const esch_256_hash_algorithm;
+
+/**
+ * \brief Meta-information block for the Esch384 hash algorithm.
+ */
+extern aead_hash_algorithm_t const esch_384_hash_algorithm;
+
+/*----------------------- TinyJAMBU -----------------------*/
+
+/**
+ * \brief Meta-information block for the TinyJAMBU-128 cipher.
+ */
+extern aead_cipher_t const tiny_jambu_128_cipher;
+
+/**
+ * \brief Meta-information block for the TinyJAMBU-192 cipher.
+ */
+extern aead_cipher_t const tiny_jambu_192_cipher;
+
+/**
+ * \brief Meta-information block for the TinyJAMBU-256 cipher.
+ */
+extern aead_cipher_t const tiny_jambu_256_cipher;
+
+/**
+ * \brief Meta-information block for the masked TinyJAMBU-128 cipher.
+ */
+extern aead_cipher_t const tiny_jambu_128_masked_cipher;
+
+/**
+ * \brief Meta-information block for the masked TinyJAMBU-192 cipher.
+ */
+extern aead_cipher_t const tiny_jambu_192_masked_cipher;
+
+/**
+ * \brief Meta-information block for the masked TinyJAMBU-256 cipher.
+ */
+extern aead_cipher_t const tiny_jambu_256_masked_cipher;
+
+/*------------------------ Xoodyak ------------------------*/
+
+/**
+ * \brief Meta-information block for the Xoodyak cipher.
+ */
+extern aead_cipher_t const xoodyak_cipher;
+
+/**
+ * \brief Meta-information block for the Xoodyak hash algorithm.
+ */
+extern aead_hash_algorithm_t const xoodyak_hash_algorithm;
+
+/**
+ * \brief Meta-information block for the masked Xoodyak cipher.
+ */
+extern aead_cipher_t const xoodyak_masked_cipher;
 
 #ifdef __cplusplus
 }

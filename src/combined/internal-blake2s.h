@@ -23,7 +23,7 @@
 #ifndef LW_INTERNAL_BLAKE2S_H
 #define LW_INTERNAL_BLAKE2S_H
 
-#include "aead-common.h"
+#include "aead-metadata.h"
 
 /**
  * \file internal-blake2s.h

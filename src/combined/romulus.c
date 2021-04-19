@@ -25,26 +25,6 @@
 #include "internal-util.h"
 #include <string.h>
 
-aead_cipher_t const romulus_np_cipher = {
-    "Romulus-N+",
-    ROMULUS_KEY_SIZE,
-    ROMULUS_NONCE_SIZE,
-    ROMULUS_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_np_aead_encrypt,
-    romulus_np_aead_decrypt
-};
-
-aead_cipher_t const romulus_mp_cipher = {
-    "Romulus-M+",
-    ROMULUS_KEY_SIZE,
-    ROMULUS_NONCE_SIZE,
-    ROMULUS_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_mp_aead_encrypt,
-    romulus_mp_aead_decrypt
-};
-
 /**
  * \brief Initializes the key schedule for Romulus-N+ or Romulus-M+.
  *

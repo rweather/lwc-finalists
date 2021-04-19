@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_GRAIN128_H
 #define LWCRYPTO_GRAIN128_H
 
-#include "aead-common.h"
-
 /**
  * \file grain128.h
  * \brief Grain-128AEAD authenticated encryption algorithm.
@@ -55,11 +53,6 @@ extern "C" {
  * \brief Size of the nonce for Grain-128AEAD.
  */
 #define GRAIN128_NONCE_SIZE 12
-
-/**
- * \brief Meta-information block for the Grain-128AEAD cipher.
- */
-extern aead_cipher_t const grain128_aead_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with Grain-128AEAD.

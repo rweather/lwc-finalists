@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "aead-common.h"
+#include "aead-metadata.h"
 #include "algorithms.h"
 #include "ascon128.h"
 #include <stdio.h>

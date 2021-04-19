@@ -23,7 +23,7 @@
 #ifndef LW_INTERNAL_CHACHAPOLY_H
 #define LW_INTERNAL_CHACHAPOLY_H
 
-#include "aead-common.h"
+#include "aead-metadata.h"
 
 /**
  * \file internal-chachapoly.h

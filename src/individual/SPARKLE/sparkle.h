@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_SPARKLE_H
 #define LWCRYPTO_SPARKLE_H
 
-#include "aead-common.h"
-
 /**
  * \file sparkle.h
  * \brief Encryption and hash algorithms based on the SPARKLE permutation.
@@ -119,36 +117,6 @@ extern "C" {
  * \brief Size of the hash output for Esch384.
  */
 #define ESCH_384_HASH_SIZE 48
-
-/**
- * \brief Meta-information block for the Schwaemm256-128 cipher.
- */
-extern aead_cipher_t const schwaemm_256_128_cipher;
-
-/**
- * \brief Meta-information block for the Schwaemm192-192 cipher.
- */
-extern aead_cipher_t const schwaemm_192_192_cipher;
-
-/**
- * \brief Meta-information block for the Schwaemm128-128 cipher.
- */
-extern aead_cipher_t const schwaemm_128_128_cipher;
-
-/**
- * \brief Meta-information block for the Schwaemm256-256 cipher.
- */
-extern aead_cipher_t const schwaemm_256_256_cipher;
-
-/**
- * \brief Meta-information block for the Esch256 hash algorithm.
- */
-extern aead_hash_algorithm_t const esch_256_hash_algorithm;
-
-/**
- * \brief Meta-information block for the Esch384 hash algorithm.
- */
-extern aead_hash_algorithm_t const esch_384_hash_algorithm;
 
 /**
  * \brief State information for the Esch256 incremental hash mode.

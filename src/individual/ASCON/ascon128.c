@@ -39,36 +39,6 @@
  */
 #define ASCON80PQ_IV    0xa0400c06U
 
-aead_cipher_t const ascon128_cipher = {
-    "ASCON-128",
-    ASCON128_KEY_SIZE,
-    ASCON128_NONCE_SIZE,
-    ASCON128_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    ascon128_aead_encrypt,
-    ascon128_aead_decrypt
-};
-
-aead_cipher_t const ascon128a_cipher = {
-    "ASCON-128a",
-    ASCON128_KEY_SIZE,
-    ASCON128_NONCE_SIZE,
-    ASCON128_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    ascon128a_aead_encrypt,
-    ascon128a_aead_decrypt
-};
-
-aead_cipher_t const ascon80pq_cipher = {
-    "ASCON-80pq",
-    ASCON80PQ_KEY_SIZE,
-    ASCON80PQ_NONCE_SIZE,
-    ASCON80PQ_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    ascon80pq_aead_encrypt,
-    ascon80pq_aead_decrypt
-};
-
 /**
  * \brief Absorbs data into an ASCON state with an 8-byte rate.
  *

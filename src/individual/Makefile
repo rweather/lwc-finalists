@@ -2,11 +2,9 @@
 SRCDIR = ../combined
 
 COMMON_FILES = \
-	aead-common.h \
 	internal-util.h \
 	internal-util.c
 COMMON_MASKING_FILES = \
-	aead-common.h \
 	aead-random.h \
 	aead-random.c \
 	internal-masking.h \

@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_GIFT_COFB_H
 #define LWCRYPTO_GIFT_COFB_H
 
-#include "aead-common.h"
-
 /**
  * \file gift-cofb.h
  * \brief GIFT-COFB authenticated encryption algorithm.
@@ -55,11 +53,6 @@ extern "C" {
  * \brief Size of the nonce for GIFT-COFB.
  */
 #define GIFT_COFB_NONCE_SIZE 16
-
-/**
- * \brief Meta-information block for the GIFT-COFB cipher.
- */
-extern aead_cipher_t const gift_cofb_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with GIFT-COFB.

@@ -21,23 +21,6 @@
  */
 
 #include "algorithms.h"
-#include "ascon128.h"
-#include "ascon128-masked.h"
-#include "elephant-delirium.h"
-#include "elephant-dumbo.h"
-#include "elephant-jumbo.h"
-#include "gift-cofb.h"
-#include "gift-cofb-masked.h"
-#include "grain128.h"
-#include "isap.h"
-#include "photon-beetle.h"
-#include "romulus.h"
-#include "romulus-hash.h"
-#include "sparkle.h"
-#include "tinyjambu.h"
-#include "tinyjambu-masked.h"
-#include "xoodyak.h"
-#include "xoodyak-masked.h"
 #include <string.h>
 #include <stdio.h>
 

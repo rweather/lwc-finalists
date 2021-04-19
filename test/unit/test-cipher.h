@@ -23,7 +23,7 @@
 #ifndef TEST_CIPHER_H
 #define TEST_CIPHER_H
 
-#include "aead-common.h"
+#include "aead-metadata.h"
 #include <stddef.h>
 #include <stdint.h>
 

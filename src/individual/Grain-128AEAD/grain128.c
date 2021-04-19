@@ -24,16 +24,6 @@
 #include "internal-grain128.h"
 #include <string.h>
 
-aead_cipher_t const grain128_aead_cipher = {
-    "Grain-128AEAD",
-    GRAIN128_KEY_SIZE,
-    GRAIN128_NONCE_SIZE,
-    GRAIN128_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    grain128_aead_encrypt,
-    grain128_aead_decrypt
-};
-
 /**
  * \brief Encodes the associated data length in DER.
  *

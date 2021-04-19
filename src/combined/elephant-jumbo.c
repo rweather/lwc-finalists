@@ -24,16 +24,6 @@
 #include "internal-spongent.h"
 #include <string.h>
 
-aead_cipher_t const jumbo_cipher = {
-    "Jumbo",
-    JUMBO_KEY_SIZE,
-    JUMBO_NONCE_SIZE,
-    JUMBO_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SLOW,
-    jumbo_aead_encrypt,
-    jumbo_aead_decrypt
-};
-
 /**
  * \brief Applies the Jumbo LFSR to the mask.
  *

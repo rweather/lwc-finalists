@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ISAP_H
 #define LWCRYPTO_ISAP_H
 
-#include "aead-common.h"
-
 /**
  * \file isap.h
  * \brief ISAP authenticated encryption algorithm.
@@ -66,26 +64,6 @@ extern "C" {
  * \brief Size of the nonce for all ISAP family members.
  */
 #define ISAP_NONCE_SIZE 16
-
-/**
- * \brief Meta-information block for the ISAP-K-128A cipher.
- */
-extern aead_cipher_t const isap_keccak_128a_cipher;
-
-/**
- * \brief Meta-information block for the ISAP-A-128A cipher.
- */
-extern aead_cipher_t const isap_ascon_128a_cipher;
-
-/**
- * \brief Meta-information block for the ISAP-K-128 cipher.
- */
-extern aead_cipher_t const isap_keccak_128_cipher;
-
-/**
- * \brief Meta-information block for the ISAP-A-128 cipher.
- */
-extern aead_cipher_t const isap_ascon_128_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with ISAP-K-128A.

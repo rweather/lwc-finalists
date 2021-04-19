@@ -25,19 +25,6 @@
 #include "internal-util.h"
 #include <string.h>
 
-aead_hash_algorithm_t const photon_beetle_hash_algorithm = {
-    "PHOTON-Beetle-HASH",
-    sizeof(photon_beetle_hash_state_t),
-    PHOTON_BEETLE_HASH_SIZE,
-    AEAD_FLAG_NONE,
-    photon_beetle_hash,
-    (aead_hash_init_t)photon_beetle_hash_init,
-    (aead_hash_update_t)photon_beetle_hash_update,
-    (aead_hash_finalize_t)photon_beetle_hash_finalize,
-    (aead_xof_absorb_t)0,
-    (aead_xof_squeeze_t)0
-};
-
 /**
  * \brief Rate of operation for PHOTON-Beetle-AEAD-ENC-128.
  */

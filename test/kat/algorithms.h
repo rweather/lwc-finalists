@@ -23,7 +23,7 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 
-#include "aead-common.h"
+#include "aead-metadata.h"
 
 const aead_cipher_t *find_cipher(const char *name);
 const aead_hash_algorithm_t *find_hash_algorithm(const char *name);

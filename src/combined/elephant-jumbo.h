@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ELEPHANT_JUMBO_H
 #define LWCRYPTO_ELEPHANT_JUMBO_H
 
-#include "aead-common.h"
-
 /**
  * \file elephant-jumbo.h
  * \brief Jumbo authenticated encryption algorithm.
@@ -54,11 +52,6 @@ extern "C" {
  * \brief Size of the nonce for Jumbo.
  */
 #define JUMBO_NONCE_SIZE 12
-
-/**
- * \brief Meta-information block for the Jumbo cipher.
- */
-extern aead_cipher_t const jumbo_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with Jumbo.

@@ -24,7 +24,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include "aead-common.h"
+#include "aead-metadata.h"
 #include "algorithms.h"
 #include "timing.h"
 #include "internal-chachapoly.h"

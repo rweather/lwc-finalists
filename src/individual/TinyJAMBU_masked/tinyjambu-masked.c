@@ -24,36 +24,6 @@
 #include "internal-tinyjambu-m.h"
 #include "internal-util.h"
 
-aead_cipher_t const tiny_jambu_128_masked_cipher = {
-    "TinyJAMBU-128-Masked",
-    TINY_JAMBU_MASKED_128_KEY_SIZE,
-    TINY_JAMBU_MASKED_NONCE_SIZE,
-    TINY_JAMBU_MASKED_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
-    tiny_jambu_128_masked_aead_encrypt,
-    tiny_jambu_128_masked_aead_decrypt
-};
-
-aead_cipher_t const tiny_jambu_192_masked_cipher = {
-    "TinyJAMBU-192-Masked",
-    TINY_JAMBU_MASKED_192_KEY_SIZE,
-    TINY_JAMBU_MASKED_NONCE_SIZE,
-    TINY_JAMBU_MASKED_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
-    tiny_jambu_192_masked_aead_encrypt,
-    tiny_jambu_192_masked_aead_decrypt
-};
-
-aead_cipher_t const tiny_jambu_256_masked_cipher = {
-    "TinyJAMBU-256-Masked",
-    TINY_JAMBU_MASKED_256_KEY_SIZE,
-    TINY_JAMBU_MASKED_NONCE_SIZE,
-    TINY_JAMBU_MASKED_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
-    tiny_jambu_256_masked_aead_encrypt,
-    tiny_jambu_256_masked_aead_decrypt
-};
-
 /**
  * \brief Set up the masked TinyJAMBU state with the key and the nonce.
  *

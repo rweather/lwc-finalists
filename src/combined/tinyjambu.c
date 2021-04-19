@@ -24,36 +24,6 @@
 #include "internal-tinyjambu.h"
 #include "internal-util.h"
 
-aead_cipher_t const tiny_jambu_128_cipher = {
-    "TinyJAMBU-128",
-    TINY_JAMBU_128_KEY_SIZE,
-    TINY_JAMBU_NONCE_SIZE,
-    TINY_JAMBU_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    tiny_jambu_128_aead_encrypt,
-    tiny_jambu_128_aead_decrypt
-};
-
-aead_cipher_t const tiny_jambu_192_cipher = {
-    "TinyJAMBU-192",
-    TINY_JAMBU_192_KEY_SIZE,
-    TINY_JAMBU_NONCE_SIZE,
-    TINY_JAMBU_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    tiny_jambu_192_aead_encrypt,
-    tiny_jambu_192_aead_decrypt
-};
-
-aead_cipher_t const tiny_jambu_256_cipher = {
-    "TinyJAMBU-256",
-    TINY_JAMBU_256_KEY_SIZE,
-    TINY_JAMBU_NONCE_SIZE,
-    TINY_JAMBU_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    tiny_jambu_256_aead_encrypt,
-    tiny_jambu_256_aead_decrypt
-};
-
 /**
  * \def tiny_jambu_init_state(state)
  * \brief Initializes a TinyJAMBU state to zero.

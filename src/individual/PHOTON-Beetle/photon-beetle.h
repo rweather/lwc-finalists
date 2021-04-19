@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_PHOTON_BEETLE_H
 #define LWCRYPTO_PHOTON_BEETLE_H
 
-#include "aead-common.h"
-
 /**
  * \file photon-beetle.h
  * \brief PHOTON-Beetle authenticated encryption algorithm.
@@ -83,21 +81,6 @@ typedef union
     unsigned long long align;    /**< For alignment of this structure */
 
 } photon_beetle_hash_state_t;
-
-/**
- * \brief Meta-information block for the PHOTON-Beetle-AEAD-ENC-128 cipher.
- */
-extern aead_cipher_t const photon_beetle_128_cipher;
-
-/**
- * \brief Meta-information block for the PHOTON-Beetle-AEAD-ENC-32 cipher.
- */
-extern aead_cipher_t const photon_beetle_32_cipher;
-
-/**
- * \brief Meta-information block for the PHOTON-Beetle-HASH algorithm.
- */
-extern aead_hash_algorithm_t const photon_beetle_hash_algorithm;
 
 /**
  * \brief Encrypts and authenticates a packet with PHOTON-Beetle-AEAD-ENC-128.

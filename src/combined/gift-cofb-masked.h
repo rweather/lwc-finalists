@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_GIFT_COFB_MASKED_H
 #define LWCRYPTO_GIFT_COFB_MASKED_H
 
-#include "aead-common.h"
-
 /**
  * \file gift-cofb-masked.h
  * \brief GIFT-COFB authenticated encryption algorithm (masked version).
@@ -50,11 +48,6 @@ extern "C" {
  * \brief Size of the nonce for masked GIFT-COFB.
  */
 #define GIFT_COFB_MASKED_NONCE_SIZE 16
-
-/**
- * \brief Meta-information block for the masked GIFT-COFB cipher.
- */
-extern aead_cipher_t const gift_cofb_masked_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with masked GIFT-COFB.

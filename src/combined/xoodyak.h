@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_XOODYAK_H
 #define LWCRYPTO_XOODYAK_H
 
-#include "aead-common.h"
-
 /**
  * \file xoodyak.h
  * \brief Xoodyak authenticated encryption algorithm.
@@ -86,16 +84,6 @@ typedef union
     unsigned long long align;    /**< For alignment of this structure */
 
 } xoodyak_hash_state_t;
-
-/**
- * \brief Meta-information block for the Xoodyak cipher.
- */
-extern aead_cipher_t const xoodyak_cipher;
-
-/**
- * \brief Meta-information block for the Xoodyak hash algorithm.
- */
-extern aead_hash_algorithm_t const xoodyak_hash_algorithm;
 
 /**
  * \brief Encrypts and authenticates a packet with Xoodyak.

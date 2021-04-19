@@ -34,19 +34,6 @@
     ascon_permute((ascon_state_t *)(state->s.state), 0)
 #endif
 
-aead_hash_algorithm_t const ascon_hash_algorithm = {
-    "ASCON-HASH",
-    sizeof(ascon_hash_state_t),
-    ASCON_HASH_SIZE,
-    AEAD_FLAG_NONE,
-    ascon_hash,
-    (aead_hash_init_t)ascon_hash_init,
-    (aead_hash_update_t)ascon_hash_update,
-    (aead_hash_finalize_t)ascon_hash_finalize,
-    0, /* absorb */
-    0  /* squeeze */
-};
-
 int ascon_hash
     (unsigned char *out, const unsigned char *in, unsigned long long inlen)
 {

@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_XOODYAK_MASKED_H
 #define LWCRYPTO_XOODYAK_MASKED_H
 
-#include "aead-common.h"
-
 /**
  * \file xoodyak-masked.h
  * \brief Masked version of the Xoodyak authenticated encryption algorithm.
@@ -48,11 +46,6 @@ extern "C" {
  * \brief Size of the nonce for masked Xoodyak.
  */
 #define XOODYAK_MASKED_NONCE_SIZE 16
-
-/**
- * \brief Meta-information block for the masked Xoodyak cipher.
- */
-extern aead_cipher_t const xoodyak_masked_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with masked Xoodyak.

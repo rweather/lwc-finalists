@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_TINYJAMBU_MASKED_H
 #define LWCRYPTO_TINYJAMBU_MASKED_H
 
-#include "aead-common.h"
-
 /**
  * \file tinyjambu-masked.h
  * \brief Masked version of the TinyJAMBU authenticated encryption algorithm.
@@ -58,21 +56,6 @@ extern "C" {
  * \brief Size of the nonce for all masked TinyJAMBU variants.
  */
 #define TINY_JAMBU_MASKED_NONCE_SIZE 12
-
-/**
- * \brief Meta-information block for the masked TinyJAMBU-128 cipher.
- */
-extern aead_cipher_t const tiny_jambu_128_masked_cipher;
-
-/**
- * \brief Meta-information block for the masked TinyJAMBU-192 cipher.
- */
-extern aead_cipher_t const tiny_jambu_192_masked_cipher;
-
-/**
- * \brief Meta-information block for the masked TinyJAMBU-256 cipher.
- */
-extern aead_cipher_t const tiny_jambu_256_masked_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with masked TinyJAMBU-128.

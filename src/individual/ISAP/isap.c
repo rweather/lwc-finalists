@@ -25,46 +25,6 @@
 #include "internal-ascon.h"
 #include <string.h>
 
-aead_cipher_t const isap_keccak_128a_cipher = {
-    "ISAP-K-128A",
-    ISAP_KEY_SIZE,
-    ISAP_NONCE_SIZE,
-    ISAP_TAG_SIZE,
-    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
-    isap_keccak_128a_aead_encrypt,
-    isap_keccak_128a_aead_decrypt
-};
-
-aead_cipher_t const isap_ascon_128a_cipher = {
-    "ISAP-A-128A",
-    ISAP_KEY_SIZE,
-    ISAP_NONCE_SIZE,
-    ISAP_TAG_SIZE,
-    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
-    isap_ascon_128a_aead_encrypt,
-    isap_ascon_128a_aead_decrypt
-};
-
-aead_cipher_t const isap_keccak_128_cipher = {
-    "ISAP-K-128",
-    ISAP_KEY_SIZE,
-    ISAP_NONCE_SIZE,
-    ISAP_TAG_SIZE,
-    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
-    isap_keccak_128_aead_encrypt,
-    isap_keccak_128_aead_decrypt
-};
-
-aead_cipher_t const isap_ascon_128_cipher = {
-    "ISAP-A-128",
-    ISAP_KEY_SIZE,
-    ISAP_NONCE_SIZE,
-    ISAP_TAG_SIZE,
-    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
-    isap_ascon_128_aead_encrypt,
-    isap_ascon_128_aead_decrypt
-};
-
 /* ISAP-K-128A */
 #define ISAP_ALG_NAME isap_keccak_128a
 #define ISAP_RATE (144 / 8)

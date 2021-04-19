@@ -40,8 +40,8 @@ clean:
 check: $(TARGET1)
 	./$(TARGET1)
 
-TEST_CIPHER_INC = test-cipher.h $(LIBSRC_DIR)/aead-common.h
-TEST_CIPHER_MASKING_INC = test-cipher.h $(LIBSRC_DIR)/aead-common.h $(LIBSRC_DIR)/aead-random.h $(LIBSRC_DIR)/internal-masking.h
+TEST_CIPHER_INC = test-cipher.h $(LIBSRC_DIR)/aead-metadata.h
+TEST_CIPHER_MASKING_INC = test-cipher.h $(LIBSRC_DIR)/aead-metadata.h $(LIBSRC_DIR)/aead-random.h $(LIBSRC_DIR)/internal-masking.h
 
 test-ascon.o: $(LIBSRC_DIR)/ascon128.h $(LIBSRC_DIR)/internal-ascon.h $(LIBSRC_DIR)/internal-ascon-m.h $(TEST_CIPHER_MASKING_INC)
 test-blake2s.o: $(LIBSRC_DIR)/internal-blake2s.h $(TEST_CIPHER_INC)

@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ELEPHANT_DELIRIUM_H
 #define LWCRYPTO_ELEPHANT_DELIRIUM_H
 
-#include "aead-common.h"
-
 /**
  * \file elephant-delirium.h
  * \brief Delirium authenticated encryption algorithm.
@@ -54,11 +52,6 @@ extern "C" {
  * \brief Size of the nonce for Delirium.
  */
 #define DELIRIUM_NONCE_SIZE 12
-
-/**
- * \brief Meta-information block for the Delirium cipher.
- */
-extern aead_cipher_t const delirium_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with Delirium.

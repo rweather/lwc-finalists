@@ -25,20 +25,6 @@
 #include "internal-xoodoo-m.h"
 #include <string.h>
 
-aead_cipher_t const xoodyak_masked_cipher = {
-    "Xoodyak-Masked",
-    XOODYAK_MASKED_KEY_SIZE,
-    XOODYAK_MASKED_NONCE_SIZE,
-    XOODYAK_MASKED_TAG_SIZE,
-#if AEAD_MASKING_KEY_ONLY
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_MASKED,
-#else
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
-#endif
-    xoodyak_masked_aead_encrypt,
-    xoodyak_masked_aead_decrypt
-};
-
 /**
  * \brief Rate for absorbing data into the sponge state.
  */

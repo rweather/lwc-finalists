@@ -21,7 +21,7 @@
  */
 
 #include "test-cipher.h"
-#include "aead-common.h"
+#include "aead-metadata.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

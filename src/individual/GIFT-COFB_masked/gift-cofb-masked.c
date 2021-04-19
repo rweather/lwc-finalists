@@ -25,16 +25,6 @@
 #include "internal-util.h"
 #include <string.h>
 
-aead_cipher_t const gift_cofb_masked_cipher = {
-    "GIFT-COFB-Masked",
-    GIFT_COFB_MASKED_KEY_SIZE,
-    GIFT_COFB_MASKED_NONCE_SIZE,
-    GIFT_COFB_MASKED_TAG_SIZE,
-    AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
-    gift_cofb_masked_aead_encrypt,
-    gift_cofb_masked_aead_decrypt
-};
-
 /**
  * \brief Structure of an L value.
  *

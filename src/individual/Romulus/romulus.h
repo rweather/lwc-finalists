@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ROMULUS_H
 #define LWCRYPTO_ROMULUS_H
 
-#include "aead-common.h"
-
 /**
  * \file romulus.h
  * \brief Romulus authenticated encryption algorithm family.
@@ -66,16 +64,6 @@ extern "C" {
  * \brief Size of the nonce for Romulus-N+ and Romulus-M+.
  */
 #define ROMULUS_NONCE_SIZE 16
-
-/**
- * \brief Meta-information block for the Romulus-N+ cipher.
- */
-extern aead_cipher_t const romulus_np_cipher;
-
-/**
- * \brief Meta-information block for the Romulus-M+ cipher.
- */
-extern aead_cipher_t const romulus_mp_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with Romulus-N+.

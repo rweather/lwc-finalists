@@ -23,8 +23,6 @@
 #ifndef LWCRYPTO_ASCON128_MASKED_H
 #define LWCRYPTO_ASCON128_MASKED_H
 
-#include "aead-common.h"
-
 /**
  * \file ascon128-masked.h
  * \brief Masked ASCON-128 encryption algorithm and related family members.
@@ -75,21 +73,6 @@ extern "C" {
  * \brief Size of the authentication tag for masked ASCON-80pq.
  */
 #define ASCON80PQ_MASKED_TAG_SIZE 16
-
-/**
- * \brief Meta-information block for the masked ASCON-128 cipher.
- */
-extern aead_cipher_t const ascon128_masked_cipher;
-
-/**
- * \brief Meta-information block for the masked ASCON-128a cipher.
- */
-extern aead_cipher_t const ascon128a_masked_cipher;
-
-/**
- * \brief Meta-information block for the masked ASCON-80pq cipher.
- */
-extern aead_cipher_t const ascon80pq_masked_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with masked ASCON-128.

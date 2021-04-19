@@ -25,26 +25,6 @@
 #include "internal-util.h"
 #include <string.h>
 
-aead_cipher_t const photon_beetle_128_cipher = {
-    "PHOTON-Beetle-AEAD-ENC-128",
-    PHOTON_BEETLE_KEY_SIZE,
-    PHOTON_BEETLE_NONCE_SIZE,
-    PHOTON_BEETLE_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    photon_beetle_128_aead_encrypt,
-    photon_beetle_128_aead_decrypt
-};
-
-aead_cipher_t const photon_beetle_32_cipher = {
-    "PHOTON-Beetle-AEAD-ENC-32",
-    PHOTON_BEETLE_KEY_SIZE,
-    PHOTON_BEETLE_NONCE_SIZE,
-    PHOTON_BEETLE_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    photon_beetle_32_aead_encrypt,
-    photon_beetle_32_aead_decrypt
-};
-
 /**
  * \brief Rate of operation for PHOTON-Beetle-AEAD-ENC-128.
  */

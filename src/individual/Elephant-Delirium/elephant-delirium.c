@@ -24,16 +24,6 @@
 #include "internal-keccakp-200.h"
 #include <string.h>
 
-aead_cipher_t const delirium_cipher = {
-    "Delirium",
-    DELIRIUM_KEY_SIZE,
-    DELIRIUM_NONCE_SIZE,
-    DELIRIUM_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SLOW,
-    delirium_aead_encrypt,
-    delirium_aead_decrypt
-};
-
 /**
  * \brief Applies the Delirium LFSR to the mask.
  *

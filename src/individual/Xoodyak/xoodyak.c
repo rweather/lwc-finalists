@@ -24,29 +24,6 @@
 #include "internal-xoodoo.h"
 #include <string.h>
 
-aead_cipher_t const xoodyak_cipher = {
-    "Xoodyak",
-    XOODYAK_KEY_SIZE,
-    XOODYAK_NONCE_SIZE,
-    XOODYAK_TAG_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    xoodyak_aead_encrypt,
-    xoodyak_aead_decrypt
-};
-
-aead_hash_algorithm_t const xoodyak_hash_algorithm = {
-    "Xoodyak-Hash",
-    sizeof(xoodyak_hash_state_t),
-    XOODYAK_HASH_SIZE,
-    AEAD_FLAG_LITTLE_ENDIAN,
-    xoodyak_hash,
-    (aead_hash_init_t)xoodyak_hash_init,
-    (aead_hash_update_t)xoodyak_hash_absorb,
-    (aead_hash_finalize_t)xoodyak_hash_finalize,
-    (aead_xof_absorb_t)xoodyak_hash_absorb,
-    (aead_xof_squeeze_t)xoodyak_hash_squeeze
-};
-
 /**
  * \brief Rate for absorbing data into the sponge state.
  */
