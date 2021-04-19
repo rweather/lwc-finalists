@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "aead-common.h"
+#include "internal-util.h"
 
 int aead_check_tag
     (unsigned char *plaintext, unsigned long long plaintext_len,

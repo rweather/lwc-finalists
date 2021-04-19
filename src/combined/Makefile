@@ -8,7 +8,6 @@ CFLAGS += $(VECTOR_CFLAGS) $(COMMON_CFLAGS) $(STDC_CFLAGS)
 LIBRARY = libcryptolw.a
 
 OBJS = \
-	aead-common.o \
 	aead-random.o \
         ascon128.o \
         ascon128-masked.o \
@@ -46,7 +45,8 @@ OBJS = \
         internal-tinyjambu.o \
         internal-tinyjambu-m.o \
         internal-xoodoo.o \
-        internal-xoodoo-m.o
+        internal-xoodoo-m.o \
+	internal-util.o
 
 all: $(LIBRARY)
 
@@ -101,3 +101,4 @@ internal-tinyjambu.o: internal-tinyjambu.h internal-util.h
 internal-tinyjambu-m.o: internal-tinyjambu-m.h aead-random.h internal-masking.h internal-util.h
 internal-xoodoo.o: internal-xoodoo.h internal-util.h
 internal-xoodoo-m.o: internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
+internal-util.o: internal-util.h

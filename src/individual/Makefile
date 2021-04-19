@@ -3,15 +3,15 @@ SRCDIR = ../combined
 
 COMMON_FILES = \
 	aead-common.h \
-	aead-common.c \
-	internal-util.h
+	internal-util.h \
+	internal-util.c
 COMMON_MASKING_FILES = \
 	aead-common.h \
-	aead-common.c \
 	aead-random.h \
 	aead-random.c \
 	internal-masking.h \
-	internal-util.h
+	internal-util.h \
+	internal-util.c
 
 ASCON_FILES = \
     ascon128.c \
