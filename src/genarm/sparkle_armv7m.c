@@ -262,16 +262,14 @@ static void gen_sparkle_256(void)
         printf("\teor\t%s, %s, %s\n", regs.ty, regs.y0, regs.y1);
         printf("\teor\t%s, %s, %s, lsl #16\n", regs.tx, regs.tx, regs.tx);
         printf("\teor\t%s, %s, %s, lsl #16\n", regs.ty, regs.ty, regs.ty);
-        printf("\tror\t%s, %s, #16\n", regs.tx, regs.tx);
-        printf("\tror\t%s, %s, #16\n", regs.ty, regs.ty);
         /* y2 ^= tx; */
         /* x2 ^= ty; */
-        binop("eor", regs.y2, regs.tx);
-        binop("eor", regs.x2, regs.ty);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.y2, regs.y2, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.x2, regs.x2, regs.ty);
         /* tx ^= y3; */
         /* ty ^= x3; */
-        binop("eor", regs.tx, regs.y3);
-        binop("eor", regs.ty, regs.x3);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.tx, regs.y3, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.ty, regs.x3, regs.ty);
         /* Rotate the state virtually */
         /* y3 = y1; -- result in original y1 */
         /* x3 = x1; -- result in original x1 */
@@ -464,20 +462,18 @@ static void gen_sparkle_384(void)
         binop("eor", regs.ty, regs.y2);
         printf("\teor\t%s, %s, %s, lsl #16\n", regs.tx, regs.tx, regs.tx);
         printf("\teor\t%s, %s, %s, lsl #16\n", regs.ty, regs.ty, regs.ty);
-        printf("\tror\t%s, %s, #16\n", regs.tx, regs.tx);
-        printf("\tror\t%s, %s, #16\n", regs.ty, regs.ty);
         /* y3 ^= tx; */
         /* y4 ^= tx; */
         /* x3 ^= ty; */
         /* x4 ^= ty; */
-        binop("eor", regs.y3, regs.tx);
-        binop("eor", regs.x3, regs.ty);
-        binop("eor", regs.y4, regs.tx);
-        binop("eor", regs.x4, regs.ty);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.y3, regs.y3, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.y4, regs.y4, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.x3, regs.x3, regs.ty);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.x4, regs.x4, regs.ty);
         /* tx ^= y5; */
         /* ty ^= x5; */
-        binop("eor", regs.tx, regs.y5);
-        binop("eor", regs.ty, regs.x5);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.tx, regs.y5, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.ty, regs.x5, regs.ty);
         /* Rotate the state virtually */
         /* y5 = y2; -- result in original y2 */
         /* x5 = x2; -- result in original x2 */
@@ -682,12 +678,10 @@ static void gen_sparkle_512(void)
         binop("eor", regs.ty, regs.y3);
         printf("\teor\t%s, %s, %s, lsl #16\n", regs.tx, regs.tx, regs.tx);
         printf("\teor\t%s, %s, %s, lsl #16\n", regs.ty, regs.ty, regs.ty);
-        printf("\tror\t%s, %s, #16\n", regs.tx, regs.tx);
-        printf("\tror\t%s, %s, #16\n", regs.ty, regs.ty);
         /* y4 ^= tx; */
         /* x4 ^= ty; */
-        binop("eor", regs.y4, regs.tx);
-        binop("eor", regs.x4, regs.ty);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.y4, regs.y4, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.x4, regs.x4, regs.ty);
 
         /* Spill rows 0, 1, and 2 and load rows 5, 6, and 7 */
         printf("\tstr\t%s, [r0, #%d]\n", regs.x0, 0);
@@ -711,16 +705,16 @@ static void gen_sparkle_512(void)
         /* Continue with the linear layer */
         /* y5 ^= tx; */
         /* x5 ^= ty; */
-        binop("eor", regs.y5, regs.tx);
-        binop("eor", regs.x5, regs.ty);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.y5, regs.y5, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.x5, regs.x5, regs.ty);
         /* y6 ^= tx; */
         /* x6 ^= ty; */
-        binop("eor", regs.y6, regs.tx);
-        binop("eor", regs.x6, regs.ty);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.y6, regs.y6, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.x6, regs.x6, regs.ty);
         /* tx ^= y7; */
         /* ty ^= x7; */
-        binop("eor", regs.tx, regs.y7);
-        binop("eor", regs.ty, regs.x7);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.tx, regs.y7, regs.tx);
+        printf("\teor\t%s, %s, %s, ror #16\n", regs.ty, regs.x7, regs.ty);
         /* y7 = y3; */
         /* x7 = x3; */
         printf("\tstr\t%s, [r0, #%d]\n", regs.y3, 60); /* y7 */

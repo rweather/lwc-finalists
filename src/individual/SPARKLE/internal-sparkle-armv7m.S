@@ -101,12 +101,10 @@ sparkle_256:
 	eor	ip, r7, r8
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r9, r2
-	eor	r5, ip
-	eor	r2, r10
-	eor	ip, r6
+	eor	r9, r9, r2, ror #16
+	eor	r5, r5, ip, ror #16
+	eor	r2, r10, r2, ror #16
+	eor	ip, r6, ip, ror #16
 	eor	r9, r7
 	eors	r5, r3
 	eor	r10, r8, r2
@@ -173,12 +171,10 @@ sparkle_256:
 	eor	ip, r10, r9
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eors	r7, r2
-	eor	r3, ip
-	eor	r2, r8
-	eor	ip, r4
+	eor	r7, r7, r2, ror #16
+	eor	r3, r3, ip, ror #16
+	eor	r2, r8, r2, ror #16
+	eor	ip, r4, ip, ror #16
 	eor	r7, r10
 	eors	r3, r6
 	eor	r8, r9, r2
@@ -245,12 +241,10 @@ sparkle_256:
 	eor	ip, r8, r7
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r10, r2
-	eor	r6, ip
-	eor	r2, r9
-	eor	ip, r5
+	eor	r10, r10, r2, ror #16
+	eor	r6, r6, ip, ror #16
+	eor	r2, r9, r2, ror #16
+	eor	ip, r5, ip, ror #16
 	eor	r10, r8
 	eors	r6, r4
 	eor	r9, r7, r2
@@ -317,12 +311,10 @@ sparkle_256:
 	eor	ip, r9, r10
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r8, r2
-	eor	r4, ip
-	eors	r2, r7
-	eor	ip, r3
+	eor	r8, r8, r2, ror #16
+	eor	r4, r4, ip, ror #16
+	eor	r2, r7, r2, ror #16
+	eor	ip, r3, ip, ror #16
 	eor	r8, r9
 	eors	r4, r5
 	eor	r7, r10, r2
@@ -391,12 +383,10 @@ sparkle_256:
 	eor	ip, r7, r8
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r9, r2
-	eor	r5, ip
-	eor	r2, r10
-	eor	ip, r6
+	eor	r9, r9, r2, ror #16
+	eor	r5, r5, ip, ror #16
+	eor	r2, r10, r2, ror #16
+	eor	ip, r6, ip, ror #16
 	eor	r9, r7
 	eors	r5, r3
 	eor	r10, r8, r2
@@ -465,12 +455,10 @@ sparkle_256:
 	eor	ip, r10, r9
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eors	r7, r2
-	eor	r3, ip
-	eor	r2, r8
-	eor	ip, r4
+	eor	r7, r7, r2, ror #16
+	eor	r3, r3, ip, ror #16
+	eor	r2, r8, r2, ror #16
+	eor	ip, r4, ip, ror #16
 	eor	r7, r10
 	eors	r3, r6
 	eor	r8, r9, r2
@@ -539,12 +527,10 @@ sparkle_256:
 	eor	ip, r8, r7
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r10, r2
-	eor	r6, ip
-	eor	r2, r9
-	eor	ip, r5
+	eor	r10, r10, r2, ror #16
+	eor	r6, r6, ip, ror #16
+	eor	r2, r9, r2, ror #16
+	eor	ip, r5, ip, ror #16
 	eor	r10, r8
 	eors	r6, r4
 	eor	r9, r7, r2
@@ -625,12 +611,10 @@ sparkle_256:
 	eor	ip, r9, r10
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r8, r2
-	eor	r4, ip
-	eors	r2, r7
-	eor	ip, r3
+	eor	r8, r8, r2, ror #16
+	eor	r4, r4, ip, ror #16
+	eor	r2, r7, r2, ror #16
+	eor	ip, r3, ip, ror #16
 	eor	r8, r9
 	eors	r4, r5
 	eor	r7, r10, r2
@@ -697,12 +681,10 @@ sparkle_256:
 	eor	ip, r7, r8
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eor	r9, r2
-	eor	r5, ip
-	eor	r2, r10
-	eor	ip, r6
+	eor	r9, r9, r2, ror #16
+	eor	r5, r5, ip, ror #16
+	eor	r2, r10, r2, ror #16
+	eor	ip, r6, ip, ror #16
 	eor	r9, r7
 	eors	r5, r3
 	eor	r10, r8, r2
@@ -769,12 +751,10 @@ sparkle_256:
 	eor	ip, r10, r9
 	eor	r2, r2, r2, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r2, r2, #16
-	ror	ip, ip, #16
-	eors	r7, r2
-	eor	r3, ip
-	eor	r2, r8
-	eor	ip, r4
+	eor	r7, r7, r2, ror #16
+	eor	r3, r3, ip, ror #16
+	eor	r2, r8, r2, ror #16
+	eor	ip, r4, ip, ror #16
 	eor	r7, r10
 	eors	r3, r6
 	eor	r8, r9, r2
@@ -905,14 +885,12 @@ sparkle_384:
 	eor	ip, fp
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	lr, r0
-	eor	r6, ip
-	eors	r2, r0
-	eor	r7, ip
-	eors	r0, r1
-	eor	ip, r8
+	eor	lr, lr, r0, ror #16
+	eor	r2, r2, r0, ror #16
+	eor	r6, r6, ip, ror #16
+	eor	r7, r7, ip, ror #16
+	eor	r0, r1, r0, ror #16
+	eor	ip, r8, ip, ror #16
 	eor	lr, r9
 	eors	r6, r3
 	eor	r2, r10
@@ -1011,14 +989,12 @@ sparkle_384:
 	eor	ip, lr
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	r9, r0
-	eor	r3, ip
-	eor	r10, r0
-	eor	r4, ip
-	eor	r0, fp
-	eor	ip, r5
+	eor	r9, r9, r0, ror #16
+	eor	r10, r10, r0, ror #16
+	eor	r3, r3, ip, ror #16
+	eor	r4, r4, ip, ror #16
+	eor	r0, fp, r0, ror #16
+	eor	ip, r5, ip, ror #16
 	eor	r9, r2
 	eors	r3, r7
 	eor	r10, r1
@@ -1117,14 +1093,12 @@ sparkle_384:
 	eor	ip, r9
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eors	r2, r0
-	eor	r7, ip
-	eors	r1, r0
-	eor	r8, ip
-	eor	r0, lr
-	eor	ip, r6
+	eor	r2, r2, r0, ror #16
+	eor	r1, r1, r0, ror #16
+	eor	r7, r7, ip, ror #16
+	eor	r8, r8, ip, ror #16
+	eor	r0, lr, r0, ror #16
+	eor	ip, r6, ip, ror #16
 	eor	r2, r10
 	eors	r7, r4
 	eor	r1, fp
@@ -1223,14 +1197,12 @@ sparkle_384:
 	eor	ip, r2
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	r10, r0
-	eor	r4, ip
-	eor	fp, r0
-	eor	r5, ip
-	eor	r0, r9
-	eor	ip, r3
+	eor	r10, r10, r0, ror #16
+	eor	fp, fp, r0, ror #16
+	eor	r4, r4, ip, ror #16
+	eor	r5, r5, ip, ror #16
+	eor	r0, r9, r0, ror #16
+	eor	ip, r3, ip, ror #16
 	eor	r10, r1
 	eor	r4, r8
 	eor	fp, lr
@@ -1329,14 +1301,12 @@ sparkle_384:
 	eor	ip, r10
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eors	r1, r0
-	eor	r8, ip
-	eor	lr, r0
-	eor	r6, ip
-	eors	r0, r2
-	eor	ip, r7
+	eor	r1, r1, r0, ror #16
+	eor	lr, lr, r0, ror #16
+	eor	r8, r8, ip, ror #16
+	eor	r6, r6, ip, ror #16
+	eor	r0, r2, r0, ror #16
+	eor	ip, r7, ip, ror #16
 	eor	r1, fp
 	eor	r8, r5
 	eor	lr, r9
@@ -1435,14 +1405,12 @@ sparkle_384:
 	eor	ip, r1
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	fp, r0
-	eor	r5, ip
-	eor	r9, r0
-	eor	r3, ip
-	eor	r0, r10
-	eor	ip, r4
+	eor	fp, fp, r0, ror #16
+	eor	r9, r9, r0, ror #16
+	eor	r5, r5, ip, ror #16
+	eor	r3, r3, ip, ror #16
+	eor	r0, r10, r0, ror #16
+	eor	ip, r4, ip, ror #16
 	eor	fp, lr
 	eors	r5, r6
 	eor	r9, r2
@@ -1543,14 +1511,12 @@ sparkle_384:
 	eor	ip, fp
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	lr, r0
-	eor	r6, ip
-	eors	r2, r0
-	eor	r7, ip
-	eors	r0, r1
-	eor	ip, r8
+	eor	lr, lr, r0, ror #16
+	eor	r2, r2, r0, ror #16
+	eor	r6, r6, ip, ror #16
+	eor	r7, r7, ip, ror #16
+	eor	r0, r1, r0, ror #16
+	eor	ip, r8, ip, ror #16
 	eor	lr, r9
 	eors	r6, r3
 	eor	r2, r10
@@ -1669,14 +1635,12 @@ sparkle_384:
 	eor	ip, lr
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	r9, r0
-	eor	r3, ip
-	eor	r10, r0
-	eor	r4, ip
-	eor	r0, fp
-	eor	ip, r5
+	eor	r9, r9, r0, ror #16
+	eor	r10, r10, r0, ror #16
+	eor	r3, r3, ip, ror #16
+	eor	r4, r4, ip, ror #16
+	eor	r0, fp, r0, ror #16
+	eor	ip, r5, ip, ror #16
 	eor	r9, r2
 	eors	r3, r7
 	eor	r10, r1
@@ -1775,14 +1739,12 @@ sparkle_384:
 	eor	ip, r9
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eors	r2, r0
-	eor	r7, ip
-	eors	r1, r0
-	eor	r8, ip
-	eor	r0, lr
-	eor	ip, r6
+	eor	r2, r2, r0, ror #16
+	eor	r1, r1, r0, ror #16
+	eor	r7, r7, ip, ror #16
+	eor	r8, r8, ip, ror #16
+	eor	r0, lr, r0, ror #16
+	eor	ip, r6, ip, ror #16
 	eor	r2, r10
 	eors	r7, r4
 	eor	r1, fp
@@ -1881,14 +1843,12 @@ sparkle_384:
 	eor	ip, r2
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eor	r10, r0
-	eor	r4, ip
-	eor	fp, r0
-	eor	r5, ip
-	eor	r0, r9
-	eor	ip, r3
+	eor	r10, r10, r0, ror #16
+	eor	fp, fp, r0, ror #16
+	eor	r4, r4, ip, ror #16
+	eor	r5, r5, ip, ror #16
+	eor	r0, r9, r0, ror #16
+	eor	ip, r3, ip, ror #16
 	eor	r10, r1
 	eor	r4, r8
 	eor	fp, lr
@@ -1987,14 +1947,12 @@ sparkle_384:
 	eor	ip, r10
 	eor	r0, r0, r0, lsl #16
 	eor	ip, ip, ip, lsl #16
-	ror	r0, r0, #16
-	ror	ip, ip, #16
-	eors	r1, r0
-	eor	r8, ip
-	eor	lr, r0
-	eor	r6, ip
-	eors	r0, r2
-	eor	ip, r7
+	eor	r1, r1, r0, ror #16
+	eor	lr, lr, r0, ror #16
+	eor	r8, r8, ip, ror #16
+	eor	r6, r6, ip, ror #16
+	eor	r0, r2, r0, ror #16
+	eor	ip, r7, ip, ror #16
 	eor	r1, fp
 	eor	r8, r5
 	eor	lr, r9
@@ -2116,10 +2074,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -2174,12 +2130,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -2284,10 +2240,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -2342,12 +2296,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -2452,10 +2406,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -2510,12 +2462,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -2620,10 +2572,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -2678,12 +2628,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -2788,10 +2738,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -2846,12 +2794,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -2958,10 +2906,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -3016,12 +2962,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -3128,10 +3074,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -3186,12 +3130,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -3298,10 +3242,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -3356,12 +3298,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -3469,10 +3411,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -3527,12 +3467,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -3637,10 +3577,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -3695,12 +3633,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -3805,10 +3743,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -3863,12 +3799,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
@@ -3975,10 +3911,8 @@ sparkle_512:
 	eor	r2, fp
 	eor	r1, r1, r1, lsl #16
 	eor	r2, r2, r2, lsl #16
-	ror	r1, r1, #16
-	ror	r2, r2, #16
-	eor	lr, r1
-	eors	r7, r2
+	eor	lr, lr, r1, ror #16
+	eor	r7, r7, r2, ror #16
 	str	r3, [r0, #0]
 	str	r8, [r0, #4]
 	str	r4, [r0, #8]
@@ -4033,12 +3967,12 @@ sparkle_512:
 	add	r3, r3, r8, ror #24
 	eor	r8, r8, r3, ror #16
 	eor	r3, ip
-	eor	r9, r1
-	eors	r4, r2
-	eor	r10, r1
-	eors	r5, r2
-	eor	r1, r8
-	eors	r2, r3
+	eor	r9, r9, r1, ror #16
+	eor	r4, r4, r2, ror #16
+	eor	r10, r10, r1, ror #16
+	eor	r5, r5, r2, ror #16
+	eor	r1, r8, r1, ror #16
+	eor	r2, r3, r2, ror #16
 	str	fp, [r0, #60]
 	str	r6, [r0, #56]
 	ldr	r8, [r0, #4]
