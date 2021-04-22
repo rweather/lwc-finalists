@@ -147,8 +147,10 @@ TINYJAMBU_MASKED_FILES = \
     internal-tinyjambu-m.h \
     $(COMMON_MASKING_FILES)
 XOODYAK_FILES = \
-    xoodyak.c \
-    xoodyak.h \
+    xoodyak-aead.c \
+    xoodyak-aead.h \
+    xoodyak-hash.c \
+    xoodyak-hash.h \
     internal-xoodoo.c \
     internal-xoodoo.h \
     internal-xoodoo-armv7m.S \

@@ -229,7 +229,7 @@ in 4 byte blocks.
 
 \section alg_romulus Romulus
 
-<b>Definition:</b> \ref romulus.h
+<b>Definition:</b> \ref romulus-aead.h, \ref romulus-hash.h
 
 <b>Nonce Reuse:</b> Resistant against nonce reuse as long as the combination
 of the associated data (AD) and plaintext is unique.
@@ -302,7 +302,8 @@ NIST submission.  Use TinyJAMBU-256 if you need a greater security margin.
 
 \section alg_xoodyak Xoodyak
 
-<b>Definition:</b> \ref xoodyak.h, \ref xoodyak-masked.h
+<b>Definition:</b> \ref xoodyak-aead.h, \ref xoodyak-hash.h,
+\ref xoodyak-masked.h
 
 Xoodyak is an authenticated encryption and hash algorithm pair based
 around the 384-bit Xoodoo permutation that is similar in structure to

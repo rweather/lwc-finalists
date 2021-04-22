@@ -7,4 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=xoodyak_aead_encrypt
 aead_decrypt=xoodyak_aead_decrypt
-aead_header=xoodyak.h
+aead_exclude="xoodyak-hash.c xoodyak-hash.h"
+aead_header=xoodyak-aead.h

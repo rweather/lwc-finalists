@@ -41,7 +41,8 @@
 #include "sparkle-hash.h"
 #include "tinyjambu.h"
 #include "tinyjambu-masked.h"
-#include "xoodyak.h"
+#include "xoodyak-aead.h"
+#include "xoodyak-hash.h"
 #include "xoodyak-masked.h"
 
 /*------------------------- ASCON -------------------------*/

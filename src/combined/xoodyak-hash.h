@@ -20,29 +20,16 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_XOODYAK_H
-#define LWCRYPTO_XOODYAK_H
+#ifndef LWCRYPTO_XOODYAK_HASH_H
+#define LWCRYPTO_XOODYAK_HASH_H
 
 /**
- * \file xoodyak.h
- * \brief Xoodyak authenticated encryption algorithm.
+ * \file xoodyak-hash.h
+ * \brief Xoodyak-Hash hash algorithm.
  *
- * Xoodyak is an authenticated encryption and hash algorithm pair based
- * around the 384-bit Xoodoo permutation that is similar in structure to
- * Keccak but is more efficient than Keccak on 32-bit embedded devices.
- * The Cyclist mode of operation is used to convert the permutation
- * into a sponge for the higher-level algorithms.
- *
- * The Xoodyak encryption mode has a 128-bit key, a 128-bit nonce,
- * and a 128-bit authentication tag.  The Xoodyak hashing mode has a
- * 256-bit fixed hash output and can also be used as an extensible
+ * Xoodyak-Hash is based around the 384-bit Xoodoo permutation and has a
+ * 256-bit output.  Xoodyak-Hash can also be used as an extensible
  * output function (XOF).
- *
- * The Xoodyak specification describes a re-keying mechanism where the
- * key for one packet is used to derive the key to use on the next packet.
- * This provides some resistance against side channel attacks by making
- * the session key a moving target.  This library does not currently
- * implement re-keying.
  *
  * References: https://keccak.team/xoodyak.html
  */
@@ -50,21 +37,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/**
- * \brief Size of the key for Xoodyak.
- */
-#define XOODYAK_KEY_SIZE 16
-
-/**
- * \brief Size of the authentication tag for Xoodyak.
- */
-#define XOODYAK_TAG_SIZE 16
-
-/**
- * \brief Size of the nonce for Xoodyak.
- */
-#define XOODYAK_NONCE_SIZE 16
 
 /**
  * \brief Size of the hash output for Xoodyak.
@@ -84,65 +56,6 @@ typedef union
     unsigned long long align;    /**< For alignment of this structure */
 
 } xoodyak_hash_state_t;
-
-/**
- * \brief Encrypts and authenticates a packet with Xoodyak.
- *
- * \param c Buffer to receive the output.
- * \param clen On exit, set to the length of the output which includes
- * the ciphertext and the 16 byte authentication tag.
- * \param m Buffer that contains the plaintext message to encrypt.
- * \param mlen Length of the plaintext message in bytes.
- * \param ad Buffer that contains associated data to authenticate
- * along with the packet but which does not need to be encrypted.
- * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
- * \param npub Points to the public nonce for the packet which must
- * be 16 bytes in length.
- * \param k Points to the 16 bytes of the key to use to encrypt the packet.
- *
- * \return 0 on success, or a negative value if there was an error in
- * the parameters.
- *
- * \sa xoodyak_aead_decrypt()
- */
-int xoodyak_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
-     const unsigned char *npub,
-     const unsigned char *k);
-
-/**
- * \brief Decrypts and authenticates a packet with Xoodyak.
- *
- * \param m Buffer to receive the plaintext message on output.
- * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
- * \param c Buffer that contains the ciphertext and authentication
- * tag to decrypt.
- * \param clen Length of the input data in bytes, which includes the
- * ciphertext and the 16 byte authentication tag.
- * \param ad Buffer that contains associated data to authenticate
- * along with the packet but which does not need to be encrypted.
- * \param adlen Length of the associated data in bytes.
- * \param npub Points to the public nonce for the packet which must
- * be 16 bytes in length.
- * \param k Points to the 16 bytes of the key to use to decrypt the packet.
- *
- * \return 0 on success, -1 if the authentication tag was incorrect,
- * or some other negative number if there was an error in the parameters.
- *
- * \sa xoodyak_aead_encrypt()
- */
-int xoodyak_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *npub,
-     const unsigned char *k);
 
 /**
  * \brief Hashes a block of input data with Xoodyak to generate a hash value.

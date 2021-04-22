@@ -29,7 +29,8 @@ OBJS = \
         sparkle-hash.o \
         tinyjambu.o \
         tinyjambu-masked.o \
-        xoodyak.o \
+        xoodyak-aead.o \
+        xoodyak-hash.o \
         xoodyak-masked.o \
 	internal-ascon.o \
 	internal-ascon-m.o \
@@ -71,7 +72,8 @@ aead-metadata.o: aead-metadata.h aead-random.h internal-masking.h \
 	photon-beetle-aead.h photon-beetle-hash.h \
 	romulus-aead.h romulus-hash.h \
 	sparkle-aead.h sparkle-hash.h \
-	tinyjambu.h tinyjambu-masked.h xoodyak.h xoodyak-masked.h
+	tinyjambu.h tinyjambu-masked.h \
+	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
 aead-random.o: aead-random.h
 ascon128.o: ascon128.h internal-ascon.h internal-util.h
 ascon128-masked.o: ascon128-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
@@ -92,8 +94,9 @@ sparkle-aead.o: sparkle-aead.h internal-sparkle.h internal-util.h
 sparkle-hash.o: sparkle-hash.h internal-sparkle.h internal-util.h
 tinyjambu.o: tinyjambu.h internal-tinyjambu.h internal-util.h
 tinyjambu-masked.o: tinyjambu-masked.h internal-tinyjambu-m.h aead-random.h internal-masking.h internal-util.h
-xoodyak.o: xoodyak.h internal-xoodoo.h internal-util.h
-xoodyak-masked.o: xoodyak.h internal-xoodoo.h internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
+xoodyak-aead.o: xoodyak-aead.h internal-xoodoo.h internal-util.h
+xoodyak-hash.o: xoodyak-hash.h internal-xoodoo.h internal-util.h
+xoodyak-masked.o: xoodyak-masked.h internal-xoodoo.h internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
 internal-ascon.o: internal-ascon.h internal-util.h
 internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
 internal-blake2s.o: internal-blake2s.h internal-util.h aead-metadata.h
