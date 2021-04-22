@@ -15,7 +15,9 @@ ASCON_FILES = \
     ascon128.c \
     ascon128.h \
     ascon-hash.c \
+    ascon-hash.h \
     ascon-xof.c \
+    ascon-xof.h \
     internal-ascon.c \
     internal-ascon.h \
     internal-ascon-armv7m.S \

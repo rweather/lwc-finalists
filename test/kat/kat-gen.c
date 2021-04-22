@@ -22,7 +22,7 @@
 
 #include "aead-metadata.h"
 #include "algorithms.h"
-#include "ascon128.h"
+#include "ascon-xof.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -42,7 +42,7 @@ static const aead_hash_algorithm_t *alg_hash = 0;
 
 /* State of the RNG for generating input vectors */
 static int rng_active = 0;
-static ascon_hash_state_t rng_state;
+static ascon_xof_state_t rng_state;
 
 /**
  * \brief Initializes the pseudo random number generator.

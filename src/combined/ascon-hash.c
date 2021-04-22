@@ -20,45 +20,16 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "ascon128.h"
-#include "internal-ascon.h"
+#include "ascon-hash.h"
 #include <string.h>
-
-#define ASCON_HASH_RATE 8
-
-#if ASCON_SLICED
-#define ascon_hash_permute() \
-    ascon_permute_sliced((ascon_state_t *)(state->s.state), 0)
-#else
-#define ascon_hash_permute() \
-    ascon_permute((ascon_state_t *)(state->s.state), 0)
-#endif
 
 int ascon_hash
     (unsigned char *out, const unsigned char *in, unsigned long long inlen)
 {
-#if ASCON_SLICED
-    ascon_hash_state_t state;
-    unsigned temp;
+    ascon_xof_state_t state;
     ascon_hash_init(&state);
-    ascon_to_sliced((ascon_state_t *)(state.s.state));
-    while (inlen >= ASCON_HASH_RATE) {
-        ascon_absorb_sliced((ascon_state_t *)(state.s.state), in, 0);
-        ascon_permute_sliced((ascon_state_t *)(state.s.state), 0);
-        in += ASCON_HASH_RATE;
-        inlen -= ASCON_HASH_RATE;
-    }
-    ascon_from_sliced((ascon_state_t *)(state.s.state));
-    temp = (unsigned)inlen;
-    lw_xor_block(state.s.state, in, temp);
-    state.s.count = temp;
-    ascon_hash_finalize(&state, out);
-#else
-    ascon_hash_state_t state;
-    ascon_hash_init(&state);
-    ascon_hash_update(&state, in, inlen);
-    ascon_hash_finalize(&state, out);
-#endif
+    ascon_xof_absorb(&state, in, inlen);
+    ascon_xof_squeeze(&state, out, ASCON_HASH_SIZE);
     return 0;
 }
 
@@ -81,76 +52,11 @@ void ascon_hash_update
     (ascon_hash_state_t *state, const unsigned char *in,
      unsigned long long inlen)
 {
-    unsigned temp;
-
-    /* Handle the partial left-over block from last time */
-    if (state->s.count) {
-        temp = ASCON_HASH_RATE - state->s.count;
-        if (temp > inlen) {
-            temp = (unsigned)inlen;
-            lw_xor_block(state->s.state + state->s.count, in, temp);
-            state->s.count += temp;
-            return;
-        }
-        lw_xor_block(state->s.state + state->s.count, in, temp);
-        state->s.count = 0;
-        in += temp;
-        inlen -= temp;
-#if ASCON_SLICED
-        ascon_to_sliced((ascon_state_t *)(state->s.state));
-#endif
-        ascon_hash_permute();
-    } else {
-#if ASCON_SLICED
-        ascon_to_sliced((ascon_state_t *)(state->s.state));
-#endif
-    }
-
-    /* Process full blocks that are aligned at state->s.count == 0 */
-#if ASCON_SLICED
-    while (inlen >= ASCON_HASH_RATE) {
-        ascon_absorb_sliced((ascon_state_t *)(state->s.state), in, 0);
-        in += ASCON_HASH_RATE;
-        inlen -= ASCON_HASH_RATE;
-        ascon_hash_permute();
-    }
-    ascon_from_sliced((ascon_state_t *)(state->s.state));
-#else
-    while (inlen >= ASCON_HASH_RATE) {
-        lw_xor_block(state->s.state, in, ASCON_HASH_RATE);
-        in += ASCON_HASH_RATE;
-        inlen -= ASCON_HASH_RATE;
-        ascon_hash_permute();
-    }
-#endif
-
-    /* Process the left-over block at the end of the input */
-    temp = (unsigned)inlen;
-    lw_xor_block(state->s.state, in, temp);
-    state->s.count = temp;
+    ascon_xof_absorb(state, in, inlen);
 }
 
 void ascon_hash_finalize
     (ascon_hash_state_t *state, unsigned char *out)
 {
-    unsigned index;
-
-    /* Pad the final block */
-    state->s.state[state->s.count] ^= 0x80;
-
-    /* Squeeze out the finalized hash value */
-#if ASCON_SLICED
-    ascon_to_sliced((ascon_state_t *)(state->s.state));
-    for (index = 0; index < ASCON_HASH_SIZE; index += ASCON_HASH_RATE) {
-        ascon_hash_permute();
-        ascon_squeeze_sliced((ascon_state_t *)(state->s.state), out, 0);
-        out += ASCON_HASH_RATE;
-    }
-#else
-    for (index = 0; index < ASCON_HASH_SIZE; index += ASCON_HASH_RATE) {
-        ascon_hash_permute();
-        memcpy(out, state->s.state, ASCON_HASH_RATE);
-        out += ASCON_HASH_RATE;
-    }
-#endif
+    ascon_xof_squeeze(state, out, ASCON_HASH_SIZE);
 }
