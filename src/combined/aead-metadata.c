@@ -35,7 +35,7 @@
 #include "isap.h"
 #include "photon-beetle-aead.h"
 #include "photon-beetle-hash.h"
-#include "romulus.h"
+#include "romulus-aead.h"
 #include "romulus-hash.h"
 #include "sparkle-aead.h"
 #include "sparkle-hash.h"

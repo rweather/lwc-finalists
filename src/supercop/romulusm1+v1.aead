@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=romulus_mp_aead_encrypt
 aead_decrypt=romulus_mp_aead_decrypt
-aead_header=romulus.h
+aead_header=romulus-aead.h
 aead_exclude="romulus-hash.c romulus-hash.h"

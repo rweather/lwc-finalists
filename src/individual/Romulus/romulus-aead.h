@@ -20,11 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_ROMULUS_H
-#define LWCRYPTO_ROMULUS_H
+#ifndef LWCRYPTO_ROMULUS_AEAD_H
+#define LWCRYPTO_ROMULUS_AEAD_H
 
 /**
- * \file romulus.h
+ * \file romulus-aead.h
  * \brief Romulus authenticated encryption algorithm family.
  *
  * Romulus is a family of authenticated encryption algorithms that

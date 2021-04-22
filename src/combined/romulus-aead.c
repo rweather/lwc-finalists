@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "romulus.h"
+#include "romulus-aead.h"
 #include "internal-skinny-plus.h"
 #include "internal-util.h"
 #include <string.h>

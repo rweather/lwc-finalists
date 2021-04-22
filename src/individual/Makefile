@@ -110,8 +110,8 @@ PHOTON_BEETLE_FILES = \
     internal-photon256-mix.h \
     $(COMMON_FILES)
 ROMULUS_FILES = \
-    romulus.c \
-    romulus.h \
+    romulus-aead.c \
+    romulus-aead.h \
     romulus-hash.c \
     romulus-hash.h \
     internal-skinny-plus.c \
