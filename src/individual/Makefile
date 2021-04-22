@@ -99,9 +99,10 @@ ISAP_FILES = \
     internal-keccakp-400-avr.S \
     $(COMMON_FILES)
 PHOTON_BEETLE_FILES = \
-    photon-beetle.c \
-    photon-beetle.h \
+    photon-beetle-aead.c \
+    photon-beetle-aead.h \
     photon-beetle-hash.c \
+    photon-beetle-hash.h \
     internal-photon256.c \
     internal-photon256.h \
     internal-photon256-armv7m.S \

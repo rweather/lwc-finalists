@@ -211,7 +211,7 @@ performance reasons.
 
 \section alg_photon_beetle PHOTON-Beetle
 
-<b>Definition:</b> \ref photon-beetle.h
+<b>Definition:</b> \ref photon-beetle-aead.h, \ref photon-beetle-hash.h
 
 PHOTON-Beetle is a family of authenticated encryption algorithms based
 on the PHOTON-256 permutation and using the Beetle sponge mode.

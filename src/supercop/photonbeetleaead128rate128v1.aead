@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=photon_beetle_128_aead_encrypt
 aead_decrypt=photon_beetle_128_aead_decrypt
-aead_header=photon-beetle.h
-aead_exclude="photon-beetle-hash.c"
+aead_header=photon-beetle-aead.h
+aead_exclude="photon-beetle-hash.c photon-beetle-hash.h"

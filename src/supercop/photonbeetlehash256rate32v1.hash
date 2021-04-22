@@ -4,5 +4,5 @@ hash_meta_name=PHOTON-Beetle-HASH
 hash_srcdir=PHOTON-Beetle
 hash_size=32
 hash_function=photon_beetle_hash
-hash_header=photon-beetle.h
-hash_exclude="photon-beetle.c"
+hash_header=photon-beetle-hash.h
+hash_exclude="photon-beetle-aead.c photon-beetle-aead.h"

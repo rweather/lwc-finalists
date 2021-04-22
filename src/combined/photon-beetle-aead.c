@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "photon-beetle.h"
+#include "photon-beetle-aead.h"
 #include "internal-photon256.h"
 #include "internal-util.h"
 #include <string.h>
