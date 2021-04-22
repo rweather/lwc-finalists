@@ -114,7 +114,8 @@ side by side with the original unprotected versions.
 
 \section alg_ascon ASCON
 
-<b>Definition:</b> \ref ascon128.h, \ref ascon128-masked.h
+<b>Definition:</b> \ref ascon128.h, \ref ascon128-masked.h,
+\ref ascon-hash.h, \ref ascon-xof.h
 
 The ASCON family consists of the following AEAD algorithms:
 
@@ -261,7 +262,7 @@ Romulus-M+ if resistance against nonce reuse is desirable.
 
 \section alg_sparkle SPARKLE
 
-<b>Definition:</b> \ref sparkle.h
+<b>Definition:</b> \ref sparkle-aead.h, \ref sparkle-hash.h
 
 SPARKLE is a family of encryption and hash algorithms that are based
 around the SPARKLE permutation.  There are three versions of the

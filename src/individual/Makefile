@@ -122,8 +122,10 @@ ROMULUS_FILES = \
     internal-skinny-plus-config.h \
     $(COMMON_FILES)
 SPARKLE_FILES = \
-    sparkle.c \
-    sparkle.h \
+    sparkle-aead.c \
+    sparkle-aead.h \
+    sparkle-hash.c \
+    sparkle-hash.h \
     internal-sparkle.c \
     internal-sparkle.h \
     internal-sparkle-armv7m.S \

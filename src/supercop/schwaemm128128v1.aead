@@ -7,4 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=schwaemm_128_128_aead_encrypt
 aead_decrypt=schwaemm_128_128_aead_decrypt
-aead_header=sparkle.h
+aead_exclude="sparkle-hash.c sparkle-hash.h"
+aead_header=sparkle-aead.h

@@ -25,7 +25,8 @@ OBJS = \
         photon-beetle-hash.o \
         romulus.o \
         romulus-hash.o \
-        sparkle.o \
+        sparkle-aead.o \
+        sparkle-hash.o \
         tinyjambu.o \
         tinyjambu-masked.o \
         xoodyak.o \
@@ -67,7 +68,8 @@ aead-metadata.o: aead-metadata.h aead-random.h internal-masking.h \
 	internal-util.h ascon128.h ascon128-masked.h ascon-hash.h ascon-xof.h \
 	elephant-delirium.h elephant-dumbo.h elephant-jumbo.h \
 	gift-cofb.h gift-cofb-masked.h grain128.h isap.h \
-	photon-beetle.h romulus.h romulus-hash.h sparkle.h \
+	photon-beetle.h romulus.h romulus-hash.h \
+        sparkle-aead.h sparkle-hash.h \
 	tinyjambu.h tinyjambu-masked.h xoodyak.h xoodyak-masked.h
 aead-random.o: aead-random.h
 ascon128.o: ascon128.h internal-ascon.h internal-util.h
@@ -85,7 +87,8 @@ photon-beetle.o: photon-beetle.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle.h internal-photon256.h internal-util.h
 romulus.o: romulus.h internal-skinny-plus.h internal-util.h
 romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h
-sparkle.o: sparkle.h internal-sparkle.h internal-util.h
+sparkle-aead.o: sparkle-aead.h internal-sparkle.h internal-util.h
+sparkle-hash.o: sparkle-hash.h internal-sparkle.h internal-util.h
 tinyjambu.o: tinyjambu.h internal-tinyjambu.h internal-util.h
 tinyjambu-masked.o: tinyjambu-masked.h internal-tinyjambu-m.h aead-random.h internal-masking.h internal-util.h
 xoodyak.o: xoodyak.h internal-xoodoo.h internal-util.h
