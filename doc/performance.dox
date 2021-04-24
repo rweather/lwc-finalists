@@ -116,15 +116,37 @@ The hash algorithms are compared against BLAKE2s instead of ChaChaPoly:
 <table>
 <tr><td>Algorithm</td><td>Hash Bits</td><td>1024 bytes</td><td>128 bytes</td><td>16 bytes</td><td>Average</td></tr>
 <tr><td><b><i>Esch256</i></b> (SPARKLE)</td><td>256</td><td>0.90</td><td>0.79</td><td>1.51</td><td>1.07</td></tr>
+<tr><td>SHA256-ASM</td><td>256</td><td>1.11</td><td>0.79</td><td>1.15</td><td>1.02</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.71</td><td>0.65</td><td>1.43</td><td>0.93</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52</td></tr>
-<tr><td><b><i>SHA256</i></b><sup>1</sup></td><td>256</td><td>0.56</td><td>0.40</td><td>0.60</td><td>0.52</td></tr>
+<tr><td>SHA256-C</td><td>256</td><td>0.56</td><td>0.40</td><td>0.60</td><td>0.52</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.46</td><td>0.38</td><td>0.59</td><td>0.48</td></tr>
 <tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.10</td><td>0.09</td><td>0.22</td><td>0.14</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.16</td><td>0.07</td></tr>
 </table>
 
-Note 1: SHA256 is in C not assembly code.
+SHA256-ASM uses a fully unrolled version of the SHA256 block transformation
+function in armv7m-compatible assembly code.  SHA256-C is a straight-forward
+C version of SHA256 with very little unrolling, designed for small code
+and memory sizes.
+
+The speed of SHA256 compared with the other candidates can be attributed
+in part to the "rate" of 64 bytes for SHA256, which allows it to process more
+data per block operation.  The other algorithms have rates of 4, 8, 16,
+or 32 bytes.  If all algorithms had the same rate, then the ordering
+would be more like this:
+
+<table>
+<tr><td>Algorithm</td><td>Average</td><td>Rate</td><td>Average / Rate</td></tr>
+<tr><td>Esch256 (SPARKLE)</td><td>1.07</td><td>16</td><td>0.0669</td></tr>
+<tr><td>ASCON-HASH</td><td>0.52</td><td>8</td><td>0.0650</td></tr>
+<tr><td>Xoodyak</td><td>0.93</td><td>16</td><td>0.0581</td></tr>
+<tr><td>Esch384 (SPARKLE)</td><td>0.48</td><td>16</td><td>0.0300</td></tr>
+<tr><td>PHOTON-Beetle-HASH</td><td>0.07</td><td>4</td><td>0.0175</td></tr>
+<tr><td>SHA256-ASM</td><td>1.02</td><td>64</td><td>0.0159</td></tr>
+<tr><td>SHA256-C</td><td>0.52</td><td>64</td><td>0.0081</td></tr>
+<tr><td>Romulus-H+</td><td>0.14</td><td>32</td><td>0.0044</td></tr>
+</table>
 
 \section perf_esp32 Performance on ESP32
 
@@ -165,7 +187,7 @@ Hash algorithms:
 <table>
 <tr><td>Algorithm</td><td>Hash Bits</td><td>1024 bytes</td><td>128 bytes</td><td>16 bytes</td><td>Average</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.35</td><td>0.33</td><td>0.73</td><td>0.47</td></tr>
-<tr><td><b><i>SHA256</i></b></td><td>256</td><td>0.47</td><td>0.37</td><td>0.55</td><td>0.47</td></tr>
+<tr><td>SHA256-C</td><td>256</td><td>0.47</td><td>0.37</td><td>0.55</td><td>0.47</td></tr>
 <tr><td><b><i>Esch256</i></b> (SPARKLE)</td><td>256</td><td>0.38</td><td>0.34</td><td>0.64</td><td>0.45</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.24</td><td>0.20</td><td>0.30</td><td>0.25</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.19</td><td>0.16</td><td>0.25</td><td>0.20</td></tr>
@@ -173,18 +195,14 @@ Hash algorithms:
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.15</td><td>0.06</td></tr>
 </table>
 
-SHA256 does quite well on ESP32.  In large part this is because SHA256's
+SHA256-C does quite well on ESP32.  In large part this is because SHA256's
 "rate" is 64 bytes which allows it to process more data per block operation
-than the other algorithms whose rate is typically 4, 8, 16, or 32 bytes per
-block operation.  BLAKE2s (which would be at the ranking 1.00) also has a rate
-of 64 bytes.  SHA256 is about half the speed of BLAKE2s for the same rate.
+than the other algorithms whose rate is 4, 8, 16, or 32 bytes per block
+operation.
 
 All of the algorithms suffer on ESP32 because the CPU does not have a native
-word rotation instruction.  BLAKE2s has a lower percentage of word rotations
-per round, as does SHA256.  So they are less affected by the CPU's shortcomings.
-
-On ARM Cortex M3, which does have a native word rotation instruction,
-some of the NIST submissions do better than SHA256.
+word rotation instruction.  BLAKE2s and SHA256 have a lower percentage of
+word rotations per round, so they are less affected by the CPU's shortcomings.
 
 \section perf_overall Overall group rankings
 

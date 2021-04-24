@@ -14,6 +14,7 @@ TARGETS = \
 	bin/keccakp_400_armv7m \
 	bin/tinyjambu_armv7m \
 	bin/photon256_armv7m \
+	bin/sha256_armv7m \
 	bin/skinny128_armv7m \
 	bin/sparkle_armv7m \
 	bin/spongent_armv7m \
@@ -42,6 +43,10 @@ bin/keccakp_400_armv7m: keccakp_400_armv7m.c copyright.h
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 bin/photon256_armv7m: photon256_armv7m.c copyright.h
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+bin/sha256_armv7m: sha256_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -80,6 +85,7 @@ generate: all
 	bin/keccakp_400_armv7m >../combined/internal-keccakp-400-armv7m.S
 	bin/photon256_armv7m >../combined/internal-photon256-armv7m.S
 	bin/tinyjambu_armv7m >../combined/internal-tinyjambu-armv7m.S
+	bin/sha256_armv7m >../combined/internal-sha256-armv7m.S
 	bin/skinny128_armv7m full plus >../combined/internal-skinny-full-armv7m.S
 	bin/skinny128_armv7m small plus >../combined/internal-skinny-small-armv7m.S
 	bin/skinny128_armv7m tiny plus >../combined/internal-skinny-tiny-armv7m.S

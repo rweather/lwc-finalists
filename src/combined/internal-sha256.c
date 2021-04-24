@@ -48,7 +48,14 @@ typedef struct
 
 /** @endcond */
 
-static void sha256_process_chunk(sha256_state_t *state)
+#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+
+/* Defined in internal-sha256-armv7m.S */
+extern void sha256_transform(sha256_state_t *state);
+
+#else /* !ASM */
+
+static void sha256_transform(sha256_state_t *state)
 {
     uint8_t index;
     uint32_t a, b, c, d, e, f, g, h;
@@ -146,6 +153,8 @@ static void sha256_process_chunk(sha256_state_t *state)
     state->h[7] += h;
 }
 
+#endif /* !ASM */
+
 int internal_sha256_hash
     (unsigned char *out, const unsigned char *in, unsigned long long inlen)
 {
@@ -168,7 +177,7 @@ int internal_sha256_hash
         memcpy(state.w, in, 64);
         inlen -= 64;
         in += 64;
-        sha256_process_chunk(&state);
+        sha256_transform(&state);
     }
     temp = (unsigned)inlen;
     memcpy(state.w, in, temp);
@@ -179,11 +188,11 @@ int internal_sha256_hash
         memset(((uint8_t *)(state.w)) + temp + 1, 0, 64 - 9 - temp);
     } else {
         memset(((uint8_t *)(state.w)) + temp + 1, 0, 64 - 1 - temp);
-        sha256_process_chunk(&state);
+        sha256_transform(&state);
         memset(&state.w, 0, 64 - 8);
     }
     be_store_word64(((uint8_t *)(state.w)) + 64 - 8, len_bytes);
-    sha256_process_chunk(&state);
+    sha256_transform(&state);
 
     /* Convert the hash into big-endian and return it */
 #if defined(LW_UTIL_LITTLE_ENDIAN)
