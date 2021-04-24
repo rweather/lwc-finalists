@@ -141,6 +141,8 @@ Performance of hash algorithms on AVR</h1>
 <tr>
 <td><b><em>Esch256</em></b> (SPARKLE)</td><td>256</td><td>1.90</td><td>1.65</td><td>3.15</td><td>2.23 </td></tr>
 <tr>
+<td><b><em>SHA256</em></b></td><td>256</td><td>2.22</td><td>1.55</td><td>2.22</td><td>1.99 </td></tr>
+<tr>
 <td>Esch384 (SPARKLE)</td><td>384</td><td>1.20</td><td>0.96</td><td>1.48</td><td>1.21 </td></tr>
 <tr>
 <td><b><em>Xoodyak</em></b></td><td>256</td><td>0.92</td><td>0.83</td><td>1.83</td><td>1.19 </td></tr>
@@ -151,6 +153,7 @@ Performance of hash algorithms on AVR</h1>
 <tr>
 <td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.17</td><td>0.18</td><td>1.38</td><td>0.58 </td></tr>
 </table>
+<p>SHA256 uses a fully unrolled implementation of the SHA256 block transform function in AVR assembly code.</p>
 <h1><a class="anchor" id="perf_avr_overall"></a>
 Overall group rankings for AVR</h1>
 <p>AEAD algorithm rankings:</p>
@@ -185,6 +188,8 @@ Overall group rankings for AVR</h1>
 <tr>
 <td>22</td><td>SPARKLE </td></tr>
 <tr>
+<td>19</td><td>SHA256 </td></tr>
+<tr>
 <td>11</td><td>Romulus, Xoodyak </td></tr>
 <tr>
 <td>7</td><td>ASCON </td></tr>
@@ -194,7 +199,7 @@ Overall group rankings for AVR</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 24 2021 13:05:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

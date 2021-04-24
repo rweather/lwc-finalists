@@ -26,6 +26,7 @@ var searchData=
   ['schwaemm_5f256_5f256_5fkey_5fsize',['SCHWAEMM_256_256_KEY_SIZE',['../sparkle-aead_8h.html#ac7beccfbb69fb74c351a1b36833f1e46',1,'sparkle-aead.h']]],
   ['schwaemm_5f256_5f256_5fnonce_5fsize',['SCHWAEMM_256_256_NONCE_SIZE',['../sparkle-aead_8h.html#a4625028203a96a99037e1383b2c03004',1,'sparkle-aead.h']]],
   ['schwaemm_5f256_5f256_5ftag_5fsize',['SCHWAEMM_256_256_TAG_SIZE',['../sparkle-aead_8h.html#a0e42d91ec395cf46481c1240091bd1c8',1,'sparkle-aead.h']]],
+  ['sha256_5fhash_5fsize',['SHA256_HASH_SIZE',['../internal-sha256_8h.html#af92a97f32f8c618057e12fd19313760b',1,'internal-sha256.h']]],
   ['skinny_5fplus_5fblock_5fsize',['SKINNY_PLUS_BLOCK_SIZE',['../internal-skinny-plus_8h.html#a6b84dd75f99a87b7032f26b90b67a3d7',1,'internal-skinny-plus.h']]],
   ['skinny_5fplus_5fencrypt',['skinny_plus_encrypt',['../internal-skinny-plus_8h.html#a0ffea345556e8ba9ebc7b631dbf22c73',1,'internal-skinny-plus.c']]],
   ['skinny_5fplus_5fencrypt_5ftk_5ffull',['skinny_plus_encrypt_tk_full',['../internal-skinny-plus_8h.html#abe7f335fe95499b2c56a2f74c0405626',1,'internal-skinny-plus.c']]],

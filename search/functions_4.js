@@ -3,6 +3,7 @@ var searchData=
   ['internal_5fblake2s_5fhash',['internal_blake2s_hash',['../internal-blake2s_8h.html#a753ce61965a843ec87eee8f0d63a5e81',1,'internal-blake2s.c']]],
   ['internal_5fchachapoly_5faead_5fdecrypt',['internal_chachapoly_aead_decrypt',['../internal-chachapoly_8h.html#a39020dcd94e59abe74d278ee569fdb70',1,'internal-chachapoly.c']]],
   ['internal_5fchachapoly_5faead_5fencrypt',['internal_chachapoly_aead_encrypt',['../internal-chachapoly_8h.html#aa83be30902bd74ddb3aa49dc81c0db45',1,'internal-chachapoly.c']]],
+  ['internal_5fsha256_5fhash',['internal_sha256_hash',['../internal-sha256_8h.html#ace1066a69506f31759fdf85754859269',1,'internal-sha256.c']]],
   ['isap_5fascon_5f128_5faead_5fdecrypt',['isap_ascon_128_aead_decrypt',['../isap-aead_8h.html#a0df245c6c6fe70dfbc5af734304fefc1',1,'isap-aead.h']]],
   ['isap_5fascon_5f128_5faead_5fencrypt',['isap_ascon_128_aead_encrypt',['../isap-aead_8h.html#a0f4b6c8f880129b0402da732d4f732a8',1,'isap-aead.h']]],
   ['isap_5fascon_5f128a_5faead_5fdecrypt',['isap_ascon_128a_aead_decrypt',['../isap-aead_8h.html#a263bd34dbe60f7ea525070ed3a916207',1,'isap-aead.h']]],
