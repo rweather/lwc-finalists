@@ -10,8 +10,8 @@ LIBRARY = libcryptolw.a
 OBJS = \
 	aead-metadata.o \
 	aead-random.o \
-        ascon128.o \
-        ascon128-masked.o \
+        ascon-aead.o \
+        ascon-aead-masked.o \
         ascon-hash.o \
         ascon-xof.o \
         elephant-delirium.o \
@@ -65,18 +65,21 @@ check: all
 individual:
 	(cd ../individual ; $(MAKE) all)
 
-aead-metadata.o: aead-metadata.h aead-random.h internal-masking.h \
-	internal-util.h ascon128.h ascon128-masked.h ascon-hash.h ascon-xof.h \
+aead-metadata.o: \
+	aead-metadata.h aead-random.h internal-masking.h internal-util.h \
+	ascon-aead.h ascon-aead-masked.h ascon-hash.h ascon-xof.h \
 	elephant-delirium.h elephant-dumbo.h elephant-jumbo.h \
-	gift-cofb.h gift-cofb-masked.h grain128.h isap.h \
+	gift-cofb.h gift-cofb-masked.h \
+	grain128.h \
+	isap.h \
 	photon-beetle-aead.h photon-beetle-hash.h \
 	romulus-aead.h romulus-hash.h \
 	sparkle-aead.h sparkle-hash.h \
 	tinyjambu.h tinyjambu-masked.h \
 	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
 aead-random.o: aead-random.h
-ascon128.o: ascon128.h internal-ascon.h internal-util.h
-ascon128-masked.o: ascon128-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
+ascon-aead.o: ascon-aead.h internal-ascon.h internal-util.h
+ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
 ascon-hash.o: ascon-hash.h ascon-xof.h
 ascon-xof.o: ascon-xof.h internal-ascon.h internal-util.h
 elephant-delirium.o: elephant-delirium.h internal-keccakp-200.h internal-util.h

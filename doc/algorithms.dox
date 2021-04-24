@@ -114,7 +114,7 @@ side by side with the original unprotected versions.
 
 \section alg_ascon ASCON
 
-<b>Definition:</b> \ref ascon128.h, \ref ascon128-masked.h,
+<b>Definition:</b> \ref ascon-aead.h, \ref ascon-aead-masked.h,
 \ref ascon-hash.h, \ref ascon-xof.h
 
 The ASCON family consists of the following AEAD algorithms:

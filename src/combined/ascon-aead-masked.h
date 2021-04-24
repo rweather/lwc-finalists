@@ -20,24 +20,22 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_ASCON_H
-#define LWCRYPTO_ASCON_H
+#ifndef LWCRYPTO_ASCON_AEAD_MASKED_H
+#define LWCRYPTO_ASCON_AEAD_MASKED_H
 
 /**
- * \file ascon128.h
- * \brief ASCON-128 encryption algorithm and related family members.
+ * \file ascon-aead-masked.h
+ * \brief Masked ASCON-128 encryption algorithm and related family members.
  *
- * The ASCON family consists of several related algorithms:
+ * This algorithm is experimental and is not one of the NIST competition
+ * submissions.  It uses a masked version of the ASCON permutation to
+ * absorb the key and nonce in the first block, and to generate the
+ * authentication tag in the last block.  The regular ASCON permutation
+ * is used for the associated data and plaintext.
  *
- * \li ASCON-128 with a 128-bit key, a 128-bit nonce, a 128-bit authentication
- * tag, and a block rate of 64 bits.
- * \li ASCON-128a with a 128-bit key, a 128-bit nonce, a 128-bit authentication
- * tag, and a block rate of 128 bits.  This is faster than ASCON-128 but may
- * not be as secure.
- * \li ASCON-80pq with a 160-bit key, a 128-bit nonce, a 128-bit authentication
- * tag, and a block rate of 64 bits.  This is similar to ASCON-128 but has a
- * 160-bit key instead which may be more resistant against quantum computers.
- * \li ASCON-HASH with a 256-bit hash output.
+ * The theory (as yet unproven) is that this construction will provide
+ * some protection for the key against power analysis side channels.
+ * Please let me know what I've done wrong if this theory is incorrect.
  *
  * References: https://ascon.iaik.tugraz.at/
  */
@@ -47,37 +45,37 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the key for ASCON-128 and ASCON-128a.
+ * \brief Size of the key for masked ASCON-128 and ASCON-128a.
  */
-#define ASCON128_KEY_SIZE 16
+#define ASCON128_MASKED_KEY_SIZE 16
 
 /**
- * \brief Size of the nonce for ASCON-128 and ASCON-128a.
+ * \brief Size of the nonce for masked ASCON-128 and ASCON-128a.
  */
-#define ASCON128_NONCE_SIZE 16
+#define ASCON128_MASKED_NONCE_SIZE 16
 
 /**
- * \brief Size of the authentication tag for ASCON-128 and ASCON-128a.
+ * \brief Size of the authentication tag for masked ASCON-128 and ASCON-128a.
  */
-#define ASCON128_TAG_SIZE 16
+#define ASCON128_MASKED_TAG_SIZE 16
 
 /**
- * \brief Size of the key for ASCON-80pq.
+ * \brief Size of the key for masked ASCON-80pq.
  */
-#define ASCON80PQ_KEY_SIZE 20
+#define ASCON80PQ_MASKED_KEY_SIZE 20
 
 /**
- * \brief Size of the nonce for ASCON-80pq.
+ * \brief Size of the nonce for masked ASCON-80pq.
  */
-#define ASCON80PQ_NONCE_SIZE 16
+#define ASCON80PQ_MASKED_NONCE_SIZE 16
 
 /**
- * \brief Size of the authentication tag for ASCON-80pq.
+ * \brief Size of the authentication tag for masked ASCON-80pq.
  */
-#define ASCON80PQ_TAG_SIZE 16
+#define ASCON80PQ_MASKED_TAG_SIZE 16
 
 /**
- * \brief Encrypts and authenticates a packet with ASCON-128.
+ * \brief Encrypts and authenticates a packet with masked ASCON-128.
  *
  * \param c Buffer to receive the output.
  * \param clen On exit, set to the length of the output which includes
@@ -95,9 +93,9 @@ extern "C" {
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  *
- * \sa ascon128_aead_decrypt()
+ * \sa ascon128_masked_aead_decrypt()
  */
-int ascon128_aead_encrypt
+int ascon128_masked_aead_encrypt
     (unsigned char *c, unsigned long long *clen,
      const unsigned char *m, unsigned long long mlen,
      const unsigned char *ad, unsigned long long adlen,
@@ -106,7 +104,7 @@ int ascon128_aead_encrypt
      const unsigned char *k);
 
 /**
- * \brief Decrypts and authenticates a packet with ASCON-128.
+ * \brief Decrypts and authenticates a packet with masked ASCON-128.
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
@@ -125,9 +123,9 @@ int ascon128_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  *
- * \sa ascon128_aead_encrypt()
+ * \sa ascon128_masked_aead_encrypt()
  */
-int ascon128_aead_decrypt
+int ascon128_masked_aead_decrypt
     (unsigned char *m, unsigned long long *mlen,
      unsigned char *nsec,
      const unsigned char *c, unsigned long long clen,
@@ -136,7 +134,7 @@ int ascon128_aead_decrypt
      const unsigned char *k);
 
 /**
- * \brief Encrypts and authenticates a packet with ASCON-128a.
+ * \brief Encrypts and authenticates a packet with masked ASCON-128a.
  *
  * \param c Buffer to receive the output.
  * \param clen On exit, set to the length of the output which includes
@@ -154,9 +152,9 @@ int ascon128_aead_decrypt
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  *
- * \sa ascon128a_aead_decrypt()
+ * \sa ascon128a_masked_aead_decrypt()
  */
-int ascon128a_aead_encrypt
+int ascon128a_masked_aead_encrypt
     (unsigned char *c, unsigned long long *clen,
      const unsigned char *m, unsigned long long mlen,
      const unsigned char *ad, unsigned long long adlen,
@@ -165,7 +163,7 @@ int ascon128a_aead_encrypt
      const unsigned char *k);
 
 /**
- * \brief Decrypts and authenticates a packet with ASCON-128a.
+ * \brief Decrypts and authenticates a packet with masked ASCON-128a.
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
@@ -184,9 +182,9 @@ int ascon128a_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  *
- * \sa ascon128a_aead_encrypt()
+ * \sa ascon128a_masked_aead_encrypt()
  */
-int ascon128a_aead_decrypt
+int ascon128a_masked_aead_decrypt
     (unsigned char *m, unsigned long long *mlen,
      unsigned char *nsec,
      const unsigned char *c, unsigned long long clen,
@@ -195,7 +193,7 @@ int ascon128a_aead_decrypt
      const unsigned char *k);
 
 /**
- * \brief Encrypts and authenticates a packet with ASCON-80pq.
+ * \brief Encrypts and authenticates a packet with masked ASCON-80pq.
  *
  * \param c Buffer to receive the output.
  * \param clen On exit, set to the length of the output which includes
@@ -213,9 +211,9 @@ int ascon128a_aead_decrypt
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  *
- * \sa ascon80pq_aead_decrypt()
+ * \sa ascon80pq_masked_aead_decrypt()
  */
-int ascon80pq_aead_encrypt
+int ascon80pq_masked_aead_encrypt
     (unsigned char *c, unsigned long long *clen,
      const unsigned char *m, unsigned long long mlen,
      const unsigned char *ad, unsigned long long adlen,
@@ -224,7 +222,7 @@ int ascon80pq_aead_encrypt
      const unsigned char *k);
 
 /**
- * \brief Decrypts and authenticates a packet with ASCON-80pq.
+ * \brief Decrypts and authenticates a packet with masked ASCON-80pq.
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
@@ -243,9 +241,9 @@ int ascon80pq_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  *
- * \sa ascon80pq_aead_encrypt()
+ * \sa ascon80pq_masked_aead_encrypt()
  */
-int ascon80pq_aead_decrypt
+int ascon80pq_masked_aead_decrypt
     (unsigned char *m, unsigned long long *mlen,
      unsigned char *nsec,
      const unsigned char *c, unsigned long long clen,

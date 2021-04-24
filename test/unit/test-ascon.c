@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "ascon128.h"
+#include "ascon-aead.h"
 #include "internal-ascon.h"
 #include "internal-ascon-m.h"
 #include "test-cipher.h"

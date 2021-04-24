@@ -12,8 +12,8 @@ COMMON_MASKING_FILES = \
 	internal-util.c
 
 ASCON_FILES = \
-    ascon128.c \
-    ascon128.h \
+    ascon-aead.c \
+    ascon-aead.h \
     ascon-hash.c \
     ascon-hash.h \
     ascon-xof.c \
@@ -24,8 +24,8 @@ ASCON_FILES = \
     internal-ascon-avr.S \
     $(COMMON_FILES)
 ASCON_MASKED_FILES = \
-    ascon128-masked.c \
-    ascon128-masked.h \
+    ascon-aead-masked.c \
+    ascon-aead-masked.h \
     internal-ascon.c \
     internal-ascon.h \
     internal-ascon-m.c \

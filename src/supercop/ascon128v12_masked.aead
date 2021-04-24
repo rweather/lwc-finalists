@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=ascon128_masked_aead_encrypt
 aead_decrypt=ascon128_masked_aead_decrypt
-aead_header=ascon128-masked.h
+aead_header=ascon-aead-masked.h
 aead_variant=masked

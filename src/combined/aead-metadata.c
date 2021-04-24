@@ -22,8 +22,8 @@
 
 #include "aead-metadata.h"
 #include "internal-masking.h"
-#include "ascon128.h"
-#include "ascon128-masked.h"
+#include "ascon-aead.h"
+#include "ascon-aead-masked.h"
 #include "ascon-hash.h"
 #include "ascon-xof.h"
 #include "elephant-delirium.h"

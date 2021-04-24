@@ -8,4 +8,4 @@ aead_tag_size=16
 aead_encrypt=ascon80pq_aead_encrypt
 aead_decrypt=ascon80pq_aead_decrypt
 aead_exclude="ascon-hash.c ascon-hash.h ascon-xof.c ascon-xof.h"
-aead_header=ascon128.h
+aead_header=ascon-aead.h

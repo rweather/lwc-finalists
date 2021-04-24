@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "ascon128-masked.h"
+#include "ascon-aead-masked.h"
 #include "internal-ascon.h"
 #include "internal-ascon-m.h"
 #include <string.h>
