@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "gift-cofb.h"
+#include "gift-cofb-aead.h"
 #include "internal-gift128.h"
 #include "internal-util.h"
 #include <string.h>

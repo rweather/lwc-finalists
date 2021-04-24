@@ -58,8 +58,8 @@ ELEPHANT_JUMBO_FILES = \
     internal-spongent-avr.S \
     $(COMMON_FILES)
 GIFT_COFB_FILES = \
-    gift-cofb.c \
-    gift-cofb.h \
+    gift-cofb-aead.c \
+    gift-cofb-aead.h \
     internal-gift128.c \
     internal-gift128.h \
     internal-gift128-config.h \
@@ -71,8 +71,8 @@ GIFT_COFB_FILES = \
     internal-gift128b-tiny-avr.S \
     $(COMMON_FILES)
 GIFT_COFB_MASKED_FILES = \
-    gift-cofb-masked.c \
-    gift-cofb-masked.h \
+    gift-cofb-aead-masked.c \
+    gift-cofb-aead-masked.h \
     internal-gift128-config.h \
     internal-gift128-m.c \
     internal-gift128-m.h \

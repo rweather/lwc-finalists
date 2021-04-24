@@ -7,4 +7,4 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=gift_cofb_aead_encrypt
 aead_decrypt=gift_cofb_aead_decrypt
-aead_header=gift-cofb.h
+aead_header=gift-cofb-aead.h

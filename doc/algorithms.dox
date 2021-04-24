@@ -155,7 +155,7 @@ tag.  It is based around the Keccak[200] permutation.
 
 \section alg_gift_cofb GIFT-COFB
 
-<b>Definition:</b> \ref gift-cofb.h, \ref gift-cofb-masked.h
+<b>Definition:</b> \ref gift-cofb-aead.h, \ref gift-cofb-aead-masked.h
 
 GIFT-COFB is an authenticated encryption algorithm that combines
 the COFB (COmbined FeedBack) block cipher mode with the bit-sliced

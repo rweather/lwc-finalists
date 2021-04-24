@@ -20,17 +20,12 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_GIFT_COFB_H
-#define LWCRYPTO_GIFT_COFB_H
+#ifndef LWCRYPTO_GIFT_COFB_AEAD_MASKED_H
+#define LWCRYPTO_GIFT_COFB_AEAD_MASKED_H
 
 /**
- * \file gift-cofb.h
- * \brief GIFT-COFB authenticated encryption algorithm.
- *
- * GIFT-COFB is an authenticated encryption algorithm that combines
- * the COFB (COmbined FeedBack) block cipher mode with the GIFT-128
- * block cipher.  The algorithm has a 128-bit key, a 128-bit nonce,
- * and a 128-bit authentication tag.
+ * \file gift-cofb-aead-masked.h
+ * \brief GIFT-COFB authenticated encryption algorithm (masked version).
  *
  * References: https://www.isical.ac.in/~lightweight/COFB/
  */
@@ -40,22 +35,22 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the key for GIFT-COFB.
+ * \brief Size of the key for masked GIFT-COFB.
  */
-#define GIFT_COFB_KEY_SIZE 16
+#define GIFT_COFB_MASKED_KEY_SIZE 16
 
 /**
- * \brief Size of the authentication tag for all GIFT-COFB family members.
+ * \brief Size of the authentication tag for masked GIFT-COFB.
  */
-#define GIFT_COFB_TAG_SIZE 16
+#define GIFT_COFB_MASKED_TAG_SIZE 16
 
 /**
- * \brief Size of the nonce for GIFT-COFB.
+ * \brief Size of the nonce for masked GIFT-COFB.
  */
-#define GIFT_COFB_NONCE_SIZE 16
+#define GIFT_COFB_MASKED_NONCE_SIZE 16
 
 /**
- * \brief Encrypts and authenticates a packet with GIFT-COFB.
+ * \brief Encrypts and authenticates a packet with masked GIFT-COFB.
  *
  * \param c Buffer to receive the output.
  * \param clen On exit, set to the length of the output which includes
@@ -73,9 +68,9 @@ extern "C" {
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  *
- * \sa gift_cofb_aead_decrypt()
+ * \sa gift_cofb_masked_aead_decrypt()
  */
-int gift_cofb_aead_encrypt
+int gift_cofb_masked_aead_encrypt
     (unsigned char *c, unsigned long long *clen,
      const unsigned char *m, unsigned long long mlen,
      const unsigned char *ad, unsigned long long adlen,
@@ -84,7 +79,7 @@ int gift_cofb_aead_encrypt
      const unsigned char *k);
 
 /**
- * \brief Decrypts and authenticates a packet with GIFT-COFB-0.
+ * \brief Decrypts and authenticates a packet with masked GIFT-COFB-0.
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
@@ -103,9 +98,9 @@ int gift_cofb_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  *
- * \sa gift_cofb_aead_encrypt()
+ * \sa gift_cofb_masked_aead_encrypt()
  */
-int gift_cofb_aead_decrypt
+int gift_cofb_masked_aead_decrypt
     (unsigned char *m, unsigned long long *mlen,
      unsigned char *nsec,
      const unsigned char *c, unsigned long long clen,

@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=gift_cofb_masked_aead_encrypt
 aead_decrypt=gift_cofb_masked_aead_decrypt
-aead_header=gift-cofb-masked.h
+aead_header=gift-cofb-aead-masked.h
 aead_variant=masked
