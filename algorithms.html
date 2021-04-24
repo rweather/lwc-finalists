@@ -153,7 +153,7 @@ Algorithms with side channel protection</h1>
 <p>In the case of ISAP, the protection is built into the algorithm. For the others, the "individual" directory contains "*_masked" variants side by side with the original unprotected versions.</p>
 <h1><a class="anchor" id="alg_ascon"></a>
 ASCON</h1>
-<p><b>Definition:</b> <a class="el" href="ascon128_8h.html">ascon128.h</a>, <a class="el" href="ascon128-masked_8h.html">ascon128-masked.h</a></p>
+<p><b>Definition:</b> <a class="el" href="ascon-aead_8h.html">ascon-aead.h</a>, <a class="el" href="ascon-aead-masked_8h.html">ascon-aead-masked.h</a>, <a class="el" href="ascon-hash_8h.html">ascon-hash.h</a>, <a class="el" href="ascon-xof_8h_source.html">ascon-xof.h</a></p>
 <p>The ASCON family consists of the following AEAD algorithms:</p>
 <ul>
 <li>ASCON-128 with a 128-bit key, a 128-bit nonce, and a 128-bit tag. </li>
@@ -176,18 +176,18 @@ Elephant</h1>
 <p><b>Recommendation:</b> The specification recommends Dumbo.</p>
 <h1><a class="anchor" id="alg_gift_cofb"></a>
 GIFT-COFB</h1>
-<p><b>Definition:</b> <a class="el" href="gift-cofb_8h.html">gift-cofb.h</a>, <a class="el" href="gift-cofb-masked_8h.html">gift-cofb-masked.h</a></p>
+<p><b>Definition:</b> <a class="el" href="gift-cofb-aead_8h.html">gift-cofb-aead.h</a>, <a class="el" href="gift-cofb-aead-masked_8h.html">gift-cofb-aead-masked.h</a></p>
 <p>GIFT-COFB is an authenticated encryption algorithm that combines the COFB (COmbined FeedBack) block cipher mode with the bit-sliced version of the GIFT-128 block cipher. The algorithm has a 128-bit key, a 128-bit nonce, and a 128-bit authentication tag.</p>
 <p>The GIFT-128 block cipher was designed with hardware FPGA/ASIC implementations in mind, but with the <a href="https://eprint.iacr.org/2020/412.pdf">fixsliced</a> representation it is possible to acheive good software performance as well. This library implements fixslicing by default.</p>
 <p>GIFT-COFB is a single-pass encryption algorithm, compared to the two-pass algorithm used by SUNDAE-GIFT. Out of all the GIFT-128 based submissions to NIST, GIFT-COFB has the best software performance, although HYENA is fairly close.</p>
 <p>This library also implements a masked version of GIFT-COFB to provide protection against power analysis side channels.</p>
 <h1><a class="anchor" id="alg_grain_128aead"></a>
 Grain-128AEAD</h1>
-<p><b>Definition:</b> <a class="el" href="grain128_8h.html">grain128.h</a></p>
+<p><b>Definition:</b> <a class="el" href="grain-aead_8h.html">grain-aead.h</a></p>
 <p>Grain-128AEAD is an authenticated encryption algorithm based around a combination of a 128-bit linear feedback shift register (LFSR) and a 128-bit non-linear feedback shift register (NFSR). It is a member of the Grain family of stream ciphers.</p>
 <h1><a class="anchor" id="alg_isap"></a>
 ISAP</h1>
-<p><b>Definition:</b> <a class="el" href="isap_8h.html">isap.h</a></p>
+<p><b>Definition:</b> <a class="el" href="isap-aead_8h.html">isap-aead.h</a></p>
 <p>ISAP is a family of authenticated encryption algorithms that are built around the Keccak-p[400] or ASCON permutations. There are four algorithms in the family, each of which have a 128-bit key, a 128-bit nonce, and a 128-bit tag:</p>
 <ul>
 <li>ISAP-K-128A based around the Keccak-p[400] permutation with a reduced number of rounds. </li>
@@ -199,7 +199,7 @@ ISAP</h1>
 <p><b>Recommendation:</b> The specification recommends ISAP-K-128A, although ISAP-A-128A may be a better choice on 32-bit platforms for performance reasons.</p>
 <h1><a class="anchor" id="alg_photon_beetle"></a>
 PHOTON-Beetle</h1>
-<p><b>Definition:</b> <a class="el" href="photon-beetle_8h.html">photon-beetle.h</a></p>
+<p><b>Definition:</b> <a class="el" href="photon-beetle-aead_8h.html">photon-beetle-aead.h</a>, <a class="el" href="photon-beetle-hash_8h.html">photon-beetle-hash.h</a></p>
 <p>PHOTON-Beetle is a family of authenticated encryption algorithms based on the PHOTON-256 permutation and using the Beetle sponge mode. There are three algorithms in the family:</p>
 <ul>
 <li>PHOTON-Beetle-AEAD-ENC-128 with a 128-bit key, a 128-bit nonce, and a 128-bit tag. Data is handled in 16 byte blocks. </li>
@@ -209,7 +209,7 @@ PHOTON-Beetle</h1>
 <p><b>Recommendation:</b> The specification recommends PHOTON-Beetle-AEAD-ENC-128.</p>
 <h1><a class="anchor" id="alg_romulus"></a>
 Romulus</h1>
-<p><b>Definition:</b> <a class="el" href="romulus_8h.html">romulus.h</a></p>
+<p><b>Definition:</b> <a class="el" href="romulus-aead_8h.html">romulus-aead.h</a>, <a class="el" href="romulus-hash_8h.html">romulus-hash.h</a></p>
 <p><b>Nonce Reuse:</b> Resistant against nonce reuse as long as the combination of the associated data (AD) and plaintext is unique.</p>
 <p>Romulus is a family of authenticated encryption and hash algorithms that are built around the SKINNY-128-384+ tweakable block cipher. There are several members in the family in round 3 of the competition:</p>
 <ul>
@@ -222,7 +222,7 @@ Romulus</h1>
 <p><b>Recommendation:</b> The specification recommends Romulus-N+, or Romulus-M+ if resistance against nonce reuse is desirable.</p>
 <h1><a class="anchor" id="alg_sparkle"></a>
 SPARKLE</h1>
-<p><b>Definition:</b> <a class="el" href="sparkle_8h.html">sparkle.h</a></p>
+<p><b>Definition:</b> <a class="el" href="sparkle-aead_8h.html">sparkle-aead.h</a>, <a class="el" href="sparkle-hash_8h.html">sparkle-hash.h</a></p>
 <p>SPARKLE is a family of encryption and hash algorithms that are based around the SPARKLE permutation. There are three versions of the permutation with 256-bit, 384-bit, and 512-bit state sizes. The algorithms in the family are:</p>
 <ul>
 <li>Schwaemm256-128 with a 128-bit key, a 256-bit nonce, and a 128-bit tag. </li>
@@ -236,7 +236,7 @@ SPARKLE</h1>
 <p><b>Recommendation:</b> Schwaemm256-128 and Esch256 are the recommended variants from the NIST submission.</p>
 <h1><a class="anchor" id="alg_tinyjambu"></a>
 TinyJAMBU</h1>
-<p><b>Definition:</b> <a class="el" href="tinyjambu_8h.html">tinyjambu.h</a>, <a class="el" href="tinyjambu-masked_8h.html">tinyjambu-masked.h</a></p>
+<p><b>Definition:</b> <a class="el" href="tinyjambu-aead_8h.html">tinyjambu-aead.h</a>, <a class="el" href="tinyjambu-aead-masked_8h.html">tinyjambu-aead-masked.h</a></p>
 <p>TinyJAMBU is a family of encryption algorithms that are built around a lightweight 128-bit permutation. There are three variants of TinyJAMBU with different key sizes:</p>
 <ul>
 <li>TinyJAMBU-128 with a 128-bit key, a 96-bit nonce, and a 64-bit tag. </li>
@@ -247,7 +247,7 @@ TinyJAMBU</h1>
 <p><b>Recommendation:</b> TinyJAMBU-128 is the recommended variant in the NIST submission. Use TinyJAMBU-256 if you need a greater security margin.</p>
 <h1><a class="anchor" id="alg_xoodyak"></a>
 Xoodyak</h1>
-<p><b>Definition:</b> <a class="el" href="xoodyak_8h.html">xoodyak.h</a>, <a class="el" href="xoodyak-masked_8h.html">xoodyak-masked.h</a></p>
+<p><b>Definition:</b> <a class="el" href="xoodyak-aead_8h.html">xoodyak-aead.h</a>, <a class="el" href="xoodyak-hash_8h.html">xoodyak-hash.h</a>, <a class="el" href="xoodyak-masked_8h.html">xoodyak-masked.h</a></p>
 <p>Xoodyak is an authenticated encryption and hash algorithm pair based around the 384-bit Xoodoo permutation that is similar in structure to Keccak but is more efficient than Keccak on 32-bit embedded devices. The Cyclist mode of operation is used to convert the permutation into a sponge for the higher-level algorithms.</p>
 <p>The Xoodyak encryption mode has a 128-bit key, a 128-bit nonce, and a 128-bit authentication tag. The Xoodyak hashing mode has a 256-bit fixed hash output and can also be used as an extensible output function (XOF).</p>
 <p>The Xoodyak specification describes a re-keying mechanism where the key for one packet is used to derive the key to use on the next packet. This provides some resistance against side channel attacks by making the session key a moving target. This library does not currently implement re-keying.</p>
@@ -261,7 +261,7 @@ Internal block operations</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 18 2021 18:00:53 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 24 2021 13:05:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

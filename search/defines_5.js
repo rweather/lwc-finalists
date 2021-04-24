@@ -9,13 +9,13 @@ var searchData=
   ['gift128_5fvariant_5ffull',['GIFT128_VARIANT_FULL',['../internal-gift128-config_8h.html#a52d4707d5d1fd67250d9e015eda6949c',1,'internal-gift128-config.h']]],
   ['gift128_5fvariant_5fsmall',['GIFT128_VARIANT_SMALL',['../internal-gift128-config_8h.html#a1ea74b4ecb86cc23d943d7d11dae1ef9',1,'internal-gift128-config.h']]],
   ['gift128_5fvariant_5ftiny',['GIFT128_VARIANT_TINY',['../internal-gift128-config_8h.html#abb5ea8560d1d59cbcbb62507ab28af41',1,'internal-gift128-config.h']]],
-  ['gift_5fcofb_5fkey_5fsize',['GIFT_COFB_KEY_SIZE',['../gift-cofb_8h.html#abf905972dee770a846429f3849785021',1,'gift-cofb.h']]],
-  ['gift_5fcofb_5fmasked_5fkey_5fsize',['GIFT_COFB_MASKED_KEY_SIZE',['../gift-cofb-masked_8h.html#af6c644422e6c05fcf2ca631a10ab560a',1,'gift-cofb-masked.h']]],
-  ['gift_5fcofb_5fmasked_5fnonce_5fsize',['GIFT_COFB_MASKED_NONCE_SIZE',['../gift-cofb-masked_8h.html#a44d14e84764948b309d385933d645592',1,'gift-cofb-masked.h']]],
-  ['gift_5fcofb_5fmasked_5ftag_5fsize',['GIFT_COFB_MASKED_TAG_SIZE',['../gift-cofb-masked_8h.html#afb1a4c755f9a045c13252bff3aee65ac',1,'gift-cofb-masked.h']]],
-  ['gift_5fcofb_5fnonce_5fsize',['GIFT_COFB_NONCE_SIZE',['../gift-cofb_8h.html#ad12c6b0811f9ebe85e40b304b383b541',1,'gift-cofb.h']]],
-  ['gift_5fcofb_5ftag_5fsize',['GIFT_COFB_TAG_SIZE',['../gift-cofb_8h.html#a8dad004f054033cd5766bc9286cabf97',1,'gift-cofb.h']]],
-  ['grain128_5fkey_5fsize',['GRAIN128_KEY_SIZE',['../grain128_8h.html#ab394b591a8017175ba26601a7a64445c',1,'grain128.h']]],
-  ['grain128_5fnonce_5fsize',['GRAIN128_NONCE_SIZE',['../grain128_8h.html#a3e6bb766668175bac5e638672e237df8',1,'grain128.h']]],
-  ['grain128_5ftag_5fsize',['GRAIN128_TAG_SIZE',['../grain128_8h.html#aa27d8a6d607c7098ec52e6c6227e42ba',1,'grain128.h']]]
+  ['gift_5fcofb_5fkey_5fsize',['GIFT_COFB_KEY_SIZE',['../gift-cofb-aead_8h.html#abf905972dee770a846429f3849785021',1,'gift-cofb-aead.h']]],
+  ['gift_5fcofb_5fmasked_5fkey_5fsize',['GIFT_COFB_MASKED_KEY_SIZE',['../gift-cofb-aead-masked_8h.html#af6c644422e6c05fcf2ca631a10ab560a',1,'gift-cofb-aead-masked.h']]],
+  ['gift_5fcofb_5fmasked_5fnonce_5fsize',['GIFT_COFB_MASKED_NONCE_SIZE',['../gift-cofb-aead-masked_8h.html#a44d14e84764948b309d385933d645592',1,'gift-cofb-aead-masked.h']]],
+  ['gift_5fcofb_5fmasked_5ftag_5fsize',['GIFT_COFB_MASKED_TAG_SIZE',['../gift-cofb-aead-masked_8h.html#afb1a4c755f9a045c13252bff3aee65ac',1,'gift-cofb-aead-masked.h']]],
+  ['gift_5fcofb_5fnonce_5fsize',['GIFT_COFB_NONCE_SIZE',['../gift-cofb-aead_8h.html#ad12c6b0811f9ebe85e40b304b383b541',1,'gift-cofb-aead.h']]],
+  ['gift_5fcofb_5ftag_5fsize',['GIFT_COFB_TAG_SIZE',['../gift-cofb-aead_8h.html#a8dad004f054033cd5766bc9286cabf97',1,'gift-cofb-aead.h']]],
+  ['grain128_5fkey_5fsize',['GRAIN128_KEY_SIZE',['../grain-aead_8h.html#ab394b591a8017175ba26601a7a64445c',1,'grain-aead.h']]],
+  ['grain128_5fnonce_5fsize',['GRAIN128_NONCE_SIZE',['../grain-aead_8h.html#a3e6bb766668175bac5e638672e237df8',1,'grain-aead.h']]],
+  ['grain128_5ftag_5fsize',['GRAIN128_TAG_SIZE',['../grain-aead_8h.html#aa27d8a6d607c7098ec52e6c6227e42ba',1,'grain-aead.h']]]
 ];

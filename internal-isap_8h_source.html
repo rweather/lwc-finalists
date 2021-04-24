@@ -130,22 +130,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/* IV string for initialising the associated data */</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keyword">const</span> ISAP_CONCAT(ISAP_ALG_NAME,_IV_A)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        [<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>] = {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    0x01, <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a> * 8, ISAP_RATE * 8, 1,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        [<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>] = {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    0x01, <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a> * 8, ISAP_RATE * 8, 1,</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ISAP_sH, ISAP_sB, ISAP_sE, ISAP_sK</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/* IV string for authenticating associated data */</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keyword">const</span> ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        [<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>] = {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    0x02, <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a> * 8, ISAP_RATE * 8, 1,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        [<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>] = {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    0x02, <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a> * 8, ISAP_RATE * 8, 1,</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ISAP_sH, ISAP_sB, ISAP_sE, ISAP_sK</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/* IV string for encrypting payload data */</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keyword">const</span> ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        [<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>] = {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    0x03, <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a> * 8, ISAP_RATE * 8, 1,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        [<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>] = {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    0x03, <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a> * 8, ISAP_RATE * 8, 1,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ISAP_sH, ISAP_sB, ISAP_sE, ISAP_sK</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
@@ -157,8 +157,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">unsigned</span> bit, num_bits;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">/* Initialize the state with the key and IV */</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    memcpy(state-&gt;B, k, <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>, iv, <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    memcpy(state-&gt;B, k, <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>, iv, <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="internal-ascon_8h.html#adc1ef033c6570f3abd644b2d7a02ca6c">ascon_to_sliced</a>(state);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    ISAP_PERMUTE_SLICED(state, ISAP_sK);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
@@ -176,8 +176,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">unsigned</span> bit, num_bits;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">/* Initialize the state with the key and IV */</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    memcpy(state-&gt;B, k, <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>, iv, <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    memcpy(state-&gt;B, k, <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>, iv, <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a>);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    ISAP_PERMUTE(state, ISAP_sK);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">/* Absorb all of the bits of the data buffer one by one */</span></div>
@@ -200,7 +200,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">/* Set up the re-keyed encryption key and nonce in the state */</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE), npub, <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE), npub, <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <a class="code" href="internal-ascon_8h.html#a5cc5cfb056067129518ff262629af669">ascon_set_sliced</a>(state, npub, 3);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="internal-ascon_8h.html#a5cc5cfb056067129518ff262629af669">ascon_set_sliced</a>(state, npub + 8, 4);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
@@ -221,9 +221,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor"></span>    <span class="comment">/* Set up the re-keyed encryption key and nonce in the state */</span></div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE), npub, <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    memcpy(state-&gt;B + <span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;           npub, <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE), npub, <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    memcpy(state-&gt;B + <span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;           npub, <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="comment">/* Encrypt the plaintext to produce the ciphertext */</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">while</span> (mlen &gt;= ISAP_RATE) {</div>
@@ -247,14 +247,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *tag)</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;{</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="preprocessor">#if defined(ISAP_PERMUTE_SLICED)</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> preserve[<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>];</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> preserve[<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>];</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> padded[ISAP_RATE];</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordtype">unsigned</span> temp;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">/* Absorb the associated data */</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    memcpy(state-&gt;B, npub, <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>, ISAP_CONCAT(ISAP_ALG_NAME,_IV_A),</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;           <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    memcpy(state-&gt;B, npub, <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>, ISAP_CONCAT(ISAP_ALG_NAME,_IV_A),</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;           <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <a class="code" href="internal-ascon_8h.html#adc1ef033c6570f3abd644b2d7a02ca6c">ascon_to_sliced</a>(state);</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    ISAP_PERMUTE_SLICED(state, ISAP_sH);</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">while</span> (adlen &gt;= ISAP_RATE) {</div>
@@ -287,24 +287,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="comment">/* Re-key the state and generate the authentication tag */</span></div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <a class="code" href="internal-ascon_8h.html#ad1f9f8ee48182dd36bfad9bdecc63771">ascon_from_sliced</a>(state);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    memcpy(tag, state-&gt;B, <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    memcpy(preserve, state-&gt;B + <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, <span class="keyword">sizeof</span>(preserve));</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    memcpy(tag, state-&gt;B, <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    memcpy(preserve, state-&gt;B + <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, <span class="keyword">sizeof</span>(preserve));</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA), tag, <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA), tag, <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <a class="code" href="internal-ascon_8h.html#ad1f9f8ee48182dd36bfad9bdecc63771">ascon_from_sliced</a>(state);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, preserve, <span class="keyword">sizeof</span>(preserve));</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, preserve, <span class="keyword">sizeof</span>(preserve));</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <a class="code" href="internal-ascon_8h.html#adc1ef033c6570f3abd644b2d7a02ca6c">ascon_to_sliced</a>(state);</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    ISAP_PERMUTE_SLICED(state, ISAP_sH);</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <a class="code" href="internal-ascon_8h.html#acd25badfbc164b96219e946bebdbae86">ascon_squeeze_sliced</a>(state, tag, 0);</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <a class="code" href="internal-ascon_8h.html#acd25badfbc164b96219e946bebdbae86">ascon_squeeze_sliced</a>(state, tag + 8, 1);</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> preserve[<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>];</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> preserve[<span class="keyword">sizeof</span>(ISAP_STATE) - <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>];</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">unsigned</span> temp;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="comment">/* Absorb the associated data */</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    memcpy(state-&gt;B, npub, <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>, ISAP_CONCAT(ISAP_ALG_NAME,_IV_A),</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;           <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    memcpy(state-&gt;B, npub, <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>, ISAP_CONCAT(ISAP_ALG_NAME,_IV_A),</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;           <span class="keyword">sizeof</span>(state-&gt;B) - <a class="code" href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a>);</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    ISAP_PERMUTE(state, ISAP_sH);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">while</span> (adlen &gt;= ISAP_RATE) {</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        lw_xor_block(state-&gt;B, ad, ISAP_RATE);</div>
@@ -331,13 +331,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    ISAP_PERMUTE(state, ISAP_sH);</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="comment">/* Re-key the state and generate the authentication tag */</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    memcpy(tag, state-&gt;B, <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    memcpy(preserve, state-&gt;B + <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, <span class="keyword">sizeof</span>(preserve));</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    memcpy(tag, state-&gt;B, <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    memcpy(preserve, state-&gt;B + <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, <span class="keyword">sizeof</span>(preserve));</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA), tag, <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, preserve, <span class="keyword">sizeof</span>(preserve));</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA), tag, <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    memcpy(state-&gt;B + <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>, preserve, <span class="keyword">sizeof</span>(preserve));</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    ISAP_PERMUTE(state, ISAP_sH);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    memcpy(tag, state-&gt;B, <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    memcpy(tag, state-&gt;B, <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>);</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="preprocessor"></span>}</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
@@ -353,7 +353,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    (void)nsec;</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="comment">/* Set the length of the returned ciphertext */</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    *clen = mlen + <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    *clen = mlen + <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>;</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="comment">/* Encrypt the plaintext to produce the ciphertext */</span></div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)(&amp;state, k, npub, c, m, mlen);</div>
@@ -373,13 +373,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k)</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    ISAP_STATE state;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> tag[<a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>];</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> tag[<a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>];</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    (void)nsec;</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="comment">/* Validate the ciphertext length and set the return &quot;mlen&quot; value */</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">if</span> (clen &lt; <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>)</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">if</span> (clen &lt; <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>)</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    *mlen = clen - <a class="code" href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    *mlen = clen - <a class="code" href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a>;</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="comment">/* Authenticate the associated data and ciphertext to generate the tag */</span></div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_mac)(&amp;state, k, npub, ad, adlen, c, *mlen, tag);</div>
@@ -388,7 +388,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)(&amp;state, k, npub, m, c, *mlen);</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="comment">/* Check the authentication tag */</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="aead-common_8h.html#aee68ca38ca62dbae8e52072af87e4f0a">aead_check_tag</a>(m, *mlen, tag, c + *mlen, ISAP_TAG_SIZE);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">return</span> aead_check_tag(m, *mlen, tag, c + *mlen, ISAP_TAG_SIZE);</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;}</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ISAP_ALG_NAME */</span><span class="preprocessor"></span></div>
@@ -406,19 +406,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#undef ISAP_PERMUTE_SLICED</span></div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#undef ISAP_CONCAT_INNER</span></div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#undef ISAP_CONCAT</span></div>
+<div class="ttc" id="isap-aead_8h_html_a4b3c1256ae5c1b4218a4ce405843718e"><div class="ttname"><a href="isap-aead_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a></div><div class="ttdeci">#define ISAP_TAG_SIZE</div><div class="ttdoc">Size of the authentication tag for all ISAP family members. </div><div class="ttdef"><b>Definition:</b> isap-aead.h:61</div></div>
+<div class="ttc" id="isap-aead_8h_html_aa964faacdf60e544d87760b9474bcd79"><div class="ttname"><a href="isap-aead_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a></div><div class="ttdeci">#define ISAP_KEY_SIZE</div><div class="ttdoc">Size of the key for all ISAP family members. </div><div class="ttdef"><b>Definition:</b> isap-aead.h:56</div></div>
+<div class="ttc" id="isap-aead_8h_html_a38dcf74e80abb9ccabfe437dfbec0e78"><div class="ttname"><a href="isap-aead_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a></div><div class="ttdeci">#define ISAP_NONCE_SIZE</div><div class="ttdoc">Size of the nonce for all ISAP family members. </div><div class="ttdef"><b>Definition:</b> isap-aead.h:66</div></div>
 <div class="ttc" id="internal-ascon_8h_html_acd25badfbc164b96219e946bebdbae86"><div class="ttname"><a href="internal-ascon_8h.html#acd25badfbc164b96219e946bebdbae86">ascon_squeeze_sliced</a></div><div class="ttdeci">#define ascon_squeeze_sliced(state, data, offset)</div><div class="ttdoc">Squeezes data from the ASCON state in sliced form. </div><div class="ttdef"><b>Definition:</b> internal-ascon.h:217</div></div>
 <div class="ttc" id="internal-ascon_8h_html_af72cdb4d98fa8df894ed9f146df974fd"><div class="ttname"><a href="internal-ascon_8h.html#af72cdb4d98fa8df894ed9f146df974fd">ascon_absorb_sliced</a></div><div class="ttdeci">#define ascon_absorb_sliced(state, data, offset)</div><div class="ttdoc">Absorbs data into the ASCON state in sliced form. </div><div class="ttdef"><b>Definition:</b> internal-ascon.h:160</div></div>
 <div class="ttc" id="internal-ascon_8h_html_adc1ef033c6570f3abd644b2d7a02ca6c"><div class="ttname"><a href="internal-ascon_8h.html#adc1ef033c6570f3abd644b2d7a02ca6c">ascon_to_sliced</a></div><div class="ttdeci">void ascon_to_sliced(ascon_state_t *state)</div><div class="ttdoc">Converts an ASCON state from byte form into sliced form. </div><div class="ttdef"><b>Definition:</b> internal-ascon.c:96</div></div>
 <div class="ttc" id="internal-ascon_8h_html_a5cc5cfb056067129518ff262629af669"><div class="ttname"><a href="internal-ascon_8h.html#a5cc5cfb056067129518ff262629af669">ascon_set_sliced</a></div><div class="ttdeci">#define ascon_set_sliced(state, data, offset)</div><div class="ttdoc">Sets data into the ASCON state in sliced form. </div><div class="ttdef"><b>Definition:</b> internal-ascon.h:141</div></div>
-<div class="ttc" id="aead-common_8h_html_aee68ca38ca62dbae8e52072af87e4f0a"><div class="ttname"><a href="aead-common_8h.html#aee68ca38ca62dbae8e52072af87e4f0a">aead_check_tag</a></div><div class="ttdeci">int aead_check_tag(unsigned char *plaintext, unsigned long long plaintext_len, const unsigned char *tag1, const unsigned char *tag2, unsigned tag_len)</div><div class="ttdoc">Check an authentication tag in constant time. </div><div class="ttdef"><b>Definition:</b> aead-common.c:26</div></div>
-<div class="ttc" id="isap_8h_html_a38dcf74e80abb9ccabfe437dfbec0e78"><div class="ttname"><a href="isap_8h.html#a38dcf74e80abb9ccabfe437dfbec0e78">ISAP_NONCE_SIZE</a></div><div class="ttdeci">#define ISAP_NONCE_SIZE</div><div class="ttdoc">Size of the nonce for all ISAP family members. </div><div class="ttdef"><b>Definition:</b> isap.h:68</div></div>
-<div class="ttc" id="isap_8h_html_a4b3c1256ae5c1b4218a4ce405843718e"><div class="ttname"><a href="isap_8h.html#a4b3c1256ae5c1b4218a4ce405843718e">ISAP_TAG_SIZE</a></div><div class="ttdeci">#define ISAP_TAG_SIZE</div><div class="ttdoc">Size of the authentication tag for all ISAP family members. </div><div class="ttdef"><b>Definition:</b> isap.h:63</div></div>
 <div class="ttc" id="internal-ascon_8h_html_ad1f9f8ee48182dd36bfad9bdecc63771"><div class="ttname"><a href="internal-ascon_8h.html#ad1f9f8ee48182dd36bfad9bdecc63771">ascon_from_sliced</a></div><div class="ttdeci">void ascon_from_sliced(ascon_state_t *state)</div><div class="ttdoc">Converts an ASCON state from sliced form into byte form. </div><div class="ttdef"><b>Definition:</b> internal-ascon.c:110</div></div>
-<div class="ttc" id="isap_8h_html_aa964faacdf60e544d87760b9474bcd79"><div class="ttname"><a href="isap_8h.html#aa964faacdf60e544d87760b9474bcd79">ISAP_KEY_SIZE</a></div><div class="ttdeci">#define ISAP_KEY_SIZE</div><div class="ttdoc">Size of the key for all ISAP family members. </div><div class="ttdef"><b>Definition:</b> isap.h:58</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 18 2021 18:00:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 24 2021 13:05:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

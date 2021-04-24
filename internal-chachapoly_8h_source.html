@@ -113,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LW_INTERNAL_CHACHAPOLY_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LW_INTERNAL_CHACHAPOLY_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="aead-common_8h.html">aead-common.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="aead-metadata_8h.html">aead-metadata.h</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
@@ -148,15 +148,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structaead__cipher__t_html"><div class="ttname"><a href="structaead__cipher__t.html">aead_cipher_t</a></div><div class="ttdoc">Meta-information about an AEAD cipher. </div><div class="ttdef"><b>Definition:</b> aead-common.h:196</div></div>
-<div class="ttc" id="aead-common_8h_html"><div class="ttname"><a href="aead-common_8h.html">aead-common.h</a></div><div class="ttdoc">Definitions that are common across AEAD schemes. </div></div>
+<div class="ttc" id="structaead__cipher__t_html"><div class="ttname"><a href="structaead__cipher__t.html">aead_cipher_t</a></div><div class="ttdoc">Meta-information about an AEAD cipher. </div><div class="ttdef"><b>Definition:</b> aead-metadata.h:196</div></div>
 <div class="ttc" id="internal-chachapoly_8h_html_a39020dcd94e59abe74d278ee569fdb70"><div class="ttname"><a href="internal-chachapoly_8h.html#a39020dcd94e59abe74d278ee569fdb70">internal_chachapoly_aead_decrypt</a></div><div class="ttdeci">int internal_chachapoly_aead_decrypt(unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with ChaChaPoly. </div><div class="ttdef"><b>Definition:</b> internal-chachapoly.c:411</div></div>
 <div class="ttc" id="internal-chachapoly_8h_html_a67175769253a7c6da653a9ad3215d8c0"><div class="ttname"><a href="internal-chachapoly_8h.html#a67175769253a7c6da653a9ad3215d8c0">internal_chachapoly_cipher</a></div><div class="ttdeci">aead_cipher_t const internal_chachapoly_cipher</div><div class="ttdoc">Meta-information block for the ChaChaPoly cipher. </div><div class="ttdef"><b>Definition:</b> internal-chachapoly.c:27</div></div>
+<div class="ttc" id="aead-metadata_8h_html"><div class="ttname"><a href="aead-metadata_8h.html">aead-metadata.h</a></div><div class="ttdoc">Metadata defintions for AEAD and hashing schemes. </div></div>
 <div class="ttc" id="internal-chachapoly_8h_html_aa83be30902bd74ddb3aa49dc81c0db45"><div class="ttname"><a href="internal-chachapoly_8h.html#aa83be30902bd74ddb3aa49dc81c0db45">internal_chachapoly_aead_encrypt</a></div><div class="ttdeci">int internal_chachapoly_aead_encrypt(unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with ChaChaPoly. </div><div class="ttdef"><b>Definition:</b> internal-chachapoly.c:363</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 18 2021 18:00:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 24 2021 13:05:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

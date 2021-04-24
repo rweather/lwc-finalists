@@ -108,13 +108,13 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>Algorithm</td><td>Key Bits</td><td>Nonce Bits</td><td>Tag Bits</td><td>Encrypt 128 bytes</td><td>Decrypt 128 bytes</td><td>Encrypt 16 bytes</td><td>Decrypt 16 bytes</td><td>Average </td></tr>
 <tr>
-<td>Schwaemm128-128 (SPARKLE)</td><td>128</td><td>128</td><td>128</td><td>1.60</td><td>1.58</td><td>2.84</td><td>2.39</td><td>2.01 </td></tr>
+<td>Schwaemm128-128 (SPARKLE)</td><td>128</td><td>128</td><td>128</td><td>1.66</td><td>1.62</td><td>3.08</td><td>2.53</td><td>2.11 </td></tr>
 <tr>
-<td><b><em>Schwaemm256-128</em></b> (SPARKLE)</td><td>128</td><td>256</td><td>128</td><td>1.74</td><td>1.63</td><td>1.90</td><td>1.93</td><td>1.80 </td></tr>
+<td><b><em>Schwaemm256-128</em></b> (SPARKLE)</td><td>128</td><td>256</td><td>128</td><td>1.93</td><td>1.61</td><td>2.13</td><td>1.97</td><td>1.90 </td></tr>
+<tr>
+<td>Schwaemm192-192 (SPARKLE)</td><td>192</td><td>192</td><td>192</td><td>1.75</td><td>1.52</td><td>2.12</td><td>1.88</td><td>1.80 </td></tr>
 <tr>
 <td>ASCON-128a</td><td>128</td><td>128</td><td>128</td><td>1.86</td><td>1.70</td><td>1.80</td><td>1.78</td><td>1.78 </td></tr>
-<tr>
-<td>Schwaemm192-192 (SPARKLE)</td><td>192</td><td>192</td><td>192</td><td>1.47</td><td>1.50</td><td>1.98</td><td>1.81</td><td>1.68 </td></tr>
 <tr>
 <td><b><em>Xoodyak</em></b></td><td>128</td><td>128</td><td>128</td><td>1.66</td><td>1.51</td><td>1.73</td><td>1.60</td><td>1.62 </td></tr>
 <tr>
@@ -124,7 +124,7 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td><b><em>TinyJAMBU-128</em></b></td><td>128</td><td>96</td><td>64</td><td>0.98</td><td>1.00</td><td>1.80</td><td>1.76</td><td>1.31 </td></tr>
 <tr>
-<td>Schwaemm256-256 (SPARKLE)</td><td>256</td><td>256</td><td>256</td><td>1.18</td><td>1.16</td><td>1.15</td><td>1.09</td><td>1.14 </td></tr>
+<td>Schwaemm256-256 (SPARKLE)</td><td>256</td><td>256</td><td>256</td><td>1.23</td><td>1.16</td><td>1.22</td><td>1.11</td><td>1.18 </td></tr>
 <tr>
 <td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.83</td><td>0.85</td><td>1.55</td><td>1.53</td><td>1.12 </td></tr>
 <tr>
@@ -161,13 +161,13 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>Algorithm</td><td>Hash Bits</td><td>1024 bytes</td><td>128 bytes</td><td>16 bytes</td><td>Average </td></tr>
 <tr>
-<td><b><em>Esch256</em></b> (SPARKLE)</td><td>256</td><td>0.89</td><td>0.78</td><td>1.50</td><td>1.06 </td></tr>
+<td><b><em>Esch256</em></b> (SPARKLE)</td><td>256</td><td>0.90</td><td>0.79</td><td>1.51</td><td>1.07 </td></tr>
 <tr>
 <td><b><em>Xoodyak</em></b></td><td>256</td><td>0.71</td><td>0.65</td><td>1.43</td><td>0.93 </td></tr>
 <tr>
 <td><b><em>ASCON-HASH</em></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52 </td></tr>
 <tr>
-<td>Esch384 (SPARKLE)</td><td>384</td><td>0.45</td><td>0.37</td><td>1.50</td><td>0.47 </td></tr>
+<td>Esch384 (SPARKLE)</td><td>384</td><td>0.46</td><td>0.38</td><td>0.59</td><td>0.48 </td></tr>
 <tr>
 <td><b><em>Romulus-H+</em></b></td><td>256</td><td>0.10</td><td>0.09</td><td>0.22</td><td>0.14 </td></tr>
 <tr>
@@ -291,7 +291,7 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <tr>
 <td>Algorithm</td><td>Round 2</td><td>New</td><td>Notable changes other than the use of assembly code </td></tr>
 <tr>
-<td>SPARKLE</td><td>1.09</td><td>1.80</td><td></td></tr>
+<td>SPARKLE</td><td>1.09</td><td>1.90</td><td></td></tr>
 <tr>
 <td>Xoodyak</td><td>0.86</td><td>1.62</td><td></td></tr>
 <tr>
@@ -319,7 +319,7 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <tr>
 <td>Algorithm</td><td>Round 2</td><td>New </td></tr>
 <tr>
-<td>SPARKLE</td><td>0.46</td><td>1.06 </td></tr>
+<td>SPARKLE</td><td>0.46</td><td>1.07 </td></tr>
 <tr>
 <td>Xoodyak</td><td>0.51</td><td>0.93 </td></tr>
 <tr>
@@ -386,7 +386,7 @@ Algorithms with native 64-bit support</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 18 2021 18:00:53 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 24 2021 13:05:13 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jumbo_5fcipher',['jumbo_cipher',['../elephant-jumbo_8h.html#a468d2a4a005ca101b7726596bce4e042',1,'elephant-jumbo.c']]]
+  ['jumbo_5fcipher',['jumbo_cipher',['../aead-metadata_8h.html#a468d2a4a005ca101b7726596bce4e042',1,'aead-metadata.c']]]
 ];

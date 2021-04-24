@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['sparkle_2eh',['sparkle.h',['../sparkle_8h.html',1,'']]]
+  ['sparkle_2daead_2eh',['sparkle-aead.h',['../sparkle-aead_8h.html',1,'']]],
+  ['sparkle_2dhash_2eh',['sparkle-hash.h',['../sparkle-hash_8h.html',1,'']]]
 ];
