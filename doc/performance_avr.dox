@@ -64,13 +64,16 @@ fairly similar.  Performance figures for 32-bit platforms can be found
 <table>
 <tr><td>Algorithm</td><td>Hash Bits</td><td>1024 bytes</td><td>128 bytes</td><td>16 bytes</td><td>Average</td></tr>
 <tr><td><b><i>Esch256</i></b> (SPARKLE)</td><td>256</td><td>1.90</td><td>1.65</td><td>3.15</td><td>2.23</td></tr>
+<tr><td><b><i>SHA256</i></b></td><td>256</td><td>2.22</td><td>1.55</td><td>2.22</td><td>1.99</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>1.20</td><td>0.96</td><td>1.48</td><td>1.21</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.92</td><td>0.83</td><td>1.83</td><td>1.19</td></tr>
 <tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.91</td><td>0.75</td><td>1.81</td><td>1.16</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.66</td><td>0.55</td><td>0.91</td><td>0.71</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.17</td><td>0.18</td><td>1.38</td><td>0.58</td></tr>
-<tr><td><b><i>SHA256</i></b></td><td>256</td><td>0.31</td><td>0.22</td><td>0.33</td><td>0.28</td></tr>
 </table>
+
+SHA256 uses a fully unrolled implementation of the SHA256 block transform
+function in AVR assembly code.
 
 \section perf_avr_overall Overall group rankings for AVR
 
@@ -95,6 +98,7 @@ Hash algorithm rankings:
 <table>
 <tr><td>Rank</td><td>Algorithms</td></tr>
 <tr><td>22</td><td>SPARKLE</td></tr>
+<tr><td>19</td><td>SHA256</td></tr>
 <tr><td>11</td><td>Romulus, Xoodyak</td></tr>
 <tr><td>7</td><td>ASCON</td></tr>
 <tr><td>5</td><td>PHOTON-Beetle</td></tr>

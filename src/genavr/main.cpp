@@ -894,6 +894,23 @@ static bool photon256(enum Mode mode)
     return true;
 }
 
+static bool sha256(enum Mode mode)
+{
+    Code code;
+    gen_sha256_transform(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_sha256_transform(code)) {
+            std::cout << "SHA256 tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "SHA256 tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
 static void skinny128_sboxes(enum Mode mode)
 {
     if (mode == Generate) {
@@ -1252,6 +1269,8 @@ int main(int argc, char *argv[])
             gen1 = keccakp_400;
         } else if (!strcmp(argv[1], "PHOTON-256")) {
             gen1 = photon256;
+        } else if (!strcmp(argv[1], "SHA256")) {
+            gen1 = sha256;
         } else if (!strcmp(argv[1], "SKINNY-128")) {
             gen1 = skinny128;
         } else if (!strcmp(argv[1], "SKINNY-128-Enc-Only")) {
@@ -1317,6 +1336,8 @@ int main(int argc, char *argv[])
         if (!keccakp_400(Test))
             exit_val = 1;
         if (!photon256(Test))
+            exit_val = 1;
+        if (!sha256(Test))
             exit_val = 1;
         if (!skinny128(Test))
             exit_val = 1;

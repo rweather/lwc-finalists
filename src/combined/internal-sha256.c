@@ -48,9 +48,9 @@ typedef struct
 
 /** @endcond */
 
-#if defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7
+#if (defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7) || \
+    defined(__AVR__)
 
-/* Defined in internal-sha256-armv7m.S */
 extern void sha256_transform(sha256_state_t *state);
 
 #else /* !ASM */

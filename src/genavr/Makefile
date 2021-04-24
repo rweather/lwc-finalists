@@ -14,6 +14,7 @@ OBJS = \
 	algorithm_grain128.o \
 	algorithm_keccak.o \
 	algorithm_photon256.o \
+	algorithm_sha256.o \
 	algorithm_skinny128.o \
 	algorithm_sparkle.o \
 	algorithm_spongent.o \
@@ -43,6 +44,7 @@ algorithm_gift128_fixsliced.o: code.h gen.h
 algorithm_grain128.o: code.h gen.h
 algorithm_keccak.o: code.h gen.h
 algorithm_photon256.o: code.h gen.h
+algorithm_sha256.o: code.h gen.h
 algorithm_skinny128.o: code.h gen.h
 algorithm_sparkle.o: code.h gen.h
 algorithm_spongent.o: code.h gen.h
@@ -59,6 +61,7 @@ generate: $(TARGET)
 	./$(TARGET) Keccakp-200 >../combined/internal-keccakp-200-avr.S
 	./$(TARGET) Keccakp-400 >../combined/internal-keccakp-400-avr.S
 	./$(TARGET) PHOTON-256 >../combined/internal-photon256-avr.S
+	./$(TARGET) SHA256 >../combined/internal-sha256-avr.S
 	./$(TARGET) SKINNY-128-384-Plus >../combined/internal-skinny-tiny-avr.S
 	./$(TARGET) SPARKLE >../combined/internal-sparkle-avr.S
 	./$(TARGET) Spongent-pi >../combined/internal-spongent-avr.S

@@ -116,6 +116,10 @@ bool test_keccakp_400_permutation(Code &code);
 void gen_photon256_permutation(Code &code);
 bool test_photon256_permutation(Code &code);
 
+// SHA-256 transformation function.
+void gen_sha256_transform(Code &code);
+bool test_sha256_transform(Code &code);
+
 // SKINNY-128 block cipher.
 #define SKINNY128_SBOX_COUNT 5
 Sbox get_skinny128_sbox(int num);

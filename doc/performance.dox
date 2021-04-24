@@ -116,7 +116,7 @@ The hash algorithms are compared against BLAKE2s instead of ChaChaPoly:
 <table>
 <tr><td>Algorithm</td><td>Hash Bits</td><td>1024 bytes</td><td>128 bytes</td><td>16 bytes</td><td>Average</td></tr>
 <tr><td><b><i>Esch256</i></b> (SPARKLE)</td><td>256</td><td>0.90</td><td>0.79</td><td>1.51</td><td>1.07</td></tr>
-<tr><td>SHA256-ASM</td><td>256</td><td>1.11</td><td>0.79</td><td>1.15</td><td>1.02</td></tr>
+<tr><td><b><i>SHA256-ASM</i></b></td><td>256</td><td>1.11</td><td>0.79</td><td>1.15</td><td>1.02</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.71</td><td>0.65</td><td>1.43</td><td>0.93</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52</td></tr>
 <tr><td>SHA256-C</td><td>256</td><td>0.56</td><td>0.40</td><td>0.60</td><td>0.52</td></tr>
@@ -187,7 +187,7 @@ Hash algorithms:
 <table>
 <tr><td>Algorithm</td><td>Hash Bits</td><td>1024 bytes</td><td>128 bytes</td><td>16 bytes</td><td>Average</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.35</td><td>0.33</td><td>0.73</td><td>0.47</td></tr>
-<tr><td>SHA256-C</td><td>256</td><td>0.47</td><td>0.37</td><td>0.55</td><td>0.47</td></tr>
+<tr><td><b><i>SHA256-C</i></b></td><td>256</td><td>0.47</td><td>0.37</td><td>0.55</td><td>0.47</td></tr>
 <tr><td><b><i>Esch256</i></b> (SPARKLE)</td><td>256</td><td>0.38</td><td>0.34</td><td>0.64</td><td>0.45</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.24</td><td>0.20</td><td>0.30</td><td>0.25</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.19</td><td>0.16</td><td>0.25</td><td>0.20</td></tr>
@@ -235,7 +235,7 @@ Hash algorithm rankings:
 
 <table>
 <tr><td>Rank</td><td>Algorithms</td></tr>
-<tr><td>7</td><td>SPARKLE, Xoodyak</td></tr>
+<tr><td>7</td><td>SHA256, SPARKLE, Xoodyak</td></tr>
 <tr><td>3</td><td>ASCON</td></tr>
 <tr><td>0</td><td>PHOTON-Beetle, Romulus</td></tr>
 </table>
