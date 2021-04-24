@@ -32,6 +32,7 @@ void test_grain128(void);
 void test_keccak(void);
 void test_masking(void);
 void test_photon256(void);
+void test_sha256(void);
 void test_skinny128(void);
 void test_sparkle(void);
 void test_spongent(void);
@@ -50,6 +51,7 @@ int main(int argc, char *argv[])
     test_keccak();
     test_masking();
     test_photon256();
+    test_sha256();
     test_skinny128();
     test_sparkle();
     test_spongent();

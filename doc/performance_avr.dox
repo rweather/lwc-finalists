@@ -69,6 +69,7 @@ fairly similar.  Performance figures for 32-bit platforms can be found
 <tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.91</td><td>0.75</td><td>1.81</td><td>1.16</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.66</td><td>0.55</td><td>0.91</td><td>0.71</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.17</td><td>0.18</td><td>1.38</td><td>0.58</td></tr>
+<tr><td><b><i>SHA256</i></b></td><td>256</td><td>0.31</td><td>0.22</td><td>0.33</td><td>0.28</td></tr>
 </table>
 
 \section perf_avr_overall Overall group rankings for AVR

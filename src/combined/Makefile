@@ -42,6 +42,7 @@ OBJS = \
 	internal-keccakp-200.o \
 	internal-keccakp-400.o \
 	internal-photon256.o \
+	internal-sha256.o \
 	internal-skinny-plus.o \
         internal-sparkle.o \
         internal-spongent.o \
@@ -110,6 +111,7 @@ internal-grain128.o: internal-grain128.h internal-util.h
 internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
 internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
 internal-photon256.o: internal-photon256.h internal-photon256-mix.h internal-util.h
+internal-sha256.o: internal-sha256.h internal-util.h aead-metadata.h
 internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-sparkle.o: internal-sparkle.h internal-util.h
 internal-spongent.o: internal-spongent.h internal-util.h

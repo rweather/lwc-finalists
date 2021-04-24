@@ -21,6 +21,7 @@ OBJS1 = \
     test-keccak.o \
     test-masking.o \
     test-photon256.o \
+    test-sha256.o \
     test-skinny-plus.o \
     test-sparkle.o \
     test-spongent.o \
@@ -51,6 +52,7 @@ test-grain128.o: $(LIBSRC_DIR)/internal-grain128.h $(TEST_CIPHER_INC)
 test-keccak.o: $(LIBSRC_DIR)/internal-keccakp-200.h $(LIBSRC_DIR)/internal-keccakp-400.h $(TEST_CIPHER_INC)
 test-masking.o: $(LIBSRC_DIR)/aead-random.h $(LIBSRC_DIR)/internal-masking.h $(TEST_CIPHER_INC) test-masking-common.c
 test-photon256.o: $(LIBSRC_DIR)/internal-photon256.h $(TEST_CIPHER_INC)
+test-sha256.o: $(LIBSRC_DIR)/internal-sha256.h $(TEST_CIPHER_INC)
 test-skinny-plus.o: $(LIBSRC_DIR)/internal-skinny-plus.h $(LIBSRC_DIR)/internal-skinny-plus-config.h $(TEST_CIPHER_INC)
 test-sparkle.o: $(LIBSRC_DIR)/internal-sparkle.h $(TEST_CIPHER_INC)
 test-spongent.o: $(LIBSRC_DIR)/internal-spongent.h $(TEST_CIPHER_INC)
