@@ -20,7 +20,7 @@ OBJS = \
         gift-cofb.o \
         gift-cofb-masked.o \
 	grain128.o \
-        isap.o \
+        isap-aead.o \
         photon-beetle-aead.o \
         photon-beetle-hash.o \
         romulus-aead.o \
@@ -71,7 +71,7 @@ aead-metadata.o: \
 	elephant-delirium.h elephant-dumbo.h elephant-jumbo.h \
 	gift-cofb.h gift-cofb-masked.h \
 	grain128.h \
-	isap.h \
+	isap-aead.h \
 	photon-beetle-aead.h photon-beetle-hash.h \
 	romulus-aead.h romulus-hash.h \
 	sparkle-aead.h sparkle-hash.h \
@@ -88,7 +88,7 @@ elephant-jumbo.o: elephant-jumbo.h internal-spongent.h internal-util.h
 gift-cofb.o: gift-cofb.h internal-gift128.h internal-gift128-config.h internal-util.h
 gift-cofb-masked.o: gift-cofb.h internal-gift128-m.h internal-gift128-config.h internal-util.h aead-random.h internal-masking.h
 grain128.o: grain128.h internal-grain128.h internal-util.h
-isap.o: isap.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
+isap-aead.o: isap-aead.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
 photon-beetle-aead.o: photon-beetle-aead.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle-hash.h internal-photon256.h internal-util.h
 romulus-aead.o: romulus-aead.h internal-skinny-plus.h internal-util.h

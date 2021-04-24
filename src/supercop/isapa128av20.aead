@@ -7,4 +7,4 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=isap_ascon_128a_aead_encrypt
 aead_decrypt=isap_ascon_128a_aead_decrypt
-aead_header=isap.h
+aead_header=isap-aead.h

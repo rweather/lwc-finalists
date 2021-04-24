@@ -20,11 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_ISAP_H
-#define LWCRYPTO_ISAP_H
+#ifndef LWCRYPTO_ISAP_AEAD_H
+#define LWCRYPTO_ISAP_AEAD_H
 
 /**
- * \file isap.h
+ * \file isap-aead.h
  * \brief ISAP authenticated encryption algorithm.
  *
  * ISAP is a family of authenticated encryption algorithms that are built

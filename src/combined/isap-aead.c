@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "isap.h"
+#include "isap-aead.h"
 #include "internal-keccakp-400.h"
 #include "internal-ascon.h"
 #include <string.h>

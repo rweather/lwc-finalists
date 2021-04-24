@@ -86,8 +86,8 @@ GRAIN128_FILES = \
     internal-grain128-avr.S \
     $(COMMON_FILES)
 ISAP_FILES = \
-    isap.c \
-    isap.h \
+    isap-aead.c \
+    isap-aead.h \
     internal-ascon.c \
     internal-ascon.h \
     internal-ascon-armv7m.S \

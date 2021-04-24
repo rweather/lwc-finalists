@@ -32,7 +32,7 @@
 #include "gift-cofb.h"
 #include "gift-cofb-masked.h"
 #include "grain128.h"
-#include "isap.h"
+#include "isap-aead.h"
 #include "photon-beetle-aead.h"
 #include "photon-beetle-hash.h"
 #include "romulus-aead.h"
