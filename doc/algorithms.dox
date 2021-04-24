@@ -283,7 +283,7 @@ variants from the NIST submission.
 
 \section alg_tinyjambu TinyJAMBU
 
-<b>Definition:</b> \ref tinyjambu.h, \ref tinyjambu-masked.h
+<b>Definition:</b> \ref tinyjambu-aead.h, \ref tinyjambu-aead-masked.h
 
 TinyJAMBU is a family of encryption algorithms that are built around a
 lightweight 128-bit permutation.  There are three variants of TinyJAMBU

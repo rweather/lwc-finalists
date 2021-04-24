@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "tinyjambu.h"
+#include "tinyjambu-aead.h"
 #include "internal-tinyjambu.h"
 #include "internal-util.h"
 

@@ -7,4 +7,4 @@ aead_nonce_size=12
 aead_tag_size=8
 aead_encrypt=tiny_jambu_256_aead_encrypt
 aead_decrypt=tiny_jambu_256_aead_decrypt
-aead_header=tinyjambu.h
+aead_header=tinyjambu-aead.h

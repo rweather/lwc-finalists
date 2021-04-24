@@ -20,11 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_TINYJAMBU_H
-#define LWCRYPTO_TINYJAMBU_H
+#ifndef LWCRYPTO_TINYJAMBU_AEAD_H
+#define LWCRYPTO_TINYJAMBU_AEAD_H
 
 /**
- * \file tinyjambu.h
+ * \file tinyjambu-aead.h
  * \brief TinyJAMBU authenticated encryption algorithm.
  *
  * TinyJAMBU is a family of encryption algorithms that are built around a

@@ -20,11 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_TINYJAMBU_MASKED_H
-#define LWCRYPTO_TINYJAMBU_MASKED_H
+#ifndef LWCRYPTO_TINYJAMBU_AEAD_MASKED_H
+#define LWCRYPTO_TINYJAMBU_AEAD_MASKED_H
 
 /**
- * \file tinyjambu-masked.h
+ * \file tinyjambu-aead-masked.h
  * \brief Masked version of the TinyJAMBU authenticated encryption algorithm.
  */
 

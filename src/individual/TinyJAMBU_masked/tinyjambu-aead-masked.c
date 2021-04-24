@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "tinyjambu-masked.h"
+#include "tinyjambu-aead-masked.h"
 #include "internal-tinyjambu-m.h"
 #include "internal-util.h"
 

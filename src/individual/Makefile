@@ -133,16 +133,16 @@ SPARKLE_FILES = \
     internal-sparkle-avr.S \
     $(COMMON_FILES)
 TINYJAMBU_FILES = \
-    tinyjambu.c \
-    tinyjambu.h \
+    tinyjambu-aead.c \
+    tinyjambu-aead.h \
     internal-tinyjambu.c \
     internal-tinyjambu.h \
     internal-tinyjambu-armv7m.S \
     internal-tinyjambu-avr.S \
     $(COMMON_FILES)
 TINYJAMBU_MASKED_FILES = \
-    tinyjambu-masked.c \
-    tinyjambu-masked.h \
+    tinyjambu-aead-masked.c \
+    tinyjambu-aead-masked.h \
     internal-tinyjambu-m.c \
     internal-tinyjambu-m.h \
     $(COMMON_MASKING_FILES)
