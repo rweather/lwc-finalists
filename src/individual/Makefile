@@ -78,8 +78,8 @@ GIFT_COFB_MASKED_FILES = \
     internal-gift128-m.h \
     $(COMMON_MASKING_FILES)
 GRAIN128_FILES = \
-    grain128.c \
-    grain128.h \
+    grain-aead.c \
+    grain-aead.h \
     internal-grain128.c \
     internal-grain128.h \
     internal-grain128-armv7m.S \

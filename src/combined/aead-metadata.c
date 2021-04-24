@@ -31,7 +31,7 @@
 #include "elephant-jumbo.h"
 #include "gift-cofb.h"
 #include "gift-cofb-masked.h"
-#include "grain128.h"
+#include "grain-aead.h"
 #include "isap-aead.h"
 #include "photon-beetle-aead.h"
 #include "photon-beetle-hash.h"

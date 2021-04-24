@@ -20,11 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_GRAIN128_H
-#define LWCRYPTO_GRAIN128_H
+#ifndef LWCRYPTO_GRAIN_AEAD_H
+#define LWCRYPTO_GRAIN_AEAD_H
 
 /**
- * \file grain128.h
+ * \file grain-aead.h
  * \brief Grain-128AEAD authenticated encryption algorithm.
  *
  * Grain-128AEAD is an authenticated encryption algorithm based around a

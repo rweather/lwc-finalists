@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "grain128.h"
+#include "grain-aead.h"
 #include "internal-grain128.h"
 #include <string.h>
 

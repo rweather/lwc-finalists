@@ -177,7 +177,7 @@ protection against power analysis side channels.
 
 \section alg_grain_128aead Grain-128AEAD
 
-<b>Definition:</b> \ref grain128.h
+<b>Definition:</b> \ref grain-aead.h
 
 Grain-128AEAD is an authenticated encryption algorithm based around a
 combination of a 128-bit linear feedback shift register (LFSR) and a
