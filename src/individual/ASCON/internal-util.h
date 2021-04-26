@@ -726,4 +726,12 @@ int aead_check_tag
      const unsigned char *tag1, const unsigned char *tag2,
      unsigned tag_len);
 
+/**
+ * \brief Attempts to cleans a buffer that contains sensitive material.
+ *
+ * \param buf Points to the buffer to clear.
+ * \param size Size of the buffer to clear in bytes.
+ */
+void aead_clean(void *buf, unsigned size);
+
 #endif

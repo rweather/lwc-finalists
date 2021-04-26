@@ -16,12 +16,15 @@ ASCON_FILES = \
     ascon-aead.h \
     ascon-hash.c \
     ascon-hash.h \
+    ascon-hmac.c \
+    ascon-hmac.h \
     ascon-xof.c \
     ascon-xof.h \
     internal-ascon.c \
     internal-ascon.h \
     internal-ascon-armv7m.S \
     internal-ascon-avr.S \
+    internal-hmac.h \
     $(COMMON_FILES)
 ASCON_MASKED_FILES = \
     ascon-aead-masked.c \
@@ -103,17 +106,22 @@ PHOTON_BEETLE_FILES = \
     photon-beetle-aead.h \
     photon-beetle-hash.c \
     photon-beetle-hash.h \
+    photon-beetle-hmac.c \
+    photon-beetle-hmac.h \
     internal-photon256.c \
     internal-photon256.h \
     internal-photon256-armv7m.S \
     internal-photon256-avr.S \
     internal-photon256-mix.h \
+    internal-hmac.h \
     $(COMMON_FILES)
 ROMULUS_FILES = \
     romulus-aead.c \
     romulus-aead.h \
     romulus-hash.c \
     romulus-hash.h \
+    romulus-hmac.c \
+    romulus-hmac.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
     internal-skinny-full-armv7m.S \
@@ -121,16 +129,20 @@ ROMULUS_FILES = \
     internal-skinny-tiny-armv7m.S \
     internal-skinny-tiny-avr.S \
     internal-skinny-plus-config.h \
+    internal-hmac.h \
     $(COMMON_FILES)
 SPARKLE_FILES = \
     sparkle-aead.c \
     sparkle-aead.h \
     sparkle-hash.c \
     sparkle-hash.h \
+    sparkle-hmac.c \
+    sparkle-hmac.h \
     internal-sparkle.c \
     internal-sparkle.h \
     internal-sparkle-armv7m.S \
     internal-sparkle-avr.S \
+    internal-hmac.h \
     $(COMMON_FILES)
 TINYJAMBU_FILES = \
     tinyjambu-aead.c \
@@ -151,10 +163,13 @@ XOODYAK_FILES = \
     xoodyak-aead.h \
     xoodyak-hash.c \
     xoodyak-hash.h \
+    xoodyak-hmac.c \
+    xoodyak-hmac.h \
     internal-xoodoo.c \
     internal-xoodoo.h \
     internal-xoodoo-armv7m.S \
     internal-xoodoo-avr.S \
+    internal-hmac.h \
     $(COMMON_FILES)
 XOODYAK_MASKED_FILES = \
     xoodyak-masked.c \

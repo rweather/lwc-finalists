@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=ascon128_aead_encrypt
 aead_decrypt=ascon128_aead_decrypt
-aead_exclude="ascon-hash.c ascon-hash.h ascon-xof.c ascon-xof.h"
+aead_exclude="ascon-hash.c ascon-hash.h ascon-xof.c ascon-xof.h ascon-hmac.c ascon-hmac.h internal-hmac.h"
 aead_header=ascon-aead.h

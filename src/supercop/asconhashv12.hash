@@ -4,5 +4,5 @@ hash_meta_name=ASCON-HASH
 hash_srcdir=ASCON
 hash_size=32
 hash_function=ascon_hash
-hash_exclude="ascon-aead.c ascon-aead.h"
+hash_exclude="ascon-aead.c ascon-aead.h ascon-hmac.c ascon-hmac.h internal-hmac.h"
 hash_header=ascon-hash.h

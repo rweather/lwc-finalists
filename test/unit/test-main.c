@@ -29,6 +29,7 @@ void test_chachapoly(void);
 void test_gift128(void);
 void test_gift128_masked(void);
 void test_grain128(void);
+void test_hmac(void);
 void test_keccak(void);
 void test_masking(void);
 void test_photon256(void);
@@ -57,5 +58,6 @@ int main(int argc, char *argv[])
     test_spongent();
     test_tinyjambu();
     test_xoodoo();
+    test_hmac();
     return test_exit_result;
 }

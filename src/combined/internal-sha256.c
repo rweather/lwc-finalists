@@ -26,27 +26,16 @@
 
 aead_hash_algorithm_t const internal_sha256_hash_algorithm = {
     "SHA256",
-    sizeof(int),
+    sizeof(sha256_state_t),
     SHA256_HASH_SIZE,
     AEAD_FLAG_NONE,
     internal_sha256_hash,
-    (aead_hash_init_t)0,
-    (aead_hash_update_t)0,
-    (aead_hash_finalize_t)0,
+    (aead_hash_init_t)internal_sha256_hash_init,
+    (aead_hash_update_t)internal_sha256_hash_update,
+    (aead_hash_finalize_t)internal_sha256_hash_finalize,
     (aead_xof_absorb_t)0,
     (aead_xof_squeeze_t)0
 };
-
-/** @cond sha256_state */
-
-typedef struct
-{
-    uint32_t h[8];
-    uint32_t w[16];
-
-} sha256_state_t;
-
-/** @endcond */
 
 #if (defined(__ARM_ARCH_ISA_THUMB) && __ARM_ARCH == 7) || \
     defined(__AVR__)
@@ -189,7 +178,7 @@ int internal_sha256_hash
     } else {
         memset(((uint8_t *)(state.w)) + temp + 1, 0, 64 - 1 - temp);
         sha256_transform(&state);
-        memset(&state.w, 0, 64 - 8);
+        memset(state.w, 0, 64 - 8);
     }
     be_store_word64(((uint8_t *)(state.w)) + 64 - 8, len_bytes);
     sha256_transform(&state);
@@ -209,3 +198,81 @@ int internal_sha256_hash
 #endif
     return 0;
 }
+
+void internal_sha256_hash_init(sha256_state_t *state)
+{
+    state->h[0] = 0x6a09e667U;
+    state->h[1] = 0xbb67ae85U;
+    state->h[2] = 0x3c6ef372U;
+    state->h[3] = 0xa54ff53aU,
+    state->h[4] = 0x510e527fU;
+    state->h[5] = 0x9b05688cU;
+    state->h[6] = 0x1f83d9abU;
+    state->h[7] = 0x5be0cd19U;
+    state->length = 0;
+    state->posn = 0;
+}
+
+void internal_sha256_hash_update
+    (sha256_state_t *state, const unsigned char *in,
+     unsigned long long inlen)
+{
+    /* Update the total length (in bits, not bytes) */
+    state->length += ((uint64_t)inlen) << 3;
+
+    /* Break the input up into 512-bit chunks and process each in turn */
+    while (inlen > 0) {
+        uint8_t size = 64 - state->posn;
+        if (size > inlen)
+            size = inlen;
+        memcpy(((uint8_t *)state->w) + state->posn, in, size);
+        state->posn += size;
+        inlen -= size;
+        in += size;
+        if (state->posn == 64) {
+            sha256_transform(state);
+            state->posn = 0;
+        }
+    }
+}
+
+void internal_sha256_hash_finalize(sha256_state_t *state, unsigned char *out)
+{
+    unsigned temp = state->posn;
+
+    /* Pad the final chunk and process it */
+    ((uint8_t *)(state->w))[temp] = 0x80;
+    if (temp <= (64U - 9U)) {
+        memset(((uint8_t *)(state->w)) + temp + 1, 0, 64 - 9 - temp);
+    } else {
+        memset(((uint8_t *)(state->w)) + temp + 1, 0, 64 - 1 - temp);
+        sha256_transform(state);
+        memset(state->w, 0, 64 - 8);
+    }
+    be_store_word64(((uint8_t *)(state->w)) + 64 - 8, state->length);
+    sha256_transform(state);
+
+    /* Convert the hash into big-endian and return it */
+#if defined(LW_UTIL_LITTLE_ENDIAN)
+    be_store_word32(out,      state->h[0]);
+    be_store_word32(out + 4,  state->h[1]);
+    be_store_word32(out + 8,  state->h[2]);
+    be_store_word32(out + 12, state->h[3]);
+    be_store_word32(out + 16, state->h[4]);
+    be_store_word32(out + 20, state->h[5]);
+    be_store_word32(out + 24, state->h[6]);
+    be_store_word32(out + 28, state->h[7]);
+#else
+    memcpy(out, state->h, SHA256_HASH_SIZE);
+#endif
+}
+
+/* The actual HMAC implementation is in the common "internal-hmac.h" file */
+#define HMAC_ALG_NAME internal_sha256_hmac
+#define HMAC_HASH_SIZE SHA256_HASH_SIZE
+#define HMAC_BLOCK_SIZE 64
+#define HMAC_STATE sha256_state_t
+#define HMAC_HASH_INIT internal_sha256_hash_init
+#define HMAC_HASH_UPDATE internal_sha256_hash_update
+#define HMAC_HASH_FINALIZE internal_sha256_hash_finalize
+#include "internal-hmac.h"

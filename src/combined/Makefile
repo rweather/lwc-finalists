@@ -13,6 +13,7 @@ OBJS = \
         ascon-aead.o \
         ascon-aead-masked.o \
         ascon-hash.o \
+        ascon-hmac.o \
         ascon-xof.o \
         elephant-delirium.o \
         elephant-dumbo.o \
@@ -23,14 +24,18 @@ OBJS = \
         isap-aead.o \
         photon-beetle-aead.o \
         photon-beetle-hash.o \
+        photon-beetle-hmac.o \
         romulus-aead.o \
         romulus-hash.o \
+        romulus-hmac.o \
         sparkle-aead.o \
         sparkle-hash.o \
+        sparkle-hmac.o \
         tinyjambu-aead.o \
         tinyjambu-aead-masked.o \
         xoodyak-aead.o \
         xoodyak-hash.o \
+        xoodyak-hmac.o \
         xoodyak-masked.o \
 	internal-ascon.o \
 	internal-ascon-m.o \
@@ -82,6 +87,7 @@ aead-random.o: aead-random.h
 ascon-aead.o: ascon-aead.h internal-ascon.h internal-util.h
 ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
 ascon-hash.o: ascon-hash.h ascon-xof.h
+ascon-hmac.o: ascon-hmac.h ascon-hash.h ascon-xof.h internal-hmac.h internal-util.h
 ascon-xof.o: ascon-xof.h internal-ascon.h internal-util.h
 elephant-delirium.o: elephant-delirium.h internal-keccakp-200.h internal-util.h
 elephant-dumbo.o: elephant-dumbo.h internal-spongent.h internal-util.h
@@ -92,14 +98,18 @@ grain-aead.o: grain-aead.h internal-grain128.h internal-util.h
 isap-aead.o: isap-aead.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
 photon-beetle-aead.o: photon-beetle-aead.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle-hash.h internal-photon256.h internal-util.h
+photon-beetle-hmac.o: photon-beetle-hmac.h photon-beetle-hash.h internal-hmac.h internal-util.h
 romulus-aead.o: romulus-aead.h internal-skinny-plus.h internal-util.h
 romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h
+romulus-hmac.o: romulus-hmac.h romulus-hash.h internal-util.h internal-hmac.h
 sparkle-aead.o: sparkle-aead.h internal-sparkle.h internal-util.h
 sparkle-hash.o: sparkle-hash.h internal-sparkle.h internal-util.h
+sparkle-hmac.o: sparkle-hmac.h sparkle-hash.h internal-hmac.h internal-util.h
 tinyjambu-aead.o: tinyjambu-aead.h internal-tinyjambu.h internal-util.h
 tinyjambu-aead-masked.o: tinyjambu-aead-masked.h internal-tinyjambu-m.h aead-random.h internal-masking.h internal-util.h
 xoodyak-aead.o: xoodyak-aead.h internal-xoodoo.h internal-util.h
 xoodyak-hash.o: xoodyak-hash.h internal-xoodoo.h internal-util.h
+xoodyak-hmac.o: xoodyak-hmac.h xoodyak-hash.h internal-hmac.h internal-util.h
 xoodyak-masked.o: xoodyak-masked.h internal-xoodoo.h internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
 internal-ascon.o: internal-ascon.h internal-util.h
 internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
@@ -111,7 +121,7 @@ internal-grain128.o: internal-grain128.h internal-util.h
 internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
 internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
 internal-photon256.o: internal-photon256.h internal-photon256-mix.h internal-util.h
-internal-sha256.o: internal-sha256.h internal-util.h aead-metadata.h
+internal-sha256.o: internal-sha256.h internal-util.h aead-metadata.h internal-hmac.h
 internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-sparkle.o: internal-sparkle.h internal-util.h
 internal-spongent.o: internal-spongent.h internal-util.h

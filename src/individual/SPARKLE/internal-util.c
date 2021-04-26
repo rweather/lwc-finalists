@@ -44,3 +44,18 @@ int aead_check_tag
     /* If "accum" is 0, return -1, otherwise return 0 */
     return ~accum;
 }
+
+void aead_clean(void *buf, unsigned size)
+{
+    /* Force the use of volatile so that we actually clear the memory.
+     * Otherwise the compiler might optimise the entire contents of this
+     * function away, which will not be secure.
+     *
+     * Even this may not work.  Some platforms have bzero_explicit() or
+     * memset_s() that could be used in place of this implementation. */
+    volatile uint8_t *d = (volatile uint8_t *)buf;
+    while (size > 0) {
+        *d++ = 0;
+        --size;
+    }
+}
