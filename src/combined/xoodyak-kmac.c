@@ -20,48 +20,18 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "test-cipher.h"
-#include "aead-random.h"
+#include "xoodyak-kmac.h"
+#include "internal-util.h"
+#include <string.h>
 
-void test_ascon(void);
-void test_blake2s(void);
-void test_chachapoly(void);
-void test_gift128(void);
-void test_gift128_masked(void);
-void test_grain128(void);
-void test_hmac(void);
-void test_keccak(void);
-void test_kmac(void);
-void test_masking(void);
-void test_photon256(void);
-void test_sha256(void);
-void test_sha3(void);
-void test_skinny128(void);
-void test_sparkle(void);
-void test_spongent(void);
-void test_tinyjambu(void);
-void test_xoodoo(void);
-
-int main(int argc, char *argv[])
-{
-    aead_random_init();
-    test_ascon();
-    test_blake2s();
-    test_chachapoly();
-    test_gift128();
-    test_gift128_masked();
-    test_grain128();
-    test_hmac();
-    test_keccak();
-    test_kmac();
-    test_masking();
-    test_photon256();
-    test_sha256();
-    test_sha3();
-    test_skinny128();
-    test_sparkle();
-    test_spongent();
-    test_tinyjambu();
-    test_xoodoo();
-    return test_exit_result;
-}
+/* The actual implementation is in the common "internal-kmac.h" file */
+#define KMAC_ALG_NAME xoodyak_kmac
+#define KMAC_SIZE XOODYAK_KMAC_SIZE
+#define KMAC_STATE xoodyak_kmac_state_t
+#define KMAC_RATE XOODYAK_HASH_RATE
+#define KMAC_XOF_INIT xoodyak_hash_init
+#define KMAC_XOF_ABSORB xoodyak_hash_absorb
+#define KMAC_XOF_SQUEEZE xoodyak_hash_squeeze
+#define KMAC_XOF_PAD xoodyak_hash_pad
+#define KMAC_XOF_IS_ABSORBING(state) ((state)->s.mode != 2)
+#include "internal-kmac.h"

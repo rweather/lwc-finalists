@@ -37,6 +37,17 @@ extern "C" {
 #endif
 
 /**
+ * \brief Size of the hash output for ASCON-HASH and the default hash
+ * output size for ASCON-XOF.
+ */
+#define ASCON_HASH_SIZE 32
+
+/**
+ * \brief Rate of absorbing and squeezing data for ASCON-XOF and ASCON-HASH.
+ */
+#define ASCON_XOF_RATE 8
+
+/**
  * \brief State information for ASCON-XOF incremental mode.
  */
 typedef union
@@ -117,6 +128,18 @@ void ascon_xof_absorb
  */
 void ascon_xof_squeeze
     (ascon_xof_state_t *state, unsigned char *out, unsigned long long outlen);
+
+/**
+ * \brief Absorbs enough zeroes into an ASCON-XOF state to pad the
+ * input to the next multiple of the block rate.
+ *
+ * \param state XOF state to pad.  Does nothing if the \a state is
+ * already aligned on a multiple of the block rate.
+ *
+ * This function can avoid unnecessary XOR-with-zero operations
+ * to save some time when padding is required.
+ */
+void ascon_xof_pad(ascon_xof_state_t *state);
 
 #ifdef __cplusplus
 }

@@ -37,11 +37,6 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the hash output for ASCON-HASH.
- */
-#define ASCON_HASH_SIZE 32
-
-/**
  * \brief State information for ASCON-HASH incremental mode.
  */
 typedef ascon_xof_state_t ascon_hash_state_t;

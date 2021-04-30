@@ -59,9 +59,9 @@ typedef struct
 #define AEAD_MAX_KEY_LEN 32
 #define AEAD_MAX_NONCE_LEN 16
 #define AEAD_MAX_AD_LEN 32
-#define AEAD_MAX_DATA_LEN 32
+#define AEAD_MAX_DATA_LEN 256
 #define AEAD_MAX_TAG_LEN 16
-#define AEAD_MAX_HASH_LEN 32
+#define AEAD_MAX_HASH_LEN 64
 
 /* Information about a test vector for an AEAD algorithm */
 typedef struct
@@ -86,6 +86,20 @@ typedef struct
     unsigned input_len;
 
 } aead_hash_test_vector_t;
+
+/* Information about a test vector for a keyed MAC algorithm */
+typedef struct
+{
+    const char *name;
+    unsigned char key[AEAD_MAX_KEY_LEN];
+    unsigned key_len;
+    unsigned char input[AEAD_MAX_DATA_LEN];
+    unsigned input_len;
+    const char *salt;
+    unsigned char output[AEAD_MAX_HASH_LEN];
+    unsigned output_len;
+
+} aead_mac_test_vector_t;
 
 /* Value to return from the main() function for the test result */
 extern int test_exit_result;

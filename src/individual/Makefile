@@ -18,6 +18,8 @@ ASCON_FILES = \
     ascon-hash.h \
     ascon-hmac.c \
     ascon-hmac.h \
+    ascon-kmac.c \
+    ascon-kmac.h \
     ascon-xof.c \
     ascon-xof.h \
     internal-ascon.c \
@@ -25,6 +27,7 @@ ASCON_FILES = \
     internal-ascon-armv7m.S \
     internal-ascon-avr.S \
     internal-hmac.h \
+    internal-kmac.h \
     $(COMMON_FILES)
 ASCON_MASKED_FILES = \
     ascon-aead-masked.c \
@@ -165,11 +168,14 @@ XOODYAK_FILES = \
     xoodyak-hash.h \
     xoodyak-hmac.c \
     xoodyak-hmac.h \
+    xoodyak-kmac.c \
+    xoodyak-kmac.h \
     internal-xoodoo.c \
     internal-xoodoo.h \
     internal-xoodoo-armv7m.S \
     internal-xoodoo-avr.S \
     internal-hmac.h \
+    internal-kmac.h \
     $(COMMON_FILES)
 XOODYAK_MASKED_FILES = \
     xoodyak-masked.c \

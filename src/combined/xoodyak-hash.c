@@ -25,11 +25,6 @@
 #include <string.h>
 
 /**
- * \brief Rate for absorbing and squeezing in hashing mode.
- */
-#define XOODYAK_HASH_RATE 16
-
-/**
  * \brief Hash mode just after initialization while absorbing the
  * first block of input data.
  */
@@ -148,4 +143,16 @@ void xoodyak_hash_finalize
     (xoodyak_hash_state_t *state, unsigned char *out)
 {
     xoodyak_hash_squeeze(state, out, XOODYAK_HASH_SIZE);
+}
+
+void xoodyak_hash_pad(xoodyak_hash_state_t *state)
+{
+    if (state->s.mode == XOODYAK_HASH_MODE_SQUEEZE) {
+        /* We were squeezing output, so re-enter the absorb phase
+         * which will implicitly align on a rate block boundary */
+        xoodyak_hash_absorb(state, 0, 0);
+    } else if (state->s.count != 0 && state->s.count != XOODYAK_HASH_RATE) {
+        /* Not currently aligned, so finish off the current block */
+        state->s.count = XOODYAK_HASH_RATE;
+    }
 }

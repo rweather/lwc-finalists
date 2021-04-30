@@ -44,6 +44,11 @@ extern "C" {
 #define XOODYAK_HASH_SIZE 32
 
 /**
+ * \brief Rate for absorbing and squeezing in Xoodyak's hashing mode.
+ */
+#define XOODYAK_HASH_RATE 16
+
+/**
  * \brief State information for Xoodyak incremental hashing modes.
  */
 typedef union
@@ -119,6 +124,18 @@ void xoodyak_hash_squeeze
  */
 void xoodyak_hash_finalize
     (xoodyak_hash_state_t *state, unsigned char *out);
+
+/**
+ * \brief Absorbs enough zeroes into a Xoodyak hashing state to pad the
+ * input to the next multiple of the block rate.
+ *
+ * \param state The state to pad.  Does nothing if the \a state is
+ * already aligned on a multiple of the block rate.
+ *
+ * This function can avoid unnecessary XOR-with-zero operations
+ * to save some time when padding is required.
+ */
+void xoodyak_hash_pad(xoodyak_hash_state_t *state);
 
 #ifdef __cplusplus
 }

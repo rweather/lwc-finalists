@@ -24,8 +24,6 @@
 #include "internal-ascon.h"
 #include <string.h>
 
-#define ASCON_XOF_RATE 8
-
 #if ASCON_SLICED
 #define ascon_xof_permute() \
     ascon_permute_sliced((ascon_state_t *)(state->s.state), 0)
@@ -228,4 +226,23 @@ void ascon_xof_squeeze
         state->s.count = temp;
     }
 #endif
+}
+
+void ascon_xof_pad(ascon_xof_state_t *state)
+{
+    if (state->s.mode) {
+        /* We were squeezing output, so re-enter the absorb phase
+         * which will implicitly align on a rate block boundary */
+        ascon_xof_absorb(state, 0, 0);
+    } else if (state->s.count != 0) {
+        /* Not currently aligned, so invoke the permutation */
+#if ASCON_SLICED
+        ascon_to_sliced((ascon_state_t *)(state->s.state));
+        ascon_xof_permute();
+        ascon_from_sliced((ascon_state_t *)(state->s.state));
+#else
+        ascon_xof_permute();
+#endif
+        state->s.count = 0;
+    }
 }
