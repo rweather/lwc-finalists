@@ -16,6 +16,7 @@ OBJS = \
         ascon-hash.o \
         ascon-hmac.o \
         ascon-kmac.o \
+        ascon-prng.o \
         ascon-xof.o \
         elephant-delirium.o \
         elephant-dumbo.o \
@@ -93,6 +94,7 @@ ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m.h aea
 ascon-hash.o: ascon-hash.h ascon-xof.h
 ascon-hmac.o: ascon-hmac.h ascon-hash.h ascon-xof.h internal-hmac.h internal-util.h
 ascon-kmac.o: ascon-kmac.h ascon-xof.h internal-kmac.h internal-util.h
+ascon-prng.o: ascon-prng.h ascon-xof.h ascon-hash.h internal-ascon.h internal-util.h
 ascon-xof.o: ascon-xof.h internal-ascon.h internal-util.h
 elephant-delirium.o: elephant-delirium.h internal-keccakp-200.h internal-util.h
 elephant-dumbo.o: elephant-dumbo.h internal-spongent.h internal-util.h

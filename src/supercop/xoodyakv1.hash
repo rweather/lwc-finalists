@@ -4,5 +4,5 @@ hash_meta_name=Xoodyak-Hash
 hash_srcdir=Xoodyak
 hash_size=32
 hash_function=xoodyak_hash
-hash_exclude="xoodyak-aead.c xoodyak-aead.h xoodyak-hmac.c xoodyak-hmac.h internal-hmac.h xoodyak-kmac.c xoodyak-kmac.h internal-kmac.h"
+hash_exclude="xoodyak-aead.c xoodyak-aead.h xoodyak-hmac.c xoodyak-hmac.h internal-hmac.h xoodyak-kmac.c xoodyak-kmac.h internal-kmac.h xoodyak-prng.c xoodyak-prng.h aead-random-system.c"
 hash_header=xoodyak-hash.h

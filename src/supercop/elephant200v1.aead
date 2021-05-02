@@ -7,4 +7,5 @@ aead_nonce_size=12
 aead_tag_size=16
 aead_encrypt=delirium_aead_encrypt
 aead_decrypt=delirium_aead_decrypt
+aead_exclude="elephant-prng.c elephant-prng.h aead-random-system.c"
 aead_header=elephant-delirium.h

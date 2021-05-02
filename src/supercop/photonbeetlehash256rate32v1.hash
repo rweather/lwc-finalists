@@ -5,4 +5,4 @@ hash_srcdir=PHOTON-Beetle
 hash_size=32
 hash_function=photon_beetle_hash
 hash_header=photon-beetle-hash.h
-hash_exclude="photon-beetle-aead.c photon-beetle-aead.h photon-beetle-hmac.c photon-beetle-hmac.h internal-hmac.h"
+hash_exclude="photon-beetle-aead.c photon-beetle-aead.h photon-beetle-hmac.c photon-beetle-hmac.h internal-hmac.h photon-beetle-prng.c photon-beetle-prng.h aead-random-system.c"

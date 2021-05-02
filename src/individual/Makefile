@@ -21,6 +21,8 @@ ASCON_FILES = \
     ascon-hmac.h \
     ascon-kmac.c \
     ascon-kmac.h \
+    ascon-prng.c \
+    ascon-prng.h \
     ascon-xof.c \
     ascon-xof.h \
     internal-ascon.c \
@@ -29,6 +31,7 @@ ASCON_FILES = \
     internal-ascon-avr.S \
     internal-hmac.h \
     internal-kmac.h \
+    aead-random-system.c \
     $(COMMON_FILES)
 ASCON_MASKED_FILES = \
     ascon-aead-masked.c \
@@ -47,6 +50,7 @@ ELEPHANT_DELIRIUM_FILES = \
     internal-keccakp-200.h \
     internal-keccakp-200-armv7m.S \
     internal-keccakp-200-avr.S \
+    aead-random-system.c \
     $(COMMON_FILES)
 ELEPHANT_DUMBO_FILES = \
     elephant-dumbo.c \
@@ -76,6 +80,7 @@ GIFT_COFB_FILES = \
     internal-gift128b-full-avr.S \
     internal-gift128b-small-avr.S \
     internal-gift128b-tiny-avr.S \
+    aead-random-system.c \
     $(COMMON_FILES)
 GIFT_COFB_MASKED_FILES = \
     gift-cofb-aead-masked.c \
@@ -91,6 +96,7 @@ GRAIN128_FILES = \
     internal-grain128.h \
     internal-grain128-armv7m.S \
     internal-grain128-avr.S \
+    aead-random-system.c \
     $(COMMON_FILES)
 ISAP_FILES = \
     isap-aead.c \
@@ -118,6 +124,7 @@ PHOTON_BEETLE_FILES = \
     internal-photon256-avr.S \
     internal-photon256-mix.h \
     internal-hmac.h \
+    aead-random-system.c \
     $(COMMON_FILES)
 ROMULUS_FILES = \
     romulus-aead.c \
@@ -134,6 +141,7 @@ ROMULUS_FILES = \
     internal-skinny-tiny-avr.S \
     internal-skinny-plus-config.h \
     internal-hmac.h \
+    aead-random-system.c \
     $(COMMON_FILES)
 SPARKLE_FILES = \
     sparkle-aead.c \
@@ -147,6 +155,7 @@ SPARKLE_FILES = \
     internal-sparkle-armv7m.S \
     internal-sparkle-avr.S \
     internal-hmac.h \
+    aead-random-system.c \
     $(COMMON_FILES)
 TINYJAMBU_FILES = \
     tinyjambu-aead.c \
@@ -155,6 +164,7 @@ TINYJAMBU_FILES = \
     internal-tinyjambu.h \
     internal-tinyjambu-armv7m.S \
     internal-tinyjambu-avr.S \
+    aead-random-system.c \
     $(COMMON_FILES)
 TINYJAMBU_MASKED_FILES = \
     tinyjambu-aead-masked.c \
@@ -177,6 +187,7 @@ XOODYAK_FILES = \
     internal-xoodoo-avr.S \
     internal-hmac.h \
     internal-kmac.h \
+    aead-random-system.c \
     $(COMMON_FILES)
 XOODYAK_MASKED_FILES = \
     xoodyak-masked.c \
