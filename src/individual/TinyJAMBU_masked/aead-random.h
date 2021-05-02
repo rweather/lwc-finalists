@@ -1,8 +1,23 @@
 /*
- * This file has been placed into the public domain by Rhys Weatherley.
- * It can be reused and modified as necessary.  It may even be completely
- * thrown away and replaced with a different system-specific implementation
- * that provides the same API.
+ * Copyright (C) 2021 Southern Storm Software, Pty Ltd.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
  */
 
 #ifndef LWCRYPTO_AEAD_RANDOM_H
@@ -12,7 +27,7 @@
 
 /**
  * \file aead-random.h
- * \brief Utilities that help with the generation of random masking material.
+ * \brief Utilities that help with the generation of random data.
  */
 
 #ifdef __cplusplus
@@ -61,20 +76,10 @@ void aead_random_generate(void *buffer, unsigned size);
  * This function does nothing if the random API is using the
  * system TRNG directly.
  *
- * This function is called implicitly by aead_random_init().
+ * This function is called implicitly by aead_random_init() and then
+ * called again every 64K of output data.
  */
 void aead_random_reseed(void);
-
-/**
- * \brief Restarts the random number generator with a specific 256-bit seed.
- *
- * \param seed The seed material.
- *
- * This function does nothing if the random API is using the system
- * TRNG directly.  This function is useful for creating reproducible
- * random numbers for test purposes.  It should not be used for real work.
- */
-void aead_random_set_seed(const unsigned char seed[32]);
 
 #ifdef __cplusplus
 }

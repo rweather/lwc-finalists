@@ -10,6 +10,7 @@ LIBRARY = libcryptolw.a
 OBJS = \
 	aead-metadata.o \
 	aead-random.o \
+	aead-random-system.o \
         ascon-aead.o \
         ascon-aead-masked.o \
         ascon-hash.o \
@@ -86,6 +87,7 @@ aead-metadata.o: \
 	tinyjambu-aead.h tinyjambu-aead-masked.h \
 	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
 aead-random.o: aead-random.h
+aead-random-system.o: aead-random.h internal-util.h
 ascon-aead.o: ascon-aead.h internal-ascon.h internal-util.h
 ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
 ascon-hash.o: ascon-hash.h ascon-xof.h

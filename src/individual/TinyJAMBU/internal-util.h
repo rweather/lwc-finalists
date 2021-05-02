@@ -734,4 +734,25 @@ int aead_check_tag
  */
 void aead_clean(void *buf, unsigned size);
 
+/**
+ * \brief Number of bytes to retrieve from the system TRNG each time
+ * we need to reseed application-level PRNG's.
+ */
+#define AEAD_SYSTEM_SEED_SIZE 32
+
+/**
+ * \brief Gets data from the system TRNG to reseed application-level PRNG's.
+ *
+ * \param seed Points to the buffer to be populated with the system seed.
+ *
+ * \return Non-zero if \a seed has been filled with TRNG data or zero
+ * if there is no accessible TRNG on this system.
+ *
+ * The quality of the returned seed data may be very poor or may not
+ * distribute the entropy evenly throughout the returned \a seed buffer.
+ * The application should use a PRNG to hash the seed data into a more
+ * useful random sequence.
+ */
+int aead_random_get_system_seed(unsigned char seed[AEAD_SYSTEM_SEED_SIZE]);
+
 #endif

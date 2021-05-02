@@ -7,6 +7,7 @@ COMMON_FILES = \
 COMMON_MASKING_FILES = \
 	aead-random.h \
 	aead-random.c \
+	aead-random-system.c \
 	internal-masking.h \
 	internal-util.h \
 	internal-util.c
