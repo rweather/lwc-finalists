@@ -39,7 +39,7 @@
 #define DOMAIN(c) ((c) << 5)
 
 int photon_beetle_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     photon256_state_t state;
     unsigned temp;
@@ -102,8 +102,7 @@ void photon_beetle_hash_init(photon_beetle_hash_state_t *state)
 }
 
 void photon_beetle_hash_update
-    (photon_beetle_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (photon_beetle_hash_state_t *state, const unsigned char *in, size_t inlen)
 {
     photon256_state_t *st = (photon256_state_t *)(state->s.state);
     unsigned temp;

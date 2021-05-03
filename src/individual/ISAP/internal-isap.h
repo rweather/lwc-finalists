@@ -124,7 +124,7 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_rekey)
  */
 static void ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)
     (ISAP_STATE *state, const unsigned char *k, const unsigned char *npub,
-     unsigned char *c, const unsigned char *m, unsigned long long mlen)
+     unsigned char *c, const unsigned char *m, size_t mlen)
 {
 #if defined(ISAP_PERMUTE_SLICED)
     unsigned char block[ISAP_RATE];
@@ -184,8 +184,8 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)
  */
 static void ISAP_CONCAT(ISAP_ALG_NAME,_mac)
     (ISAP_STATE *state, const unsigned char *k, const unsigned char *npub,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *c, unsigned long long clen,
+     const unsigned char *ad, size_t adlen,
+     const unsigned char *c, size_t clen,
      unsigned char *tag)
 {
 #if defined(ISAP_PERMUTE_SLICED)
@@ -284,15 +284,13 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_mac)
 }
 
 int ISAP_CONCAT(ISAP_ALG_NAME,_aead_encrypt)
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ISAP_STATE state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ISAP_TAG_SIZE;
@@ -307,16 +305,14 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_encrypt)
 }
 
 int ISAP_CONCAT(ISAP_ALG_NAME,_aead_decrypt)
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ISAP_STATE state;
     unsigned char tag[ISAP_TAG_SIZE];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < ISAP_TAG_SIZE)

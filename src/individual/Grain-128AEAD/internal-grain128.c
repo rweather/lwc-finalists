@@ -328,7 +328,7 @@ static void grain128_next_keystream(grain128_state_t *state)
 
 void grain128_authenticate
     (grain128_state_t *state, const unsigned char *data,
-     unsigned long long len)
+     size_t len)
 {
     unsigned char abyte;
     unsigned char sbyte;
@@ -369,7 +369,7 @@ void grain128_authenticate
 
 void grain128_encrypt
     (grain128_state_t *state, unsigned char *c, const unsigned char *m,
-     unsigned long long len)
+     size_t len)
 {
     unsigned char mbyte;
     unsigned char sbyte;
@@ -412,7 +412,7 @@ void grain128_encrypt
 
 void grain128_decrypt
     (grain128_state_t *state, unsigned char *m, const unsigned char *c,
-     unsigned long long len)
+     size_t len)
 {
     unsigned char mbyte;
     unsigned char sbyte;

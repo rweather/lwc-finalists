@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_XOODYAK_AEAD_H
 #define LWCRYPTO_XOODYAK_AEAD_H
 
+#include <stddef.h>
+
 /**
  * \file xoodyak-aead.h
  * \brief Xoodyak authenticated encryption algorithm.
@@ -75,7 +77,6 @@ extern "C" {
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 16 bytes in length.
  * \param k Points to the 16 bytes of the key to use to encrypt the packet.
@@ -86,10 +87,9 @@ extern "C" {
  * \sa xoodyak_aead_decrypt()
  */
 int xoodyak_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -98,7 +98,6 @@ int xoodyak_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -116,10 +115,9 @@ int xoodyak_aead_encrypt
  * \sa xoodyak_aead_encrypt()
  */
 int xoodyak_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 

@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_ROMULUS_HASH_H
 #define LWCRYPTO_ROMULUS_HASH_H
 
+#include <stddef.h>
+
 /**
  * \file romulus-hash.h
  * \brief Romulus-H+ hash algorithm.
@@ -72,7 +74,7 @@ typedef union
  * \sa romulus_hash_init(), romulus_hash_absorb(), romulus_hash_squeeze()
  */
 int romulus_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for a Romulus-H+ hashing operation.
@@ -93,8 +95,7 @@ void romulus_hash_init(romulus_hash_state_t *state);
  * \sa romulus_hash_init(), romulus_hash_finalize()
  */
 void romulus_hash_update
-    (romulus_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (romulus_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from a Romulus-H+ hashing operation.

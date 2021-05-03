@@ -83,7 +83,7 @@
  */
 static void schwaemm_256_128_authenticate
     (uint32_t s[SPARKLE_384_STATE_SIZE],
-     const unsigned char *ad, unsigned long long adlen)
+     const unsigned char *ad, size_t adlen)
 {
     while (adlen > SCHWAEMM_256_128_RATE) {
         schwaemm_256_128_rho(s);
@@ -107,16 +107,14 @@ static void schwaemm_256_128_authenticate
 }
 
 int schwaemm_256_128_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_384_STATE_SIZE];
     uint8_t block[SCHWAEMM_256_128_RATE];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + SCHWAEMM_256_128_TAG_SIZE;
@@ -170,16 +168,14 @@ int schwaemm_256_128_aead_encrypt
 }
 
 int schwaemm_256_128_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_384_STATE_SIZE];
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < SCHWAEMM_256_128_TAG_SIZE)
@@ -275,7 +271,7 @@ int schwaemm_256_128_aead_decrypt
  */
 static void schwaemm_192_192_authenticate
     (uint32_t s[SPARKLE_384_STATE_SIZE],
-     const unsigned char *ad, unsigned long long adlen)
+     const unsigned char *ad, size_t adlen)
 {
     while (adlen > SCHWAEMM_192_192_RATE) {
         schwaemm_192_192_rho(s);
@@ -299,16 +295,14 @@ static void schwaemm_192_192_authenticate
 }
 
 int schwaemm_192_192_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_384_STATE_SIZE];
     uint8_t block[SCHWAEMM_192_192_RATE];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + SCHWAEMM_192_192_TAG_SIZE;
@@ -362,16 +356,14 @@ int schwaemm_192_192_aead_encrypt
 }
 
 int schwaemm_192_192_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_384_STATE_SIZE];
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < SCHWAEMM_192_192_TAG_SIZE)
@@ -464,7 +456,7 @@ int schwaemm_192_192_aead_decrypt
  */
 static void schwaemm_128_128_authenticate
     (uint32_t s[SPARKLE_256_STATE_SIZE],
-     const unsigned char *ad, unsigned long long adlen)
+     const unsigned char *ad, size_t adlen)
 {
     while (adlen > SCHWAEMM_128_128_RATE) {
         schwaemm_128_128_rho(s);
@@ -488,16 +480,14 @@ static void schwaemm_128_128_authenticate
 }
 
 int schwaemm_128_128_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_256_STATE_SIZE];
     uint8_t block[SCHWAEMM_128_128_RATE];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + SCHWAEMM_128_128_TAG_SIZE;
@@ -551,16 +541,14 @@ int schwaemm_128_128_aead_encrypt
 }
 
 int schwaemm_128_128_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_256_STATE_SIZE];
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < SCHWAEMM_128_128_TAG_SIZE)
@@ -659,7 +647,7 @@ int schwaemm_128_128_aead_decrypt
  */
 static void schwaemm_256_256_authenticate
     (uint32_t s[SPARKLE_512_STATE_SIZE],
-     const unsigned char *ad, unsigned long long adlen)
+     const unsigned char *ad, size_t adlen)
 {
     while (adlen > SCHWAEMM_256_256_RATE) {
         schwaemm_256_256_rho(s);
@@ -683,16 +671,14 @@ static void schwaemm_256_256_authenticate
 }
 
 int schwaemm_256_256_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_512_STATE_SIZE];
     uint8_t block[SCHWAEMM_256_256_RATE];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + SCHWAEMM_256_256_TAG_SIZE;
@@ -746,16 +732,14 @@ int schwaemm_256_256_aead_encrypt
 }
 
 int schwaemm_256_256_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     uint32_t s[SPARKLE_512_STATE_SIZE];
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < SCHWAEMM_256_256_TAG_SIZE)

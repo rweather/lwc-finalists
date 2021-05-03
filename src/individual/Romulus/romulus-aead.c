@@ -80,7 +80,7 @@ STATIC_INLINE void romulus1_update_counter(uint8_t TK1[16])
 static void romulus_np_process_ad
     (skinny_plus_key_schedule_t *ks,
      unsigned char S[16], const unsigned char *k, const unsigned char *npub,
-     const unsigned char *ad, unsigned long long adlen)
+     const unsigned char *ad, size_t adlen)
 {
     unsigned char temp;
 
@@ -156,7 +156,7 @@ static void romulus_np_process_ad
  * \return The domain separation bits to use to finalize the last block.
  */
 static uint8_t romulus_m_final_ad_domain
-    (unsigned long long adlen, unsigned long long mlen, unsigned t)
+    (size_t adlen, size_t mlen, unsigned t)
 {
     uint8_t domain = 0;
     unsigned split = 16U;
@@ -222,8 +222,8 @@ static uint8_t romulus_m_final_ad_domain
 static void romulus_mp_process_ad
     (skinny_plus_key_schedule_t *ks,
      unsigned char S[16], const unsigned char *k, const unsigned char *npub,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *m, unsigned long long mlen)
+     const unsigned char *ad, size_t adlen,
+     const unsigned char *m, size_t mlen)
 {
     unsigned char pad[16];
     uint8_t final_domain = 0x30;
@@ -441,7 +441,7 @@ STATIC_INLINE void romulus_rho_inverse_short
  */
 static void romulus_np_encrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
-     unsigned char *c, const unsigned char *m, unsigned long long mlen)
+     unsigned char *c, const unsigned char *m, size_t mlen)
 {
     unsigned temp;
 
@@ -488,7 +488,7 @@ static void romulus_np_encrypt
  */
 static void romulus_np_decrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
-     unsigned char *m, const unsigned char *c, unsigned long long mlen)
+     unsigned char *m, const unsigned char *c, size_t mlen)
 {
     unsigned temp;
 
@@ -535,7 +535,7 @@ static void romulus_np_decrypt
  */
 static void romulus_mp_encrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
-     unsigned char *c, const unsigned char *m, unsigned long long mlen)
+     unsigned char *c, const unsigned char *m, size_t mlen)
 {
     /* Nothing to do if the message is empty */
     if (!mlen)
@@ -568,7 +568,7 @@ static void romulus_mp_encrypt
  */
 static void romulus_mp_decrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
-     unsigned char *m, const unsigned char *c, unsigned long long mlen)
+     unsigned char *m, const unsigned char *c, size_t mlen)
 {
     /* Nothing to do if the message is empty */
     if (!mlen)
@@ -607,16 +607,14 @@ STATIC_INLINE void romulus_generate_tag
 }
 
 int romulus_np_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ROMULUS_TAG_SIZE;
@@ -637,16 +635,14 @@ int romulus_np_aead_encrypt
 }
 
 int romulus_np_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < ROMULUS_TAG_SIZE)
@@ -670,16 +666,14 @@ int romulus_np_aead_decrypt
 }
 
 int romulus_mp_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ROMULUS_TAG_SIZE;
@@ -702,16 +696,14 @@ int romulus_mp_aead_encrypt
 }
 
 int romulus_mp_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < ROMULUS_TAG_SIZE)

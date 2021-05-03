@@ -52,7 +52,7 @@
  */
 static void ascon_absorb_masked_8
     (ascon_state_t *state, const unsigned char *data,
-     unsigned long long len, uint8_t first_round)
+     size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
@@ -92,7 +92,7 @@ static void ascon_absorb_masked_8
  */
 static void ascon_absorb_masked_16
     (ascon_state_t *state, const unsigned char *data,
-     unsigned long long len, uint8_t first_round)
+     size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
@@ -135,7 +135,7 @@ static void ascon_absorb_masked_16
  */
 static void ascon_encrypt_masked_8
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
@@ -177,7 +177,7 @@ static void ascon_encrypt_masked_8
  */
 static void ascon_encrypt_masked_16
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
@@ -221,7 +221,7 @@ static void ascon_encrypt_masked_16
  */
 static void ascon_decrypt_masked_8
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
@@ -263,7 +263,7 @@ static void ascon_decrypt_masked_8
  */
 static void ascon_decrypt_masked_16
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
@@ -304,16 +304,14 @@ static void ascon_decrypt_masked_16
 #endif
 
 int ascon128_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t masked_state;
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON128_MASKED_TAG_SIZE;
@@ -362,16 +360,14 @@ int ascon128_masked_aead_encrypt
 }
 
 int ascon128_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t masked_state;
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON128_MASKED_TAG_SIZE)
@@ -423,16 +419,14 @@ int ascon128_masked_aead_decrypt
 }
 
 int ascon128a_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t masked_state;
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON128_MASKED_TAG_SIZE;
@@ -481,16 +475,14 @@ int ascon128a_masked_aead_encrypt
 }
 
 int ascon128a_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t masked_state;
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON128_MASKED_TAG_SIZE)
@@ -542,16 +534,14 @@ int ascon128a_masked_aead_decrypt
 }
 
 int ascon80pq_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t masked_state;
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON80PQ_MASKED_TAG_SIZE;
@@ -602,16 +592,14 @@ int ascon80pq_masked_aead_encrypt
 }
 
 int ascon80pq_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t masked_state;
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON80PQ_MASKED_TAG_SIZE)
@@ -676,7 +664,7 @@ int ascon80pq_masked_aead_decrypt
  */
 static void ascon_absorb_masked_8
     (ascon_masked_state_t *state, const unsigned char *data,
-     unsigned long long len, uint8_t first_round)
+     size_t len, uint8_t first_round)
 {
     unsigned char padded[8];
     unsigned temp;
@@ -704,7 +692,7 @@ static void ascon_absorb_masked_8
  */
 static void ascon_absorb_masked_16
     (ascon_masked_state_t *state, const unsigned char *data,
-     unsigned long long len, uint8_t first_round)
+     size_t len, uint8_t first_round)
 {
     unsigned char padded[16];
     unsigned temp;
@@ -735,7 +723,7 @@ static void ascon_absorb_masked_16
  */
 static void ascon_encrypt_masked_8
     (ascon_masked_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len,
+     const unsigned char *src, size_t len,
      uint8_t first_round)
 {
     unsigned char padded[8];
@@ -768,7 +756,7 @@ static void ascon_encrypt_masked_8
  */
 static void ascon_encrypt_masked_16
     (ascon_masked_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len,
+     const unsigned char *src, size_t len,
      uint8_t first_round)
 {
     unsigned char padded[16];
@@ -805,7 +793,7 @@ static void ascon_encrypt_masked_16
  */
 static void ascon_decrypt_masked_8
     (ascon_masked_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len,
+     const unsigned char *src, size_t len,
      uint8_t first_round)
 {
     unsigned char padded[8];
@@ -839,7 +827,7 @@ static void ascon_decrypt_masked_8
  */
 static void ascon_decrypt_masked_16
     (ascon_masked_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len,
+     const unsigned char *src, size_t len,
      uint8_t first_round)
 {
     unsigned char padded[16];
@@ -868,15 +856,13 @@ static void ascon_decrypt_masked_16
 }
 
 int ascon128_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON128_MASKED_TAG_SIZE;
@@ -915,16 +901,14 @@ int ascon128_masked_aead_encrypt
 }
 
 int ascon128_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t state;
     unsigned char tag[ASCON128_MASKED_TAG_SIZE];
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON128_MASKED_TAG_SIZE)
@@ -965,15 +949,13 @@ int ascon128_masked_aead_decrypt
 }
 
 int ascon128a_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON128_MASKED_TAG_SIZE;
@@ -1012,16 +994,14 @@ int ascon128a_masked_aead_encrypt
 }
 
 int ascon128a_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t state;
     unsigned char tag[ASCON128_MASKED_TAG_SIZE];
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON128_MASKED_TAG_SIZE)
@@ -1062,15 +1042,13 @@ int ascon128a_masked_aead_decrypt
 }
 
 int ascon80pq_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON80PQ_MASKED_TAG_SIZE;
@@ -1111,16 +1089,14 @@ int ascon80pq_masked_aead_encrypt
 }
 
 int ascon80pq_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_masked_state_t state;
     unsigned char tag[ASCON80PQ_MASKED_TAG_SIZE];
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON80PQ_MASKED_TAG_SIZE)

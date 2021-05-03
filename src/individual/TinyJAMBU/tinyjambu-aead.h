@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_TINYJAMBU_AEAD_H
 #define LWCRYPTO_TINYJAMBU_AEAD_H
 
+#include <stddef.h>
+
 /**
  * \file tinyjambu-aead.h
  * \brief TinyJAMBU authenticated encryption algorithm.
@@ -80,7 +82,6 @@ extern "C" {
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 12 bytes in length.
  * \param k Points to the 16 bytes of the key to use to encrypt the packet.
@@ -91,10 +92,9 @@ extern "C" {
  * \sa tiny_jambu_128_aead_decrypt()
  */
 int tiny_jambu_128_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -103,7 +103,6 @@ int tiny_jambu_128_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -121,10 +120,9 @@ int tiny_jambu_128_aead_encrypt
  * \sa tiny_jambu_128_aead_encrypt()
  */
 int tiny_jambu_128_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -139,7 +137,6 @@ int tiny_jambu_128_aead_decrypt
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 12 bytes in length.
  * \param k Points to the 24 bytes of the key to use to encrypt the packet.
@@ -150,10 +147,9 @@ int tiny_jambu_128_aead_decrypt
  * \sa tiny_jambu_192_aead_decrypt()
  */
 int tiny_jambu_192_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -162,7 +158,6 @@ int tiny_jambu_192_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -180,10 +175,9 @@ int tiny_jambu_192_aead_encrypt
  * \sa tiny_jambu_192_aead_encrypt()
  */
 int tiny_jambu_192_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -198,7 +192,6 @@ int tiny_jambu_192_aead_decrypt
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 12 bytes in length.
  * \param k Points to the 32 bytes of the key to use to encrypt the packet.
@@ -209,10 +202,9 @@ int tiny_jambu_192_aead_decrypt
  * \sa tiny_jambu_256_aead_decrypt()
  */
 int tiny_jambu_256_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -221,7 +213,6 @@ int tiny_jambu_256_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -239,10 +230,9 @@ int tiny_jambu_256_aead_encrypt
  * \sa tiny_jambu_256_aead_encrypt()
  */
 int tiny_jambu_256_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 

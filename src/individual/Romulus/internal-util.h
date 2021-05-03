@@ -23,6 +23,7 @@
 #ifndef LW_INTERNAL_UTIL_H
 #define LW_INTERNAL_UTIL_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 /* Figure out how to inline functions using this C compiler */
@@ -713,7 +714,7 @@
  * \param plaintext_len Length of the plaintext in bytes.
  * \param tag1 First tag to compare.
  * \param tag2 Second tag to compare.
- * \param tag_len Length of the tags in bytes.
+ * \param size Length of the tags in bytes.
  *
  * \return Returns -1 if the tag check failed or 0 if the check succeeded.
  *
@@ -722,9 +723,8 @@
  * ciphertext was invalid.
  */
 int aead_check_tag
-    (unsigned char *plaintext, unsigned long long plaintext_len,
-     const unsigned char *tag1, const unsigned char *tag2,
-     unsigned tag_len);
+    (unsigned char *plaintext, size_t plaintext_len,
+     const unsigned char *tag1, const unsigned char *tag2, size_t size);
 
 /**
  * \brief Attempts to cleans a buffer that contains sensitive material.

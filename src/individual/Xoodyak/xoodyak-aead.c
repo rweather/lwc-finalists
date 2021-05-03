@@ -56,7 +56,7 @@
  */
 static void xoodyak_absorb
     (xoodoo_state_t *state, uint8_t *phase,
-     const unsigned char *data, unsigned long long len)
+     const unsigned char *data, size_t len)
 {
     uint8_t domain = 0x03;
     unsigned temp;
@@ -81,17 +81,15 @@ static void xoodyak_absorb
 }
 
 int xoodyak_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
-     const unsigned char *nsec,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     xoodoo_state_t state;
     uint8_t phase, domain;
     unsigned temp;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + XOODYAK_TAG_SIZE;
@@ -134,10 +132,9 @@ int xoodyak_aead_encrypt
 }
 
 int xoodyak_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
-     unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *m, size_t *mlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -145,7 +142,6 @@ int xoodyak_aead_decrypt
     uint8_t phase, domain;
     unsigned temp;
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < XOODYAK_TAG_SIZE)

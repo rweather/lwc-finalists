@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_SPARKLE_HASH_H
 #define LWCRYPTO_SPARKLE_HASH_H
 
+#include <stddef.h>
+
 /**
  * \file sparkle-hash.h
  * \brief Hash algorithms based on the SPARKLE permutation.
@@ -93,7 +95,7 @@ typedef union
  * parameters.
  */
 int esch_256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for an Esch256 hashing operation.
@@ -114,8 +116,7 @@ void esch_256_hash_init(esch_256_hash_state_t *state);
  * \sa esch_256_hash_init(), esch_256_hash_finalize()
  */
 void esch_256_hash_update
-    (esch_256_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (esch_256_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from an Esch256 hashing operation.
@@ -140,7 +141,7 @@ void esch_256_hash_finalize
  * parameters.
  */
 int esch_384_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for an Esch384 hashing operation.
@@ -161,8 +162,7 @@ void esch_384_hash_init(esch_384_hash_state_t *state);
  * \sa esch_384_hash_init(), esch_384_hash_finalize()
  */
 void esch_384_hash_update
-    (esch_384_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (esch_384_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from an Esch384 hashing operation.

@@ -46,7 +46,7 @@
 #define ROMULUS_HASH_RATE 32
 
 int romulus_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     romulus_hash_state_t state;
     romulus_hash_init(&state);
@@ -92,8 +92,7 @@ static void romulus_hash_process_chunk(romulus_hash_state_t *state)
 }
 
 void romulus_hash_update
-    (romulus_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (romulus_hash_state_t *state, const unsigned char *in, size_t inlen)
 {
     unsigned temp;
 

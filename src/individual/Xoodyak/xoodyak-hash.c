@@ -50,7 +50,7 @@
     xoodoo_permute((xoodoo_state_t *)((state)->s.state))
 
 int xoodyak_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     xoodyak_hash_state_t state;
     xoodyak_hash_init(&state);
@@ -66,8 +66,7 @@ void xoodyak_hash_init(xoodyak_hash_state_t *state)
 }
 
 void xoodyak_hash_absorb
-    (xoodyak_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (xoodyak_hash_state_t *state, const unsigned char *in, size_t inlen)
 {
     uint8_t domain;
     unsigned temp;
@@ -103,8 +102,7 @@ void xoodyak_hash_absorb
 }
 
 void xoodyak_hash_squeeze
-    (xoodyak_hash_state_t *state, unsigned char *out,
-     unsigned long long outlen)
+    (xoodyak_hash_state_t *state, unsigned char *out, size_t outlen)
 {
     uint8_t domain;
     unsigned temp;

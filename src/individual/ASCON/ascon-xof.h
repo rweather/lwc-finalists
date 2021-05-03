@@ -78,7 +78,7 @@ typedef union
  * \sa ascon_xof_init(), ascon_xof_absorb(), ascon_xof_squeeze()
  */
 int ascon_xof
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for an ASCON-XOF hashing operation.
@@ -114,8 +114,7 @@ void ascon_xof_init_fixed(ascon_xof_state_t *state, size_t outlen);
  * \sa ascon_xof_init(), ascon_xof_squeeze()
  */
 void ascon_xof_absorb
-    (ascon_xof_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (ascon_xof_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Squeezes output data from an ASCON-XOF state.
@@ -127,7 +126,7 @@ void ascon_xof_absorb
  * \sa ascon_xof_init(), ascon_xof_update()
  */
 void ascon_xof_squeeze
-    (ascon_xof_state_t *state, unsigned char *out, unsigned long long outlen);
+    (ascon_xof_state_t *state, unsigned char *out, size_t outlen);
 
 /**
  * \brief Absorbs enough zeroes into an ASCON-XOF state to pad the

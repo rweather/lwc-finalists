@@ -77,14 +77,14 @@ typedef union
         uint32_t block[4];
         unsigned char count;
     } s;
-    unsigned long long align;
+    size_t align;
 
 } esch_256_hash_state_wt;
 
 /** @endcond */
 
 int esch_256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     uint32_t s[SPARKLE_384_STATE_SIZE];
     uint32_t block[ESCH_256_RATE / 4];
@@ -120,8 +120,7 @@ void esch_256_hash_init(esch_256_hash_state_t *state)
 }
 
 void esch_256_hash_update
-    (esch_256_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (esch_256_hash_state_t *state, const unsigned char *in, size_t inlen)
 {
     esch_256_hash_state_wt *st = (esch_256_hash_state_wt *)state;
     unsigned temp;
@@ -206,14 +205,14 @@ typedef union
         uint32_t block[4];
         unsigned char count;
     } s;
-    unsigned long long align;
+    size_t align;
 
 } esch_384_hash_state_wt;
 
 /** @endcond */
 
 int esch_384_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     uint32_t s[SPARKLE_512_STATE_SIZE];
     uint32_t block[ESCH_256_RATE / 4];
@@ -251,8 +250,7 @@ void esch_384_hash_init(esch_384_hash_state_t *state)
 }
 
 void esch_384_hash_update
-    (esch_384_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (esch_384_hash_state_t *state, const unsigned char *in, size_t inlen)
 {
     esch_384_hash_state_wt *st = (esch_384_hash_state_wt *)state;
     unsigned temp;

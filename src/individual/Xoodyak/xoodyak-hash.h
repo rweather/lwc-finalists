@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_XOODYAK_HASH_H
 #define LWCRYPTO_XOODYAK_HASH_H
 
+#include <stddef.h>
+
 /**
  * \file xoodyak-hash.h
  * \brief Xoodyak-Hash hash algorithm.
@@ -74,7 +76,7 @@ typedef union
  * parameters.
  */
 int xoodyak_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for a Xoodyak hashing operation.
@@ -95,8 +97,7 @@ void xoodyak_hash_init(xoodyak_hash_state_t *state);
  * \sa xoodyak_hash_init(), xoodyak_hash_squeeze()
  */
 void xoodyak_hash_absorb
-    (xoodyak_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (xoodyak_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Squeezes output data from a Xoodyak hashing state.
@@ -108,8 +109,7 @@ void xoodyak_hash_absorb
  * \sa xoodyak_hash_init(), xoodyak_hash_absorb()
  */
 void xoodyak_hash_squeeze
-    (xoodyak_hash_state_t *state, unsigned char *out,
-     unsigned long long outlen);
+    (xoodyak_hash_state_t *state, unsigned char *out, size_t outlen);
 
 /**
  * \brief Returns the final hash value from a Xoodyak hashing operation.
