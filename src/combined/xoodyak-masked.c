@@ -107,14 +107,12 @@ int xoodyak_masked_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     xoodoo_state_t state;
     uint8_t domain;
     unsigned temp;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + XOODYAK_MASKED_TAG_SIZE;
@@ -154,7 +152,6 @@ int xoodyak_masked_aead_encrypt
 
 int xoodyak_masked_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -164,7 +161,6 @@ int xoodyak_masked_aead_decrypt
     uint8_t domain;
     unsigned temp;
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < XOODYAK_MASKED_TAG_SIZE)
@@ -276,14 +272,12 @@ int xoodyak_masked_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     mask_uint32_t state[12];
     uint32_t domain;
     unsigned temp;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + XOODYAK_MASKED_TAG_SIZE;
@@ -356,7 +350,6 @@ int xoodyak_masked_aead_encrypt
 
 int xoodyak_masked_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -367,7 +360,6 @@ int xoodyak_masked_aead_decrypt
     uint32_t domain, mword;
     unsigned temp;
     unsigned char *mtemp = m;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < XOODYAK_MASKED_TAG_SIZE)

@@ -67,7 +67,6 @@ extern "C" {
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 16 bytes in length.
  * \param k Points to the 16 bytes of the key to use to encrypt the packet.
@@ -81,7 +80,6 @@ int gift_cofb_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -90,7 +88,6 @@ int gift_cofb_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -109,7 +106,6 @@ int gift_cofb_aead_encrypt
  */
 int gift_cofb_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,

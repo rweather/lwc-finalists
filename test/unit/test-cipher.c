@@ -195,7 +195,7 @@ static int test_aead_cipher_inner
     len = 0xBADBEEF;
     result = (*(cipher->encrypt))
         (temp, &len, test_vector->plaintext, test_vector->plaintext_len,
-         test_vector->ad, test_vector->ad_len, 0, test_vector->nonce,
+         test_vector->ad, test_vector->ad_len, test_vector->nonce,
          test_vector->key);
     if (result != 0 || len != ciphertext_len ||
             test_memcmp(temp, test_vector->ciphertext, len) != 0) {
@@ -209,7 +209,7 @@ static int test_aead_cipher_inner
     len = 0xBADBEEF;
     result = (*(cipher->encrypt))
         (temp, &len, temp, test_vector->plaintext_len,
-         test_vector->ad, test_vector->ad_len, 0, test_vector->nonce,
+         test_vector->ad, test_vector->ad_len, test_vector->nonce,
          test_vector->key);
     if (result != 0 || len != ciphertext_len ||
             test_memcmp(temp, test_vector->ciphertext, len) != 0) {
@@ -221,7 +221,7 @@ static int test_aead_cipher_inner
     memset(temp, 0xAA, sizeof(temp));
     len = 0xBADBEEF;
     result = (*(cipher->decrypt))
-        (temp, &len, 0, test_vector->ciphertext, ciphertext_len,
+        (temp, &len, test_vector->ciphertext, ciphertext_len,
          test_vector->ad, test_vector->ad_len, test_vector->nonce,
          test_vector->key);
     if (result != 0 || len != test_vector->plaintext_len ||
@@ -235,7 +235,7 @@ static int test_aead_cipher_inner
     memcpy(temp, test_vector->ciphertext, ciphertext_len);
     len = 0xBADBEEF;
     result = (*(cipher->decrypt))
-        (temp, &len, 0, temp, ciphertext_len,
+        (temp, &len, temp, ciphertext_len,
          test_vector->ad, test_vector->ad_len, test_vector->nonce,
          test_vector->key);
     if (result != 0 ||
@@ -251,7 +251,7 @@ static int test_aead_cipher_inner
     temp2[0] ^= 0x01; // Corrupt the first byte of the ciphertext.
     len = 0xBADBEEF;
     result = (*(cipher->decrypt))
-        (temp, &len, 0, temp2, ciphertext_len,
+        (temp, &len, temp2, ciphertext_len,
          test_vector->ad, test_vector->ad_len, test_vector->nonce,
          test_vector->key);
     if (result != -1) {
@@ -263,7 +263,7 @@ static int test_aead_cipher_inner
     temp2[test_vector->plaintext_len] ^= 0x01; // Corrupt first byte of the tag.
     len = 0xBADBEEF;
     result = (*(cipher->decrypt))
-        (temp, &len, 0, temp2, ciphertext_len,
+        (temp, &len, temp2, ciphertext_len,
          test_vector->ad, test_vector->ad_len, test_vector->nonce,
          test_vector->key);
     if (result != -1) {

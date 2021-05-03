@@ -118,7 +118,6 @@ extern "C" {
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 32 bytes in length.
  * \param k Points to the 16 bytes of the key to use to encrypt the packet.
@@ -132,7 +131,6 @@ int schwaemm_256_128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -141,7 +139,6 @@ int schwaemm_256_128_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -160,7 +157,6 @@ int schwaemm_256_128_aead_encrypt
  */
 int schwaemm_256_128_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -177,7 +173,6 @@ int schwaemm_256_128_aead_decrypt
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 24 bytes in length.
  * \param k Points to the 24 bytes of the key to use to encrypt the packet.
@@ -191,7 +186,6 @@ int schwaemm_192_192_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -200,7 +194,6 @@ int schwaemm_192_192_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -219,7 +212,6 @@ int schwaemm_192_192_aead_encrypt
  */
 int schwaemm_192_192_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -236,7 +228,6 @@ int schwaemm_192_192_aead_decrypt
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 16 bytes in length.
  * \param k Points to the 16 bytes of the key to use to encrypt the packet.
@@ -250,7 +241,6 @@ int schwaemm_128_128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -259,7 +249,6 @@ int schwaemm_128_128_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -278,7 +267,6 @@ int schwaemm_128_128_aead_encrypt
  */
 int schwaemm_128_128_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -295,7 +283,6 @@ int schwaemm_128_128_aead_decrypt
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param npub Points to the public nonce for the packet which must
  * be 16 bytes in length.
  * \param k Points to the 16 bytes of the key to use to encrypt the packet.
@@ -309,7 +296,6 @@ int schwaemm_256_256_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -318,7 +304,6 @@ int schwaemm_256_256_aead_encrypt
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - not used by this algorithm.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -337,7 +322,6 @@ int schwaemm_256_256_aead_encrypt
  */
 int schwaemm_256_256_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,

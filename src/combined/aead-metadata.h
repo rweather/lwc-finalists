@@ -49,7 +49,6 @@ extern "C" {
  * \param ad Buffer that contains associated data to authenticate
  * along with the packet but which does not need to be encrypted.
  * \param adlen Length of the associated data in bytes.
- * \param nsec Secret nonce - normally not used by AEAD schemes.
  * \param npub Points to the public nonce for the packet.
  * \param k Points to the key to use to encrypt the packet.
  *
@@ -60,7 +59,6 @@ typedef int (*aead_cipher_encrypt_t)
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -69,7 +67,6 @@ typedef int (*aead_cipher_encrypt_t)
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
- * \param nsec Secret nonce - normally not used by AEAD schemes.
  * \param c Buffer that contains the ciphertext and authentication
  * tag to decrypt.
  * \param clen Length of the input data in bytes, which includes the
@@ -85,7 +82,6 @@ typedef int (*aead_cipher_encrypt_t)
  */
 typedef int (*aead_cipher_decrypt_t)
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,

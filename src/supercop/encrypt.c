@@ -11,7 +11,8 @@ int crypto_aead_encrypt
 {
     size_t len = 0;
     int result = AEAD_ENCRYPT
-        (c, &len, m, mlen, a, adlen, nsec, npub, k);
+        (c, &len, m, mlen, a, adlen, npub, k);
+    (void)nsec;
     *clen = clen_size;
     return result;
 }
@@ -26,7 +27,8 @@ int crypto_aead_decrypt
 {
     size_t len = 0;
     int result = AEAD_DECRYPT
-        (m, &len, nsec, c, clen, ad, adlen, npub, k);
+        (m, &len, c, clen, ad, adlen, npub, k);
+    (void)nsec;
     *mlen = len;
     return result;
 }

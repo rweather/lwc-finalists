@@ -272,7 +272,7 @@ static void generate_kats_for_cipher(const aead_cipher_t *alg, FILE *file)
 
             /* Produce the ciphertext output */
             (*(alg->encrypt))
-                (ct, &clen, pt, pt_len, ad, ad_len, 0, nonce, key);
+                (ct, &clen, pt, pt_len, ad, ad_len, nonce, key);
 
             /* Write out the results */
             fprintf(file, "Count = %d\n", count++);

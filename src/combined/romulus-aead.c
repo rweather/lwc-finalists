@@ -610,13 +610,11 @@ int romulus_np_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ROMULUS_TAG_SIZE;
@@ -638,7 +636,6 @@ int romulus_np_aead_encrypt
 
 int romulus_np_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -646,7 +643,6 @@ int romulus_np_aead_decrypt
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < ROMULUS_TAG_SIZE)
@@ -673,13 +669,11 @@ int romulus_mp_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ROMULUS_TAG_SIZE;
@@ -703,7 +697,6 @@ int romulus_mp_aead_encrypt
 
 int romulus_mp_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -711,7 +704,6 @@ int romulus_mp_aead_decrypt
 {
     skinny_plus_key_schedule_t ks;
     unsigned char S[16];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < ROMULUS_TAG_SIZE)

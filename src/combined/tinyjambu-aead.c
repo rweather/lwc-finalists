@@ -307,14 +307,12 @@ int tiny_jambu_128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     tiny_jambu_state_t state;
     tiny_jambu_key_word_t key[4];
     uint32_t data;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_TAG_SIZE;
@@ -375,7 +373,6 @@ int tiny_jambu_128_aead_encrypt
 
 int tiny_jambu_128_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -386,7 +383,6 @@ int tiny_jambu_128_aead_decrypt
     tiny_jambu_key_word_t key[4];
     unsigned char tag[TINY_JAMBU_TAG_SIZE];
     uint32_t data;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < TINY_JAMBU_TAG_SIZE)
@@ -453,14 +449,12 @@ int tiny_jambu_192_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     tiny_jambu_state_t state;
     tiny_jambu_key_word_t key[6];
     uint32_t data;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_TAG_SIZE;
@@ -523,7 +517,6 @@ int tiny_jambu_192_aead_encrypt
 
 int tiny_jambu_192_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -534,7 +527,6 @@ int tiny_jambu_192_aead_decrypt
     tiny_jambu_key_word_t key[6];
     unsigned char tag[TINY_JAMBU_TAG_SIZE];
     uint32_t data;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < TINY_JAMBU_TAG_SIZE)
@@ -603,14 +595,12 @@ int tiny_jambu_256_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     tiny_jambu_state_t state;
     tiny_jambu_key_word_t key[8];
     uint32_t data;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + TINY_JAMBU_TAG_SIZE;
@@ -675,7 +665,6 @@ int tiny_jambu_256_aead_encrypt
 
 int tiny_jambu_256_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -686,7 +675,6 @@ int tiny_jambu_256_aead_decrypt
     tiny_jambu_key_word_t key[8];
     unsigned char tag[TINY_JAMBU_TAG_SIZE];
     uint32_t data;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < TINY_JAMBU_TAG_SIZE)

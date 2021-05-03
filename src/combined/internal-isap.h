@@ -287,12 +287,10 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_encrypt)
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ISAP_STATE state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ISAP_TAG_SIZE;
@@ -308,7 +306,6 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_encrypt)
 
 int ISAP_CONCAT(ISAP_ALG_NAME,_aead_decrypt)
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -316,7 +313,6 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_decrypt)
 {
     ISAP_STATE state;
     unsigned char tag[ISAP_TAG_SIZE];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < ISAP_TAG_SIZE)

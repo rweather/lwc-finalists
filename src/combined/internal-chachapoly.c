@@ -363,7 +363,6 @@ int internal_chachapoly_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -371,7 +370,6 @@ int internal_chachapoly_aead_encrypt
     chacha20_state_t stream;
     poly1305_state_t poly;
     unsigned char poly_nonce[16];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + CHACHAPOLY_TAG_SIZE;
@@ -409,7 +407,6 @@ int internal_chachapoly_aead_encrypt
 
 int internal_chachapoly_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -419,7 +416,6 @@ int internal_chachapoly_aead_decrypt
     chacha20_state_t stream;
     poly1305_state_t poly;
     unsigned char poly_nonce[16];
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < CHACHAPOLY_TAG_SIZE)

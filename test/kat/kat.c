@@ -236,7 +236,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->encrypt))
         (temp1, &len, plaintext->data, plaintext->size,
-         ad->data, ad->size, 0, nonce->data, key->data);
+         ad->data, ad->size, nonce->data, key->data);
     if (result != 0 || len != ciphertext->size ||
             !test_compare(temp1, ciphertext->data, len)) {
         test_print_error(alg->name, vec, "encryption failed");
@@ -251,7 +251,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->encrypt))
         (temp1, &len, temp1, plaintext->size,
-         ad->size ? ad->data : 0, ad->size, 0, nonce->data, key->data);
+         ad->size ? ad->data : 0, ad->size, nonce->data, key->data);
     if (result != 0 || len != ciphertext->size ||
             !test_compare(temp1, ciphertext->data, len)) {
         test_print_error(alg->name, vec, "in-place encryption failed");
@@ -264,7 +264,7 @@ static int test_cipher_inner
     memset(temp1, 0xAA, ciphertext->size);
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
-        (temp1, &len, 0, ciphertext->data, ciphertext->size,
+        (temp1, &len, ciphertext->data, ciphertext->size,
          ad->data, ad->size, nonce->data, key->data);
     if (result != 0 || len != plaintext->size ||
             !test_compare(temp1, plaintext->data, len)) {
@@ -278,7 +278,7 @@ static int test_cipher_inner
     memcpy(temp1, ciphertext->data, ciphertext->size);
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
-        (temp1, &len, 0, temp1, ciphertext->size,
+        (temp1, &len, temp1, ciphertext->size,
          ad->data, ad->size, nonce->data, key->data);
     if (result != 0 || len != plaintext->size ||
             !test_compare(temp1, plaintext->data, len)) {
@@ -294,7 +294,7 @@ static int test_cipher_inner
     temp2[0] ^= 0x01; /* Corrupt the first byte of the ciphertext */
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
-        (temp1, &len, 0, temp2, ciphertext->size,
+        (temp1, &len, temp2, ciphertext->size,
          ad->data, ad->size, nonce->data, key->data);
     if (result != -1) {
         test_print_error(alg->name, vec, "corrupt ciphertext check failed");
@@ -313,7 +313,7 @@ static int test_cipher_inner
     temp2[ciphertext->size - 1] ^= 0x01; /* Corrupt last byte of the tag */
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
-        (temp1, &len, 0, temp2, ciphertext->size,
+        (temp1, &len, temp2, ciphertext->size,
          ad->data, ad->size, nonce->data, key->data);
     if (result != -1) {
         test_print_error(alg->name, vec, "corrupt tag check failed");
@@ -425,7 +425,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
         plen = 1024;
     else
         plen = 16;
-    alg->encrypt(ciphertext, &clen, plaintext, plen, 0, 0, 0, nonce, key);
+    alg->encrypt(ciphertext, &clen, plaintext, plen, 0, 0, nonce, key);
 
     /* Run several loops without timing to force the CPU
      * to load the code and data into internal cache to get
@@ -434,7 +434,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
     case MODE_ENC128:
         for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
             alg->encrypt
-                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+                (ciphertext, &len, plaintext, plen, 0, 0, nonce, key);
         }
         ref_time = cipher_ref_metrics.encrypt_128;
         break;
@@ -442,7 +442,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
     case MODE_DEC128:
         for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
             alg->decrypt
-                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+                (plaintext, &len, ciphertext, clen, 0, 0, nonce, key);
         }
         ref_time = cipher_ref_metrics.decrypt_128;
         break;
@@ -450,7 +450,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
     case MODE_ENC16:
         for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
             alg->encrypt
-                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+                (ciphertext, &len, plaintext, plen, 0, 0, nonce, key);
         }
         ref_time = cipher_ref_metrics.encrypt_16;
         break;
@@ -458,7 +458,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
     case MODE_DEC16:
         for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
             alg->decrypt
-                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+                (plaintext, &len, ciphertext, clen, 0, 0, nonce, key);
         }
         ref_time = cipher_ref_metrics.decrypt_16;
         break;
@@ -466,7 +466,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
     case MODE_ENC1024:
         for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
             alg->encrypt
-                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+                (ciphertext, &len, plaintext, plen, 0, 0, nonce, key);
         }
         ref_time = cipher_ref_metrics.encrypt_1024;
         break;
@@ -474,7 +474,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
     case MODE_DEC1024:
         for (count = 0; count < PERF_LOOPS_WARMUP; ++count) {
             alg->decrypt
-                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+                (plaintext, &len, ciphertext, clen, 0, 0, nonce, key);
         }
         ref_time = cipher_ref_metrics.decrypt_1024;
         break;
@@ -492,14 +492,14 @@ static perf_timer_t perf_cipher_encrypt_decrypt
         start = perf_timer_get_time();
         for (count = 0; count < loops; ++count) {
             alg->encrypt
-                (ciphertext, &len, plaintext, plen, 0, 0, 0, nonce, key);
+                (ciphertext, &len, plaintext, plen, 0, 0, nonce, key);
         }
         elapsed = perf_timer_get_time() - start;
     } else {
         start = perf_timer_get_time();
         for (count = 0; count < loops; ++count) {
             alg->decrypt
-                (plaintext, &len, 0, ciphertext, clen, 0, 0, nonce, key);
+                (plaintext, &len, ciphertext, clen, 0, 0, nonce, key);
         }
         elapsed = perf_timer_get_time() - start;
     }

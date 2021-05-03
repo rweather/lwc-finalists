@@ -210,12 +210,10 @@ int photon_beetle_128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     photon256_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + PHOTON_BEETLE_TAG_SIZE;
@@ -246,14 +244,12 @@ int photon_beetle_128_aead_encrypt
 
 int photon_beetle_128_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     photon256_state_t state;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < PHOTON_BEETLE_TAG_SIZE)
@@ -288,12 +284,10 @@ int photon_beetle_32_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     photon256_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + PHOTON_BEETLE_TAG_SIZE;
@@ -324,14 +318,12 @@ int photon_beetle_32_aead_encrypt
 
 int photon_beetle_32_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     photon256_state_t state;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < PHOTON_BEETLE_TAG_SIZE)

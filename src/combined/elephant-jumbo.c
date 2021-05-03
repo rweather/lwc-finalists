@@ -109,7 +109,6 @@ int jumbo_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -118,7 +117,6 @@ int jumbo_aead_encrypt
     unsigned char mask[SPONGENT176_STATE_SIZE];
     unsigned char next[SPONGENT176_STATE_SIZE];
     unsigned char tag[JUMBO_TAG_SIZE];
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + JUMBO_TAG_SIZE;
@@ -204,7 +202,6 @@ int jumbo_aead_encrypt
 
 int jumbo_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -216,7 +213,6 @@ int jumbo_aead_decrypt
     unsigned char mask[SPONGENT176_STATE_SIZE];
     unsigned char next[SPONGENT176_STATE_SIZE];
     unsigned char tag[JUMBO_TAG_SIZE];
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < JUMBO_TAG_SIZE)

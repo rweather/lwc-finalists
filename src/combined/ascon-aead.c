@@ -304,12 +304,10 @@ int ascon128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON128_TAG_SIZE;
@@ -354,14 +352,12 @@ int ascon128_aead_encrypt
 
 int ascon128_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON128_TAG_SIZE)
@@ -411,12 +407,10 @@ int ascon128a_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON128_TAG_SIZE;
@@ -461,14 +455,12 @@ int ascon128a_aead_encrypt
 
 int ascon128a_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON128_TAG_SIZE)
@@ -518,12 +510,10 @@ int ascon80pq_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + ASCON80PQ_TAG_SIZE;
@@ -570,14 +560,12 @@ int ascon80pq_aead_encrypt
 
 int ascon80pq_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
     ascon_state_t state;
-    (void)nsec;
 
     /* Set the length of the returned plaintext */
     if (clen < ASCON80PQ_TAG_SIZE)

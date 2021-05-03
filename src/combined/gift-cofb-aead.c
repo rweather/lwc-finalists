@@ -182,7 +182,6 @@ int gift_cofb_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
-     const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -190,7 +189,6 @@ int gift_cofb_aead_encrypt
     gift_cofb_block_t Y;
     gift_cofb_l_t L;
     gift_cofb_block_t P;
-    (void)nsec;
 
     /* Set the length of the returned ciphertext */
     *clen = mlen + GIFT_COFB_TAG_SIZE;
@@ -290,7 +288,6 @@ int gift_cofb_aead_encrypt
 
 int gift_cofb_aead_decrypt
     (unsigned char *m, size_t *mlen,
-     unsigned char *nsec,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
@@ -301,7 +298,6 @@ int gift_cofb_aead_decrypt
     gift_cofb_l_t L;
     gift_cofb_block_t P;
     unsigned char *mtemp;
-    (void)nsec;
 
     /* Validate the ciphertext length and set the return "mlen" value */
     if (clen < GIFT_COFB_TAG_SIZE)
