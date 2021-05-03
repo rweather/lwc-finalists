@@ -224,16 +224,17 @@ void grain_prng_add_ident(const unsigned char *data, size_t size)
     aead_clean(&state, sizeof(state));
 }
 
-void grain_prng_init(grain_prng_state_t *state)
+int grain_prng_init(grain_prng_state_t *state)
 {
     uint32_t seed[AEAD_SYSTEM_SEED_SIZE / 4];
+    int have_trng;
 
     /* By default we can generate 16K of output data before re-seeding */
     state->s.count = 0;
     state->s.limit = 16384;
 
     /* Generate a seed from the system TRNG and initialize the PRNG */
-    aead_random_get_system_seed((unsigned char *)seed);
+    have_trng = aead_random_get_system_seed((unsigned char *)seed);
     grain_prng_setup_key(GRAIN128_STATE(state), seed, 0);
     aead_clean(seed, sizeof(seed));
     state->s.rekeys = 0;
@@ -241,6 +242,7 @@ void grain_prng_init(grain_prng_state_t *state)
     /* Absorb the identification pool into the state and re-key */
     grain_prng_feed
         (state, (const unsigned char *)grain_id_pool, sizeof(grain_id_pool));
+    return have_trng;
 }
 
 void grain_prng_free(grain_prng_state_t *state)
@@ -248,12 +250,13 @@ void grain_prng_free(grain_prng_state_t *state)
     aead_clean(state, sizeof(grain_prng_state_t));
 }
 
-void grain_prng_reseed(grain_prng_state_t *state)
+int grain_prng_reseed(grain_prng_state_t *state)
 {
     uint32_t key[8];
+    int have_trng;
 
     /* Fetch a seed from the system TRNG and feed it into the PRNG */
-    aead_random_get_system_seed((unsigned char *)key);
+    have_trng = aead_random_get_system_seed((unsigned char *)key);
     grain_prng_absorb(GRAIN128_STATE(state), (const unsigned char *)key, 32);
 
     /* Re-key the PRNG */
@@ -262,6 +265,7 @@ void grain_prng_reseed(grain_prng_state_t *state)
 
     /* Reset the output byte counter to zero */
     state->s.count = 0;
+    return have_trng;
 }
 
 void grain_prng_feed

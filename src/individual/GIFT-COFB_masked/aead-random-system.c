@@ -42,15 +42,18 @@
 #include <string.h>
 #if defined(ARDUINO)
 #include <Arduino.h>
-#endif
+#elif defined(__linux__) || defined(__APPLE__) || defined(__MACH__) || \
+    defined(__FreeBSD__) || defined(__unix__) || defined(__ANDROID__)
 #if defined(__linux__)
 #include <sys/syscall.h>
+#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#define AEAD_TRNG_UNIX_LIKE 1
 #endif
 
 /* Determine if we have a CPU random number generator that can generate
@@ -58,7 +61,7 @@
 #if defined(__x86_64) || defined(__x86_64__)
 /* Assume that we have the RDRAND instruction on x86-64 platforms */
 #define aead_system_random_init() do { ; } while (0)
-#define aead_system_random(var) \
+#define aead_system_random(var, ready) \
     do { \
         uint64_t temp = 0; \
         uint8_t ok = 0; \
@@ -84,29 +87,37 @@
             done = 1; \
         } \
     } while (0)
-#define aead_system_random(var) \
+/* SAM3X8E's TRNG returns a new random word every 84 clock cycles.
+ * If the TRNG is not ready after 100 iterations, assume it has failed. */
+#define aead_system_random(var, ready) \
     do { \
-        while ((REG_TRNG_ISR & TRNG_ISR_DATRDY) == 0) \
-            ; \
+        int count = 100; \
+        while ((REG_TRNG_ISR & TRNG_ISR_DATRDY) == 0) { \
+            if ((--count) <= 0) { \
+                (ready) = 0;  \
+                break; \
+            } \
+        } \
         (var) = REG_TRNG_ODATA; \
     } while (0)
 #endif
 #if defined(ESP8266)
 #define aead_system_random_init() do { ; } while (0)
-#define aead_system_random(var) ((var) = *((volatile int *)0x3FF20E44))
+#define aead_system_random(var, ready) ((var) = *((volatile int *)0x3FF20E44))
 #endif
 #if defined(ESP32)
 extern uint32_t esp_random(void);
 #define aead_system_random_init() do { ; } while (0)
-#define aead_system_random(var) ((var) = esp_random())
+#define aead_system_random(var, ready) ((var) = esp_random())
 #endif
 #if !defined(aead_system_type) && defined(aead_system_random)
 #define aead_system_type uint32_t
 #endif
 
-/* Determine if we have /dev/urandom or a similar device */
-#if defined(__linux__)
+/* Determine if we have /dev/urandom, /dev/random, or a similar device */
+#if defined(AEAD_TRNG_UNIX_LIKE)
 #define aead_random_device "/dev/urandom"
+#define aead_random_device_backup "/dev/random"
 #endif
 
 int aead_random_get_system_seed(unsigned char seed[AEAD_SYSTEM_SEED_SIZE])
@@ -131,6 +142,10 @@ int aead_random_get_system_seed(unsigned char seed[AEAD_SYSTEM_SEED_SIZE])
         /* Use /dev/urandom to seed the PRNG.  If for some reason that fails,
          * then fall back to RDRAND or the current system time. */
         int fd = open(aead_random_device, O_RDONLY);
+#if defined(aead_random_device_backup)
+        if (fd < 0)
+            fd = open(aead_random_device_backup, O_RDONLY);
+#endif
         if (fd >= 0) {
             for (;;) {
                 int ret = read(fd, seed, 32);
@@ -149,12 +164,13 @@ int aead_random_get_system_seed(unsigned char seed[AEAD_SYSTEM_SEED_SIZE])
         {
             aead_system_type x;
             int index;
+            int ready = 1;
             aead_system_random_init();
             for (index = 0; index < AEAD_SYSTEM_SEED_SIZE; index += sizeof(x)) {
-                aead_system_random(x);
+                aead_system_random(x, ready);
                 memcpy(seed + index, &x, sizeof(x));
             }
-            return 1;
+            return ready;
         }
 #endif
         /* Last ditch is to use the system time.  This is not ideal */
@@ -174,12 +190,13 @@ int aead_random_get_system_seed(unsigned char seed[AEAD_SYSTEM_SEED_SIZE])
 #elif defined(aead_system_random)
     aead_system_type x;
     int index;
+    int ready = 1;
     aead_system_random_init();
     for (index = 0; index < AEAD_SYSTEM_SEED_SIZE; index += sizeof(x)) {
-        aead_system_random(x);
+        aead_system_random(x, ready);
         memcpy(seed + index, &x, sizeof(x));
     }
-    return 1;
+    return ready;
 #else
     #warning "No system random number source found"
 

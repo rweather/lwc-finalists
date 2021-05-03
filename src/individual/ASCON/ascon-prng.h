@@ -76,10 +76,13 @@ void ascon_prng_add_ident(const unsigned char *data, size_t size);
  *
  * \param state PRNG state to be initialized.
  *
+ * \return Non-zero if the PRNG was initialized from system TRNG data,
+ * or zero if there is no system TRNG or it has failed.
+ *
  * This function will fetch fresh data from the system TRNG to prepare
  * the PRNG state to generate random data.
  */
-void ascon_prng_init(ascon_prng_state_t *state);
+int ascon_prng_init(ascon_prng_state_t *state);
 
 /**
  * \brief Frees an ASCON-based PRNG and destroys all sensitive information.
@@ -92,8 +95,11 @@ void ascon_prng_free(ascon_prng_state_t *state);
  * \brief Forces an ASCON-based PRNG to re-seed from the system TRNG.
  *
  * \param state PRNG state to be re-seeded.
+ *
+ * \return Non-zero if the PRNG was re-seeded from system TRNG data,
+ * or zero if there is no system TRNG or it has failed.
  */
-void ascon_prng_reseed(ascon_prng_state_t *state);
+int ascon_prng_reseed(ascon_prng_state_t *state);
 
 /**
  * \brief Feeds data into an ASCON-based PRNG state to seed it from

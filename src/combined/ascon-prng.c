@@ -138,7 +138,7 @@ void ascon_prng_add_ident(const unsigned char *data, size_t size)
     aead_clean(&state, sizeof(state));
 }
 
-void ascon_prng_init(ascon_prng_state_t *state)
+int ascon_prng_init(ascon_prng_state_t *state)
 {
     /* Set up the initial ASCON block with an IV value and the
      * contents of the global identification pool.  Then hash it
@@ -154,7 +154,7 @@ void ascon_prng_init(ascon_prng_state_t *state)
     state->s.limit = ASCON_PRNG_RESEED_LIMIT;
 
     /* Re-seed the PRNG from the system TRNG */
-    ascon_prng_reseed(state);
+    return ascon_prng_reseed(state);
 }
 
 void ascon_prng_free(ascon_prng_state_t *state)
@@ -162,13 +162,14 @@ void ascon_prng_free(ascon_prng_state_t *state)
     aead_clean(state, sizeof(ascon_prng_state_t));
 }
 
-void ascon_prng_reseed(ascon_prng_state_t *state)
+int ascon_prng_reseed(ascon_prng_state_t *state)
 {
     unsigned char seed[AEAD_SYSTEM_SEED_SIZE];
     unsigned index;
+    int have_trng;
 
     /* Get a fresh seed from the system TRNG and absorb it into the state */
-    aead_random_get_system_seed(seed);
+    have_trng = aead_random_get_system_seed(seed);
     for (index = 0; index < AEAD_SYSTEM_SEED_SIZE; index += ASCON_XOF_RATE) {
         lw_xor_block(state->s.state, seed + index, ASCON_XOF_RATE);
         ascon_prng_permute(ASCON_STATE(state));
@@ -180,6 +181,7 @@ void ascon_prng_reseed(ascon_prng_state_t *state)
 
     /* Reset the reseed counter */
     state->s.count = 0;
+    return have_trng;
 }
 
 void ascon_prng_feed
