@@ -24,7 +24,7 @@
 #include <string.h>
 
 int ascon_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     ascon_xof_state_t state;
     ascon_hash_init(&state);
@@ -49,8 +49,7 @@ void ascon_hash_init(ascon_hash_state_t *state)
 }
 
 void ascon_hash_update
-    (ascon_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (ascon_hash_state_t *state, const unsigned char *in, size_t inlen)
 {
     ascon_xof_absorb(state, in, inlen);
 }

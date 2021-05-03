@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_PHOTON_BEETLE_HASH_H
 #define LWCRYPTO_PHOTON_BEETLE_HASH_H
 
+#include <stddef.h>
+
 /**
  * \file photon-beetle-hash.h
  * \brief PHOTON-Beetle hash algorithm.
@@ -73,7 +75,7 @@ typedef union
  * \sa photon_beetle_hash_init()
  */
 int photon_beetle_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for a Photon-Beetle-HASH hashing operation.
@@ -95,8 +97,7 @@ void photon_beetle_hash_init(photon_beetle_hash_state_t *state);
  * \sa photon_beetle_hash_init(), photon_beetle_hash_finalize()
  */
 void photon_beetle_hash_update
-    (photon_beetle_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (photon_beetle_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from a Photon-Beetle-HASH

@@ -145,7 +145,7 @@ static void sha256_transform(sha256_state_t *state)
 #endif /* !ASM */
 
 int internal_sha256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     sha256_state_t state;
     unsigned temp;
@@ -214,8 +214,7 @@ void internal_sha256_hash_init(sha256_state_t *state)
 }
 
 void internal_sha256_hash_update
-    (sha256_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (sha256_state_t *state, const unsigned char *in, size_t inlen)
 {
     /* Update the total length (in bits, not bytes) */
     state->length += ((uint64_t)inlen) << 3;

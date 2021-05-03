@@ -49,7 +49,7 @@
  */
 static void ascon_absorb_8
     (ascon_state_t *state, const unsigned char *data,
-     unsigned long long len, uint8_t first_round)
+     size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
@@ -89,7 +89,7 @@ static void ascon_absorb_8
  */
 static void ascon_absorb_16
     (ascon_state_t *state, const unsigned char *data,
-     unsigned long long len, uint8_t first_round)
+     size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
@@ -132,7 +132,7 @@ static void ascon_absorb_16
  */
 static void ascon_encrypt_8
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
@@ -174,7 +174,7 @@ static void ascon_encrypt_8
  */
 static void ascon_encrypt_16
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
@@ -218,7 +218,7 @@ static void ascon_encrypt_16
  */
 static void ascon_decrypt_8
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
@@ -260,7 +260,7 @@ static void ascon_decrypt_8
  */
 static void ascon_decrypt_16
     (ascon_state_t *state, unsigned char *dest,
-     const unsigned char *src, unsigned long long len, uint8_t first_round)
+     const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
@@ -301,9 +301,9 @@ static void ascon_decrypt_16
 #endif
 
 int ascon128_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -353,10 +353,10 @@ int ascon128_aead_encrypt
 }
 
 int ascon128_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -408,9 +408,9 @@ int ascon128_aead_decrypt
 }
 
 int ascon128a_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -460,10 +460,10 @@ int ascon128a_aead_encrypt
 }
 
 int ascon128a_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -515,9 +515,9 @@ int ascon128a_aead_decrypt
 }
 
 int ascon80pq_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -569,10 +569,10 @@ int ascon80pq_aead_encrypt
 }
 
 int ascon80pq_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {

@@ -248,7 +248,7 @@ static void generate_kats_for_cipher(const aead_cipher_t *alg, FILE *file)
 {
     int count = 1;
     int pt_len, ad_len;
-    unsigned long long clen;
+    size_t clen;
 
     /* Allocate space for the temporary buffers we will need */
     unsigned char *key = (unsigned char *)malloc(alg->key_len);

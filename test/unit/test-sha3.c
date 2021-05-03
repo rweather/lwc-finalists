@@ -241,7 +241,7 @@ static void sha3_keccakp(sha3_state_t *state)
 }
 
 void sha3_absorb
-    (sha3_state_t *state, const unsigned char *data, unsigned long long size)
+    (sha3_state_t *state, const unsigned char *data, size_t size)
 {
     const uint8_t *d = (const uint8_t *)data;
     uint8_t *Abytes;
@@ -270,7 +270,7 @@ void sha3_absorb
 }
 
 void sha3_squeeze
-    (sha3_state_t *state, unsigned char *data, unsigned long long size)
+    (sha3_state_t *state, unsigned char *data, size_t size)
 {
     uint8_t *d = (uint8_t *)data;
     unsigned tempSize;
@@ -320,7 +320,7 @@ void sha3_pad(sha3_state_t *state)
 }
 
 int sha3_256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     sha3_state_t state;
     sha3_256_init(&state);
@@ -330,7 +330,7 @@ int sha3_256_hash
 }
 
 int sha3_512_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     sha3_state_t state;
     sha3_512_init(&state);
@@ -340,7 +340,7 @@ int sha3_512_hash
 }
 
 int shake128_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     sha3_state_t state;
     shake128_init(&state);
@@ -350,7 +350,7 @@ int shake128_hash
 }
 
 int shake256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     sha3_state_t state;
     shake256_init(&state);

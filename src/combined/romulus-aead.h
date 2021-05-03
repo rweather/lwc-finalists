@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_ROMULUS_AEAD_H
 #define LWCRYPTO_ROMULUS_AEAD_H
 
+#include <stddef.h>
+
 /**
  * \file romulus-aead.h
  * \brief Romulus authenticated encryption algorithm family.
@@ -87,9 +89,9 @@ extern "C" {
  * \sa romulus_np_aead_decrypt()
  */
 int romulus_np_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -117,10 +119,10 @@ int romulus_np_aead_encrypt
  * \sa romulus_np_aead_encrypt()
  */
 int romulus_np_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -146,9 +148,9 @@ int romulus_np_aead_decrypt
  * \sa romulus_mp_aead_decrypt()
  */
 int romulus_mp_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -176,10 +178,10 @@ int romulus_mp_aead_encrypt
  * \sa romulus_mp_aead_encrypt()
  */
 int romulus_mp_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 

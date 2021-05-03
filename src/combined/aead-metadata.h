@@ -57,9 +57,9 @@ extern "C" {
  * the parameters.
  */
 typedef int (*aead_cipher_encrypt_t)
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -84,10 +84,10 @@ typedef int (*aead_cipher_encrypt_t)
  * or some other negative number if there was an error in the parameters.
  */
 typedef int (*aead_cipher_decrypt_t)
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -102,7 +102,7 @@ typedef int (*aead_cipher_decrypt_t)
  * parameters.
  */
 typedef int (*aead_hash_t)
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for a hashing operation.
@@ -119,7 +119,7 @@ typedef void (*aead_hash_init_t)(void *state);
  * \param inlen Length of the input data to be incorporated into the state.
  */
 typedef void (*aead_hash_update_t)
-    (void *state, const unsigned char *in, unsigned long long inlen);
+    (void *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from a hashing operation.
@@ -139,7 +139,7 @@ typedef void (*aead_hash_finalize_t)(void *state, unsigned char *out);
  * \sa ascon_xof_init(), ascon_xof_squeeze()
  */
 typedef void (*aead_xof_absorb_t)
-    (void *state, const unsigned char *in, unsigned long long inlen);
+    (void *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Squeezes output data from an XOF state.
@@ -149,7 +149,7 @@ typedef void (*aead_xof_absorb_t)
  * \param outlen Number of bytes of data to squeeze out of the state.
  */
 typedef void (*aead_xof_squeeze_t)
-    (void *state, unsigned char *out, unsigned long long outlen);
+    (void *state, unsigned char *out, size_t outlen);
 
 /**
  * \brief No special AEAD features.

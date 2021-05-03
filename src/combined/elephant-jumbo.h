@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_ELEPHANT_JUMBO_H
 #define LWCRYPTO_ELEPHANT_JUMBO_H
 
+#include <stddef.h>
+
 /**
  * \file elephant-jumbo.h
  * \brief Jumbo authenticated encryption algorithm.
@@ -75,9 +77,9 @@ extern "C" {
  * \sa jumbo_aead_decrypt()
  */
 int jumbo_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -105,10 +107,10 @@ int jumbo_aead_encrypt
  * \sa jumbo_aead_encrypt()
  */
 int jumbo_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 

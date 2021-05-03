@@ -30,7 +30,7 @@ static int first_test = 1;
 int test_exit_result = 0;
 
 static void test_print_hex
-    (const char *tag, const unsigned char *data, unsigned long long len)
+    (const char *tag, const unsigned char *data, size_t len)
 {
     printf("%s =", tag);
     while (len > 0) {
@@ -42,8 +42,7 @@ static void test_print_hex
 }
 
 int test_memcmp
-    (const unsigned char *actual, const unsigned char *expected,
-     unsigned long long len)
+    (const unsigned char *actual, const unsigned char *expected, size_t len)
 {
     int cmp = memcmp(actual, expected, (size_t)len);
     if (cmp == 0)
@@ -188,7 +187,7 @@ static int test_aead_cipher_inner
     unsigned char temp[AEAD_MAX_DATA_LEN + AEAD_MAX_TAG_LEN];
     unsigned char temp2[AEAD_MAX_DATA_LEN + AEAD_MAX_TAG_LEN];
     unsigned ciphertext_len = test_vector->plaintext_len + cipher->tag_len;
-    unsigned long long len;
+    size_t len;
     int result;
 
     /* Test encryption */

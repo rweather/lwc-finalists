@@ -132,7 +132,7 @@ static int test_chachapoly_vector_inner
     unsigned char temp[MAX_PLAINTEXT_LEN + CHACHAPOLY_TAG_SIZE];
     unsigned char temp2[MAX_PLAINTEXT_LEN + CHACHAPOLY_TAG_SIZE];
     unsigned ciphertext_len = test_vector->datasize + cipher->tag_len;
-    unsigned long long len;
+    size_t len;
     int result;
 
     /* Test encryption */

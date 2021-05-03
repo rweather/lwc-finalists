@@ -155,7 +155,7 @@ static void test_print_error
 }
 
 static void test_print_hex
-    (const char *tag, const unsigned char *data, unsigned long long len)
+    (const char *tag, const unsigned char *data, size_t len)
 {
     printf("%s =", tag);
     while (len > 0) {
@@ -167,8 +167,7 @@ static void test_print_hex
 }
 
 static int test_compare
-    (const unsigned char *actual, const unsigned char *expected,
-     unsigned long long len)
+    (const unsigned char *actual, const unsigned char *expected, size_t len)
 {
     int cmp = memcmp(actual, expected, (size_t)len);
     if (cmp == 0)
@@ -180,7 +179,7 @@ static int test_compare
 }
 
 /* Determine if the contents of a buffer is all-zero bytes or not */
-static int test_all_zeroes(const unsigned char *buf, unsigned long long len)
+static int test_all_zeroes(const unsigned char *buf, size_t len)
 {
     while (len > 0) {
         if (*buf++ != 0)
@@ -201,7 +200,7 @@ static int test_cipher_inner
     const test_string_t *ad;
     unsigned char *temp1;
     unsigned char *temp2;
-    unsigned long long len;
+    size_t len;
     int result;
 
     /* Get the parameters for the test */
@@ -402,9 +401,7 @@ static perf_timer_t perf_cipher_encrypt_decrypt
 {
     unsigned char plaintext[MAX_DATA_SIZE];
     unsigned char ciphertext[MAX_DATA_SIZE + MAX_TAG_SIZE];
-    unsigned long long plen;
-    unsigned long long clen;
-    unsigned long long len;
+    size_t plen, clen, len;
     perf_timer_t start, elapsed;
     perf_timer_t ticks_per_second = perf_timer_ticks_per_second();
     perf_timer_t ref_time = 0;

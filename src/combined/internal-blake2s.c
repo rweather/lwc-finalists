@@ -137,7 +137,7 @@ static void blake2s_process_chunk(blake2s_state_t *state, uint32_t f0)
 }
 
 int internal_blake2s_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     blake2s_state_t state;
     unsigned temp;

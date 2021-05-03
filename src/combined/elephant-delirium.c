@@ -59,7 +59,7 @@ static void delirium_process_ad
      unsigned char next[KECCAKP_200_STATE_SIZE],
      unsigned char tag[DELIRIUM_TAG_SIZE],
      const unsigned char *npub,
-     const unsigned char *ad, unsigned long long adlen)
+     const unsigned char *ad, size_t adlen)
 {
     unsigned posn, size;
 
@@ -106,9 +106,9 @@ static void delirium_process_ad
 }
 
 int delirium_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -203,10 +203,10 @@ int delirium_aead_encrypt
 }
 
 int delirium_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {

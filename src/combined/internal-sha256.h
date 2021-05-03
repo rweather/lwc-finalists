@@ -77,7 +77,7 @@ extern aead_hash_algorithm_t const internal_sha256_hash_algorithm;
  * parameters.
  */
 int internal_sha256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for a SHA256 hashing operation.
@@ -94,8 +94,7 @@ void internal_sha256_hash_init(sha256_state_t *state);
  * \param inlen Length of the input data to be incorporated into the state.
  */
 void internal_sha256_hash_update
-    (sha256_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (sha256_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from a SHA256 hashing operation.

@@ -33,7 +33,7 @@
 #endif
 
 int ascon_xof
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen)
+    (unsigned char *out, const unsigned char *in, size_t inlen)
 {
     ascon_xof_state_t state;
     ascon_xof_init(&state);
@@ -97,8 +97,7 @@ void ascon_xof_init_fixed(ascon_xof_state_t *state, size_t outlen)
 }
 
 void ascon_xof_absorb
-    (ascon_xof_state_t *state, const unsigned char *in,
-     unsigned long long inlen)
+    (ascon_xof_state_t *state, const unsigned char *in, size_t inlen)
 {
     unsigned temp;
 
@@ -163,7 +162,7 @@ void ascon_xof_absorb
 }
 
 void ascon_xof_squeeze
-    (ascon_xof_state_t *state, unsigned char *out, unsigned long long outlen)
+    (ascon_xof_state_t *state, unsigned char *out, size_t outlen)
 {
     unsigned temp;
 

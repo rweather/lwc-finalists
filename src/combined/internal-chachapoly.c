@@ -122,7 +122,7 @@ static const char tag256[] = "expand 32-byte k";
 
 STATIC_INLINE void chacha_encrypt
     (chacha20_state_t *state, chacha20_state_t *stream,
-     unsigned char *out, const unsigned char *in, unsigned long long len)
+     unsigned char *out, const unsigned char *in, size_t len)
 {
     /* Note: For simplicity we limit the block counter to 32-bit which
      * limits the maximum packet size to 256Gb.  This should be OK. */
@@ -274,7 +274,7 @@ static void poly1305_process_chunk(poly1305_state_t *state)
 
 static void poly1305_update
     (poly1305_state_t *state, const unsigned char *in,
-     unsigned long long len, unsigned char padding)
+     size_t len, unsigned char padding)
 {
     while (len >= 16) {
         /* Absorb the next 16 byte block */
@@ -360,9 +360,9 @@ static void poly1305_finalize
 }
 
 int internal_chachapoly_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -408,10 +408,10 @@ int internal_chachapoly_aead_encrypt
 }
 
 int internal_chachapoly_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {

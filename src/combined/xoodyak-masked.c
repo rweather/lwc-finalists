@@ -83,7 +83,7 @@ static void xoodyak_init_masked
  * \param len Length of the data to be absorbed.
  */
 static void xoodyak_absorb_masked
-    (xoodoo_state_t *state, const unsigned char *data, unsigned long long len)
+    (xoodoo_state_t *state, const unsigned char *data, size_t len)
 {
     uint8_t domain = 0x03;
     unsigned temp;
@@ -104,9 +104,9 @@ static void xoodyak_absorb_masked
 }
 
 int xoodyak_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -153,10 +153,10 @@ int xoodyak_masked_aead_encrypt
 }
 
 int xoodyak_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -248,7 +248,7 @@ static void xoodyak_init_masked
  * \param len Length of the data to be absorbed.
  */
 static void xoodyak_absorb_masked
-    (mask_uint32_t state[12], const unsigned char *data, unsigned long long len)
+    (mask_uint32_t state[12], const unsigned char *data, size_t len)
 {
     unsigned char padded[48];
     uint32_t domain = 0x03000000U;
@@ -273,9 +273,9 @@ static void xoodyak_absorb_masked
 }
 
 int xoodyak_masked_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -355,10 +355,10 @@ int xoodyak_masked_aead_encrypt
 }
 
 int xoodyak_masked_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {

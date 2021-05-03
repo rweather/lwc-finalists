@@ -23,6 +23,8 @@
 #ifndef LWCRYPTO_ASCON_AEAD_H
 #define LWCRYPTO_ASCON_AEAD_H
 
+#include <stddef.h>
+
 /**
  * \file ascon-aead.h
  * \brief ASCON-128 encryption algorithm and related family members.
@@ -98,9 +100,9 @@ extern "C" {
  * \sa ascon128_aead_decrypt()
  */
 int ascon128_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -128,10 +130,10 @@ int ascon128_aead_encrypt
  * \sa ascon128_aead_encrypt()
  */
 int ascon128_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -157,9 +159,9 @@ int ascon128_aead_decrypt
  * \sa ascon128a_aead_decrypt()
  */
 int ascon128a_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -187,10 +189,10 @@ int ascon128a_aead_encrypt
  * \sa ascon128a_aead_encrypt()
  */
 int ascon128a_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 
@@ -216,9 +218,9 @@ int ascon128a_aead_decrypt
  * \sa ascon80pq_aead_decrypt()
  */
 int ascon80pq_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k);
@@ -246,10 +248,10 @@ int ascon80pq_aead_encrypt
  * \sa ascon80pq_aead_encrypt()
  */
 int ascon80pq_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k);
 

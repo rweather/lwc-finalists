@@ -134,7 +134,7 @@ void cshake256_init(sha3_state_t *state);
  * \param size Length of the input data in bytes.
  */
 void sha3_absorb
-    (sha3_state_t *state, const unsigned char *data, unsigned long long size);
+    (sha3_state_t *state, const unsigned char *data, size_t size);
 
 /**
  * \brief Squeezes data from the SHA3 hashing state.
@@ -144,7 +144,7 @@ void sha3_absorb
  * \param size Length of the output data in bytes.
  */
 void sha3_squeeze
-    (sha3_state_t *state, unsigned char *data, unsigned long long size);
+    (sha3_state_t *state, unsigned char *data, size_t size);
 
 /**
  * \brief Pads the input with zeroes to the next multiple of the rate.
@@ -164,7 +164,7 @@ void sha3_pad(sha3_state_t *state);
  * parameters.
  */
 int sha3_256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Hashes a block of input data with SHA3-512.
@@ -177,7 +177,7 @@ int sha3_256_hash
  * parameters.
  */
 int sha3_512_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Hashes a block of input data with SHAKE128.
@@ -190,7 +190,7 @@ int sha3_512_hash
  * parameters.
  */
 int shake128_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Hashes a block of input data with SHAKE256.
@@ -203,7 +203,7 @@ int shake128_hash
  * parameters.
  */
 int shake256_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 #ifdef __cplusplus
 }

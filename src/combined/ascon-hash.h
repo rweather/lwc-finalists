@@ -55,7 +55,7 @@ typedef ascon_xof_state_t ascon_hash_state_t;
  * \sa ascon_hash_init(), ascon_hash_absorb(), ascon_hash_squeeze()
  */
 int ascon_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for an ASCON-HASH hashing operation.
@@ -76,8 +76,7 @@ void ascon_hash_init(ascon_hash_state_t *state);
  * \sa ascon_hash_init(), ascon_hash_finalize()
  */
 void ascon_hash_update
-    (ascon_hash_state_t *state, const unsigned char *in,
-     unsigned long long inlen);
+    (ascon_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Returns the final hash value from an ASCON-HASH hashing operation.

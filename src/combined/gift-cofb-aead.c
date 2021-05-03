@@ -110,7 +110,7 @@ typedef union
  */
 static void gift_cofb_assoc_data
     (gift128b_key_schedule_t *ks, gift_cofb_block_t *Y, gift_cofb_l_t *L,
-     const unsigned char *ad, unsigned long long adlen, unsigned long long mlen)
+     const unsigned char *ad, size_t adlen, size_t mlen)
 {
     /* Deal with all associated data blocks except the last */
     while (adlen > 16) {
@@ -179,9 +179,9 @@ static void gift_cofb_assoc_data
 /** @endcond */
 
 int gift_cofb_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -289,10 +289,10 @@ int gift_cofb_aead_encrypt
 }
 
 int gift_cofb_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {

@@ -9,8 +9,11 @@ int crypto_aead_encrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    return AEAD_ENCRYPT
-        (c, clen, m, mlen, a, adlen, nsec, npub, k);
+    size_t len = 0;
+    int result = AEAD_ENCRYPT
+        (c, &len, m, mlen, a, adlen, nsec, npub, k);
+    *clen = clen_size;
+    return result;
 }
 
 int crypto_aead_decrypt
@@ -21,6 +24,9 @@ int crypto_aead_decrypt
      const unsigned char *npub,
      const unsigned char *k)
 {
-    return AEAD_DECRYPT
-        (m, mlen, nsec, c, clen, ad, adlen, npub, k);
+    size_t len = 0;
+    int result = AEAD_DECRYPT
+        (m, &len, nsec, c, clen, ad, adlen, npub, k);
+    *mlen = len;
+    return result;
 }

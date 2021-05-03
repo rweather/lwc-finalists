@@ -66,7 +66,7 @@ extern aead_hash_algorithm_t const internal_blake2s_hash_algorithm;
  * parameters.
  */
 int internal_blake2s_hash
-    (unsigned char *out, const unsigned char *in, unsigned long long inlen);
+    (unsigned char *out, const unsigned char *in, size_t inlen);
 
 #ifdef __cplusplus
 }

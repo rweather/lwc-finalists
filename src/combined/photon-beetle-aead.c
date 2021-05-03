@@ -49,7 +49,7 @@
  */
 static void photon_beetle_process_ad
     (photon256_state_t *state,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *ad, size_t adlen,
      unsigned rate, int mempty)
 {
     unsigned temp;
@@ -108,7 +108,7 @@ static void photon_beetle_rotate1
  */
 static void photon_beetle_encrypt
     (photon256_state_t *state, unsigned char *c,
-     const unsigned char *m, unsigned long long mlen,
+     const unsigned char *m, size_t mlen,
      unsigned rate, int adempty)
 {
     unsigned char shuffle[PHOTON_BEETLE_128_RATE]; /* Block of max rate size */
@@ -163,7 +163,7 @@ static void photon_beetle_encrypt
  */
 static void photon_beetle_decrypt
     (photon256_state_t *state, unsigned char *m,
-     const unsigned char *c, unsigned long long mlen,
+     const unsigned char *c, size_t mlen,
      unsigned rate, int adempty)
 {
     unsigned char shuffle[PHOTON_BEETLE_128_RATE]; /* Block of max rate size */
@@ -207,9 +207,9 @@ static void photon_beetle_decrypt
 }
 
 int photon_beetle_128_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -245,10 +245,10 @@ int photon_beetle_128_aead_encrypt
 }
 
 int photon_beetle_128_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
@@ -285,9 +285,9 @@ int photon_beetle_128_aead_decrypt
 }
 
 int photon_beetle_32_aead_encrypt
-    (unsigned char *c, unsigned long long *clen,
-     const unsigned char *m, unsigned long long mlen,
-     const unsigned char *ad, unsigned long long adlen,
+    (unsigned char *c, size_t *clen,
+     const unsigned char *m, size_t mlen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *nsec,
      const unsigned char *npub,
      const unsigned char *k)
@@ -323,10 +323,10 @@ int photon_beetle_32_aead_encrypt
 }
 
 int photon_beetle_32_aead_decrypt
-    (unsigned char *m, unsigned long long *mlen,
+    (unsigned char *m, size_t *mlen,
      unsigned char *nsec,
-     const unsigned char *c, unsigned long long clen,
-     const unsigned char *ad, unsigned long long adlen,
+     const unsigned char *c, size_t clen,
+     const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
      const unsigned char *k)
 {
