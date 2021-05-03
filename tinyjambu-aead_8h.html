@@ -94,7 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>TinyJAMBU authenticated encryption algorithm.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="tinyjambu-aead_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -122,24 +123,24 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a92c0ad696026229e8d421dc5bffef1ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a92c0ad696026229e8d421dc5bffef1ff">tiny_jambu_128_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a92c0ad696026229e8d421dc5bffef1ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with TinyJAMBU-128.  <a href="#a92c0ad696026229e8d421dc5bffef1ff">More...</a><br/></td></tr>
-<tr class="separator:a92c0ad696026229e8d421dc5bffef1ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15a56be3e2adf84d9d93d5d654813c68"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a15a56be3e2adf84d9d93d5d654813c68">tiny_jambu_128_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a15a56be3e2adf84d9d93d5d654813c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with TinyJAMBU-128.  <a href="#a15a56be3e2adf84d9d93d5d654813c68">More...</a><br/></td></tr>
-<tr class="separator:a15a56be3e2adf84d9d93d5d654813c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2456185f5c3262deccb648caf48a71c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a2456185f5c3262deccb648caf48a71c5">tiny_jambu_192_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a2456185f5c3262deccb648caf48a71c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with TinyJAMBU-192.  <a href="#a2456185f5c3262deccb648caf48a71c5">More...</a><br/></td></tr>
-<tr class="separator:a2456185f5c3262deccb648caf48a71c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75c68dbda3ed7b7b9fccda702e9d5b61"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a75c68dbda3ed7b7b9fccda702e9d5b61">tiny_jambu_192_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a75c68dbda3ed7b7b9fccda702e9d5b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with TinyJAMBU-192.  <a href="#a75c68dbda3ed7b7b9fccda702e9d5b61">More...</a><br/></td></tr>
-<tr class="separator:a75c68dbda3ed7b7b9fccda702e9d5b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7feec076254eaf1c475a99daad7bd2ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a7feec076254eaf1c475a99daad7bd2ee">tiny_jambu_256_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a7feec076254eaf1c475a99daad7bd2ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with TinyJAMBU-256.  <a href="#a7feec076254eaf1c475a99daad7bd2ee">More...</a><br/></td></tr>
-<tr class="separator:a7feec076254eaf1c475a99daad7bd2ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9c936ea74e40ceddfced9aece390c27"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#ac9c936ea74e40ceddfced9aece390c27">tiny_jambu_256_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:ac9c936ea74e40ceddfced9aece390c27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with TinyJAMBU-256.  <a href="#ac9c936ea74e40ceddfced9aece390c27">More...</a><br/></td></tr>
-<tr class="separator:ac9c936ea74e40ceddfced9aece390c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44bc3ac5917c9d91dc39ed74e0435b4b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a44bc3ac5917c9d91dc39ed74e0435b4b">tiny_jambu_128_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a44bc3ac5917c9d91dc39ed74e0435b4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with TinyJAMBU-128.  <a href="#a44bc3ac5917c9d91dc39ed74e0435b4b">More...</a><br/></td></tr>
+<tr class="separator:a44bc3ac5917c9d91dc39ed74e0435b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbd9ddfbf632a38c95375d6f9cb8c755"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#afbd9ddfbf632a38c95375d6f9cb8c755">tiny_jambu_128_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:afbd9ddfbf632a38c95375d6f9cb8c755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with TinyJAMBU-128.  <a href="#afbd9ddfbf632a38c95375d6f9cb8c755">More...</a><br/></td></tr>
+<tr class="separator:afbd9ddfbf632a38c95375d6f9cb8c755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1556ed35cdd9f11323c98c189aa1f15"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#ae1556ed35cdd9f11323c98c189aa1f15">tiny_jambu_192_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:ae1556ed35cdd9f11323c98c189aa1f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with TinyJAMBU-192.  <a href="#ae1556ed35cdd9f11323c98c189aa1f15">More...</a><br/></td></tr>
+<tr class="separator:ae1556ed35cdd9f11323c98c189aa1f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0df0ea426e3a874e2cea2a8e26ed6321"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a0df0ea426e3a874e2cea2a8e26ed6321">tiny_jambu_192_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a0df0ea426e3a874e2cea2a8e26ed6321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with TinyJAMBU-192.  <a href="#a0df0ea426e3a874e2cea2a8e26ed6321">More...</a><br/></td></tr>
+<tr class="separator:a0df0ea426e3a874e2cea2a8e26ed6321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c241c162e1c6da16c0baf35626c292b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a0c241c162e1c6da16c0baf35626c292b">tiny_jambu_256_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a0c241c162e1c6da16c0baf35626c292b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with TinyJAMBU-256.  <a href="#a0c241c162e1c6da16c0baf35626c292b">More...</a><br/></td></tr>
+<tr class="separator:a0c241c162e1c6da16c0baf35626c292b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8410798cb93090822b29ea31610729ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyjambu-aead_8h.html#a8410798cb93090822b29ea31610729ad">tiny_jambu_256_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a8410798cb93090822b29ea31610729ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with TinyJAMBU-256.  <a href="#a8410798cb93090822b29ea31610729ad">More...</a><br/></td></tr>
+<tr class="separator:a8410798cb93090822b29ea31610729ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>TinyJAMBU authenticated encryption algorithm. </p>
@@ -151,7 +152,7 @@ Functions</h2></td></tr>
 </ul>
 <p>TinyJAMBU has one of the smallest RAM and flash memory footprints out of all the algorithms in this library. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a15a56be3e2adf84d9d93d5d654813c68"></a>
+<a class="anchor" id="afbd9ddfbf632a38c95375d6f9cb8c755"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -164,14 +165,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -182,7 +177,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -194,7 +189,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -222,7 +217,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 8 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -233,11 +227,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a92c0ad696026229e8d421dc5bffef1ff" title="Encrypts and authenticates a packet with TinyJAMBU-128. ">tiny_jambu_128_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a44bc3ac5917c9d91dc39ed74e0435b4b" title="Encrypts and authenticates a packet with TinyJAMBU-128. ">tiny_jambu_128_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a92c0ad696026229e8d421dc5bffef1ff"></a>
+<a class="anchor" id="a44bc3ac5917c9d91dc39ed74e0435b4b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -250,7 +244,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -262,7 +256,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -274,14 +268,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -312,18 +300,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 12 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a15a56be3e2adf84d9d93d5d654813c68" title="Decrypts and authenticates a packet with TinyJAMBU-128. ">tiny_jambu_128_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#afbd9ddfbf632a38c95375d6f9cb8c755" title="Decrypts and authenticates a packet with TinyJAMBU-128. ">tiny_jambu_128_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a75c68dbda3ed7b7b9fccda702e9d5b61"></a>
+<a class="anchor" id="a0df0ea426e3a874e2cea2a8e26ed6321"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -336,14 +323,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -354,7 +335,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -366,7 +347,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -394,7 +375,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 8 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -405,11 +385,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a2456185f5c3262deccb648caf48a71c5" title="Encrypts and authenticates a packet with TinyJAMBU-192. ">tiny_jambu_192_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#ae1556ed35cdd9f11323c98c189aa1f15" title="Encrypts and authenticates a packet with TinyJAMBU-192. ">tiny_jambu_192_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a2456185f5c3262deccb648caf48a71c5"></a>
+<a class="anchor" id="ae1556ed35cdd9f11323c98c189aa1f15"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -422,7 +402,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -434,7 +414,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -446,14 +426,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -484,18 +458,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 12 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 24 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a75c68dbda3ed7b7b9fccda702e9d5b61" title="Decrypts and authenticates a packet with TinyJAMBU-192. ">tiny_jambu_192_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a0df0ea426e3a874e2cea2a8e26ed6321" title="Decrypts and authenticates a packet with TinyJAMBU-192. ">tiny_jambu_192_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ac9c936ea74e40ceddfced9aece390c27"></a>
+<a class="anchor" id="a8410798cb93090822b29ea31610729ad"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -508,14 +481,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -526,7 +493,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -538,7 +505,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -566,7 +533,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 8 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -577,11 +543,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a7feec076254eaf1c475a99daad7bd2ee" title="Encrypts and authenticates a packet with TinyJAMBU-256. ">tiny_jambu_256_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a0c241c162e1c6da16c0baf35626c292b" title="Encrypts and authenticates a packet with TinyJAMBU-256. ">tiny_jambu_256_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a7feec076254eaf1c475a99daad7bd2ee"></a>
+<a class="anchor" id="a0c241c162e1c6da16c0baf35626c292b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -594,7 +560,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -606,7 +572,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -618,14 +584,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -656,21 +616,20 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 12 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 32 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#ac9c936ea74e40ceddfced9aece390c27" title="Decrypts and authenticates a packet with TinyJAMBU-256. ">tiny_jambu_256_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="tinyjambu-aead_8h.html#a8410798cb93090822b29ea31610729ad" title="Decrypts and authenticates a packet with TinyJAMBU-256. ">tiny_jambu_256_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:53 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

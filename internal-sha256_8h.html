@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -96,9 +97,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>SHA256 implementation for performance comparisons.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="aead-metadata_8h_source.html">aead-metadata.h</a>&quot;</code><br/>
+<code>#include &lt;stdint.h&gt;</code><br/>
+<code>#include &lt;stddef.h&gt;</code><br/>
 </div>
 <p><a href="internal-sha256_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsha256__state__t.html">sha256_state_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State for SHA256 incremental mode.  <a href="structsha256__state__t.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:af92a97f32f8c618057e12fd19313760b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af92a97f32f8c618057e12fd19313760b"></a>
@@ -108,9 +117,30 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ace1066a69506f31759fdf85754859269"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#ace1066a69506f31759fdf85754859269">internal_sha256_hash</a> (unsigned char *out, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:ace1066a69506f31759fdf85754859269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with SHA256 to generate a hash value.  <a href="#ace1066a69506f31759fdf85754859269">More...</a><br/></td></tr>
-<tr class="separator:ace1066a69506f31759fdf85754859269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad166333e79092ae6cabb4b7da40add69"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#ad166333e79092ae6cabb4b7da40add69">internal_sha256_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:ad166333e79092ae6cabb4b7da40add69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with SHA256 to generate a hash value.  <a href="#ad166333e79092ae6cabb4b7da40add69">More...</a><br/></td></tr>
+<tr class="separator:ad166333e79092ae6cabb4b7da40add69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1964f17c58d8c25781ad765c8b069ca9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#a1964f17c58d8c25781ad765c8b069ca9">internal_sha256_hash_init</a> (<a class="el" href="structsha256__state__t.html">sha256_state_t</a> *state)</td></tr>
+<tr class="memdesc:a1964f17c58d8c25781ad765c8b069ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for a SHA256 hashing operation.  <a href="#a1964f17c58d8c25781ad765c8b069ca9">More...</a><br/></td></tr>
+<tr class="separator:a1964f17c58d8c25781ad765c8b069ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53c1858c4843b6b37c6b912fae65af1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#ac53c1858c4843b6b37c6b912fae65af1">internal_sha256_hash_update</a> (<a class="el" href="structsha256__state__t.html">sha256_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:ac53c1858c4843b6b37c6b912fae65af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a SHA256 state with more input data.  <a href="#ac53c1858c4843b6b37c6b912fae65af1">More...</a><br/></td></tr>
+<tr class="separator:ac53c1858c4843b6b37c6b912fae65af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa71bb039c191933737fe3ab94b152c01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#aa71bb039c191933737fe3ab94b152c01">internal_sha256_hash_finalize</a> (<a class="el" href="structsha256__state__t.html">sha256_state_t</a> *state, unsigned char *out)</td></tr>
+<tr class="memdesc:aa71bb039c191933737fe3ab94b152c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from a SHA256 hashing operation.  <a href="#aa71bb039c191933737fe3ab94b152c01">More...</a><br/></td></tr>
+<tr class="separator:aa71bb039c191933737fe3ab94b152c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfce7ef01442c81305e5776aa18237e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#adfce7ef01442c81305e5776aa18237e3">internal_sha256_hmac</a> (unsigned char *out, const unsigned char *key, size_t keylen, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:adfce7ef01442c81305e5776aa18237e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a HMAC value using SHA256.  <a href="#adfce7ef01442c81305e5776aa18237e3">More...</a><br/></td></tr>
+<tr class="separator:adfce7ef01442c81305e5776aa18237e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa54e0995490aba7a4d148a83e92e716a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#aa54e0995490aba7a4d148a83e92e716a">internal_sha256_hmac_init</a> (<a class="el" href="structsha256__state__t.html">sha256_state_t</a> *state, const unsigned char *key, size_t keylen)</td></tr>
+<tr class="memdesc:aa54e0995490aba7a4d148a83e92e716a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental HMAC state using SHA256.  <a href="#aa54e0995490aba7a4d148a83e92e716a">More...</a><br/></td></tr>
+<tr class="separator:aa54e0995490aba7a4d148a83e92e716a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a524b4e38871ae3b9385e78a1875c4fe4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#a524b4e38871ae3b9385e78a1875c4fe4">internal_sha256_hmac_update</a> (<a class="el" href="structsha256__state__t.html">sha256_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a524b4e38871ae3b9385e78a1875c4fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an incremental SHA256-HMAC state with more input data.  <a href="#a524b4e38871ae3b9385e78a1875c4fe4">More...</a><br/></td></tr>
+<tr class="separator:a524b4e38871ae3b9385e78a1875c4fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef7ad9b990fedf5e3e07b75e4f9fcc19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-sha256_8h.html#aef7ad9b990fedf5e3e07b75e4f9fcc19">internal_sha256_hmac_finalize</a> (<a class="el" href="structsha256__state__t.html">sha256_state_t</a> *state, const unsigned char *key, size_t keylen, unsigned char *out)</td></tr>
+<tr class="memdesc:aef7ad9b990fedf5e3e07b75e4f9fcc19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes an incremental SHA256-HMAC state.  <a href="#aef7ad9b990fedf5e3e07b75e4f9fcc19">More...</a><br/></td></tr>
+<tr class="separator:aef7ad9b990fedf5e3e07b75e4f9fcc19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -124,7 +154,7 @@ Variables</h2></td></tr>
 <p>SHA256 is not one of the NIST lightweight submissions. We use it as a comparison to evaluate the performance of other hash algorithsm.</p>
 <p>This SHA256 implementation is based on the one from the <a href="http://rweather.github.com/arduinolibs/crypto.html">Arduino Cryptography Library</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ace1066a69506f31759fdf85754859269"></a>
+<a class="anchor" id="ad166333e79092ae6cabb4b7da40add69"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -143,7 +173,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -167,10 +197,300 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa71bb039c191933737fe3ab94b152c01"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hash_finalize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsha256__state__t.html">sha256_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the final hash value from a SHA256 hashing operation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Hash state to be finalized. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the 32-byte hash value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1964f17c58d8c25781ad765c8b069ca9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hash_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsha256__state__t.html">sha256_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the state for a SHA256 hashing operation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Hash state to be initialized. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac53c1858c4843b6b37c6b912fae65af1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hash_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsha256__state__t.html">sha256_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates a SHA256 state with more input data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Hash state to be updated. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be incorporated into the state. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data to be incorporated into the state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adfce7ef01442c81305e5776aa18237e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hmac </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes a HMAC value using SHA256. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Buffer to receive the output HMAC value; must be at least SHA256_HASH_SIZE bytes in length. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the data to authenticate. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Number of bytes of data to authenticate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aef7ad9b990fedf5e3e07b75e4f9fcc19"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hmac_finalize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsha256__state__t.html">sha256_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finalizes an incremental SHA256-HMAC state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HMAC state to squeeze the output data from. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the HMAC value; must be at least SHA256_HASH_SIZE bytes in length. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa54e0995490aba7a4d148a83e92e716a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hmac_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsha256__state__t.html">sha256_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes an incremental HMAC state using SHA256. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Points to the state to be initialized. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a524b4e38871ae3b9385e78a1875c4fe4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void internal_sha256_hmac_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsha256__state__t.html">sha256_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates an incremental SHA256-HMAC state with more input data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HMAC state to be updated. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be incorporated into the state. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data to be incorporated into the state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Utilities that help with the generation of random masking material.  
+<p>Utilities that help with the generation of random data.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br/>
 </div>
@@ -118,12 +118,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead
 <tr class="memitem:a87b736739cc3d848f4a8634df09a4998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-random_8h.html#a87b736739cc3d848f4a8634df09a4998">aead_random_reseed</a> (void)</td></tr>
 <tr class="memdesc:a87b736739cc3d848f4a8634df09a4998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reseeds the random number generator from the system TRNG.  <a href="#a87b736739cc3d848f4a8634df09a4998">More...</a><br/></td></tr>
 <tr class="separator:a87b736739cc3d848f4a8634df09a4998"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8a2d3a3e7647f6f4298a26122be6036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-random_8h.html#af8a2d3a3e7647f6f4298a26122be6036">aead_random_set_seed</a> (const unsigned char seed[32])</td></tr>
-<tr class="memdesc:af8a2d3a3e7647f6f4298a26122be6036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restarts the random number generator with a specific 256-bit seed.  <a href="#af8a2d3a3e7647f6f4298a26122be6036">More...</a><br/></td></tr>
-<tr class="separator:af8a2d3a3e7647f6f4298a26122be6036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utilities that help with the generation of random masking material. </p>
+<div class="textblock"><p>Utilities that help with the generation of random data. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="afd82a0f33788413a176333d0afe697b3"></a>
 <div class="memitem">
@@ -233,39 +230,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead
 
 <p>Reseeds the random number generator from the system TRNG. </p>
 <p>This function does nothing if the random API is using the system TRNG directly.</p>
-<p>This function is called implicitly by <a class="el" href="aead-random_8h.html#aabaf63ea152ee51859cb046a2740bfc7" title="Initializes the system random number generator for the generation of masking material. ">aead_random_init()</a>. </p>
-
-</div>
-</div>
-<a class="anchor" id="af8a2d3a3e7647f6f4298a26122be6036"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void aead_random_set_seed </td>
-          <td>(</td>
-          <td class="paramtype">const unsigned char&#160;</td>
-          <td class="paramname"><em>seed</em>[32]</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Restarts the random number generator with a specific 256-bit seed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">seed</td><td>The seed material.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function does nothing if the random API is using the system TRNG directly. This function is useful for creating reproducible random numbers for test purposes. It should not be used for real work. </p>
+<p>This function is called implicitly by <a class="el" href="aead-random_8h.html#aabaf63ea152ee51859cb046a2740bfc7" title="Initializes the system random number generator for the generation of masking material. ">aead_random_init()</a> and then called again every 64K of output data. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

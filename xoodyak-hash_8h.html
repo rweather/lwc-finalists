@@ -95,7 +95,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Xoodyak-Hash hash algorithm.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="xoodyak-hash_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -110,31 +111,38 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a6e47d99e238ca4061b2798d2851a78ee">XOODYAK_HASH_SIZE</a>&#160;&#160;&#160;32</td></tr>
 <tr class="memdesc:a6e47d99e238ca4061b2798d2851a78ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the hash output for Xoodyak. <br/></td></tr>
 <tr class="separator:a6e47d99e238ca4061b2798d2851a78ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a888c7982073495e3ff140fe53ee6920d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a888c7982073495e3ff140fe53ee6920d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a888c7982073495e3ff140fe53ee6920d">XOODYAK_HASH_RATE</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:a888c7982073495e3ff140fe53ee6920d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rate for absorbing and squeezing in Xoodyak's hashing mode. <br/></td></tr>
+<tr class="separator:a888c7982073495e3ff140fe53ee6920d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abfcffaa12af0ec1c0c49cce23b95ff1a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#abfcffaa12af0ec1c0c49cce23b95ff1a">xoodyak_hash</a> (unsigned char *out, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:abfcffaa12af0ec1c0c49cce23b95ff1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with Xoodyak to generate a hash value.  <a href="#abfcffaa12af0ec1c0c49cce23b95ff1a">More...</a><br/></td></tr>
-<tr class="separator:abfcffaa12af0ec1c0c49cce23b95ff1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ebf83d8a4438ccdd6a78ccedf2ca9e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a4ebf83d8a4438ccdd6a78ccedf2ca9e7">xoodyak_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a4ebf83d8a4438ccdd6a78ccedf2ca9e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with Xoodyak to generate a hash value.  <a href="#a4ebf83d8a4438ccdd6a78ccedf2ca9e7">More...</a><br/></td></tr>
+<tr class="separator:a4ebf83d8a4438ccdd6a78ccedf2ca9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a415a8ed9ec2c79026c0cb8c6789cc42d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d">xoodyak_hash_init</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state)</td></tr>
 <tr class="memdesc:a415a8ed9ec2c79026c0cb8c6789cc42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for a Xoodyak hashing operation.  <a href="#a415a8ed9ec2c79026c0cb8c6789cc42d">More...</a><br/></td></tr>
 <tr class="separator:a415a8ed9ec2c79026c0cb8c6789cc42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d356e50bdb3108285bdbe1b989faca6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a9d356e50bdb3108285bdbe1b989faca6">xoodyak_hash_absorb</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:a9d356e50bdb3108285bdbe1b989faca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aborbs more input data into a Xoodyak hashing state.  <a href="#a9d356e50bdb3108285bdbe1b989faca6">More...</a><br/></td></tr>
-<tr class="separator:a9d356e50bdb3108285bdbe1b989faca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7767ce1477d01e086c2fe9681a499d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#ad7767ce1477d01e086c2fe9681a499d2">xoodyak_hash_squeeze</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state, unsigned char *out, unsigned long long outlen)</td></tr>
-<tr class="memdesc:ad7767ce1477d01e086c2fe9681a499d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from a Xoodyak hashing state.  <a href="#ad7767ce1477d01e086c2fe9681a499d2">More...</a><br/></td></tr>
-<tr class="separator:ad7767ce1477d01e086c2fe9681a499d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d74ce8319304c085b762fd5ef29e052"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a9d74ce8319304c085b762fd5ef29e052">xoodyak_hash_absorb</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a9d74ce8319304c085b762fd5ef29e052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aborbs more input data into a Xoodyak hashing state.  <a href="#a9d74ce8319304c085b762fd5ef29e052">More...</a><br/></td></tr>
+<tr class="separator:a9d74ce8319304c085b762fd5ef29e052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd188387cd00ebe1912adeba40fda21e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#abd188387cd00ebe1912adeba40fda21e">xoodyak_hash_squeeze</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:abd188387cd00ebe1912adeba40fda21e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from a Xoodyak hashing state.  <a href="#abd188387cd00ebe1912adeba40fda21e">More...</a><br/></td></tr>
+<tr class="separator:abd188387cd00ebe1912adeba40fda21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc3adedde76aa936ffe5083dc6eb985a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#acc3adedde76aa936ffe5083dc6eb985a">xoodyak_hash_finalize</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state, unsigned char *out)</td></tr>
 <tr class="memdesc:acc3adedde76aa936ffe5083dc6eb985a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from a Xoodyak hashing operation.  <a href="#acc3adedde76aa936ffe5083dc6eb985a">More...</a><br/></td></tr>
 <tr class="separator:acc3adedde76aa936ffe5083dc6eb985a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712eac88638364d855fb9b79e5e7aa66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-hash_8h.html#a712eac88638364d855fb9b79e5e7aa66">xoodyak_hash_pad</a> (<a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *state)</td></tr>
+<tr class="memdesc:a712eac88638364d855fb9b79e5e7aa66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absorbs enough zeroes into a Xoodyak hashing state to pad the input to the next multiple of the block rate.  <a href="#a712eac88638364d855fb9b79e5e7aa66">More...</a><br/></td></tr>
+<tr class="separator:a712eac88638364d855fb9b79e5e7aa66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Xoodyak-Hash hash algorithm. </p>
 <p>Xoodyak-Hash is based around the 384-bit Xoodoo permutation and has a 256-bit output. Xoodyak-Hash can also be used as an extensible output function (XOF).</p>
 <p>References: <a href="https://keccak.team/xoodyak.html">https://keccak.team/xoodyak.html</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="abfcffaa12af0ec1c0c49cce23b95ff1a"></a>
+<a class="anchor" id="a4ebf83d8a4438ccdd6a78ccedf2ca9e7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -153,7 +161,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -177,7 +185,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9d356e50bdb3108285bdbe1b989faca6"></a>
+<a class="anchor" id="a9d74ce8319304c085b762fd5ef29e052"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -196,7 +204,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -216,7 +224,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d" title="Initializes the state for a Xoodyak hashing operation. ">xoodyak_hash_init()</a>, <a class="el" href="xoodyak-hash_8h.html#ad7767ce1477d01e086c2fe9681a499d2" title="Squeezes output data from a Xoodyak hashing state. ">xoodyak_hash_squeeze()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d" title="Initializes the state for a Xoodyak hashing operation. ">xoodyak_hash_init()</a>, <a class="el" href="xoodyak-hash_8h.html#abd188387cd00ebe1912adeba40fda21e" title="Squeezes output data from a Xoodyak hashing state. ">xoodyak_hash_squeeze()</a> </dd></dl>
 
 </div>
 </div>
@@ -252,8 +260,8 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This is a wrapper around <a class="el" href="xoodyak-hash_8h.html#ad7767ce1477d01e086c2fe9681a499d2" title="Squeezes output data from a Xoodyak hashing state. ">xoodyak_hash_squeeze()</a> for a fixed length of XOODYAK_HASH_SIZE bytes.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d" title="Initializes the state for a Xoodyak hashing operation. ">xoodyak_hash_init()</a>, <a class="el" href="xoodyak-hash_8h.html#a9d356e50bdb3108285bdbe1b989faca6" title="Aborbs more input data into a Xoodyak hashing state. ">xoodyak_hash_absorb()</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is a wrapper around <a class="el" href="xoodyak-hash_8h.html#abd188387cd00ebe1912adeba40fda21e" title="Squeezes output data from a Xoodyak hashing state. ">xoodyak_hash_squeeze()</a> for a fixed length of XOODYAK_HASH_SIZE bytes.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d" title="Initializes the state for a Xoodyak hashing operation. ">xoodyak_hash_init()</a>, <a class="el" href="xoodyak-hash_8h.html#a9d74ce8319304c085b762fd5ef29e052" title="Aborbs more input data into a Xoodyak hashing state. ">xoodyak_hash_absorb()</a> </dd></dl>
 
 </div>
 </div>
@@ -278,11 +286,36 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a9d356e50bdb3108285bdbe1b989faca6" title="Aborbs more input data into a Xoodyak hashing state. ">xoodyak_hash_absorb()</a>, <a class="el" href="xoodyak-hash_8h.html#ad7767ce1477d01e086c2fe9681a499d2" title="Squeezes output data from a Xoodyak hashing state. ">xoodyak_hash_squeeze()</a>, <a class="el" href="xoodyak-hash_8h.html#abfcffaa12af0ec1c0c49cce23b95ff1a" title="Hashes a block of input data with Xoodyak to generate a hash value. ">xoodyak_hash()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a9d74ce8319304c085b762fd5ef29e052" title="Aborbs more input data into a Xoodyak hashing state. ">xoodyak_hash_absorb()</a>, <a class="el" href="xoodyak-hash_8h.html#abd188387cd00ebe1912adeba40fda21e" title="Squeezes output data from a Xoodyak hashing state. ">xoodyak_hash_squeeze()</a>, <a class="el" href="xoodyak-hash_8h.html#a4ebf83d8a4438ccdd6a78ccedf2ca9e7" title="Hashes a block of input data with Xoodyak to generate a hash value. ">xoodyak_hash()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ad7767ce1477d01e086c2fe9681a499d2"></a>
+<a class="anchor" id="a712eac88638364d855fb9b79e5e7aa66"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void xoodyak_hash_pad </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="unionxoodyak__hash__state__t.html">xoodyak_hash_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absorbs enough zeroes into a Xoodyak hashing state to pad the input to the next multiple of the block rate. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>The state to pad. Does nothing if the <em>state</em> is already aligned on a multiple of the block rate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function can avoid unnecessary XOR-with-zero operations to save some time when padding is required. </p>
+
+</div>
+</div>
+<a class="anchor" id="abd188387cd00ebe1912adeba40fda21e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -301,7 +334,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>outlen</em>&#160;</td>
         </tr>
         <tr>
@@ -321,14 +354,14 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d" title="Initializes the state for a Xoodyak hashing operation. ">xoodyak_hash_init()</a>, <a class="el" href="xoodyak-hash_8h.html#a9d356e50bdb3108285bdbe1b989faca6" title="Aborbs more input data into a Xoodyak hashing state. ">xoodyak_hash_absorb()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-hash_8h.html#a415a8ed9ec2c79026c0cb8c6789cc42d" title="Initializes the state for a Xoodyak hashing operation. ">xoodyak_hash_init()</a>, <a class="el" href="xoodyak-hash_8h.html#a9d74ce8319304c085b762fd5ef29e052" title="Aborbs more input data into a Xoodyak hashing state. ">xoodyak_hash_absorb()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:53 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

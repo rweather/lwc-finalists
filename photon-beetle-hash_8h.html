@@ -95,7 +95,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>PHOTON-Beetle hash algorithm.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="photon-beetle-hash_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -113,15 +114,15 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a50889d8917484ee09e1b24f288612fec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="photon-beetle-hash_8h.html#a50889d8917484ee09e1b24f288612fec">photon_beetle_hash</a> (unsigned char *out, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:a50889d8917484ee09e1b24f288612fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with PHOTON-Beetle-HASH to generate a hash value.  <a href="#a50889d8917484ee09e1b24f288612fec">More...</a><br/></td></tr>
-<tr class="separator:a50889d8917484ee09e1b24f288612fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9ac930e2876f15bc6b08c408bb51b4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="photon-beetle-hash_8h.html#aa9ac930e2876f15bc6b08c408bb51b4a">photon_beetle_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:aa9ac930e2876f15bc6b08c408bb51b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with PHOTON-Beetle-HASH to generate a hash value.  <a href="#aa9ac930e2876f15bc6b08c408bb51b4a">More...</a><br/></td></tr>
+<tr class="separator:aa9ac930e2876f15bc6b08c408bb51b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abab3687bfe34a51be524c2e92a3a82c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="photon-beetle-hash_8h.html#abab3687bfe34a51be524c2e92a3a82c6">photon_beetle_hash_init</a> (<a class="el" href="unionphoton__beetle__hash__state__t.html">photon_beetle_hash_state_t</a> *state)</td></tr>
 <tr class="memdesc:abab3687bfe34a51be524c2e92a3a82c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for a Photon-Beetle-HASH hashing operation.  <a href="#abab3687bfe34a51be524c2e92a3a82c6">More...</a><br/></td></tr>
 <tr class="separator:abab3687bfe34a51be524c2e92a3a82c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaf5703d80cee026d5bad1eae689fb00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="photon-beetle-hash_8h.html#aaaf5703d80cee026d5bad1eae689fb00">photon_beetle_hash_update</a> (<a class="el" href="unionphoton__beetle__hash__state__t.html">photon_beetle_hash_state_t</a> *state, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:aaaf5703d80cee026d5bad1eae689fb00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a Photon-Beetle-HASH state with more input data.  <a href="#aaaf5703d80cee026d5bad1eae689fb00">More...</a><br/></td></tr>
-<tr class="separator:aaaf5703d80cee026d5bad1eae689fb00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7f3b401aff542a94794fe16a4f95bbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="photon-beetle-hash_8h.html#ad7f3b401aff542a94794fe16a4f95bbb">photon_beetle_hash_update</a> (<a class="el" href="unionphoton__beetle__hash__state__t.html">photon_beetle_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:ad7f3b401aff542a94794fe16a4f95bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a Photon-Beetle-HASH state with more input data.  <a href="#ad7f3b401aff542a94794fe16a4f95bbb">More...</a><br/></td></tr>
+<tr class="separator:ad7f3b401aff542a94794fe16a4f95bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c10ab66cd18370075e040d1480a9cc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="photon-beetle-hash_8h.html#a4c10ab66cd18370075e040d1480a9cc3">photon_beetle_hash_finalize</a> (<a class="el" href="unionphoton__beetle__hash__state__t.html">photon_beetle_hash_state_t</a> *state, unsigned char *out)</td></tr>
 <tr class="memdesc:a4c10ab66cd18370075e040d1480a9cc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from a Photon-Beetle-HASH hashing operation.  <a href="#a4c10ab66cd18370075e040d1480a9cc3">More...</a><br/></td></tr>
 <tr class="separator:a4c10ab66cd18370075e040d1480a9cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +132,7 @@ Functions</h2></td></tr>
 <p>PHOTON-Beetle-Hash has a 256-bit hash output. The initial data is handled as a 16 byte block, and then the remaining bytes are processed in 4 byte blocks.</p>
 <p>References: <a href="https://www.isical.ac.in/~lightweight/beetle/">https://www.isical.ac.in/~lightweight/beetle/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a50889d8917484ee09e1b24f288612fec"></a>
+<a class="anchor" id="aa9ac930e2876f15bc6b08c408bb51b4a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -150,7 +151,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -207,7 +208,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="photon-beetle-hash_8h.html#abab3687bfe34a51be524c2e92a3a82c6" title="Initializes the state for a Photon-Beetle-HASH hashing operation. ">photon_beetle_hash_init()</a>, <a class="el" href="photon-beetle-hash_8h.html#aaaf5703d80cee026d5bad1eae689fb00" title="Updates a Photon-Beetle-HASH state with more input data. ">photon_beetle_hash_update()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="photon-beetle-hash_8h.html#abab3687bfe34a51be524c2e92a3a82c6" title="Initializes the state for a Photon-Beetle-HASH hashing operation. ">photon_beetle_hash_init()</a>, <a class="el" href="photon-beetle-hash_8h.html#ad7f3b401aff542a94794fe16a4f95bbb" title="Updates a Photon-Beetle-HASH state with more input data. ">photon_beetle_hash_update()</a> </dd></dl>
 
 </div>
 </div>
@@ -232,11 +233,11 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="photon-beetle-hash_8h.html#aaaf5703d80cee026d5bad1eae689fb00" title="Updates a Photon-Beetle-HASH state with more input data. ">photon_beetle_hash_update()</a>, <a class="el" href="photon-beetle-hash_8h.html#a4c10ab66cd18370075e040d1480a9cc3" title="Returns the final hash value from a Photon-Beetle-HASH hashing operation. ">photon_beetle_hash_finalize()</a>, <a class="el" href="photon-beetle-hash_8h.html#a50889d8917484ee09e1b24f288612fec" title="Hashes a block of input data with PHOTON-Beetle-HASH to generate a hash value. ">photon_beetle_hash()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="photon-beetle-hash_8h.html#ad7f3b401aff542a94794fe16a4f95bbb" title="Updates a Photon-Beetle-HASH state with more input data. ">photon_beetle_hash_update()</a>, <a class="el" href="photon-beetle-hash_8h.html#a4c10ab66cd18370075e040d1480a9cc3" title="Returns the final hash value from a Photon-Beetle-HASH hashing operation. ">photon_beetle_hash_finalize()</a>, <a class="el" href="photon-beetle-hash_8h.html#aa9ac930e2876f15bc6b08c408bb51b4a" title="Hashes a block of input data with PHOTON-Beetle-HASH to generate a hash value. ">photon_beetle_hash()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aaaf5703d80cee026d5bad1eae689fb00"></a>
+<a class="anchor" id="ad7f3b401aff542a94794fe16a4f95bbb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -255,7 +256,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -282,7 +283,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

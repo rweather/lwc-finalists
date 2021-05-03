@@ -89,51 +89,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="aead-random_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * This file has been placed into the public domain by Rhys Weatherley.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * It can be reused and modified as necessary.  It may even be completely</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * thrown away and replaced with a different system-specific implementation</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * that provides the same API.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef LWCRYPTO_AEAD_RANDOM_H</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LWCRYPTO_AEAD_RANDOM_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#aabaf63ea152ee51859cb046a2740bfc7">aead_random_init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Copyright (C) 2021 Southern Storm Software, Pty Ltd.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Permission is hereby granted, free of charge, to any person obtaining a</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * to deal in the Software without restriction, including without limitation</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * the rights to use, copy, modify, merge, publish, distribute, sublicense,</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * and/or sell copies of the Software, and to permit persons to whom the</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Software is furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * The above copyright notice and this permission notice shall be included</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * in all copies or substantial portions of the Software.</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * DEALINGS IN THE SOFTWARE.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LWCRYPTO_AEAD_RANDOM_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LWCRYPTO_AEAD_RANDOM_H</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#afd82a0f33788413a176333d0afe697b3">aead_random_finish</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;uint32_t <a class="code" href="aead-random_8h.html#a01593d6cb100e428306930561e747182">aead_random_generate_32</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#aabaf63ea152ee51859cb046a2740bfc7">aead_random_init</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;uint64_t <a class="code" href="aead-random_8h.html#a4d5fe0b937db991d13dcaf1cd4b3aba4">aead_random_generate_64</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#ae4014b6affbf43fe075f3217557de259">aead_random_generate</a>(<span class="keywordtype">void</span> *buffer, <span class="keywordtype">unsigned</span> size);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#afd82a0f33788413a176333d0afe697b3">aead_random_finish</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;uint32_t <a class="code" href="aead-random_8h.html#a01593d6cb100e428306930561e747182">aead_random_generate_32</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#a87b736739cc3d848f4a8634df09a4998">aead_random_reseed</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#af8a2d3a3e7647f6f4298a26122be6036">aead_random_set_seed</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> seed[32]);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aead-random_8h_html_afd82a0f33788413a176333d0afe697b3"><div class="ttname"><a href="aead-random_8h.html#afd82a0f33788413a176333d0afe697b3">aead_random_finish</a></div><div class="ttdeci">void aead_random_finish(void)</div><div class="ttdoc">Finishes using the random number source. </div><div class="ttdef"><b>Definition:</b> aead-random.c:235</div></div>
-<div class="ttc" id="aead-random_8h_html_af8a2d3a3e7647f6f4298a26122be6036"><div class="ttname"><a href="aead-random_8h.html#af8a2d3a3e7647f6f4298a26122be6036">aead_random_set_seed</a></div><div class="ttdeci">void aead_random_set_seed(const unsigned char seed[32])</div><div class="ttdoc">Restarts the random number generator with a specific 256-bit seed. </div><div class="ttdef"><b>Definition:</b> aead-random.c:385</div></div>
-<div class="ttc" id="aead-random_8h_html_a4d5fe0b937db991d13dcaf1cd4b3aba4"><div class="ttname"><a href="aead-random_8h.html#a4d5fe0b937db991d13dcaf1cd4b3aba4">aead_random_generate_64</a></div><div class="ttdeci">uint64_t aead_random_generate_64(void)</div><div class="ttdoc">Generates a single random 64-bit word. </div><div class="ttdef"><b>Definition:</b> aead-random.c:272</div></div>
-<div class="ttc" id="aead-random_8h_html_a01593d6cb100e428306930561e747182"><div class="ttname"><a href="aead-random_8h.html#a01593d6cb100e428306930561e747182">aead_random_generate_32</a></div><div class="ttdeci">uint32_t aead_random_generate_32(void)</div><div class="ttdoc">Generates a single random 32-bit word. </div><div class="ttdef"><b>Definition:</b> aead-random.c:243</div></div>
-<div class="ttc" id="aead-random_8h_html_a87b736739cc3d848f4a8634df09a4998"><div class="ttname"><a href="aead-random_8h.html#a87b736739cc3d848f4a8634df09a4998">aead_random_reseed</a></div><div class="ttdeci">void aead_random_reseed(void)</div><div class="ttdoc">Reseeds the random number generator from the system TRNG. </div><div class="ttdef"><b>Definition:</b> aead-random.c:335</div></div>
-<div class="ttc" id="aead-random_8h_html_aabaf63ea152ee51859cb046a2740bfc7"><div class="ttname"><a href="aead-random_8h.html#aabaf63ea152ee51859cb046a2740bfc7">aead_random_init</a></div><div class="ttdeci">void aead_random_init(void)</div><div class="ttdoc">Initializes the system random number generator for the generation of masking material. </div><div class="ttdef"><b>Definition:</b> aead-random.c:227</div></div>
-<div class="ttc" id="aead-random_8h_html_ae4014b6affbf43fe075f3217557de259"><div class="ttname"><a href="aead-random_8h.html#ae4014b6affbf43fe075f3217557de259">aead_random_generate</a></div><div class="ttdeci">void aead_random_generate(void *buffer, unsigned size)</div><div class="ttdoc">Generates a number of bytes into a buffer. </div><div class="ttdef"><b>Definition:</b> aead-random.c:291</div></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;uint64_t <a class="code" href="aead-random_8h.html#a4d5fe0b937db991d13dcaf1cd4b3aba4">aead_random_generate_64</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#ae4014b6affbf43fe075f3217557de259">aead_random_generate</a>(<span class="keywordtype">void</span> *buffer, <span class="keywordtype">unsigned</span> size);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">void</span> <a class="code" href="aead-random_8h.html#a87b736739cc3d848f4a8634df09a4998">aead_random_reseed</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aead-random_8h_html_afd82a0f33788413a176333d0afe697b3"><div class="ttname"><a href="aead-random_8h.html#afd82a0f33788413a176333d0afe697b3">aead_random_finish</a></div><div class="ttdeci">void aead_random_finish(void)</div><div class="ttdoc">Finishes using the random number source. </div><div class="ttdef"><b>Definition:</b> aead-random.c:150</div></div>
+<div class="ttc" id="aead-random_8h_html_a4d5fe0b937db991d13dcaf1cd4b3aba4"><div class="ttname"><a href="aead-random_8h.html#a4d5fe0b937db991d13dcaf1cd4b3aba4">aead_random_generate_64</a></div><div class="ttdeci">uint64_t aead_random_generate_64(void)</div><div class="ttdoc">Generates a single random 64-bit word. </div><div class="ttdef"><b>Definition:</b> aead-random.c:177</div></div>
+<div class="ttc" id="aead-random_8h_html_a01593d6cb100e428306930561e747182"><div class="ttname"><a href="aead-random_8h.html#a01593d6cb100e428306930561e747182">aead_random_generate_32</a></div><div class="ttdeci">uint32_t aead_random_generate_32(void)</div><div class="ttdoc">Generates a single random 32-bit word. </div><div class="ttdef"><b>Definition:</b> aead-random.c:156</div></div>
+<div class="ttc" id="aead-random_8h_html_a87b736739cc3d848f4a8634df09a4998"><div class="ttname"><a href="aead-random_8h.html#a87b736739cc3d848f4a8634df09a4998">aead_random_reseed</a></div><div class="ttdeci">void aead_random_reseed(void)</div><div class="ttdoc">Reseeds the random number generator from the system TRNG. </div><div class="ttdef"><b>Definition:</b> aead-random.c:201</div></div>
+<div class="ttc" id="aead-random_8h_html_aabaf63ea152ee51859cb046a2740bfc7"><div class="ttname"><a href="aead-random_8h.html#aabaf63ea152ee51859cb046a2740bfc7">aead_random_init</a></div><div class="ttdeci">void aead_random_init(void)</div><div class="ttdoc">Initializes the system random number generator for the generation of masking material. </div><div class="ttdef"><b>Definition:</b> aead-random.c:144</div></div>
+<div class="ttc" id="aead-random_8h_html_ae4014b6affbf43fe075f3217557de259"><div class="ttname"><a href="aead-random_8h.html#ae4014b6affbf43fe075f3217557de259">aead_random_generate</a></div><div class="ttdeci">void aead_random_generate(void *buffer, unsigned size)</div><div class="ttdoc">Generates a number of bytes into a buffer. </div><div class="ttdef"><b>Definition:</b> aead-random.c:185</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

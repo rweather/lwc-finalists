@@ -85,7 +85,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -99,13 +98,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <p><a href="ascon-hash_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ab2c9302a9e7a26f5e5585fb5cbbe747d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2c9302a9e7a26f5e5585fb5cbbe747d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#ab2c9302a9e7a26f5e5585fb5cbbe747d">ASCON_HASH_SIZE</a>&#160;&#160;&#160;32</td></tr>
-<tr class="memdesc:ab2c9302a9e7a26f5e5585fb5cbbe747d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the hash output for ASCON-HASH. <br/></td></tr>
-<tr class="separator:ab2c9302a9e7a26f5e5585fb5cbbe747d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a24d54ca18c4cdc47c1094828a87e8760"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a24d54ca18c4cdc47c1094828a87e8760"></a>
@@ -115,15 +107,15 @@ typedef <a class="el" href="unionascon__xof__state__t.html">ascon_xof_state_t</a
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac98ba6887d81d2a0c250ab1f1d3f400c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#ac98ba6887d81d2a0c250ab1f1d3f400c">ascon_hash</a> (unsigned char *out, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:ac98ba6887d81d2a0c250ab1f1d3f400c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with ASCON-HASH.  <a href="#ac98ba6887d81d2a0c250ab1f1d3f400c">More...</a><br/></td></tr>
-<tr class="separator:ac98ba6887d81d2a0c250ab1f1d3f400c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dcda54d9402c14917be5752033f76c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a9dcda54d9402c14917be5752033f76c4">ascon_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a9dcda54d9402c14917be5752033f76c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with ASCON-HASH.  <a href="#a9dcda54d9402c14917be5752033f76c4">More...</a><br/></td></tr>
+<tr class="separator:a9dcda54d9402c14917be5752033f76c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cc8894358bbf26c57b7a2cffb122865"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a1cc8894358bbf26c57b7a2cffb122865">ascon_hash_init</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state)</td></tr>
 <tr class="memdesc:a1cc8894358bbf26c57b7a2cffb122865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for an ASCON-HASH hashing operation.  <a href="#a1cc8894358bbf26c57b7a2cffb122865">More...</a><br/></td></tr>
 <tr class="separator:a1cc8894358bbf26c57b7a2cffb122865"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3eb114e60d880b0937832bf25fcd9946"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a3eb114e60d880b0937832bf25fcd9946">ascon_hash_update</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:a3eb114e60d880b0937832bf25fcd9946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an ASCON-HASH state with more input data.  <a href="#a3eb114e60d880b0937832bf25fcd9946">More...</a><br/></td></tr>
-<tr class="separator:a3eb114e60d880b0937832bf25fcd9946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc41e4ccd0f2633fdddf3667e4b0894"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a5fc41e4ccd0f2633fdddf3667e4b0894">ascon_hash_update</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a5fc41e4ccd0f2633fdddf3667e4b0894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an ASCON-HASH state with more input data.  <a href="#a5fc41e4ccd0f2633fdddf3667e4b0894">More...</a><br/></td></tr>
+<tr class="separator:a5fc41e4ccd0f2633fdddf3667e4b0894"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6acc6df761756d14f1b58ea25645c0f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a6acc6df761756d14f1b58ea25645c0f7">ascon_hash_finalize</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state, unsigned char *out)</td></tr>
 <tr class="memdesc:a6acc6df761756d14f1b58ea25645c0f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from an ASCON-HASH hashing operation.  <a href="#a6acc6df761756d14f1b58ea25645c0f7">More...</a><br/></td></tr>
 <tr class="separator:a6acc6df761756d14f1b58ea25645c0f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,7 +125,7 @@ Functions</h2></td></tr>
 <p>ASCON-XOF extensible output function (XOF).</p>
 <p>References: <a href="https://ascon.iaik.tugraz.at/">https://ascon.iaik.tugraz.at/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ac98ba6887d81d2a0c250ab1f1d3f400c"></a>
+<a class="anchor" id="a9dcda54d9402c14917be5752033f76c4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -152,7 +144,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -209,7 +201,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a1cc8894358bbf26c57b7a2cffb122865" title="Initializes the state for an ASCON-HASH hashing operation. ">ascon_hash_init()</a>, <a class="el" href="ascon-hash_8h.html#a3eb114e60d880b0937832bf25fcd9946" title="Updates an ASCON-HASH state with more input data. ">ascon_hash_update()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a1cc8894358bbf26c57b7a2cffb122865" title="Initializes the state for an ASCON-HASH hashing operation. ">ascon_hash_init()</a>, <a class="el" href="ascon-hash_8h.html#a5fc41e4ccd0f2633fdddf3667e4b0894" title="Updates an ASCON-HASH state with more input data. ">ascon_hash_update()</a> </dd></dl>
 
 </div>
 </div>
@@ -234,11 +226,11 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a3eb114e60d880b0937832bf25fcd9946" title="Updates an ASCON-HASH state with more input data. ">ascon_hash_update()</a>, <a class="el" href="ascon-hash_8h.html#a6acc6df761756d14f1b58ea25645c0f7" title="Returns the final hash value from an ASCON-HASH hashing operation. ">ascon_hash_finalize()</a>, <a class="el" href="ascon-hash_8h.html#ac98ba6887d81d2a0c250ab1f1d3f400c" title="Hashes a block of input data with ASCON-HASH. ">ascon_hash()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a5fc41e4ccd0f2633fdddf3667e4b0894" title="Updates an ASCON-HASH state with more input data. ">ascon_hash_update()</a>, <a class="el" href="ascon-hash_8h.html#a6acc6df761756d14f1b58ea25645c0f7" title="Returns the final hash value from an ASCON-HASH hashing operation. ">ascon_hash_finalize()</a>, <a class="el" href="ascon-hash_8h.html#a9dcda54d9402c14917be5752033f76c4" title="Hashes a block of input data with ASCON-HASH. ">ascon_hash()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a3eb114e60d880b0937832bf25fcd9946"></a>
+<a class="anchor" id="a5fc41e4ccd0f2633fdddf3667e4b0894"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -257,7 +249,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -284,7 +276,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

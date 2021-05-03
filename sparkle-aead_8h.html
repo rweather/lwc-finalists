@@ -94,7 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Encryption algorithms based on the SPARKLE permutation.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="sparkle-aead_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -150,30 +151,30 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad3c9320b6006a7c5502cb741dc1b4b78"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#ad3c9320b6006a7c5502cb741dc1b4b78">schwaemm_256_128_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:ad3c9320b6006a7c5502cb741dc1b4b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm256-128.  <a href="#ad3c9320b6006a7c5502cb741dc1b4b78">More...</a><br/></td></tr>
-<tr class="separator:ad3c9320b6006a7c5502cb741dc1b4b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42caa97b2e0868b0a5188d868ac42195"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a42caa97b2e0868b0a5188d868ac42195">schwaemm_256_128_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a42caa97b2e0868b0a5188d868ac42195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm256-128.  <a href="#a42caa97b2e0868b0a5188d868ac42195">More...</a><br/></td></tr>
-<tr class="separator:a42caa97b2e0868b0a5188d868ac42195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41cd61d9029e2a61b92cae945c76bab7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a41cd61d9029e2a61b92cae945c76bab7">schwaemm_192_192_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a41cd61d9029e2a61b92cae945c76bab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm192-192.  <a href="#a41cd61d9029e2a61b92cae945c76bab7">More...</a><br/></td></tr>
-<tr class="separator:a41cd61d9029e2a61b92cae945c76bab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1441ae441101b7123b82f3f6bf595e83"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a1441ae441101b7123b82f3f6bf595e83">schwaemm_192_192_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a1441ae441101b7123b82f3f6bf595e83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm192-192.  <a href="#a1441ae441101b7123b82f3f6bf595e83">More...</a><br/></td></tr>
-<tr class="separator:a1441ae441101b7123b82f3f6bf595e83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae7ca156b78ed3a83e9dc2b2ab326920"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#aae7ca156b78ed3a83e9dc2b2ab326920">schwaemm_128_128_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:aae7ca156b78ed3a83e9dc2b2ab326920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm128-128.  <a href="#aae7ca156b78ed3a83e9dc2b2ab326920">More...</a><br/></td></tr>
-<tr class="separator:aae7ca156b78ed3a83e9dc2b2ab326920"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a7d23f1c0d75f849b7f1d875ace7160"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a2a7d23f1c0d75f849b7f1d875ace7160">schwaemm_128_128_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a2a7d23f1c0d75f849b7f1d875ace7160"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm128-128.  <a href="#a2a7d23f1c0d75f849b7f1d875ace7160">More...</a><br/></td></tr>
-<tr class="separator:a2a7d23f1c0d75f849b7f1d875ace7160"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9940883671504792086ea6e8ca79652a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a9940883671504792086ea6e8ca79652a">schwaemm_256_256_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a9940883671504792086ea6e8ca79652a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm256-256.  <a href="#a9940883671504792086ea6e8ca79652a">More...</a><br/></td></tr>
-<tr class="separator:a9940883671504792086ea6e8ca79652a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a941ff77b27a2ad50fb5f0338a229bef3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a941ff77b27a2ad50fb5f0338a229bef3">schwaemm_256_256_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a941ff77b27a2ad50fb5f0338a229bef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm256-256.  <a href="#a941ff77b27a2ad50fb5f0338a229bef3">More...</a><br/></td></tr>
-<tr class="separator:a941ff77b27a2ad50fb5f0338a229bef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7381c7509bfc2ab0c20a5f0771df6b04"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a7381c7509bfc2ab0c20a5f0771df6b04">schwaemm_256_128_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a7381c7509bfc2ab0c20a5f0771df6b04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm256-128.  <a href="#a7381c7509bfc2ab0c20a5f0771df6b04">More...</a><br/></td></tr>
+<tr class="separator:a7381c7509bfc2ab0c20a5f0771df6b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dc26ccd96c1330b03276d61f4607431"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a5dc26ccd96c1330b03276d61f4607431">schwaemm_256_128_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a5dc26ccd96c1330b03276d61f4607431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm256-128.  <a href="#a5dc26ccd96c1330b03276d61f4607431">More...</a><br/></td></tr>
+<tr class="separator:a5dc26ccd96c1330b03276d61f4607431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed8021069bdcb651c7ef9c20e890b7c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a4ed8021069bdcb651c7ef9c20e890b7c">schwaemm_192_192_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a4ed8021069bdcb651c7ef9c20e890b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm192-192.  <a href="#a4ed8021069bdcb651c7ef9c20e890b7c">More...</a><br/></td></tr>
+<tr class="separator:a4ed8021069bdcb651c7ef9c20e890b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad958dcc888a7e61f1742f32aefe9274e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#ad958dcc888a7e61f1742f32aefe9274e">schwaemm_192_192_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:ad958dcc888a7e61f1742f32aefe9274e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm192-192.  <a href="#ad958dcc888a7e61f1742f32aefe9274e">More...</a><br/></td></tr>
+<tr class="separator:ad958dcc888a7e61f1742f32aefe9274e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8536233d0b61995879b8c8b75e9b5df4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a8536233d0b61995879b8c8b75e9b5df4">schwaemm_128_128_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a8536233d0b61995879b8c8b75e9b5df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm128-128.  <a href="#a8536233d0b61995879b8c8b75e9b5df4">More...</a><br/></td></tr>
+<tr class="separator:a8536233d0b61995879b8c8b75e9b5df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1051dcc07684521d1487b57a1726f36"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#af1051dcc07684521d1487b57a1726f36">schwaemm_128_128_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:af1051dcc07684521d1487b57a1726f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm128-128.  <a href="#af1051dcc07684521d1487b57a1726f36">More...</a><br/></td></tr>
+<tr class="separator:af1051dcc07684521d1487b57a1726f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f7ec2528f826f29a8ce32dae6e3c49"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#aa8f7ec2528f826f29a8ce32dae6e3c49">schwaemm_256_256_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:aa8f7ec2528f826f29a8ce32dae6e3c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Schwaemm256-256.  <a href="#aa8f7ec2528f826f29a8ce32dae6e3c49">More...</a><br/></td></tr>
+<tr class="separator:aa8f7ec2528f826f29a8ce32dae6e3c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d4dfc998d6fc408f3a1f9cb1d385847"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-aead_8h.html#a8d4dfc998d6fc408f3a1f9cb1d385847">schwaemm_256_256_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a8d4dfc998d6fc408f3a1f9cb1d385847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Schwaemm256-256.  <a href="#a8d4dfc998d6fc408f3a1f9cb1d385847">More...</a><br/></td></tr>
+<tr class="separator:a8d4dfc998d6fc408f3a1f9cb1d385847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Encryption algorithms based on the SPARKLE permutation. </p>
@@ -186,7 +187,7 @@ Functions</h2></td></tr>
 </ul>
 <p>References: <a href="https://www.cryptolux.org/index.php/Sparkle">https://www.cryptolux.org/index.php/Sparkle</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a2a7d23f1c0d75f849b7f1d875ace7160"></a>
+<a class="anchor" id="af1051dcc07684521d1487b57a1726f36"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -199,14 +200,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -217,7 +212,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -229,7 +224,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -257,7 +252,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -268,11 +262,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#aae7ca156b78ed3a83e9dc2b2ab326920" title="Encrypts and authenticates a packet with Schwaemm128-128. ">schwaemm_128_128_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a8536233d0b61995879b8c8b75e9b5df4" title="Encrypts and authenticates a packet with Schwaemm128-128. ">schwaemm_128_128_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aae7ca156b78ed3a83e9dc2b2ab326920"></a>
+<a class="anchor" id="a8536233d0b61995879b8c8b75e9b5df4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -285,7 +279,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -297,7 +291,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -309,14 +303,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -347,18 +335,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a2a7d23f1c0d75f849b7f1d875ace7160" title="Decrypts and authenticates a packet with Schwaemm128-128. ">schwaemm_128_128_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#af1051dcc07684521d1487b57a1726f36" title="Decrypts and authenticates a packet with Schwaemm128-128. ">schwaemm_128_128_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a1441ae441101b7123b82f3f6bf595e83"></a>
+<a class="anchor" id="ad958dcc888a7e61f1742f32aefe9274e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -371,14 +358,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -389,7 +370,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -401,7 +382,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -429,7 +410,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 24 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -440,11 +420,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a41cd61d9029e2a61b92cae945c76bab7" title="Encrypts and authenticates a packet with Schwaemm192-192. ">schwaemm_192_192_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a4ed8021069bdcb651c7ef9c20e890b7c" title="Encrypts and authenticates a packet with Schwaemm192-192. ">schwaemm_192_192_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a41cd61d9029e2a61b92cae945c76bab7"></a>
+<a class="anchor" id="a4ed8021069bdcb651c7ef9c20e890b7c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -457,7 +437,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -469,7 +449,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -481,14 +461,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -519,18 +493,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 24 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 24 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a1441ae441101b7123b82f3f6bf595e83" title="Decrypts and authenticates a packet with Schwaemm192-192. ">schwaemm_192_192_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#ad958dcc888a7e61f1742f32aefe9274e" title="Decrypts and authenticates a packet with Schwaemm192-192. ">schwaemm_192_192_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a42caa97b2e0868b0a5188d868ac42195"></a>
+<a class="anchor" id="a5dc26ccd96c1330b03276d61f4607431"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -543,14 +516,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -561,7 +528,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -573,7 +540,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -601,7 +568,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -612,11 +578,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#ad3c9320b6006a7c5502cb741dc1b4b78" title="Encrypts and authenticates a packet with Schwaemm256-128. ">schwaemm_256_128_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a7381c7509bfc2ab0c20a5f0771df6b04" title="Encrypts and authenticates a packet with Schwaemm256-128. ">schwaemm_256_128_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ad3c9320b6006a7c5502cb741dc1b4b78"></a>
+<a class="anchor" id="a7381c7509bfc2ab0c20a5f0771df6b04"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -629,7 +595,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -641,7 +607,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -653,14 +619,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -691,18 +651,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 32 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a42caa97b2e0868b0a5188d868ac42195" title="Decrypts and authenticates a packet with Schwaemm256-128. ">schwaemm_256_128_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a5dc26ccd96c1330b03276d61f4607431" title="Decrypts and authenticates a packet with Schwaemm256-128. ">schwaemm_256_128_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a941ff77b27a2ad50fb5f0338a229bef3"></a>
+<a class="anchor" id="a8d4dfc998d6fc408f3a1f9cb1d385847"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -715,14 +674,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -733,7 +686,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -745,7 +698,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -773,7 +726,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -784,11 +736,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a9940883671504792086ea6e8ca79652a" title="Encrypts and authenticates a packet with Schwaemm256-256. ">schwaemm_256_256_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#aa8f7ec2528f826f29a8ce32dae6e3c49" title="Encrypts and authenticates a packet with Schwaemm256-256. ">schwaemm_256_256_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a9940883671504792086ea6e8ca79652a"></a>
+<a class="anchor" id="aa8f7ec2528f826f29a8ce32dae6e3c49"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -801,7 +753,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -813,7 +765,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -825,14 +777,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -863,21 +809,20 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a941ff77b27a2ad50fb5f0338a229bef3" title="Decrypts and authenticates a packet with Schwaemm256-256. ">schwaemm_256_256_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-aead_8h.html#a8d4dfc998d6fc408f3a1f9cb1d385847" title="Decrypts and authenticates a packet with Schwaemm256-256. ">schwaemm_256_256_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

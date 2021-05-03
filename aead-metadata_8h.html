@@ -137,30 +137,30 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ab497cc2c7580ebb183c9e8e8b4f0645c"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#ab497cc2c7580ebb183c9e8e8b4f0645c">aead_cipher_encrypt_t</a> )(unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:ab497cc2c7580ebb183c9e8e8b4f0645c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with an AEAD scheme.  <a href="#ab497cc2c7580ebb183c9e8e8b4f0645c">More...</a><br/></td></tr>
-<tr class="separator:ab497cc2c7580ebb183c9e8e8b4f0645c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01a3b8ccfd367356c116837456b7875c"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a01a3b8ccfd367356c116837456b7875c">aead_cipher_decrypt_t</a> )(unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a01a3b8ccfd367356c116837456b7875c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with an AEAD scheme.  <a href="#a01a3b8ccfd367356c116837456b7875c">More...</a><br/></td></tr>
-<tr class="separator:a01a3b8ccfd367356c116837456b7875c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a767390d1aca215584b7c339fc559aca8"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a767390d1aca215584b7c339fc559aca8">aead_hash_t</a> )(unsigned char *out, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:a767390d1aca215584b7c339fc559aca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data.  <a href="#a767390d1aca215584b7c339fc559aca8">More...</a><br/></td></tr>
-<tr class="separator:a767390d1aca215584b7c339fc559aca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a617d00939ed99a002d3848d4239011f5"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a617d00939ed99a002d3848d4239011f5">aead_cipher_encrypt_t</a> )(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a617d00939ed99a002d3848d4239011f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with an AEAD scheme.  <a href="#a617d00939ed99a002d3848d4239011f5">More...</a><br/></td></tr>
+<tr class="separator:a617d00939ed99a002d3848d4239011f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7131bd4a4a04635f77c138bd4a77a99d"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a7131bd4a4a04635f77c138bd4a77a99d">aead_cipher_decrypt_t</a> )(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a7131bd4a4a04635f77c138bd4a77a99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with an AEAD scheme.  <a href="#a7131bd4a4a04635f77c138bd4a77a99d">More...</a><br/></td></tr>
+<tr class="separator:a7131bd4a4a04635f77c138bd4a77a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c936f19ce8ced63189e95033d955c6"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a62c936f19ce8ced63189e95033d955c6">aead_hash_t</a> )(unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a62c936f19ce8ced63189e95033d955c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data.  <a href="#a62c936f19ce8ced63189e95033d955c6">More...</a><br/></td></tr>
+<tr class="separator:a62c936f19ce8ced63189e95033d955c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba2e9c4d866dd218472107e9d7bba204"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#aba2e9c4d866dd218472107e9d7bba204">aead_hash_init_t</a> )(void *state)</td></tr>
 <tr class="memdesc:aba2e9c4d866dd218472107e9d7bba204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for a hashing operation.  <a href="#aba2e9c4d866dd218472107e9d7bba204">More...</a><br/></td></tr>
 <tr class="separator:aba2e9c4d866dd218472107e9d7bba204"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af84795b30d21325e486f4b2864b1901f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#af84795b30d21325e486f4b2864b1901f">aead_hash_update_t</a> )(void *state, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:af84795b30d21325e486f4b2864b1901f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a hash state with more input data.  <a href="#af84795b30d21325e486f4b2864b1901f">More...</a><br/></td></tr>
-<tr class="separator:af84795b30d21325e486f4b2864b1901f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2c6c1e51580cbb160125f9c3c6cd0f"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a2c2c6c1e51580cbb160125f9c3c6cd0f">aead_hash_update_t</a> )(void *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a2c2c6c1e51580cbb160125f9c3c6cd0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a hash state with more input data.  <a href="#a2c2c6c1e51580cbb160125f9c3c6cd0f">More...</a><br/></td></tr>
+<tr class="separator:a2c2c6c1e51580cbb160125f9c3c6cd0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a43ca5f6dcd78d7d0a8831a070de0a7"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a5a43ca5f6dcd78d7d0a8831a070de0a7">aead_hash_finalize_t</a> )(void *state, unsigned char *out)</td></tr>
 <tr class="memdesc:a5a43ca5f6dcd78d7d0a8831a070de0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from a hashing operation.  <a href="#a5a43ca5f6dcd78d7d0a8831a070de0a7">More...</a><br/></td></tr>
 <tr class="separator:a5a43ca5f6dcd78d7d0a8831a070de0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4ab721a972d5984b466aab2066a0190"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#ac4ab721a972d5984b466aab2066a0190">aead_xof_absorb_t</a> )(void *state, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:ac4ab721a972d5984b466aab2066a0190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aborbs more input data into an XOF state.  <a href="#ac4ab721a972d5984b466aab2066a0190">More...</a><br/></td></tr>
-<tr class="separator:ac4ab721a972d5984b466aab2066a0190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a758506425d04f1eb5d689ae68a7e977b"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a758506425d04f1eb5d689ae68a7e977b">aead_xof_squeeze_t</a> )(void *state, unsigned char *out, unsigned long long outlen)</td></tr>
-<tr class="memdesc:a758506425d04f1eb5d689ae68a7e977b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from an XOF state.  <a href="#a758506425d04f1eb5d689ae68a7e977b">More...</a><br/></td></tr>
-<tr class="separator:a758506425d04f1eb5d689ae68a7e977b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afec40a10ad5d8e5528b4e6cb21b84c0a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#afec40a10ad5d8e5528b4e6cb21b84c0a">aead_xof_absorb_t</a> )(void *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:afec40a10ad5d8e5528b4e6cb21b84c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aborbs more input data into an XOF state.  <a href="#afec40a10ad5d8e5528b4e6cb21b84c0a">More...</a><br/></td></tr>
+<tr class="separator:afec40a10ad5d8e5528b4e6cb21b84c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff49f6ca6bb1e0b978597187d7456f1"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a0ff49f6ca6bb1e0b978597187d7456f1">aead_xof_squeeze_t</a> )(void *state, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:a0ff49f6ca6bb1e0b978597187d7456f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from an XOF state.  <a href="#a0ff49f6ca6bb1e0b978597187d7456f1">More...</a><br/></td></tr>
+<tr class="separator:a0ff49f6ca6bb1e0b978597187d7456f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -342,12 +342,12 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="a01a3b8ccfd367356c116837456b7875c"></a>
+<a class="anchor" id="a7131bd4a4a04635f77c138bd4a77a99d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int(* aead_cipher_decrypt_t)(unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td>
+          <td class="memname">typedef int(* aead_cipher_decrypt_t)(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -357,7 +357,6 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - normally not used by AEAD schemes. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -371,12 +370,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab497cc2c7580ebb183c9e8e8b4f0645c"></a>
+<a class="anchor" id="a617d00939ed99a002d3848d4239011f5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int(* aead_cipher_encrypt_t)(unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td>
+          <td class="memname">typedef int(* aead_cipher_encrypt_t)(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -390,7 +389,6 @@ Variables</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - normally not used by AEAD schemes. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the key to use to encrypt the packet.</td></tr>
   </table>
@@ -441,12 +439,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a767390d1aca215584b7c339fc559aca8"></a>
+<a class="anchor" id="a62c936f19ce8ced63189e95033d955c6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int(* aead_hash_t)(unsigned char *out, const unsigned char *in, unsigned long long inlen)</td>
+          <td class="memname">typedef int(* aead_hash_t)(unsigned char *out, const unsigned char *in, size_t inlen)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -464,12 +462,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af84795b30d21325e486f4b2864b1901f"></a>
+<a class="anchor" id="a2c2c6c1e51580cbb160125f9c3c6cd0f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* aead_hash_update_t)(void *state, const unsigned char *in, unsigned long long inlen)</td>
+          <td class="memname">typedef void(* aead_hash_update_t)(void *state, const unsigned char *in, size_t inlen)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -486,12 +484,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac4ab721a972d5984b466aab2066a0190"></a>
+<a class="anchor" id="afec40a10ad5d8e5528b4e6cb21b84c0a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* aead_xof_absorb_t)(void *state, const unsigned char *in, unsigned long long inlen)</td>
+          <td class="memname">typedef void(* aead_xof_absorb_t)(void *state, const unsigned char *in, size_t inlen)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -509,12 +507,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a758506425d04f1eb5d689ae68a7e977b"></a>
+<a class="anchor" id="a0ff49f6ca6bb1e0b978597187d7456f1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* aead_xof_squeeze_t)(void *state, unsigned char *out, unsigned long long outlen)</td>
+          <td class="memname">typedef void(* aead_xof_squeeze_t)(void *state, unsigned char *out, size_t outlen)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -534,7 +532,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

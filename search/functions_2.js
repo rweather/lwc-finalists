@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['esch_5f256_5fhash',['esch_256_hash',['../sparkle-hash_8h.html#ae061a2b568838902040b40804af2941c',1,'sparkle-hash.c']]],
+  ['esch_5f256_5fhash',['esch_256_hash',['../sparkle-hash_8h.html#a775c2c4bf7851deaeaa87d828fb06808',1,'sparkle-hash.c']]],
   ['esch_5f256_5fhash_5ffinalize',['esch_256_hash_finalize',['../sparkle-hash_8h.html#a83bf58243c9b57fbbb99a739fe1ae7dd',1,'sparkle-hash.c']]],
   ['esch_5f256_5fhash_5finit',['esch_256_hash_init',['../sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2',1,'sparkle-hash.c']]],
-  ['esch_5f256_5fhash_5fupdate',['esch_256_hash_update',['../sparkle-hash_8h.html#a7ef2860644c2238c45cb4dfb78c32841',1,'sparkle-hash.c']]],
-  ['esch_5f384_5fhash',['esch_384_hash',['../sparkle-hash_8h.html#a2f84f3b98939c4ce777f89920d77e05d',1,'sparkle-hash.c']]],
+  ['esch_5f256_5fhash_5fupdate',['esch_256_hash_update',['../sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15',1,'sparkle-hash.c']]],
+  ['esch_5f256_5fhmac',['esch_256_hmac',['../sparkle-hmac_8h.html#a6ab6e173bb6761ca04a0498c7b533b9a',1,'sparkle-hmac.h']]],
+  ['esch_5f256_5fhmac_5ffinalize',['esch_256_hmac_finalize',['../sparkle-hmac_8h.html#ae87d4badb9072854ef4438c9b34c4dc7',1,'sparkle-hmac.h']]],
+  ['esch_5f256_5fhmac_5finit',['esch_256_hmac_init',['../sparkle-hmac_8h.html#aa18f2f4bba14e22276e3d7198d1e8a01',1,'sparkle-hmac.h']]],
+  ['esch_5f256_5fhmac_5fupdate',['esch_256_hmac_update',['../sparkle-hmac_8h.html#a21b1837da136b3c89f7eff3bf1305714',1,'sparkle-hmac.h']]],
+  ['esch_5f384_5fhash',['esch_384_hash',['../sparkle-hash_8h.html#a2c9cd6cc3eb6cddea7d2251b0af77fd4',1,'sparkle-hash.c']]],
   ['esch_5f384_5fhash_5ffinalize',['esch_384_hash_finalize',['../sparkle-hash_8h.html#a648bb24a9a30431f27d3ad0ccce17dd4',1,'sparkle-hash.c']]],
   ['esch_5f384_5fhash_5finit',['esch_384_hash_init',['../sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853',1,'sparkle-hash.c']]],
-  ['esch_5f384_5fhash_5fupdate',['esch_384_hash_update',['../sparkle-hash_8h.html#aba781c723ef400e62f4479ee689aeb66',1,'sparkle-hash.c']]]
+  ['esch_5f384_5fhash_5fupdate',['esch_384_hash_update',['../sparkle-hash_8h.html#a70b948b4aa872daf2f3dd82b67f7e787',1,'sparkle-hash.c']]],
+  ['esch_5f384_5fhmac',['esch_384_hmac',['../sparkle-hmac_8h.html#adfd76f8f7bf2f0eed6c1af3177915435',1,'sparkle-hmac.h']]],
+  ['esch_5f384_5fhmac_5ffinalize',['esch_384_hmac_finalize',['../sparkle-hmac_8h.html#a1343ae9c0966a67a78411b8e2a6e39b5',1,'sparkle-hmac.h']]],
+  ['esch_5f384_5fhmac_5finit',['esch_384_hmac_init',['../sparkle-hmac_8h.html#a938638182bd591fb77494c060c3434ed',1,'sparkle-hmac.h']]],
+  ['esch_5f384_5fhmac_5fupdate',['esch_384_hmac_update',['../sparkle-hmac_8h.html#a96e828cc2a7e95f4bdef698a039e1945',1,'sparkle-hmac.h']]]
 ];

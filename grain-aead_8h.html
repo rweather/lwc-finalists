@@ -94,7 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Grain-128AEAD authenticated encryption algorithm.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="grain-aead_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -114,19 +115,19 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab7ae0b5a3bc56b377b57f549c89cbea2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-aead_8h.html#ab7ae0b5a3bc56b377b57f549c89cbea2">grain128_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:ab7ae0b5a3bc56b377b57f549c89cbea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Grain-128AEAD.  <a href="#ab7ae0b5a3bc56b377b57f549c89cbea2">More...</a><br/></td></tr>
-<tr class="separator:ab7ae0b5a3bc56b377b57f549c89cbea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fad29d2e493e26a7f3a1667ce09cc62"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-aead_8h.html#a2fad29d2e493e26a7f3a1667ce09cc62">grain128_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a2fad29d2e493e26a7f3a1667ce09cc62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Grain-128AEAD.  <a href="#a2fad29d2e493e26a7f3a1667ce09cc62">More...</a><br/></td></tr>
-<tr class="separator:a2fad29d2e493e26a7f3a1667ce09cc62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8474372c27e9ba89cfcb8111c3a2340"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-aead_8h.html#ac8474372c27e9ba89cfcb8111c3a2340">grain128_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:ac8474372c27e9ba89cfcb8111c3a2340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Grain-128AEAD.  <a href="#ac8474372c27e9ba89cfcb8111c3a2340">More...</a><br/></td></tr>
+<tr class="separator:ac8474372c27e9ba89cfcb8111c3a2340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18eb2819e087e7ea719eece32f5b3f10"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-aead_8h.html#a18eb2819e087e7ea719eece32f5b3f10">grain128_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a18eb2819e087e7ea719eece32f5b3f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Grain-128AEAD.  <a href="#a18eb2819e087e7ea719eece32f5b3f10">More...</a><br/></td></tr>
+<tr class="separator:a18eb2819e087e7ea719eece32f5b3f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Grain-128AEAD authenticated encryption algorithm. </p>
 <p>Grain-128AEAD is an authenticated encryption algorithm based around a combination of a 128-bit linear feedback shift register (LFSR) and a 128-bit non-linear feedback shift register (NFSR). It is a member of the Grain family of stream ciphers.</p>
 <p>References: <a href="https://grain-128aead.github.io/">https://grain-128aead.github.io/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a2fad29d2e493e26a7f3a1667ce09cc62"></a>
+<a class="anchor" id="a18eb2819e087e7ea719eece32f5b3f10"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -139,14 +140,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -157,7 +152,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -169,7 +164,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -197,7 +192,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 8 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -208,11 +202,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="grain-aead_8h.html#ab7ae0b5a3bc56b377b57f549c89cbea2" title="Encrypts and authenticates a packet with Grain-128AEAD. ">grain128_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="grain-aead_8h.html#ac8474372c27e9ba89cfcb8111c3a2340" title="Encrypts and authenticates a packet with Grain-128AEAD. ">grain128_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ab7ae0b5a3bc56b377b57f549c89cbea2"></a>
+<a class="anchor" id="ac8474372c27e9ba89cfcb8111c3a2340"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -225,7 +219,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -237,7 +231,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -249,14 +243,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -287,21 +275,20 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 12 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="grain-aead_8h.html#a2fad29d2e493e26a7f3a1667ce09cc62" title="Decrypts and authenticates a packet with Grain-128AEAD. ">grain128_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="grain-aead_8h.html#a18eb2819e087e7ea719eece32f5b3f10" title="Decrypts and authenticates a packet with Grain-128AEAD. ">grain128_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -116,12 +116,12 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa83be30902bd74ddb3aa49dc81c0db45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-chachapoly_8h.html#aa83be30902bd74ddb3aa49dc81c0db45">internal_chachapoly_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:aa83be30902bd74ddb3aa49dc81c0db45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ChaChaPoly.  <a href="#aa83be30902bd74ddb3aa49dc81c0db45">More...</a><br/></td></tr>
-<tr class="separator:aa83be30902bd74ddb3aa49dc81c0db45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39020dcd94e59abe74d278ee569fdb70"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-chachapoly_8h.html#a39020dcd94e59abe74d278ee569fdb70">internal_chachapoly_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a39020dcd94e59abe74d278ee569fdb70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ChaChaPoly.  <a href="#a39020dcd94e59abe74d278ee569fdb70">More...</a><br/></td></tr>
-<tr class="separator:a39020dcd94e59abe74d278ee569fdb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008f5405970ddf5fd87c6a97c1ca0401"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-chachapoly_8h.html#a008f5405970ddf5fd87c6a97c1ca0401">internal_chachapoly_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a008f5405970ddf5fd87c6a97c1ca0401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ChaChaPoly.  <a href="#a008f5405970ddf5fd87c6a97c1ca0401">More...</a><br/></td></tr>
+<tr class="separator:a008f5405970ddf5fd87c6a97c1ca0401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e59cdea0ec8c5cae97ebb097e961f8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-chachapoly_8h.html#a9e59cdea0ec8c5cae97ebb097e961f8e">internal_chachapoly_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a9e59cdea0ec8c5cae97ebb097e961f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ChaChaPoly.  <a href="#a9e59cdea0ec8c5cae97ebb097e961f8e">More...</a><br/></td></tr>
+<tr class="separator:a9e59cdea0ec8c5cae97ebb097e961f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -135,7 +135,7 @@ Variables</h2></td></tr>
 <p>ChaChaPoly is not one of the NIST lightweight submissions. We use it as a baseline to evaluate the performance of other ciphers. For example, a performance result of "1.2 ChaChaPolys" means that the algorithm is 1.2 times faster than ChaChaPoly on the same input data on the same hardware.</p>
 <p>This ChaChaPoly implementation is based on the one from the <a href="http://rweather.github.com/arduinolibs/crypto.html">Arduino Cryptography Library</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a39020dcd94e59abe74d278ee569fdb70"></a>
+<a class="anchor" id="a9e59cdea0ec8c5cae97ebb097e961f8e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -148,14 +148,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -166,7 +160,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -178,7 +172,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -206,7 +200,6 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -221,7 +214,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa83be30902bd74ddb3aa49dc81c0db45"></a>
+<a class="anchor" id="a008f5405970ddf5fd87c6a97c1ca0401"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -234,7 +227,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -246,7 +239,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -258,14 +251,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -296,7 +283,6 @@ Variables</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
@@ -310,7 +296,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -113,43 +113,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LWCRYPTO_XOODYAK_AEAD_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LWCRYPTO_XOODYAK_AEAD_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="xoodyak-aead_8h.html#a8b3cb76f31b1c11fa19e118f63fdeeea">   55</a></span>&#160;<span class="preprocessor">#define XOODYAK_KEY_SIZE 16</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="xoodyak-aead_8h.html#a23cbfa471d507a2991d32f458378ac26">   60</a></span>&#160;<span class="preprocessor">#define XOODYAK_TAG_SIZE 16</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="xoodyak-aead_8h.html#ab5edaa9779bf4ff26eb4af3a2e3d881c">   65</a></span>&#160;<span class="preprocessor">#define XOODYAK_NONCE_SIZE 16</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">int</span> <a class="code" href="xoodyak-aead_8h.html#a922cc8b64545a4d06b84aad2c466fcf8">xoodyak_aead_encrypt</a></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> *clen,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> mlen,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> adlen,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *nsec,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="xoodyak-aead_8h.html#a8b3cb76f31b1c11fa19e118f63fdeeea">   57</a></span>&#160;<span class="preprocessor">#define XOODYAK_KEY_SIZE 16</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="xoodyak-aead_8h.html#a23cbfa471d507a2991d32f458378ac26">   62</a></span>&#160;<span class="preprocessor">#define XOODYAK_TAG_SIZE 16</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="xoodyak-aead_8h.html#ab5edaa9779bf4ff26eb4af3a2e3d881c">   67</a></span>&#160;<span class="preprocessor">#define XOODYAK_NONCE_SIZE 16</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">int</span> <a class="code" href="xoodyak-aead_8h.html#ad7e73d5f4802621eb985fbc7e463dfa1">xoodyak_aead_encrypt</a></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">int</span> <a class="code" href="xoodyak-aead_8h.html#ac64fbe6a95a1a1cad33f87fece148e2a">xoodyak_aead_decrypt</a></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> *mlen,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *nsec,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> clen,</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> adlen,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">int</span> <a class="code" href="xoodyak-aead_8h.html#ad4f90d6f9e65e536b6b585a561595c67">xoodyak_aead_decrypt</a></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="xoodyak-aead_8h_html_ac64fbe6a95a1a1cad33f87fece148e2a"><div class="ttname"><a href="xoodyak-aead_8h.html#ac64fbe6a95a1a1cad33f87fece148e2a">xoodyak_aead_decrypt</a></div><div class="ttdeci">int xoodyak_aead_decrypt(unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with Xoodyak. </div><div class="ttdef"><b>Definition:</b> xoodyak-aead.c:137</div></div>
-<div class="ttc" id="xoodyak-aead_8h_html_a922cc8b64545a4d06b84aad2c466fcf8"><div class="ttname"><a href="xoodyak-aead_8h.html#a922cc8b64545a4d06b84aad2c466fcf8">xoodyak_aead_encrypt</a></div><div class="ttdeci">int xoodyak_aead_encrypt(unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with Xoodyak. </div><div class="ttdef"><b>Definition:</b> xoodyak-aead.c:84</div></div>
+<div class="ttc" id="xoodyak-aead_8h_html_ad7e73d5f4802621eb985fbc7e463dfa1"><div class="ttname"><a href="xoodyak-aead_8h.html#ad7e73d5f4802621eb985fbc7e463dfa1">xoodyak_aead_encrypt</a></div><div class="ttdeci">int xoodyak_aead_encrypt(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with Xoodyak. </div><div class="ttdef"><b>Definition:</b> xoodyak-aead.c:84</div></div>
+<div class="ttc" id="xoodyak-aead_8h_html_ad4f90d6f9e65e536b6b585a561595c67"><div class="ttname"><a href="xoodyak-aead_8h.html#ad4f90d6f9e65e536b6b585a561595c67">xoodyak_aead_decrypt</a></div><div class="ttdeci">int xoodyak_aead_decrypt(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with Xoodyak. </div><div class="ttdef"><b>Definition:</b> xoodyak-aead.c:135</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

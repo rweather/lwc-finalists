@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['mask_5fuint16_5ft',['mask_uint16_t',['../internal-masking_8h.html#a18d958c2f77a2b411b528270fa97172e',1,'internal-masking.h']]],
-  ['mask_5fuint32_5ft',['mask_uint32_t',['../internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88',1,'internal-masking.h']]],
-  ['mask_5fuint64_5ft',['mask_uint64_t',['../internal-masking_8h.html#aa6621cc6545bdfa66d6602b0e28fe811',1,'internal-masking.h']]]
+  ['esch_5f256_5fhmac_5fstate_5ft',['esch_256_hmac_state_t',['../sparkle-hmac_8h.html#a0d83ace0a7d102a78838b6696d25f493',1,'sparkle-hmac.h']]],
+  ['esch_5f384_5fhmac_5fstate_5ft',['esch_384_hmac_state_t',['../sparkle-hmac_8h.html#aef9467d58a995f5cdf0d923256356c39',1,'sparkle-hmac.h']]]
 ];

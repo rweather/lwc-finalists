@@ -94,7 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>GIFT-COFB authenticated encryption algorithm (masked version).  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="gift-cofb-aead-masked_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -114,18 +115,18 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a254b068935980576910b7f1421b2f324"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gift-cofb-aead-masked_8h.html#a254b068935980576910b7f1421b2f324">gift_cofb_masked_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a254b068935980576910b7f1421b2f324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with masked GIFT-COFB.  <a href="#a254b068935980576910b7f1421b2f324">More...</a><br/></td></tr>
-<tr class="separator:a254b068935980576910b7f1421b2f324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa03f36b1b78cf5407da76dddde513887"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gift-cofb-aead-masked_8h.html#aa03f36b1b78cf5407da76dddde513887">gift_cofb_masked_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:aa03f36b1b78cf5407da76dddde513887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with masked GIFT-COFB-0.  <a href="#aa03f36b1b78cf5407da76dddde513887">More...</a><br/></td></tr>
-<tr class="separator:aa03f36b1b78cf5407da76dddde513887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae74c5550393eda22e3321435bbdbec6c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gift-cofb-aead-masked_8h.html#ae74c5550393eda22e3321435bbdbec6c">gift_cofb_masked_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:ae74c5550393eda22e3321435bbdbec6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with masked GIFT-COFB.  <a href="#ae74c5550393eda22e3321435bbdbec6c">More...</a><br/></td></tr>
+<tr class="separator:ae74c5550393eda22e3321435bbdbec6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3df730648fc5a9b00eaacbb0a5168894"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gift-cofb-aead-masked_8h.html#a3df730648fc5a9b00eaacbb0a5168894">gift_cofb_masked_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a3df730648fc5a9b00eaacbb0a5168894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with masked GIFT-COFB-0.  <a href="#a3df730648fc5a9b00eaacbb0a5168894">More...</a><br/></td></tr>
+<tr class="separator:a3df730648fc5a9b00eaacbb0a5168894"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>GIFT-COFB authenticated encryption algorithm (masked version). </p>
 <p>References: <a href="https://www.isical.ac.in/~lightweight/COFB/">https://www.isical.ac.in/~lightweight/COFB/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aa03f36b1b78cf5407da76dddde513887"></a>
+<a class="anchor" id="a3df730648fc5a9b00eaacbb0a5168894"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -138,14 +139,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -156,7 +151,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -168,7 +163,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -196,7 +191,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -207,11 +201,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="gift-cofb-aead-masked_8h.html#a254b068935980576910b7f1421b2f324" title="Encrypts and authenticates a packet with masked GIFT-COFB. ">gift_cofb_masked_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="gift-cofb-aead-masked_8h.html#ae74c5550393eda22e3321435bbdbec6c" title="Encrypts and authenticates a packet with masked GIFT-COFB. ">gift_cofb_masked_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a254b068935980576910b7f1421b2f324"></a>
+<a class="anchor" id="ae74c5550393eda22e3321435bbdbec6c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -224,7 +218,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -236,7 +230,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -248,14 +242,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -286,21 +274,20 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="gift-cofb-aead-masked_8h.html#aa03f36b1b78cf5407da76dddde513887" title="Decrypts and authenticates a packet with masked GIFT-COFB-0. ">gift_cofb_masked_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="gift-cofb-aead-masked_8h.html#a3df730648fc5a9b00eaacbb0a5168894" title="Decrypts and authenticates a packet with masked GIFT-COFB-0. ">gift_cofb_masked_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

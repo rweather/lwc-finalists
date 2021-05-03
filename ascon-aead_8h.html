@@ -94,7 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>ASCON-128 encryption algorithm and related family members.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
+</div>
 <p><a href="ascon-aead_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -126,24 +127,24 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7c24daebd5ce27893937a2d4e889cee4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a7c24daebd5ce27893937a2d4e889cee4">ascon128_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a7c24daebd5ce27893937a2d4e889cee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ASCON-128.  <a href="#a7c24daebd5ce27893937a2d4e889cee4">More...</a><br/></td></tr>
-<tr class="separator:a7c24daebd5ce27893937a2d4e889cee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af36498f34fbe0906821cb062e1773ea9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#af36498f34fbe0906821cb062e1773ea9">ascon128_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:af36498f34fbe0906821cb062e1773ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ASCON-128.  <a href="#af36498f34fbe0906821cb062e1773ea9">More...</a><br/></td></tr>
-<tr class="separator:af36498f34fbe0906821cb062e1773ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0061bf36751a5f1f253c155e97648352"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a0061bf36751a5f1f253c155e97648352">ascon128a_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a0061bf36751a5f1f253c155e97648352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ASCON-128a.  <a href="#a0061bf36751a5f1f253c155e97648352">More...</a><br/></td></tr>
-<tr class="separator:a0061bf36751a5f1f253c155e97648352"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a8da3221e4d6aebd19ceabc85b04372"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a8a8da3221e4d6aebd19ceabc85b04372">ascon128a_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a8a8da3221e4d6aebd19ceabc85b04372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ASCON-128a.  <a href="#a8a8da3221e4d6aebd19ceabc85b04372">More...</a><br/></td></tr>
-<tr class="separator:a8a8da3221e4d6aebd19ceabc85b04372"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe091a30dfe9c8fcc31d8b91197776c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#afe091a30dfe9c8fcc31d8b91197776c5">ascon80pq_aead_encrypt</a> (unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:afe091a30dfe9c8fcc31d8b91197776c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ASCON-80pq.  <a href="#afe091a30dfe9c8fcc31d8b91197776c5">More...</a><br/></td></tr>
-<tr class="separator:afe091a30dfe9c8fcc31d8b91197776c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61243e2274d90359b49ec06e84f13eee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a61243e2274d90359b49ec06e84f13eee">ascon80pq_aead_decrypt</a> (unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a61243e2274d90359b49ec06e84f13eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ASCON-80pq.  <a href="#a61243e2274d90359b49ec06e84f13eee">More...</a><br/></td></tr>
-<tr class="separator:a61243e2274d90359b49ec06e84f13eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a547f25e5d730e81bbf33e2a903f247da"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a547f25e5d730e81bbf33e2a903f247da">ascon128_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a547f25e5d730e81bbf33e2a903f247da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ASCON-128.  <a href="#a547f25e5d730e81bbf33e2a903f247da">More...</a><br/></td></tr>
+<tr class="separator:a547f25e5d730e81bbf33e2a903f247da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa0c3e569e9aad6045bdacc48938f9b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a7aa0c3e569e9aad6045bdacc48938f9b">ascon128_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a7aa0c3e569e9aad6045bdacc48938f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ASCON-128.  <a href="#a7aa0c3e569e9aad6045bdacc48938f9b">More...</a><br/></td></tr>
+<tr class="separator:a7aa0c3e569e9aad6045bdacc48938f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204673a9c38094e3573422daf3e30be6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a204673a9c38094e3573422daf3e30be6">ascon128a_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a204673a9c38094e3573422daf3e30be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ASCON-128a.  <a href="#a204673a9c38094e3573422daf3e30be6">More...</a><br/></td></tr>
+<tr class="separator:a204673a9c38094e3573422daf3e30be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acac2fc9074f6d3a9f5e04e93d1456f23"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#acac2fc9074f6d3a9f5e04e93d1456f23">ascon128a_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:acac2fc9074f6d3a9f5e04e93d1456f23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ASCON-128a.  <a href="#acac2fc9074f6d3a9f5e04e93d1456f23">More...</a><br/></td></tr>
+<tr class="separator:acac2fc9074f6d3a9f5e04e93d1456f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a968661fd99f65f0ba50e919e6194f324"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a968661fd99f65f0ba50e919e6194f324">ascon80pq_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a968661fd99f65f0ba50e919e6194f324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with ASCON-80pq.  <a href="#a968661fd99f65f0ba50e919e6194f324">More...</a><br/></td></tr>
+<tr class="separator:a968661fd99f65f0ba50e919e6194f324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50666411e58c11c2805f1ae47981c204"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-aead_8h.html#a50666411e58c11c2805f1ae47981c204">ascon80pq_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a50666411e58c11c2805f1ae47981c204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with ASCON-80pq.  <a href="#a50666411e58c11c2805f1ae47981c204">More...</a><br/></td></tr>
+<tr class="separator:a50666411e58c11c2805f1ae47981c204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ASCON-128 encryption algorithm and related family members. </p>
@@ -156,7 +157,7 @@ Functions</h2></td></tr>
 </ul>
 <p>References: <a href="https://ascon.iaik.tugraz.at/">https://ascon.iaik.tugraz.at/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="af36498f34fbe0906821cb062e1773ea9"></a>
+<a class="anchor" id="a7aa0c3e569e9aad6045bdacc48938f9b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -169,14 +170,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -187,7 +182,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -199,7 +194,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -227,7 +222,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -238,11 +232,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a7c24daebd5ce27893937a2d4e889cee4" title="Encrypts and authenticates a packet with ASCON-128. ">ascon128_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a547f25e5d730e81bbf33e2a903f247da" title="Encrypts and authenticates a packet with ASCON-128. ">ascon128_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a7c24daebd5ce27893937a2d4e889cee4"></a>
+<a class="anchor" id="a547f25e5d730e81bbf33e2a903f247da"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -255,7 +249,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -267,7 +261,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -279,14 +273,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -317,18 +305,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#af36498f34fbe0906821cb062e1773ea9" title="Decrypts and authenticates a packet with ASCON-128. ">ascon128_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a7aa0c3e569e9aad6045bdacc48938f9b" title="Decrypts and authenticates a packet with ASCON-128. ">ascon128_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a8a8da3221e4d6aebd19ceabc85b04372"></a>
+<a class="anchor" id="acac2fc9074f6d3a9f5e04e93d1456f23"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -341,14 +328,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -359,7 +340,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -371,7 +352,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -399,7 +380,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -410,11 +390,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a0061bf36751a5f1f253c155e97648352" title="Encrypts and authenticates a packet with ASCON-128a. ">ascon128a_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a204673a9c38094e3573422daf3e30be6" title="Encrypts and authenticates a packet with ASCON-128a. ">ascon128a_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a0061bf36751a5f1f253c155e97648352"></a>
+<a class="anchor" id="a204673a9c38094e3573422daf3e30be6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -427,7 +407,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -439,7 +419,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -451,14 +431,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -489,18 +463,17 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 16 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a8a8da3221e4d6aebd19ceabc85b04372" title="Decrypts and authenticates a packet with ASCON-128a. ">ascon128a_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#acac2fc9074f6d3a9f5e04e93d1456f23" title="Decrypts and authenticates a packet with ASCON-128a. ">ascon128a_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a61243e2274d90359b49ec06e84f13eee"></a>
+<a class="anchor" id="a50666411e58c11c2805f1ae47981c204"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -513,14 +486,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -531,7 +498,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -543,7 +510,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
         </tr>
         <tr>
@@ -571,7 +538,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
     <tr><td class="paramname">mlen</td><td>Receives the length of the plaintext message on output. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">c</td><td>Buffer that contains the ciphertext and authentication tag to decrypt. </td></tr>
     <tr><td class="paramname">clen</td><td>Length of the input data in bytes, which includes the ciphertext and the 16 byte authentication tag. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
@@ -582,11 +548,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#afe091a30dfe9c8fcc31d8b91197776c5" title="Encrypts and authenticates a packet with ASCON-80pq. ">ascon80pq_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a968661fd99f65f0ba50e919e6194f324" title="Encrypts and authenticates a packet with ASCON-80pq. ">ascon80pq_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="afe091a30dfe9c8fcc31d8b91197776c5"></a>
+<a class="anchor" id="a968661fd99f65f0ba50e919e6194f324"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -599,7 +565,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long *&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>clen</em>, </td>
         </tr>
         <tr>
@@ -611,7 +577,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>mlen</em>, </td>
         </tr>
         <tr>
@@ -623,14 +589,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>adlen</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned char *&#160;</td>
-          <td class="paramname"><em>nsec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -661,21 +621,20 @@ Functions</h2></td></tr>
     <tr><td class="paramname">mlen</td><td>Length of the plaintext message in bytes. </td></tr>
     <tr><td class="paramname">ad</td><td>Buffer that contains associated data to authenticate along with the packet but which does not need to be encrypted. </td></tr>
     <tr><td class="paramname">adlen</td><td>Length of the associated data in bytes. </td></tr>
-    <tr><td class="paramname">nsec</td><td>Secret nonce - not used by this algorithm. </td></tr>
     <tr><td class="paramname">npub</td><td>Points to the public nonce for the packet which must be 16 bytes in length. </td></tr>
     <tr><td class="paramname">k</td><td>Points to the 20 bytes of the key to use to encrypt the packet.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a61243e2274d90359b49ec06e84f13eee" title="Decrypts and authenticates a packet with ASCON-80pq. ">ascon80pq_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-aead_8h.html#a50666411e58c11c2805f1ae47981c204" title="Decrypts and authenticates a packet with ASCON-80pq. ">ascon80pq_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

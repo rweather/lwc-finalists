@@ -108,9 +108,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a753ce61965a843ec87eee8f0d63a5e81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-blake2s_8h.html#a753ce61965a843ec87eee8f0d63a5e81">internal_blake2s_hash</a> (unsigned char *out, const unsigned char *in, unsigned long long inlen)</td></tr>
-<tr class="memdesc:a753ce61965a843ec87eee8f0d63a5e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with BLAKE2s to generate a hash value.  <a href="#a753ce61965a843ec87eee8f0d63a5e81">More...</a><br/></td></tr>
-<tr class="separator:a753ce61965a843ec87eee8f0d63a5e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574ec306a0ea8184afba1397dd5c88ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-blake2s_8h.html#a574ec306a0ea8184afba1397dd5c88ce">internal_blake2s_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a574ec306a0ea8184afba1397dd5c88ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with BLAKE2s to generate a hash value.  <a href="#a574ec306a0ea8184afba1397dd5c88ce">More...</a><br/></td></tr>
+<tr class="separator:a574ec306a0ea8184afba1397dd5c88ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -124,7 +124,7 @@ Variables</h2></td></tr>
 <p>BLAKE2s is not one of the NIST lightweight submissions. We use it as a baseline to evaluate the performance of other hash algorithsm. For example, a performance result of "1.2 BLAKE's" means that the algorithm is 1.2 times faster than BLAKE2s on the same input data on the same hardware.</p>
 <p>This BLAKE2s implementation is based on the one from the <a href="http://rweather.github.com/arduinolibs/crypto.html">Arduino Cryptography Library</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a753ce61965a843ec87eee8f0d63a5e81"></a>
+<a class="anchor" id="a574ec306a0ea8184afba1397dd5c88ce"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -143,7 +143,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>inlen</em>&#160;</td>
         </tr>
         <tr>
@@ -170,7 +170,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

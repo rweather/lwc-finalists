@@ -115,15 +115,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ab8badf7d15868acb24c26bd3f78cd125"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#ab8badf7d15868acb24c26bd3f78cd125">grain128_setup</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, const unsigned char *key, const unsigned char *nonce)</td></tr>
 <tr class="memdesc:ab8badf7d15868acb24c26bd3f78cd125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the initial Grain-128 state with the key and nonce.  <a href="#ab8badf7d15868acb24c26bd3f78cd125">More...</a><br/></td></tr>
 <tr class="separator:ab8badf7d15868acb24c26bd3f78cd125"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff9aa77629794aea8a81ecf38267173a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#aff9aa77629794aea8a81ecf38267173a">grain128_authenticate</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, const unsigned char *data, unsigned long long len)</td></tr>
-<tr class="memdesc:aff9aa77629794aea8a81ecf38267173a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authenticates data with Grain-128.  <a href="#aff9aa77629794aea8a81ecf38267173a">More...</a><br/></td></tr>
-<tr class="separator:aff9aa77629794aea8a81ecf38267173a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eea18f1ba3dea68807b402432d2c431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#a5eea18f1ba3dea68807b402432d2c431">grain128_encrypt</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, unsigned char *c, const unsigned char *m, unsigned long long len)</td></tr>
-<tr class="memdesc:a5eea18f1ba3dea68807b402432d2c431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates data with Grain-128.  <a href="#a5eea18f1ba3dea68807b402432d2c431">More...</a><br/></td></tr>
-<tr class="separator:a5eea18f1ba3dea68807b402432d2c431"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73cf4ed4bc18154d07d71c8ffb8e1e1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#a73cf4ed4bc18154d07d71c8ffb8e1e1d">grain128_decrypt</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, unsigned char *m, const unsigned char *c, unsigned long long len)</td></tr>
-<tr class="memdesc:a73cf4ed4bc18154d07d71c8ffb8e1e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates data with Grain-128.  <a href="#a73cf4ed4bc18154d07d71c8ffb8e1e1d">More...</a><br/></td></tr>
-<tr class="separator:a73cf4ed4bc18154d07d71c8ffb8e1e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a034691d65e1e993e5b8d5c5794e6c534"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#a034691d65e1e993e5b8d5c5794e6c534">grain128_authenticate</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, const unsigned char *data, size_t len)</td></tr>
+<tr class="memdesc:a034691d65e1e993e5b8d5c5794e6c534"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authenticates data with Grain-128.  <a href="#a034691d65e1e993e5b8d5c5794e6c534">More...</a><br/></td></tr>
+<tr class="separator:a034691d65e1e993e5b8d5c5794e6c534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1725e48747cea56a687da172d7ac179"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#ae1725e48747cea56a687da172d7ac179">grain128_encrypt</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, unsigned char *c, const unsigned char *m, size_t len)</td></tr>
+<tr class="memdesc:ae1725e48747cea56a687da172d7ac179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates data with Grain-128.  <a href="#ae1725e48747cea56a687da172d7ac179">More...</a><br/></td></tr>
+<tr class="separator:ae1725e48747cea56a687da172d7ac179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70da4cd3771b28b72e393ffe959809d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#a70da4cd3771b28b72e393ffe959809d2">grain128_decrypt</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state, unsigned char *m, const unsigned char *c, size_t len)</td></tr>
+<tr class="memdesc:a70da4cd3771b28b72e393ffe959809d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates data with Grain-128.  <a href="#a70da4cd3771b28b72e393ffe959809d2">More...</a><br/></td></tr>
+<tr class="separator:a70da4cd3771b28b72e393ffe959809d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88947e94b7050dc5ec8719ff0971a4bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-grain128_8h.html#a88947e94b7050dc5ec8719ff0971a4bc">grain128_compute_tag</a> (<a class="el" href="structgrain128__state__t.html">grain128_state_t</a> *state)</td></tr>
 <tr class="memdesc:a88947e94b7050dc5ec8719ff0971a4bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the final authentiation tag.  <a href="#a88947e94b7050dc5ec8719ff0971a4bc">More...</a><br/></td></tr>
 <tr class="separator:a88947e94b7050dc5ec8719ff0971a4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,7 +132,7 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Internal implementation of the Grain-128 stream cipher. </p>
 <p>References: <a href="https://grain-128aead.github.io/">https://grain-128aead.github.io/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aff9aa77629794aea8a81ecf38267173a"></a>
+<a class="anchor" id="a034691d65e1e993e5b8d5c5794e6c534"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -151,7 +151,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
@@ -241,7 +241,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a73cf4ed4bc18154d07d71c8ffb8e1e1d"></a>
+<a class="anchor" id="a70da4cd3771b28b72e393ffe959809d2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -266,7 +266,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
@@ -290,7 +290,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5eea18f1ba3dea68807b402432d2c431"></a>
+<a class="anchor" id="ae1725e48747cea56a687da172d7ac179"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -315,7 +315,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long long&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
@@ -409,7 +409,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -113,43 +113,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LWCRYPTO_ELEPHANT_DELIRIUM_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LWCRYPTO_ELEPHANT_DELIRIUM_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="elephant-delirium_8h.html#a5a1ea3fbaa88ee670160be091e9cb372">   44</a></span>&#160;<span class="preprocessor">#define DELIRIUM_KEY_SIZE 16</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="elephant-delirium_8h.html#a5b444c4c4881232ea7a0640e95a2fc45">   49</a></span>&#160;<span class="preprocessor">#define DELIRIUM_TAG_SIZE 16</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="elephant-delirium_8h.html#a5cde64d3654d8ede4ebf61ae221ac391">   54</a></span>&#160;<span class="preprocessor">#define DELIRIUM_NONCE_SIZE 12</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">int</span> <a class="code" href="elephant-delirium_8h.html#afcb3e07ba7c5f0c68e7f6e4b4666aa7f">delirium_aead_encrypt</a></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> *clen,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> mlen,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> adlen,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *nsec,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="elephant-delirium_8h.html#a5a1ea3fbaa88ee670160be091e9cb372">   46</a></span>&#160;<span class="preprocessor">#define DELIRIUM_KEY_SIZE 16</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="elephant-delirium_8h.html#a5b444c4c4881232ea7a0640e95a2fc45">   51</a></span>&#160;<span class="preprocessor">#define DELIRIUM_TAG_SIZE 16</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="elephant-delirium_8h.html#a5cde64d3654d8ede4ebf61ae221ac391">   56</a></span>&#160;<span class="preprocessor">#define DELIRIUM_NONCE_SIZE 12</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">int</span> <a class="code" href="elephant-delirium_8h.html#aacfdb6babad4e33162e753e1bc1bc841">delirium_aead_encrypt</a></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">int</span> <a class="code" href="elephant-delirium_8h.html#a1d9cee7e4ac5729315358da395b61782">delirium_aead_decrypt</a></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> *mlen,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *nsec,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> clen,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> adlen,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">int</span> <a class="code" href="elephant-delirium_8h.html#ab5502f735082ee07af9578c4ed93bbda">delirium_aead_decrypt</a></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="elephant-delirium_8h_html_afcb3e07ba7c5f0c68e7f6e4b4666aa7f"><div class="ttname"><a href="elephant-delirium_8h.html#afcb3e07ba7c5f0c68e7f6e4b4666aa7f">delirium_aead_encrypt</a></div><div class="ttdeci">int delirium_aead_encrypt(unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with Delirium. </div><div class="ttdef"><b>Definition:</b> elephant-delirium.c:109</div></div>
-<div class="ttc" id="elephant-delirium_8h_html_a1d9cee7e4ac5729315358da395b61782"><div class="ttname"><a href="elephant-delirium_8h.html#a1d9cee7e4ac5729315358da395b61782">delirium_aead_decrypt</a></div><div class="ttdeci">int delirium_aead_decrypt(unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with Delirium. </div><div class="ttdef"><b>Definition:</b> elephant-delirium.c:206</div></div>
+<div class="ttc" id="elephant-delirium_8h_html_aacfdb6babad4e33162e753e1bc1bc841"><div class="ttname"><a href="elephant-delirium_8h.html#aacfdb6babad4e33162e753e1bc1bc841">delirium_aead_encrypt</a></div><div class="ttdeci">int delirium_aead_encrypt(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with Delirium. </div><div class="ttdef"><b>Definition:</b> elephant-delirium.c:109</div></div>
+<div class="ttc" id="elephant-delirium_8h_html_ab5502f735082ee07af9578c4ed93bbda"><div class="ttname"><a href="elephant-delirium_8h.html#ab5502f735082ee07af9578c4ed93bbda">delirium_aead_decrypt</a></div><div class="ttdeci">int delirium_aead_decrypt(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with Delirium. </div><div class="ttdef"><b>Definition:</b> elephant-delirium.c:204</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

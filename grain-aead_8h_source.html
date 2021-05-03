@@ -113,43 +113,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef LWCRYPTO_GRAIN_AEAD_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LWCRYPTO_GRAIN_AEAD_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="grain-aead_8h.html#ab394b591a8017175ba26601a7a64445c">   45</a></span>&#160;<span class="preprocessor">#define GRAIN128_KEY_SIZE 16</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="grain-aead_8h.html#aa27d8a6d607c7098ec52e6c6227e42ba">   50</a></span>&#160;<span class="preprocessor">#define GRAIN128_TAG_SIZE 8</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="grain-aead_8h.html#a3e6bb766668175bac5e638672e237df8">   55</a></span>&#160;<span class="preprocessor">#define GRAIN128_NONCE_SIZE 12</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">int</span> <a class="code" href="grain-aead_8h.html#ab7ae0b5a3bc56b377b57f549c89cbea2">grain128_aead_encrypt</a></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> *clen,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> mlen,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> adlen,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *nsec,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="grain-aead_8h.html#ab394b591a8017175ba26601a7a64445c">   47</a></span>&#160;<span class="preprocessor">#define GRAIN128_KEY_SIZE 16</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="grain-aead_8h.html#aa27d8a6d607c7098ec52e6c6227e42ba">   52</a></span>&#160;<span class="preprocessor">#define GRAIN128_TAG_SIZE 8</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="grain-aead_8h.html#a3e6bb766668175bac5e638672e237df8">   57</a></span>&#160;<span class="preprocessor">#define GRAIN128_NONCE_SIZE 12</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">int</span> <a class="code" href="grain-aead_8h.html#ac8474372c27e9ba89cfcb8111c3a2340">grain128_aead_encrypt</a></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">int</span> <a class="code" href="grain-aead_8h.html#a2fad29d2e493e26a7f3a1667ce09cc62">grain128_aead_decrypt</a></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> *mlen,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *nsec,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> clen,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> adlen,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">int</span> <a class="code" href="grain-aead_8h.html#a18eb2819e087e7ea719eece32f5b3f10">grain128_aead_decrypt</a></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="grain-aead_8h_html_a2fad29d2e493e26a7f3a1667ce09cc62"><div class="ttname"><a href="grain-aead_8h.html#a2fad29d2e493e26a7f3a1667ce09cc62">grain128_aead_decrypt</a></div><div class="ttdeci">int grain128_aead_decrypt(unsigned char *m, unsigned long long *mlen, unsigned char *nsec, const unsigned char *c, unsigned long long clen, const unsigned char *ad, unsigned long long adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with Grain-128AEAD. </div><div class="ttdef"><b>Definition:</b> grain-aead.c:105</div></div>
-<div class="ttc" id="grain-aead_8h_html_ab7ae0b5a3bc56b377b57f549c89cbea2"><div class="ttname"><a href="grain-aead_8h.html#ab7ae0b5a3bc56b377b57f549c89cbea2">grain128_aead_encrypt</a></div><div class="ttdeci">int grain128_aead_encrypt(unsigned char *c, unsigned long long *clen, const unsigned char *m, unsigned long long mlen, const unsigned char *ad, unsigned long long adlen, const unsigned char *nsec, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with Grain-128AEAD. </div><div class="ttdef"><b>Definition:</b> grain-aead.c:68</div></div>
+<div class="ttc" id="grain-aead_8h_html_a18eb2819e087e7ea719eece32f5b3f10"><div class="ttname"><a href="grain-aead_8h.html#a18eb2819e087e7ea719eece32f5b3f10">grain128_aead_decrypt</a></div><div class="ttdeci">int grain128_aead_decrypt(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with Grain-128AEAD. </div><div class="ttdef"><b>Definition:</b> grain-aead.c:105</div></div>
+<div class="ttc" id="grain-aead_8h_html_ac8474372c27e9ba89cfcb8111c3a2340"><div class="ttname"><a href="grain-aead_8h.html#ac8474372c27e9ba89cfcb8111c3a2340">grain128_aead_encrypt</a></div><div class="ttdeci">int grain128_aead_encrypt(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with Grain-128AEAD. </div><div class="ttdef"><b>Definition:</b> grain-aead.c:68</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 08:41:42 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
