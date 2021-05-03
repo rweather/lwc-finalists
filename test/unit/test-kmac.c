@@ -231,8 +231,10 @@ typedef void (*kmac_allinone_t)
 typedef void (*kmac_init_t)
     (void *state, const unsigned char *key, size_t keylen,
      const unsigned char *custom, size_t customlen);
-typedef aead_xof_absorb_t kmac_absorb_t;
-typedef aead_xof_squeeze_t kmac_squeeze_t;
+typedef void (*kmac_absorb_t)
+    (void *state, const unsigned char *in, size_t inlen);
+typedef void (*kmac_squeeze_t)
+    (void *state, unsigned char *out, size_t outlen);
 typedef void (*kmac_set_output_length_t)(void *state, size_t outlen);
 typedef aead_hash_finalize_t kmac_finalize_t;
 

@@ -34,7 +34,7 @@ aead_hash_algorithm_t const sha3_256_hash_algorithm = {
     sha3_256_hash,
     (aead_hash_init_t)sha3_256_init,
     (aead_hash_update_t)sha3_absorb,
-    (aead_hash_finalize_t)sha3_squeeze,
+    (aead_hash_finalize_t)0,
     (aead_xof_absorb_t)sha3_absorb,
     (aead_xof_squeeze_t)sha3_squeeze
 };
@@ -47,7 +47,7 @@ aead_hash_algorithm_t const sha3_512_hash_algorithm = {
     sha3_512_hash,
     (aead_hash_init_t)sha3_512_init,
     (aead_hash_update_t)sha3_absorb,
-    (aead_hash_finalize_t)sha3_squeeze,
+    (aead_hash_finalize_t)0,
     (aead_xof_absorb_t)sha3_absorb,
     (aead_xof_squeeze_t)sha3_squeeze
 };
@@ -60,7 +60,7 @@ aead_hash_algorithm_t const shake128_xof_algorithm = {
     shake128_hash,
     (aead_hash_init_t)shake128_init,
     (aead_hash_update_t)sha3_absorb,
-    (aead_hash_finalize_t)sha3_squeeze,
+    (aead_hash_finalize_t)0,
     (aead_xof_absorb_t)sha3_absorb,
     (aead_xof_squeeze_t)sha3_squeeze
 };
@@ -73,7 +73,7 @@ aead_hash_algorithm_t const shake256_xof_algorithm = {
     shake256_hash,
     (aead_hash_init_t)shake256_init,
     (aead_hash_update_t)sha3_absorb,
-    (aead_hash_finalize_t)sha3_squeeze,
+    (aead_hash_finalize_t)0,
     (aead_xof_absorb_t)sha3_absorb,
     (aead_xof_squeeze_t)sha3_squeeze
 };
@@ -86,7 +86,7 @@ aead_hash_algorithm_t const cshake128_xof_algorithm = {
     0,
     (aead_hash_init_t)cshake128_init,
     (aead_hash_update_t)sha3_absorb,
-    (aead_hash_finalize_t)sha3_squeeze,
+    (aead_hash_finalize_t)0,
     (aead_xof_absorb_t)sha3_absorb,
     (aead_xof_squeeze_t)sha3_squeeze
 };
@@ -99,7 +99,7 @@ aead_hash_algorithm_t const cshake256_xof_algorithm = {
     0,
     (aead_hash_init_t)cshake256_init,
     (aead_hash_update_t)sha3_absorb,
-    (aead_hash_finalize_t)sha3_squeeze,
+    (aead_hash_finalize_t)0,
     (aead_xof_absorb_t)sha3_absorb,
     (aead_xof_squeeze_t)sha3_squeeze
 };
