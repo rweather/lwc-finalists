@@ -24,6 +24,7 @@ OBJS = \
         gift-cofb-aead.o \
         gift-cofb-aead-masked.o \
 	grain-aead.o \
+	grain-prng.o \
         isap-aead.o \
         photon-beetle-aead.o \
         photon-beetle-hash.o \
@@ -102,6 +103,7 @@ elephant-jumbo.o: elephant-jumbo.h internal-spongent.h internal-util.h
 gift-cofb-aead.o: gift-cofb-aead.h internal-gift128.h internal-gift128-config.h internal-util.h
 gift-cofb-aead-masked.o: gift-cofb-aead-masked.h internal-gift128-m.h internal-gift128-config.h internal-util.h aead-random.h internal-masking.h
 grain-aead.o: grain-aead.h internal-grain128.h internal-util.h
+grain-prng.o: grain-prng.h internal-grain128.h internal-util.h
 isap-aead.o: isap-aead.h internal-isap.h internal-ascon.h internal-keccakp-400.h internal-util.h
 photon-beetle-aead.o: photon-beetle-aead.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle-hash.h internal-photon256.h internal-util.h

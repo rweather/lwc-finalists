@@ -92,6 +92,8 @@ GIFT_COFB_MASKED_FILES = \
 GRAIN128_FILES = \
     grain-aead.c \
     grain-aead.h \
+    grain-prng.c \
+    grain-prng.h \
     internal-grain128.c \
     internal-grain128.h \
     internal-grain128-armv7m.S \
