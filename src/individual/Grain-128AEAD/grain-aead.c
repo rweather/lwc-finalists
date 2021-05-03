@@ -78,9 +78,11 @@ int grain128_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + GRAIN128_TAG_SIZE;
 
+#if defined(LW_UTIL_CPU_IS_64BIT)
     /* Limit the amount of associated data to make DER encoding easier */
     if (adlen >= 0x100000000ULL)
         return -2;
+#endif
 
     /* Initialize the Grain-128 stream cipher with the key and nonce */
     grain128_setup(&state, k, npub);
@@ -115,9 +117,11 @@ int grain128_aead_decrypt
         return -1;
     *mlen = clen - GRAIN128_TAG_SIZE;
 
+#if defined(LW_UTIL_CPU_IS_64BIT)
     /* Limit the amount of associated data to make DER encoding easier */
     if (adlen >= 0x100000000ULL)
         return -2;
+#endif
 
     /* Initialize the Grain-128 stream cipher with the key and nonce */
     grain128_setup(&state, k, npub);
