@@ -23,7 +23,7 @@
 #ifndef LWCRYPTO_ASCON_PRNG_H
 #define LWCRYPTO_ASCON_PRNG_H
 
-#include "ascon-xof.h"
+#include <stddef.h>
 
 /**
  * \file ascon-prng.h

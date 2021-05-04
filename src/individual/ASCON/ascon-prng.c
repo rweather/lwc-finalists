@@ -114,7 +114,7 @@ static unsigned char ascon_id_pool[ASCON_HASH_SIZE] = {
  * The SpongePRNG paper recommends repeating the process ceil(c/r) times,
  * which is ceil((40 - ASCON_XOF_RATE) / ASCON_XOF_RATE) in our case.
  */
-void ascon_prng_rekey(ascon_state_t *state)
+static void ascon_prng_rekey(ascon_state_t *state)
 {
     int temp;
     for (temp = 0; temp < (40 - ASCON_XOF_RATE); temp += ASCON_XOF_RATE) {
