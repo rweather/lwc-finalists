@@ -42,6 +42,11 @@
 #include <string.h>
 #if defined(ARDUINO)
 #include <Arduino.h>
+#elif defined(_WIN32) || defined(__WIN32__) || defined(_WIN64) || \
+    defined(__CYGWIN__) || defined(__CYGWIN32__)
+#include <windows.h>
+#include <wincrypt.h>
+#define AEAD_TRNG_WINDOWS 1
 #elif defined(__linux__) || defined(__APPLE__) || defined(__MACH__) || \
     defined(__FreeBSD__) || defined(__unix__) || defined(__ANDROID__)
 #if defined(__linux__)
@@ -187,6 +192,22 @@ int aead_random_get_system_seed(unsigned char seed[AEAD_SYSTEM_SEED_SIZE])
         }
         return 0; /* Not properly seeded */
     }
+#elif defined(AEAD_TRNG_WINDOWS)
+    /* Microsoft documentation recommends using RtlGenRandom() rather
+     * than CryptGenRandom() as it is more efficient than creating a
+     * cryptography service provider.  But it is harder to access as
+     * there is no import library.  Fix this later to dynamically load
+     * "Advapi32.dll" and resolve the entry point for RtlGenRandom(). */
+    HCRYPTPROV provider = 0;
+    memset(seed, 0, AEAD_SYSTEM_SEED_SIZE);
+    if (CryptAcquireContextW
+            (&provider, 0, 0, PROV_RSA_FULL,
+             CRYPT_VERIFYCONTEXT | CRYPT_SILENT)) {
+        BOOL result = CryptGenRandom(provider, AEAD_SYSTEM_SEED_SIZE, seed);
+        CryptReleaseContext(provider, 0);
+        return result;
+    }
+    return 0;
 #elif defined(aead_system_random)
     aead_system_type x;
     int index;
