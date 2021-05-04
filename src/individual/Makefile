@@ -183,6 +183,8 @@ XOODYAK_FILES = \
     xoodyak-hmac.h \
     xoodyak-kmac.c \
     xoodyak-kmac.h \
+    xoodyak-prng.c \
+    xoodyak-prng.h \
     internal-xoodoo.c \
     internal-xoodoo.h \
     internal-xoodoo-armv7m.S \
