@@ -42,11 +42,11 @@ static unsigned char xoodyak_id_pool[XOODYAK_HASH_SIZE] = {
  * \brief Converts a pointer to a PRNG state into a pointer to a
  * xoodoo_state_t structure.
  *
- * \param state Pointer to the PRNG state.
+ * \param st Pointer to the PRNG state.
  *
  * \return Pointer to the xoodoo_state_t structure inside the PRNG state.
  */
-#define XOODOO_STATE(state) ((xoodoo_state_t *)((state)->s.state))
+#define XOODOO_STATE(st) ((xoodoo_state_t *)((st)->s.state))
 
 /**
  * \brief Rekeys the Xoodoo-PRNG state to enhance forward security.
@@ -89,10 +89,9 @@ void xoodyak_prng_add_ident(const unsigned char *data, size_t size)
 int xoodyak_prng_init(xoodyak_prng_state_t *state)
 {
     /* Set up the default input block consisting of the global
-     * identification pool and 128 bits of zeroes.  Then permute. */
+     * identification pool and 128 bits of zeroes. */
     memcpy(state->s.state, xoodyak_id_pool, sizeof(xoodyak_id_pool));
     memset(state->s.state + 32, 0, 16);
-    xoodoo_permute(XOODOO_STATE(state));
 
     /* Set the byte counter and default byte limit */
     state->s.count = 0;
@@ -139,11 +138,9 @@ void xoodyak_prng_feed
         data += XOODYAK_HASH_RATE;
         size -= XOODYAK_HASH_RATE;
     }
-    if (size > 0) {
-        lw_xor_block(state->s.state, data, size);
-        state->s.state[size] ^= 0x01; /* Padding */
-        xoodoo_permute(XOODOO_STATE(state));
-    }
+    lw_xor_block(state->s.state, data, size);
+    state->s.state[size] ^= 0x01; /* Padding */
+    xoodoo_permute(XOODOO_STATE(state));
 
     /* Re-key the PRNG state */
     xoodyak_prng_rekey(XOODOO_STATE(state));

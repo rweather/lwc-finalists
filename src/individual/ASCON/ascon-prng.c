@@ -64,11 +64,11 @@ static unsigned char ascon_id_pool[ASCON_HASH_SIZE] = {
  * \brief Converts a pointer to a PRNG state into a pointer to a
  * ascon_state_t structure.
  *
- * \param state Pointer to the PRNG state.
+ * \param st Pointer to the PRNG state.
  *
  * \return Pointer to the ascon_state_t structure inside the PRNG state.
  */
-#define ASCON_STATE(state) ((ascon_state_t *)((state)->s.state))
+#define ASCON_STATE(st) ((ascon_state_t *)((st)->s.state))
 
 /**
  * \def ascon_prng_permute(state)
@@ -141,14 +141,15 @@ void ascon_prng_add_ident(const unsigned char *data, size_t size)
 int ascon_prng_init(ascon_prng_state_t *state)
 {
     /* Set up the initial ASCON block with an IV value and the
-     * contents of the global identification pool.  Then hash it
-     * to initialize the PRNG's permutation state. */
-    be_store_word64(state->s.state, ASCON_PRNG_IV);
-    memcpy(state->s.state + 8, ascon_id_pool, ASCON_HASH_SIZE);
+     * contents of the global identification pool.  ASCON normally
+     * puts the IV value first but we put the global identification
+     * pool first so that the first block of the seed will XOR
+     * with the semi-chaotic hash data rather than the IV. */
+    memcpy(state->s.state, ascon_id_pool, ASCON_HASH_SIZE);
+    be_store_word64(state->s.state + ASCON_HASH_SIZE, ASCON_PRNG_IV);
 #if ASCON_SLICED
     ascon_to_sliced(ASCON_STATE(state));
 #endif
-    ascon_prng_permute(ASCON_STATE(state));
 
     /* Set the default re-seeding limit */
     state->s.limit = ASCON_PRNG_RESEED_LIMIT;
@@ -194,11 +195,9 @@ void ascon_prng_feed
         data += ASCON_XOF_RATE;
         size -= ASCON_XOF_RATE;
     }
-    if (size > 0) {
-        lw_xor_block(state->s.state, data, size);
-        state->s.state[size] ^= 0x80; /* Padding */
-        ascon_prng_permute(ASCON_STATE(state));
-    }
+    lw_xor_block(state->s.state, data, size);
+    state->s.state[size] ^= 0x80; /* Padding */
+    ascon_prng_permute(ASCON_STATE(state));
 
     /* Re-key the PRNG state */
     ascon_prng_rekey(ASCON_STATE(state));

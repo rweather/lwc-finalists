@@ -46,6 +46,8 @@ ASCON_MASKED_FILES = \
 ELEPHANT_DELIRIUM_FILES = \
     elephant-delirium.c \
     elephant-delirium.h \
+    elephant-prng.c \
+    elephant-prng.h \
     internal-keccakp-200.c \
     internal-keccakp-200.h \
     internal-keccakp-200-armv7m.S \
