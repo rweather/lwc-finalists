@@ -26,7 +26,7 @@
 #include <stddef.h>
 
 /**
- * \file photon_beetle-prng.h
+ * \file photon-beetle-prng.h
  * \brief Pseudorandom number generator (PRNG) for PHOTON-Beetle.
  *
  * This PRNG implementation uses the SpongePRNG construction with
