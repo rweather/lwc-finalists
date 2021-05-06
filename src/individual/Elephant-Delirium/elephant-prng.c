@@ -154,6 +154,7 @@ int elephant_prng_reseed(elephant_prng_state_t *state)
     elephant_prng_absorb(KECCAK_STATE(state), seed, sizeof(seed), 0);
     aead_clean(seed, sizeof(seed));
     elephant_prng_rekey(KECCAK_STATE(state));
+    state->s.count = 0;
     return have_trng;
 }
 

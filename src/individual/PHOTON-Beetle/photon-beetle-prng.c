@@ -148,6 +148,7 @@ int photon_beetle_prng_reseed(photon_beetle_prng_state_t *state)
     photon_beetle_prng_absorb(PHOTON256_STATE(state), seed, sizeof(seed), 0);
     aead_clean(seed, sizeof(seed));
     photon_beetle_prng_rekey(PHOTON256_STATE(state));
+    state->s.count = 0;
     return have_trng;
 }
 

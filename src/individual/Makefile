@@ -156,6 +156,8 @@ SPARKLE_FILES = \
     sparkle-hash.h \
     sparkle-hmac.c \
     sparkle-hmac.h \
+    sparkle-prng.c \
+    sparkle-prng.h \
     internal-sparkle.c \
     internal-sparkle.h \
     internal-sparkle-armv7m.S \
