@@ -184,10 +184,11 @@ void xoodyak_prng_fetch
     xoodyak_prng_rekey(XOODOO_STATE(state));
 }
 
-void xoodyak_prng_generate(unsigned char *data, size_t size)
+int xoodyak_prng_generate(unsigned char *data, size_t size)
 {
     xoodyak_prng_state_t state;
-    xoodyak_prng_init(&state);
+    int have_trng = xoodyak_prng_init(&state);
     xoodyak_prng_squeeze(&state, data, size);
     xoodyak_prng_free(&state);
+    return have_trng;
 }

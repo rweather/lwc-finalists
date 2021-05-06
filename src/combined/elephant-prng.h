@@ -128,11 +128,14 @@ void elephant_prng_fetch
  * \param data Points to a buffer to receive the generated random data.
  * \param size Number of bytes of random data to be generated.
  *
+ * \return Non-zero if the PRNG was initialized from system TRNG data,
+ * or zero if there is no system TRNG or it has failed.
+ *
  * This function will create a temporary PRNG state object, seed it from
  * the system TRNG, and then generate \a size bytes of random data.
  * It is intended for quick one-off generation of random material.
  */
-void elephant_prng_generate(unsigned char *data, size_t size);
+int elephant_prng_generate(unsigned char *data, size_t size);
 
 #ifdef __cplusplus
 }

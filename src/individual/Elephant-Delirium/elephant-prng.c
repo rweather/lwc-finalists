@@ -199,10 +199,11 @@ void elephant_prng_fetch
     elephant_prng_rekey(KECCAK_STATE(state));
 }
 
-void elephant_prng_generate(unsigned char *data, size_t size)
+int elephant_prng_generate(unsigned char *data, size_t size)
 {
     elephant_prng_state_t state;
-    elephant_prng_init(&state);
+    int have_trng = elephant_prng_init(&state);
     elephant_prng_squeeze(&state, data, size);
     elephant_prng_free(&state);
+    return have_trng;
 }

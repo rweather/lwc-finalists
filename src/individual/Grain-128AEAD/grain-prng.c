@@ -288,10 +288,11 @@ void grain_prng_fetch
     grain_prng_feed(state, 0, 0);
 }
 
-void grain_prng_generate(unsigned char *data, size_t size)
+int grain_prng_generate(unsigned char *data, size_t size)
 {
     grain_prng_state_t state;
-    grain_prng_init(&state);
+    int have_trng = grain_prng_init(&state);
     grain_prng_squeeze(&state, data, size);
     aead_clean(&state, sizeof(state));
+    return have_trng;
 }

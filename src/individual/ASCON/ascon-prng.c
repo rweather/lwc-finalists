@@ -241,10 +241,11 @@ void ascon_prng_fetch
     ascon_prng_rekey(ASCON_STATE(state));
 }
 
-void ascon_prng_generate(unsigned char *data, size_t size)
+int ascon_prng_generate(unsigned char *data, size_t size)
 {
     ascon_prng_state_t state;
-    ascon_prng_init(&state);
+    int have_trng = ascon_prng_init(&state);
     ascon_prng_squeeze(&state, data, size);
     ascon_prng_free(&state);
+    return have_trng;
 }
