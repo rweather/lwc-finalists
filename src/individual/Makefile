@@ -122,6 +122,8 @@ PHOTON_BEETLE_FILES = \
     photon-beetle-hash.h \
     photon-beetle-hmac.c \
     photon-beetle-hmac.h \
+    photon-beetle-prng.c \
+    photon-beetle-prng.h \
     internal-photon256.c \
     internal-photon256.h \
     internal-photon256-armv7m.S \

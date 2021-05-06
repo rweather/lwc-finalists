@@ -30,6 +30,7 @@ OBJS = \
         photon-beetle-aead.o \
         photon-beetle-hash.o \
         photon-beetle-hmac.o \
+        photon-beetle-prng.o \
         romulus-aead.o \
         romulus-hash.o \
         romulus-hmac.o \
@@ -111,6 +112,7 @@ isap-aead.o: isap-aead.h internal-isap.h internal-ascon.h internal-keccakp-400.h
 photon-beetle-aead.o: photon-beetle-aead.h internal-photon256.h internal-util.h
 photon-beetle-hash.o: photon-beetle-hash.h internal-photon256.h internal-util.h
 photon-beetle-hmac.o: photon-beetle-hmac.h photon-beetle-hash.h internal-hmac.h internal-util.h
+photon-beetle-prng.o: photon-beetle-prng.h photon-beetle-hash.h internal-photon256.h internal-util.h
 romulus-aead.o: romulus-aead.h internal-skinny-plus.h internal-util.h
 romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h
 romulus-hmac.o: romulus-hmac.h romulus-hash.h internal-util.h internal-hmac.h
