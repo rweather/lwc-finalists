@@ -101,7 +101,7 @@ void perfCipherEncrypt128(const aead_cipher_t *cipher)
 {
     unsigned long start;
     unsigned long elapsed;
-    unsigned long long len;
+    size_t len;
     int count;
 
     for (count = 0; count < MAX_DATA_SIZE; ++count)
@@ -112,7 +112,7 @@ void perfCipherEncrypt128(const aead_cipher_t *cipher)
     start = micros();
     for (count = 0; count < PERF_LOOPS; ++count) {
         cipher->encrypt
-            (ciphertext, &len, plaintext, 128, 0, 0, 0, nonce, key);
+            (ciphertext, &len, plaintext, 128, 0, 0, nonce, key);
     }
     elapsed = micros() - start;
     encrypt_128_time = elapsed;
@@ -132,20 +132,20 @@ void perfCipherDecrypt128(const aead_cipher_t *cipher)
 {
     unsigned long start;
     unsigned long elapsed;
-    unsigned long long clen;
-    unsigned long long plen;
+    size_t clen;
+    size_t plen;
     int count;
 
     for (count = 0; count < MAX_DATA_SIZE; ++count)
         plaintext[count] = (unsigned char)count;
-    cipher->encrypt(ciphertext, &clen, plaintext, 128, 0, 0, 0, nonce, key);
+    cipher->encrypt(ciphertext, &clen, plaintext, 128, 0, 0, nonce, key);
 
     Serial.print("   decrypt 128 byte packets ... ");
 
     start = micros();
     for (count = 0; count < PERF_LOOPS; ++count) {
         cipher->decrypt
-            (plaintext, &plen, 0, ciphertext, clen, 0, 0, nonce, key);
+            (plaintext, &plen, ciphertext, clen, 0, 0, nonce, key);
     }
     elapsed = micros() - start;
     decrypt_128_time = elapsed;
@@ -165,7 +165,7 @@ void perfCipherEncrypt16(const aead_cipher_t *cipher)
 {
     unsigned long start;
     unsigned long elapsed;
-    unsigned long long len;
+    size_t len;
     int count;
 
     for (count = 0; count < MAX_DATA_SIZE; ++count)
@@ -176,7 +176,7 @@ void perfCipherEncrypt16(const aead_cipher_t *cipher)
     start = micros();
     for (count = 0; count < PERF_LOOPS_16; ++count) {
         cipher->encrypt
-            (ciphertext, &len, plaintext, 16, 0, 0, 0, nonce, key);
+            (ciphertext, &len, plaintext, 16, 0, 0, nonce, key);
     }
     elapsed = micros() - start;
     encrypt_16_time = elapsed;
@@ -196,20 +196,20 @@ void perfCipherDecrypt16(const aead_cipher_t *cipher)
 {
     unsigned long start;
     unsigned long elapsed;
-    unsigned long long clen;
-    unsigned long long plen;
+    size_t clen;
+    size_t plen;
     int count;
 
     for (count = 0; count < MAX_DATA_SIZE; ++count)
         plaintext[count] = (unsigned char)count;
-    cipher->encrypt(ciphertext, &clen, plaintext, 16, 0, 0, 0, nonce, key);
+    cipher->encrypt(ciphertext, &clen, plaintext, 16, 0, 0, nonce, key);
 
     Serial.print("   decrypt  16 byte packets ... ");
 
     start = micros();
     for (count = 0; count < PERF_LOOPS_16; ++count) {
         cipher->decrypt
-            (plaintext, &plen, 0, ciphertext, clen, 0, 0, nonce, key);
+            (plaintext, &plen, ciphertext, clen, 0, 0, nonce, key);
     }
     elapsed = micros() - start;
     decrypt_16_time = elapsed;
@@ -260,7 +260,7 @@ bool equal_hex(const char *expected, const unsigned char *actual, unsigned len)
 void perfCipherSanityCheck(const aead_cipher_t *cipher, const char *sanity_vec)
 {
     unsigned count;
-    unsigned long long clen;
+    size_t clen;
 
     Serial.print("   sanity check ... ");
 
@@ -270,7 +270,7 @@ void perfCipherSanityCheck(const aead_cipher_t *cipher, const char *sanity_vec)
         plaintext[32 + count] = (unsigned char)count;
 
     cipher->encrypt
-        (ciphertext, &clen, plaintext, 23, plaintext + 32, 11, 0, nonce, key);
+        (ciphertext, &clen, plaintext, 23, plaintext + 32, 11, nonce, key);
 
     if (equal_hex(sanity_vec, ciphertext, clen))
         Serial.println("ok");
@@ -319,7 +319,6 @@ unsigned long perfHash_N
 {
     unsigned long start;
     unsigned long elapsed;
-    unsigned long long len;
     int count, loops;
 
     for (count = 0; count < size; ++count)
