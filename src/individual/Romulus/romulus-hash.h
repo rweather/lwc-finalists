@@ -52,7 +52,7 @@ typedef union
 {
     struct {
         unsigned char tk[48];   /**< Current tweakey state for SKINNY */
-        unsigned char s2[16];   /**< Next state block to be encrypted */
+        unsigned char h[16];    /**< Next state block to be encrypted */
         unsigned char count;    /**< Number of bytes in the current block */
         unsigned char mode;     /**< Hash mode: 0 for update, 1 for final */
     } s;                        /**< State */

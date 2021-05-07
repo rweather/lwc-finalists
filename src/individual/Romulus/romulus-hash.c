@@ -22,6 +22,7 @@
 
 #include "romulus-hash.h"
 #include "internal-skinny-plus.h"
+#include "internal-util.h"
 #include <string.h>
 
 /**
@@ -68,26 +69,38 @@ void romulus_hash_init(romulus_hash_state_t *state)
 static void romulus_hash_process_chunk(romulus_hash_state_t *state)
 {
     /*
-     * TK = M + S1 is 32 bytes of the message followed by the 16 byte S1 value.
-     * S2 is a separate 16 byte rolling state value.  Compute:
+     * TK = g + M where g is TK1 and TK23 = M is the 32 bytes of the message.
+     * h is a separate 16 byte rolling state value.  Compute:
      *
-     *      S1' = encrypt(M + S1, S2)
-     *      S2' = encrypt(M + S1, S2 ^ 0x80)
+     *      g' = h
+     *      h' = h
+     *      g' ^= 0x01
+     *      h = encrypt(TK, h')
+     *      g = encrypt(TK, g')
+     *      h ^= h'
+     *      g ^= h'
+     *      g ^= 0x01
      */
 #if ROMULUS_HASH_KEY_SCHEDULE
-    unsigned char s1[16];
+    unsigned char h[16];
     skinny_plus_key_schedule_t ks;
+    memcpy(h, state->s.h, 16);
     skinny_plus_init(&ks, state->s.tk);
-    skinny_plus_encrypt(&ks, s1, state->s.s2);
-    state->s.s2[0] ^= 0x80;
-    skinny_plus_encrypt(&ks, state->s.s2, state->s.s2);
-    memcpy(state->s.tk + 32, s1, 16);
+    skinny_plus_encrypt(&ks, state->s.h, h);
+    h[0] ^= 0x01;
+    skinny_plus_encrypt(&ks, state->s.tk, h);
+    lw_xor_block(state->s.h, h, 16);
+    lw_xor_block(state->s.tk, h, 16);
+    state->s.h[0] ^= 0x01;
 #else
-    unsigned char s1[16];
-    skinny_plus_encrypt_tk_full(state->s.tk, s1, state->s.s2);
-    state->s.s2[0] ^= 0x80;
-    skinny_plus_encrypt_tk_full(state->s.tk, state->s.s2, state->s.s2);
-    memcpy(state->s.tk + 32, s1, 16);
+    unsigned char h[16];
+    memcpy(h, state->s.h, 16);
+    skinny_plus_encrypt_tk_full(state->s.tk, state->s.h, h);
+    h[0] ^= 0x01;
+    skinny_plus_encrypt_tk_full(state->s.tk, state->s.tk, h);
+    lw_xor_block(state->s.h, h, 16);
+    lw_xor_block(state->s.tk, h, 16);
+    state->s.h[0] ^= 0x01;
 #endif
 }
 
@@ -108,11 +121,11 @@ void romulus_hash_update
         temp = ROMULUS_HASH_RATE - state->s.count;
         if (temp > inlen) {
             temp = (unsigned)inlen;
-            memcpy(state->s.tk + state->s.count, in, temp);
+            memcpy(state->s.tk + 16 + state->s.count, in, temp);
             state->s.count += temp;
             return;
         }
-        memcpy(state->s.tk + state->s.count, in, temp);
+        memcpy(state->s.tk + 16 + state->s.count, in, temp);
         state->s.count = 0;
         in += temp;
         inlen -= temp;
@@ -121,7 +134,7 @@ void romulus_hash_update
 
     /* Process full blocks that are aligned at state->s.count == 0 */
     while (inlen >= ROMULUS_HASH_RATE) {
-        memcpy(state->s.tk, in, ROMULUS_HASH_RATE);
+        memcpy(state->s.tk + 16, in, ROMULUS_HASH_RATE);
         in += ROMULUS_HASH_RATE;
         inlen -= ROMULUS_HASH_RATE;
         romulus_hash_process_chunk(state);
@@ -129,7 +142,7 @@ void romulus_hash_update
 
     /* Process the left-over block at the end of the input */
     temp = (unsigned)inlen;
-    memcpy(state->s.tk, in, temp);
+    memcpy(state->s.tk + 16, in, temp);
     state->s.count = temp;
 }
 
@@ -137,15 +150,16 @@ void romulus_hash_finalize(romulus_hash_state_t *state, unsigned char *out)
 {
     if (!state->s.mode) {
         /* We were still absorbing, so pad and process the last chunk */
-        state->s.tk[state->s.count] = 0x80;
-        memset(state->s.tk + state->s.count + 1, 0,
+        memset(state->s.tk + 16 + state->s.count, 0,
                ROMULUS_HASH_RATE - 1 - state->s.count);
+        state->s.tk[47] = state->s.count;
+        state->s.h[0] ^= 0x02;
         romulus_hash_process_chunk(state);
         state->s.mode = 1;
         state->s.count = 0;
     }
 
-    /* The hash value is S1 concatenated with S2 */
-    memcpy(out, state->s.tk + 32, 16);
-    memcpy(out + 16, state->s.s2, 16);
+    /* The hash value is h concatenated with g, where g is in the tweakey */
+    memcpy(out, state->s.h, 16);
+    memcpy(out + 16, state->s.tk, 16);
 }
