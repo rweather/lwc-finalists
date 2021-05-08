@@ -73,6 +73,8 @@ ELEPHANT_JUMBO_FILES = \
 GIFT_COFB_FILES = \
     gift-cofb-aead.c \
     gift-cofb-aead.h \
+    gift-prng.c \
+    gift-prng.h \
     internal-gift128.c \
     internal-gift128.h \
     internal-gift128-config.h \
