@@ -42,6 +42,7 @@ OBJS = \
         sparkle-prng.o \
         tinyjambu-aead.o \
         tinyjambu-aead-masked.o \
+        tinyjambu-prng.o \
         xoodyak-aead.o \
         xoodyak-hash.o \
         xoodyak-hmac.o \
@@ -127,6 +128,7 @@ sparkle-hmac.o: sparkle-hmac.h sparkle-hash.h internal-hmac.h internal-util.h
 sparkle-prng.o: sparkle-prng.h sparkle-hash.h internal-sparkle.h internal-util.h
 tinyjambu-aead.o: tinyjambu-aead.h internal-tinyjambu.h internal-util.h
 tinyjambu-aead-masked.o: tinyjambu-aead-masked.h internal-tinyjambu-m.h aead-random.h internal-masking.h internal-util.h
+tinyjambu-prng.o: tinyjambu-prng.h internal-tinyjambu.h internal-util.h
 xoodyak-aead.o: xoodyak-aead.h internal-xoodoo.h internal-util.h
 xoodyak-hash.o: xoodyak-hash.h internal-xoodoo.h internal-util.h
 xoodyak-hmac.o: xoodyak-hmac.h xoodyak-hash.h internal-hmac.h internal-util.h

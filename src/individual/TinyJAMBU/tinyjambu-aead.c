@@ -25,51 +25,6 @@
 #include "internal-util.h"
 
 /**
- * \def tiny_jambu_init_state(state)
- * \brief Initializes a TinyJAMBU state to zero.
- *
- * \param state TinyJAMBU state to be initialized.
- */
-/**
- * \def tiny_jambu_add_domain(state, domain)
- * \brief Adds a domain separation value to the TinyJAMBU state.
- *
- * \param state TinyJAMBU state to be updated.
- * \param domain Domain separation value to add.
- */
-/**
- * \def tiny_jambu_absorb(state, word)
- * \brief Absorbs a 32-bit word into the TinyJAMBU state.
- *
- * \param state TinyJAMBU state to be updated.
- * \param word Word value to absorb.
- */
-/**
- * \def tiny_jambu_squeeze(state)
- * \brief Squeezes a 32-bit word from the TinyJAMBU state.
- *
- * \param state TinyJAMBU state to squeeze from.
- * \return Word value that was squeezed out.
- */
-#if TINY_JAMBU_64BIT
-#define tiny_jambu_init_state(state) \
-    ((state)->t[0] = (state)->t[1] = 0)
-#define tiny_jambu_add_domain(state, domain) \
-    ((state)->t[0] ^= ((uint64_t)(domain)) << 32)
-#define tiny_jambu_absorb(state, word) \
-    ((state)->t[1] ^= ((uint64_t)(word)) << 32)
-#define tiny_jambu_squeeze(state) ((uint32_t)((state)->t[1]))
-#else
-#define tiny_jambu_init_state(state) \
-    ((state)->s[0] = (state)->s[1] = (state)->s[2] = (state)->s[3] = 0)
-#define tiny_jambu_add_domain(state, domain) \
-    ((state)->s[1] ^= (domain))
-#define tiny_jambu_absorb(state, word) \
-    ((state)->s[3] ^= (word))
-#define tiny_jambu_squeeze(state) ((state)->s[2])
-#endif
-
-/**
  * \brief Set up the TinyJAMBU-128 state with the key and the nonce
  * and then absorbs the associated data.
  *

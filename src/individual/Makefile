@@ -172,6 +172,8 @@ SPARKLE_FILES = \
 TINYJAMBU_FILES = \
     tinyjambu-aead.c \
     tinyjambu-aead.h \
+    tinyjambu-prng.c \
+    tinyjambu-prng.h \
     internal-tinyjambu.c \
     internal-tinyjambu.h \
     internal-tinyjambu-armv7m.S \
