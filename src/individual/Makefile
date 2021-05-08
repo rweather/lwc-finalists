@@ -139,6 +139,8 @@ ROMULUS_FILES = \
     romulus-hash.h \
     romulus-hmac.c \
     romulus-hmac.h \
+    romulus-prng.c \
+    romulus-prng.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
     internal-skinny-full-armv7m.S \
