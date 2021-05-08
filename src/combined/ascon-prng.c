@@ -209,14 +209,19 @@ void ascon_prng_feed
  * \param state PRNG state to squeeze from.
  * \param data Points to the data buffer to fill.
  * \param size Number of bytes to squeeze out of \a state.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-static void ascon_prng_squeeze
+static int ascon_prng_squeeze
     (ascon_prng_state_t *state, unsigned char *data, size_t size)
 {
+    int reseed_ok = 1;
+
     /* Squeeze as many rate-sized blocks as possible */
     while (size >= ASCON_XOF_RATE) {
         if (state->s.count >= state->s.limit)
-            ascon_prng_reseed(state);
+            reseed_ok &= ascon_prng_reseed(state);
         memcpy(data, state->s.state, ASCON_XOF_RATE);
         ascon_prng_permute(ASCON_STATE(state));
         state->s.count += ASCON_XOF_RATE;
@@ -227,25 +232,27 @@ static void ascon_prng_squeeze
     /* Squeeze out the final block */
     if (size > 0) {
         if (state->s.count >= state->s.limit)
-            ascon_prng_reseed(state);
+            reseed_ok &= ascon_prng_reseed(state);
         memcpy(data, state->s.state, size);
         ascon_prng_permute(ASCON_STATE(state));
         state->s.count += ASCON_XOF_RATE;
     }
+    return reseed_ok;
 }
 
-void ascon_prng_fetch
+int ascon_prng_fetch
     (ascon_prng_state_t *state, unsigned char *data, size_t size)
 {
-    ascon_prng_squeeze(state, data, size);
+    int have_trng = ascon_prng_squeeze(state, data, size);
     ascon_prng_rekey(ASCON_STATE(state));
+    return have_trng;
 }
 
 int ascon_prng_generate(unsigned char *data, size_t size)
 {
     ascon_prng_state_t state;
     int have_trng = ascon_prng_init(&state);
-    ascon_prng_squeeze(&state, data, size);
+    have_trng &= ascon_prng_squeeze(&state, data, size);
     ascon_prng_free(&state);
     return have_trng;
 }

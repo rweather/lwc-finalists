@@ -171,13 +171,17 @@ void elephant_prng_feed
  * \param state Points to the PRNG state.
  * \param data Points to the buffer to receive the squeezed data.
  * \param size Number of bytes to be squeezed.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-static void elephant_prng_squeeze
+static int elephant_prng_squeeze
     (elephant_prng_state_t *state, unsigned char *data, size_t size)
 {
+    int reseed_ok = 1;
     while (size >= ELEPHANT_PRNG_RATE) {
         if (state->s.count >= state->s.limit)
-            elephant_prng_reseed(state);
+            reseed_ok &= elephant_prng_reseed(state);
         memcpy(data, state->s.state, ELEPHANT_PRNG_RATE);
         keccakp_200_permute(KECCAK_STATE(state));
         data += ELEPHANT_PRNG_RATE;
@@ -186,25 +190,27 @@ static void elephant_prng_squeeze
     }
     if (size > 0) {
         if (state->s.count >= state->s.limit)
-            elephant_prng_reseed(state);
+            reseed_ok &= elephant_prng_reseed(state);
         memcpy(data, state->s.state, size);
         keccakp_200_permute(KECCAK_STATE(state));
         state->s.count += ELEPHANT_PRNG_RATE;
     }
+    return reseed_ok;
 }
 
-void elephant_prng_fetch
+int elephant_prng_fetch
     (elephant_prng_state_t *state, unsigned char *data, size_t size)
 {
-    elephant_prng_squeeze(state, data, size);
+    int have_trng = elephant_prng_squeeze(state, data, size);
     elephant_prng_rekey(KECCAK_STATE(state));
+    return have_trng;
 }
 
 int elephant_prng_generate(unsigned char *data, size_t size)
 {
     elephant_prng_state_t state;
     int have_trng = elephant_prng_init(&state);
-    elephant_prng_squeeze(&state, data, size);
+    have_trng &= elephant_prng_squeeze(&state, data, size);
     elephant_prng_free(&state);
     return have_trng;
 }

@@ -212,13 +212,17 @@ void sparkle_prng_feed
  * \param state Points to the PRNG state.
  * \param data Points to the buffer to receive the squeezed data.
  * \param size Number of bytes to be squeezed.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-static void sparkle_prng_squeeze
+static int sparkle_prng_squeeze
     (sparkle_prng_state_t *state, unsigned char *data, size_t size)
 {
+    int reseed_ok = 1;
     while (size >= SPARKLE_PRNG_RATE) {
         if (state->s.count >= state->s.limit)
-            sparkle_prng_reseed(state);
+            reseed_ok &= sparkle_prng_reseed(state);
         memcpy(data, state->s.state, SPARKLE_PRNG_RATE);
         sparkle_384(SPARKLE_STATE(state), 7);
         data += SPARKLE_PRNG_RATE;
@@ -227,25 +231,27 @@ static void sparkle_prng_squeeze
     }
     if (size > 0) {
         if (state->s.count >= state->s.limit)
-            sparkle_prng_reseed(state);
+            reseed_ok &= sparkle_prng_reseed(state);
         memcpy(data, state->s.state, size);
         sparkle_384(SPARKLE_STATE(state), 7);
         state->s.count += SPARKLE_PRNG_RATE;
     }
+    return reseed_ok;
 }
 
-void sparkle_prng_fetch
+int sparkle_prng_fetch
     (sparkle_prng_state_t *state, unsigned char *data, size_t size)
 {
-    sparkle_prng_squeeze(state, data, size);
+    int have_trng = sparkle_prng_squeeze(state, data, size);
     sparkle_prng_rekey(SPARKLE_STATE(state));
+    return have_trng;
 }
 
 int sparkle_prng_generate(unsigned char *data, size_t size)
 {
     sparkle_prng_state_t state;
     int have_trng = sparkle_prng_init(&state);
-    sparkle_prng_squeeze(&state, data, size);
+    have_trng &= sparkle_prng_squeeze(&state, data, size);
     sparkle_prng_free(&state);
     return have_trng;
 }

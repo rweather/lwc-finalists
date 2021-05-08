@@ -165,13 +165,17 @@ void photon_beetle_prng_feed
  * \param state Points to the PRNG state.
  * \param data Points to the buffer to receive the squeezed data.
  * \param size Number of bytes to be squeezed.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-static void photon_beetle_prng_squeeze
+static int photon_beetle_prng_squeeze
     (photon_beetle_prng_state_t *state, unsigned char *data, size_t size)
 {
+    int reseed_ok = 1;
     while (size >= PHOTON_BEETLE_PRNG_RATE) {
         if (state->s.count >= state->s.limit)
-            photon_beetle_prng_reseed(state);
+            reseed_ok &= photon_beetle_prng_reseed(state);
         memcpy(data, state->s.state, PHOTON_BEETLE_PRNG_RATE);
         photon256_permute(PHOTON256_STATE(state));
         data += PHOTON_BEETLE_PRNG_RATE;
@@ -180,25 +184,27 @@ static void photon_beetle_prng_squeeze
     }
     if (size > 0) {
         if (state->s.count >= state->s.limit)
-            photon_beetle_prng_reseed(state);
+            reseed_ok &= photon_beetle_prng_reseed(state);
         memcpy(data, state->s.state, size);
         photon256_permute(PHOTON256_STATE(state));
         state->s.count += PHOTON_BEETLE_PRNG_RATE;
     }
+    return reseed_ok;
 }
 
-void photon_beetle_prng_fetch
+int photon_beetle_prng_fetch
     (photon_beetle_prng_state_t *state, unsigned char *data, size_t size)
 {
-    photon_beetle_prng_squeeze(state, data, size);
+    int have_trng = photon_beetle_prng_squeeze(state, data, size);
     photon_beetle_prng_rekey(PHOTON256_STATE(state));
+    return have_trng;
 }
 
 int photon_beetle_prng_generate(unsigned char *data, size_t size)
 {
     photon_beetle_prng_state_t state;
     int have_trng = photon_beetle_prng_init(&state);
-    photon_beetle_prng_squeeze(&state, data, size);
+    have_trng &= photon_beetle_prng_squeeze(&state, data, size);
     photon_beetle_prng_free(&state);
     return have_trng;
 }

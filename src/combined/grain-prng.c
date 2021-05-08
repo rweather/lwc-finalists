@@ -98,16 +98,20 @@ static void grain_prng_absorb
  * \param state Points to the PRNG state.
  * \param data Points to the data buffer to fill with squeezed data.
  * \param size Number of bytes to be squeezed.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-static void grain_prng_squeeze
+static int grain_prng_squeeze
     (grain_prng_state_t *state, unsigned char *data, size_t size)
 {
+    int reseed_ok = 1;
     uint32_t x;
 
     /* Squeeze as many 32-bit blocks as possible */
     while (size >= 4) {
         if (state->s.count >= state->s.limit)
-            grain_prng_reseed(state);
+            reseed_ok &= grain_prng_reseed(state);
         x = grain128_preoutput(GRAIN128_STATE(state));
         grain128_core(GRAIN128_STATE(state), 0, 0);
         le_store_word32(data, x);
@@ -119,7 +123,7 @@ static void grain_prng_squeeze
     /* Squeeze out the final partial block */
     if (size > 0) {
         if (state->s.count >= state->s.limit)
-            grain_prng_reseed(state);
+            reseed_ok &= grain_prng_reseed(state);
         x = grain128_preoutput(GRAIN128_STATE(state));
         grain128_core(GRAIN128_STATE(state), 0, 0);
         if (size == 1) {
@@ -134,6 +138,7 @@ static void grain_prng_squeeze
         }
         state->s.count += 4;
     }
+    return reseed_ok;
 }
 
 /**
@@ -278,21 +283,22 @@ void grain_prng_feed
     aead_clean(key, sizeof(key));
 }
 
-void grain_prng_fetch
+int grain_prng_fetch
     (grain_prng_state_t *state, unsigned char *data, size_t size)
 {
     /* Squeeze data out of the PRNG state */
-    grain_prng_squeeze(state, data, size);
+    int have_trng = grain_prng_squeeze(state, data, size);
 
     /* Re-key the PRNG after the request */
     grain_prng_feed(state, 0, 0);
+    return have_trng;
 }
 
 int grain_prng_generate(unsigned char *data, size_t size)
 {
     grain_prng_state_t state;
     int have_trng = grain_prng_init(&state);
-    grain_prng_squeeze(&state, data, size);
+    have_trng &= grain_prng_squeeze(&state, data, size);
     aead_clean(&state, sizeof(state));
     return have_trng;
 }

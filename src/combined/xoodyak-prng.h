@@ -118,8 +118,11 @@ void xoodyak_prng_feed
  * \param state PRNG state to fetch data from.
  * \param data Points to a buffer to receive the generated random data.
  * \param size Number of bytes of random data to be generated.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-void xoodyak_prng_fetch
+int xoodyak_prng_fetch
     (xoodyak_prng_state_t *state, unsigned char *data, size_t size);
 
 /**

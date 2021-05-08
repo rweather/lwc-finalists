@@ -152,14 +152,19 @@ void xoodyak_prng_feed
  * \param state PRNG state to squeeze from.
  * \param data Points to the data buffer to fill.
  * \param size Number of bytes to squeeze out of \a state.
+ *
+ * \return Zero if the PRNG was re-seeded from the system TRNG during
+ * the fetch but there is no system TRNG or it has failed.
  */
-static void xoodyak_prng_squeeze
+static int xoodyak_prng_squeeze
     (xoodyak_prng_state_t *state, unsigned char *data, size_t size)
 {
+    int reseed_ok = 1;
+
     /* Squeeze as many rate-sized blocks as possible */
     while (size >= XOODYAK_HASH_RATE) {
         if (state->s.count >= state->s.limit)
-            xoodyak_prng_reseed(state);
+            reseed_ok &= xoodyak_prng_reseed(state);
         memcpy(data, state->s.state, XOODYAK_HASH_RATE);
         xoodoo_permute(XOODOO_STATE(state));
         state->s.count += XOODYAK_HASH_RATE;
@@ -170,25 +175,27 @@ static void xoodyak_prng_squeeze
     /* Squeeze out the final block */
     if (size > 0) {
         if (state->s.count >= state->s.limit)
-            xoodyak_prng_reseed(state);
+            reseed_ok &= xoodyak_prng_reseed(state);
         memcpy(data, state->s.state, size);
         xoodoo_permute(XOODOO_STATE(state));
         state->s.count += XOODYAK_HASH_RATE;
     }
+    return reseed_ok;
 }
 
-void xoodyak_prng_fetch
+int xoodyak_prng_fetch
     (xoodyak_prng_state_t *state, unsigned char *data, size_t size)
 {
-    xoodyak_prng_squeeze(state, data, size);
+    int have_trng = xoodyak_prng_squeeze(state, data, size);
     xoodyak_prng_rekey(XOODOO_STATE(state));
+    return have_trng;
 }
 
 int xoodyak_prng_generate(unsigned char *data, size_t size)
 {
     xoodyak_prng_state_t state;
     int have_trng = xoodyak_prng_init(&state);
-    xoodyak_prng_squeeze(&state, data, size);
+    have_trng &= xoodyak_prng_squeeze(&state, data, size);
     xoodyak_prng_free(&state);
     return have_trng;
 }
