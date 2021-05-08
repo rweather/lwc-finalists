@@ -209,13 +209,17 @@ static void grain_prng_rekey(grain_prng_state_t *state, uint32_t key[8])
 
 void grain_prng_add_ident(const unsigned char *data, size_t size)
 {
+    static uint32_t const ident_key[8] = {0};
     grain128_compact_state_t state;
     uint8_t round;
 
-    /* Set up a Grain-128 state using the identification pool as the key */
-    grain_prng_setup_key(GRAIN128_STATE(&state), grain_id_pool, 0);
+    /* Set up a Grain-128 state using an all-zeroes key and nonce */
+    grain_prng_setup_key(GRAIN128_STATE(&state), ident_key, 0);
 
-    /* Absorb the input data into the Grain-128 state */
+    /* Absorb the existing pool and the new data into the Grain-128 state */
+    grain_prng_absorb
+        (GRAIN128_STATE(&state), (unsigned char *)grain_id_pool,
+         sizeof(grain_id_pool));
     grain_prng_absorb(GRAIN128_STATE(&state), data, size);
 
     /* Generate 32 bytes of output for the new identification pool */
