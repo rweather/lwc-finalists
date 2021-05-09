@@ -110,40 +110,40 @@ Macros</h2></td></tr>
 <tr class="separator:a9188c93a0975d91f0cf7052601cf7a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66d4736e84d9383ce86af4ad3d9028c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66d4736e84d9383ce86af4ad3d9028c3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#a66d4736e84d9383ce86af4ad3d9028c3">ROMULUS_NONCE_SIZE</a>&#160;&#160;&#160;16</td></tr>
-<tr class="memdesc:a66d4736e84d9383ce86af4ad3d9028c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the nonce for Romulus-N+ and Romulus-M+. <br/></td></tr>
+<tr class="memdesc:a66d4736e84d9383ce86af4ad3d9028c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the nonce for Romulus-N and Romulus-M. <br/></td></tr>
 <tr class="separator:a66d4736e84d9383ce86af4ad3d9028c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1c0706fcb000b0e93d54835ce5d7d478"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#a1c0706fcb000b0e93d54835ce5d7d478">romulus_np_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a1c0706fcb000b0e93d54835ce5d7d478"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Romulus-N+.  <a href="#a1c0706fcb000b0e93d54835ce5d7d478">More...</a><br/></td></tr>
-<tr class="separator:a1c0706fcb000b0e93d54835ce5d7d478"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad49cec205b4258ed35e0eadfc6756081"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#ad49cec205b4258ed35e0eadfc6756081">romulus_np_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:ad49cec205b4258ed35e0eadfc6756081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Romulus-N+.  <a href="#ad49cec205b4258ed35e0eadfc6756081">More...</a><br/></td></tr>
-<tr class="separator:ad49cec205b4258ed35e0eadfc6756081"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a448eae0e9466b4324c9861e82604fb75"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#a448eae0e9466b4324c9861e82604fb75">romulus_mp_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:a448eae0e9466b4324c9861e82604fb75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Romulus-M+.  <a href="#a448eae0e9466b4324c9861e82604fb75">More...</a><br/></td></tr>
-<tr class="separator:a448eae0e9466b4324c9861e82604fb75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeeab5c1f1c22b062d57ba8d2649701cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#aeeab5c1f1c22b062d57ba8d2649701cf">romulus_mp_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
-<tr class="memdesc:aeeab5c1f1c22b062d57ba8d2649701cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Romulus-M+.  <a href="#aeeab5c1f1c22b062d57ba8d2649701cf">More...</a><br/></td></tr>
-<tr class="separator:aeeab5c1f1c22b062d57ba8d2649701cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adca3216d00aa5ccd9bff863470ca53ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#adca3216d00aa5ccd9bff863470ca53ed">romulus_n_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:adca3216d00aa5ccd9bff863470ca53ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Romulus-N.  <a href="#adca3216d00aa5ccd9bff863470ca53ed">More...</a><br/></td></tr>
+<tr class="separator:adca3216d00aa5ccd9bff863470ca53ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd0103f1a3eb61f067cf68028239dd9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#a7dd0103f1a3eb61f067cf68028239dd9">romulus_n_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a7dd0103f1a3eb61f067cf68028239dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Romulus-N.  <a href="#a7dd0103f1a3eb61f067cf68028239dd9">More...</a><br/></td></tr>
+<tr class="separator:a7dd0103f1a3eb61f067cf68028239dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff3dd3dd6473b0f429d478f71ff3b193"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#aff3dd3dd6473b0f429d478f71ff3b193">romulus_m_aead_encrypt</a> (unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:aff3dd3dd6473b0f429d478f71ff3b193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts and authenticates a packet with Romulus-M.  <a href="#aff3dd3dd6473b0f429d478f71ff3b193">More...</a><br/></td></tr>
+<tr class="separator:aff3dd3dd6473b0f429d478f71ff3b193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a787d4a7d301a65bb82f7af50ed54227e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-aead_8h.html#a787d4a7d301a65bb82f7af50ed54227e">romulus_m_aead_decrypt</a> (unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
+<tr class="memdesc:a787d4a7d301a65bb82f7af50ed54227e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with Romulus-M.  <a href="#a787d4a7d301a65bb82f7af50ed54227e">More...</a><br/></td></tr>
+<tr class="separator:a787d4a7d301a65bb82f7af50ed54227e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Romulus authenticated encryption algorithm family. </p>
 <p>Romulus is a family of authenticated encryption algorithms that are built around the SKINNY-128-384+ tweakable block cipher. There are two members in the family:</p>
 <ul>
-<li>Romulus-N+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384+ tweakable block cipher. This is the primary member of the family. </li>
-<li>Romulus-M+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384+ tweakable block cipher.</li>
+<li>Romulus-N has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384+ tweakable block cipher. This is the primary member of the family. </li>
+<li>Romulus-M has a 128-bit key, a 128-bit nonce, and a 128-bit tag, based around the SKINNY-128-384+ tweakable block cipher.</li>
 </ul>
 <p>The Romulus-M variants are resistant to nonce reuse as long as the combination of the associated data and plaintext is unique. If the same associated data and plaintext are reused under the same nonce, then the scheme will leak that the same plaintext has been sent for a second time but will not reveal the plaintext itself.</p>
 <p>References: <a href="https://romulusae.github.io/romulus/">https://romulusae.github.io/romulus/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aeeab5c1f1c22b062d57ba8d2649701cf"></a>
+<a class="anchor" id="a787d4a7d301a65bb82f7af50ed54227e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int romulus_mp_aead_decrypt </td>
+          <td class="memname">int romulus_m_aead_decrypt </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -198,7 +198,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Decrypts and authenticates a packet with Romulus-M+. </p>
+<p>Decrypts and authenticates a packet with Romulus-M. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
@@ -213,16 +213,16 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#a448eae0e9466b4324c9861e82604fb75" title="Encrypts and authenticates a packet with Romulus-M+. ">romulus_mp_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#aff3dd3dd6473b0f429d478f71ff3b193" title="Encrypts and authenticates a packet with Romulus-M. ">romulus_m_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a448eae0e9466b4324c9861e82604fb75"></a>
+<a class="anchor" id="aff3dd3dd6473b0f429d478f71ff3b193"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int romulus_mp_aead_encrypt </td>
+          <td class="memname">int romulus_m_aead_encrypt </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>c</em>, </td>
@@ -277,7 +277,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Encrypts and authenticates a packet with Romulus-M+. </p>
+<p>Encrypts and authenticates a packet with Romulus-M. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>Buffer to receive the output. </td></tr>
@@ -292,16 +292,16 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#aeeab5c1f1c22b062d57ba8d2649701cf" title="Decrypts and authenticates a packet with Romulus-M+. ">romulus_mp_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#a787d4a7d301a65bb82f7af50ed54227e" title="Decrypts and authenticates a packet with Romulus-M. ">romulus_m_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ad49cec205b4258ed35e0eadfc6756081"></a>
+<a class="anchor" id="a7dd0103f1a3eb61f067cf68028239dd9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int romulus_np_aead_decrypt </td>
+          <td class="memname">int romulus_n_aead_decrypt </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -356,7 +356,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Decrypts and authenticates a packet with Romulus-N+. </p>
+<p>Decrypts and authenticates a packet with Romulus-N. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>Buffer to receive the plaintext message on output. </td></tr>
@@ -371,16 +371,16 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if the authentication tag was incorrect, or some other negative number if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#a1c0706fcb000b0e93d54835ce5d7d478" title="Encrypts and authenticates a packet with Romulus-N+. ">romulus_np_aead_encrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#adca3216d00aa5ccd9bff863470ca53ed" title="Encrypts and authenticates a packet with Romulus-N. ">romulus_n_aead_encrypt()</a> </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a1c0706fcb000b0e93d54835ce5d7d478"></a>
+<a class="anchor" id="adca3216d00aa5ccd9bff863470ca53ed"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int romulus_np_aead_encrypt </td>
+          <td class="memname">int romulus_n_aead_encrypt </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>c</em>, </td>
@@ -435,7 +435,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Encrypts and authenticates a packet with Romulus-N+. </p>
+<p>Encrypts and authenticates a packet with Romulus-N. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>Buffer to receive the output. </td></tr>
@@ -450,14 +450,14 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#ad49cec205b4258ed35e0eadfc6756081" title="Decrypts and authenticates a packet with Romulus-N+. ">romulus_np_aead_decrypt()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-aead_8h.html#a7dd0103f1a3eb61f067cf68028239dd9" title="Decrypts and authenticates a packet with Romulus-N. ">romulus_n_aead_decrypt()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 9 2021 11:24:25 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -114,6 +114,18 @@ Macros</h2></td></tr>
 <tr class="memitem:a1a73720588bbe09195cbc5e1c92c8d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a1a73720588bbe09195cbc5e1c92c8d25">tiny_jambu_key_load_odd</a>(ptr)&#160;&#160;&#160;((<a class="el" href="internal-tinyjambu_8h.html#a5ff18d32dc9e0e71ba68d77cebd5c600">tiny_jambu_key_word_t</a>)(~(le_load_word32((ptr)))))</td></tr>
 <tr class="memdesc:a1a73720588bbe09195cbc5e1c92c8d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an odd key word for TinyJAMBU.  <a href="#a1a73720588bbe09195cbc5e1c92c8d25">More...</a><br/></td></tr>
 <tr class="separator:a1a73720588bbe09195cbc5e1c92c8d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6428484538b84623556947faff22d8a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a6428484538b84623556947faff22d8a6">tiny_jambu_init_state</a>(state)&#160;&#160;&#160;((state)-&gt;s[0] = (state)-&gt;s[1] = (state)-&gt;s[2] = (state)-&gt;s[3] = 0)</td></tr>
+<tr class="memdesc:a6428484538b84623556947faff22d8a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a TinyJAMBU state to zero.  <a href="#a6428484538b84623556947faff22d8a6">More...</a><br/></td></tr>
+<tr class="separator:a6428484538b84623556947faff22d8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69c17319185c96c0a1b8dddd4fc7c010"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#a69c17319185c96c0a1b8dddd4fc7c010">tiny_jambu_add_domain</a>(state, domain)&#160;&#160;&#160;((state)-&gt;s[1] ^= (domain))</td></tr>
+<tr class="memdesc:a69c17319185c96c0a1b8dddd4fc7c010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a domain separation value to the TinyJAMBU state.  <a href="#a69c17319185c96c0a1b8dddd4fc7c010">More...</a><br/></td></tr>
+<tr class="separator:a69c17319185c96c0a1b8dddd4fc7c010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa99e26189f862e65236fee697d7ecb9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#aa99e26189f862e65236fee697d7ecb9c">tiny_jambu_absorb</a>(state, word)&#160;&#160;&#160;((state)-&gt;s[3] ^= (word))</td></tr>
+<tr class="memdesc:aa99e26189f862e65236fee697d7ecb9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absorbs a 32-bit word into the TinyJAMBU state.  <a href="#aa99e26189f862e65236fee697d7ecb9c">More...</a><br/></td></tr>
+<tr class="separator:aa99e26189f862e65236fee697d7ecb9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8909cdcda6b1f4a362d2ce36160323a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#aa8909cdcda6b1f4a362d2ce36160323a">tiny_jambu_squeeze</a>(state)&#160;&#160;&#160;((state)-&gt;s[2])</td></tr>
+<tr class="memdesc:aa8909cdcda6b1f4a362d2ce36160323a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes a 32-bit word from the TinyJAMBU state.  <a href="#aa8909cdcda6b1f4a362d2ce36160323a">More...</a><br/></td></tr>
+<tr class="separator:aa8909cdcda6b1f4a362d2ce36160323a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab20aad70de3206ce2707aa66f8c1e6ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-tinyjambu_8h.html#ab20aad70de3206ce2707aa66f8c1e6ac">TINYJAMBU_ROUNDS</a>(steps)&#160;&#160;&#160;((steps) / 128)</td></tr>
 <tr class="memdesc:ab20aad70de3206ce2707aa66f8c1e6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a number of steps into a number of rounds, where each round consists of 128 steps.  <a href="#ab20aad70de3206ce2707aa66f8c1e6ac">More...</a><br/></td></tr>
 <tr class="separator:ab20aad70de3206ce2707aa66f8c1e6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +152,100 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Internal implementation of the TinyJAMBU permutation. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="aa99e26189f862e65236fee697d7ecb9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define tiny_jambu_absorb</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">state, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">word&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((state)-&gt;s[3] ^= (word))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absorbs a 32-bit word into the TinyJAMBU state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>TinyJAMBU state to be updated. </td></tr>
+    <tr><td class="paramname">word</td><td>Word value to absorb. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a69c17319185c96c0a1b8dddd4fc7c010"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define tiny_jambu_add_domain</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">state, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">domain&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((state)-&gt;s[1] ^= (domain))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a domain separation value to the TinyJAMBU state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>TinyJAMBU state to be updated. </td></tr>
+    <tr><td class="paramname">domain</td><td>Domain separation value to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6428484538b84623556947faff22d8a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define tiny_jambu_init_state</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">state</td><td>)</td>
+          <td>&#160;&#160;&#160;((state)-&gt;s[0] = (state)-&gt;s[1] = (state)-&gt;s[2] = (state)-&gt;s[3] = 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes a TinyJAMBU state to zero. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>TinyJAMBU state to be initialized. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a67e0ea5d19a3f762d6e3e847e900a2f2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -187,6 +293,31 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The key word. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa8909cdcda6b1f4a362d2ce36160323a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define tiny_jambu_squeeze</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">state</td><td>)</td>
+          <td>&#160;&#160;&#160;((state)-&gt;s[2])</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Squeezes a 32-bit word from the TinyJAMBU state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>TinyJAMBU state to squeeze from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Word value that was squeezed out. </dd></dl>
 
 </div>
 </div>
@@ -348,7 +479,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 9 2021 11:24:25 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

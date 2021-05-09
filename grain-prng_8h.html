@@ -109,24 +109,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a730bd53228545a4a1b9c8ea664ae782c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a730bd53228545a4a1b9c8ea664ae782c">grain_prng_add_ident</a> (const unsigned char *data, size_t size)</td></tr>
 <tr class="memdesc:a730bd53228545a4a1b9c8ea664ae782c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unique identification information for this device to the global pool.  <a href="#a730bd53228545a4a1b9c8ea664ae782c">More...</a><br/></td></tr>
 <tr class="separator:a730bd53228545a4a1b9c8ea664ae782c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e400260251e92a659ba13f7d5febd23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a8e400260251e92a659ba13f7d5febd23">grain_prng_init</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state)</td></tr>
-<tr class="memdesc:a8e400260251e92a659ba13f7d5febd23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a Grain-128 based PRNG.  <a href="#a8e400260251e92a659ba13f7d5febd23">More...</a><br/></td></tr>
-<tr class="separator:a8e400260251e92a659ba13f7d5febd23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae061b58200d607f5e19db9e91e00df8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#ae061b58200d607f5e19db9e91e00df8e">grain_prng_init</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state)</td></tr>
+<tr class="memdesc:ae061b58200d607f5e19db9e91e00df8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a Grain-128 based PRNG.  <a href="#ae061b58200d607f5e19db9e91e00df8e">More...</a><br/></td></tr>
+<tr class="separator:ae061b58200d607f5e19db9e91e00df8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d47fda46ae5cb2605258b6960cecc19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a8d47fda46ae5cb2605258b6960cecc19">grain_prng_free</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state)</td></tr>
 <tr class="memdesc:a8d47fda46ae5cb2605258b6960cecc19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees a Grain-128 based PRNG and destroys all sensitive information.  <a href="#a8d47fda46ae5cb2605258b6960cecc19">More...</a><br/></td></tr>
 <tr class="separator:a8d47fda46ae5cb2605258b6960cecc19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f8eb477e07497a327396ac38fcf8c57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a6f8eb477e07497a327396ac38fcf8c57">grain_prng_reseed</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state)</td></tr>
-<tr class="memdesc:a6f8eb477e07497a327396ac38fcf8c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forces a Grain-128 based PRNG to re-seed from the system TRNG.  <a href="#a6f8eb477e07497a327396ac38fcf8c57">More...</a><br/></td></tr>
-<tr class="separator:a6f8eb477e07497a327396ac38fcf8c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c09d3c250850c6a1eecbde723354413"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a9c09d3c250850c6a1eecbde723354413">grain_prng_reseed</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state)</td></tr>
+<tr class="memdesc:a9c09d3c250850c6a1eecbde723354413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forces a Grain-128 based PRNG to re-seed from the system TRNG.  <a href="#a9c09d3c250850c6a1eecbde723354413">More...</a><br/></td></tr>
+<tr class="separator:a9c09d3c250850c6a1eecbde723354413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a305b5cdd7bede01d7184ee94d9168908"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a305b5cdd7bede01d7184ee94d9168908">grain_prng_feed</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state, const unsigned char *data, size_t size)</td></tr>
 <tr class="memdesc:a305b5cdd7bede01d7184ee94d9168908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feeds data into a Grain-128 based PRNG state to seed it from other sources besides the system TRNG.  <a href="#a305b5cdd7bede01d7184ee94d9168908">More...</a><br/></td></tr>
 <tr class="separator:a305b5cdd7bede01d7184ee94d9168908"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a218ffb60cbc2584d4c7963efeb55c3fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a218ffb60cbc2584d4c7963efeb55c3fc">grain_prng_fetch</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state, unsigned char *data, size_t size)</td></tr>
-<tr class="memdesc:a218ffb60cbc2584d4c7963efeb55c3fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches data from a Grain-128 based PRNG state.  <a href="#a218ffb60cbc2584d4c7963efeb55c3fc">More...</a><br/></td></tr>
-<tr class="separator:a218ffb60cbc2584d4c7963efeb55c3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a787af6b3f46c122cc9467ada0a0bf808"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a787af6b3f46c122cc9467ada0a0bf808">grain_prng_generate</a> (unsigned char *data, size_t size)</td></tr>
-<tr class="memdesc:a787af6b3f46c122cc9467ada0a0bf808"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches random data using a Grain-128 based PRNG.  <a href="#a787af6b3f46c122cc9467ada0a0bf808">More...</a><br/></td></tr>
-<tr class="separator:a787af6b3f46c122cc9467ada0a0bf808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9875bd281444b642225fe284900ef63a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a9875bd281444b642225fe284900ef63a">grain_prng_fetch</a> (<a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *state, unsigned char *data, size_t size)</td></tr>
+<tr class="memdesc:a9875bd281444b642225fe284900ef63a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches data from a Grain-128 based PRNG state.  <a href="#a9875bd281444b642225fe284900ef63a">More...</a><br/></td></tr>
+<tr class="separator:a9875bd281444b642225fe284900ef63a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2518e49ae4cd6ae152f0e0f89e6cadfd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grain-prng_8h.html#a2518e49ae4cd6ae152f0e0f89e6cadfd">grain_prng_generate</a> (unsigned char *data, size_t size)</td></tr>
+<tr class="memdesc:a2518e49ae4cd6ae152f0e0f89e6cadfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches random data using a Grain-128 based PRNG.  <a href="#a2518e49ae4cd6ae152f0e0f89e6cadfd">More...</a><br/></td></tr>
+<tr class="separator:a2518e49ae4cd6ae152f0e0f89e6cadfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Pseudorandom number generator (PRNG) built around Grain-128. </p>
@@ -210,12 +210,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a218ffb60cbc2584d4c7963efeb55c3fc"></a>
+<a class="anchor" id="a9875bd281444b642225fe284900ef63a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void grain_prng_fetch </td>
+          <td class="memname">int grain_prng_fetch </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *&#160;</td>
           <td class="paramname"><em>state</em>, </td>
@@ -245,10 +245,11 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">state</td><td>PRNG state to fetch data from. </td></tr>
     <tr><td class="paramname">data</td><td>Points to a buffer to receive the generated random data. </td></tr>
-    <tr><td class="paramname">size</td><td>Number of bytes of random data to be generated. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of bytes of random data to be generated.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero if the PRNG was re-seeded from the system TRNG during the fetch but there is no system TRNG or it has failed. </dd></dl>
 
 </div>
 </div>
@@ -276,12 +277,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a787af6b3f46c122cc9467ada0a0bf808"></a>
+<a class="anchor" id="a2518e49ae4cd6ae152f0e0f89e6cadfd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void grain_prng_generate </td>
+          <td class="memname">int grain_prng_generate </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -308,16 +309,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the PRNG was initialized from system TRNG data, or zero if there is no system TRNG or it has failed.</dd></dl>
 <p>This function will create a temporary PRNG state object, seed it from the system TRNG, and then generate <em>size</em> bytes of random data. It is intended for quick one-off generation of random material. </p>
 
 </div>
 </div>
-<a class="anchor" id="a8e400260251e92a659ba13f7d5febd23"></a>
+<a class="anchor" id="ae061b58200d607f5e19db9e91e00df8e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void grain_prng_init </td>
+          <td class="memname">int grain_prng_init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
@@ -333,16 +335,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the PRNG was initialized from system TRNG data, or zero if there is no system TRNG or it has failed.</dd></dl>
 <p>This function will fetch fresh data from the system TRNG to prepare the PRNG state to generate random data. </p>
 
 </div>
 </div>
-<a class="anchor" id="a6f8eb477e07497a327396ac38fcf8c57"></a>
+<a class="anchor" id="a9c09d3c250850c6a1eecbde723354413"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void grain_prng_reseed </td>
+          <td class="memname">int grain_prng_reseed </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="uniongrain__prng__state__t.html">grain_prng_state_t</a> *&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
@@ -354,17 +357,18 @@ Functions</h2></td></tr>
 <p>Forces a Grain-128 based PRNG to re-seed from the system TRNG. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>PRNG state to be re-seeded. </td></tr>
+    <tr><td class="paramname">state</td><td>PRNG state to be re-seeded.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the PRNG was re-seeded from system TRNG data, or zero if there is no system TRNG or it has failed. </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 9 2021 11:24:25 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

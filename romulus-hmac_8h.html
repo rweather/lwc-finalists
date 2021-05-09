@@ -93,7 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Hashed Message Authentication Code (HMAC) based on Romulus-H+.  
+<p>Hashed Message Authentication Code (HMAC) based on Romulus-H.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="romulus-hash_8h_source.html">romulus-hash.h</a>&quot;</code><br/>
 <code>#include &lt;stddef.h&gt;</code><br/>
@@ -117,10 +117,10 @@ typedef <a class="el" href="unionromulus__hash__state__t.html">romulus_hash_stat
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af6f659bf10f1e6a859d8a2df3e629585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hmac_8h.html#af6f659bf10f1e6a859d8a2df3e629585">romulus_hmac</a> (unsigned char *out, const unsigned char *key, size_t keylen, const unsigned char *in, size_t inlen)</td></tr>
-<tr class="memdesc:af6f659bf10f1e6a859d8a2df3e629585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a HMAC value using Romulus-H+.  <a href="#af6f659bf10f1e6a859d8a2df3e629585">More...</a><br/></td></tr>
+<tr class="memdesc:af6f659bf10f1e6a859d8a2df3e629585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a HMAC value using Romulus-H.  <a href="#af6f659bf10f1e6a859d8a2df3e629585">More...</a><br/></td></tr>
 <tr class="separator:af6f659bf10f1e6a859d8a2df3e629585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7d0bbdb4b62508df2e623601d63e345"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hmac_8h.html#ae7d0bbdb4b62508df2e623601d63e345">romulus_hmac_init</a> (<a class="el" href="romulus-hmac_8h.html#a1ea71919b58f6f3b86545a2dc082214e">romulus_hmac_state_t</a> *state, const unsigned char *key, size_t keylen)</td></tr>
-<tr class="memdesc:ae7d0bbdb4b62508df2e623601d63e345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental HMAC state using Romulus-H+.  <a href="#ae7d0bbdb4b62508df2e623601d63e345">More...</a><br/></td></tr>
+<tr class="memdesc:ae7d0bbdb4b62508df2e623601d63e345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental HMAC state using Romulus-H.  <a href="#ae7d0bbdb4b62508df2e623601d63e345">More...</a><br/></td></tr>
 <tr class="separator:ae7d0bbdb4b62508df2e623601d63e345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36dd7f9d685a9869b7bc5fd5724e39a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hmac_8h.html#a36dd7f9d685a9869b7bc5fd5724e39a3">romulus_hmac_update</a> (<a class="el" href="romulus-hmac_8h.html#a1ea71919b58f6f3b86545a2dc082214e">romulus_hmac_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a36dd7f9d685a9869b7bc5fd5724e39a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an incremental Romulus-HMAC state with more input data.  <a href="#a36dd7f9d685a9869b7bc5fd5724e39a3">More...</a><br/></td></tr>
@@ -130,9 +130,9 @@ Functions</h2></td></tr>
 <tr class="separator:a021775bd61648ae0d71c7d5db97394b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Hashed Message Authentication Code (HMAC) based on Romulus-H+. </p>
-<p>The HMAC mode provides a method to authenticate a sequence of bytes using Romulus-H+ as the underlying digest algorithm.</p>
-<p>HMAC uses an underlying block size to pad the key data. The Romulus-H+ block absorption rate of 32 bytes is too short so we use the HMAC-SHA-256 block size of 64 instead.</p>
+<div class="textblock"><p>Hashed Message Authentication Code (HMAC) based on Romulus-H. </p>
+<p>The HMAC mode provides a method to authenticate a sequence of bytes using Romulus-H as the underlying digest algorithm.</p>
+<p>HMAC uses an underlying block size to pad the key data. The Romulus-H block absorption rate of 32 bytes is too short so we use the HMAC-SHA-256 block size of 64 instead.</p>
 <dl class="section note"><dt>Note</dt><dd>The KMAC construction is preferable for sponge-based hash algorithms as it is simpler and more efficient. HMAC mode is provided for drop-in compatibility with existing designs.</dd></dl>
 <p>Reference: <a href="https://tools.ietf.org/html/rfc2104">https://tools.ietf.org/html/rfc2104</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -178,7 +178,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes a HMAC value using Romulus-H+. </p>
+<p>Computes a HMAC value using Romulus-H. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">out</td><td>Buffer to receive the output HMAC value; must be at least ROMULUS_HMAC_SIZE bytes in length. </td></tr>
@@ -238,7 +238,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hmac_8h.html#ae7d0bbdb4b62508df2e623601d63e345" title="Initializes an incremental HMAC state using Romulus-H+. ">romulus_hmac_init()</a>, <a class="el" href="romulus-hmac_8h.html#a36dd7f9d685a9869b7bc5fd5724e39a3" title="Updates an incremental Romulus-HMAC state with more input data. ">romulus_hmac_update()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hmac_8h.html#ae7d0bbdb4b62508df2e623601d63e345" title="Initializes an incremental HMAC state using Romulus-H. ">romulus_hmac_init()</a>, <a class="el" href="romulus-hmac_8h.html#a36dd7f9d685a9869b7bc5fd5724e39a3" title="Updates an incremental Romulus-HMAC state with more input data. ">romulus_hmac_update()</a> </dd></dl>
 
 </div>
 </div>
@@ -272,7 +272,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes an incremental HMAC state using Romulus-H+. </p>
+<p>Initializes an incremental HMAC state using Romulus-H. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Points to the state to be initialized. </td></tr>
@@ -325,14 +325,14 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hmac_8h.html#ae7d0bbdb4b62508df2e623601d63e345" title="Initializes an incremental HMAC state using Romulus-H+. ">romulus_hmac_init()</a>, <a class="el" href="romulus-hmac_8h.html#a021775bd61648ae0d71c7d5db97394b3" title="Finalizes an incremental Romulus-HMAC state. ">romulus_hmac_finalize()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hmac_8h.html#ae7d0bbdb4b62508df2e623601d63e345" title="Initializes an incremental HMAC state using Romulus-H. ">romulus_hmac_init()</a>, <a class="el" href="romulus-hmac_8h.html#a021775bd61648ae0d71c7d5db97394b3" title="Finalizes an incremental Romulus-HMAC state. ">romulus_hmac_finalize()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 9 2021 11:24:25 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

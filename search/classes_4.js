@@ -6,6 +6,7 @@ var searchData=
   ['gift_5fcofb_5fl_5ft',['gift_cofb_l_t',['../structgift__cofb__l__t.html',1,'']]],
   ['gift_5fcofb_5fmasked_5fblock_5ft',['gift_cofb_masked_block_t',['../structgift__cofb__masked__block__t.html',1,'']]],
   ['gift_5fcofb_5fmasked_5fl_5ft',['gift_cofb_masked_l_t',['../structgift__cofb__masked__l__t.html',1,'']]],
+  ['gift_5fprng_5fstate_5ft',['gift_prng_state_t',['../uniongift__prng__state__t.html',1,'']]],
   ['grain128_5fcompact_5fstate_5ft',['grain128_compact_state_t',['../structgrain128__compact__state__t.html',1,'']]],
   ['grain128_5fstate_5ft',['grain128_state_t',['../structgrain128__state__t.html',1,'']]],
   ['grain_5fprng_5fstate_5ft',['grain_prng_state_t',['../uniongrain__prng__state__t.html',1,'']]]

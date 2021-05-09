@@ -14,6 +14,7 @@ var searchData=
   ['xoodyak_2dhmac_2eh',['xoodyak-hmac.h',['../xoodyak-hmac_8h.html',1,'']]],
   ['xoodyak_2dkmac_2eh',['xoodyak-kmac.h',['../xoodyak-kmac_8h.html',1,'']]],
   ['xoodyak_2dmasked_2eh',['xoodyak-masked.h',['../xoodyak-masked_8h.html',1,'']]],
+  ['xoodyak_2dprng_2eh',['xoodyak-prng.h',['../xoodyak-prng_8h.html',1,'']]],
   ['xoodyak_5faead_5fdecrypt',['xoodyak_aead_decrypt',['../xoodyak-aead_8h.html#ad4f90d6f9e65e536b6b585a561595c67',1,'xoodyak-aead.c']]],
   ['xoodyak_5faead_5fencrypt',['xoodyak_aead_encrypt',['../xoodyak-aead_8h.html#ad7e73d5f4802621eb985fbc7e463dfa1',1,'xoodyak-aead.c']]],
   ['xoodyak_5fcipher',['xoodyak_cipher',['../aead-metadata_8h.html#a646aad6bf7fd7cf20070733cc8c67371',1,'aead-metadata.c']]],
@@ -49,5 +50,13 @@ var searchData=
   ['xoodyak_5fmasked_5fnonce_5fsize',['XOODYAK_MASKED_NONCE_SIZE',['../xoodyak-masked_8h.html#a3affd091605622f8ef5f0a0d55de9b93',1,'xoodyak-masked.h']]],
   ['xoodyak_5fmasked_5ftag_5fsize',['XOODYAK_MASKED_TAG_SIZE',['../xoodyak-masked_8h.html#a0f30feb9c5e75ef5a7587261f6aa43f9',1,'xoodyak-masked.h']]],
   ['xoodyak_5fnonce_5fsize',['XOODYAK_NONCE_SIZE',['../xoodyak-aead_8h.html#ab5edaa9779bf4ff26eb4af3a2e3d881c',1,'xoodyak-aead.h']]],
+  ['xoodyak_5fprng_5fadd_5fident',['xoodyak_prng_add_ident',['../xoodyak-prng_8h.html#aa7afdbbec4b587b7398bec8f3c66be9e',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5ffeed',['xoodyak_prng_feed',['../xoodyak-prng_8h.html#a8d5c64cf289b35051ad50f78b7a86e70',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5ffetch',['xoodyak_prng_fetch',['../xoodyak-prng_8h.html#a94de7ceef391d14bfd0c36fb60e46aca',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5ffree',['xoodyak_prng_free',['../xoodyak-prng_8h.html#ae10000b36a69cdcb2e053c9e37594626',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5fgenerate',['xoodyak_prng_generate',['../xoodyak-prng_8h.html#a8d454d63bbc0b39a4648c602cf8d1b50',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5finit',['xoodyak_prng_init',['../xoodyak-prng_8h.html#af3c2c8eb839c0cdbcdf1da7ec656d6d2',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5freseed',['xoodyak_prng_reseed',['../xoodyak-prng_8h.html#a65abbf6743cdc53db18483d956327045',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5fstate_5ft',['xoodyak_prng_state_t',['../unionxoodyak__prng__state__t.html',1,'']]],
   ['xoodyak_5ftag_5fsize',['XOODYAK_TAG_SIZE',['../xoodyak-aead_8h.html#a23cbfa471d507a2991d32f458378ac26',1,'xoodyak-aead.h']]]
 ];

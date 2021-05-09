@@ -23,5 +23,12 @@ var searchData=
   ['xoodyak_5fkmac_5fset_5foutput_5flength',['xoodyak_kmac_set_output_length',['../xoodyak-kmac_8h.html#a3809c4bcad1788232a45c3f4657e55f2',1,'xoodyak-kmac.h']]],
   ['xoodyak_5fkmac_5fsqueeze',['xoodyak_kmac_squeeze',['../xoodyak-kmac_8h.html#a44be883f8cbbe2e7d63c7c74455c2d21',1,'xoodyak-kmac.h']]],
   ['xoodyak_5fmasked_5faead_5fdecrypt',['xoodyak_masked_aead_decrypt',['../xoodyak-masked_8h.html#aba16f5be17796a89b43b02bd5ac5dc32',1,'xoodyak-masked.c']]],
-  ['xoodyak_5fmasked_5faead_5fencrypt',['xoodyak_masked_aead_encrypt',['../xoodyak-masked_8h.html#a34ca4cfbdac7b08e40c34d7ff947ebc7',1,'xoodyak-masked.c']]]
+  ['xoodyak_5fmasked_5faead_5fencrypt',['xoodyak_masked_aead_encrypt',['../xoodyak-masked_8h.html#a34ca4cfbdac7b08e40c34d7ff947ebc7',1,'xoodyak-masked.c']]],
+  ['xoodyak_5fprng_5fadd_5fident',['xoodyak_prng_add_ident',['../xoodyak-prng_8h.html#aa7afdbbec4b587b7398bec8f3c66be9e',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5ffeed',['xoodyak_prng_feed',['../xoodyak-prng_8h.html#a8d5c64cf289b35051ad50f78b7a86e70',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5ffetch',['xoodyak_prng_fetch',['../xoodyak-prng_8h.html#a94de7ceef391d14bfd0c36fb60e46aca',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5ffree',['xoodyak_prng_free',['../xoodyak-prng_8h.html#ae10000b36a69cdcb2e053c9e37594626',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5fgenerate',['xoodyak_prng_generate',['../xoodyak-prng_8h.html#a8d454d63bbc0b39a4648c602cf8d1b50',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5finit',['xoodyak_prng_init',['../xoodyak-prng_8h.html#af3c2c8eb839c0cdbcdf1da7ec656d6d2',1,'xoodyak-prng.c']]],
+  ['xoodyak_5fprng_5freseed',['xoodyak_prng_reseed',['../xoodyak-prng_8h.html#a65abbf6743cdc53db18483d956327045',1,'xoodyak-prng.c']]]
 ];

@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Pseudorandom number generator (PRNG) built around ASCON.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;ascon-xof.h&quot;</code><br/>
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
 </div>
 <p><a href="ascon-prng_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -109,24 +109,24 @@ Functions</h2></td></tr>
 <tr class="memitem:ad749640cc39c26ced0c0928afbfea929"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#ad749640cc39c26ced0c0928afbfea929">ascon_prng_add_ident</a> (const unsigned char *data, size_t size)</td></tr>
 <tr class="memdesc:ad749640cc39c26ced0c0928afbfea929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unique identification information for this device to the global pool.  <a href="#ad749640cc39c26ced0c0928afbfea929">More...</a><br/></td></tr>
 <tr class="separator:ad749640cc39c26ced0c0928afbfea929"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec336a281eae81253c4a4df92653c300"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#aec336a281eae81253c4a4df92653c300">ascon_prng_init</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state)</td></tr>
-<tr class="memdesc:aec336a281eae81253c4a4df92653c300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an ASCON-based PRNG.  <a href="#aec336a281eae81253c4a4df92653c300">More...</a><br/></td></tr>
-<tr class="separator:aec336a281eae81253c4a4df92653c300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38b9f619ba4472a43ca2766c773148a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#ab38b9f619ba4472a43ca2766c773148a">ascon_prng_init</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state)</td></tr>
+<tr class="memdesc:ab38b9f619ba4472a43ca2766c773148a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an ASCON-based PRNG.  <a href="#ab38b9f619ba4472a43ca2766c773148a">More...</a><br/></td></tr>
+<tr class="separator:ab38b9f619ba4472a43ca2766c773148a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a143d7796161773f6d4ea1acf6084b61a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#a143d7796161773f6d4ea1acf6084b61a">ascon_prng_free</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state)</td></tr>
 <tr class="memdesc:a143d7796161773f6d4ea1acf6084b61a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees an ASCON-based PRNG and destroys all sensitive information.  <a href="#a143d7796161773f6d4ea1acf6084b61a">More...</a><br/></td></tr>
 <tr class="separator:a143d7796161773f6d4ea1acf6084b61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66b9148e48ff67fa4d6c0b1dee23fd28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#a66b9148e48ff67fa4d6c0b1dee23fd28">ascon_prng_reseed</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state)</td></tr>
-<tr class="memdesc:a66b9148e48ff67fa4d6c0b1dee23fd28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forces an ASCON-based PRNG to re-seed from the system TRNG.  <a href="#a66b9148e48ff67fa4d6c0b1dee23fd28">More...</a><br/></td></tr>
-<tr class="separator:a66b9148e48ff67fa4d6c0b1dee23fd28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a719dc7dcccac644b86aaafd12344b30f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#a719dc7dcccac644b86aaafd12344b30f">ascon_prng_reseed</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state)</td></tr>
+<tr class="memdesc:a719dc7dcccac644b86aaafd12344b30f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forces an ASCON-based PRNG to re-seed from the system TRNG.  <a href="#a719dc7dcccac644b86aaafd12344b30f">More...</a><br/></td></tr>
+<tr class="separator:a719dc7dcccac644b86aaafd12344b30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32c39fc84b17fba520e34619207a2830"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#a32c39fc84b17fba520e34619207a2830">ascon_prng_feed</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state, const unsigned char *data, size_t size)</td></tr>
 <tr class="memdesc:a32c39fc84b17fba520e34619207a2830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feeds data into an ASCON-based PRNG state to seed it from other sources besides the system TRNG.  <a href="#a32c39fc84b17fba520e34619207a2830">More...</a><br/></td></tr>
 <tr class="separator:a32c39fc84b17fba520e34619207a2830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dd32c7547b3736e26ce9ec88d141799"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#a1dd32c7547b3736e26ce9ec88d141799">ascon_prng_fetch</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state, unsigned char *data, size_t size)</td></tr>
-<tr class="memdesc:a1dd32c7547b3736e26ce9ec88d141799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches data from an ASCON-based PRNG state.  <a href="#a1dd32c7547b3736e26ce9ec88d141799">More...</a><br/></td></tr>
-<tr class="separator:a1dd32c7547b3736e26ce9ec88d141799"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acff51b2ba929ee4461955e3c45aa057c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#acff51b2ba929ee4461955e3c45aa057c">ascon_prng_generate</a> (unsigned char *data, size_t size)</td></tr>
-<tr class="memdesc:acff51b2ba929ee4461955e3c45aa057c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches random data using an ASCON-based PRNG.  <a href="#acff51b2ba929ee4461955e3c45aa057c">More...</a><br/></td></tr>
-<tr class="separator:acff51b2ba929ee4461955e3c45aa057c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4352adfa8dac3595daf9db4e6e80a2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#a7c4352adfa8dac3595daf9db4e6e80a2">ascon_prng_fetch</a> (<a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *state, unsigned char *data, size_t size)</td></tr>
+<tr class="memdesc:a7c4352adfa8dac3595daf9db4e6e80a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches data from an ASCON-based PRNG state.  <a href="#a7c4352adfa8dac3595daf9db4e6e80a2">More...</a><br/></td></tr>
+<tr class="separator:a7c4352adfa8dac3595daf9db4e6e80a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae173642df089720974d20ef67739281e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-prng_8h.html#ae173642df089720974d20ef67739281e">ascon_prng_generate</a> (unsigned char *data, size_t size)</td></tr>
+<tr class="memdesc:ae173642df089720974d20ef67739281e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches random data using an ASCON-based PRNG.  <a href="#ae173642df089720974d20ef67739281e">More...</a><br/></td></tr>
+<tr class="separator:ae173642df089720974d20ef67739281e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Pseudorandom number generator (PRNG) built around ASCON. </p>
@@ -212,12 +212,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1dd32c7547b3736e26ce9ec88d141799"></a>
+<a class="anchor" id="a7c4352adfa8dac3595daf9db4e6e80a2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ascon_prng_fetch </td>
+          <td class="memname">int ascon_prng_fetch </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *&#160;</td>
           <td class="paramname"><em>state</em>, </td>
@@ -247,10 +247,11 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">state</td><td>PRNG state to fetch data from. </td></tr>
     <tr><td class="paramname">data</td><td>Points to a buffer to receive the generated random data. </td></tr>
-    <tr><td class="paramname">size</td><td>Number of bytes of random data to be generated. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of bytes of random data to be generated.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero if the PRNG was re-seeded from the system TRNG during the fetch but there is no system TRNG or it has failed. </dd></dl>
 
 </div>
 </div>
@@ -278,12 +279,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="acff51b2ba929ee4461955e3c45aa057c"></a>
+<a class="anchor" id="ae173642df089720974d20ef67739281e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ascon_prng_generate </td>
+          <td class="memname">int ascon_prng_generate </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -310,16 +311,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the PRNG was initialized from system TRNG data, or zero if there is no system TRNG or it has failed.</dd></dl>
 <p>This function will create a temporary PRNG state object, seed it from the system TRNG, and then generate <em>size</em> bytes of random data. It is intended for quick one-off generation of random material. </p>
 
 </div>
 </div>
-<a class="anchor" id="aec336a281eae81253c4a4df92653c300"></a>
+<a class="anchor" id="ab38b9f619ba4472a43ca2766c773148a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ascon_prng_init </td>
+          <td class="memname">int ascon_prng_init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
@@ -335,16 +337,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the PRNG was initialized from system TRNG data, or zero if there is no system TRNG or it has failed.</dd></dl>
 <p>This function will fetch fresh data from the system TRNG to prepare the PRNG state to generate random data. </p>
 
 </div>
 </div>
-<a class="anchor" id="a66b9148e48ff67fa4d6c0b1dee23fd28"></a>
+<a class="anchor" id="a719dc7dcccac644b86aaafd12344b30f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ascon_prng_reseed </td>
+          <td class="memname">int ascon_prng_reseed </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="unionascon__prng__state__t.html">ascon_prng_state_t</a> *&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
@@ -356,17 +359,18 @@ Functions</h2></td></tr>
 <p>Forces an ASCON-based PRNG to re-seed from the system TRNG. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>PRNG state to be re-seeded. </td></tr>
+    <tr><td class="paramname">state</td><td>PRNG state to be re-seeded.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the PRNG was re-seeded from system TRNG data, or zero if there is no system TRNG or it has failed. </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 9 2021 11:24:25 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

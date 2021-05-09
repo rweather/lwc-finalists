@@ -12,5 +12,12 @@ var searchData=
   ['photon_5fbeetle_5fhmac',['photon_beetle_hmac',['../photon-beetle-hmac_8h.html#a5ac9a431cedf9d7a411d772add9ed4b5',1,'photon-beetle-hmac.h']]],
   ['photon_5fbeetle_5fhmac_5ffinalize',['photon_beetle_hmac_finalize',['../photon-beetle-hmac_8h.html#a31f08e242cdd29f3f47ff54fca7e49ef',1,'photon-beetle-hmac.h']]],
   ['photon_5fbeetle_5fhmac_5finit',['photon_beetle_hmac_init',['../photon-beetle-hmac_8h.html#a491800c7843cdc2c431da5d5cb7d9b56',1,'photon-beetle-hmac.h']]],
-  ['photon_5fbeetle_5fhmac_5fupdate',['photon_beetle_hmac_update',['../photon-beetle-hmac_8h.html#a2257ba259a18961f465548467efbc0e9',1,'photon-beetle-hmac.h']]]
+  ['photon_5fbeetle_5fhmac_5fupdate',['photon_beetle_hmac_update',['../photon-beetle-hmac_8h.html#a2257ba259a18961f465548467efbc0e9',1,'photon-beetle-hmac.h']]],
+  ['photon_5fbeetle_5fprng_5fadd_5fident',['photon_beetle_prng_add_ident',['../photon-beetle-prng_8h.html#a66be3517cbb6c4ce6bc304c9654c6a23',1,'photon-beetle-prng.c']]],
+  ['photon_5fbeetle_5fprng_5ffeed',['photon_beetle_prng_feed',['../photon-beetle-prng_8h.html#aef866a70efd323c4b901c96c083799d1',1,'photon-beetle-prng.c']]],
+  ['photon_5fbeetle_5fprng_5ffetch',['photon_beetle_prng_fetch',['../photon-beetle-prng_8h.html#a404f907ff386aa64de12be6f9f5cc6e4',1,'photon-beetle-prng.c']]],
+  ['photon_5fbeetle_5fprng_5ffree',['photon_beetle_prng_free',['../photon-beetle-prng_8h.html#a5b65a0d09833599f7877e1c599bed7cc',1,'photon-beetle-prng.c']]],
+  ['photon_5fbeetle_5fprng_5fgenerate',['photon_beetle_prng_generate',['../photon-beetle-prng_8h.html#aee63741e7a8c52085c63cf02bce1005f',1,'photon-beetle-prng.c']]],
+  ['photon_5fbeetle_5fprng_5finit',['photon_beetle_prng_init',['../photon-beetle-prng_8h.html#a7a8011c760cae3986eac1206fce61a0d',1,'photon-beetle-prng.c']]],
+  ['photon_5fbeetle_5fprng_5freseed',['photon_beetle_prng_reseed',['../photon-beetle-prng_8h.html#a54ce60646c3121582deb8f98108d1734',1,'photon-beetle-prng.c']]]
 ];

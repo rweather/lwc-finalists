@@ -15,5 +15,12 @@ var searchData=
   ['tiny_5fjambu_5fpermutation_5f128',['tiny_jambu_permutation_128',['../internal-tinyjambu_8h.html#afc169dcfe528e0e6cb45ab024daac1f2',1,'internal-tinyjambu.c']]],
   ['tiny_5fjambu_5fpermutation_5f192',['tiny_jambu_permutation_192',['../internal-tinyjambu_8h.html#a0e8d17d87c061bc88da87bf31b28950e',1,'internal-tinyjambu.c']]],
   ['tiny_5fjambu_5fpermutation_5f256',['tiny_jambu_permutation_256',['../internal-tinyjambu_8h.html#ac45cd3974480a195e48dd5c792fc335a',1,'internal-tinyjambu.c']]],
-  ['tiny_5fjambu_5fpermutation_5fmasked',['tiny_jambu_permutation_masked',['../internal-tinyjambu-m_8h.html#aa57f1a9cc98a001ccea2c1f0f07234f1',1,'internal-tinyjambu-m.c']]]
+  ['tiny_5fjambu_5fpermutation_5fmasked',['tiny_jambu_permutation_masked',['../internal-tinyjambu-m_8h.html#aa57f1a9cc98a001ccea2c1f0f07234f1',1,'internal-tinyjambu-m.c']]],
+  ['tinyjambu_5fprng_5fadd_5fident',['tinyjambu_prng_add_ident',['../tinyjambu-prng_8h.html#ae2a9bec6b7b7df1678040e4b702fafa5',1,'tinyjambu-prng.c']]],
+  ['tinyjambu_5fprng_5ffeed',['tinyjambu_prng_feed',['../tinyjambu-prng_8h.html#a579c7308b72e4db3df81280e6959c9a3',1,'tinyjambu-prng.c']]],
+  ['tinyjambu_5fprng_5ffetch',['tinyjambu_prng_fetch',['../tinyjambu-prng_8h.html#afebe61a1670f61b7d4909fb7f5c898a9',1,'tinyjambu-prng.c']]],
+  ['tinyjambu_5fprng_5ffree',['tinyjambu_prng_free',['../tinyjambu-prng_8h.html#a46b7d898e65c90dc223e45b110e577a5',1,'tinyjambu-prng.c']]],
+  ['tinyjambu_5fprng_5fgenerate',['tinyjambu_prng_generate',['../tinyjambu-prng_8h.html#a818eb9073a3bf0a0d8b80a4464ba1f57',1,'tinyjambu-prng.c']]],
+  ['tinyjambu_5fprng_5finit',['tinyjambu_prng_init',['../tinyjambu-prng_8h.html#a7e6ba24c39c34cc667cea837f6b1c855',1,'tinyjambu-prng.c']]],
+  ['tinyjambu_5fprng_5freseed',['tinyjambu_prng_reseed',['../tinyjambu-prng_8h.html#a99c0233a6cdd2fa5a2c909dca6449213',1,'tinyjambu-prng.c']]]
 ];

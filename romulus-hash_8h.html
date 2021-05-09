@@ -93,7 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Romulus-H+ hash algorithm.  
+<p>Romulus-H hash algorithm.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br/>
 </div>
@@ -102,34 +102,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionromulus__hash__state__t.html">romulus_hash_state_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for Romulus-H+ incremental modes.  <a href="unionromulus__hash__state__t.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for Romulus-H incremental modes.  <a href="unionromulus__hash__state__t.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ac11aa13a1726975171f0e8fc95b61e2c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac11aa13a1726975171f0e8fc95b61e2c"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hash_8h.html#ac11aa13a1726975171f0e8fc95b61e2c">ROMULUS_HASH_SIZE</a>&#160;&#160;&#160;32</td></tr>
-<tr class="memdesc:ac11aa13a1726975171f0e8fc95b61e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the fixed-length hash value for Romulus-H+. <br/></td></tr>
+<tr class="memdesc:ac11aa13a1726975171f0e8fc95b61e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the fixed-length hash value for Romulus-H. <br/></td></tr>
 <tr class="separator:ac11aa13a1726975171f0e8fc95b61e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a278455cad34c0907fb9af1e1ff3be32c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hash_8h.html#a278455cad34c0907fb9af1e1ff3be32c">romulus_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
-<tr class="memdesc:a278455cad34c0907fb9af1e1ff3be32c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with Romulus-H+.  <a href="#a278455cad34c0907fb9af1e1ff3be32c">More...</a><br/></td></tr>
+<tr class="memdesc:a278455cad34c0907fb9af1e1ff3be32c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with Romulus-H.  <a href="#a278455cad34c0907fb9af1e1ff3be32c">More...</a><br/></td></tr>
 <tr class="separator:a278455cad34c0907fb9af1e1ff3be32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab732249cb8378406ad762a9ea3188351"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351">romulus_hash_init</a> (<a class="el" href="unionromulus__hash__state__t.html">romulus_hash_state_t</a> *state)</td></tr>
-<tr class="memdesc:ab732249cb8378406ad762a9ea3188351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for a Romulus-H+ hashing operation.  <a href="#ab732249cb8378406ad762a9ea3188351">More...</a><br/></td></tr>
+<tr class="memdesc:ab732249cb8378406ad762a9ea3188351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for a Romulus-H hashing operation.  <a href="#ab732249cb8378406ad762a9ea3188351">More...</a><br/></td></tr>
 <tr class="separator:ab732249cb8378406ad762a9ea3188351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a806b0bf2c5921802304f4b97ad0ac2a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hash_8h.html#a806b0bf2c5921802304f4b97ad0ac2a3">romulus_hash_update</a> (<a class="el" href="unionromulus__hash__state__t.html">romulus_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
-<tr class="memdesc:a806b0bf2c5921802304f4b97ad0ac2a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a Romulus-H+ hash state with more input data.  <a href="#a806b0bf2c5921802304f4b97ad0ac2a3">More...</a><br/></td></tr>
+<tr class="memdesc:a806b0bf2c5921802304f4b97ad0ac2a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a Romulus-H hash state with more input data.  <a href="#a806b0bf2c5921802304f4b97ad0ac2a3">More...</a><br/></td></tr>
 <tr class="separator:a806b0bf2c5921802304f4b97ad0ac2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b137c5d52d71a80f45c7ea0c88fb258"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="romulus-hash_8h.html#a7b137c5d52d71a80f45c7ea0c88fb258">romulus_hash_finalize</a> (<a class="el" href="unionromulus__hash__state__t.html">romulus_hash_state_t</a> *state, unsigned char *out)</td></tr>
-<tr class="memdesc:a7b137c5d52d71a80f45c7ea0c88fb258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from a Romulus-H+ hashing operation.  <a href="#a7b137c5d52d71a80f45c7ea0c88fb258">More...</a><br/></td></tr>
+<tr class="memdesc:a7b137c5d52d71a80f45c7ea0c88fb258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from a Romulus-H hashing operation.  <a href="#a7b137c5d52d71a80f45c7ea0c88fb258">More...</a><br/></td></tr>
 <tr class="separator:a7b137c5d52d71a80f45c7ea0c88fb258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Romulus-H+ hash algorithm. </p>
-<p>Romulus-H+ is a hash algorithm based on the block cipher SKINNY-128-384+, using the MDPH construction. The algorithm produces a 256-bit fixed length output.</p>
+<div class="textblock"><p>Romulus-H hash algorithm. </p>
+<p>Romulus-H is a hash algorithm based on the block cipher SKINNY-128-384+, using the MDPH construction. The algorithm produces a 256-bit fixed length output.</p>
 <p>References: <a href="https://romulusae.github.io/romulus/">https://romulusae.github.io/romulus/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a278455cad34c0907fb9af1e1ff3be32c"></a>
@@ -162,7 +162,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Hashes a block of input data with Romulus-H+. </p>
+<p>Hashes a block of input data with Romulus-H. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">out</td><td>Buffer to receive the hash output which must be at least ROMULUS_HASH_SIZE bytes in length. </td></tr>
@@ -172,7 +172,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns zero on success or -1 if there was an error in the parameters.</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351" title="Initializes the state for a Romulus-H+ hashing operation. ">romulus_hash_init()</a>, romulus_hash_absorb(), romulus_hash_squeeze() </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351" title="Initializes the state for a Romulus-H hashing operation. ">romulus_hash_init()</a>, romulus_hash_absorb(), romulus_hash_squeeze() </dd></dl>
 
 </div>
 </div>
@@ -200,7 +200,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the final hash value from a Romulus-H+ hashing operation. </p>
+<p>Returns the final hash value from a Romulus-H hashing operation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Hash state to be finalized. </td></tr>
@@ -208,7 +208,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351" title="Initializes the state for a Romulus-H+ hashing operation. ">romulus_hash_init()</a>, <a class="el" href="romulus-hash_8h.html#a806b0bf2c5921802304f4b97ad0ac2a3" title="Updates a Romulus-H+ hash state with more input data. ">romulus_hash_update()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351" title="Initializes the state for a Romulus-H hashing operation. ">romulus_hash_init()</a>, <a class="el" href="romulus-hash_8h.html#a806b0bf2c5921802304f4b97ad0ac2a3" title="Updates a Romulus-H hash state with more input data. ">romulus_hash_update()</a> </dd></dl>
 
 </div>
 </div>
@@ -226,14 +226,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes the state for a Romulus-H+ hashing operation. </p>
+<p>Initializes the state for a Romulus-H hashing operation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Hash state to be initialized.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#a806b0bf2c5921802304f4b97ad0ac2a3" title="Updates a Romulus-H+ hash state with more input data. ">romulus_hash_update()</a>, <a class="el" href="romulus-hash_8h.html#a7b137c5d52d71a80f45c7ea0c88fb258" title="Returns the final hash value from a Romulus-H+ hashing operation. ">romulus_hash_finalize()</a>, <a class="el" href="romulus-hash_8h.html#a278455cad34c0907fb9af1e1ff3be32c" title="Hashes a block of input data with Romulus-H+. ">romulus_hash()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#a806b0bf2c5921802304f4b97ad0ac2a3" title="Updates a Romulus-H hash state with more input data. ">romulus_hash_update()</a>, <a class="el" href="romulus-hash_8h.html#a7b137c5d52d71a80f45c7ea0c88fb258" title="Returns the final hash value from a Romulus-H hashing operation. ">romulus_hash_finalize()</a>, <a class="el" href="romulus-hash_8h.html#a278455cad34c0907fb9af1e1ff3be32c" title="Hashes a block of input data with Romulus-H. ">romulus_hash()</a> </dd></dl>
 
 </div>
 </div>
@@ -267,7 +267,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Updates a Romulus-H+ hash state with more input data. </p>
+<p>Updates a Romulus-H hash state with more input data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Hash state to be updated. </td></tr>
@@ -276,14 +276,14 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351" title="Initializes the state for a Romulus-H+ hashing operation. ">romulus_hash_init()</a>, <a class="el" href="romulus-hash_8h.html#a7b137c5d52d71a80f45c7ea0c88fb258" title="Returns the final hash value from a Romulus-H+ hashing operation. ">romulus_hash_finalize()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="romulus-hash_8h.html#ab732249cb8378406ad762a9ea3188351" title="Initializes the state for a Romulus-H hashing operation. ">romulus_hash_init()</a>, <a class="el" href="romulus-hash_8h.html#a7b137c5d52d71a80f45c7ea0c88fb258" title="Returns the final hash value from a Romulus-H hashing operation. ">romulus_hash_finalize()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 3 2021 19:41:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 9 2021 11:24:25 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

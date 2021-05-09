@@ -8,8 +8,15 @@ var searchData=
   ['romulus_5fhmac_5ffinalize',['romulus_hmac_finalize',['../romulus-hmac_8h.html#a021775bd61648ae0d71c7d5db97394b3',1,'romulus-hmac.h']]],
   ['romulus_5fhmac_5finit',['romulus_hmac_init',['../romulus-hmac_8h.html#ae7d0bbdb4b62508df2e623601d63e345',1,'romulus-hmac.h']]],
   ['romulus_5fhmac_5fupdate',['romulus_hmac_update',['../romulus-hmac_8h.html#a36dd7f9d685a9869b7bc5fd5724e39a3',1,'romulus-hmac.h']]],
-  ['romulus_5fmp_5faead_5fdecrypt',['romulus_mp_aead_decrypt',['../romulus-aead_8h.html#aeeab5c1f1c22b062d57ba8d2649701cf',1,'romulus-aead.c']]],
-  ['romulus_5fmp_5faead_5fencrypt',['romulus_mp_aead_encrypt',['../romulus-aead_8h.html#a448eae0e9466b4324c9861e82604fb75',1,'romulus-aead.c']]],
-  ['romulus_5fnp_5faead_5fdecrypt',['romulus_np_aead_decrypt',['../romulus-aead_8h.html#ad49cec205b4258ed35e0eadfc6756081',1,'romulus-aead.c']]],
-  ['romulus_5fnp_5faead_5fencrypt',['romulus_np_aead_encrypt',['../romulus-aead_8h.html#a1c0706fcb000b0e93d54835ce5d7d478',1,'romulus-aead.c']]]
+  ['romulus_5fm_5faead_5fdecrypt',['romulus_m_aead_decrypt',['../romulus-aead_8h.html#a787d4a7d301a65bb82f7af50ed54227e',1,'romulus-aead.c']]],
+  ['romulus_5fm_5faead_5fencrypt',['romulus_m_aead_encrypt',['../romulus-aead_8h.html#aff3dd3dd6473b0f429d478f71ff3b193',1,'romulus-aead.c']]],
+  ['romulus_5fn_5faead_5fdecrypt',['romulus_n_aead_decrypt',['../romulus-aead_8h.html#a7dd0103f1a3eb61f067cf68028239dd9',1,'romulus-aead.c']]],
+  ['romulus_5fn_5faead_5fencrypt',['romulus_n_aead_encrypt',['../romulus-aead_8h.html#adca3216d00aa5ccd9bff863470ca53ed',1,'romulus-aead.c']]],
+  ['romulus_5fprng_5fadd_5fident',['romulus_prng_add_ident',['../romulus-prng_8h.html#a75e21f67452912fbec8ab6ce5220c57d',1,'romulus-prng.c']]],
+  ['romulus_5fprng_5ffeed',['romulus_prng_feed',['../romulus-prng_8h.html#a2bd67435b77f0ac09be119f2fca6c9f4',1,'romulus-prng.c']]],
+  ['romulus_5fprng_5ffetch',['romulus_prng_fetch',['../romulus-prng_8h.html#af87b2ff39a673bd22285b1d441997462',1,'romulus-prng.c']]],
+  ['romulus_5fprng_5ffree',['romulus_prng_free',['../romulus-prng_8h.html#adbd5f9178513e8948aa29efe9ab34370',1,'romulus-prng.c']]],
+  ['romulus_5fprng_5fgenerate',['romulus_prng_generate',['../romulus-prng_8h.html#ac72b8c1e55ba10cd27064ad2b2ac9a13',1,'romulus-prng.c']]],
+  ['romulus_5fprng_5finit',['romulus_prng_init',['../romulus-prng_8h.html#abb01dc3b6b1239d64292475993a121e4',1,'romulus-prng.c']]],
+  ['romulus_5fprng_5freseed',['romulus_prng_reseed',['../romulus-prng_8h.html#a950797f0b4cf504b11d485f911342a6e',1,'romulus-prng.c']]]
 ];
