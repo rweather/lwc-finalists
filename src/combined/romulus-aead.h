@@ -33,10 +33,10 @@
  * are built around the SKINNY-128-384+ tweakable block cipher.  There
  * are two members in the family:
  *
- * \li Romulus-N+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
+ * \li Romulus-N has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
  * based around the SKINNY-128-384+ tweakable block cipher.  This is the
  * primary member of the family.
- * \li Romulus-M+ has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
+ * \li Romulus-M has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
  * based around the SKINNY-128-384+ tweakable block cipher.
  *
  * The Romulus-M variants are resistant to nonce reuse as long as the
@@ -63,12 +63,12 @@ extern "C" {
 #define ROMULUS_TAG_SIZE 16
 
 /**
- * \brief Size of the nonce for Romulus-N+ and Romulus-M+.
+ * \brief Size of the nonce for Romulus-N and Romulus-M.
  */
 #define ROMULUS_NONCE_SIZE 16
 
 /**
- * \brief Encrypts and authenticates a packet with Romulus-N+.
+ * \brief Encrypts and authenticates a packet with Romulus-N.
  *
  * \param c Buffer to receive the output.
  * \param clen On exit, set to the length of the output which includes
@@ -85,9 +85,9 @@ extern "C" {
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  *
- * \sa romulus_np_aead_decrypt()
+ * \sa romulus_n_aead_decrypt()
  */
-int romulus_np_aead_encrypt
+int romulus_n_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -95,7 +95,7 @@ int romulus_np_aead_encrypt
      const unsigned char *k);
 
 /**
- * \brief Decrypts and authenticates a packet with Romulus-N+.
+ * \brief Decrypts and authenticates a packet with Romulus-N.
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
@@ -113,9 +113,9 @@ int romulus_np_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  *
- * \sa romulus_np_aead_encrypt()
+ * \sa romulus_n_aead_encrypt()
  */
-int romulus_np_aead_decrypt
+int romulus_n_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -123,7 +123,7 @@ int romulus_np_aead_decrypt
      const unsigned char *k);
 
 /**
- * \brief Encrypts and authenticates a packet with Romulus-M+.
+ * \brief Encrypts and authenticates a packet with Romulus-M.
  *
  * \param c Buffer to receive the output.
  * \param clen On exit, set to the length of the output which includes
@@ -140,9 +140,9 @@ int romulus_np_aead_decrypt
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  *
- * \sa romulus_mp_aead_decrypt()
+ * \sa romulus_m_aead_decrypt()
  */
-int romulus_mp_aead_encrypt
+int romulus_m_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -150,7 +150,7 @@ int romulus_mp_aead_encrypt
      const unsigned char *k);
 
 /**
- * \brief Decrypts and authenticates a packet with Romulus-M+.
+ * \brief Decrypts and authenticates a packet with Romulus-M.
  *
  * \param m Buffer to receive the plaintext message on output.
  * \param mlen Receives the length of the plaintext message on output.
@@ -168,9 +168,9 @@ int romulus_mp_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  *
- * \sa romulus_mp_aead_encrypt()
+ * \sa romulus_m_aead_encrypt()
  */
-int romulus_mp_aead_decrypt
+int romulus_m_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,

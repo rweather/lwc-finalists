@@ -1,6 +1,6 @@
 hash_family=romulus
-hash_name=romulush+v1
-hash_meta_name=Romulus-H+
+hash_name=romulushv1
+hash_meta_name=Romulus-H
 hash_srcdir=Romulus
 hash_size=32
 hash_function=romulus_hash

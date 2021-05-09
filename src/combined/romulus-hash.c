@@ -42,7 +42,7 @@
 #endif
 
 /**
- * \brief Number of bytes in a rate block for Romulus-H+.
+ * \brief Number of bytes in a rate block for Romulus-H.
  */
 #define ROMULUS_HASH_RATE 32
 
@@ -64,7 +64,7 @@ void romulus_hash_init(romulus_hash_state_t *state)
 /**
  * \brief Processes a full chunk of input data.
  *
- * \param Points to the Romulus-H+ hash state.
+ * \param Points to the Romulus-H hash state.
  */
 static void romulus_hash_process_chunk(romulus_hash_state_t *state)
 {

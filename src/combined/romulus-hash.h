@@ -27,9 +27,9 @@
 
 /**
  * \file romulus-hash.h
- * \brief Romulus-H+ hash algorithm.
+ * \brief Romulus-H hash algorithm.
  *
- * Romulus-H+ is a hash algorithm based on the block cipher SKINNY-128-384+,
+ * Romulus-H is a hash algorithm based on the block cipher SKINNY-128-384+,
  * using the MDPH construction.  The algorithm produces a 256-bit fixed
  * length output.
  *
@@ -41,12 +41,12 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the fixed-length hash value for Romulus-H+.
+ * \brief Size of the fixed-length hash value for Romulus-H.
  */
 #define ROMULUS_HASH_SIZE 32
 
 /**
- * \brief State information for Romulus-H+ incremental modes.
+ * \brief State information for Romulus-H incremental modes.
  */
 typedef union
 {
@@ -61,7 +61,7 @@ typedef union
 } romulus_hash_state_t;
 
 /**
- * \brief Hashes a block of input data with Romulus-H+.
+ * \brief Hashes a block of input data with Romulus-H.
  *
  * \param out Buffer to receive the hash output which must be at least
  * ROMULUS_HASH_SIZE bytes in length.
@@ -77,7 +77,7 @@ int romulus_hash
     (unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
- * \brief Initializes the state for a Romulus-H+ hashing operation.
+ * \brief Initializes the state for a Romulus-H hashing operation.
  *
  * \param state Hash state to be initialized.
  *
@@ -86,7 +86,7 @@ int romulus_hash
 void romulus_hash_init(romulus_hash_state_t *state);
 
 /**
- * \brief Updates a Romulus-H+ hash state with more input data.
+ * \brief Updates a Romulus-H hash state with more input data.
  *
  * \param state Hash state to be updated.
  * \param in Points to the input data to be absorbed into the state.
@@ -98,7 +98,7 @@ void romulus_hash_update
     (romulus_hash_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
- * \brief Returns the final hash value from a Romulus-H+ hashing operation.
+ * \brief Returns the final hash value from a Romulus-H hashing operation.
  *
  * \param state Hash state to be finalized.
  * \param out Buffer to receive the hash output which must be at least

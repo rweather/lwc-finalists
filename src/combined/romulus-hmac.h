@@ -28,13 +28,13 @@
 
 /**
  * \file romulus-hmac.h
- * \brief Hashed Message Authentication Code (HMAC) based on Romulus-H+.
+ * \brief Hashed Message Authentication Code (HMAC) based on Romulus-H.
  *
  * The HMAC mode provides a method to authenticate a sequence of bytes
- * using Romulus-H+ as the underlying digest algorithm.
+ * using Romulus-H as the underlying digest algorithm.
  *
  * HMAC uses an underlying block size to pad the key data.
- * The Romulus-H+ block absorption rate of 32 bytes is too short
+ * The Romulus-H block absorption rate of 32 bytes is too short
  * so we use the HMAC-SHA-256 block size of 64 instead.
  *
  * \note The KMAC construction is preferable for sponge-based hash
@@ -59,7 +59,7 @@ extern "C" {
 typedef romulus_hash_state_t romulus_hmac_state_t;
 
 /**
- * \brief Computes a HMAC value using Romulus-H+.
+ * \brief Computes a HMAC value using Romulus-H.
  *
  * \param out Buffer to receive the output HMAC value; must be at least
  * ROMULUS_HMAC_SIZE bytes in length.
@@ -74,7 +74,7 @@ void romulus_hmac
      const unsigned char *in, size_t inlen);
 
 /**
- * \brief Initializes an incremental HMAC state using Romulus-H+.
+ * \brief Initializes an incremental HMAC state using Romulus-H.
  *
  * \param state Points to the state to be initialized.
  * \param key Points to the key.

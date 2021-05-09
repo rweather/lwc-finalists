@@ -343,17 +343,17 @@ extern aead_hash_algorithm_t const photon_beetle_hash_algorithm;
 /*------------------------ Romulus ------------------------*/
 
 /**
- * \brief Meta-information block for the Romulus-N+ cipher.
+ * \brief Meta-information block for the Romulus-N cipher.
  */
-extern aead_cipher_t const romulus_np_cipher;
+extern aead_cipher_t const romulus_n_cipher;
 
 /**
- * \brief Meta-information block for the Romulus-M+ cipher.
+ * \brief Meta-information block for the Romulus-M cipher.
  */
-extern aead_cipher_t const romulus_mp_cipher;
+extern aead_cipher_t const romulus_m_cipher;
 
 /**
- * \brief Meta-information block for the Romulus-H+ hash algorithm.
+ * \brief Meta-information block for the Romulus-H hash algorithm.
  */
 extern aead_hash_algorithm_t const romulus_hash_algorithm;
 

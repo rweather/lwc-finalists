@@ -26,7 +26,7 @@
 #include <string.h>
 
 /**
- * \brief Initializes the key schedule for Romulus-N+ or Romulus-M+.
+ * \brief Initializes the key schedule for Romulus-N or Romulus-M.
  *
  * \param ks Points to the key schedule to initialize.
  * \param k Points to the 16 bytes of the key.
@@ -43,7 +43,7 @@ static void romulus1_init
 }
 
 /**
- * \brief Sets the domain separation value for Romulus-N+ and M+.
+ * \brief Sets the domain separation value for Romulus-N and M.
  *
  * \param ks The key schedule to set the domain separation value into.
  * \param domain The domain separation value.
@@ -51,7 +51,7 @@ static void romulus1_init
 #define romulus1_set_domain(ks, domain) ((ks)->TK1[7] = (domain))
 
 /**
- * \brief Updates the 56-bit LFSR block counter for Romulus-N+ and M+.
+ * \brief Updates the 56-bit LFSR block counter for Romulus-N and M.
  *
  * \param TK1 Points to the TK1 part of the key schedule containing the LFSR.
  */
@@ -68,7 +68,7 @@ STATIC_INLINE void romulus1_update_counter(uint8_t TK1[16])
 }
 
 /**
- * \brief Process the asssociated data for Romulus-N+.
+ * \brief Process the asssociated data for Romulus-N.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -77,7 +77,7 @@ STATIC_INLINE void romulus1_update_counter(uint8_t TK1[16])
  * \param ad Points to the associated data.
  * \param adlen Length of the associated data in bytes.
  */
-static void romulus_np_process_ad
+static void romulus_n_process_ad
     (skinny_plus_key_schedule_t *ks,
      unsigned char S[16], const unsigned char *k, const unsigned char *npub,
      const unsigned char *ad, size_t adlen)
@@ -208,7 +208,7 @@ static uint8_t romulus_m_final_ad_domain
 }
 
 /**
- * \brief Process the asssociated data for Romulus-M+.
+ * \brief Process the asssociated data for Romulus-M.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -219,7 +219,7 @@ static uint8_t romulus_m_final_ad_domain
  * \param m Points to the message plaintext.
  * \param mlen Length of the message plaintext.
  */
-static void romulus_mp_process_ad
+static void romulus_m_process_ad
     (skinny_plus_key_schedule_t *ks,
      unsigned char S[16], const unsigned char *k, const unsigned char *npub,
      const unsigned char *ad, size_t adlen,
@@ -431,7 +431,7 @@ STATIC_INLINE void romulus_rho_inverse_short
 }
 
 /**
- * \brief Encrypts a plaintext message with Romulus-N+.
+ * \brief Encrypts a plaintext message with Romulus-N.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -439,7 +439,7 @@ STATIC_INLINE void romulus_rho_inverse_short
  * \param m Points to the buffer containing the plaintext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_np_encrypt
+static void romulus_n_encrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *c, const unsigned char *m, size_t mlen)
 {
@@ -478,7 +478,7 @@ static void romulus_np_encrypt
 }
 
 /**
- * \brief Decrypts a ciphertext message with Romulus-N+.
+ * \brief Decrypts a ciphertext message with Romulus-N.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -486,7 +486,7 @@ static void romulus_np_encrypt
  * \param c Points to the buffer containing the ciphertext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_np_decrypt
+static void romulus_n_decrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *m, const unsigned char *c, size_t mlen)
 {
@@ -525,7 +525,7 @@ static void romulus_np_decrypt
 }
 
 /**
- * \brief Encrypts a plaintext message with Romulus-M+.
+ * \brief Encrypts a plaintext message with Romulus-M.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -533,7 +533,7 @@ static void romulus_np_decrypt
  * \param m Points to the buffer containing the plaintext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_mp_encrypt
+static void romulus_m_encrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *c, const unsigned char *m, size_t mlen)
 {
@@ -558,7 +558,7 @@ static void romulus_mp_encrypt
 }
 
 /**
- * \brief Decrypts a ciphertext message with Romulus-M+.
+ * \brief Decrypts a ciphertext message with Romulus-M.
  *
  * \param ks Points to the key schedule.
  * \param S The rolling Romulus state.
@@ -566,7 +566,7 @@ static void romulus_mp_encrypt
  * \param c Points to the buffer containing the ciphertext.
  * \param mlen Length of the plaintext in bytes.
  */
-static void romulus_mp_decrypt
+static void romulus_m_decrypt
     (skinny_plus_key_schedule_t *ks, unsigned char S[16],
      unsigned char *m, const unsigned char *c, size_t mlen)
 {
@@ -606,7 +606,7 @@ STATIC_INLINE void romulus_generate_tag
     }
 }
 
-int romulus_np_aead_encrypt
+int romulus_n_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -621,20 +621,20 @@ int romulus_np_aead_encrypt
 
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_np_process_ad(&ks, S, k, npub, ad, adlen);
+    romulus_n_process_ad(&ks, S, k, npub, ad, adlen);
 
     /* Re-initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
 
     /* Encrypts the plaintext to produce the ciphertext */
-    romulus_np_encrypt(&ks, S, c, m, mlen);
+    romulus_n_encrypt(&ks, S, c, m, mlen);
 
     /* Generate the authentication tag */
     romulus_generate_tag(c + mlen, S);
     return 0;
 }
 
-int romulus_np_aead_decrypt
+int romulus_n_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -651,21 +651,21 @@ int romulus_np_aead_decrypt
 
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_np_process_ad(&ks, S, k, npub, ad, adlen);
+    romulus_n_process_ad(&ks, S, k, npub, ad, adlen);
 
     /* Re-initialize the key schedule with the key and nonce */
     romulus1_init(&ks, k, npub);
 
     /* Decrypt the ciphertext to produce the plaintext */
     clen -= ROMULUS_TAG_SIZE;
-    romulus_np_decrypt(&ks, S, m, c, clen);
+    romulus_n_decrypt(&ks, S, m, c, clen);
 
     /* Check the authentication tag */
     romulus_generate_tag(S, S);
     return aead_check_tag(m, clen, S, c + clen, ROMULUS_TAG_SIZE);
 }
 
-int romulus_mp_aead_encrypt
+int romulus_m_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -680,7 +680,7 @@ int romulus_mp_aead_encrypt
 
     /* Process the associated data and the plaintext message */
     memset(S, 0, sizeof(S));
-    romulus_mp_process_ad(&ks, S, k, npub, ad, adlen, m, mlen);
+    romulus_m_process_ad(&ks, S, k, npub, ad, adlen, m, mlen);
 
     /* Generate the authentication tag, which is also the initialization
      * vector for the encryption portion of the packet processing */
@@ -691,11 +691,11 @@ int romulus_mp_aead_encrypt
     romulus1_init(&ks, k, npub);
 
     /* Encrypt the plaintext to produce the ciphertext */
-    romulus_mp_encrypt(&ks, S, c, m, mlen);
+    romulus_m_encrypt(&ks, S, c, m, mlen);
     return 0;
 }
 
-int romulus_mp_aead_decrypt
+int romulus_m_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -717,11 +717,11 @@ int romulus_mp_aead_decrypt
      * authentication tag as the initialization vector for decryption */
     clen -= ROMULUS_TAG_SIZE;
     memcpy(S, c + clen, ROMULUS_TAG_SIZE);
-    romulus_mp_decrypt(&ks, S, m, c, clen);
+    romulus_m_decrypt(&ks, S, m, c, clen);
 
     /* Process the associated data */
     memset(S, 0, sizeof(S));
-    romulus_mp_process_ad(&ks, S, k, npub, ad, adlen, m, clen);
+    romulus_m_process_ad(&ks, S, k, npub, ad, adlen, m, clen);
 
     /* Check the authentication tag */
     romulus_generate_tag(S, S);

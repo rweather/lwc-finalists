@@ -99,9 +99,9 @@ assembly code.
 <tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>0.77</td><td>0.79</td><td>1.44</td><td>1.43</td><td>1.04</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.28</td><td>0.34</td><td>0.61</td><td>0.67</td><td>0.43</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33</td></tr>
-<tr><td><b><i>Romulus-N+</i></b></td><td>128</td><td>128</td><td>128</td><td>0.29</td><td>0.32</td><td>0.32</td><td>0.34</td><td>0.32</td></tr>
+<tr><td><b><i>Romulus-N</i></b></td><td>128</td><td>128</td><td>128</td><td>0.29</td><td>0.32</td><td>0.32</td><td>0.34</td><td>0.32</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.33</td><td>0.35</td><td>0.25</td></tr>
-<tr><td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.17</td><td>0.19</td><td>0.22</td><td>0.23</td><td>0.20</td></tr>
+<tr><td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>0.17</td><td>0.19</td><td>0.22</td><td>0.23</td><td>0.20</td></tr>
 <tr><td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18</td></tr>
 <tr><td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.13</td><td>0.14</td><td>0.08</td></tr>
 <tr><td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.08</td><td>0.08</td><td>0.03</td><td>0.04</td><td>0.05</td></tr>
@@ -121,7 +121,7 @@ The hash algorithms are compared against BLAKE2s instead of ChaChaPoly:
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.51</td><td>0.41</td><td>0.63</td><td>0.52</td></tr>
 <tr><td>SHA256-C</td><td>256</td><td>0.56</td><td>0.40</td><td>0.60</td><td>0.52</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.46</td><td>0.38</td><td>0.59</td><td>0.48</td></tr>
-<tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.10</td><td>0.09</td><td>0.22</td><td>0.14</td></tr>
+<tr><td><b><i>Romulus-H</i></b></td><td>256</td><td>0.10</td><td>0.09</td><td>0.22</td><td>0.14</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.16</td><td>0.07</td></tr>
 </table>
 
@@ -145,7 +145,7 @@ would be more like this:
 <tr><td>PHOTON-Beetle-HASH</td><td>0.07</td><td>4</td><td>0.0175</td></tr>
 <tr><td>SHA256-ASM</td><td>1.02</td><td>64</td><td>0.0159</td></tr>
 <tr><td>SHA256-C</td><td>0.52</td><td>64</td><td>0.0081</td></tr>
-<tr><td>Romulus-H+</td><td>0.14</td><td>32</td><td>0.0044</td></tr>
+<tr><td>Romulus-H</td><td>0.14</td><td>32</td><td>0.0044</td></tr>
 </table>
 
 \section perf_esp32 Performance on ESP32
@@ -170,9 +170,9 @@ where the architectural differences gives some algorithms an added advantage.
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>0.67</td><td>0.44</td><td>0.84</td><td>0.61</td><td>0.61</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.33</td><td>0.30</td><td>0.65</td><td>0.59</td><td>0.43</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23</td></tr>
-<tr><td><b><i>Romulus-N+</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.21</td><td>0.20</td></tr>
+<tr><td><b><i>Romulus-N</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.21</td><td>0.20</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.22</td><td>0.24</td><td>0.19</td></tr>
-<tr><td>Romulus-M+</td><td>128</td><td>128</td><td>128</td><td>0.11</td><td>0.13</td><td>0.15</td><td>0.16</td><td>0.14</td></tr>
+<tr><td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>0.11</td><td>0.13</td><td>0.15</td><td>0.16</td><td>0.14</td></tr>
 <tr><td>ISAP-A-128A</td><td>128</td><td>128</td><td>128</td><td>0.13</td><td>0.15</td><td>0.08</td><td>0.09</td><td>0.10</td></tr>
 <tr><td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.04</td><td>0.05</td><td>0.12</td><td>0.13</td><td>0.07</td></tr>
 <tr><td><b><i>ISAP-K-128A</i></b></td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.02</td><td>0.02</td><td>0.02</td></tr>
@@ -191,7 +191,7 @@ Hash algorithms:
 <tr><td><b><i>Esch256</i></b> (SPARKLE)</td><td>256</td><td>0.38</td><td>0.34</td><td>0.64</td><td>0.45</td></tr>
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>0.24</td><td>0.20</td><td>0.30</td><td>0.25</td></tr>
 <tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.19</td><td>0.16</td><td>0.25</td><td>0.20</td></tr>
-<tr><td><b><i>Romulus-H+</i></b></td><td>256</td><td>0.07</td><td>0.06</td><td>0.09</td><td>0.09</td></tr>
+<tr><td><b><i>Romulus-H</i></b></td><td>256</td><td>0.07</td><td>0.06</td><td>0.09</td><td>0.09</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.02</td><td>0.02</td><td>0.15</td><td>0.06</td></tr>
 </table>
 

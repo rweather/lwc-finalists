@@ -290,28 +290,28 @@ aead_hash_algorithm_t const photon_beetle_hash_algorithm = {
 
 /*------------------------ Romulus ------------------------*/
 
-aead_cipher_t const romulus_np_cipher = {
-    "Romulus-N+",
+aead_cipher_t const romulus_n_cipher = {
+    "Romulus-N",
     ROMULUS_KEY_SIZE,
     ROMULUS_NONCE_SIZE,
     ROMULUS_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_np_aead_encrypt,
-    romulus_np_aead_decrypt
+    romulus_n_aead_encrypt,
+    romulus_n_aead_decrypt
 };
 
-aead_cipher_t const romulus_mp_cipher = {
-    "Romulus-M+",
+aead_cipher_t const romulus_m_cipher = {
+    "Romulus-M",
     ROMULUS_KEY_SIZE,
     ROMULUS_NONCE_SIZE,
     ROMULUS_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
-    romulus_mp_aead_encrypt,
-    romulus_mp_aead_decrypt
+    romulus_m_aead_encrypt,
+    romulus_m_aead_decrypt
 };
 
 aead_hash_algorithm_t const romulus_hash_algorithm = {
-    "Romulus-H+",
+    "Romulus-H",
     sizeof(romulus_hash_state_t),
     ROMULUS_HASH_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
