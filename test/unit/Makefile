@@ -17,6 +17,7 @@ OBJS1 = \
     test-ascon.o \
     test-blake2s.o \
     test-chachapoly.o \
+    test-ghash.o \
     test-gift128.o \
     test-grain128.o \
     test-hmac.o \
@@ -52,6 +53,7 @@ test-aes.o: $(LIBSRC_DIR)/internal-aes.h $(LIBSRC_DIR)/internal-util.h $(TEST_CI
 test-ascon.o: $(LIBSRC_DIR)/ascon-aead.h $(LIBSRC_DIR)/internal-ascon.h $(LIBSRC_DIR)/internal-ascon-m.h $(TEST_CIPHER_MASKING_INC)
 test-blake2s.o: $(LIBSRC_DIR)/internal-blake2s.h $(TEST_CIPHER_INC)
 test-chachapoly.o: $(LIBSRC_DIR)/internal-chachapoly.h $(TEST_CIPHER_INC)
+test-ghash.o: $(LIBSRC_DIR)/internal-ghash.h $(LIBSRC_DIR)/internal-util.h $(TEST_CIPHER_INC)
 test-gift128.o: $(LIBSRC_DIR)/internal-gift128.h $(LIBSRC_DIR)/internal-gift128-m.h $(LIBSRC_DIR)/internal-gift128-config.h $(TEST_CIPHER_MASKING_INC)
 test-grain128.o: $(LIBSRC_DIR)/internal-grain128.h $(TEST_CIPHER_INC)
 test-hmac.o: $(LIBSRC_DIR)/aead-metadata.h $(LIBSRC_DIR)/ascon-hmac.h $(LIBSRC_DIR)/photon-beetle-hmac.h $(LIBSRC_DIR)/romulus-hmac.h $(LIBSRC_DIR)/sparkle-hmac.h $(LIBSRC_DIR)/xoodyak-hmac.h $(TEST_CIPHER_INC)

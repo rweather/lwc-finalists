@@ -54,6 +54,7 @@ OBJS = \
 	internal-ascon-m.o \
 	internal-blake2s.o \
 	internal-chachapoly.o \
+	internal-ghash.o \
 	internal-gift128.o \
 	internal-gift128-m.o \
 	internal-grain128.o \
@@ -141,6 +142,7 @@ internal-ascon.o: internal-ascon.h internal-util.h
 internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
 internal-blake2s.o: internal-blake2s.h internal-util.h aead-metadata.h
 internal-chachapoly.o: internal-chachapoly.h internal-util.h aead-metadata.h
+internal-ghash.o: internal-ghash.h internal-util.h
 internal-gift128.o: internal-gift128.h internal-gift128-config.h internal-util.h
 internal-gift128-m.o: internal-gift128-m.h internal-gift128-config.h aead-random.h internal-masking.h internal-util.h
 internal-grain128.o: internal-grain128.h internal-util.h

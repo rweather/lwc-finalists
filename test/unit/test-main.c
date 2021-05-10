@@ -27,6 +27,7 @@ void test_aes(void);
 void test_ascon(void);
 void test_blake2s(void);
 void test_chachapoly(void);
+void test_ghash(void);
 void test_gift128(void);
 void test_gift128_masked(void);
 void test_grain128(void);
@@ -46,9 +47,11 @@ void test_xoodoo(void);
 int main(int argc, char *argv[])
 {
     aead_random_init();
+    test_aes();
     test_ascon();
     test_blake2s();
     test_chachapoly();
+    test_ghash();
     test_gift128();
     test_gift128_masked();
     test_grain128();
@@ -64,6 +67,5 @@ int main(int argc, char *argv[])
     test_spongent();
     test_tinyjambu();
     test_xoodoo();
-    test_aes();
     return test_exit_result;
 }
