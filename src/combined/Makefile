@@ -49,6 +49,7 @@ OBJS = \
         xoodyak-kmac.o \
         xoodyak-masked.o \
         xoodyak-prng.o \
+	internal-aes.o \
 	internal-ascon.o \
 	internal-ascon-m.o \
 	internal-blake2s.o \
@@ -135,6 +136,7 @@ xoodyak-hmac.o: xoodyak-hmac.h xoodyak-hash.h internal-hmac.h internal-util.h
 xoodyak-kmac.o: xoodyak-kmac.h xoodyak-hash.h internal-kmac.h internal-util.h
 xoodyak-masked.o: xoodyak-masked.h internal-xoodoo.h internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
 xoodyak-prng.o: xoodyak-prng.h xoodyak-hash.h internal-xoodoo.h internal-util.h
+internal-aes.o: internal-aes.h internal-util.h
 internal-ascon.o: internal-ascon.h internal-util.h
 internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
 internal-blake2s.o: internal-blake2s.h internal-util.h aead-metadata.h

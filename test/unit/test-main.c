@@ -23,6 +23,7 @@
 #include "test-cipher.h"
 #include "aead-random.h"
 
+void test_aes(void);
 void test_ascon(void);
 void test_blake2s(void);
 void test_chachapoly(void);
@@ -63,5 +64,6 @@ int main(int argc, char *argv[])
     test_spongent();
     test_tinyjambu();
     test_xoodoo();
+    test_aes();
     return test_exit_result;
 }
