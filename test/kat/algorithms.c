@@ -21,11 +21,15 @@
  */
 
 #include "algorithms.h"
+#include "internal-aesgcm.h"
 #include <string.h>
 #include <stdio.h>
 
 /* List of all AEAD ciphers that we can run KAT tests for */
 static const aead_cipher_t *const ciphers[] = {
+    &internal_aesgcm128_cipher,
+    &internal_aesgcm192_cipher,
+    &internal_aesgcm256_cipher,
     &ascon128_cipher,
     &ascon128a_cipher,
     &ascon80pq_cipher,

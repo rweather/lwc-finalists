@@ -24,6 +24,7 @@
 #include "aead-random.h"
 
 void test_aes(void);
+void test_aesgcm(void);
 void test_ascon(void);
 void test_blake2s(void);
 void test_chachapoly(void);
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
 {
     aead_random_init();
     test_aes();
+    test_aesgcm();
     test_ascon();
     test_blake2s();
     test_chachapoly();
