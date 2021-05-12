@@ -490,6 +490,8 @@ void setup()
 
     // AES-GCM for comparison purposes.
     perfCipher(&internal_aesgcm128_cipher, "936DA5CD621EF15343DB6B813AAE7E07A33708F547F8EB0B765EB53DA457F27E10BC0EA5FFB012");
+    perfCipher(&internal_aesgcm192_cipher, "E6F820989DBCCF09D83AD689F3A4D27F1E8E21182CB44015E3A161D7178FA543913F0659733BE7");
+    perfCipher(&internal_aesgcm256_cipher, "4703D418C1E0C41C85489D80BDE4766293C79527E46E4935C2431AA67EE0AFD558E563B09E1B8C");
 
     // SHA256 for comparison purposes.
     perfHash(&internal_sha256_hash_algorithm, 0);

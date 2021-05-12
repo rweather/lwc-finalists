@@ -26,6 +26,12 @@
 /**
  * \file internal-ghash.h
  * \brief GHASH algorithm for supporting GCM mode.
+ *
+ * Note: This implementation is not constant cache.  Internally it uses
+ * lookup tables for multiplication in the GF(2^128) field.  This means
+ * that it has similar behaviour to other fast but memory-efficient
+ * software implementations of GHASH but is not suitable for use where
+ * memory cache attacks are a concern.
  */
 
 #include "internal-util.h"
@@ -36,13 +42,37 @@ extern "C" {
 #endif
 
 /**
+ * \def GHASH_SHOUP_4BIT
+ * \brief Define to 1 to use Shoup's 4-bit method for GF(2^128) multiplications,
+ * or define to 0 to use a simpler but slower bit-by-bit method.
+ */
+#if defined(__AVR__)
+#define GHASH_SHOUP_4BIT 0
+#else
+#define GHASH_SHOUP_4BIT 1
+#endif
+
+/**
+ * \brief Representation of a value in the GF(2^128) field.
+ */
+typedef struct
+{
+    uint64_t c[2];          /**< Components of the 128-bit value */
+
+} gf128_value_t;
+
+/**
  * \brief State information for GHASH.
  */
 typedef struct
 {
-    uint8_t Y[16];  /**< Current value of the hash */
-    uint32_t H[4];  /**< Hash key */
-    uint32_t posn;  /**< Position within the Y block for the next input byte */
+#if GHASH_SHOUP_4BIT
+    gf128_value_t H[16];    /**< Precomputed hash keys for 0..15 */
+#else
+    gf128_value_t H;        /**< Hash key */
+#endif
+    uint8_t Y[16];          /**< Current value of the hash */
+    uint32_t posn;          /**< Position within Y for the next input byte */
 
 } ghash_state_t;
 

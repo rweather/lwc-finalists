@@ -97,7 +97,10 @@ assembly code.
 <tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.83</td><td>0.85</td><td>1.55</td><td>1.53</td><td>1.12</td></tr>
 <tr><td><b><i>GIFT-COFB</i></b><td>128</td><td>128</td><td>128</td><td>1.01</td><td>1.01</td><td>1.16</td><td>1.15</td><td>1.08</td></tr>
 <tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>0.77</td><td>0.79</td><td>1.44</td><td>1.43</td><td>1.04</td></tr>
+<tr><td>AES-128-GCM</td><td>128</td><td>96</td><td>128</td><td>0.36</td><td>0.38</td><td>0.50</td><td>0.52</td><td>0.44</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.28</td><td>0.34</td><td>0.61</td><td>0.67</td><td>0.43</td></tr>
+<tr><td>AES-192-GCM</td><td>192</td><td>96</td><td>128</td><td>0.34</td><td>0.35</td><td>0.46</td><td>0.48</td><td>0.40</td></tr>
+<tr><td>AES-256-GCM</td><td>256</td><td>96</td><td>128</td><td>0.31</td><td>0.33</td><td>0.42</td><td>0.44</td><td>0.37</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33</td></tr>
 <tr><td><b><i>Romulus-N</i></b></td><td>128</td><td>128</td><td>128</td><td>0.29</td><td>0.32</td><td>0.32</td><td>0.34</td><td>0.32</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.33</td><td>0.35</td><td>0.25</td></tr>
@@ -165,9 +168,12 @@ where the architectural differences gives some algorithms an added advantage.
 <tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>0.84</td><td>0.86</td><td>0.80</td><td>0.82</td><td>0.83</td></tr>
 <tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.57</td><td>0.61</td><td>1.11</td><td>1.11</td><td>0.79</td></tr>
 <tr><td>Schwaemm256-256 (SPARKLE)</td><td>256</td><td>256</td><td>256</td><td>0.77</td><td>0.78</td><td>0.70</td><td>0.70</td><td>0.73</td></tr>
+<tr><td>AES-128-GCM</td><td>128</td><td>96</td><td>128</td><td>0.59</td><td>0.60</td><td>0.82</td><td>0.83</td><td>0.70</td></tr>
 <tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>0.49</td><td>0.53</td><td>0.98</td><td>0.98</td><td>0.69</td></tr>
+<tr><td>AES-192-GCM</td><td>192</td><td>96</td><td>128</td><td>0.54</td><td>0.56</td><td>0.76</td><td>0.77</td><td>0.65</td></tr>
 <tr><td><b><i>ASCON-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.67</td><td>0.46</td><td>0.86</td><td>0.66</td><td>0.63</td></tr>
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>0.67</td><td>0.44</td><td>0.84</td><td>0.61</td><td>0.61</td></tr>
+<tr><td>AES-256-GCM</td><td>256</td><td>96</td><td>128</td><td>0.50</td><td>0.52</td><td>0.68</td><td>0.69</td><td>0.59</td></tr>
 <tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.33</td><td>0.30</td><td>0.65</td><td>0.59</td><td>0.43</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23</td></tr>
 <tr><td><b><i>Romulus-N</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.21</td><td>0.20</td></tr>
@@ -226,6 +232,7 @@ AEAD algorithm rankings:
 <tr><td>11</td><td>ASCON</td></tr>
 <tr><td>10</td><td>TinyJAMBU</td></tr>
 <tr><td>9</td><td>GIFT-COFB</td></tr>
+<tr><td>5</td><td>AES-128</td></tr>
 <tr><td>4</td><td>Grain128-AEAD</td></tr>
 <tr><td>2</td><td>PHOTON-Beetle, Romulus</td></tr>
 <tr><td>0</td><td>Elephant, ISAP</td></tr>
