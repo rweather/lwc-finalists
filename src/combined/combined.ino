@@ -32,7 +32,6 @@ of flash memory.
 #include "internal-blake2s.h"
 #include "internal-chachapoly.h"
 #include "internal-sha256.h"
-#include "internal-aesgcm.h"
 #include "internal-masking.h"
 
 #if defined(ESP8266)
@@ -489,9 +488,9 @@ void setup()
     perfHash(&xoodyak_hash_algorithm, "511AD3AA185ACC22EB141A81C1EBDA05EADA4E0C07BFBAD3A4855DB3E96C2164");
 
     // AES-GCM for comparison purposes.
-    perfCipher(&internal_aesgcm128_cipher, "936DA5CD621EF15343DB6B813AAE7E07A33708F547F8EB0B765EB53DA457F27E10BC0EA5FFB012");
-    perfCipher(&internal_aesgcm192_cipher, "E6F820989DBCCF09D83AD689F3A4D27F1E8E21182CB44015E3A161D7178FA543913F0659733BE7");
-    perfCipher(&internal_aesgcm256_cipher, "4703D418C1E0C41C85489D80BDE4766293C79527E46E4935C2431AA67EE0AFD558E563B09E1B8C");
+    perfCipher(&aesgcm128_cipher, "936DA5CD621EF15343DB6B813AAE7E07A33708F547F8EB0B765EB53DA457F27E10BC0EA5FFB012");
+    perfCipher(&aesgcm192_cipher, "E6F820989DBCCF09D83AD689F3A4D27F1E8E21182CB44015E3A161D7178FA543913F0659733BE7");
+    perfCipher(&aesgcm256_cipher, "4703D418C1E0C41C85489D80BDE4766293C79527E46E4935C2431AA67EE0AFD558E563B09E1B8C");
 
     // SHA256 for comparison purposes.
     perfHash(&internal_sha256_hash_algorithm, 0);

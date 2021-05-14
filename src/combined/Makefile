@@ -11,6 +11,7 @@ OBJS = \
 	aead-metadata.o \
 	aead-random.o \
 	aead-random-system.o \
+	aesgcm-aead.o \
         ascon-aead.o \
         ascon-aead-masked.o \
         ascon-hash.o \
@@ -50,7 +51,6 @@ OBJS = \
         xoodyak-masked.o \
         xoodyak-prng.o \
 	internal-aes.o \
-	internal-aesgcm.o \
 	internal-ascon.o \
 	internal-ascon-m.o \
 	internal-blake2s.o \
@@ -88,7 +88,7 @@ individual:
 
 aead-metadata.o: \
 	aead-metadata.h aead-random.h internal-masking.h internal-util.h \
-	ascon-aead.h ascon-aead-masked.h ascon-hash.h ascon-xof.h \
+	aesgcm-aead.h ascon-aead.h ascon-aead-masked.h ascon-hash.h ascon-xof.h \
 	elephant-delirium.h elephant-dumbo.h elephant-jumbo.h \
 	gift-cofb-aead.h gift-cofb-aead-masked.h \
 	grain-aead.h \
@@ -100,6 +100,7 @@ aead-metadata.o: \
 	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
 aead-random.o: aead-random.h
 aead-random-system.o: aead-random.h internal-util.h
+aesgcm-aead.o: aesgcm-aead.h internal-aes.h internal-util.h internal-ghash.h aead-metadata.h
 ascon-aead.o: ascon-aead.h internal-ascon.h internal-util.h
 ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
 ascon-hash.o: ascon-hash.h ascon-xof.h
@@ -139,7 +140,6 @@ xoodyak-kmac.o: xoodyak-kmac.h xoodyak-hash.h internal-kmac.h internal-util.h
 xoodyak-masked.o: xoodyak-masked.h internal-xoodoo.h internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
 xoodyak-prng.o: xoodyak-prng.h xoodyak-hash.h internal-xoodoo.h internal-util.h
 internal-aes.o: internal-aes.h internal-util.h
-internal-aesgcm.o: internal-aesgcm.h internal-aes.h internal-util.h internal-ghash.h aead-metadata.h
 internal-ascon.o: internal-ascon.h internal-util.h
 internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
 internal-blake2s.o: internal-blake2s.h internal-util.h aead-metadata.h

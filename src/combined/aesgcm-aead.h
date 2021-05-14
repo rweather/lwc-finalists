@@ -20,11 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LW_INTERNAL_AESGCM_H
-#define LW_INTERNAL_AESGCM_H
+#ifndef LWCRYPTO_AESGCM_AEAD_H
+#define LWCRYPTO_AESGCM_AEAD_H
 
 /**
- * \file internal-aesgcm.h
+ * \file aesgcm-aead.h
  * \brief AES-GCM Authenticated Encryption with Associated Data.
  */
 
@@ -35,6 +35,21 @@ extern "C" {
 #endif
 
 /**
+ * \brief Size of the AES-128-GCM key in bytes.
+ */
+#define AES128GCM_KEY_SIZE 16
+
+/**
+ * \brief Size of the AES-192-GCM key in bytes.
+ */
+#define AES192GCM_KEY_SIZE 24
+
+/**
+ * \brief Size of the AES-256-GCM key in bytes.
+ */
+#define AES256GCM_KEY_SIZE 32
+
+/**
  * \brief Size of the AES-GCM nonce in bytes (96 bits).
  */
 #define AESGCM_NONCE_SIZE 12
@@ -43,21 +58,6 @@ extern "C" {
  * \brief Size of the AES-GCM tag in bytes.
  */
 #define AESGCM_TAG_SIZE 16
-
-/**
- * \brief Meta-information block for the AES-128-GCM cipher.
- */
-extern aead_cipher_t const internal_aesgcm128_cipher;
-
-/**
- * \brief Meta-information block for the AES-192-GCM cipher.
- */
-extern aead_cipher_t const internal_aesgcm192_cipher;
-
-/**
- * \brief Meta-information block for the AES-256-GCM cipher.
- */
-extern aead_cipher_t const internal_aesgcm256_cipher;
 
 /**
  * \brief Encrypts and authenticates a packet with AES-128-GCM.
@@ -77,7 +77,7 @@ extern aead_cipher_t const internal_aesgcm256_cipher;
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  */
-int internal_aesgcm128_aead_encrypt
+int aesgcm128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -103,7 +103,7 @@ int internal_aesgcm128_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  */
-int internal_aesgcm128_aead_decrypt
+int aesgcm128_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -128,7 +128,7 @@ int internal_aesgcm128_aead_decrypt
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  */
-int internal_aesgcm192_aead_encrypt
+int aesgcm192_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -154,7 +154,7 @@ int internal_aesgcm192_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  */
-int internal_aesgcm192_aead_decrypt
+int aesgcm192_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -179,7 +179,7 @@ int internal_aesgcm192_aead_decrypt
  * \return 0 on success, or a negative value if there was an error in
  * the parameters.
  */
-int internal_aesgcm256_aead_encrypt
+int aesgcm256_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -205,7 +205,7 @@ int internal_aesgcm256_aead_encrypt
  * \return 0 on success, -1 if the authentication tag was incorrect,
  * or some other negative number if there was an error in the parameters.
  */
-int internal_aesgcm256_aead_decrypt
+int aesgcm256_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,

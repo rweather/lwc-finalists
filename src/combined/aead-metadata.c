@@ -22,6 +22,7 @@
 
 #include "aead-metadata.h"
 #include "internal-masking.h"
+#include "aesgcm-aead.h"
 #include "ascon-aead.h"
 #include "ascon-aead-masked.h"
 #include "ascon-hash.h"
@@ -44,6 +45,38 @@
 #include "xoodyak-aead.h"
 #include "xoodyak-hash.h"
 #include "xoodyak-masked.h"
+
+/*------------------------ AES-GCM ------------------------*/
+
+aead_cipher_t const aesgcm128_cipher = {
+    "AES-128-GCM",
+    AES128GCM_KEY_SIZE,
+    AESGCM_NONCE_SIZE,
+    AESGCM_TAG_SIZE,
+    AEAD_FLAG_NONE,
+    aesgcm128_aead_encrypt,
+    aesgcm128_aead_decrypt
+};
+
+aead_cipher_t const aesgcm192_cipher = {
+    "AES-192-GCM",
+    AES192GCM_KEY_SIZE,
+    AESGCM_NONCE_SIZE,
+    AESGCM_TAG_SIZE,
+    AEAD_FLAG_NONE,
+    aesgcm192_aead_encrypt,
+    aesgcm192_aead_decrypt
+};
+
+aead_cipher_t const aesgcm256_cipher = {
+    "AES-256-GCM",
+    AES256GCM_KEY_SIZE,
+    AESGCM_NONCE_SIZE,
+    AESGCM_TAG_SIZE,
+    AEAD_FLAG_NONE,
+    aesgcm256_aead_encrypt,
+    aesgcm256_aead_decrypt
+};
 
 /*------------------------- ASCON -------------------------*/
 

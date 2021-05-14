@@ -223,6 +223,23 @@ typedef struct
 
 } aead_hash_algorithm_t;
 
+/*------------------------ AES-GCM ------------------------*/
+
+/**
+ * \brief Meta-information block for the AES-128-GCM cipher.
+ */
+extern aead_cipher_t const aesgcm128_cipher;
+
+/**
+ * \brief Meta-information block for the AES-192-GCM cipher.
+ */
+extern aead_cipher_t const aesgcm192_cipher;
+
+/**
+ * \brief Meta-information block for the AES-256-GCM cipher.
+ */
+extern aead_cipher_t const aesgcm256_cipher;
+
 /*------------------------- ASCON -------------------------*/
 
 /**

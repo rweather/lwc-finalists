@@ -12,6 +12,16 @@ COMMON_MASKING_FILES = \
 	internal-util.h \
 	internal-util.c
 
+AESGCM_FILES = \
+    aesgcm-aead.c \
+    aesgcm-aead.h \
+    internal-aes.c \
+    internal-aes.h \
+    internal-aes-avr.S \
+    internal-ghash.c \
+    internal-ghash.h \
+    internal-ghash-avr.S \
+    $(COMMON_FILES)
 ASCON_FILES = \
     ascon-aead.c \
     ascon-aead.h \
@@ -217,6 +227,7 @@ XOODYAK_MASKED_FILES = \
     $(COMMON_MASKING_FILES)
 
 ALL_ALGORITHMS = \
+    aesgcm \
     ascon \
     ascon_masked \
     elephant_delirium \
@@ -237,6 +248,9 @@ ALL_ALGORITHMS = \
 .PHONY: all $(ALL_ALGORITHMS)
 
 all: $(ALL_ALGORITHMS)
+
+aesgcm:
+	cp $(foreach file,$(AESGCM_FILES),$(SRCDIR)/$(file)) AESGCM
 
 ascon:
 	cp $(foreach file,$(ASCON_FILES),$(SRCDIR)/$(file)) ASCON

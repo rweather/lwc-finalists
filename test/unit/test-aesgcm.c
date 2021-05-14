@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "internal-aesgcm.h"
+#include "aesgcm-aead.h"
 #include "internal-util.h"
 #include "test-cipher.h"
 #include <stdio.h>
@@ -248,12 +248,12 @@ void test_aesgcm(void)
 {
     printf("AES-GCM:\n");
 
-    test_aesgcm_vector(&internal_aesgcm128_cipher, &testVectorGCM1);
-    test_aesgcm_vector(&internal_aesgcm128_cipher, &testVectorGCM2);
-    test_aesgcm_vector(&internal_aesgcm128_cipher, &testVectorGCM3);
-    test_aesgcm_vector(&internal_aesgcm128_cipher, &testVectorGCM4);
-    test_aesgcm_vector(&internal_aesgcm192_cipher, &testVectorGCM10);
-    test_aesgcm_vector(&internal_aesgcm256_cipher, &testVectorGCM16);
+    test_aesgcm_vector(&aesgcm128_cipher, &testVectorGCM1);
+    test_aesgcm_vector(&aesgcm128_cipher, &testVectorGCM2);
+    test_aesgcm_vector(&aesgcm128_cipher, &testVectorGCM3);
+    test_aesgcm_vector(&aesgcm128_cipher, &testVectorGCM4);
+    test_aesgcm_vector(&aesgcm192_cipher, &testVectorGCM10);
+    test_aesgcm_vector(&aesgcm256_cipher, &testVectorGCM16);
 
     printf("\n");
 }

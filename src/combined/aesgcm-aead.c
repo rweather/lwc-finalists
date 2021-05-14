@@ -20,40 +20,10 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "internal-aesgcm.h"
+#include "aesgcm-aead.h"
 #include "internal-aes.h"
 #include "internal-ghash.h"
 #include <string.h>
-
-aead_cipher_t const internal_aesgcm128_cipher = {
-    "AES-128-GCM",
-    AES128_KEY_SIZE,
-    AESGCM_NONCE_SIZE,
-    AESGCM_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    internal_aesgcm128_aead_encrypt,
-    internal_aesgcm128_aead_decrypt
-};
-
-aead_cipher_t const internal_aesgcm192_cipher = {
-    "AES-192-GCM",
-    AES192_KEY_SIZE,
-    AESGCM_NONCE_SIZE,
-    AESGCM_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    internal_aesgcm192_aead_encrypt,
-    internal_aesgcm192_aead_decrypt
-};
-
-aead_cipher_t const internal_aesgcm256_cipher = {
-    "AES-256-GCM",
-    AES256_KEY_SIZE,
-    AESGCM_NONCE_SIZE,
-    AESGCM_TAG_SIZE,
-    AEAD_FLAG_NONE,
-    internal_aesgcm256_aead_encrypt,
-    internal_aesgcm256_aead_decrypt
-};
 
 /**
  * \brief Encrypts and authenticates a packet with AES-GCM.
@@ -219,7 +189,7 @@ static int aesgcm_aead_decrypt
     return aead_check_tag(m, *mlen, block, c + clen, AESGCM_TAG_SIZE);
 }
 
-int internal_aesgcm128_aead_encrypt
+int aesgcm128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -231,7 +201,7 @@ int internal_aesgcm128_aead_encrypt
     return aesgcm_aead_encrypt(c, clen, m, mlen, ad, adlen, npub, &ks);
 }
 
-int internal_aesgcm128_aead_decrypt
+int aesgcm128_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -243,7 +213,7 @@ int internal_aesgcm128_aead_decrypt
     return aesgcm_aead_decrypt(m, mlen, c, clen, ad, adlen, npub, &ks);
 }
 
-int internal_aesgcm192_aead_encrypt
+int aesgcm192_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -255,7 +225,7 @@ int internal_aesgcm192_aead_encrypt
     return aesgcm_aead_encrypt(c, clen, m, mlen, ad, adlen, npub, &ks);
 }
 
-int internal_aesgcm192_aead_decrypt
+int aesgcm192_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
@@ -267,7 +237,7 @@ int internal_aesgcm192_aead_decrypt
     return aesgcm_aead_decrypt(m, mlen, c, clen, ad, adlen, npub, &ks);
 }
 
-int internal_aesgcm256_aead_encrypt
+int aesgcm256_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
@@ -279,7 +249,7 @@ int internal_aesgcm256_aead_encrypt
     return aesgcm_aead_encrypt(c, clen, m, mlen, ad, adlen, npub, &ks);
 }
 
-int internal_aesgcm256_aead_decrypt
+int aesgcm256_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
