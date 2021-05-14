@@ -36,5 +36,6 @@ var searchData=
   ['romulus_5fprng_5finit',['romulus_prng_init',['../romulus-prng_8h.html#abb01dc3b6b1239d64292475993a121e4',1,'romulus-prng.c']]],
   ['romulus_5fprng_5freseed',['romulus_prng_reseed',['../romulus-prng_8h.html#a950797f0b4cf504b11d485f911342a6e',1,'romulus-prng.c']]],
   ['romulus_5fprng_5fstate_5ft',['romulus_prng_state_t',['../unionromulus__prng__state__t.html',1,'']]],
-  ['romulus_5ftag_5fsize',['ROMULUS_TAG_SIZE',['../romulus-aead_8h.html#a9188c93a0975d91f0cf7052601cf7a1c',1,'romulus-aead.h']]]
+  ['romulus_5ftag_5fsize',['ROMULUS_TAG_SIZE',['../romulus-aead_8h.html#a9188c93a0975d91f0cf7052601cf7a1c',1,'romulus-aead.h']]],
+  ['rounds',['rounds',['../structaes__key__schedule__t.html#a4123d7894013edfb98b4c8e13e09640e',1,'aes_key_schedule_t']]]
 ];

@@ -1,5 +1,12 @@
 var searchData=
 [
+  ['gf128_5fvalue_5ft',['gf128_value_t',['../structgf128__value__t.html',1,'']]],
+  ['ghash_5ffinalize',['ghash_finalize',['../internal-ghash_8h.html#a7d5e623e8cb88827dab89a9554fa18da',1,'internal-ghash.c']]],
+  ['ghash_5finit',['ghash_init',['../internal-ghash_8h.html#aa6b92bf6279ad85d08e97061551d4c60',1,'internal-ghash.c']]],
+  ['ghash_5fpad',['ghash_pad',['../internal-ghash_8h.html#ae480c359972f3be4e11cf7445eadcd61',1,'internal-ghash.c']]],
+  ['ghash_5fshoup_5f4bit',['GHASH_SHOUP_4BIT',['../internal-ghash_8h.html#aaa9093f905a6be50ab1068ac494af292',1,'internal-ghash.h']]],
+  ['ghash_5fstate_5ft',['ghash_state_t',['../structghash__state__t.html',1,'']]],
+  ['ghash_5fupdate',['ghash_update',['../internal-ghash_8h.html#a8b35e8c38775c423be455f2aa88878b2',1,'internal-ghash.c']]],
   ['gift_2dcofb_2daead_2dmasked_2eh',['gift-cofb-aead-masked.h',['../gift-cofb-aead-masked_8h.html',1,'']]],
   ['gift_2dcofb_2daead_2eh',['gift-cofb-aead.h',['../gift-cofb-aead_8h.html',1,'']]],
   ['gift_2dprng_2eh',['gift-prng.h',['../gift-prng_8h.html',1,'']]],

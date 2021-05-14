@@ -1,5 +1,9 @@
 var searchData=
 [
+  ['ghash_5ffinalize',['ghash_finalize',['../internal-ghash_8h.html#a7d5e623e8cb88827dab89a9554fa18da',1,'internal-ghash.c']]],
+  ['ghash_5finit',['ghash_init',['../internal-ghash_8h.html#aa6b92bf6279ad85d08e97061551d4c60',1,'internal-ghash.c']]],
+  ['ghash_5fpad',['ghash_pad',['../internal-ghash_8h.html#ae480c359972f3be4e11cf7445eadcd61',1,'internal-ghash.c']]],
+  ['ghash_5fupdate',['ghash_update',['../internal-ghash_8h.html#a8b35e8c38775c423be455f2aa88878b2',1,'internal-ghash.c']]],
   ['gift128b_5fencrypt_5fpreloaded',['gift128b_encrypt_preloaded',['../internal-gift128_8h.html#ac7269b3484146e77aebe0e69254e3e95',1,'internal-gift128.c']]],
   ['gift128b_5fencrypt_5fpreloaded_5fmasked',['gift128b_encrypt_preloaded_masked',['../internal-gift128-m_8h.html#ada59ccbc42583dbb8d89fa7e232a9e65',1,'internal-gift128-m.c']]],
   ['gift128b_5finit',['gift128b_init',['../internal-gift128_8h.html#a263702f9f1840fa07a2c7f9bb13df8c1',1,'internal-gift128.c']]],
