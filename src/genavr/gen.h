@@ -36,9 +36,25 @@ typedef struct
 
 } block_cipher_test_vector_t;
 
+// AES block cipher.
+Sbox get_aes_sbox();
+void gen_aes128_setup_key(Code &code);
+void gen_aes192_setup_key(Code &code);
+void gen_aes256_setup_key(Code &code);
+void gen_aes_ecb_encrypt(Code &code);
+bool test_aes128_setup_key(Code &code);
+bool test_aes192_setup_key(Code &code);
+bool test_aes256_setup_key(Code &code);
+bool test_aes_ecb_encrypt(Code &code);
+
 // ASCON permutation.
 void gen_ascon_permutation(Code &code);
 bool test_ascon_permutation(Code &code);
+
+// GHASH hashing algorithm for GCM.
+void gen_ghash_init(Code &code);
+void gen_ghash_mul(Code &code);
+bool test_ghash_mul(Code &code);
 
 // GIFT-128 block cipher (bit-sliced).
 Sbox get_gift128_round_constants();

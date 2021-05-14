@@ -67,6 +67,89 @@ static void footer(std::ostream &ostream)
     ostream << "#endif" << std::endl;
 }
 
+static bool aes128_setup_key(enum Mode mode)
+{
+    Code code;
+    gen_aes128_setup_key(code);
+    if (mode == Generate) {
+        code.sbox_write(std::cout, 0, get_aes_sbox());
+        code.write(std::cout);
+    } else {
+        if (!test_aes128_setup_key(code)) {
+            std::cout << "AES-128 key setup tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "AES-128 key setup tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
+static bool aes192_setup_key(enum Mode mode)
+{
+    Code code;
+    gen_aes192_setup_key(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_aes192_setup_key(code)) {
+            std::cout << "AES-192 key setup tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "AES-192 key setup tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
+static bool aes256_setup_key(enum Mode mode)
+{
+    Code code;
+    gen_aes256_setup_key(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_aes256_setup_key(code)) {
+            std::cout << "AES-256 key setup tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "AES-256 key setup tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
+static bool aes_ecb_encrypt(enum Mode mode)
+{
+    Code code;
+    gen_aes_ecb_encrypt(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_aes_ecb_encrypt(code)) {
+            std::cout << "AES encrypt tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "AES encrypt tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
+static bool aes(enum Mode mode)
+{
+    bool ok = true;
+    if (!aes128_setup_key(mode))
+        ok = false;
+    if (!aes192_setup_key(mode))
+        ok = false;
+    if (!aes256_setup_key(mode))
+        ok = false;
+    if (!aes_ecb_encrypt(mode))
+        ok = false;
+    return ok;
+}
+
 static bool ascon(enum Mode mode)
 {
     Code code;
@@ -82,6 +165,43 @@ static bool ascon(enum Mode mode)
         }
     }
     return true;
+}
+
+static bool ghash_init(enum Mode mode)
+{
+    Code code;
+    gen_ghash_init(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    }
+    return true;
+}
+
+static bool ghash_mul(enum Mode mode)
+{
+    Code code;
+    gen_ghash_mul(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_ghash_mul(code)) {
+            std::cout << "GHASH tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "GHASH tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
+static bool ghash(enum Mode mode)
+{
+    bool ok = true;
+    if (!ghash_init(mode))
+        ok = false;
+    if (!ghash_mul(mode))
+        ok = false;
+    return ok;
 }
 
 static bool gift128b_setup_key(enum Mode mode)
@@ -1224,8 +1344,12 @@ int main(int argc, char *argv[])
             fprintf(stderr, "Usage: %s algorithm-name\n", argv[0]);
             return 1;
         }
-        if (!strcmp(argv[1], "ASCON")) {
+        if (!strcmp(argv[1], "AES")) {
+            gen1 = aes;
+        } else if (!strcmp(argv[1], "ASCON")) {
             gen1 = ascon;
+        } else if (!strcmp(argv[1], "GHASH")) {
+            gen1 = ghash;
         } else if (!strcmp(argv[1], "GIFT-128b")) {
             gen1 = gift128b;
         } else if (!strcmp(argv[1], "GIFT-COFB-128b")) {
@@ -1303,7 +1427,11 @@ int main(int argc, char *argv[])
             gen3(Generate);
         footer(std::cout);
     } else {
+        if (!aes(Test))
+            exit_val = 1;
         if (!ascon(Test))
+            exit_val = 1;
+        if (!ghash(Test))
             exit_val = 1;
         if (!gift128b(Test))
             exit_val = 1;

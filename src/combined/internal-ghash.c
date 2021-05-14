@@ -23,6 +23,14 @@
 #include "internal-ghash.h"
 #include <string.h>
 
+#if defined(__AVR__)
+#define GHASH_ASM 1
+#else
+#define GHASH_ASM 0
+#endif
+
+#if !GHASH_ASM
+
 #if GHASH_SHOUP_4BIT
 
 /**
@@ -216,6 +224,13 @@ void ghash_init(ghash_state_t *state, const unsigned char *key)
     memset(state->Y, 0, sizeof(state->Y));
     state->posn = 0;
 }
+
+#else /* GMASH_ASM */
+
+/* External declaration for the assembly code version */
+void ghash_mul(ghash_state_t *state);
+
+#endif /* GHASH_ASM */
 
 void ghash_update(ghash_state_t *state, const unsigned char *data, size_t size)
 {

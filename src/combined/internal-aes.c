@@ -22,6 +22,14 @@
 
 #include "internal-aes.h"
 
+#if defined(__AVR__)
+#define AES_ASM 1
+#else
+#define AES_ASM 0
+#endif
+
+#if !AES_ASM
+
 #define AES_GENERATE 0
 
 #if !AES_GENERATE
@@ -566,4 +574,6 @@ int main(void)
     return 0;
 }
 
-#endif
+#endif /* AES_GENERATE */
+
+#endif /* !AES_ASM */

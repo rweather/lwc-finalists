@@ -8,7 +8,9 @@ CXXFLAGS += -g $(COMMON_CFLAGS) $(STDC_CXXFLAGS)
 TARGET = genavr
 
 OBJS = \
+	algorithm_aes.o \
 	algorithm_ascon.o \
+	algorithm_ghash.o \
 	algorithm_gift128.o \
 	algorithm_gift128_fixsliced.o \
 	algorithm_grain128.o \
@@ -38,7 +40,9 @@ check: all
 
 code.o: code.h
 code_out.o: code.h
+algorithm_aes.o: code.h gen.h
 algorithm_ascon.o: code.h gen.h
+algorithm_ghash.o: code.h gen.h
 algorithm_gift128.o: code.h gen.h
 algorithm_gift128_fixsliced.o: code.h gen.h
 algorithm_grain128.o: code.h gen.h
@@ -53,7 +57,9 @@ algorithm_xoodoo.o: code.h gen.h
 interpret.o: code.h
 
 generate: $(TARGET)
+	./$(TARGET) AES >../combined/internal-aes-avr.S
 	./$(TARGET) ASCON >../combined/internal-ascon-avr.S
+	./$(TARGET) GHASH >../combined/internal-ghash-avr.S
 	./$(TARGET) GIFT-COFB-128b-fs-4 >../combined/internal-gift128b-tiny-avr.S
 	./$(TARGET) GIFT-COFB-128b-fs-20 >../combined/internal-gift128b-small-avr.S
 	./$(TARGET) GIFT-COFB-128b-fs-80 >../combined/internal-gift128b-full-avr.S

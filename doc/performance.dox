@@ -232,7 +232,7 @@ AEAD algorithm rankings:
 <tr><td>11</td><td>ASCON</td></tr>
 <tr><td>10</td><td>TinyJAMBU</td></tr>
 <tr><td>9</td><td>GIFT-COFB</td></tr>
-<tr><td>5</td><td>AES-128</td></tr>
+<tr><td>5</td><td>AES-128-GCM</td></tr>
 <tr><td>4</td><td>Grain128-AEAD</td></tr>
 <tr><td>2</td><td>PHOTON-Beetle, Romulus</td></tr>
 <tr><td>0</td><td>Elephant, ISAP</td></tr>
