@@ -287,6 +287,17 @@ void ascon_permute_sliced(ascon_state_t *state, uint8_t first_round);
 
 #endif /* ASCON_SLICED */
 
+/**
+ * \def ascon_separator()
+ * \brief Absorbs the standard ASCON separator for switching between
+ * associated data and message payload.
+ */
+#if ASCON_SLICED
+#define ascon_separator() (state.W[8] ^= 0x01)
+#else
+#define ascon_separator() (state.B[39] ^= 0x01)
+#endif
+
 #ifdef __cplusplus
 }
 #endif

@@ -33,6 +33,8 @@ ASCON_FILES = \
     ascon-kmac.h \
     ascon-prng.c \
     ascon-prng.h \
+    ascon-siv.c \
+    ascon-siv.h \
     ascon-xof.c \
     ascon-xof.h \
     internal-ascon.c \

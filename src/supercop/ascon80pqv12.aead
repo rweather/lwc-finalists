@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=ascon80pq_aead_encrypt
 aead_decrypt=ascon80pq_aead_decrypt
-aead_exclude="ascon-hash.c ascon-hash.h ascon-xof.c ascon-xof.h ascon-hmac.c ascon-hmac.h internal-hmac.h ascon-kmac.c ascon-kmac.h internal-kmac.h ascon-prng.c ascon-prng.h aead-random-system.c"
+aead_exclude="ascon-hash.c ascon-hash.h ascon-xof.c ascon-xof.h ascon-hmac.c ascon-hmac.h internal-hmac.h ascon-kmac.c ascon-kmac.h internal-kmac.h ascon-prng.c ascon-prng.h aead-random-system.c ascon-siv.c ascon-siv.h"
 aead_header=ascon-aead.h

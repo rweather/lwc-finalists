@@ -297,12 +297,6 @@ static void ascon_decrypt_masked_16
 #endif
 }
 
-#if ASCON_SLICED
-#define ascon_separator() (state.W[8] ^= 0x01)
-#else
-#define ascon_separator() (state.B[39] ^= 0x01)
-#endif
-
 int ascon128_masked_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,

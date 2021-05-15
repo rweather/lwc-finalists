@@ -25,6 +25,7 @@
 #include "aesgcm-aead.h"
 #include "ascon-aead.h"
 #include "ascon-aead-masked.h"
+#include "ascon-siv.h"
 #include "ascon-hash.h"
 #include "ascon-xof.h"
 #include "elephant-delirium.h"
@@ -176,6 +177,36 @@ aead_cipher_t const ascon80pq_masked_cipher = {
 #endif
     ascon80pq_masked_aead_encrypt,
     ascon80pq_masked_aead_decrypt
+};
+
+aead_cipher_t const ascon128_siv_cipher = {
+    "ASCON-128-SIV",
+    ASCON128_KEY_SIZE,
+    ASCON128_NONCE_SIZE,
+    ASCON128_TAG_SIZE,
+    AEAD_FLAG_NONE,
+    ascon128_siv_encrypt,
+    ascon128_siv_decrypt
+};
+
+aead_cipher_t const ascon128a_siv_cipher = {
+    "ASCON-128a-SIV",
+    ASCON128_KEY_SIZE,
+    ASCON128_NONCE_SIZE,
+    ASCON128_TAG_SIZE,
+    AEAD_FLAG_NONE,
+    ascon128a_siv_encrypt,
+    ascon128a_siv_decrypt
+};
+
+aead_cipher_t const ascon80pq_siv_cipher = {
+    "ASCON-80pq-SIV",
+    ASCON80PQ_KEY_SIZE,
+    ASCON80PQ_NONCE_SIZE,
+    ASCON80PQ_TAG_SIZE,
+    AEAD_FLAG_NONE,
+    ascon80pq_siv_encrypt,
+    ascon80pq_siv_decrypt
 };
 
 /*----------------------- Elephant ------------------------*/

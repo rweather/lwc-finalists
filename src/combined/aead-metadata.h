@@ -282,6 +282,21 @@ extern aead_cipher_t const ascon128a_masked_cipher;
  */
 extern aead_cipher_t const ascon80pq_masked_cipher;
 
+/**
+ * \brief Meta-information block for the ASCON-128-SIV cipher.
+ */
+extern aead_cipher_t const ascon128_siv_cipher;
+
+/**
+ * \brief Meta-information block for the ASCON-128a-SIV cipher.
+ */
+extern aead_cipher_t const ascon128a_siv_cipher;
+
+/**
+ * \brief Meta-information block for the ASCON-80pq-SIV cipher.
+ */
+extern aead_cipher_t const ascon80pq_siv_cipher;
+
 /*----------------------- Elephant ------------------------*/
 
 /**

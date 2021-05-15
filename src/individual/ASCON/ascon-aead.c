@@ -46,26 +46,27 @@
  * \param data Points to the data to be absorbed.
  * \param len Length of the data to be absorbed.
  * \param first_round First round of the permutation to apply each block.
+ * \param last_permute Non-zero to permute the last block, or zero
+ * to delay the permutation.
  */
-static void ascon_absorb_8
+void ascon_aead_absorb_8
     (ascon_state_t *state, const unsigned char *data,
-     size_t len, uint8_t first_round)
+     size_t len, uint8_t first_round, int last_permute)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
-    unsigned temp;
     while (len >= 8) {
         ascon_absorb_sliced(state, data, 0);
         ascon_permute_sliced(state, first_round);
         data += 8;
         len -= 8;
     }
-    temp = (unsigned)len;
-    memcpy(padded, data, temp);
-    padded[temp] = 0x80;
-    memset(padded + temp + 1, 0, sizeof(padded) - (temp + 1));
+    memcpy(padded, data, len);
+    padded[len] = 0x80;
+    memset(padded + len + 1, 0, sizeof(padded) - (len + 1));
     ascon_absorb_sliced(state, padded, 0);
-    ascon_permute_sliced(state, first_round);
+    if (last_permute)
+        ascon_permute_sliced(state, first_round);
 #else
     while (len >= 8) {
         lw_xor_block(state->B, data, 8);
@@ -73,9 +74,10 @@ static void ascon_absorb_8
         data += 8;
         len -= 8;
     }
-    lw_xor_block(state->B, data, (unsigned)len);
-    state->B[(unsigned)len] ^= 0x80;
-    ascon_permute(state, first_round);
+    lw_xor_block(state->B, data, len);
+    state->B[len] ^= 0x80;
+    if (last_permute)
+        ascon_permute(state, first_round);
 #endif
 }
 
@@ -86,14 +88,15 @@ static void ascon_absorb_8
  * \param data Points to the data to be absorbed.
  * \param len Length of the data to be absorbed.
  * \param first_round First round of the permutation to apply each block.
+ * \param last_permute Non-zero to permute the last block, or zero
+ * to delay the permutation.
  */
-static void ascon_absorb_16
+void ascon_aead_absorb_16
     (ascon_state_t *state, const unsigned char *data,
-     size_t len, uint8_t first_round)
+     size_t len, uint8_t first_round, int last_permute)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
-    unsigned temp;
     while (len >= 16) {
         ascon_absorb_sliced(state, data, 0);
         ascon_absorb_sliced(state, data + 8, 1);
@@ -101,13 +104,13 @@ static void ascon_absorb_16
         data += 16;
         len -= 16;
     }
-    temp = (unsigned)len;
-    memcpy(padded, data, temp);
-    padded[temp] = 0x80;
-    memset(padded + temp + 1, 0, sizeof(padded) - (temp + 1));
+    memcpy(padded, data, len);
+    padded[len] = 0x80;
+    memset(padded + len + 1, 0, sizeof(padded) - (len + 1));
     ascon_absorb_sliced(state, padded, 0);
     ascon_absorb_sliced(state, padded + 8, 1);
-    ascon_permute_sliced(state, first_round);
+    if (last_permute)
+        ascon_permute_sliced(state, first_round);
 #else
     while (len >= 16) {
         lw_xor_block(state->B, data, 16);
@@ -115,9 +118,10 @@ static void ascon_absorb_16
         data += 16;
         len -= 16;
     }
-    lw_xor_block(state->B, data, (unsigned)len);
-    state->B[(unsigned)len] ^= 0x80;
-    ascon_permute(state, first_round);
+    lw_xor_block(state->B, data, len);
+    state->B[len] ^= 0x80;
+    if (last_permute)
+        ascon_permute(state, first_round);
 #endif
 }
 
@@ -130,13 +134,12 @@ static void ascon_absorb_16
  * \param len Length of the data to encrypt from \a src into \a dest.
  * \param first_round First round of the permutation to apply each block.
  */
-static void ascon_encrypt_8
+static void ascon_aead_encrypt_8
     (ascon_state_t *state, unsigned char *dest,
      const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[8];
-    unsigned temp;
     while (len >= 8) {
         ascon_encrypt_sliced(state, dest, src, 0);
         ascon_permute_sliced(state, first_round);
@@ -144,12 +147,11 @@ static void ascon_encrypt_8
         src += 8;
         len -= 8;
     }
-    temp = (unsigned)len;
-    memcpy(padded, src, temp);
-    padded[temp] = 0x80;
-    memset(padded + temp + 1, 0, sizeof(padded) - (temp + 1));
+    memcpy(padded, src, len);
+    padded[len] = 0x80;
+    memset(padded + len + 1, 0, sizeof(padded) - (len + 1));
     ascon_encrypt_sliced(state, padded, padded, 0);
-    memcpy(dest, padded, temp);
+    memcpy(dest, padded, len);
 #else
     while (len >= 8) {
         lw_xor_block_2_dest(dest, state->B, src, 8);
@@ -158,8 +160,8 @@ static void ascon_encrypt_8
         src += 8;
         len -= 8;
     }
-    lw_xor_block_2_dest(dest, state->B, src, (unsigned)len);
-    state->B[(unsigned)len] ^= 0x80;
+    lw_xor_block_2_dest(dest, state->B, src, len);
+    state->B[len] ^= 0x80;
 #endif
 }
 
@@ -172,13 +174,12 @@ static void ascon_encrypt_8
  * \param len Length of the data to encrypt from \a src into \a dest.
  * \param first_round First round of the permutation to apply each block.
  */
-static void ascon_encrypt_16
+static void ascon_aead_encrypt_16
     (ascon_state_t *state, unsigned char *dest,
      const unsigned char *src, size_t len, uint8_t first_round)
 {
 #if ASCON_SLICED
     unsigned char padded[16];
-    unsigned temp;
     while (len >= 16) {
         ascon_encrypt_sliced(state, dest, src, 0);
         ascon_encrypt_sliced(state, dest + 8, src + 8, 1);
@@ -187,13 +188,12 @@ static void ascon_encrypt_16
         src += 16;
         len -= 16;
     }
-    temp = (unsigned)len;
-    memcpy(padded, src, temp);
-    padded[temp] = 0x80;
-    memset(padded + temp + 1, 0, sizeof(padded) - (temp + 1));
+    memcpy(padded, src, len);
+    padded[len] = 0x80;
+    memset(padded + len + 1, 0, sizeof(padded) - (len + 1));
     ascon_encrypt_sliced(state, padded, padded, 0);
     ascon_encrypt_sliced(state, padded + 8, padded + 8, 1);
-    memcpy(dest, padded, temp);
+    memcpy(dest, padded, len);
 #else
     while (len >= 16) {
         lw_xor_block_2_dest(dest, state->B, src, 16);
@@ -202,8 +202,8 @@ static void ascon_encrypt_16
         src += 16;
         len -= 16;
     }
-    lw_xor_block_2_dest(dest, state->B, src, (unsigned)len);
-    state->B[(unsigned)len] ^= 0x80;
+    lw_xor_block_2_dest(dest, state->B, src, len);
+    state->B[len] ^= 0x80;
 #endif
 }
 
@@ -216,7 +216,7 @@ static void ascon_encrypt_16
  * \param len Length of the data to decrypt from \a src into \a dest.
  * \param first_round First round of the permutation to apply each block.
  */
-static void ascon_decrypt_8
+static void ascon_aead_decrypt_8
     (ascon_state_t *state, unsigned char *dest,
      const unsigned char *src, size_t len, uint8_t first_round)
 {
@@ -258,7 +258,7 @@ static void ascon_decrypt_8
  * \param len Length of the data to decrypt from \a src into \a dest.
  * \param first_round First round of the permutation to apply each block.
  */
-static void ascon_decrypt_16
+static void ascon_aead_decrypt_16
     (ascon_state_t *state, unsigned char *dest,
      const unsigned char *src, size_t len, uint8_t first_round)
 {
@@ -294,12 +294,6 @@ static void ascon_decrypt_16
 #endif
 }
 
-#if ASCON_SLICED
-#define ascon_separator() (state.W[8] ^= 0x01)
-#else
-#define ascon_separator() (state.B[39] ^= 0x01)
-#endif
-
 int ascon128_aead_encrypt
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
@@ -328,13 +322,13 @@ int ascon128_aead_encrypt
 
     /* Absorb the associated data into the state */
     if (adlen > 0)
-        ascon_absorb_8(&state, ad, adlen, 6);
+        ascon_aead_absorb_8(&state, ad, adlen, 6, 1);
 
     /* Separator between the associated data and the payload */
     ascon_separator();
 
     /* Encrypt the plaintext to create the ciphertext */
-    ascon_encrypt_8(&state, c, m, mlen, 6);
+    ascon_aead_encrypt_8(&state, c, m, mlen, 6);
 
     /* Finalize and compute the authentication tag */
 #if ASCON_SLICED
@@ -380,13 +374,13 @@ int ascon128_aead_decrypt
 
     /* Absorb the associated data into the state */
     if (adlen > 0)
-        ascon_absorb_8(&state, ad, adlen, 6);
+        ascon_aead_absorb_8(&state, ad, adlen, 6, 1);
 
     /* Separator between the associated data and the payload */
     ascon_separator();
 
     /* Decrypt the ciphertext to create the plaintext */
-    ascon_decrypt_8(&state, m, c, *mlen, 6);
+    ascon_aead_decrypt_8(&state, m, c, *mlen, 6);
 
     /* Finalize and check the authentication tag */
 #if ASCON_SLICED
@@ -431,13 +425,13 @@ int ascon128a_aead_encrypt
 
     /* Absorb the associated data into the state */
     if (adlen > 0)
-        ascon_absorb_16(&state, ad, adlen, 4);
+        ascon_aead_absorb_16(&state, ad, adlen, 4, 1);
 
     /* Separator between the associated data and the payload */
     ascon_separator();
 
     /* Encrypt the plaintext to create the ciphertext */
-    ascon_encrypt_16(&state, c, m, mlen, 4);
+    ascon_aead_encrypt_16(&state, c, m, mlen, 4);
 
     /* Finalize and compute the authentication tag */
 #if ASCON_SLICED
@@ -483,13 +477,13 @@ int ascon128a_aead_decrypt
 
     /* Absorb the associated data into the state */
     if (adlen > 0)
-        ascon_absorb_16(&state, ad, adlen, 4);
+        ascon_aead_absorb_16(&state, ad, adlen, 4, 1);
 
     /* Separator between the associated data and the payload */
     ascon_separator();
 
     /* Decrypt the ciphertext to create the plaintext */
-    ascon_decrypt_16(&state, m, c, *mlen, 4);
+    ascon_aead_decrypt_16(&state, m, c, *mlen, 4);
 
     /* Finalize and check the authentication tag */
 #if ASCON_SLICED
@@ -535,13 +529,13 @@ int ascon80pq_aead_encrypt
 
     /* Absorb the associated data into the state */
     if (adlen > 0)
-        ascon_absorb_8(&state, ad, adlen, 6);
+        ascon_aead_absorb_8(&state, ad, adlen, 6, 1);
 
     /* Separator between the associated data and the payload */
     ascon_separator();
 
     /* Encrypt the plaintext to create the ciphertext */
-    ascon_encrypt_8(&state, c, m, mlen, 6);
+    ascon_aead_encrypt_8(&state, c, m, mlen, 6);
 
     /* Finalize and compute the authentication tag */
 #if ASCON_SLICED
@@ -589,13 +583,13 @@ int ascon80pq_aead_decrypt
 
     /* Absorb the associated data into the state */
     if (adlen > 0)
-        ascon_absorb_8(&state, ad, adlen, 6);
+        ascon_aead_absorb_8(&state, ad, adlen, 6, 1);
 
     /* Separator between the associated data and the payload */
     ascon_separator();
 
     /* Decrypt the ciphertext to create the plaintext */
-    ascon_decrypt_8(&state, m, c, *mlen, 6);
+    ascon_aead_decrypt_8(&state, m, c, *mlen, 6);
 
     /* Finalize and check the authentication tag */
 #if ASCON_SLICED

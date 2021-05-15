@@ -18,6 +18,7 @@ OBJS = \
         ascon-hmac.o \
         ascon-kmac.o \
         ascon-prng.o \
+        ascon-siv.o \
         ascon-xof.o \
         elephant-delirium.o \
         elephant-dumbo.o \
@@ -88,7 +89,8 @@ individual:
 
 aead-metadata.o: \
 	aead-metadata.h aead-random.h internal-masking.h internal-util.h \
-	aesgcm-aead.h ascon-aead.h ascon-aead-masked.h ascon-hash.h ascon-xof.h \
+	aesgcm-aead.h ascon-aead.h ascon-aead-masked.h ascon-hash.h \
+        ascon-xof.h ascon-siv.h \
 	elephant-delirium.h elephant-dumbo.h elephant-jumbo.h \
 	gift-cofb-aead.h gift-cofb-aead-masked.h \
 	grain-aead.h \
@@ -107,6 +109,7 @@ ascon-hash.o: ascon-hash.h ascon-xof.h
 ascon-hmac.o: ascon-hmac.h ascon-hash.h ascon-xof.h internal-hmac.h internal-util.h
 ascon-kmac.o: ascon-kmac.h ascon-xof.h internal-kmac.h internal-util.h
 ascon-prng.o: ascon-prng.h ascon-xof.h ascon-hash.h internal-ascon.h internal-util.h
+ascon-siv.o: ascon-siv.h ascon-aead.h internal-ascon.h internal-util.h
 ascon-xof.o: ascon-xof.h internal-ascon.h internal-util.h
 elephant-delirium.o: elephant-delirium.h internal-keccakp-200.h internal-util.h
 elephant-dumbo.o: elephant-dumbo.h internal-spongent.h internal-util.h
