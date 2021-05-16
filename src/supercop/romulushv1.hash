@@ -4,5 +4,5 @@ hash_meta_name=Romulus-H
 hash_srcdir=Romulus
 hash_size=32
 hash_function=romulus_hash
-hash_exclude="romulus-aead.c romulus-aead.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c"
+hash_exclude="romulus-aead.c romulus-aead.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c romulus-hkdf.c romulus-hkdf.h internal-hkdf.h"
 hash_header=romulus-hash.h

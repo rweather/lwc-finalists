@@ -27,6 +27,8 @@ ASCON_FILES = \
     ascon-aead.h \
     ascon-hash.c \
     ascon-hash.h \
+    ascon-hkdf.c \
+    ascon-hkdf.h \
     ascon-hmac.c \
     ascon-hmac.h \
     ascon-kmac.c \
@@ -41,6 +43,7 @@ ASCON_FILES = \
     internal-ascon.h \
     internal-ascon-armv7m.S \
     internal-ascon-avr.S \
+    internal-hkdf.h \
     internal-hmac.h \
     internal-kmac.h \
     aead-random-system.c \
@@ -134,6 +137,8 @@ PHOTON_BEETLE_FILES = \
     photon-beetle-aead.h \
     photon-beetle-hash.c \
     photon-beetle-hash.h \
+    photon-beetle-hkdf.c \
+    photon-beetle-hkdf.h \
     photon-beetle-hmac.c \
     photon-beetle-hmac.h \
     photon-beetle-prng.c \
@@ -143,6 +148,7 @@ PHOTON_BEETLE_FILES = \
     internal-photon256-armv7m.S \
     internal-photon256-avr.S \
     internal-photon256-mix.h \
+    internal-hkdf.h \
     internal-hmac.h \
     aead-random-system.c \
     $(COMMON_FILES)
@@ -151,6 +157,8 @@ ROMULUS_FILES = \
     romulus-aead.h \
     romulus-hash.c \
     romulus-hash.h \
+    romulus-hkdf.c \
+    romulus-hkdf.h \
     romulus-hmac.c \
     romulus-hmac.h \
     romulus-prng.c \
@@ -162,6 +170,7 @@ ROMULUS_FILES = \
     internal-skinny-tiny-armv7m.S \
     internal-skinny-tiny-avr.S \
     internal-skinny-plus-config.h \
+    internal-hkdf.h \
     internal-hmac.h \
     aead-random-system.c \
     $(COMMON_FILES)
@@ -170,6 +179,8 @@ SPARKLE_FILES = \
     sparkle-aead.h \
     sparkle-hash.c \
     sparkle-hash.h \
+    sparkle-hkdf.c \
+    sparkle-hkdf.h \
     sparkle-hmac.c \
     sparkle-hmac.h \
     sparkle-prng.c \
@@ -178,6 +189,7 @@ SPARKLE_FILES = \
     internal-sparkle.h \
     internal-sparkle-armv7m.S \
     internal-sparkle-avr.S \
+    internal-hkdf.h \
     internal-hmac.h \
     aead-random-system.c \
     $(COMMON_FILES)
@@ -203,6 +215,8 @@ XOODYAK_FILES = \
     xoodyak-aead.h \
     xoodyak-hash.c \
     xoodyak-hash.h \
+    xoodyak-hkdf.c \
+    xoodyak-hkdf.h \
     xoodyak-hmac.c \
     xoodyak-hmac.h \
     xoodyak-kmac.c \
@@ -213,6 +227,7 @@ XOODYAK_FILES = \
     internal-xoodoo.h \
     internal-xoodoo-armv7m.S \
     internal-xoodoo-avr.S \
+    internal-hkdf.h \
     internal-hmac.h \
     internal-kmac.h \
     aead-random-system.c \

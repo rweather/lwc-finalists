@@ -20,56 +20,17 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "test-cipher.h"
-#include "aead-random.h"
+#include "romulus-hkdf.h"
+#include "romulus-hmac.h"
+#include "internal-util.h"
+#include <string.h>
 
-void test_aes(void);
-void test_aesgcm(void);
-void test_ascon(void);
-void test_blake2s(void);
-void test_chachapoly(void);
-void test_ghash(void);
-void test_gift128(void);
-void test_gift128_masked(void);
-void test_grain128(void);
-void test_hkdf(void);
-void test_hmac(void);
-void test_keccak(void);
-void test_kmac(void);
-void test_masking(void);
-void test_photon256(void);
-void test_sha256(void);
-void test_sha3(void);
-void test_skinny128(void);
-void test_sparkle(void);
-void test_spongent(void);
-void test_tinyjambu(void);
-void test_xoodoo(void);
-
-int main(int argc, char *argv[])
-{
-    aead_random_init();
-    test_aes();
-    test_aesgcm();
-    test_ascon();
-    test_blake2s();
-    test_chachapoly();
-    test_ghash();
-    test_gift128();
-    test_gift128_masked();
-    test_grain128();
-    test_hkdf();
-    test_hmac();
-    test_keccak();
-    test_kmac();
-    test_masking();
-    test_photon256();
-    test_sha256();
-    test_sha3();
-    test_skinny128();
-    test_sparkle();
-    test_spongent();
-    test_tinyjambu();
-    test_xoodoo();
-    return test_exit_result;
-}
+/* The actual implementation is in the common "internal-hkdf.h" file */
+#define HKDF_ALG_NAME romulus_hkdf
+#define HKDF_STATE romulus_hkdf_state_t
+#define HKDF_HMAC_SIZE ROMULUS_HMAC_SIZE
+#define HKDF_HMAC_STATE romulus_hmac_state_t
+#define HKDF_HMAC_INIT romulus_hmac_init
+#define HKDF_HMAC_UPDATE romulus_hmac_update
+#define HKDF_HMAC_FINALIZE romulus_hmac_finalize
+#include "internal-hkdf.h"

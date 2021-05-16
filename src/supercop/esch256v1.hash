@@ -4,5 +4,5 @@ hash_meta_name=Esch256
 hash_srcdir=SPARKLE
 hash_size=32
 hash_function=esch_256_hash
-hash_exclude="sparkle-aead.c sparkle-aead.h sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random-system.c"
+hash_exclude="sparkle-aead.c sparkle-aead.h sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random-system.c sparkle-hkdf.c sparkle-hkdf.h internal-hkdf.h"
 hash_header=sparkle-hash.h
