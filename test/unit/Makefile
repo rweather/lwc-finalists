@@ -26,6 +26,7 @@ OBJS1 = \
     test-keccak.o \
     test-kmac.o \
     test-masking.o \
+    test-pbkdf2.o \
     test-photon256.o \
     test-sha256.o \
     test-sha3.o \
@@ -64,6 +65,7 @@ test-hmac.o: $(LIBSRC_DIR)/aead-metadata.h $(LIBSRC_DIR)/ascon-hmac.h $(LIBSRC_D
 test-keccak.o: $(LIBSRC_DIR)/internal-keccakp-200.h $(LIBSRC_DIR)/internal-keccakp-400.h $(TEST_CIPHER_INC)
 test-kmac.o: test-sha3.h $(LIBSRC_DIR)/internal-kmac.h $(LIBSRC_DIR)/ascon-kmac.h $(LIBSRC_DIR)/xoodyak-kmac.h $(TEST_CIPHER_INC)
 test-masking.o: $(LIBSRC_DIR)/aead-random.h $(LIBSRC_DIR)/internal-masking.h $(TEST_CIPHER_INC) test-masking-common.c
+test-pbkdf2.o: $(LIBSRC_DIR)/internal-sha256.h $(LIBSRC_DIR)/internal-pbkdf2.h $(LIBSRC_DIR)/internal-util.h $(LIBSRC_DIR)/ascon-hmac.h $(LIBSRC_DIR)/photon-beetle-hmac.h $(LIBSRC_DIR)/romulus-hmac.h $(LIBSRC_DIR)/sparkle-hmac.h $(LIBSRC_DIR)/xoodyak-hmac.h $(LIBSRC_DIR)/ascon-pbkdf2.h $(LIBSRC_DIR)/photon-beetle-pbkdf2.h $(LIBSRC_DIR)/romulus-pbkdf2.h $(LIBSRC_DIR)/sparkle-pbkdf2.h $(LIBSRC_DIR)/xoodyak-pbkdf2.h $(TEST_CIPHER_INC)
 test-photon256.o: $(LIBSRC_DIR)/internal-photon256.h $(TEST_CIPHER_INC)
 test-sha256.o: $(LIBSRC_DIR)/internal-sha256.h $(LIBSRC_DIR)/aead-metadata.h $(TEST_CIPHER_INC)
 test-sha3.o: test-sha3.h $(LIBSRC_DIR)/internal-util.h $(TEST_CIPHER_INC)

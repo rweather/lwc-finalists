@@ -33,6 +33,8 @@ ASCON_FILES = \
     ascon-hmac.h \
     ascon-kmac.c \
     ascon-kmac.h \
+    ascon-pbkdf2.c \
+    ascon-pbkdf2.h \
     ascon-prng.c \
     ascon-prng.h \
     ascon-siv.c \
@@ -46,6 +48,7 @@ ASCON_FILES = \
     internal-hkdf.h \
     internal-hmac.h \
     internal-kmac.h \
+    internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)
 ASCON_MASKED_FILES = \
@@ -141,6 +144,8 @@ PHOTON_BEETLE_FILES = \
     photon-beetle-hkdf.h \
     photon-beetle-hmac.c \
     photon-beetle-hmac.h \
+    photon-beetle-pbkdf2.c \
+    photon-beetle-pbkdf2.h \
     photon-beetle-prng.c \
     photon-beetle-prng.h \
     internal-photon256.c \
@@ -150,6 +155,7 @@ PHOTON_BEETLE_FILES = \
     internal-photon256-mix.h \
     internal-hkdf.h \
     internal-hmac.h \
+    internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)
 ROMULUS_FILES = \
@@ -161,6 +167,8 @@ ROMULUS_FILES = \
     romulus-hkdf.h \
     romulus-hmac.c \
     romulus-hmac.h \
+    romulus-pbkdf2.c \
+    romulus-pbkdf2.h \
     romulus-prng.c \
     romulus-prng.h \
     internal-skinny-plus.c \
@@ -172,6 +180,7 @@ ROMULUS_FILES = \
     internal-skinny-plus-config.h \
     internal-hkdf.h \
     internal-hmac.h \
+    internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)
 SPARKLE_FILES = \
@@ -183,6 +192,8 @@ SPARKLE_FILES = \
     sparkle-hkdf.h \
     sparkle-hmac.c \
     sparkle-hmac.h \
+    sparkle-pbkdf2.c \
+    sparkle-pbkdf2.h \
     sparkle-prng.c \
     sparkle-prng.h \
     internal-sparkle.c \
@@ -191,6 +202,7 @@ SPARKLE_FILES = \
     internal-sparkle-avr.S \
     internal-hkdf.h \
     internal-hmac.h \
+    internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)
 TINYJAMBU_FILES = \
@@ -221,6 +233,8 @@ XOODYAK_FILES = \
     xoodyak-hmac.h \
     xoodyak-kmac.c \
     xoodyak-kmac.h \
+    xoodyak-pbkdf2.c \
+    xoodyak-pbkdf2.h \
     xoodyak-prng.c \
     xoodyak-prng.h \
     internal-xoodoo.c \
@@ -230,6 +244,7 @@ XOODYAK_FILES = \
     internal-hkdf.h \
     internal-hmac.h \
     internal-kmac.h \
+    internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)
 XOODYAK_MASKED_FILES = \

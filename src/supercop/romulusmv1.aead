@@ -8,4 +8,4 @@ aead_tag_size=16
 aead_encrypt=romulus_m_aead_encrypt
 aead_decrypt=romulus_m_aead_decrypt
 aead_header=romulus-aead.h
-aead_exclude="romulus-hash.c romulus-hash.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c romulus-hkdf.c romulus-hkdf.h internal-hkdf.h"
+aead_exclude="romulus-hash.c romulus-hash.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c romulus-hkdf.c romulus-hkdf.h internal-hkdf.h romulus-pbkdf2.c romulus-pbkdf2.h internal-pbkdf2.h"

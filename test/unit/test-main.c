@@ -37,6 +37,7 @@ void test_hmac(void);
 void test_keccak(void);
 void test_kmac(void);
 void test_masking(void);
+void test_pbkdf2(void);
 void test_photon256(void);
 void test_sha256(void);
 void test_sha3(void);
@@ -63,6 +64,7 @@ int main(int argc, char *argv[])
     test_keccak();
     test_kmac();
     test_masking();
+    test_pbkdf2();
     test_photon256();
     test_sha256();
     test_sha3();

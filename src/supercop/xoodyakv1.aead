@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=xoodyak_aead_encrypt
 aead_decrypt=xoodyak_aead_decrypt
-aead_exclude="xoodyak-hash.c xoodyak-hash.h xoodyak-hmac.c xoodyak-hmac.h internal-hmac.h xoodyak-kmac.c xoodyak-kmac.h internal-kmac.h xoodyak-prng.c xoodyak-prng.h aead-random-system.c xoodyak-hkdf.c xoodyak-hkdf.h internal-hkdf.h"
+aead_exclude="xoodyak-hash.c xoodyak-hash.h xoodyak-hmac.c xoodyak-hmac.h internal-hmac.h xoodyak-kmac.c xoodyak-kmac.h internal-kmac.h xoodyak-prng.c xoodyak-prng.h aead-random-system.c xoodyak-hkdf.c xoodyak-hkdf.h internal-hkdf.h xoodyak-pbkdf2.c xoodyak-pbkdf2.h internal-pbkdf2.h"
 aead_header=xoodyak-aead.h
