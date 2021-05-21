@@ -40,7 +40,7 @@ rm -rf "$OUT_DIR"/*
 
 # Generate the code for the AEAD algorithms.
 if test "$CIPHERS" = "1" ; then
-    for info_file in *aead ; do
+    for info_file in *.aead ; do
         # Load the algorithm properties from the *.info file.
         unset aead_family
         unset aead_name
@@ -56,7 +56,7 @@ if test "$CIPHERS" = "1" ; then
         unset aead_kat_options
         unset aead_variant
         . ./$info_file
-        echo $info_file
+        echo Generating AEAD crypto_aead/$aead_name
 
         # Create the directory structure for the algorithm.
         AEAD_OUT_DIR="$OUT_DIR/$aead_family/Implementations/crypto_aead/$aead_name/$TAG"
@@ -80,6 +80,9 @@ if test "$CIPHERS" = "1" ; then
         echo "#define CRYPTO_ABYTES $aead_tag_size " >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_NOOVERLAP 1 " >>"$AEAD_OUT_DIR/api.h"
 
+        # Copy the crypto_aead.h header file.
+        cp crypto_aead.h "$AEAD_OUT_DIR"
+
         # Generate the encrypt.c wrapper to call through to the actual code.
         sed -e '1,$s/AEAD_ENCRYPT/'"$aead_encrypt"'/g' encrypt.c | \
           sed -e '1,$s/AEAD_DECRYPT/'"$aead_decrypt"'/g' | \
@@ -96,7 +99,7 @@ fi
 
 # Generate the code for the hash algorithms.
 if test "$HASHES" = "1" ; then
-    for info_file in *hash ; do
+    for info_file in *.hash ; do
         # Load the algorithm properties from the *.info file.
         unset hash_family
         unset hash_name
@@ -109,7 +112,7 @@ if test "$HASHES" = "1" ; then
         unset hash_kat_options
         unset hash_variant
         . ./$info_file
-        echo $info_file
+        echo Generating HASH crypto_hash/$hash_name
 
         # Create the directory structure for the algorithm.
         HASH_OUT_DIR="$OUT_DIR/$hash_family/Implementations/crypto_hash/$hash_name/$TAG"
@@ -129,6 +132,9 @@ if test "$HASHES" = "1" ; then
         # Generate the api.h file with the algorithm properties.
         echo "#define CRYPTO_BYTES $hash_size" >"$HASH_OUT_DIR/api.h"
 
+        # Copy the crypto_hash header file.
+        cp crypto_hash.h "$HASH_OUT_DIR"
+
         # Generate the hash wrapper to call through to the actual code.
         sed -e '1,$s/HASH_FUNCTION/'"$hash_function"'/g' hash.c | \
           sed -e '1,$s/HEADER/'"$hash_header"'/g' >"$HASH_OUT_DIR/hash.c"
@@ -143,7 +149,7 @@ fi
 
 # Generate the code for the combined algorithms.
 if test "$COMBINED" = "1" ; then
-    for info_file in *both ; do
+    for info_file in *.both ; do
         # Load the algorithm properties from the *.info file.
         unset aead_family
         unset aead_name
@@ -169,7 +175,7 @@ if test "$COMBINED" = "1" ; then
         unset hash_kat_options
         unset hash_variant
         . ./$info_file
-        echo $info_file
+        echo Generating AEAD and HASH crypto_aead_hash/$aead_name
 
         # Create the directory structure for the algorithm.
         AEAD_OUT_DIR="$OUT_DIR/$aead_family/Implementations/crypto_aead_hash/$aead_name/$TAG"
@@ -187,21 +193,20 @@ if test "$COMBINED" = "1" ; then
         fi
 
         # Generate the api.h file with the algorithm properties.
-        echo "" >"$AEAD_OUT_DIR/api.h"
-        echo "// AEAD defines" >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_KEYBYTES $aead_key_size" >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_NSECBYTES 0 " >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_NPUBBYTES $aead_nonce_size " >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_ABYTES $aead_tag_size " >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_NOOVERLAP 1 " >>"$AEAD_OUT_DIR/api.h"
-        echo "" >>"$AEAD_OUT_DIR/api.h"
-        echo "// Hash defines" >>"$AEAD_OUT_DIR/api.h"
         echo "#define CRYPTO_BYTES $hash_size" >>"$AEAD_OUT_DIR/api.h"
 
         # Generate the encrypt.c wrapper to call through to the actual code.
         sed -e '1,$s/AEAD_ENCRYPT/'"$aead_encrypt"'/g' encrypt.c | \
           sed -e '1,$s/AEAD_DECRYPT/'"$aead_decrypt"'/g' | \
           sed -e '1,$s/HEADER/'"$aead_header"'/g' >"$AEAD_OUT_DIR/encrypt.c"
+
+        # Copy the crypto_aead.h and crypto_hash.h header files.
+        cp crypto_aead.h crypto_hash.h "$AEAD_OUT_DIR"
 
         # Generate the hash wrapper to call through to the actual code.
         sed -e '1,$s/HASH_FUNCTION/'"$hash_function"'/g' hash.c | \
