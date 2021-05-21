@@ -1,0 +1,15 @@
+aead_family=romulus
+aead_name=romulusnv1
+aead_meta_name=Romulus-N
+aead_srcdir=Romulus
+aead_key_size=16
+aead_nonce_size=16
+aead_tag_size=16
+aead_encrypt=romulus_n_aead_encrypt
+aead_decrypt=romulus_n_aead_decrypt
+aead_header=romulus-aead.h
+hash_meta_name=Romulus-H
+hash_size=32
+hash_function=romulus_hash
+hash_header=romulus-hash.h
+aead_exclude="romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c romulus-hkdf.c romulus-hkdf.h internal-hkdf.h romulus-pbkdf2.c romulus-pbkdf2.h internal-pbkdf2.h"

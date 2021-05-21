@@ -1,0 +1,15 @@
+aead_family=photon-beetle
+aead_name=photonbeetleaead128rate128v1
+aead_meta_name=PHOTON-Beetle-AEAD-ENC-128
+aead_srcdir=PHOTON-Beetle
+aead_key_size=16
+aead_nonce_size=16
+aead_tag_size=16
+aead_encrypt=photon_beetle_128_aead_encrypt
+aead_decrypt=photon_beetle_128_aead_decrypt
+aead_header=photon-beetle-aead.h
+hash_meta_name=PHOTON-Beetle-HASH
+hash_size=32
+hash_function=photon_beetle_hash
+hash_header=photon-beetle-hash.h
+aead_exclude="photon-beetle-hmac.c photon-beetle-hmac.h internal-hmac.h photon-beetle-prng.c photon-beetle-prng.h aead-random-system.c photon-beetle-hkdf.c photon-beetle-hkdf.h internal-hkdf.h photon-beetle-pbkdf2.c photon-beetle-pbkdf2.h internal-pbkdf2.h"
