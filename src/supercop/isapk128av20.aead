@@ -7,4 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=isap_keccak_128a_aead_encrypt
 aead_decrypt=isap_keccak_128a_aead_decrypt
+aead_exclude="isap-aead-pk.c isap-aead-pk.h internal-isap-pk.h"
 aead_header=isap-aead.h

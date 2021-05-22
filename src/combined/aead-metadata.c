@@ -35,6 +35,7 @@
 #include "gift-cofb-aead-masked.h"
 #include "grain-aead.h"
 #include "isap-aead.h"
+#include "isap-aead-pk.h"
 #include "photon-beetle-aead.h"
 #include "photon-beetle-hash.h"
 #include "romulus-aead.h"
@@ -56,7 +57,8 @@ aead_cipher_t const aesgcm128_cipher = {
     AESGCM_TAG_SIZE,
     AEAD_FLAG_NONE,
     aesgcm128_aead_encrypt,
-    aesgcm128_aead_decrypt
+    aesgcm128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const aesgcm192_cipher = {
@@ -66,7 +68,8 @@ aead_cipher_t const aesgcm192_cipher = {
     AESGCM_TAG_SIZE,
     AEAD_FLAG_NONE,
     aesgcm192_aead_encrypt,
-    aesgcm192_aead_decrypt
+    aesgcm192_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const aesgcm256_cipher = {
@@ -76,7 +79,8 @@ aead_cipher_t const aesgcm256_cipher = {
     AESGCM_TAG_SIZE,
     AEAD_FLAG_NONE,
     aesgcm256_aead_encrypt,
-    aesgcm256_aead_decrypt
+    aesgcm256_aead_decrypt,
+    0, 0
 };
 
 /*------------------------- ASCON -------------------------*/
@@ -88,7 +92,8 @@ aead_cipher_t const ascon128_cipher = {
     ASCON128_TAG_SIZE,
     AEAD_FLAG_NONE,
     ascon128_aead_encrypt,
-    ascon128_aead_decrypt
+    ascon128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon128a_cipher = {
@@ -98,7 +103,8 @@ aead_cipher_t const ascon128a_cipher = {
     ASCON128_TAG_SIZE,
     AEAD_FLAG_NONE,
     ascon128a_aead_encrypt,
-    ascon128a_aead_decrypt
+    ascon128a_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon80pq_cipher = {
@@ -108,7 +114,8 @@ aead_cipher_t const ascon80pq_cipher = {
     ASCON80PQ_TAG_SIZE,
     AEAD_FLAG_NONE,
     ascon80pq_aead_encrypt,
-    ascon80pq_aead_decrypt
+    ascon80pq_aead_decrypt,
+    0, 0
 };
 
 aead_hash_algorithm_t const ascon_hash_algorithm = {
@@ -148,7 +155,8 @@ aead_cipher_t const ascon128_masked_cipher = {
     AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     ascon128_masked_aead_encrypt,
-    ascon128_masked_aead_decrypt
+    ascon128_masked_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon128a_masked_cipher = {
@@ -162,7 +170,8 @@ aead_cipher_t const ascon128a_masked_cipher = {
     AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     ascon128a_masked_aead_encrypt,
-    ascon128a_masked_aead_decrypt
+    ascon128a_masked_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon80pq_masked_cipher = {
@@ -176,7 +185,8 @@ aead_cipher_t const ascon80pq_masked_cipher = {
     AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     ascon80pq_masked_aead_encrypt,
-    ascon80pq_masked_aead_decrypt
+    ascon80pq_masked_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon128_siv_cipher = {
@@ -186,7 +196,8 @@ aead_cipher_t const ascon128_siv_cipher = {
     ASCON128_TAG_SIZE,
     AEAD_FLAG_NONE,
     ascon128_siv_encrypt,
-    ascon128_siv_decrypt
+    ascon128_siv_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon128a_siv_cipher = {
@@ -196,7 +207,8 @@ aead_cipher_t const ascon128a_siv_cipher = {
     ASCON128_TAG_SIZE,
     AEAD_FLAG_NONE,
     ascon128a_siv_encrypt,
-    ascon128a_siv_decrypt
+    ascon128a_siv_decrypt,
+    0, 0
 };
 
 aead_cipher_t const ascon80pq_siv_cipher = {
@@ -206,7 +218,8 @@ aead_cipher_t const ascon80pq_siv_cipher = {
     ASCON80PQ_TAG_SIZE,
     AEAD_FLAG_NONE,
     ascon80pq_siv_encrypt,
-    ascon80pq_siv_decrypt
+    ascon80pq_siv_decrypt,
+    0, 0
 };
 
 /*----------------------- Elephant ------------------------*/
@@ -218,7 +231,8 @@ aead_cipher_t const delirium_cipher = {
     DELIRIUM_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SLOW,
     delirium_aead_encrypt,
-    delirium_aead_decrypt
+    delirium_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const dumbo_cipher = {
@@ -228,7 +242,8 @@ aead_cipher_t const dumbo_cipher = {
     DUMBO_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SLOW,
     dumbo_aead_encrypt,
-    dumbo_aead_decrypt
+    dumbo_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const jumbo_cipher = {
@@ -238,7 +253,8 @@ aead_cipher_t const jumbo_cipher = {
     JUMBO_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SLOW,
     jumbo_aead_encrypt,
-    jumbo_aead_decrypt
+    jumbo_aead_decrypt,
+    0, 0
 };
 
 /*----------------------- GIFT-COFB -----------------------*/
@@ -250,7 +266,8 @@ aead_cipher_t const gift_cofb_cipher = {
     GIFT_COFB_TAG_SIZE,
     AEAD_FLAG_NONE,
     gift_cofb_aead_encrypt,
-    gift_cofb_aead_decrypt
+    gift_cofb_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const gift_cofb_masked_cipher = {
@@ -260,7 +277,8 @@ aead_cipher_t const gift_cofb_masked_cipher = {
     GIFT_COFB_MASKED_TAG_SIZE,
     AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
     gift_cofb_masked_aead_encrypt,
-    gift_cofb_masked_aead_decrypt
+    gift_cofb_masked_aead_decrypt,
+    0, 0
 };
 
 /*--------------------- Grain128-AEAD ---------------------*/
@@ -272,7 +290,8 @@ aead_cipher_t const grain128_aead_cipher = {
     GRAIN128_TAG_SIZE,
     AEAD_FLAG_NONE,
     grain128_aead_encrypt,
-    grain128_aead_decrypt
+    grain128_aead_decrypt,
+    0, 0
 };
 
 /*-------------------------- ISAP -------------------------*/
@@ -284,7 +303,8 @@ aead_cipher_t const isap_keccak_128a_cipher = {
     ISAP_TAG_SIZE,
     AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
     isap_keccak_128a_aead_encrypt,
-    isap_keccak_128a_aead_decrypt
+    isap_keccak_128a_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const isap_ascon_128a_cipher = {
@@ -294,7 +314,8 @@ aead_cipher_t const isap_ascon_128a_cipher = {
     ISAP_TAG_SIZE,
     AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
     isap_ascon_128a_aead_encrypt,
-    isap_ascon_128a_aead_decrypt
+    isap_ascon_128a_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const isap_keccak_128_cipher = {
@@ -304,7 +325,8 @@ aead_cipher_t const isap_keccak_128_cipher = {
     ISAP_TAG_SIZE,
     AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
     isap_keccak_128_aead_encrypt,
-    isap_keccak_128_aead_decrypt
+    isap_keccak_128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const isap_ascon_128_cipher = {
@@ -314,7 +336,56 @@ aead_cipher_t const isap_ascon_128_cipher = {
     ISAP_TAG_SIZE,
     AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
     isap_ascon_128_aead_encrypt,
-    isap_ascon_128_aead_decrypt
+    isap_ascon_128_aead_decrypt,
+    0, 0
+};
+
+aead_cipher_t const isap_keccak_128a_pk_cipher = {
+    "ISAP-K-128A-pk",
+    ISAP_KEY_SIZE,
+    ISAP_NONCE_SIZE,
+    ISAP_TAG_SIZE,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
+    (aead_cipher_encrypt_t)isap_keccak_128a_aead_pk_encrypt,
+    (aead_cipher_decrypt_t)isap_keccak_128a_aead_pk_decrypt,
+    sizeof(isap_keccak_128a_key_t),
+    (aead_cipher_pk_init_t)isap_keccak_128a_aead_pk_init
+};
+
+aead_cipher_t const isap_ascon_128a_pk_cipher = {
+    "ISAP-A-128A-pk",
+    ISAP_KEY_SIZE,
+    ISAP_NONCE_SIZE,
+    ISAP_TAG_SIZE,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
+    (aead_cipher_encrypt_t)isap_ascon_128a_aead_pk_encrypt,
+    (aead_cipher_decrypt_t)isap_ascon_128a_aead_pk_decrypt,
+    sizeof(isap_ascon_128a_key_t),
+    (aead_cipher_pk_init_t)isap_ascon_128a_aead_pk_init
+};
+
+aead_cipher_t const isap_keccak_128_pk_cipher = {
+    "ISAP-K-128-pk",
+    ISAP_KEY_SIZE,
+    ISAP_NONCE_SIZE,
+    ISAP_TAG_SIZE,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
+    (aead_cipher_encrypt_t)isap_keccak_128_aead_pk_encrypt,
+    (aead_cipher_decrypt_t)isap_keccak_128_aead_pk_decrypt,
+    sizeof(isap_keccak_128_key_t),
+    (aead_cipher_pk_init_t)isap_keccak_128_aead_pk_init
+};
+
+aead_cipher_t const isap_ascon_128_pk_cipher = {
+    "ISAP-A-128-pk",
+    ISAP_KEY_SIZE,
+    ISAP_NONCE_SIZE,
+    ISAP_TAG_SIZE,
+    AEAD_FLAG_SC_PROTECT_KEY | AEAD_FLAG_SLOW,
+    (aead_cipher_encrypt_t)isap_ascon_128_aead_pk_encrypt,
+    (aead_cipher_decrypt_t)isap_ascon_128_aead_pk_decrypt,
+    sizeof(isap_ascon_128_key_t),
+    (aead_cipher_pk_init_t)isap_ascon_128_aead_pk_init
 };
 
 /*--------------------- PHOTON-Beetle ---------------------*/
@@ -326,7 +397,8 @@ aead_cipher_t const photon_beetle_128_cipher = {
     PHOTON_BEETLE_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     photon_beetle_128_aead_encrypt,
-    photon_beetle_128_aead_decrypt
+    photon_beetle_128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const photon_beetle_32_cipher = {
@@ -336,7 +408,8 @@ aead_cipher_t const photon_beetle_32_cipher = {
     PHOTON_BEETLE_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     photon_beetle_32_aead_encrypt,
-    photon_beetle_32_aead_decrypt
+    photon_beetle_32_aead_decrypt,
+    0, 0
 };
 
 aead_hash_algorithm_t const photon_beetle_hash_algorithm = {
@@ -361,7 +434,8 @@ aead_cipher_t const romulus_n_cipher = {
     ROMULUS_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     romulus_n_aead_encrypt,
-    romulus_n_aead_decrypt
+    romulus_n_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const romulus_m_cipher = {
@@ -371,7 +445,8 @@ aead_cipher_t const romulus_m_cipher = {
     ROMULUS_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     romulus_m_aead_encrypt,
-    romulus_m_aead_decrypt
+    romulus_m_aead_decrypt,
+    0, 0
 };
 
 aead_hash_algorithm_t const romulus_hash_algorithm = {
@@ -396,7 +471,8 @@ aead_cipher_t const schwaemm_256_128_cipher = {
     SCHWAEMM_256_128_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     schwaemm_256_128_aead_encrypt,
-    schwaemm_256_128_aead_decrypt
+    schwaemm_256_128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const schwaemm_192_192_cipher = {
@@ -406,7 +482,8 @@ aead_cipher_t const schwaemm_192_192_cipher = {
     SCHWAEMM_192_192_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     schwaemm_192_192_aead_encrypt,
-    schwaemm_192_192_aead_decrypt
+    schwaemm_192_192_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const schwaemm_128_128_cipher = {
@@ -416,7 +493,8 @@ aead_cipher_t const schwaemm_128_128_cipher = {
     SCHWAEMM_128_128_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     schwaemm_128_128_aead_encrypt,
-    schwaemm_128_128_aead_decrypt
+    schwaemm_128_128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const schwaemm_256_256_cipher = {
@@ -426,7 +504,8 @@ aead_cipher_t const schwaemm_256_256_cipher = {
     SCHWAEMM_256_256_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     schwaemm_256_256_aead_encrypt,
-    schwaemm_256_256_aead_decrypt
+    schwaemm_256_256_aead_decrypt,
+    0, 0
 };
 
 aead_hash_algorithm_t const esch_256_hash_algorithm = {
@@ -464,7 +543,8 @@ aead_cipher_t const tiny_jambu_128_cipher = {
     TINY_JAMBU_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     tiny_jambu_128_aead_encrypt,
-    tiny_jambu_128_aead_decrypt
+    tiny_jambu_128_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const tiny_jambu_192_cipher = {
@@ -474,7 +554,8 @@ aead_cipher_t const tiny_jambu_192_cipher = {
     TINY_JAMBU_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     tiny_jambu_192_aead_encrypt,
-    tiny_jambu_192_aead_decrypt
+    tiny_jambu_192_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const tiny_jambu_256_cipher = {
@@ -484,7 +565,8 @@ aead_cipher_t const tiny_jambu_256_cipher = {
     TINY_JAMBU_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     tiny_jambu_256_aead_encrypt,
-    tiny_jambu_256_aead_decrypt
+    tiny_jambu_256_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const tiny_jambu_128_masked_cipher = {
@@ -494,7 +576,8 @@ aead_cipher_t const tiny_jambu_128_masked_cipher = {
     TINY_JAMBU_MASKED_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
     tiny_jambu_128_masked_aead_encrypt,
-    tiny_jambu_128_masked_aead_decrypt
+    tiny_jambu_128_masked_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const tiny_jambu_192_masked_cipher = {
@@ -504,7 +587,8 @@ aead_cipher_t const tiny_jambu_192_masked_cipher = {
     TINY_JAMBU_MASKED_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
     tiny_jambu_192_masked_aead_encrypt,
-    tiny_jambu_192_masked_aead_decrypt
+    tiny_jambu_192_masked_aead_decrypt,
+    0, 0
 };
 
 aead_cipher_t const tiny_jambu_256_masked_cipher = {
@@ -514,7 +598,8 @@ aead_cipher_t const tiny_jambu_256_masked_cipher = {
     TINY_JAMBU_MASKED_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
     tiny_jambu_256_masked_aead_encrypt,
-    tiny_jambu_256_masked_aead_decrypt
+    tiny_jambu_256_masked_aead_decrypt,
+    0, 0
 };
 
 /*------------------------ Xoodyak ------------------------*/
@@ -526,7 +611,8 @@ aead_cipher_t const xoodyak_cipher = {
     XOODYAK_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     xoodyak_aead_encrypt,
-    xoodyak_aead_decrypt
+    xoodyak_aead_decrypt,
+    0, 0
 };
 
 aead_hash_algorithm_t const xoodyak_hash_algorithm = {
@@ -553,5 +639,6 @@ aead_cipher_t const xoodyak_masked_cipher = {
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
 #endif
     xoodyak_masked_aead_encrypt,
-    xoodyak_masked_aead_decrypt
+    xoodyak_masked_aead_decrypt,
+    0, 0
 };

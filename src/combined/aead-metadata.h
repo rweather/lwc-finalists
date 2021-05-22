@@ -88,6 +88,18 @@ typedef int (*aead_cipher_decrypt_t)
      const unsigned char *k);
 
 /**
+ * \brief Initializes a pre-computed key for an AEAD scheme.
+ *
+ * \param pk Points to the object to receive the pre-computed key value.
+ * \param k Points to the bytes of the key.
+ *
+ * \return 0 on success, or a negative value if there was an error in
+ * the parameters.
+ */
+typedef int (*aead_cipher_pk_init_t)
+    (unsigned char *pk, const unsigned char *k);
+
+/**
  * \brief Hashes a block of input data.
  *
  * \param out Buffer to receive the hash output.
@@ -198,6 +210,8 @@ typedef struct
     unsigned flags;                 /**< Flags for extra features */
     aead_cipher_encrypt_t encrypt;  /**< AEAD encryption function */
     aead_cipher_decrypt_t decrypt;  /**< AEAD decryption function */
+    unsigned pk_state_len;          /**< Length of the pre-computed state */
+    aead_cipher_pk_init_t pk_init;  /**< AEAD pre-computed init function */
 
 } aead_cipher_t;
 
@@ -354,6 +368,26 @@ extern aead_cipher_t const isap_keccak_128_cipher;
  * \brief Meta-information block for the ISAP-A-128 cipher.
  */
 extern aead_cipher_t const isap_ascon_128_cipher;
+
+/**
+ * \brief Meta-information block for the pre-computed ISAP-K-128A cipher.
+ */
+extern aead_cipher_t const isap_keccak_128a_pk_cipher;
+
+/**
+ * \brief Meta-information block for the pre-computed ISAP-A-128A cipher.
+ */
+extern aead_cipher_t const isap_ascon_128a_pk_cipher;
+
+/**
+ * \brief Meta-information block for the pre-computed ISAP-K-128 cipher.
+ */
+extern aead_cipher_t const isap_keccak_128_pk_cipher;
+
+/**
+ * \brief Meta-information block for the pre-computed ISAP-A-128 cipher.
+ */
+extern aead_cipher_t const isap_ascon_128_pk_cipher;
 
 /*--------------------- PHOTON-Beetle ---------------------*/
 

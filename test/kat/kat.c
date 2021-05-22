@@ -193,6 +193,7 @@ static int test_all_zeroes(const unsigned char *buf, size_t len)
 static int test_cipher_inner
     (const aead_cipher_t *alg, const test_vector_t *vec)
 {
+    unsigned char *pk = 0;
     const test_string_t *key;
     const test_string_t *nonce;
     const test_string_t *plaintext;
@@ -200,6 +201,7 @@ static int test_cipher_inner
     const test_string_t *ad;
     unsigned char *temp1;
     unsigned char *temp2;
+    const unsigned char *actual_key = 0;
     size_t len;
     int result;
 
@@ -217,11 +219,6 @@ static int test_cipher_inner
         test_print_error(alg->name, vec, "incorrect nonce size in test data");
         return 0;
     }
-    /* Check doesn't work for SATURNIN-Short - disable it.
-    if (ciphertext->size != (plaintext->size + alg->tag_len)) {
-        test_print_error(alg->name, vec, "incorrect tag size in test data");
-        return 0;
-    }*/
 
     /* Allocate temporary buffers */
     temp1 = malloc(ciphertext->size);
@@ -231,12 +228,23 @@ static int test_cipher_inner
     if (!temp2)
         exit(2);
 
+    /* Set up a pre-computed key if necessary */
+    if (alg->pk_state_len) {
+        pk = malloc(alg->pk_state_len);
+        if (!pk)
+            exit(2);
+        (*(alg->pk_init))(pk, key->data);
+        actual_key = pk;
+    } else {
+        actual_key = key->data;
+    }
+
     /* Test encryption */
     memset(temp1, 0xAA, ciphertext->size);
     len = 0xBADBEEF;
     result = (*(alg->encrypt))
         (temp1, &len, plaintext->data, plaintext->size,
-         ad->data, ad->size, nonce->data, key->data);
+         ad->data, ad->size, nonce->data, actual_key);
     if (result != 0 || len != ciphertext->size ||
             !test_compare(temp1, ciphertext->data, len)) {
         test_print_error(alg->name, vec, "encryption failed");
@@ -251,7 +259,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->encrypt))
         (temp1, &len, temp1, plaintext->size,
-         ad->size ? ad->data : 0, ad->size, nonce->data, key->data);
+         ad->size ? ad->data : 0, ad->size, nonce->data, actual_key);
     if (result != 0 || len != ciphertext->size ||
             !test_compare(temp1, ciphertext->data, len)) {
         test_print_error(alg->name, vec, "in-place encryption failed");
@@ -265,7 +273,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
         (temp1, &len, ciphertext->data, ciphertext->size,
-         ad->data, ad->size, nonce->data, key->data);
+         ad->data, ad->size, nonce->data, actual_key);
     if (result != 0 || len != plaintext->size ||
             !test_compare(temp1, plaintext->data, len)) {
         test_print_error(alg->name, vec, "decryption failed");
@@ -279,7 +287,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
         (temp1, &len, temp1, ciphertext->size,
-         ad->data, ad->size, nonce->data, key->data);
+         ad->data, ad->size, nonce->data, actual_key);
     if (result != 0 || len != plaintext->size ||
             !test_compare(temp1, plaintext->data, len)) {
         test_print_error(alg->name, vec, "in-place decryption failed");
@@ -295,7 +303,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
         (temp1, &len, temp2, ciphertext->size,
-         ad->data, ad->size, nonce->data, key->data);
+         ad->data, ad->size, nonce->data, actual_key);
     if (result != -1) {
         test_print_error(alg->name, vec, "corrupt ciphertext check failed");
         free(temp1);
@@ -314,7 +322,7 @@ static int test_cipher_inner
     len = 0xBADBEEF;
     result = (*(alg->decrypt))
         (temp1, &len, temp2, ciphertext->size,
-         ad->data, ad->size, nonce->data, key->data);
+         ad->data, ad->size, nonce->data, actual_key);
     if (result != -1) {
         test_print_error(alg->name, vec, "corrupt tag check failed");
         free(temp1);
@@ -331,6 +339,8 @@ static int test_cipher_inner
     /* All tests passed for this test vector */
     free(temp1);
     free(temp2);
+    if (pk)
+        free(pk);
     return 1;
 }
 

@@ -125,11 +125,14 @@ GRAIN128_FILES = \
 ISAP_FILES = \
     isap-aead.c \
     isap-aead.h \
+    isap-aead-pk.c \
+    isap-aead-pk.h \
     internal-ascon.c \
     internal-ascon.h \
     internal-ascon-armv7m.S \
     internal-ascon-avr.S \
     internal-isap.h \
+    internal-isap-pk.h \
     internal-keccakp-400.c \
     internal-keccakp-400.h \
     internal-keccakp-400-armv7m.S \

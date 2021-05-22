@@ -256,9 +256,19 @@ static void generate_kats_for_cipher(const aead_cipher_t *alg, FILE *file)
     unsigned char *ad = (unsigned char *)malloc(max_ad);
     unsigned char *pt = (unsigned char *)malloc(max_pt);
     unsigned char *ct = (unsigned char *)malloc(max_pt + alg->tag_len);
+    unsigned char *pk = 0;
     if (!key || !nonce || !ad || !pt || !ct) {
         fprintf(stderr, "Out of memory\n");
         exit(1);
+    }
+
+    /* Allocate a pre-computed key object if necessary */
+    if (alg->pk_state_len) {
+        pk = (unsigned char *)malloc(alg->pk_state_len);
+        if (!pk) {
+            fprintf(stderr, "Out of memory\n");
+            exit(1);
+        }
     }
 
     /* Generate the KAT vectors */
@@ -271,8 +281,14 @@ static void generate_kats_for_cipher(const aead_cipher_t *alg, FILE *file)
             rng_generate(pt, pt_len);
 
             /* Produce the ciphertext output */
-            (*(alg->encrypt))
-                (ct, &clen, pt, pt_len, ad, ad_len, nonce, key);
+            if (pk) {
+                (*(alg->pk_init))(pk, key);
+                (*(alg->encrypt))
+                    (ct, &clen, pt, pt_len, ad, ad_len, nonce, pk);
+            } else {
+                (*(alg->encrypt))
+                    (ct, &clen, pt, pt_len, ad, ad_len, nonce, key);
+            }
 
             /* Write out the results */
             fprintf(file, "Count = %d\n", count++);
@@ -291,6 +307,8 @@ static void generate_kats_for_cipher(const aead_cipher_t *alg, FILE *file)
     free(ad);
     free(pt);
     free(ct);
+    if (pk)
+        free(pk);
 }
 
 /**
