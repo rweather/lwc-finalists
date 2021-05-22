@@ -132,6 +132,10 @@ Macros</h2></td></tr>
 <tr class="memitem:a8b7e0bbe71fa47de5d2493022b2b33d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-ascon_8h.html#a8b7e0bbe71fa47de5d2493022b2b33d0">ascon_decrypt_sliced</a>(state, m, c, offset)</td></tr>
 <tr class="memdesc:a8b7e0bbe71fa47de5d2493022b2b33d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts data using the ASCON state in sliced form.  <a href="#a8b7e0bbe71fa47de5d2493022b2b33d0">More...</a><br/></td></tr>
 <tr class="separator:a8b7e0bbe71fa47de5d2493022b2b33d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78dabb115853bfc15da8347d7be18ddf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78dabb115853bfc15da8347d7be18ddf"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-ascon_8h.html#a78dabb115853bfc15da8347d7be18ddf">ascon_separator</a>()&#160;&#160;&#160;(state.W[8] ^= 0x01)</td></tr>
+<tr class="memdesc:a78dabb115853bfc15da8347d7be18ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absorbs the standard ASCON separator for switching between associated data and message payload. <br/></td></tr>
+<tr class="separator:a78dabb115853bfc15da8347d7be18ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -665,7 +669,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 15 2021 09:31:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 22 2021 13:36:00 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

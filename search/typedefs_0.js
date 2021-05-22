@@ -2,6 +2,7 @@ var searchData=
 [
   ['aead_5fcipher_5fdecrypt_5ft',['aead_cipher_decrypt_t',['../aead-metadata_8h.html#a7131bd4a4a04635f77c138bd4a77a99d',1,'aead-metadata.h']]],
   ['aead_5fcipher_5fencrypt_5ft',['aead_cipher_encrypt_t',['../aead-metadata_8h.html#a617d00939ed99a002d3848d4239011f5',1,'aead-metadata.h']]],
+  ['aead_5fcipher_5fpk_5finit_5ft',['aead_cipher_pk_init_t',['../aead-metadata_8h.html#acd5c8fc1e8971bf3be83ae8bb4f5f9ad',1,'aead-metadata.h']]],
   ['aead_5fhash_5ffinalize_5ft',['aead_hash_finalize_t',['../aead-metadata_8h.html#a5a43ca5f6dcd78d7d0a8831a070de0a7',1,'aead-metadata.h']]],
   ['aead_5fhash_5finit_5ft',['aead_hash_init_t',['../aead-metadata_8h.html#aba2e9c4d866dd218472107e9d7bba204',1,'aead-metadata.h']]],
   ['aead_5fhash_5ft',['aead_hash_t',['../aead-metadata_8h.html#a62c936f19ce8ced63189e95033d955c6',1,'aead-metadata.h']]],

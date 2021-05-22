@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['xoodoo_5fstate_5ft',['xoodoo_state_t',['../unionxoodoo__state__t.html',1,'']]],
-  ['xoodyak_5fhash_5fstate_5ft',['xoodyak_hash_state_t',['../unionxoodyak__hash__state__t.html',1,'']]],
-  ['xoodyak_5fprng_5fstate_5ft',['xoodyak_prng_state_t',['../unionxoodyak__prng__state__t.html',1,'']]]
+  ['tiny_5fjambu_5fstate_5ft',['tiny_jambu_state_t',['../structtiny__jambu__state__t.html',1,'']]],
+  ['tinyjambu_5fprng_5fstate_5ft',['tinyjambu_prng_state_t',['../uniontinyjambu__prng__state__t.html',1,'']]]
 ];

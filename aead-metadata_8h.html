@@ -143,6 +143,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a7131bd4a4a04635f77c138bd4a77a99d"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a7131bd4a4a04635f77c138bd4a77a99d">aead_cipher_decrypt_t</a> )(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</td></tr>
 <tr class="memdesc:a7131bd4a4a04635f77c138bd4a77a99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts and authenticates a packet with an AEAD scheme.  <a href="#a7131bd4a4a04635f77c138bd4a77a99d">More...</a><br/></td></tr>
 <tr class="separator:a7131bd4a4a04635f77c138bd4a77a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd5c8fc1e8971bf3be83ae8bb4f5f9ad"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#acd5c8fc1e8971bf3be83ae8bb4f5f9ad">aead_cipher_pk_init_t</a> )(unsigned char *pk, const unsigned char *k)</td></tr>
+<tr class="memdesc:acd5c8fc1e8971bf3be83ae8bb4f5f9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a pre-computed key for an AEAD scheme.  <a href="#acd5c8fc1e8971bf3be83ae8bb4f5f9ad">More...</a><br/></td></tr>
+<tr class="separator:acd5c8fc1e8971bf3be83ae8bb4f5f9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62c936f19ce8ced63189e95033d955c6"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a62c936f19ce8ced63189e95033d955c6">aead_hash_t</a> )(unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a62c936f19ce8ced63189e95033d955c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data.  <a href="#a62c936f19ce8ced63189e95033d955c6">More...</a><br/></td></tr>
 <tr class="separator:a62c936f19ce8ced63189e95033d955c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,6 +211,18 @@ Variables</h2></td></tr>
 <a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#adc2933e7761cd05a663a4d467fb09c1f">ascon80pq_masked_cipher</a></td></tr>
 <tr class="memdesc:adc2933e7761cd05a663a4d467fb09c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the masked ASCON-80pq cipher. <br/></td></tr>
 <tr class="separator:adc2933e7761cd05a663a4d467fb09c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04a7c73f66f245a4f2fb35584030cea9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04a7c73f66f245a4f2fb35584030cea9"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a04a7c73f66f245a4f2fb35584030cea9">ascon128_siv_cipher</a></td></tr>
+<tr class="memdesc:a04a7c73f66f245a4f2fb35584030cea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the ASCON-128-SIV cipher. <br/></td></tr>
+<tr class="separator:a04a7c73f66f245a4f2fb35584030cea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae23ef67b6e97819906be65153ac4c843"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae23ef67b6e97819906be65153ac4c843"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#ae23ef67b6e97819906be65153ac4c843">ascon128a_siv_cipher</a></td></tr>
+<tr class="memdesc:ae23ef67b6e97819906be65153ac4c843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the ASCON-128a-SIV cipher. <br/></td></tr>
+<tr class="separator:ae23ef67b6e97819906be65153ac4c843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeabac90c80a3ecd3aa8fa01010cfbdd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaeabac90c80a3ecd3aa8fa01010cfbdd"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#aaeabac90c80a3ecd3aa8fa01010cfbdd">ascon80pq_siv_cipher</a></td></tr>
+<tr class="memdesc:aaeabac90c80a3ecd3aa8fa01010cfbdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the ASCON-80pq-SIV cipher. <br/></td></tr>
+<tr class="separator:aaeabac90c80a3ecd3aa8fa01010cfbdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3a79ff1807234f3396498ca47b1eb39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3a79ff1807234f3396498ca47b1eb39"></a>
 <a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#ac3a79ff1807234f3396498ca47b1eb39">delirium_cipher</a></td></tr>
 <tr class="memdesc:ac3a79ff1807234f3396498ca47b1eb39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the Delirium cipher. <br/></td></tr>
@@ -248,6 +263,22 @@ Variables</h2></td></tr>
 <a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#ad19d7aeb4d54b2f7040bc329193ee2e5">isap_ascon_128_cipher</a></td></tr>
 <tr class="memdesc:ad19d7aeb4d54b2f7040bc329193ee2e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the ISAP-A-128 cipher. <br/></td></tr>
 <tr class="separator:ad19d7aeb4d54b2f7040bc329193ee2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5058cf44e48887948178ae0aa47d8971"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5058cf44e48887948178ae0aa47d8971"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a5058cf44e48887948178ae0aa47d8971">isap_keccak_128a_pk_cipher</a></td></tr>
+<tr class="memdesc:a5058cf44e48887948178ae0aa47d8971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the pre-computed ISAP-K-128A cipher. <br/></td></tr>
+<tr class="separator:a5058cf44e48887948178ae0aa47d8971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd30b0f0465e478ea956b6cb0bee995"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accd30b0f0465e478ea956b6cb0bee995"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#accd30b0f0465e478ea956b6cb0bee995">isap_ascon_128a_pk_cipher</a></td></tr>
+<tr class="memdesc:accd30b0f0465e478ea956b6cb0bee995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the pre-computed ISAP-A-128A cipher. <br/></td></tr>
+<tr class="separator:accd30b0f0465e478ea956b6cb0bee995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a083042a18e6c3fec25eec4c991c6d0a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a083042a18e6c3fec25eec4c991c6d0a7"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a083042a18e6c3fec25eec4c991c6d0a7">isap_keccak_128_pk_cipher</a></td></tr>
+<tr class="memdesc:a083042a18e6c3fec25eec4c991c6d0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the pre-computed ISAP-K-128 cipher. <br/></td></tr>
+<tr class="separator:a083042a18e6c3fec25eec4c991c6d0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaccd06e9dd62116af9d3a4ef93542cd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaccd06e9dd62116af9d3a4ef93542cd6"></a>
+<a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#aaccd06e9dd62116af9d3a4ef93542cd6">isap_ascon_128_pk_cipher</a></td></tr>
+<tr class="memdesc:aaccd06e9dd62116af9d3a4ef93542cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the pre-computed ISAP-A-128 cipher. <br/></td></tr>
+<tr class="separator:aaccd06e9dd62116af9d3a4ef93542cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9773adb3c02d308cbb1f87a5d3a3613d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9773adb3c02d308cbb1f87a5d3a3613d"></a>
 <a class="el" href="structaead__cipher__t.html">aead_cipher_t</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="aead-metadata_8h.html#a9773adb3c02d308cbb1f87a5d3a3613d">photon_beetle_128_cipher</a></td></tr>
 <tr class="memdesc:a9773adb3c02d308cbb1f87a5d3a3613d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Meta-information block for the PHOTON-Beetle-AEAD-ENC-128 cipher. <br/></td></tr>
@@ -410,6 +441,28 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acd5c8fc1e8971bf3be83ae8bb4f5f9ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int(* aead_cipher_pk_init_t)(unsigned char *pk, const unsigned char *k)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes a pre-computed key for an AEAD scheme. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pk</td><td>Points to the object to receive the pre-computed key value. </td></tr>
+    <tr><td class="paramname">k</td><td>Points to the bytes of the key.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value if there was an error in the parameters. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a5a43ca5f6dcd78d7d0a8831a070de0a7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -544,7 +597,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 15 2021 09:31:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 22 2021 13:36:00 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -268,11 +268,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ASCON_SLICED */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="preprocessor">#if ASCON_SLICED</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="internal-ascon_8h.html#a78dabb115853bfc15da8347d7be18ddf">  296</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ascon_separator() (state.W[8] ^= 0x01)</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define ascon_separator() (state.B[39] ^= 0x01)</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="internal-ascon_8h_html_a6128b5afc3989348a38af23aafbaf095"><div class="ttname"><a href="internal-ascon_8h.html#a6128b5afc3989348a38af23aafbaf095">ascon_permute_sliced</a></div><div class="ttdeci">void ascon_permute_sliced(ascon_state_t *state, uint8_t first_round)</div><div class="ttdoc">Permutes the ASCON state in sliced form. </div><div class="ttdef"><b>Definition:</b> internal-ascon.c:124</div></div>
 <div class="ttc" id="unionascon__state__t_html"><div class="ttname"><a href="unionascon__state__t.html">ascon_state_t</a></div><div class="ttdoc">Structure of the internal state of the ASCON permutation. </div><div class="ttdef"><b>Definition:</b> internal-ascon.h:52</div></div>
 <div class="ttc" id="internal-ascon_8h_html_ab21c365db8b660dc1e81ddbbda00395e"><div class="ttname"><a href="internal-ascon_8h.html#ab21c365db8b660dc1e81ddbbda00395e">ascon_permute</a></div><div class="ttdeci">void ascon_permute(ascon_state_t *state, uint8_t first_round)</div><div class="ttdoc">Permutes the ASCON state. </div><div class="ttdef"><b>Definition:</b> internal-ascon.c:39</div></div>
@@ -281,7 +287,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 15 2021 09:31:52 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 22 2021 13:36:00 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

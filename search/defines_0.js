@@ -35,8 +35,11 @@ var searchData=
   ['ascon_5fabsorb_5fsliced',['ascon_absorb_sliced',['../internal-ascon_8h.html#af72cdb4d98fa8df894ed9f146df974fd',1,'internal-ascon.h']]],
   ['ascon_5fdecrypt_5fsliced',['ascon_decrypt_sliced',['../internal-ascon_8h.html#a8b7e0bbe71fa47de5d2493022b2b33d0',1,'internal-ascon.h']]],
   ['ascon_5fencrypt_5fsliced',['ascon_encrypt_sliced',['../internal-ascon_8h.html#a19c753f0267ca22df4fa8b8b63d6e8cf',1,'internal-ascon.h']]],
+  ['ascon_5fhkdf_5foutput_5fsize',['ASCON_HKDF_OUTPUT_SIZE',['../ascon-hkdf_8h.html#ac79be9d364874170d219a783fd81ffdd',1,'ascon-hkdf.h']]],
   ['ascon_5fhmac_5fsize',['ASCON_HMAC_SIZE',['../ascon-hmac_8h.html#a37abe53f04723f82c22152f16cd9ca85',1,'ascon-hmac.h']]],
   ['ascon_5fkmac_5fsize',['ASCON_KMAC_SIZE',['../ascon-kmac_8h.html#a7cd133c2679a76220bb714e6f1825a9c',1,'ascon-kmac.h']]],
+  ['ascon_5fpbkdf2_5fsize',['ASCON_PBKDF2_SIZE',['../ascon-pbkdf2_8h.html#a2cb8fad60be665c0be7a218fd4100bc6',1,'ascon-pbkdf2.h']]],
+  ['ascon_5fseparator',['ascon_separator',['../internal-ascon_8h.html#a78dabb115853bfc15da8347d7be18ddf',1,'internal-ascon.h']]],
   ['ascon_5fset_5fsliced',['ascon_set_sliced',['../internal-ascon_8h.html#a5cc5cfb056067129518ff262629af669',1,'internal-ascon.h']]],
   ['ascon_5fsliced',['ASCON_SLICED',['../internal-ascon_8h.html#a10fbd94f5320dd003f33e77fe99cbc5c',1,'internal-ascon.h']]],
   ['ascon_5fsqueeze_5fsliced',['ascon_squeeze_sliced',['../internal-ascon_8h.html#acd25badfbc164b96219e946bebdbae86',1,'internal-ascon.h']]]
