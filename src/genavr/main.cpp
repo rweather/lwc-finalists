@@ -273,6 +273,23 @@ static bool gift128b_decrypt_block(enum Mode mode)
     return true;
 }
 
+static bool gift128b_decrypt_block_preloaded(enum Mode mode)
+{
+    Code code;
+    gen_gift128b_decrypt_preloaded(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_gift128b_decrypt_preloaded(code)) {
+            std::cout << "GIFT-128b preloaded decrypt tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "GIFT-128b preloaded decrypt tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
 static bool gift128b(enum Mode mode)
 {
     bool ok = true;
@@ -284,6 +301,8 @@ static bool gift128b(enum Mode mode)
         ok = false;
     if (!gift128b_decrypt_block(mode))
         ok = false;
+    if (!gift128b_decrypt_block_preloaded(mode))
+        ok = false;
     return ok;
 }
 
@@ -293,6 +312,8 @@ static bool gift128b_cofb_only(enum Mode mode)
     if (!gift128b_setup_key(mode))
         ok = false;
     if (!gift128b_encrypt_block_preloaded(mode))
+        ok = false;
+    if (!gift128b_decrypt_block_preloaded(mode))
         ok = false;
     return ok;
 }
@@ -572,6 +593,23 @@ static bool gift128b_fs_decrypt_block(enum Mode mode, int num_keys)
     return true;
 }
 
+static bool gift128b_fs_decrypt_block_preloaded(enum Mode mode, int num_keys)
+{
+    Code code;
+    gen_gift128b_fs_decrypt_preloaded(code, num_keys);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_gift128b_fs_decrypt_preloaded(code, num_keys)) {
+            std::cout << "GIFT-128b-fs-" << num_keys << " preloaded decrypt tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "GIFT-128b-fs-" << num_keys << " preloaded decrypt tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
 static bool gift128b_fs(enum Mode mode, int num_keys, bool cofb_only)
 {
     bool ok = true;
@@ -594,6 +632,8 @@ static bool gift128b_fs(enum Mode mode, int num_keys, bool cofb_only)
     if (!gift128b_fs_encrypt_block_preloaded(mode, num_keys))
         ok = false;
     if (!cofb_only && !gift128b_fs_decrypt_block(mode, num_keys))
+        ok = false;
+    if (!gift128b_fs_decrypt_block_preloaded(mode, num_keys))
         ok = false;
     if (mode == Generate) {
         std::cout << std::endl;

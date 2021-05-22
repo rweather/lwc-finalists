@@ -38,7 +38,9 @@ static uint32_t const GIFT128_RC_fixsliced[40] = {
     0xc001a000, 0x14500002, 0x01020181, 0x8000001a
 };
 
-#else
+#endif
+
+#if GIFT128_VARIANT != GIFT128_VARIANT_FULL
 
 /* Round constants for GIFT-128 in the bitsliced representation */
 static uint8_t const GIFT128_RC[40] = {
@@ -110,6 +112,37 @@ static uint8_t const GIFT128_RC[40] = {
         (x) = _x; \
     } while (0)
 
+#define INV_PERM3_INNER(x) \
+    do { \
+        bit_permute_step(x, 0x00550055, 9); \
+        bit_permute_step(x, 0x00003333, 18); \
+        bit_permute_step(x, 0x000f000f, 12); \
+        bit_permute_step(x, 0x000000ff, 24); \
+    } while (0)
+#define INV_PERM0(x) \
+    do { \
+        uint32_t _x = rightRotate8(x); \
+        INV_PERM3_INNER(_x); \
+        (x) = _x; \
+    } while (0)
+#define INV_PERM1(x) \
+    do { \
+        uint32_t _x = rightRotate16(x); \
+        INV_PERM3_INNER(_x); \
+        (x) = _x; \
+    } while (0)
+#define INV_PERM2(x) \
+    do { \
+        uint32_t _x = rightRotate24(x); \
+        INV_PERM3_INNER(_x); \
+        (x) = _x; \
+    } while (0)
+#define INV_PERM3(x) \
+    do { \
+        uint32_t _x = (x); \
+        INV_PERM3_INNER(_x); \
+        (x) = _x; \
+    } while (0)
 #if GIFT128_VARIANT != GIFT128_VARIANT_TINY
 
 /**
@@ -666,6 +699,35 @@ void gift128b_encrypt_preloaded
     output[3] = s3;
 }
 
+void gift128b_decrypt_preloaded
+    (const gift128b_key_schedule_t *ks, uint32_t output[4],
+     const uint32_t input[4])
+{
+    uint32_t s0, s1, s2, s3;
+
+    /* Copy the plaintext into the state buffer */
+    s0 = input[0];
+    s1 = input[1];
+    s2 = input[2];
+    s3 = input[3];
+
+    /* Perform all 40 rounds five at a time using the fixsliced method */
+    gift128b_decrypt_5_rounds(ks->k + 70, GIFT128_RC_fixsliced + 35);
+    gift128b_decrypt_5_rounds(ks->k + 60, GIFT128_RC_fixsliced + 30);
+    gift128b_decrypt_5_rounds(ks->k + 50, GIFT128_RC_fixsliced + 25);
+    gift128b_decrypt_5_rounds(ks->k + 40, GIFT128_RC_fixsliced + 20);
+    gift128b_decrypt_5_rounds(ks->k + 30, GIFT128_RC_fixsliced + 15);
+    gift128b_decrypt_5_rounds(ks->k + 20, GIFT128_RC_fixsliced + 10);
+    gift128b_decrypt_5_rounds(ks->k + 10, GIFT128_RC_fixsliced + 5);
+    gift128b_decrypt_5_rounds(ks->k, GIFT128_RC_fixsliced);
+
+    /* Pack the state into the ciphertext buffer */
+    output[0] = s0;
+    output[1] = s1;
+    output[2] = s2;
+    output[3] = s3;
+}
+
 #else /* GIFT128_VARIANT_TINY */
 
 void gift128b_encrypt_preloaded
@@ -731,5 +793,156 @@ void gift128b_encrypt_preloaded
 }
 
 #endif /* GIFT128_VARIANT_TINY */
+
+#if GIFT128_VARIANT != GIFT128_VARIANT_FULL
+
+/* The small variant uses fixslicing for encryption, but we need to change
+ * to bitslicing for decryption because of the difficulty of fast-forwarding
+ * the fixsliced key schedule to the end.  So the tiny variant is used for
+ * decryption when the small variant is selected.  Since the NIST AEAD modes
+ * for GIFT-128 only use the block encrypt operation, the inefficiencies
+ * in decryption don't matter all that much */
+
+/**
+ * \def gift128b_load_and_forward_schedule()
+ * \brief Generate the decryption key at the end of the last round.
+ *
+ * To do that, we run the block operation forward to determine the
+ * final state of the key schedule after the last round:
+ *
+ * w0 = ks->k[0];
+ * w1 = ks->k[1];
+ * w2 = ks->k[2];
+ * w3 = ks->k[3];
+ * for (round = 0; round < 40; ++round) {
+ *     temp = w3;
+ *     w3 = w2;
+ *     w2 = w1;
+ *     w1 = w0;
+ *     w0 = ((temp & 0xFFFC0000U) >> 2) | ((temp & 0x00030000U) << 14) |
+ *          ((temp & 0x00000FFFU) << 4) | ((temp & 0x0000F000U) >> 12);
+ * }
+ *
+ * We can short-cut all of the above by noticing that we don't need
+ * to do the word rotations.  Every 4 rounds, the rotation alignment
+ * returns to the original position and each word has been rotated
+ * by applying the "2 right and 4 left" bit-rotation step to it.
+ * We then repeat that 10 times for the full 40 rounds.  The overall
+ * effect is to apply a "20 right and 40 left" bit-rotation to every
+ * word in the key schedule.  That is equivalent to "4 right and 8 left"
+ * on the 16-bit sub-words.
+ */
+#if GIFT128_VARIANT != GIFT128_VARIANT_SMALL
+#define gift128b_load_and_forward_schedule() \
+    do { \
+        w0 = ks->k[3]; \
+        w1 = ks->k[1]; \
+        w2 = ks->k[2]; \
+        w3 = ks->k[0]; \
+        w0 = ((w0 & 0xFFF00000U) >> 4) | ((w0 & 0x000F0000U) << 12) | \
+             ((w0 & 0x000000FFU) << 8) | ((w0 & 0x0000FF00U) >> 8);   \
+        w1 = ((w1 & 0xFFF00000U) >> 4) | ((w1 & 0x000F0000U) << 12) | \
+             ((w1 & 0x000000FFU) << 8) | ((w1 & 0x0000FF00U) >> 8);   \
+        w2 = ((w2 & 0xFFF00000U) >> 4) | ((w2 & 0x000F0000U) << 12) | \
+             ((w2 & 0x000000FFU) << 8) | ((w2 & 0x0000FF00U) >> 8);   \
+        w3 = ((w3 & 0xFFF00000U) >> 4) | ((w3 & 0x000F0000U) << 12) | \
+             ((w3 & 0x000000FFU) << 8) | ((w3 & 0x0000FF00U) >> 8);   \
+    } while (0)
+#else
+/* The small variant needs to also undo some of the rotations that were
+ * done to generate the fixsliced version of the key schedule */
+#define gift128b_load_and_forward_schedule() \
+    do { \
+        w0 = ks->k[3]; \
+        w1 = ks->k[1]; \
+        w2 = ks->k[2]; \
+        w3 = ks->k[0]; \
+        gift128b_swap_move(w3, w3, 0x000000FFU, 24); \
+        gift128b_swap_move(w3, w3, 0x00003333U, 18); \
+        gift128b_swap_move(w3, w3, 0x000F000FU, 12); \
+        gift128b_swap_move(w3, w3, 0x00550055U, 9);  \
+        gift128b_swap_move(w1, w1, 0x000000FFU, 24); \
+        gift128b_swap_move(w1, w1, 0x00003333U, 18); \
+        gift128b_swap_move(w1, w1, 0x000F000FU, 12); \
+        gift128b_swap_move(w1, w1, 0x00550055U, 9);  \
+        gift128b_swap_move(w2, w2, 0x000000FFU, 24); \
+        gift128b_swap_move(w2, w2, 0x000F000FU, 12); \
+        gift128b_swap_move(w2, w2, 0x03030303U, 6);  \
+        gift128b_swap_move(w2, w2, 0x11111111U, 3);  \
+        gift128b_swap_move(w0, w0, 0x000000FFU, 24); \
+        gift128b_swap_move(w0, w0, 0x000F000FU, 12); \
+        gift128b_swap_move(w0, w0, 0x03030303U, 6);  \
+        gift128b_swap_move(w0, w0, 0x11111111U, 3);  \
+        w0 = ((w0 & 0xFFF00000U) >> 4) | ((w0 & 0x000F0000U) << 12) | \
+             ((w0 & 0x000000FFU) << 8) | ((w0 & 0x0000FF00U) >> 8);   \
+        w1 = ((w1 & 0xFFF00000U) >> 4) | ((w1 & 0x000F0000U) << 12) | \
+             ((w1 & 0x000000FFU) << 8) | ((w1 & 0x0000FF00U) >> 8);   \
+        w2 = ((w2 & 0xFFF00000U) >> 4) | ((w2 & 0x000F0000U) << 12) | \
+             ((w2 & 0x000000FFU) << 8) | ((w2 & 0x0000FF00U) >> 8);   \
+        w3 = ((w3 & 0xFFF00000U) >> 4) | ((w3 & 0x000F0000U) << 12) | \
+             ((w3 & 0x000000FFU) << 8) | ((w3 & 0x0000FF00U) >> 8);   \
+    } while (0)
+#endif
+
+void gift128b_decrypt_preloaded
+    (const gift128b_key_schedule_t *ks, uint32_t output[4],
+     const uint32_t input[4])
+{
+    uint32_t s0, s1, s2, s3;
+    uint32_t w0, w1, w2, w3;
+    uint32_t temp;
+    uint8_t round;
+
+    /* Copy the ciphertext into the state buffer */
+    s0 = input[0];
+    s1 = input[1];
+    s2 = input[2];
+    s3 = input[3];
+
+    /* Generate the decryption key at the end of the last round */
+    gift128b_load_and_forward_schedule();
+
+    /* Perform all 40 rounds */
+    for (round = 40; round > 0; --round) {
+        /* Rotate the key schedule backwards */
+        temp = w0;
+        w0 = w1;
+        w1 = w2;
+        w2 = w3;
+        w3 = ((temp & 0x3FFF0000U) << 2) | ((temp & 0xC0000000U) >> 14) |
+             ((temp & 0x0000FFF0U) >> 4) | ((temp & 0x0000000FU) << 12);
+
+        /* AddRoundKey - XOR in the key schedule and the round constant */
+        s2 ^= w1;
+        s1 ^= w3;
+        s3 ^= 0x80000000U ^ GIFT128_RC[round - 1];
+
+        /* InvPermBits - apply the inverse of the 128-bit permutation */
+        INV_PERM0(s0);
+        INV_PERM1(s1);
+        INV_PERM2(s2);
+        INV_PERM3(s3);
+
+        /* InvSubCells - apply the inverse of the S-box */
+        temp = s0;
+        s0 = s3;
+        s3 = temp;
+        s2 ^= s0 & s1;
+        s3 ^= 0xFFFFFFFFU;
+        s1 ^= s3;
+        s3 ^= s2;
+        s2 ^= s0 | s1;
+        s0 ^= s1 & s3;
+        s1 ^= s0 & s2;
+    }
+
+    /* Pack the state into the plaintext buffer */
+    output[0] = s0;
+    output[1] = s1;
+    output[2] = s2;
+    output[3] = s3;
+}
+
+#endif /* GIFT128_VARIANT_SMALL || GIFT128_VARIANT_TINY */
 
 #endif /* !GIFT128_VARIANT_ASM */

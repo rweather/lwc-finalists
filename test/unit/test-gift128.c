@@ -44,6 +44,22 @@ static void gift128b_encrypt_wrapper
     be_store_word32(output + 8, out[2]);
     be_store_word32(output + 12, out[3]);
 }
+static void gift128b_decrypt_wrapper
+    (const gift128b_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    uint32_t out[4];
+    uint32_t in[4];
+    in[0] = be_load_word32(input);
+    in[1] = be_load_word32(input + 4);
+    in[2] = be_load_word32(input + 8);
+    in[3] = be_load_word32(input + 12);
+    gift128b_decrypt_preloaded(ks, out, in);
+    be_store_word32(output, out[0]);
+    be_store_word32(output + 4, out[1]);
+    be_store_word32(output + 8, out[2]);
+    be_store_word32(output + 12, out[3]);
+}
 
 /* Information block for the GIFT-128 block cipher (bit-sliced version) */
 static block_cipher_t const gift128b = {
@@ -51,7 +67,7 @@ static block_cipher_t const gift128b = {
     sizeof(gift128b_key_schedule_t),
     (block_cipher_init_t)gift128b_init,
     (block_cipher_encrypt_t)gift128b_encrypt_wrapper,
-    (block_cipher_decrypt_t)0
+    (block_cipher_decrypt_t)gift128b_decrypt_wrapper
 };
 
 /* Wrapper around the "preloaded" version to convert the test vectors
@@ -72,6 +88,22 @@ static void gift128b_encrypt_masked_wrapper
     be_store_word32(output + 8, mask_output(out[2]));
     be_store_word32(output + 12, mask_output(out[3]));
 }
+static void gift128b_decrypt_masked_wrapper
+    (const gift128b_masked_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    mask_uint32_t out[4];
+    mask_uint32_t in[4];
+    mask_input(in[0], be_load_word32(input));
+    mask_input(in[1], be_load_word32(input + 4));
+    mask_input(in[2], be_load_word32(input + 8));
+    mask_input(in[3], be_load_word32(input + 12));
+    gift128b_decrypt_preloaded_masked(ks, out, in);
+    be_store_word32(output, mask_output(out[0]));
+    be_store_word32(output + 4, mask_output(out[1]));
+    be_store_word32(output + 8, mask_output(out[2]));
+    be_store_word32(output + 12, mask_output(out[3]));
+}
 
 /* Information block for the masked GIFT-128 block cipher (bit-sliced) */
 static block_cipher_t const gift128b_masked = {
@@ -79,7 +111,7 @@ static block_cipher_t const gift128b_masked = {
     sizeof(gift128b_masked_key_schedule_t),
     (block_cipher_init_t)gift128b_init_masked,
     (block_cipher_encrypt_t)gift128b_encrypt_masked_wrapper,
-    (block_cipher_decrypt_t)0
+    (block_cipher_decrypt_t)gift128b_decrypt_masked_wrapper
 };
 
 /* Test vectors for GIFT-128 (bit-sliced version) from the GIFT-COFB spec:

@@ -89,6 +89,24 @@ void gift128b_encrypt_preloaded_masked
     (const gift128b_masked_key_schedule_t *ks, mask_uint32_t output[4],
      const mask_uint32_t input[4]);
 
+/**
+ * \brief Decrypts a block with masked GIFT-128 (bit-sliced and pre-loaded).
+ *
+ * \param ks Points to the masked GIFT-128 key schedule.
+ * \param output Output buffer which must be at least 16 bytes in length.
+ * \param input Input buffer which must be at least 16 bytes in length.
+ *
+ * The \a input and \a output buffers can be the same buffer for
+ * in-place decryption.
+ *
+ * This version assumes that the input has already been pre-loaded from
+ * big-endian into host byte order in the supplied word array.  The output
+ * is delivered in the same way.
+ */
+void gift128b_decrypt_preloaded_masked
+    (const gift128b_masked_key_schedule_t *ks, mask_uint32_t output[4],
+     const mask_uint32_t input[4]);
+
 #ifdef __cplusplus
 }
 #endif

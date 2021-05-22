@@ -1747,6 +1747,24 @@ void gen_gift128b_fs_decrypt_alt(Code &code, int num_keys)
 }
 
 /**
+ * \brief Generates the AVR code for the gift128b decryption function,
+ * little-endian version.
+ *
+ * \param code The code block to generate into.
+ * \param num_keys Number of round keys to be generated: 4, 20, or 80.
+ */
+void gen_gift128b_fs_decrypt_preloaded(Code &code, int num_keys)
+{
+    if (num_keys == 80) {
+        gen_gift128_fs_decrypt
+            (code, "gift128b_decrypt_preloaded", StateLE, false);
+    } else {
+        gen_gift128_fs_decrypt_short
+            (code, "gift128b_decrypt_preloaded", num_keys, StateLE, false);
+    }
+}
+
+/**
  * \brief Generates the AVR code for the gift128n decryption function.
  *
  * \param code The code block to generate into.
@@ -2408,6 +2426,36 @@ bool test_gift128b_fs_decrypt(Code &code, int num_keys)
     if (!test_gift128b_fs_decrypt(code, num_keys, &gift128b_4))
         return false;
     if (!test_gift128b_fs_decrypt(code, num_keys, &gift128b_5))
+        return false;
+    return true;
+}
+
+static bool test_gift128b_fs_decrypt_preloaded
+    (Code &code, int num_keys, const block_cipher_test_vector_t *test)
+{
+    unsigned char schedule[80 * 4] = {0};
+    unsigned char input[16] = {0};
+    unsigned char output[16] = {0};
+    gift128_setup_key(schedule, test->key, StateBE, num_keys);
+    gift128_swap_words(input, test->ciphertext);
+    code.exec_decrypt_block(schedule, num_keys * 4, output, 16, input, 16);
+    gift128_swap_words(input, output);
+    if (memcmp(input, test->plaintext, 16) != 0)
+        return false;
+    return true;
+}
+
+bool test_gift128b_fs_decrypt_preloaded(Code &code, int num_keys)
+{
+    if (!test_gift128b_fs_decrypt_preloaded(code, num_keys, &gift128b_1))
+        return false;
+    if (!test_gift128b_fs_decrypt_preloaded(code, num_keys, &gift128b_2))
+        return false;
+    if (!test_gift128b_fs_decrypt_preloaded(code, num_keys, &gift128b_3))
+        return false;
+    if (!test_gift128b_fs_decrypt_preloaded(code, num_keys, &gift128b_4))
+        return false;
+    if (!test_gift128b_fs_decrypt_preloaded(code, num_keys, &gift128b_5))
         return false;
     return true;
 }

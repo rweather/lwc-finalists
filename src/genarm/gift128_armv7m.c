@@ -1816,6 +1816,18 @@ int main(int argc, char *argv[])
         function_footer(order_name, "decrypt");
     }
 
+    /* Output the preloaded GIFT-128 encryption function */
+    if (!is_nibble_based) {
+        function_header(order_name, "decrypt_preloaded");
+        preloaded = 1;
+        if (variant == GIFT128_VARIANT_FULL)
+            gen_gift128_decrypt_fixsliced();
+        else
+            gen_gift128_decrypt_tiny();
+        preloaded = 0;
+        function_footer(order_name, "decrypt_preloaded");
+    }
+
     /* Output the tweaked encryption and decryption functions in nibble mode */
     if (is_nibble_based) {
         order_name = "gift128t";

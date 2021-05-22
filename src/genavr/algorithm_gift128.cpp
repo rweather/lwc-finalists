@@ -722,6 +722,11 @@ void gen_gift128b_decrypt(Code &code)
     gen_gift128_decrypt(code, "gift128b_decrypt", StateBE);
 }
 
+void gen_gift128b_decrypt_preloaded(Code &code)
+{
+    gen_gift128_decrypt(code, "gift128b_decrypt_preloaded", StateLE);
+}
+
 void gen_gift128b_encrypt_alt(Code &code)
 {
     gen_gift128_encrypt(code, "giftb128_encrypt_block", StateBE, true);
@@ -965,6 +970,38 @@ bool test_gift128b_decrypt(Code &code)
     if (!test_gift128b_decrypt(code, &gift128b_4))
         return false;
     if (!test_gift128b_decrypt(code, &gift128b_5))
+        return false;
+    return true;
+}
+
+static bool test_gift128b_decrypt_preloaded
+    (Code &code, const block_cipher_test_vector_t *test, unsigned tweak = 0)
+{
+    unsigned char schedule[16];
+    unsigned char input[16];
+    unsigned char output[16];
+    gift128b_setup(schedule, test);
+    gift128_swap_words(input, test->ciphertext);
+    code.exec_decrypt_block(schedule, sizeof(schedule),
+                            output, sizeof(output),
+                            input, sizeof(input), tweak);
+    gift128_swap_words(input, test->plaintext);
+    if (memcmp(output, input, 16) != 0)
+        return false;
+    return true;
+}
+
+bool test_gift128b_decrypt_preloaded(Code &code)
+{
+    if (!test_gift128b_decrypt_preloaded(code, &gift128b_1))
+        return false;
+    if (!test_gift128b_decrypt_preloaded(code, &gift128b_2))
+        return false;
+    if (!test_gift128b_decrypt_preloaded(code, &gift128b_3))
+        return false;
+    if (!test_gift128b_decrypt_preloaded(code, &gift128b_4))
+        return false;
+    if (!test_gift128b_decrypt_preloaded(code, &gift128b_5))
         return false;
     return true;
 }
