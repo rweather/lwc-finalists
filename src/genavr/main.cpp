@@ -610,6 +610,40 @@ static bool gift128b_fs_decrypt_block_preloaded(enum Mode mode, int num_keys)
     return true;
 }
 
+static bool gift128_nibbles_to_words(enum Mode mode)
+{
+    Code code;
+    gen_gift128_nibbles_to_words(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_gift128_nibbles_to_words(code)) {
+            std::cout << "GIFT-128 nibbles to words tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "GIFT-128 nibbles to words tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
+static bool gift128_words_to_nibbles(enum Mode mode)
+{
+    Code code;
+    gen_gift128_words_to_nibbles(code);
+    if (mode == Generate) {
+        code.write(std::cout);
+    } else {
+        if (!test_gift128_words_to_nibbles(code)) {
+            std::cout << "GIFT-128 words to nibbles tests FAILED" << std::endl;
+            return false;
+        } else {
+            std::cout << "GIFT-128 words to nibbles tests succeeded" << std::endl;
+        }
+    }
+    return true;
+}
+
 static bool gift128b_fs(enum Mode mode, int num_keys, bool cofb_only)
 {
     bool ok = true;
@@ -634,6 +668,10 @@ static bool gift128b_fs(enum Mode mode, int num_keys, bool cofb_only)
     if (!cofb_only && !gift128b_fs_decrypt_block(mode, num_keys))
         ok = false;
     if (!gift128b_fs_decrypt_block_preloaded(mode, num_keys))
+        ok = false;
+    if (!gift128_nibbles_to_words(mode))
+        ok = false;
+    if (!gift128_words_to_nibbles(mode))
         ok = false;
     if (mode == Generate) {
         std::cout << std::endl;

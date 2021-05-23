@@ -50,7 +50,7 @@ extern "C" {
 /**
  * \brief Size of a GIFT-128 block in bytes.
  */
-#define GIFT128_BLOCK_SIZE 16
+#define GIFT128_BLK_SIZE 16
 
 /**
  * \var GIFT128_ROUND_KEYS
@@ -117,6 +117,24 @@ void gift128b_encrypt_preloaded
 void gift128b_decrypt_preloaded
     (const gift128b_key_schedule_t *ks, uint32_t output[4],
      const uint32_t input[4]);
+
+/**
+ * \brief Converts the GIFT-128 nibble-based representation into word-based.
+ *
+ * \param block Block to convert from nibble-based to word-based.
+ *
+ * \sa gift128_words_to_nibbles()
+ */
+void gift128_nibbles_to_words(uint32_t block[4]);
+
+/**
+ * \brief Converts the GIFT-128 word-based representation into nibble-based.
+ *
+ * \param block Block to convert from word-based to nibble-based.
+ *
+ * \sa gift128_nibbles_to_words()
+ */
+void gift128_words_to_nibbles(uint32_t block[4]);
 
 #ifdef __cplusplus
 }

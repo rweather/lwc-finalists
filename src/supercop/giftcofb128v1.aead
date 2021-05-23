@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=gift_cofb_aead_encrypt
 aead_decrypt=gift_cofb_aead_decrypt
-aead_exclude="gift-prng.c gift-prng.h aead-random-system.c"
+aead_exclude="gift-prng.c gift-prng.h aead-random-system.c gift-bc.c gift-bc.h"
 aead_header=gift-cofb-aead.h

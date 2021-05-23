@@ -104,6 +104,8 @@ void gen_gift128b_fs_decrypt_preloaded(Code &code, int num_keys);
 void gen_gift128n_fs_decrypt(Code &code, int num_keys);
 void gen_gift128n_fs_decrypt_alt(Code &code, int num_keys);
 void gen_gift128t_fs_decrypt(Code &code, int num_keys);
+void gen_gift128_nibbles_to_words(Code &code);
+void gen_gift128_words_to_nibbles(Code &code);
 bool test_gift128b_fs_setup_key(Code &code, int num_keys);
 bool test_gift128n_fs_setup_key(Code &code, int num_keys);
 bool test_gift128b_fs_encrypt(Code &code, int num_keys);
@@ -116,6 +118,8 @@ bool test_gift128b_fs_decrypt_preloaded(Code &code, int num_keys);
 bool test_gift128n_fs_decrypt(Code &code, int num_keys);
 bool test_gift128n_fs_decrypt_alt(Code &code, int num_keys);
 bool test_gift128t_fs_decrypt(Code &code, int num_keys);
+bool test_gift128_nibbles_to_words(Code &code);
+bool test_gift128_words_to_nibbles(Code &code);
 
 // Grain-128 stream cipher.
 void gen_grain128_core(Code &code);

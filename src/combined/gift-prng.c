@@ -32,7 +32,7 @@
  * The initial value is the result of using bitsliced GIFT-128 to
  * encrypt an all-zero block with an all-zero key.
  */
-static unsigned char gift_id_pool[GIFT128_BLOCK_SIZE] = {
+static unsigned char gift_id_pool[GIFT128_BLK_SIZE] = {
     0x5e, 0x8e, 0x3a, 0x2e, 0x16, 0x97, 0xa7, 0x7d,
     0xcc, 0x0b, 0x89, 0xdc, 0xd9, 0x7a, 0x64, 0xee
 };
@@ -109,11 +109,11 @@ static void gift_prng_derive_hash
         gift128b_encrypt_preloaded(ks, block, block);
         data += 8;
         size -= 8;
-        while (size >= GIFT128_BLOCK_SIZE) {
-            lw_xor_block((unsigned char *)block, data, GIFT128_BLOCK_SIZE);
+        while (size >= GIFT128_BLK_SIZE) {
+            lw_xor_block((unsigned char *)block, data, GIFT128_BLK_SIZE);
             gift128b_encrypt_preloaded(ks, block, block);
-            data += GIFT128_BLOCK_SIZE;
-            size -= GIFT128_BLOCK_SIZE;
+            data += GIFT128_BLK_SIZE;
+            size -= GIFT128_BLK_SIZE;
         }
         lw_xor_block((unsigned char *)block, data, size);
         ((unsigned char *)block)[size] ^= 0x80;
@@ -128,7 +128,7 @@ void gift_prng_add_ident(const unsigned char *data, size_t size)
     uint32_t block[4];
     gift128b_init(&ks, gift_id_pool);
     gift_prng_derive_hash(&ks, block, 16, 0, data, size);
-    memcpy(gift_id_pool, block, GIFT128_BLOCK_SIZE);
+    memcpy(gift_id_pool, block, GIFT128_BLK_SIZE);
     aead_clean(&ks, sizeof(ks));
     aead_clean(block, sizeof(block));
 }
@@ -274,17 +274,17 @@ static int gift_prng_squeeze
     gift128b_init(&ks, state->s.state);
 
     /* Generate the requested number of bytes in CTR mode */
-    while (size >= GIFT128_BLOCK_SIZE) {
+    while (size >= GIFT128_BLK_SIZE) {
         if (state->s.count >= state->s.limit) {
             reseed_ok &= gift_prng_reseed_with_schedule(state, &ks);
             gift128b_init(&ks, state->s.state);
         }
         ++(input[3]);
         gift128b_encrypt_preloaded(&ks, output, input);
-        memcpy(data, output, GIFT128_BLOCK_SIZE);
-        data += GIFT128_BLOCK_SIZE;
-        size -= GIFT128_BLOCK_SIZE;
-        state->s.count += GIFT128_BLOCK_SIZE;
+        memcpy(data, output, GIFT128_BLK_SIZE);
+        data += GIFT128_BLK_SIZE;
+        size -= GIFT128_BLK_SIZE;
+        state->s.count += GIFT128_BLK_SIZE;
     }
     if (size > 0) {
         if (state->s.count >= state->s.limit) {
@@ -294,7 +294,7 @@ static int gift_prng_squeeze
         ++(input[3]);
         gift128b_encrypt_preloaded(&ks, output, input);
         memcpy(data, output, size);
-        state->s.count += GIFT128_BLOCK_SIZE;
+        state->s.count += GIFT128_BLK_SIZE;
     }
 
     /* Re-key and clean up */

@@ -22,6 +22,7 @@
 
 #include "gen.h"
 #include <cstring>
+#include <cstdio>
 
 /* Round constants for GIFT-128 */
 static uint8_t const GIFT128_RC[40] = {
@@ -767,6 +768,100 @@ void gen_gift128n_decrypt_alt(Code &code)
     gen_gift128_decrypt(code, "gift128_decrypt_block", StateNibbleBE, true);
 }
 
+static unsigned char const nibble_perm[32] = {
+    0, 8, 16, 24, 1, 9, 17, 25, 2, 10, 18, 26, 3, 11, 19, 27,
+    4, 12, 20, 28, 5, 13, 21, 29, 6, 14, 22, 30, 7, 15, 23, 31
+};
+
+void gen_gift128_nibbles_to_words(Code &code)
+{
+    // Set up the function prologue with 0 bytes of local variable storage.
+    // Z points to the block to be converted on input and output.
+    code.prologue_permutation("gift128_nibbles_to_words", 0);
+    code.setFlag(Code::NoLocals); // Don't need to save the Y register.
+
+    // Load the words in nibble form.
+    Reg s0 = code.allocateReg(4);
+    Reg s1 = code.allocateReg(4);
+    Reg s2 = code.allocateReg(4);
+    Reg s3 = code.allocateReg(4);
+    Reg t1 = code.allocateReg(4);
+    code.ldz(s0, 0);
+    code.ldz(s1, 4);
+    code.ldz(s2, 8);
+    code.ldz(s3, 12);
+
+    // Apply the permutation to the words and store the bytes back.
+    for (int word = 0; word < 4; ++word) {
+        Reg src;
+        switch (word) {
+        case 0: default:    src = s0; break;
+        case 1:             src = s1; break;
+        case 2:             src = s2; break;
+        case 3:             src = s3; break;
+        }
+        for (int bit = 0; bit < 32; ++bit) {
+            code.bit_get(src, bit);
+            code.bit_put(t1, nibble_perm[bit]);
+        }
+        code.stz(Reg(t1, 0, 1), 3 - word);
+        code.stz(Reg(t1, 1, 1), 4 + 3 - word);
+        code.stz(Reg(t1, 2, 1), 8 + 3 - word);
+        code.stz(Reg(t1, 3, 1), 12 + 3 - word);
+    }
+}
+
+void gen_gift128_words_to_nibbles(Code &code)
+{
+    unsigned char inv_perm[32];
+
+    // Set up the function prologue with 0 bytes of local variable storage.
+    // Z points to the block to be converted on input and output.
+    code.prologue_permutation("gift128_words_to_nibbles", 0);
+    code.setFlag(Code::NoLocals); // Don't need to save the Y register.
+
+    // Load the words and rearrange the bytes.
+    Reg s0 = code.allocateReg(4);
+    Reg s1 = code.allocateReg(4);
+    Reg s2 = code.allocateReg(4);
+    Reg s3 = code.allocateReg(4);
+    Reg t1 = code.allocateReg(4);
+    code.ldz(Reg(s0, 0, 1), 3);
+    code.ldz(Reg(s0, 1, 1), 7);
+    code.ldz(Reg(s0, 2, 1), 11);
+    code.ldz(Reg(s0, 3, 1), 15);
+    code.ldz(Reg(s1, 0, 1), 2);
+    code.ldz(Reg(s1, 1, 1), 6);
+    code.ldz(Reg(s1, 2, 1), 10);
+    code.ldz(Reg(s1, 3, 1), 14);
+    code.ldz(Reg(s2, 0, 1), 1);
+    code.ldz(Reg(s2, 1, 1), 5);
+    code.ldz(Reg(s2, 2, 1), 9);
+    code.ldz(Reg(s2, 3, 1), 13);
+    code.ldz(Reg(s3, 0, 1), 0);
+    code.ldz(Reg(s3, 1, 1), 4);
+    code.ldz(Reg(s3, 2, 1), 8);
+    code.ldz(Reg(s3, 3, 1), 12);
+
+    // Apply the inverse of the nibble permutation and store.
+    for (int index = 0; index < 32; ++index)
+        inv_perm[nibble_perm[index]] = index;
+    for (int word = 0; word < 4; ++word) {
+        Reg src;
+        switch (word) {
+        case 0: default:    src = s0; break;
+        case 1:             src = s1; break;
+        case 2:             src = s2; break;
+        case 3:             src = s3; break;
+        }
+        for (int bit = 0; bit < 32; ++bit) {
+            code.bit_get(src, bit);
+            code.bit_put(t1, inv_perm[bit]);
+        }
+        code.stz(t1, word * 4);
+    }
+}
+
 /* Test vectors for GIFT-128 (bit-sliced version) */
 static block_cipher_test_vector_t const gift128b_1 = {
     "Test Vector 1",
@@ -1258,4 +1353,31 @@ bool test_gift128t_decrypt(Code &code)
     if (!test_gift128n_decrypt(code, &gift128t_4, 0))
         return false;
     return true;
+}
+
+// Test vectors for converting between nibble and word forms.
+static unsigned char const nibble_form[16] = {
+    0x1f, 0x14, 0x9c, 0xe3, 0x43, 0xba, 0x7d, 0xa5,
+    0xb6, 0x85, 0x8a, 0xf0, 0xc1, 0x86, 0x1f, 0xa9
+};
+static unsigned char const word_form[16] = {
+    0x71, 0x86, 0x79, 0x6b, 0x94, 0x93, 0xad, 0xc1,
+    0x16, 0x85, 0x72, 0x95, 0xda, 0xba, 0x9c, 0xb1
+};
+
+bool test_gift128_nibbles_to_words(Code &code)
+{
+    unsigned char state[16];
+    memcpy(state, nibble_form, 16);
+    code.exec_permutation(state, 16);
+    printf("%02x %02x %02x %02x\n", state[0], state[1], state[2], state[3]);
+    return !memcmp(state, word_form, 16);
+}
+
+bool test_gift128_words_to_nibbles(Code &code)
+{
+    unsigned char state[16];
+    memcpy(state, word_form, 16);
+    code.exec_permutation(state, 16);
+    return !memcmp(state, nibble_form, 16);
 }

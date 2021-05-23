@@ -26,6 +26,7 @@ OBJS = \
         elephant-dumbo.o \
         elephant-jumbo.o \
         elephant-prng.o \
+        gift-bc.o \
         gift-cofb-aead.o \
         gift-cofb-aead-masked.o \
 	gift-prng.o \
@@ -128,6 +129,7 @@ elephant-delirium.o: elephant-delirium.h internal-keccakp-200.h internal-util.h
 elephant-dumbo.o: elephant-dumbo.h internal-spongent.h internal-util.h
 elephant-jumbo.o: elephant-jumbo.h internal-spongent.h internal-util.h
 elephant-prng.o: elephant-prng.h internal-keccakp-200.h internal-util.h
+gift-bc.o: gift-bc.h internal-gift128.h internal-gift128-config.h internal-util.h
 gift-cofb-aead.o: gift-cofb-aead.h internal-gift128.h internal-gift128-config.h internal-util.h
 gift-cofb-aead-masked.o: gift-cofb-aead-masked.h internal-gift128-m.h internal-gift128-config.h internal-util.h aead-random.h internal-masking.h
 gift-prng.o: gift-prng.h internal-gift128.h internal-gift128-config.h internal-util.h
