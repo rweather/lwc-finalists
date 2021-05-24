@@ -35,6 +35,8 @@ ASCON_FILES = \
     ascon-kmac.h \
     ascon-pbkdf2.c \
     ascon-pbkdf2.h \
+    ascon-permutation.c \
+    ascon-permutation.h \
     ascon-prng.c \
     ascon-prng.h \
     ascon-siv.c \

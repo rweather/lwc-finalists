@@ -19,6 +19,7 @@ OBJS = \
         ascon-hmac.o \
         ascon-kmac.o \
         ascon-pbkdf2.o \
+        ascon-permutation.o \
         ascon-prng.o \
         ascon-siv.o \
         ascon-xof.o \
@@ -122,6 +123,7 @@ ascon-hkdf.o: ascon-hkdf.h ascon-hmac.h ascon-hash.h ascon-xof.h internal-hkdf.h
 ascon-hmac.o: ascon-hmac.h ascon-hash.h ascon-xof.h internal-hmac.h internal-util.h
 ascon-kmac.o: ascon-kmac.h ascon-xof.h internal-kmac.h internal-util.h
 ascon-pbkdf2.o: ascon-pbkdf2.h ascon-hmac.h ascon-hash.h ascon-xof.h internal-pbkdf2.h internal-util.h
+ascon-permutation.o: ascon-permutation.h internal-ascon.h internal-util.h
 ascon-prng.o: ascon-prng.h ascon-xof.h ascon-hash.h internal-ascon.h internal-util.h
 ascon-siv.o: ascon-siv.h ascon-aead.h internal-ascon.h internal-util.h
 ascon-xof.o: ascon-xof.h internal-ascon.h internal-util.h

@@ -21,6 +21,7 @@
  */
 
 #include "ascon-aead.h"
+#include "ascon-permutation.h"
 #include "internal-ascon.h"
 #include "internal-ascon-m.h"
 #include "test-cipher.h"
@@ -154,13 +155,226 @@ static void test_ascon_masked(void)
     }
 }
 
+/* Permutes the public and private ASCON states in parallel */
+static void snp_permute(ascon_permutation_state_t *state, ascon_state_t *state2)
+{
+    ascon_permute_all_rounds(state);
+#if ASCON_SLICED
+    ascon_to_sliced(state2);
+    ascon_permute_sliced(state2, 0);
+    ascon_from_sliced(state2);
+#else
+    ascon_permute(state2, 0);
+#endif
+}
+
+/* Set up for an SnP test that compares the public vs private API's */
+static void snp_setup(ascon_permutation_state_t *state, ascon_state_t *state2)
+{
+    /* Use a counter and run the permutation to make the starting
+     * state different every time this function is called. */
+    static unsigned counter = 0;
+    memcpy(state->B, ascon_output_12, ASCON_STATE_SIZE);
+    state->B[38] ^= (unsigned char)(counter >> 8);
+    state->B[39] ^= (unsigned char)counter;
+    memcpy(state2->B, ascon_output_12, ASCON_STATE_SIZE);
+    state2->B[38] ^= (unsigned char)(counter >> 8);
+    state2->B[39] ^= (unsigned char)counter;
+    ascon_to_operational(state);
+    snp_permute(state, state2);
+    ++counter;
+}
+
+/* Check that the public and private states are still identical */
+static int snp_check
+    (int ok, const ascon_permutation_state_t *state,
+     const ascon_state_t *state2)
+{
+    ascon_permutation_state_t temp = *state;
+    ascon_from_operational(&temp);
+    if (test_memcmp(temp.B, state2->B, ASCON_STATE_SIZE) != 0)
+        ok = 0;
+    return ok;
+}
+
+/* Test the SnP version of the ASCON API */
+static void test_ascon_snp(void)
+{
+    ascon_permutation_state_t state;
+    ascon_state_t state2;
+    int ok = 1;
+    unsigned offset, length, temp;
+    unsigned char buf[ASCON_STATE_SIZE];
+    unsigned char buf2[ASCON_STATE_SIZE];
+
+    printf("    SnP ... ");
+    fflush(stdout);
+
+    /* Check that initialization zeroes the state */
+    memset(&state, 0xAA, sizeof(state));
+    ascon_init(&state);
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        if (state.B[offset] != 0)
+            ok = 0;
+    }
+
+    /* Basic permutation test - 12 rounds */
+    memcpy(state.B, ascon_input, sizeof(ascon_input));
+    ascon_to_operational(&state);
+    ascon_permute_all_rounds(&state);
+    ascon_from_operational(&state);
+    if (test_memcmp(state.B, ascon_output_12, sizeof(ascon_output_12)) != 0)
+        ok = 0;
+
+    /* Basic permutation test - 8 rounds */
+    memcpy(state.B, ascon_input, sizeof(ascon_input));
+    ascon_to_operational(&state);
+    ascon_permute_n_rounds(&state, 8);
+    ascon_from_operational(&state);
+    if (test_memcmp(state.B, ascon_output_8, sizeof(ascon_output_8)) != 0)
+        ok = 0;
+
+    /* Adding bytes to the state individually */
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        snp_setup(&state, &state2);
+        ascon_add_byte(&state, 0x6A, offset);
+        state2.B[offset] ^= 0x6A;
+        ok = snp_check(ok, &state, &state2);
+    }
+
+    /* Adding bytes to the state in groups */
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        for (length = 0; length < ASCON_STATE_SIZE; ++length) {
+            snp_setup(&state, &state2);
+            ascon_add_bytes(&state, ascon_input, offset, length);
+            if ((offset + length) > ASCON_STATE_SIZE)
+                temp = ASCON_STATE_SIZE - offset;
+            else
+                temp = length;
+            lw_xor_block(state2.B + offset, ascon_input, temp);
+            snp_permute(&state, &state2);
+            ok = snp_check(ok, &state, &state2);
+        }
+    }
+
+    /* Overwriting bytes in the state in groups */
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        for (length = 0; length < ASCON_STATE_SIZE; ++length) {
+            snp_setup(&state, &state2);
+            ascon_overwrite_bytes(&state, ascon_input, offset, length);
+            if ((offset + length) > ASCON_STATE_SIZE)
+                temp = ASCON_STATE_SIZE - offset;
+            else
+                temp = length;
+            memcpy(state2.B + offset, ascon_input, temp);
+            snp_permute(&state, &state2);
+            ok = snp_check(ok, &state, &state2);
+        }
+    }
+
+    /* Overwriting the leading part of the state with zeroes */
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        snp_setup(&state, &state2);
+        ascon_overwrite_with_zeroes(&state, offset);
+        memset(state2.B, 0, offset);
+        snp_permute(&state, &state2);
+        ok = snp_check(ok, &state, &state2);
+    }
+
+    /* Extracting bytes from the state */
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        for (length = 0; length < ASCON_STATE_SIZE; ++length) {
+            /* Extract the bytes directly */
+            snp_setup(&state, &state2);
+            ascon_extract_bytes(&state, buf, offset, length);
+            if ((offset + length) > ASCON_STATE_SIZE)
+                temp = ASCON_STATE_SIZE - offset;
+            else
+                temp = length;
+            ok = snp_check(ok, &state, &state2);
+            ok &= !memcmp(buf, state2.B + offset, temp);
+
+            /* Extract the bytes and XOR them with a buffer */
+            snp_permute(&state, &state2);
+            memcpy(buf, ascon_input, ASCON_STATE_SIZE);
+            memset(buf2, 0xA6, ASCON_STATE_SIZE);
+            ascon_extract_and_add_bytes(&state, buf, buf2, offset, length);
+            if ((offset + length) > ASCON_STATE_SIZE)
+                temp = ASCON_STATE_SIZE - offset;
+            else
+                temp = length;
+            ok = snp_check(ok, &state, &state2);
+            lw_xor_block(state2.B + offset, ascon_input, temp);
+            ok &= !memcmp(buf2, state2.B + offset, temp);
+        }
+    }
+
+    /* Encrypting and encrypting data with the state */
+    for (offset = 0; offset < ASCON_STATE_SIZE; ++offset) {
+        for (length = 0; length < ASCON_STATE_SIZE; ++length) {
+            /* Encrypting */
+            snp_setup(&state, &state2);
+            ascon_encrypt_bytes(&state, ascon_input, buf, offset, length, 0);
+            if ((offset + length) > ASCON_STATE_SIZE)
+                temp = ASCON_STATE_SIZE - offset;
+            else
+                temp = length;
+            lw_xor_block_2_dest(buf2, state2.B + offset, ascon_input, temp);
+            ok = snp_check(ok, &state, &state2);
+            ok &= !memcmp(buf, buf2, temp);
+
+            /* Decrypting */
+            snp_permute(&state, &state2);
+            ascon_decrypt_bytes(&state, ascon_input, buf, offset, length, 0);
+            lw_xor_block_swap(buf2, state2.B + offset, ascon_input, temp);
+            ok = snp_check(ok, &state, &state2);
+            ok &= !memcmp(buf, buf2, temp);
+
+            /* Skip the rest if not enough room for a padding byte */
+            if ((offset + length) >= ASCON_STATE_SIZE)
+                continue;
+
+            /* Reduce the truncated length by 1 for the padding */
+            if ((offset + length) >= ASCON_STATE_SIZE)
+                temp = ASCON_STATE_SIZE - 1 - offset;
+            else
+                temp = length;
+
+            /* Encrypt again, this time with padding */
+            snp_permute(&state, &state2);
+            ascon_encrypt_bytes(&state, ascon_input, buf, offset, temp, 1);
+            lw_xor_block_2_dest(buf2, state2.B + offset, ascon_input, temp);
+            state2.B[offset + temp] ^= (unsigned char)0x80;
+            ok = snp_check(ok, &state, &state2);
+            ok &= !memcmp(buf, buf2, temp);
+
+            /* Decrypt again, this time with padding */
+            snp_permute(&state, &state2);
+            ascon_decrypt_bytes(&state, ascon_input, buf, offset, temp, 1);
+            lw_xor_block_swap(buf2, state2.B + offset, ascon_input, temp);
+            state2.B[offset + temp] ^= (unsigned char)0x80;
+            ok = snp_check(ok, &state, &state2);
+            ok &= !memcmp(buf, buf2, temp);
+        }
+    }
+
+    /* Report the results */
+    if (!ok) {
+        printf("failed\n");
+        test_exit_result = 1;
+    } else {
+        printf("ok\n");
+    }
+}
+
 void test_ascon(void)
 {
-    test_aead_cipher_start(&ascon128_cipher);
+    printf("ASCON:\n");
     test_ascon_permutation();
 #if ASCON_SLICED
     test_ascon_sliced();
 #endif
     test_ascon_masked();
-    test_aead_cipher_end(&ascon128_cipher);
+    test_ascon_snp();
+    printf("\n");
 }
