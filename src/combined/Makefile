@@ -65,26 +65,58 @@ OBJS = \
         xoodyak-masked.o \
         xoodyak-prng.o \
 	internal-aes.o \
+	internal-aes-avr.o \
 	internal-ascon.o \
 	internal-ascon-m.o \
+	internal-ascon-armv7m.o \
+	internal-ascon-avr.o \
 	internal-blake2s.o \
 	internal-chachapoly.o \
 	internal-ghash.o \
+	internal-ghash-avr.o \
 	internal-gift128.o \
 	internal-gift128-m.o \
+	internal-gift128b-full-armv7m.o \
+	internal-gift128b-full-avr.o \
+	internal-gift128b-small-armv7m.o \
+	internal-gift128b-small-avr.o \
+	internal-gift128b-tiny-armv7m.o \
+	internal-gift128b-tiny-avr.o \
 	internal-grain128.o \
+	internal-grain128-armv7m.o \
+	internal-grain128-avr.o \
 	internal-keccakp-200.o \
+	internal-keccakp-200-armv7m.o \
+	internal-keccakp-200-avr.o \
 	internal-keccakp-400.o \
+	internal-keccakp-400-armv7m.o \
+	internal-keccakp-400-avr.o \
 	internal-photon256.o \
+	internal-photon256-armv7m.o \
+	internal-photon256-avr.o \
 	internal-sha256.o \
+	internal-sha256-armv7m.o \
+	internal-sha256-avr.o \
 	internal-skinny-plus.o \
+	internal-skinny-full-armv7m.o \
+	internal-skinny-small-armv7m.o \
+	internal-skinny-tiny-armv7m.o \
+	internal-skinny-tiny-avr.o \
         internal-sparkle.o \
+	internal-sparkle-armv7m.o \
+	internal-sparkle-avr.o \
         internal-spongent.o \
+	internal-spongent-armv7m.o \
+	internal-spongent-avr.o \
         internal-tinyjambu.o \
         internal-tinyjambu-m.o \
+	internal-tinyjambu-armv7m.o \
+	internal-tinyjambu-avr.o \
         internal-xoodoo.o \
         internal-xoodoo-m.o \
-	internal-util.o
+	internal-util.o \
+	internal-xoodoo-armv7m.o \
+	internal-xoodoo-avr.o
 
 all: $(LIBRARY)
 
@@ -176,12 +208,21 @@ internal-chachapoly.o: internal-chachapoly.h internal-util.h aead-metadata.h
 internal-ghash.o: internal-ghash.h internal-util.h
 internal-gift128.o: internal-gift128.h internal-gift128-config.h internal-util.h
 internal-gift128-m.o: internal-gift128-m.h internal-gift128-config.h aead-random.h internal-masking.h internal-util.h
+internal-gift128b-full-armv7m.o: internal-gift128-config.h
+internal-gift128b-full-avr.o: internal-gift128-config.h
+internal-gift128b-small-armv7m.o: internal-gift128-config.h
+internal-gift128b-small-avr.o: internal-gift128-config.h
+internal-gift128b-tiny-armv7m.o: internal-gift128-config.h
+internal-gift128b-tiny-avr.o: internal-gift128-config.h
 internal-grain128.o: internal-grain128.h internal-util.h
 internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
 internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
 internal-photon256.o: internal-photon256.h internal-photon256-mix.h internal-util.h
 internal-sha256.o: internal-sha256.h internal-util.h aead-metadata.h internal-hmac.h
 internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
+internal-skinny-full-armv7m.o: internal-skinny-plus-config.h
+internal-skinny-small-armv7m.o: internal-skinny-plus-config.h
+internal-skinny-tiny-armv7m.o: internal-skinny-plus-config.h
 internal-sparkle.o: internal-sparkle.h internal-util.h
 internal-spongent.o: internal-spongent.h internal-util.h
 internal-tinyjambu.o: internal-tinyjambu.h internal-util.h
@@ -189,3 +230,6 @@ internal-tinyjambu-m.o: internal-tinyjambu-m.h aead-random.h internal-masking.h 
 internal-xoodoo.o: internal-xoodoo.h internal-util.h
 internal-xoodoo-m.o: internal-xoodoo-m.h aead-random.h internal-masking.h internal-util.h
 internal-util.o: internal-util.h
+
+.S.o:
+	$(CC_ASM) -o $@ -c $<
