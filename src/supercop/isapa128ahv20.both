@@ -1,0 +1,16 @@
+aead_family=isap
+aead_name=isapa128ahv20
+aead_meta_name=ISAP-A-128A
+aead_srcdir=ISAP
+aead_key_size=16
+aead_nonce_size=16
+aead_tag_size=16
+aead_encrypt=isap_ascon_128a_aead_encrypt
+aead_decrypt=isap_ascon_128a_aead_decrypt
+aead_exclude="isap-aead-pk.c isap-aead-pk.h internal-isap-pk.h"
+aead_header=isap-aead.h
+hash_meta_name=ASCON-HASH
+hash_size=32
+hash_function=ascon_hash
+hash_header=ascon-hash.h
+both_copy_extra="ASCON/ascon-hash.h ASCON/ascon-hash.c ASCON/ascon-xof.h ASCON/ascon-xof.c"

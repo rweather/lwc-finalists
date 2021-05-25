@@ -205,9 +205,9 @@ using differential power analysis to determine the key.  The downside
 is that key setup is very slow.  The Keccak-p[400] permutation is
 slower than ASCON on 32-bit platforms.
 
-<b>Recommendation:</b> The specification recommends ISAP-K-128A,
-although ISAP-A-128A may be a better choice on 32-bit platforms for
-performance reasons.
+<b>Recommendation:</b> The final round version of the specification
+recommends ISAP-A-128A.  If hashing is required, then ISAP-A-128A
+should be paired with ASCON-HASH.
 
 \section alg_photon_beetle PHOTON-Beetle
 

@@ -174,6 +174,7 @@ if test "$COMBINED" = "1" ; then
         unset hash_header
         unset hash_kat_options
         unset hash_variant
+        unset both_copy_extra
         . ./$info_file
         echo Generating AEAD and HASH crypto_aead_hash/$aead_name
 
@@ -189,6 +190,11 @@ if test "$COMBINED" = "1" ; then
         if test -n "$aead_exclude" ; then
             for exclude in $aead_exclude ; do
                 rm -f "$AEAD_OUT_DIR/$exclude"
+            done
+        fi
+        if test -n "$both_copy_extra" ; then
+            for extra in $both_copy_extra ; do
+                cp "$SRC_DIR/$extra" "$AEAD_OUT_DIR"
             done
         fi
 
