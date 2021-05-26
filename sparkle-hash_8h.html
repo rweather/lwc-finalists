@@ -102,10 +102,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionesch__256__hash__state__t.html">esch_256_hash_state_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the Esch256 incremental hash mode.  <a href="unionesch__256__hash__state__t.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the Esch256 incremental hash mode and the XOEsch256 increment XOF mode.  <a href="unionesch__256__hash__state__t.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionesch__384__hash__state__t.html">esch_384_hash_state_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the Esch384 incremental hash mode.  <a href="unionesch__384__hash__state__t.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the Esch384 incremental hash mod ande the XOEsch384 increment XOF mode.  <a href="unionesch__384__hash__state__t.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -114,30 +114,47 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a639cd045594df03c39731d1587dbb805">ESCH_256_HASH_SIZE</a>&#160;&#160;&#160;32</td></tr>
 <tr class="memdesc:a639cd045594df03c39731d1587dbb805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the hash output for Esch256. <br/></td></tr>
 <tr class="separator:a639cd045594df03c39731d1587dbb805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e2e247faf88e45d12f8ec115fe6ff3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03e2e247faf88e45d12f8ec115fe6ff3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a03e2e247faf88e45d12f8ec115fe6ff3">ESCH_256_RATE</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:a03e2e247faf88e45d12f8ec115fe6ff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rate at which bytes are processed by Esch256 and XOEsch256. <br/></td></tr>
+<tr class="separator:a03e2e247faf88e45d12f8ec115fe6ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ae401c898565391b4f9884c7b4bafd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65ae401c898565391b4f9884c7b4bafd"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a65ae401c898565391b4f9884c7b4bafd">ESCH_384_HASH_SIZE</a>&#160;&#160;&#160;48</td></tr>
 <tr class="memdesc:a65ae401c898565391b4f9884c7b4bafd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the hash output for Esch384. <br/></td></tr>
 <tr class="separator:a65ae401c898565391b4f9884c7b4bafd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75a8e45700cdb819508e20bfe38ef9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad75a8e45700cdb819508e20bfe38ef9c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#ad75a8e45700cdb819508e20bfe38ef9c">ESCH_384_RATE</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:ad75a8e45700cdb819508e20bfe38ef9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rate at which bytes are processed by Esch384 and XOEsch384. <br/></td></tr>
+<tr class="separator:ad75a8e45700cdb819508e20bfe38ef9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a775c2c4bf7851deaeaa87d828fb06808"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a775c2c4bf7851deaeaa87d828fb06808">esch_256_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a775c2c4bf7851deaeaa87d828fb06808"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with Esch256 to generate a hash value.  <a href="#a775c2c4bf7851deaeaa87d828fb06808">More...</a><br/></td></tr>
 <tr class="separator:a775c2c4bf7851deaeaa87d828fb06808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89e65844db3b8d37ec709edc04a92a63"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a89e65844db3b8d37ec709edc04a92a63">esch_256_xof</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a89e65844db3b8d37ec709edc04a92a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with XOEsch256 to generate an XOF output value.  <a href="#a89e65844db3b8d37ec709edc04a92a63">More...</a><br/></td></tr>
+<tr class="separator:a89e65844db3b8d37ec709edc04a92a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23291a190f64d3386564adfb07a8ebe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2">esch_256_hash_init</a> (<a class="el" href="unionesch__256__hash__state__t.html">esch_256_hash_state_t</a> *state)</td></tr>
-<tr class="memdesc:a23291a190f64d3386564adfb07a8ebe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for an Esch256 hashing operation.  <a href="#a23291a190f64d3386564adfb07a8ebe2">More...</a><br/></td></tr>
+<tr class="memdesc:a23291a190f64d3386564adfb07a8ebe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for an Esch256 hashing or a XOEsch256 XOF operation.  <a href="#a23291a190f64d3386564adfb07a8ebe2">More...</a><br/></td></tr>
 <tr class="separator:a23291a190f64d3386564adfb07a8ebe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbbf3c6cd5e9917752bd4bf7b3ee2a15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15">esch_256_hash_update</a> (<a class="el" href="unionesch__256__hash__state__t.html">esch_256_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
-<tr class="memdesc:abbbf3c6cd5e9917752bd4bf7b3ee2a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an Esch256 state with more input data.  <a href="#abbbf3c6cd5e9917752bd4bf7b3ee2a15">More...</a><br/></td></tr>
+<tr class="memdesc:abbbf3c6cd5e9917752bd4bf7b3ee2a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an Esch256 or XOEsch256 state with more input data.  <a href="#abbbf3c6cd5e9917752bd4bf7b3ee2a15">More...</a><br/></td></tr>
 <tr class="separator:abbbf3c6cd5e9917752bd4bf7b3ee2a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83bf58243c9b57fbbb99a739fe1ae7dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a83bf58243c9b57fbbb99a739fe1ae7dd">esch_256_hash_finalize</a> (<a class="el" href="unionesch__256__hash__state__t.html">esch_256_hash_state_t</a> *state, unsigned char *out)</td></tr>
 <tr class="memdesc:a83bf58243c9b57fbbb99a739fe1ae7dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from an Esch256 hashing operation.  <a href="#a83bf58243c9b57fbbb99a739fe1ae7dd">More...</a><br/></td></tr>
 <tr class="separator:a83bf58243c9b57fbbb99a739fe1ae7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27627a526eb1c46a8f926aa065c5cd26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a27627a526eb1c46a8f926aa065c5cd26">esch_256_hash_squeeze</a> (<a class="el" href="unionesch__256__hash__state__t.html">esch_256_hash_state_t</a> *state, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:a27627a526eb1c46a8f926aa065c5cd26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from a XOEsch256 XOF state.  <a href="#a27627a526eb1c46a8f926aa065c5cd26">More...</a><br/></td></tr>
+<tr class="separator:a27627a526eb1c46a8f926aa065c5cd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c9cd6cc3eb6cddea7d2251b0af77fd4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a2c9cd6cc3eb6cddea7d2251b0af77fd4">esch_384_hash</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a2c9cd6cc3eb6cddea7d2251b0af77fd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with Esch384 to generate a hash value.  <a href="#a2c9cd6cc3eb6cddea7d2251b0af77fd4">More...</a><br/></td></tr>
 <tr class="separator:a2c9cd6cc3eb6cddea7d2251b0af77fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b8a5e88906f3d6be1fdd7aa9dccb99"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a19b8a5e88906f3d6be1fdd7aa9dccb99">esch_384_xof</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a19b8a5e88906f3d6be1fdd7aa9dccb99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with XOEsch384 to generate an XOF output value.  <a href="#a19b8a5e88906f3d6be1fdd7aa9dccb99">More...</a><br/></td></tr>
+<tr class="separator:a19b8a5e88906f3d6be1fdd7aa9dccb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae817b39795486817b17bcc2d05685853"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853">esch_384_hash_init</a> (<a class="el" href="unionesch__384__hash__state__t.html">esch_384_hash_state_t</a> *state)</td></tr>
-<tr class="memdesc:ae817b39795486817b17bcc2d05685853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for an Esch384 hashing operation.  <a href="#ae817b39795486817b17bcc2d05685853">More...</a><br/></td></tr>
+<tr class="memdesc:ae817b39795486817b17bcc2d05685853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for an Esch384 hashing or a XOEsch384 XOF operation.  <a href="#ae817b39795486817b17bcc2d05685853">More...</a><br/></td></tr>
 <tr class="separator:ae817b39795486817b17bcc2d05685853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70b948b4aa872daf2f3dd82b67f7e787"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a70b948b4aa872daf2f3dd82b67f7e787">esch_384_hash_update</a> (<a class="el" href="unionesch__384__hash__state__t.html">esch_384_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a70b948b4aa872daf2f3dd82b67f7e787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an Esch384 state with more input data.  <a href="#a70b948b4aa872daf2f3dd82b67f7e787">More...</a><br/></td></tr>
@@ -145,13 +162,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a648bb24a9a30431f27d3ad0ccce17dd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a648bb24a9a30431f27d3ad0ccce17dd4">esch_384_hash_finalize</a> (<a class="el" href="unionesch__384__hash__state__t.html">esch_384_hash_state_t</a> *state, unsigned char *out)</td></tr>
 <tr class="memdesc:a648bb24a9a30431f27d3ad0ccce17dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from an Esch384 hashing operation.  <a href="#a648bb24a9a30431f27d3ad0ccce17dd4">More...</a><br/></td></tr>
 <tr class="separator:a648bb24a9a30431f27d3ad0ccce17dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c34346b6da48506fcf24d9c38d2903"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sparkle-hash_8h.html#a60c34346b6da48506fcf24d9c38d2903">esch_384_hash_squeeze</a> (<a class="el" href="unionesch__384__hash__state__t.html">esch_384_hash_state_t</a> *state, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:a60c34346b6da48506fcf24d9c38d2903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from a XOEsch384 XOF state.  <a href="#a60c34346b6da48506fcf24d9c38d2903">More...</a><br/></td></tr>
+<tr class="separator:a60c34346b6da48506fcf24d9c38d2903"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Hash algorithms based on the SPARKLE permutation. </p>
 <p>SPARKLE is a family of encryption and hash algorithms that are based around the SPARKLE permutation. There are three versions of the permutation with 256-bit, 384-bit, and 512-bit state sizes. The hash algorithms in the family are:</p>
 <ul>
 <li>Esch256 hash algorithm with a 256-bit digest output. This is the primary hash algorithm in the family. </li>
-<li>Esch384 hash algorithm with a 384-bit digest output.</li>
+<li>Esch384 hash algorithm with a 384-bit digest output. </li>
+<li>XOEsch256 extensible output function based on Esch256. </li>
+<li>XOEsch384 extensible output function based on Esch384.</li>
 </ul>
 <p>References: <a href="https://www.cryptolux.org/index.php/Sparkle">https://www.cryptolux.org/index.php/Sparkle</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -225,12 +247,13 @@ Functions</h2></td></tr>
 <p>Returns the final hash value from an Esch256 hashing operation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Hash state to be finalized. </td></tr>
+    <tr><td class="paramname">state</td><td>State to be finalized. </td></tr>
     <tr><td class="paramname">out</td><td>Points to the output buffer to receive the 32-byte hash value.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2" title="Initializes the state for an Esch256 hashing operation. ">esch_256_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15" title="Updates an Esch256 state with more input data. ">esch_256_hash_update()</a> </dd></dl>
+<p>This function is intended for generating output from the Esch256 hashing mode. Use <a class="el" href="sparkle-hash_8h.html#a27627a526eb1c46a8f926aa065c5cd26" title="Squeezes output data from a XOEsch256 XOF state. ">esch_256_hash_squeeze()</a> instead to generate XOF data.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2" title="Initializes the state for an Esch256 hashing or a XOEsch256 XOF operation. ">esch_256_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15" title="Updates an Esch256 or XOEsch256 state with more input data. ">esch_256_hash_update()</a>, <a class="el" href="sparkle-hash_8h.html#a27627a526eb1c46a8f926aa065c5cd26" title="Squeezes output data from a XOEsch256 XOF state. ">esch_256_hash_squeeze()</a> </dd></dl>
 
 </div>
 </div>
@@ -248,14 +271,57 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes the state for an Esch256 hashing operation. </p>
+<p>Initializes the state for an Esch256 hashing or a XOEsch256 XOF operation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Hash state to be initialized.</td></tr>
+    <tr><td class="paramname">state</td><td>State to be initialized.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15" title="Updates an Esch256 state with more input data. ">esch_256_hash_update()</a>, <a class="el" href="sparkle-hash_8h.html#a83bf58243c9b57fbbb99a739fe1ae7dd" title="Returns the final hash value from an Esch256 hashing operation. ">esch_256_hash_finalize()</a>, <a class="el" href="sparkle-hash_8h.html#a775c2c4bf7851deaeaa87d828fb06808" title="Hashes a block of input data with Esch256 to generate a hash value. ">esch_256_hash()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15" title="Updates an Esch256 or XOEsch256 state with more input data. ">esch_256_hash_update()</a>, <a class="el" href="sparkle-hash_8h.html#a83bf58243c9b57fbbb99a739fe1ae7dd" title="Returns the final hash value from an Esch256 hashing operation. ">esch_256_hash_finalize()</a>, <a class="el" href="sparkle-hash_8h.html#a775c2c4bf7851deaeaa87d828fb06808" title="Hashes a block of input data with Esch256 to generate a hash value. ">esch_256_hash()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a27627a526eb1c46a8f926aa065c5cd26"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void esch_256_hash_squeeze </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="unionesch__256__hash__state__t.html">esch_256_hash_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Squeezes output data from a XOEsch256 XOF state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>State to squeeze the output data from. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the squeezed data. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Number of bytes of data to squeeze out of the state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2" title="Initializes the state for an Esch256 hashing or a XOEsch256 XOF operation. ">esch_256_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#abbbf3c6cd5e9917752bd4bf7b3ee2a15" title="Updates an Esch256 or XOEsch256 state with more input data. ">esch_256_hash_update()</a> </dd></dl>
 
 </div>
 </div>
@@ -289,16 +355,59 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Updates an Esch256 state with more input data. </p>
+<p>Updates an Esch256 or XOEsch256 state with more input data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Hash state to be updated. </td></tr>
+    <tr><td class="paramname">state</td><td>State to be updated. </td></tr>
     <tr><td class="paramname">in</td><td>Points to the input data to be incorporated into the state. </td></tr>
     <tr><td class="paramname">inlen</td><td>Length of the input data to be incorporated into the state.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2" title="Initializes the state for an Esch256 hashing operation. ">esch_256_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a83bf58243c9b57fbbb99a739fe1ae7dd" title="Returns the final hash value from an Esch256 hashing operation. ">esch_256_hash_finalize()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#a23291a190f64d3386564adfb07a8ebe2" title="Initializes the state for an Esch256 hashing or a XOEsch256 XOF operation. ">esch_256_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a83bf58243c9b57fbbb99a739fe1ae7dd" title="Returns the final hash value from an Esch256 hashing operation. ">esch_256_hash_finalize()</a>, <a class="el" href="sparkle-hash_8h.html#a27627a526eb1c46a8f926aa065c5cd26" title="Squeezes output data from a XOEsch256 XOF state. ">esch_256_hash_squeeze()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a89e65844db3b8d37ec709edc04a92a63"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int esch_256_xof </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hashes a block of input data with XOEsch256 to generate an XOF output value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Buffer to receive the hash output which must be at least ESCH_256_HASH_SIZE bytes in length. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be hashed. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data in bytes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns zero on success or -1 if there was an error in the parameters. </dd></dl>
 
 </div>
 </div>
@@ -372,12 +481,13 @@ Functions</h2></td></tr>
 <p>Returns the final hash value from an Esch384 hashing operation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Hash state to be finalized. </td></tr>
+    <tr><td class="paramname">state</td><td>State to be finalized. </td></tr>
     <tr><td class="paramname">out</td><td>Points to the output buffer to receive the 48-byte hash value.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853" title="Initializes the state for an Esch384 hashing operation. ">esch_384_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a70b948b4aa872daf2f3dd82b67f7e787" title="Updates an Esch384 state with more input data. ">esch_384_hash_update()</a> </dd></dl>
+<p>This function is intended for generating output from the Esch384 hashing mode. Use <a class="el" href="sparkle-hash_8h.html#a60c34346b6da48506fcf24d9c38d2903" title="Squeezes output data from a XOEsch384 XOF state. ">esch_384_hash_squeeze()</a> instead to generate XOF data.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853" title="Initializes the state for an Esch384 hashing or a XOEsch384 XOF operation. ">esch_384_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a70b948b4aa872daf2f3dd82b67f7e787" title="Updates an Esch384 state with more input data. ">esch_384_hash_update()</a>, <a class="el" href="sparkle-hash_8h.html#a60c34346b6da48506fcf24d9c38d2903" title="Squeezes output data from a XOEsch384 XOF state. ">esch_384_hash_squeeze()</a> </dd></dl>
 
 </div>
 </div>
@@ -395,14 +505,57 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes the state for an Esch384 hashing operation. </p>
+<p>Initializes the state for an Esch384 hashing or a XOEsch384 XOF operation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Hash state to be initialized.</td></tr>
+    <tr><td class="paramname">state</td><td>State to be initialized.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#a70b948b4aa872daf2f3dd82b67f7e787" title="Updates an Esch384 state with more input data. ">esch_384_hash_update()</a>, <a class="el" href="sparkle-hash_8h.html#a648bb24a9a30431f27d3ad0ccce17dd4" title="Returns the final hash value from an Esch384 hashing operation. ">esch_384_hash_finalize()</a>, <a class="el" href="sparkle-hash_8h.html#a2c9cd6cc3eb6cddea7d2251b0af77fd4" title="Hashes a block of input data with Esch384 to generate a hash value. ">esch_384_hash()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a60c34346b6da48506fcf24d9c38d2903"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void esch_384_hash_squeeze </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="unionesch__384__hash__state__t.html">esch_384_hash_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Squeezes output data from a XOEsch384 XOF state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>State to squeeze the output data from. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the squeezed data. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Number of bytes of data to squeeze out of the state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853" title="Initializes the state for an Esch384 hashing or a XOEsch384 XOF operation. ">esch_384_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a70b948b4aa872daf2f3dd82b67f7e787" title="Updates an Esch384 state with more input data. ">esch_384_hash_update()</a> </dd></dl>
 
 </div>
 </div>
@@ -439,20 +592,63 @@ Functions</h2></td></tr>
 <p>Updates an Esch384 state with more input data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>Hash state to be updated. </td></tr>
+    <tr><td class="paramname">state</td><td>State to be updated. </td></tr>
     <tr><td class="paramname">in</td><td>Points to the input data to be incorporated into the state. </td></tr>
     <tr><td class="paramname">inlen</td><td>Length of the input data to be incorporated into the state.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853" title="Initializes the state for an Esch384 hashing operation. ">esch_384_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a648bb24a9a30431f27d3ad0ccce17dd4" title="Returns the final hash value from an Esch384 hashing operation. ">esch_384_hash_finalize()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="sparkle-hash_8h.html#ae817b39795486817b17bcc2d05685853" title="Initializes the state for an Esch384 hashing or a XOEsch384 XOF operation. ">esch_384_hash_init()</a>, <a class="el" href="sparkle-hash_8h.html#a648bb24a9a30431f27d3ad0ccce17dd4" title="Returns the final hash value from an Esch384 hashing operation. ">esch_384_hash_finalize()</a>, <a class="el" href="sparkle-hash_8h.html#a60c34346b6da48506fcf24d9c38d2903" title="Squeezes output data from a XOEsch384 XOF state. ">esch_384_hash_squeeze()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a19b8a5e88906f3d6be1fdd7aa9dccb99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int esch_384_xof </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hashes a block of input data with XOEsch384 to generate an XOF output value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Buffer to receive the hash output which must be at least ESCH_384_HASH_SIZE bytes in length. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be hashed. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data in bytes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns zero on success or -1 if there was an error in the parameters. </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 22 2021 13:36:01 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 27 2021 04:52:12 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

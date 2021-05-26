@@ -128,7 +128,7 @@ Summary</h1>
 <tr>
 <td>Romulus-M</td><td>128</td><td>SKINNY-128-384+</td><td>Romulus-M</td><td>Y</td><td></td><td></td><td></td></tr>
 <tr>
-<td>SPARKLE</td><td>128/192/256</td><td>SPARKLE</td><td>Beetle</td><td></td><td></td><td>K</td><td>Digest </td></tr>
+<td>SPARKLE</td><td>128/192/256</td><td>SPARKLE</td><td>Beetle</td><td></td><td></td><td>K</td><td>Digest/XOF </td></tr>
 <tr>
 <td>TinyJAMBU</td><td>128/192/256</td><td>TinyJAMBU</td><td>TinyJAMBU</td><td></td><td>M</td><td>K</td><td></td></tr>
 <tr>
@@ -196,7 +196,7 @@ ISAP</h1>
 <li>ISAP-A-128 based around the ASCON permutation.</li>
 </ul>
 <p>ISAP is designed to provide some protection against adversaries using differential power analysis to determine the key. The downside is that key setup is very slow. The Keccak-p[400] permutation is slower than ASCON on 32-bit platforms.</p>
-<p><b>Recommendation:</b> The specification recommends ISAP-K-128A, although ISAP-A-128A may be a better choice on 32-bit platforms for performance reasons.</p>
+<p><b>Recommendation:</b> The final round version of the specification recommends ISAP-A-128A. If hashing is required, then ISAP-A-128A should be paired with ASCON-HASH.</p>
 <h1><a class="anchor" id="alg_photon_beetle"></a>
 PHOTON-Beetle</h1>
 <p><b>Definition:</b> <a class="el" href="photon-beetle-aead_8h.html">photon-beetle-aead.h</a>, <a class="el" href="photon-beetle-hash_8h.html">photon-beetle-hash.h</a></p>
@@ -230,7 +230,9 @@ SPARKLE</h1>
 <li>Schwaemm128-128 with a 128-bit key, a 128-bit nonce, and a 128-bit tag. </li>
 <li>Schwaemm256-256 with a 256-bit key, a 256-bit nonce, and a 256-bit tag. </li>
 <li>Esch256 hash algorithm with a 256-bit digest output. </li>
-<li>Esch384 hash algorithm with a 384-bit digest output.</li>
+<li>Esch384 hash algorithm with a 384-bit digest output. </li>
+<li>XOEsch256 XOF algorithm. </li>
+<li>XOEsch384 XOF algorithm.</li>
 </ul>
 <p>SPARKLE has good performance in software on 32-bit platforms.</p>
 <p><b>Recommendation:</b> Schwaemm256-128 and Esch256 are the recommended variants from the NIST submission.</p>
@@ -261,7 +263,7 @@ Internal block operations</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 22 2021 13:36:01 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 27 2021 04:52:12 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

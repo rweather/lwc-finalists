@@ -125,10 +125,57 @@ Functions</h2></td></tr>
 <tr class="memitem:ada59ccbc42583dbb8d89fa7e232a9e65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-gift128-m_8h.html#ada59ccbc42583dbb8d89fa7e232a9e65">gift128b_encrypt_preloaded_masked</a> (const <a class="el" href="structgift128b__masked__key__schedule__t.html">gift128b_masked_key_schedule_t</a> *ks, <a class="el" href="internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88">mask_uint32_t</a> output[4], const <a class="el" href="internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88">mask_uint32_t</a> input[4])</td></tr>
 <tr class="memdesc:ada59ccbc42583dbb8d89fa7e232a9e65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts a block with masked GIFT-128 (bit-sliced and pre-loaded).  <a href="#ada59ccbc42583dbb8d89fa7e232a9e65">More...</a><br/></td></tr>
 <tr class="separator:ada59ccbc42583dbb8d89fa7e232a9e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10e04ac35233dc214b833273a68e24a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-gift128-m_8h.html#af10e04ac35233dc214b833273a68e24a">gift128b_decrypt_preloaded_masked</a> (const <a class="el" href="structgift128b__masked__key__schedule__t.html">gift128b_masked_key_schedule_t</a> *ks, <a class="el" href="internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88">mask_uint32_t</a> output[4], const <a class="el" href="internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88">mask_uint32_t</a> input[4])</td></tr>
+<tr class="memdesc:af10e04ac35233dc214b833273a68e24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts a block with masked GIFT-128 (bit-sliced and pre-loaded).  <a href="#af10e04ac35233dc214b833273a68e24a">More...</a><br/></td></tr>
+<tr class="separator:af10e04ac35233dc214b833273a68e24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Masked version of the GIFT-128 block cipher. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="af10e04ac35233dc214b833273a68e24a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gift128b_decrypt_preloaded_masked </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structgift128b__masked__key__schedule__t.html">gift128b_masked_key_schedule_t</a> *&#160;</td>
+          <td class="paramname"><em>ks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88">mask_uint32_t</a>&#160;</td>
+          <td class="paramname"><em>output</em>[4], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="internal-masking_8h.html#a1bbbc6662e017843d2376226611b4e88">mask_uint32_t</a>&#160;</td>
+          <td class="paramname"><em>input</em>[4]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decrypts a block with masked GIFT-128 (bit-sliced and pre-loaded). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ks</td><td>Points to the masked GIFT-128 key schedule. </td></tr>
+    <tr><td class="paramname">output</td><td>Output buffer which must be at least 16 bytes in length. </td></tr>
+    <tr><td class="paramname">input</td><td>Input buffer which must be at least 16 bytes in length.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <em>input</em> and <em>output</em> buffers can be the same buffer for in-place decryption.</p>
+<p>This version assumes that the input has already been pre-loaded from big-endian into host byte order in the supplied word array. The output is delivered in the same way. </p>
+
+</div>
+</div>
 <a class="anchor" id="ada59ccbc42583dbb8d89fa7e232a9e65"></a>
 <div class="memitem">
 <div class="memproto">
@@ -211,7 +258,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 22 2021 13:36:00 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 27 2021 04:52:11 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

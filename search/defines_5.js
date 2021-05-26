@@ -1,7 +1,9 @@
 var searchData=
 [
   ['ghash_5fshoup_5f4bit',['GHASH_SHOUP_4BIT',['../internal-ghash_8h.html#aaa9093f905a6be50ab1068ac494af292',1,'internal-ghash.h']]],
-  ['gift128_5fblock_5fsize',['GIFT128_BLOCK_SIZE',['../internal-gift128_8h.html#a642719cdc783743ff774f31b77513109',1,'internal-gift128.h']]],
+  ['gift128_5fblk_5fsize',['GIFT128_BLK_SIZE',['../internal-gift128_8h.html#a6ff414ab605240b4270d1e70850851c3',1,'internal-gift128.h']]],
+  ['gift128_5fblock_5fsize',['GIFT128_BLOCK_SIZE',['../gift-bc_8h.html#a642719cdc783743ff774f31b77513109',1,'gift-bc.h']]],
+  ['gift128_5fkey_5fsize',['GIFT128_KEY_SIZE',['../gift-bc_8h.html#aa92601cca84578596fc3a08bacc85112',1,'gift-bc.h']]],
   ['gift128_5fmasked_5fblock_5fsize',['GIFT128_MASKED_BLOCK_SIZE',['../internal-gift128-m_8h.html#a8132d93ef56a01be0420a234965c99c3',1,'internal-gift128-m.h']]],
   ['gift128_5fmasked_5fround_5fkeys',['GIFT128_MASKED_ROUND_KEYS',['../internal-gift128-m_8h.html#a76232831fa3ba562ddd1aee6fa509f73',1,'internal-gift128-m.h']]],
   ['gift128_5fround_5fkeys',['GIFT128_ROUND_KEYS',['../internal-gift128_8h.html#a3a5957cb1753fcdc528d2885707d06a8',1,'internal-gift128.h']]],

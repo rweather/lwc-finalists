@@ -2,6 +2,7 @@ var searchData=
 [
   ['gf128_5fvalue_5ft',['gf128_value_t',['../structgf128__value__t.html',1,'']]],
   ['ghash_5fstate_5ft',['ghash_state_t',['../structghash__state__t.html',1,'']]],
+  ['gift128_5fkey_5fschedule_5ft',['gift128_key_schedule_t',['../structgift128__key__schedule__t.html',1,'']]],
   ['gift128b_5fkey_5fschedule_5ft',['gift128b_key_schedule_t',['../structgift128b__key__schedule__t.html',1,'']]],
   ['gift128b_5fmasked_5fkey_5fschedule_5ft',['gift128b_masked_key_schedule_t',['../structgift128b__masked__key__schedule__t.html',1,'']]],
   ['gift_5fcofb_5fblock_5ft',['gift_cofb_block_t',['../uniongift__cofb__block__t.html',1,'']]],

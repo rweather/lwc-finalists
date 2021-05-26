@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>State information for the Esch384 incremental hash mode.  
+<p>State information for the Esch384 incremental hash mod ande the XOEsch384 increment XOF mode.  
  <a href="unionesch__384__hash__state__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="sparkle-hash_8h_source.html">sparkle-hash.h</a>&gt;</code></p>
@@ -102,13 +102,15 @@ Data Fields</h2></td></tr>
 <tr class="separator:a8b651beb238d7f9a2fda2df5b088784d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11f680404b5a8d07c475ebec046a9e0e"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionesch__384__hash__state__t.html#acf49a94ae0dbe84a74fec1d1f421fc4c">count</a></td></tr>
 <tr class="separator:a11f680404b5a8d07c475ebec046a9e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e8df99c4aca91445b8f4ab5cfe937f9"><td class="memItemLeft" >&#160;&#160;&#160;unsigned char&#160;&#160;&#160;<a class="el" href="unionesch__384__hash__state__t.html#adc196b8154df55639f374ba9bf4d97c0">mode</a></td></tr>
+<tr class="separator:a8e8df99c4aca91445b8f4ab5cfe937f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6281f43f59bf4758a9f4411e4092efe2"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionesch__384__hash__state__t.html#a6281f43f59bf4758a9f4411e4092efe2">s</a></td></tr>
 <tr class="separator:a6281f43f59bf4758a9f4411e4092efe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a984dedbe8531567e9a778c70e3509fae"><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionesch__384__hash__state__t.html#a984dedbe8531567e9a778c70e3509fae">align</a></td></tr>
 <tr class="separator:a984dedbe8531567e9a778c70e3509fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>State information for the Esch384 incremental hash mode. </p>
+<div class="textblock"><p>State information for the Esch384 incremental hash mod ande the XOEsch384 increment XOF mode. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a984dedbe8531567e9a778c70e3509fae"></a>
 <div class="memitem">
@@ -149,6 +151,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="adc196b8154df55639f374ba9bf4d97c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char esch_384_hash_state_t::mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hash mode: absorb or squeeze </p>
+
+</div>
+</div>
 <a class="anchor" id="a6281f43f59bf4758a9f4411e4092efe2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -181,7 +196,7 @@ Data Fields</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 22 2021 13:36:01 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 27 2021 04:52:12 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

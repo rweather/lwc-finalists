@@ -11,6 +11,7 @@ var searchData=
   ['ascon_2dhmac_2eh',['ascon-hmac.h',['../ascon-hmac_8h.html',1,'']]],
   ['ascon_2dkmac_2eh',['ascon-kmac.h',['../ascon-kmac_8h.html',1,'']]],
   ['ascon_2dpbkdf2_2eh',['ascon-pbkdf2.h',['../ascon-pbkdf2_8h.html',1,'']]],
+  ['ascon_2dpermutation_2eh',['ascon-permutation.h',['../ascon-permutation_8h.html',1,'']]],
   ['ascon_2dprng_2eh',['ascon-prng.h',['../ascon-prng_8h.html',1,'']]],
   ['ascon_2dsiv_2eh',['ascon-siv.h',['../ascon-siv_8h.html',1,'']]]
 ];
