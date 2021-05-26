@@ -38,11 +38,6 @@
 #endif
 
 /**
- * \brief Rate at which bytes are processed by Esch256.
- */
-#define ESCH_256_RATE 16
-
-/**
  * \brief Perform the M3 step for Esch256 to mix the input with the state.
  *
  * \param s SPARKLE-384 state.
@@ -169,7 +164,7 @@ void esch_256_hash_update
         temp = ESCH_256_RATE - st->s.count;
         if (temp > inlen)
             temp = (unsigned)inlen;
-        memcpy(((unsigned char *)(st->s.block)) + st->s.count, in, temp);
+        memcpy(state->s.block + st->s.count, in, temp);
         st->s.count += temp;
         in += temp;
         inlen -= temp;
@@ -186,9 +181,8 @@ void esch_256_hash_finalize
         esch_256_m3(st->s.state, st->s.block, 0x02);
     } else {
         unsigned temp = st->s.count;
-        ((unsigned char *)(st->s.block))[temp] = 0x80;
-        memset(((unsigned char *)(st->s.block)) + temp + 1, 0,
-               ESCH_256_RATE - temp - 1);
+        state->s.block[temp] = 0x80;
+        memset(state->s.block + temp + 1, 0, ESCH_256_RATE - temp - 1);
         esch_256_m3(st->s.state, st->s.block, 0x01);
     }
     sparkle_384(st->s.state, 11);
@@ -211,9 +205,8 @@ void esch_256_hash_squeeze
             esch_256_m3(st->s.state, st->s.block, 0x06);
         } else {
             unsigned temp = st->s.count;
-            ((unsigned char *)(st->s.block))[temp] = 0x80;
-            memset(((unsigned char *)(st->s.block)) + temp + 1, 0,
-                ESCH_256_RATE - temp - 1);
+            state->s.block[temp] = 0x80;
+            memset(state->s.block + temp + 1, 0, ESCH_256_RATE - temp - 1);
             esch_256_m3(st->s.state, st->s.block, 0x05);
         }
         sparkle_384(st->s.state, 11);
@@ -250,11 +243,6 @@ void esch_256_hash_squeeze
         st->s.count = (unsigned char)outlen;
     }
 }
-
-/**
- * \brief Rate at which bytes are processed by Esch384.
- */
-#define ESCH_384_RATE 16
 
 /**
  * \brief Perform the M4 step for Esch384 to mix the input with the state.
@@ -389,7 +377,7 @@ void esch_384_hash_update
         temp = ESCH_384_RATE - st->s.count;
         if (temp > inlen)
             temp = (unsigned)inlen;
-        memcpy(((unsigned char *)(st->s.block)) + st->s.count, in, temp);
+        memcpy(state->s.block + st->s.count, in, temp);
         st->s.count += temp;
         in += temp;
         inlen -= temp;
@@ -406,9 +394,8 @@ void esch_384_hash_finalize
         esch_384_m4(st->s.state, st->s.block, 0x02);
     } else {
         unsigned temp = st->s.count;
-        ((unsigned char *)(st->s.block))[temp] = 0x80;
-        memset(((unsigned char *)(st->s.block)) + temp + 1, 0,
-               ESCH_384_RATE - temp - 1);
+        state->s.block[temp] = 0x80;
+        memset(state->s.block + temp + 1, 0, ESCH_384_RATE - temp - 1);
         esch_384_m4(st->s.state, st->s.block, 0x01);
     }
     sparkle_512(st->s.state, 12);
@@ -433,9 +420,8 @@ void esch_384_hash_squeeze
             esch_384_m4(st->s.state, st->s.block, 0x06);
         } else {
             unsigned temp = st->s.count;
-            ((unsigned char *)(st->s.block))[temp] = 0x80;
-            memset(((unsigned char *)(st->s.block)) + temp + 1, 0,
-                ESCH_384_RATE - temp - 1);
+            state->s.block[temp] = 0x80;
+            memset(state->s.block + temp + 1, 0, ESCH_384_RATE - temp - 1);
             esch_384_m4(st->s.state, st->s.block, 0x05);
         }
         sparkle_512(st->s.state, 12);

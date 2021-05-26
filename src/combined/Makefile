@@ -51,6 +51,7 @@ OBJS = \
         sparkle-hash.o \
         sparkle-hkdf.o \
         sparkle-hmac.o \
+        sparkle-kmac.o \
         sparkle-pbkdf2.o \
         sparkle-prng.o \
         tinyjambu-aead.o \
@@ -187,6 +188,7 @@ sparkle-aead.o: sparkle-aead.h internal-sparkle.h internal-util.h
 sparkle-hash.o: sparkle-hash.h internal-sparkle.h internal-util.h
 sparkle-hkdf.o: sparkle-hkdf.h sparkle-hmac.h sparkle-hash.h internal-hkdf.h internal-util.h
 sparkle-hmac.o: sparkle-hmac.h sparkle-hash.h internal-hmac.h internal-util.h
+sparkle-kmac.o: sparkle-kmac.h sparkle-hash.h internal-kmac.h internal-util.h
 sparkle-pbkdf2.o: sparkle-pbkdf2.h sparkle-hmac.h sparkle-hash.h internal-pbkdf2.h internal-util.h
 sparkle-prng.o: sparkle-prng.h sparkle-hash.h internal-sparkle.h internal-util.h
 tinyjambu-aead.o: tinyjambu-aead.h internal-tinyjambu.h internal-util.h

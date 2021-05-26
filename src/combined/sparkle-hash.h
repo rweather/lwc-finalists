@@ -53,9 +53,19 @@ extern "C" {
 #define ESCH_256_HASH_SIZE 32
 
 /**
+ * \brief Rate at which bytes are processed by Esch256 and XOEsch256.
+ */
+#define ESCH_256_RATE 16
+
+/**
  * \brief Size of the hash output for Esch384.
  */
 #define ESCH_384_HASH_SIZE 48
+
+/**
+ * \brief Rate at which bytes are processed by Esch384 and XOEsch384.
+ */
+#define ESCH_384_RATE 16
 
 /**
  * \brief State information for the Esch256 incremental hash mode and the

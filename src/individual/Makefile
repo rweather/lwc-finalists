@@ -199,6 +199,8 @@ SPARKLE_FILES = \
     sparkle-hkdf.h \
     sparkle-hmac.c \
     sparkle-hmac.h \
+    sparkle-kmac.c \
+    sparkle-kmac.h \
     sparkle-pbkdf2.c \
     sparkle-pbkdf2.h \
     sparkle-prng.c \
@@ -209,6 +211,7 @@ SPARKLE_FILES = \
     internal-sparkle-avr.S \
     internal-hkdf.h \
     internal-hmac.h \
+    internal-kmac.h \
     internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)

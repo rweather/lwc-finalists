@@ -22,6 +22,7 @@
 
 #include "aead-metadata.h"
 #include "ascon-kmac.h"
+#include "sparkle-kmac.h"
 #include "xoodyak-kmac.h"
 #include "test-cipher.h"
 #include "internal-util.h"
@@ -287,6 +288,11 @@ static void test_kmac_alg
     (*init)(state, test->key, test->key_len,
             (const unsigned char *)(test->salt), strlen(test->salt));
     (*absorb)(state, test->input, test->input_len);
+    if (test->output_len != alg->hash_len) {
+        /* Mismatch between the test output and the underlying hash length,
+         * so force the output length to be set explicitly before finalize. */
+        (*setoutlen)(state, test->output_len);
+    }
     (*finalize)(state, out);
     if (test_memcmp(out, expected, test->output_len) != 0)
         ok = 0;
@@ -344,6 +350,44 @@ void test_kmac(void)
                   (kmac_squeeze_t)xoodyak_kmac_squeeze,
                   (kmac_set_output_length_t)xoodyak_kmac_set_output_length,
                   (kmac_finalize_t)xoodyak_kmac_finalize,
+                  &testVectorNIST_2);
+
+    test_kmac_alg("XOEsch256 KMAC", &esch_256_xof_algorithm,
+                  ESCH_256_RATE, sizeof(esch_256_kmac_state_t),
+                  (kmac_allinone_t)esch_256_kmac,
+                  (kmac_init_t)esch_256_kmac_init,
+                  (kmac_absorb_t)esch_256_kmac_absorb,
+                  (kmac_squeeze_t)esch_256_kmac_squeeze,
+                  (kmac_set_output_length_t)esch_256_kmac_set_output_length,
+                  (kmac_finalize_t)esch_256_kmac_finalize,
+                  &testVectorNIST_1);
+    test_kmac_alg("XOEsch256 KMAC", &esch_256_xof_algorithm,
+                  ESCH_256_RATE, sizeof(esch_256_kmac_state_t),
+                  (kmac_allinone_t)esch_256_kmac,
+                  (kmac_init_t)esch_256_kmac_init,
+                  (kmac_absorb_t)esch_256_kmac_absorb,
+                  (kmac_squeeze_t)esch_256_kmac_squeeze,
+                  (kmac_set_output_length_t)esch_256_kmac_set_output_length,
+                  (kmac_finalize_t)esch_256_kmac_finalize,
+                  &testVectorNIST_2);
+
+    test_kmac_alg("XOEsch384 KMAC", &esch_384_xof_algorithm,
+                  ESCH_384_RATE, sizeof(esch_384_kmac_state_t),
+                  (kmac_allinone_t)esch_384_kmac,
+                  (kmac_init_t)esch_384_kmac_init,
+                  (kmac_absorb_t)esch_384_kmac_absorb,
+                  (kmac_squeeze_t)esch_384_kmac_squeeze,
+                  (kmac_set_output_length_t)esch_384_kmac_set_output_length,
+                  (kmac_finalize_t)esch_384_kmac_finalize,
+                  &testVectorNIST_1);
+    test_kmac_alg("XOEsch384 KMAC", &esch_384_xof_algorithm,
+                  ESCH_384_RATE, sizeof(esch_384_kmac_state_t),
+                  (kmac_allinone_t)esch_384_kmac,
+                  (kmac_init_t)esch_384_kmac_init,
+                  (kmac_absorb_t)esch_384_kmac_absorb,
+                  (kmac_squeeze_t)esch_384_kmac_squeeze,
+                  (kmac_set_output_length_t)esch_384_kmac_set_output_length,
+                  (kmac_finalize_t)esch_384_kmac_finalize,
                   &testVectorNIST_2);
 
     printf("\n");
