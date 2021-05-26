@@ -26,7 +26,7 @@
 #include "sparkle-hash.h"
 
 /**
- * \file esch_256-kmac.h
+ * \file sparkle-kmac.h
  * \brief Keyed Message Authentication Code (KMAC) based on XOEsch256.
  *
  * The KMAC mode provides a method to authenticate a sequence of bytes
