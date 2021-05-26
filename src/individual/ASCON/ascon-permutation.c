@@ -299,10 +299,17 @@ void ascon_encrypt_bytes
     unsigned char buf[8];
     unsigned relative = offset & 7U;
 #endif
-    if (offset >= ASCON_STATE_SIZE)
-        return;
-    if ((ASCON_STATE_SIZE - offset) < length)
-        length = ASCON_STATE_SIZE - offset;
+    if (padded) {
+        if (offset >= ASCON_STATE_SIZE)
+            return;
+        if ((ASCON_STATE_SIZE - 1 - offset) < length)
+            length = ASCON_STATE_SIZE - 1 - offset;
+    } else {
+        if (offset >= ASCON_STATE_SIZE)
+            return;
+        if ((ASCON_STATE_SIZE - offset) < length)
+            length = ASCON_STATE_SIZE - offset;
+    }
 #if ASCON_SLICED
     if (relative != 0) {
         unsigned temp = 8U - relative;
@@ -360,10 +367,17 @@ void ascon_decrypt_bytes
     unsigned char buf[8];
     unsigned relative = offset & 7U;
 #endif
-    if (offset >= ASCON_STATE_SIZE)
-        return;
-    if ((ASCON_STATE_SIZE - offset) < length)
-        length = ASCON_STATE_SIZE - offset;
+    if (padded) {
+        if (offset >= ASCON_STATE_SIZE)
+            return;
+        if ((ASCON_STATE_SIZE - 1 - offset) < length)
+            length = ASCON_STATE_SIZE - 1 - offset;
+    } else {
+        if (offset >= ASCON_STATE_SIZE)
+            return;
+        if ((ASCON_STATE_SIZE - offset) < length)
+            length = ASCON_STATE_SIZE - offset;
+    }
 #if ASCON_SLICED
     if (relative != 0) {
         unsigned temp = 8U - relative;
@@ -404,7 +418,7 @@ void ascon_decrypt_bytes
         lw_xor_block_2_dest(output, buf, input, length);
         if (padded) {
             buf[length] = (unsigned char)0x80;
-            memset(buf + length, 0, 7U - length);
+            memset(buf + length + 1, 0, 7U - length);
         } else {
             memset(buf + length, 0, 8U - length);
         }

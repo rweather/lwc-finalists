@@ -76,6 +76,7 @@ typedef union
         uint32_t state[SPARKLE_384_STATE_SIZE];
         uint32_t block[4];
         unsigned char count;
+        unsigned char mode;
     } s;
     size_t align;
 
@@ -83,8 +84,7 @@ typedef union
 
 /** @endcond */
 
-int esch_256_hash
-    (unsigned char *out, const unsigned char *in, size_t inlen)
+int esch_256_hash(unsigned char *out, const unsigned char *in, size_t inlen)
 {
     uint32_t s[SPARKLE_384_STATE_SIZE];
     uint32_t block[ESCH_256_RATE / 4];
@@ -114,6 +114,36 @@ int esch_256_hash
     return 0;
 }
 
+int esch_256_xof(unsigned char *out, const unsigned char *in, size_t inlen)
+{
+    uint32_t s[SPARKLE_384_STATE_SIZE];
+    uint32_t block[ESCH_256_RATE / 4];
+    memset(s, 0, sizeof(s));
+    while (inlen > ESCH_256_RATE) {
+        memcpy(block, in, ESCH_256_RATE);
+        esch_256_m3(s, block, 0x00);
+        sparkle_384(s, 7);
+        in += ESCH_256_RATE;
+        inlen -= ESCH_256_RATE;
+    }
+    if (inlen == ESCH_256_RATE) {
+        memcpy(block, in, ESCH_256_RATE);
+        esch_256_m3(s, block, 0x06);
+    } else {
+        unsigned temp = (unsigned)inlen;
+        memcpy(block, in, temp);
+        ((unsigned char *)block)[temp] = 0x80;
+        memset(((unsigned char *)block) + temp + 1, 0,
+               ESCH_256_RATE - temp - 1);
+        esch_256_m3(s, block, 0x05);
+    }
+    sparkle_384(s, 11);
+    memcpy(out, s, ESCH_256_RATE);
+    sparkle_384(s, 7);
+    memcpy(out + ESCH_256_RATE, s, ESCH_256_RATE);
+    return 0;
+}
+
 void esch_256_hash_init(esch_256_hash_state_t *state)
 {
     memset(state, 0, sizeof(esch_256_hash_state_t));
@@ -124,6 +154,12 @@ void esch_256_hash_update
 {
     esch_256_hash_state_wt *st = (esch_256_hash_state_wt *)state;
     unsigned temp;
+    if (st->s.mode) {
+        /* Was squeezing output, go back to absorbing */
+        sparkle_384(st->s.state, 11);
+        st->s.count = 0;
+        st->s.mode = 0;
+    }
     while (inlen > 0) {
         if (st->s.count == ESCH_256_RATE) {
             esch_256_m3(st->s.state, st->s.block, 0x00);
@@ -161,6 +197,58 @@ void esch_256_hash_finalize
     memcpy(out, st->s.state, ESCH_256_RATE);
     sparkle_384(st->s.state, 7);
     memcpy(out + ESCH_256_RATE, st->s.state, ESCH_256_RATE);
+}
+
+void esch_256_hash_squeeze
+    (esch_256_hash_state_t *state, unsigned char *out, size_t outlen)
+{
+    esch_256_hash_state_wt *st = (esch_256_hash_state_wt *)state;
+    size_t len;
+
+    /* If we are in the absorb phase then pad and process the last block */
+    if (!st->s.mode) {
+        if (st->s.count == ESCH_256_RATE) {
+            esch_256_m3(st->s.state, st->s.block, 0x06);
+        } else {
+            unsigned temp = st->s.count;
+            ((unsigned char *)(st->s.block))[temp] = 0x80;
+            memset(((unsigned char *)(st->s.block)) + temp + 1, 0,
+                ESCH_256_RATE - temp - 1);
+            esch_256_m3(st->s.state, st->s.block, 0x05);
+        }
+        sparkle_384(st->s.state, 11);
+        st->s.count = 0;
+        st->s.mode = 1;
+    }
+
+    /* Deal with the left-over block from last time */
+    if (st->s.count) {
+        len = ESCH_256_RATE - st->s.count;
+        if (len > outlen) {
+            memcpy(out, state->s.state + st->s.count, outlen);
+            st->s.count += outlen;
+            return;
+        }
+        memcpy(out, state->s.state + st->s.count, len);
+        sparkle_384(st->s.state, 7);
+        state->s.count = 0;
+        out += len;
+        outlen -= len;
+    }
+
+    /* Squeeze out as many full blocks as possible */
+    while (outlen >= ESCH_256_RATE) {
+        memcpy(out, st->s.state, ESCH_256_RATE);
+        sparkle_384(st->s.state, 7);
+        out += ESCH_256_RATE;
+        outlen -= ESCH_256_RATE;
+    }
+
+    /* Deal with the final left-over block */
+    if (outlen > 0) {
+        memcpy(out, st->s.state, outlen);
+        st->s.count = (unsigned char)outlen;
+    }
 }
 
 /**
@@ -204,6 +292,7 @@ typedef union
         uint32_t state[SPARKLE_512_STATE_SIZE];
         uint32_t block[4];
         unsigned char count;
+        unsigned char mode;
     } s;
     size_t align;
 
@@ -211,8 +300,7 @@ typedef union
 
 /** @endcond */
 
-int esch_384_hash
-    (unsigned char *out, const unsigned char *in, size_t inlen)
+int esch_384_hash(unsigned char *out, const unsigned char *in, size_t inlen)
 {
     uint32_t s[SPARKLE_512_STATE_SIZE];
     uint32_t block[ESCH_256_RATE / 4];
@@ -244,6 +332,38 @@ int esch_384_hash
     return 0;
 }
 
+int esch_384_xof(unsigned char *out, const unsigned char *in, size_t inlen)
+{
+    uint32_t s[SPARKLE_512_STATE_SIZE];
+    uint32_t block[ESCH_256_RATE / 4];
+    memset(s, 0, sizeof(s));
+    while (inlen > ESCH_384_RATE) {
+        memcpy(block, in, ESCH_384_RATE);
+        esch_384_m4(s, block, 0x00);
+        sparkle_512(s, 8);
+        in += ESCH_384_RATE;
+        inlen -= ESCH_384_RATE;
+    }
+    if (inlen == ESCH_384_RATE) {
+        memcpy(block, in, ESCH_384_RATE);
+        esch_384_m4(s, block, 0x06);
+    } else {
+        unsigned temp = (unsigned)inlen;
+        memcpy(block, in, temp);
+        ((unsigned char *)block)[temp] = 0x80;
+        memset(((unsigned char *)block) + temp + 1, 0,
+               ESCH_384_RATE - temp - 1);
+        esch_384_m4(s, block, 0x05);
+    }
+    sparkle_512(s, 12);
+    memcpy(out, s, ESCH_384_RATE);
+    sparkle_512(s, 8);
+    memcpy(out + ESCH_384_RATE, s, ESCH_384_RATE);
+    sparkle_512(s, 8);
+    memcpy(out + ESCH_384_RATE * 2, s, ESCH_384_RATE);
+    return 0;
+}
+
 void esch_384_hash_init(esch_384_hash_state_t *state)
 {
     memset(state, 0, sizeof(esch_384_hash_state_t));
@@ -254,6 +374,12 @@ void esch_384_hash_update
 {
     esch_384_hash_state_wt *st = (esch_384_hash_state_wt *)state;
     unsigned temp;
+    if (st->s.mode) {
+        /* Was squeezing output, go back to absorbing */
+        sparkle_512(st->s.state, 12);
+        st->s.count = 0;
+        st->s.mode = 0;
+    }
     while (inlen > 0) {
         if (st->s.count == ESCH_384_RATE) {
             esch_384_m4(st->s.state, st->s.block, 0x00);
@@ -294,3 +420,56 @@ void esch_384_hash_finalize
     sparkle_512(st->s.state, 8);
     memcpy(out + ESCH_384_RATE * 2, st->s.state, ESCH_384_RATE);
 }
+
+void esch_384_hash_squeeze
+    (esch_384_hash_state_t *state, unsigned char *out, size_t outlen)
+{
+    esch_384_hash_state_wt *st = (esch_384_hash_state_wt *)state;
+    size_t len;
+
+    /* If we are in the absorb phase then pad and process the last block */
+    if (!st->s.mode) {
+        if (st->s.count == ESCH_384_RATE) {
+            esch_384_m4(st->s.state, st->s.block, 0x06);
+        } else {
+            unsigned temp = st->s.count;
+            ((unsigned char *)(st->s.block))[temp] = 0x80;
+            memset(((unsigned char *)(st->s.block)) + temp + 1, 0,
+                ESCH_384_RATE - temp - 1);
+            esch_384_m4(st->s.state, st->s.block, 0x05);
+        }
+        sparkle_512(st->s.state, 12);
+        st->s.count = 0;
+        st->s.mode = 1;
+    }
+
+    /* Deal with the left-over block from last time */
+    if (st->s.count) {
+        len = ESCH_384_RATE - st->s.count;
+        if (len > outlen) {
+            memcpy(out, state->s.state + st->s.count, outlen);
+            st->s.count += outlen;
+            return;
+        }
+        memcpy(out, state->s.state + st->s.count, len);
+        sparkle_512(st->s.state, 8);
+        state->s.count = 0;
+        out += len;
+        outlen -= len;
+    }
+
+    /* Squeeze out as many full blocks as possible */
+    while (outlen >= ESCH_384_RATE) {
+        memcpy(out, st->s.state, ESCH_384_RATE);
+        sparkle_512(st->s.state, 8);
+        out += ESCH_384_RATE;
+        outlen -= ESCH_384_RATE;
+    }
+
+    /* Deal with the final left-over block */
+    if (outlen > 0) {
+        memcpy(out, st->s.state, outlen);
+        st->s.count = (unsigned char)outlen;
+    }
+}
+

@@ -455,6 +455,16 @@ extern aead_hash_algorithm_t const esch_256_hash_algorithm;
  */
 extern aead_hash_algorithm_t const esch_384_hash_algorithm;
 
+/**
+ * \brief Meta-information block for the XOEsch256 XOF algorithm.
+ */
+extern aead_hash_algorithm_t const esch_256_xof_algorithm;
+
+/**
+ * \brief Meta-information block for the XOEsch384 XOF algorithm.
+ */
+extern aead_hash_algorithm_t const esch_384_xof_algorithm;
+
 /*----------------------- TinyJAMBU -----------------------*/
 
 /**

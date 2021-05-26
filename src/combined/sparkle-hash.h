@@ -37,6 +37,8 @@
  * \li Esch256 hash algorithm with a 256-bit digest output.  This is the
  * primary hash algorithm in the family.
  * \li Esch384 hash algorithm with a 384-bit digest output.
+ * \li XOEsch256 extensible output function based on Esch256.
+ * \li XOEsch384 extensible output function based on Esch384.
  *
  * References: https://www.cryptolux.org/index.php/Sparkle
  */
@@ -56,7 +58,8 @@ extern "C" {
 #define ESCH_384_HASH_SIZE 48
 
 /**
- * \brief State information for the Esch256 incremental hash mode.
+ * \brief State information for the Esch256 incremental hash mode and the
+ * XOEsch256 increment XOF mode.
  */
 typedef union
 {
@@ -64,13 +67,15 @@ typedef union
         unsigned char state[48];    /**< Current hash state */
         unsigned char block[16];    /**< Partial input data block */
         unsigned char count;        /**< Number of bytes in the current block */
+        unsigned char mode;         /**< Hash mode: absorb or squeeze */
     } s;                            /**< State */
     unsigned long long align;       /**< For alignment of this structure */
 
 } esch_256_hash_state_t;
 
 /**
- * \brief State information for the Esch384 incremental hash mode.
+ * \brief State information for the Esch384 incremental hash mod ande the
+ * XOEsch384 increment XOF mode.
  */
 typedef union
 {
@@ -78,6 +83,7 @@ typedef union
         unsigned char state[64];    /**< Current hash state */
         unsigned char block[16];    /**< Partial input data block */
         unsigned char count;        /**< Number of bytes in the current block */
+        unsigned char mode;         /**< Hash mode: absorb or squeeze */
     } s;                            /**< State */
     unsigned long long align;       /**< For alignment of this structure */
 
@@ -94,26 +100,40 @@ typedef union
  * \return Returns zero on success or -1 if there was an error in the
  * parameters.
  */
-int esch_256_hash
-    (unsigned char *out, const unsigned char *in, size_t inlen);
+int esch_256_hash(unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
- * \brief Initializes the state for an Esch256 hashing operation.
+ * \brief Hashes a block of input data with XOEsch256 to generate an
+ * XOF output value.
  *
- * \param state Hash state to be initialized.
+ * \param out Buffer to receive the hash output which must be at least
+ * ESCH_256_HASH_SIZE bytes in length.
+ * \param in Points to the input data to be hashed.
+ * \param inlen Length of the input data in bytes.
+ *
+ * \return Returns zero on success or -1 if there was an error in the
+ * parameters.
+ */
+int esch_256_xof(unsigned char *out, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Initializes the state for an Esch256 hashing or a XOEsch256
+ * XOF operation.
+ *
+ * \param state State to be initialized.
  *
  * \sa esch_256_hash_update(), esch_256_hash_finalize(), esch_256_hash()
  */
 void esch_256_hash_init(esch_256_hash_state_t *state);
 
 /**
- * \brief Updates an Esch256 state with more input data.
+ * \brief Updates an Esch256 or XOEsch256 state with more input data.
  *
- * \param state Hash state to be updated.
+ * \param state State to be updated.
  * \param in Points to the input data to be incorporated into the state.
  * \param inlen Length of the input data to be incorporated into the state.
  *
- * \sa esch_256_hash_init(), esch_256_hash_finalize()
+ * \sa esch_256_hash_init(), esch_256_hash_finalize(), esch_256_hash_squeeze()
  */
 void esch_256_hash_update
     (esch_256_hash_state_t *state, const unsigned char *in, size_t inlen);
@@ -121,13 +141,28 @@ void esch_256_hash_update
 /**
  * \brief Returns the final hash value from an Esch256 hashing operation.
  *
- * \param state Hash state to be finalized.
+ * \param state State to be finalized.
  * \param out Points to the output buffer to receive the 32-byte hash value.
  *
- * \sa esch_256_hash_init(), esch_256_hash_update()
+ * This function is intended for generating output from the Esch256
+ * hashing mode.  Use esch_256_hash_squeeze() instead to generate XOF data.
+ *
+ * \sa esch_256_hash_init(), esch_256_hash_update(), esch_256_hash_squeeze()
  */
 void esch_256_hash_finalize
     (esch_256_hash_state_t *state, unsigned char *out);
+
+/**
+ * \brief Squeezes output data from a XOEsch256 XOF state.
+ *
+ * \param state State to squeeze the output data from.
+ * \param out Points to the output buffer to receive the squeezed data.
+ * \param outlen Number of bytes of data to squeeze out of the state.
+ *
+ * \sa esch_256_hash_init(), esch_256_hash_update()
+ */
+void esch_256_hash_squeeze
+    (esch_256_hash_state_t *state, unsigned char *out, size_t outlen);
 
 /**
  * \brief Hashes a block of input data with Esch384 to generate a hash value.
@@ -140,13 +175,27 @@ void esch_256_hash_finalize
  * \return Returns zero on success or -1 if there was an error in the
  * parameters.
  */
-int esch_384_hash
-    (unsigned char *out, const unsigned char *in, size_t inlen);
+int esch_384_hash(unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
- * \brief Initializes the state for an Esch384 hashing operation.
+ * \brief Hashes a block of input data with XOEsch384 to generate an
+ * XOF output value.
  *
- * \param state Hash state to be initialized.
+ * \param out Buffer to receive the hash output which must be at least
+ * ESCH_384_HASH_SIZE bytes in length.
+ * \param in Points to the input data to be hashed.
+ * \param inlen Length of the input data in bytes.
+ *
+ * \return Returns zero on success or -1 if there was an error in the
+ * parameters.
+ */
+int esch_384_xof(unsigned char *out, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Initializes the state for an Esch384 hashing or a XOEsch384
+ * XOF operation.
+ *
+ * \param state State to be initialized.
  *
  * \sa esch_384_hash_update(), esch_384_hash_finalize(), esch_384_hash()
  */
@@ -155,11 +204,11 @@ void esch_384_hash_init(esch_384_hash_state_t *state);
 /**
  * \brief Updates an Esch384 state with more input data.
  *
- * \param state Hash state to be updated.
+ * \param state State to be updated.
  * \param in Points to the input data to be incorporated into the state.
  * \param inlen Length of the input data to be incorporated into the state.
  *
- * \sa esch_384_hash_init(), esch_384_hash_finalize()
+ * \sa esch_384_hash_init(), esch_384_hash_finalize(), esch_384_hash_squeeze()
  */
 void esch_384_hash_update
     (esch_384_hash_state_t *state, const unsigned char *in, size_t inlen);
@@ -167,13 +216,28 @@ void esch_384_hash_update
 /**
  * \brief Returns the final hash value from an Esch384 hashing operation.
  *
- * \param state Hash state to be finalized.
+ * \param state State to be finalized.
  * \param out Points to the output buffer to receive the 48-byte hash value.
  *
- * \sa esch_384_hash_init(), esch_384_hash_update()
+ * This function is intended for generating output from the Esch384
+ * hashing mode.  Use esch_384_hash_squeeze() instead to generate XOF data.
+ *
+ * \sa esch_384_hash_init(), esch_384_hash_update(), esch_384_hash_squeeze()
  */
 void esch_384_hash_finalize
     (esch_384_hash_state_t *state, unsigned char *out);
+
+/**
+ * \brief Squeezes output data from a XOEsch384 XOF state.
+ *
+ * \param state State to squeeze the output data from.
+ * \param out Points to the output buffer to receive the squeezed data.
+ * \param outlen Number of bytes of data to squeeze out of the state.
+ *
+ * \sa esch_384_hash_init(), esch_384_hash_update()
+ */
+void esch_384_hash_squeeze
+    (esch_384_hash_state_t *state, unsigned char *out, size_t outlen);
 
 #ifdef __cplusplus
 }

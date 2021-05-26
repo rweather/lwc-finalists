@@ -534,6 +534,32 @@ aead_hash_algorithm_t const esch_384_hash_algorithm = {
     (aead_xof_squeeze_t)0
 };
 
+aead_hash_algorithm_t const esch_256_xof_algorithm = {
+    "XOEsch256",
+    sizeof(esch_256_hash_state_t),
+    ESCH_256_HASH_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    esch_256_xof,
+    (aead_hash_init_t)esch_256_hash_init,
+    (aead_hash_update_t)0,
+    (aead_hash_finalize_t)0,
+    (aead_xof_absorb_t)esch_256_hash_update,
+    (aead_xof_squeeze_t)esch_256_hash_squeeze
+};
+
+aead_hash_algorithm_t const esch_384_xof_algorithm = {
+    "XOEsch384",
+    sizeof(esch_384_hash_state_t),
+    ESCH_384_HASH_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    esch_384_xof,
+    (aead_hash_init_t)esch_384_hash_init,
+    (aead_hash_update_t)0,
+    (aead_hash_finalize_t)0,
+    (aead_xof_absorb_t)esch_384_hash_update,
+    (aead_xof_squeeze_t)esch_384_hash_squeeze
+};
+
 /*----------------------- TinyJAMBU -----------------------*/
 
 aead_cipher_t const tiny_jambu_128_cipher = {

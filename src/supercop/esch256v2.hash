@@ -1,8 +1,8 @@
 hash_family=sparkle
-hash_name=esch384v1
-hash_meta_name=Esch384
+hash_name=esch256v2
+hash_meta_name=Esch256
 hash_srcdir=SPARKLE
-hash_size=48
-hash_function=esch_384_hash
+hash_size=32
+hash_function=esch_256_hash
 hash_exclude="sparkle-aead.c sparkle-aead.h sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random-system.c sparkle-hkdf.c sparkle-hkdf.h internal-hkdf.h sparkle-pbkdf2.c sparkle-pbkdf2.h internal-pbkdf2.h"
 hash_header=sparkle-hash.h

@@ -35,8 +35,8 @@
  *
  * The ASCON state has two modes: "traditional" and "operational".
  * In the traditional mode, the bytes are laid out in the standard
- * big-endian order.  In the "operational" mode, the bytes may be
- * laid out in a different machine-dependent order for greater efficiency.
+ * big-endian order.  In the "operational" mode, the bytes may be laid
+ * out in a different platform-dependent order for greater efficiency.
  *
  * Most functions expect the state to be in operational mode.
  * The application can call ascon_from_operational() to convert to
@@ -75,9 +75,9 @@ extern "C" {
  */
 typedef union
 {
-    uint64_t S[5];      /**< 64-bit words of the state */
-    uint32_t W[10];     /**< 32-bit words of the state */
-    uint8_t B[40];      /**< Bytes of the state */
+    uint64_t S[ASCON_STATE_SIZE / 8];   /**< 64-bit words of the state */
+    uint32_t W[ASCON_STATE_SIZE / 4];   /**< 32-bit words of the state */
+    uint8_t B[ASCON_STATE_SIZE];        /**< Bytes of the state */
 
 } ascon_permutation_state_t;
 
@@ -140,7 +140,7 @@ void ascon_add_byte
  * then extra bytes will be ignored.
  *
  * The \a state is assumed to be in the "operational" mode.  Best performance
- * is achieved when \a offset and \a length are a multiple of 8.
+ * is achieved when \a offset and \a length are multiples of 8.
  *
  * \sa ascon_add_byte(), ascon_extract_bytes(), ascon_overwrite_bytes()
  */
@@ -163,7 +163,7 @@ void ascon_add_bytes
  * then extra bytes will be ignored.
  *
  * The \a state is assumed to be in the "operational" mode.  Best performance
- * is achieved when \a offset and \a length are a multiple of 8.
+ * is achieved when \a offset and \a length are multiples of 8.
  *
  * \sa ascon_add_bytes(), ascon_overwrite_with_zeroes()
  */
@@ -199,6 +199,8 @@ void ascon_overwrite_with_zeroes
  * If \a rounds is greater than ASCON_MAX_ROUNDS, then it will be
  * clamped to that value.
  *
+ * The \a state is assumed to be in the "operational" mode.
+ *
  * \sa ascon_permute_all_rounds()
  */
 void ascon_permute_n_rounds(ascon_permutation_state_t *state, unsigned rounds);
@@ -207,6 +209,8 @@ void ascon_permute_n_rounds(ascon_permutation_state_t *state, unsigned rounds);
  * \brief Performs all 12 rounds of the ASCON permutation.
  *
  * \param state The state to be permuted.
+ *
+ * The \a state is assumed to be in the "operational" mode.
  *
  * \sa ascon_permute_n_rounds()
  */
@@ -227,7 +231,7 @@ void ascon_permute_all_rounds(ascon_permutation_state_t *state);
  * then extra bytes will be ignored.
  *
  * The \a state is assumed to be in the "operational" mode.  Best performance
- * is achieved when \a offset and \a length are a multiple of 8.
+ * is achieved when \a offset and \a length are multiples of 8.
  *
  * \sa ascon_add_bytes(), ascon_extract_and_add_bytes()
  */
@@ -260,7 +264,7 @@ void ascon_extract_bytes
  * is a better option than this function.
  *
  * The \a state is assumed to be in the "operational" mode.  Best performance
- * is achieved when \a offset and \a length are a multiple of 8.
+ * is achieved when \a offset and \a length are multiples of 8.
  *
  * \sa ascon_add_bytes(), ascon_extract_bytes(), ascon_encrypt_bytes()
  */
@@ -296,7 +300,7 @@ void ascon_extract_and_add_bytes
  * for authentication purposes.
  *
  * The \a state is assumed to be in the "operational" mode.  Best performance
- * is achieved when \a offset and \a length are a multiple of 8.
+ * is achieved when \a offset and \a length are multiples of 8.
  *
  * \sa ascon_decrypt_bytes(), ascon_extract_and_add_bytes()
  */
@@ -332,7 +336,7 @@ void ascon_encrypt_bytes
  * for authentication purposes.
  *
  * The \a state is assumed to be in the "operational" mode.  Best performance
- * is achieved when \a offset and \a length are a multiple of 8.
+ * is achieved when \a offset and \a length are multiples of 8.
  *
  * \sa ascon_encrypt_bytes(), ascon_extract_and_add_bytes()
  */
