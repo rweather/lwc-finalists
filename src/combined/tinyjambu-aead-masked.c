@@ -50,15 +50,15 @@ static void tiny_jambu_setup_masked
     /* Absorb the three 32-bit words of the 96-bit nonce */
     mask_xor_const(state[1], 0x10); /* Domain separator for the nonce */
     tiny_jambu_permutation_masked
-        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
     mask_xor_const(state[3], le_load_word32(nonce));
     mask_xor_const(state[1], 0x10);
     tiny_jambu_permutation_masked
-        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
     mask_xor_const(state[3], le_load_word32(nonce + 4));
     mask_xor_const(state[1], 0x10);
     tiny_jambu_permutation_masked
-        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
     mask_xor_const(state[3], le_load_word32(nonce + 8));
 }
 
@@ -80,7 +80,7 @@ static void tiny_jambu_process_ad_masked
     while (adlen >= 4) {
         mask_xor_const(state[1], 0x30); /* Domain separator for associated data */
         tiny_jambu_permutation_masked
-            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
         mask_xor_const(state[3], le_load_word32(ad));
         ad += 4;
         adlen -= 4;
@@ -90,19 +90,19 @@ static void tiny_jambu_process_ad_masked
     if (adlen == 1) {
         mask_xor_const(state[1], 0x30);
         tiny_jambu_permutation_masked
-            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
         mask_xor_const(state[3], ad[0]);
         mask_xor_const(state[1], 0x01);
     } else if (adlen == 2) {
         mask_xor_const(state[1], 0x30);
         tiny_jambu_permutation_masked
-            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
         mask_xor_const(state[3], le_load_word16(ad));
         mask_xor_const(state[1], 0x02);
     } else if (adlen == 3) {
         mask_xor_const(state[1], 0x30);
         tiny_jambu_permutation_masked
-            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+            (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
         mask_xor_const
             (state[3], le_load_word16(ad) | (((uint32_t)(ad[2])) << 16));
         mask_xor_const(state[1], 0x03);
@@ -250,7 +250,7 @@ static void tiny_jambu_generate_tag_masked
     le_store_word32(tag, mask_output(state[2]));
     mask_xor_const(state[1], 0x70);
     tiny_jambu_permutation_masked
-        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(384));
+        (state, key, key_words, TINYJAMBU_MASKED_ROUNDS(640));
     le_store_word32(tag + 4, mask_output(state[2]));
     aead_random_finish();
 }

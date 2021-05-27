@@ -1,5 +1,5 @@
 aead_family=tinyjambu
-aead_name=tinyjambu256
+aead_name=tinyjambu256v2
 aead_meta_name=TinyJAMBU-256-Masked
 aead_srcdir=TinyJAMBU_masked
 aead_key_size=32

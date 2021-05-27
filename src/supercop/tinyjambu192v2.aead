@@ -1,11 +1,11 @@
 aead_family=tinyjambu
-aead_name=tinyjambu128
-aead_meta_name=TinyJAMBU-128
+aead_name=tinyjambu192v2
+aead_meta_name=TinyJAMBU-192
 aead_srcdir=TinyJAMBU
-aead_key_size=16
+aead_key_size=24
 aead_nonce_size=12
 aead_tag_size=8
-aead_encrypt=tiny_jambu_128_aead_encrypt
-aead_decrypt=tiny_jambu_128_aead_decrypt
+aead_encrypt=tiny_jambu_192_aead_encrypt
+aead_decrypt=tiny_jambu_192_aead_decrypt
 aead_exclude="tinyjambu-prng.c tinyjambu-prng.h aead-random-system.c"
 aead_header=tinyjambu-aead.h

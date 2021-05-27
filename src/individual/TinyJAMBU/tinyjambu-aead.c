@@ -45,19 +45,19 @@ static void tiny_jambu_setup_128
 
     /* Absorb the three 32-bit words of the 96-bit nonce */
     tiny_jambu_add_domain(state, 0x10); /* Domain separator for the nonce */
-    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce));
     tiny_jambu_add_domain(state, 0x10);
-    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce + 4));
     tiny_jambu_add_domain(state, 0x10);
-    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce + 8));
 
     /* Process as many full 32-bit words of associated data as we can */
     while (adlen >= 4) {
         tiny_jambu_add_domain(state, 0x30); /* Domain sep for associated data */
-        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, le_load_word32(ad));
         ad += 4;
         adlen -= 4;
@@ -66,17 +66,17 @@ static void tiny_jambu_setup_128
     /* Handle the left-over associated data bytes, if any */
     if (adlen == 1) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, ad[0]);
         tiny_jambu_add_domain(state, 0x01);
     } else if (adlen == 2) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, le_load_word16(ad));
         tiny_jambu_add_domain(state, 0x02);
     } else if (adlen == 3) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb
             (state, le_load_word16(ad) | (((uint32_t)(ad[2])) << 16));
         tiny_jambu_add_domain(state, 0x03);
@@ -104,19 +104,19 @@ static void tiny_jambu_setup_192
 
     /* Absorb the three 32-bit words of the 96-bit nonce */
     tiny_jambu_add_domain(state, 0x10); /* Domain separator for the nonce */
-    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce));
     tiny_jambu_add_domain(state, 0x10);
-    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce + 4));
     tiny_jambu_add_domain(state, 0x10);
-    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce + 8));
 
     /* Process as many full 32-bit words of associated data as we can */
     while (adlen >= 4) {
         tiny_jambu_add_domain(state, 0x30); /* Domain sep for associated data */
-        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, le_load_word32(ad));
         ad += 4;
         adlen -= 4;
@@ -125,17 +125,17 @@ static void tiny_jambu_setup_192
     /* Handle the left-over associated data bytes, if any */
     if (adlen == 1) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, ad[0]);
         tiny_jambu_add_domain(state, 0x01);
     } else if (adlen == 2) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, le_load_word16(ad));
         tiny_jambu_add_domain(state, 0x02);
     } else if (adlen == 3) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb
             (state, le_load_word16(ad) | (((uint32_t)(ad[2])) << 16));
         tiny_jambu_add_domain(state, 0x03);
@@ -163,19 +163,19 @@ static void tiny_jambu_setup_256
 
     /* Absorb the three 32-bit words of the 96-bit nonce */
     tiny_jambu_add_domain(state, 0x10); /* Domain separator for the nonce */
-    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce));
     tiny_jambu_add_domain(state, 0x10);
-    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce + 4));
     tiny_jambu_add_domain(state, 0x10);
-    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
     tiny_jambu_absorb(state, le_load_word32(nonce + 8));
 
     /* Process as many full 32-bit words of associated data as we can */
     while (adlen >= 4) {
         tiny_jambu_add_domain(state, 0x30); /* Domain sep for associated data */
-        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, le_load_word32(ad));
         ad += 4;
         adlen -= 4;
@@ -184,17 +184,17 @@ static void tiny_jambu_setup_256
     /* Handle the left-over associated data bytes, if any */
     if (adlen == 1) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, ad[0]);
         tiny_jambu_add_domain(state, 0x01);
     } else if (adlen == 2) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb(state, le_load_word16(ad));
         tiny_jambu_add_domain(state, 0x02);
     } else if (adlen == 3) {
         tiny_jambu_add_domain(state, 0x30);
-        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+        tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
         tiny_jambu_absorb
             (state, le_load_word16(ad) | (((uint32_t)(ad[2])) << 16));
         tiny_jambu_add_domain(state, 0x03);
@@ -216,7 +216,7 @@ static void tiny_jambu_generate_tag_128
     tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(1024));
     le_store_word32(tag, tiny_jambu_squeeze(state));
     tiny_jambu_add_domain(state, 0x70);
-    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_128(state, key, TINYJAMBU_ROUNDS(640));
     le_store_word32(tag + 4, tiny_jambu_squeeze(state));
 }
 
@@ -235,7 +235,7 @@ static void tiny_jambu_generate_tag_192
     tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(1152));
     le_store_word32(tag, tiny_jambu_squeeze(state));
     tiny_jambu_add_domain(state, 0x70);
-    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_192(state, key, TINYJAMBU_ROUNDS(640));
     le_store_word32(tag + 4, tiny_jambu_squeeze(state));
 }
 
@@ -254,7 +254,7 @@ static void tiny_jambu_generate_tag_256
     tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(1280));
     le_store_word32(tag, tiny_jambu_squeeze(state));
     tiny_jambu_add_domain(state, 0x70);
-    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(384));
+    tiny_jambu_permutation_256(state, key, TINYJAMBU_ROUNDS(640));
     le_store_word32(tag + 4, tiny_jambu_squeeze(state));
 }
 
