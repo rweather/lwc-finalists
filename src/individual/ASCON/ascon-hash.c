@@ -23,8 +23,7 @@
 #include "ascon-hash.h"
 #include <string.h>
 
-int ascon_hash
-    (unsigned char *out, const unsigned char *in, size_t inlen)
+int ascon_hash(unsigned char *out, const unsigned char *in, size_t inlen)
 {
     ascon_xof_state_t state;
     ascon_hash_init(&state);
@@ -54,8 +53,42 @@ void ascon_hash_update
     ascon_xof_absorb(state, in, inlen);
 }
 
-void ascon_hash_finalize
-    (ascon_hash_state_t *state, unsigned char *out)
+void ascon_hash_finalize(ascon_hash_state_t *state, unsigned char *out)
 {
     ascon_xof_squeeze(state, out, ASCON_HASH_SIZE);
+}
+
+int ascon_hasha(unsigned char *out, const unsigned char *in, size_t inlen)
+{
+    ascon_xof_state_t state;
+    ascon_hasha_init(&state);
+    ascon_xofa_absorb(&state, in, inlen);
+    ascon_xofa_squeeze(&state, out, ASCON_HASH_SIZE);
+    return 0;
+}
+
+void ascon_hasha_init(ascon_hash_state_t *state)
+{
+    /* IV for ASCON-HASHA after processing it with the permutation */
+    static unsigned char const hash_iv[40] = {
+        0x01, 0x47, 0x01, 0x94, 0xfc, 0x65, 0x28, 0xa6,
+        0x73, 0x8e, 0xc3, 0x8a, 0xc0, 0xad, 0xff, 0xa7,
+        0x2e, 0xc8, 0xe3, 0x29, 0x6c, 0x76, 0x38, 0x4c,
+        0xd6, 0xf6, 0xa5, 0x4d, 0x7f, 0x52, 0x37, 0x7d,
+        0xa1, 0x3c, 0x42, 0xa2, 0x23, 0xbe, 0x8d, 0x87
+    };
+    memcpy(state->s.state, hash_iv, sizeof(hash_iv));
+    state->s.count = 0;
+    state->s.mode = 0;
+}
+
+void ascon_hasha_update
+    (ascon_hash_state_t *state, const unsigned char *in, size_t inlen)
+{
+    ascon_xofa_absorb(state, in, inlen);
+}
+
+void ascon_hasha_finalize(ascon_hash_state_t *state, unsigned char *out)
+{
+    ascon_xofa_squeeze(state, out, ASCON_HASH_SIZE);
 }

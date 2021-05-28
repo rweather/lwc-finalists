@@ -129,8 +129,8 @@ much as ASCON-128.  ASCON-80pq is essentially the same as ASCON-128
 but it has a 160-bit key which may give added resistance against
 quantum computers.
 
-The library also implements the ASCON-HASH and ASCON-XOF hashing
-algorithms as companions to the AEAD mode.
+The library also implements the ASCON-HASH, ASCON-HASHA, ASCON-XOF,
+and ASCON-XOFA hashing algorithms as companions to the AEAD mode.
 
 This library also provides a masked implementation of ASCON.
 

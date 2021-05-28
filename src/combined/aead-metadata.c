@@ -131,9 +131,22 @@ aead_hash_algorithm_t const ascon_hash_algorithm = {
     0  /* squeeze */
 };
 
+aead_hash_algorithm_t const ascon_hasha_algorithm = {
+    "ASCON-HASHA",
+    sizeof(ascon_hash_state_t),
+    ASCON_HASH_SIZE,
+    AEAD_FLAG_NONE,
+    ascon_hasha,
+    (aead_hash_init_t)ascon_hasha_init,
+    (aead_hash_update_t)ascon_hasha_update,
+    (aead_hash_finalize_t)ascon_hasha_finalize,
+    0, /* absorb */
+    0  /* squeeze */
+};
+
 aead_hash_algorithm_t const ascon_xof_algorithm = {
     "ASCON-XOF",
-    sizeof(ascon_hash_state_t),
+    sizeof(ascon_xof_state_t),
     ASCON_HASH_SIZE,
     AEAD_FLAG_NONE,
     ascon_xof,
@@ -142,6 +155,19 @@ aead_hash_algorithm_t const ascon_xof_algorithm = {
     0, /* finalize */
     (aead_xof_absorb_t)ascon_xof_absorb,
     (aead_xof_squeeze_t)ascon_xof_squeeze
+};
+
+aead_hash_algorithm_t const ascon_xofa_algorithm = {
+    "ASCON-XOFA",
+    sizeof(ascon_xof_state_t),
+    ASCON_HASH_SIZE,
+    AEAD_FLAG_NONE,
+    ascon_xofa,
+    (aead_hash_init_t)ascon_xofa_init,
+    0, /* update */
+    0, /* finalize */
+    (aead_xof_absorb_t)ascon_xofa_absorb,
+    (aead_xof_squeeze_t)ascon_xofa_squeeze
 };
 
 aead_cipher_t const ascon128_masked_cipher = {

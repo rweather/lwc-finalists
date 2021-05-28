@@ -74,7 +74,9 @@ static const aead_cipher_t *const ciphers[] = {
 /* List of all hash algorithms that we can run KAT tests for */
 static const aead_hash_algorithm_t *const hashes[] = {
     &ascon_hash_algorithm,
+    &ascon_hasha_algorithm,
     &ascon_xof_algorithm,
+    &ascon_xofa_algorithm,
     &esch_256_hash_algorithm,
     &esch_256_xof_algorithm,
     &esch_384_hash_algorithm,

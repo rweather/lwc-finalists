@@ -25,6 +25,8 @@
 #include <string.h>
 
 /* The actual implementation is in the common "internal-hmac.h" file */
+
+/* ASCON-HMAC */
 #define HMAC_ALG_NAME ascon_hmac
 #define HMAC_HASH_SIZE ASCON_HASH_SIZE
 #define HMAC_BLOCK_SIZE 64
@@ -32,4 +34,14 @@
 #define HMAC_HASH_INIT ascon_hash_init
 #define HMAC_HASH_UPDATE ascon_xof_absorb
 #define HMAC_HASH_FINALIZE ascon_hash_finalize
+#include "internal-hmac.h"
+
+/* ASCON-HMACA */
+#define HMAC_ALG_NAME ascon_hmaca
+#define HMAC_HASH_SIZE ASCON_HASH_SIZE
+#define HMAC_BLOCK_SIZE 64
+#define HMAC_STATE ascon_hmac_state_t
+#define HMAC_HASH_INIT ascon_hasha_init
+#define HMAC_HASH_UPDATE ascon_xofa_absorb
+#define HMAC_HASH_FINALIZE ascon_hasha_finalize
 #include "internal-hmac.h"

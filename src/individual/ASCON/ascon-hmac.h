@@ -30,7 +30,7 @@
  * \brief Hashed Message Authentication Code (HMAC) based on ASCON-HASH.
  *
  * The HMAC mode provides a method to authenticate a sequence of bytes
- * using ASCON-HASH as the underlying digest algorithm.
+ * using ASCON-HASH or ASCON-HASHA as the underlying digest algorithm.
  *
  * HMAC uses an underlying block size to pad the key data.
  * The ASCON-HASH block absorption rate of 8 bytes is too short
@@ -48,12 +48,13 @@ extern "C" {
 #endif
 
 /**
- * \brief Default size of the output for ASCON-HMAC.
+ * \brief Default size of the output for ASCON-HMAC and ASCON-HMACA.
  */
 #define ASCON_HMAC_SIZE ASCON_HASH_SIZE
 
 /**
- * \brief State information for the ASCON-HMAC incremental mode.
+ * \brief State information for the ASCON-HMAC and ASCON-HMACA
+ * incremental modes.
  */
 typedef ascon_xof_state_t ascon_hmac_state_t;
 
@@ -111,6 +112,63 @@ void ascon_hmac_update
  * \sa ascon_hmac_init(), ascon_hmac_update()
  */
 void ascon_hmac_finalize
+    (ascon_hmac_state_t *state, const unsigned char *key, size_t keylen,
+     unsigned char *out);
+
+/**
+ * \brief Computes a HMAC value using ASCON-HASHA.
+ *
+ * \param out Buffer to receive the output HMAC value; must be at least
+ * ASCON_HMAC_SIZE bytes in length.
+ * \param key Points to the key.
+ * \param keylen Number of bytes in the key.
+ * \param in Points to the data to authenticate.
+ * \param inlen Number of bytes of data to authenticate.
+ */
+void ascon_hmaca
+    (unsigned char *out,
+     const unsigned char *key, size_t keylen,
+     const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Initializes an incremental HMAC state using ASCON-HASHA.
+ *
+ * \param state Points to the state to be initialized.
+ * \param key Points to the key.
+ * \param keylen Number of bytes in the key.
+ *
+ * The \a key needs to be preserved until the ascon_hmaca_finalize() call
+ * to provide the outer HMAC hashing key.
+ *
+ * \sa ascon_hmaca_update(), ascon_hmaca_finalize()
+ */
+void ascon_hmaca_init
+    (ascon_hmac_state_t *state, const unsigned char *key, size_t keylen);
+
+/**
+ * \brief Updates an incremental ASCON-HMACA state with more input data.
+ *
+ * \param state HMAC state to be updated.
+ * \param in Points to the input data to be incorporated into the state.
+ * \param inlen Length of the input data to be incorporated into the state.
+ *
+ * \sa ascon_hmaca_init(), ascon_hmaca_finalize()
+ */
+void ascon_hmaca_update
+    (ascon_hmac_state_t *state, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Finalizes an incremental ASCON-HMACA state.
+ *
+ * \param state HMAC state to squeeze the output data from.
+ * \param key Points to the key.
+ * \param keylen Number of bytes in the key.
+ * \param out Points to the output buffer to receive the HMAC value;
+ * must be at least ASCON_HMAC_SIZE bytes in length.
+ *
+ * \sa ascon_hmaca_init(), ascon_hmaca_update()
+ */
+void ascon_hmaca_finalize
     (ascon_hmac_state_t *state, const unsigned char *key, size_t keylen,
      unsigned char *out);
 

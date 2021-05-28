@@ -156,6 +156,16 @@ void test_hmac(void)
          &testVectorHMAC_3, 32, 64);
 
     test_hmac_vector
+        (&ascon_hasha_algorithm, "ASCON-A", ascon_hmaca,
+         &testVectorHMAC_1, 32, 64);
+    test_hmac_vector
+        (&ascon_hasha_algorithm, "ASCON-A", ascon_hmaca,
+         &testVectorHMAC_2, 32, 64);
+    test_hmac_vector
+        (&ascon_hasha_algorithm, "ASCON-A", ascon_hmaca,
+         &testVectorHMAC_3, 32, 64);
+
+    test_hmac_vector
         (&esch_256_hash_algorithm, "Esch256", esch_256_hmac,
          &testVectorHMAC_1, 32, 64);
     test_hmac_vector

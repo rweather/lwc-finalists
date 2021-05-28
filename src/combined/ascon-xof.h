@@ -25,7 +25,7 @@
 
 /**
  * \file ascon-hash.h
- * \brief ASCON-XOF extensible output function (XOF).
+ * \brief ASCON-XOF and ASCON-XOFA extensible output functions (XOF's).
  *
  * References: https://ascon.iaik.tugraz.at/
  */
@@ -37,18 +37,19 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the hash output for ASCON-HASH and the default hash
- * output size for ASCON-XOF.
+ * \brief Size of the hash output for ASCON-HASH/ASCON-HASHA and the
+ * default hash output size for ASCON-XOF/ASCON-XOFA.
  */
 #define ASCON_HASH_SIZE 32
 
 /**
- * \brief Rate of absorbing and squeezing data for ASCON-XOF and ASCON-HASH.
+ * \brief Rate of absorbing and squeezing data for ASCON-XOF,
+ * ASCON-XOFA, ASCON-HASH, and ASCON-HASHA.
  */
 #define ASCON_XOF_RATE 8
 
 /**
- * \brief State information for ASCON-XOF incremental mode.
+ * \brief State information for ASCON-XOF and ASCON-XOFA incremental modes.
  */
 typedef union
 {
@@ -139,6 +140,85 @@ void ascon_xof_squeeze
  * to save some time when padding is required.
  */
 void ascon_xof_pad(ascon_xof_state_t *state);
+
+/**
+ * \brief Hashes a block of input data with ASCON-XOFA and generates a
+ * fixed-length 32 byte output.
+ *
+ * \param out Buffer to receive the hash output which must be at least
+ * 32 bytes in length.
+ * \param in Points to the input data to be hashed.
+ * \param inlen Length of the input data in bytes.
+ *
+ * \return Returns zero on success or -1 if there was an error in the
+ * parameters.
+ *
+ * Use ascon_xofa_squeeze() instead if you need variable-length XOF ouutput.
+ *
+ * \sa ascon_xofa_init(), ascon_xofa_absorb(), ascon_xofa_squeeze()
+ */
+int ascon_xofa
+    (unsigned char *out, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Initializes the state for an ASCON-XOFA hashing operation.
+ *
+ * \param state XOF state to be initialized.
+ *
+ * \sa ascon_xofa_absorb(), ascon_xofa_squeeze(), ascon_xofa()
+ */
+void ascon_xofa_init(ascon_xof_state_t *state);
+
+/**
+ * \brief Initializes the state for an incremental ASCON-XOFA operation,
+ * with a fixed output length.
+ *
+ * \param state XOF state to be initialized.
+ * \param outlen The desired output length in bytes, or 0 for arbitrary-length.
+ *
+ * In the ASCON standard, the output length is encoded as a bit counter
+ * in a 32-bit word.  If \a outlen is greater than 536870911, it will be
+ * replaced with zero to indicate arbitary-length output instead.
+ *
+ * \sa ascon_xofa_init()
+ */
+void ascon_xofa_init_fixed(ascon_xof_state_t *state, size_t outlen);
+
+/**
+ * \brief Aborbs more input data into an ASCON-XOFA state.
+ *
+ * \param state XOF state to be updated.
+ * \param in Points to the input data to be absorbed into the state.
+ * \param inlen Length of the input data to be absorbed into the state.
+ *
+ * \sa ascon_xofa_init(), ascon_xofa_squeeze()
+ */
+void ascon_xofa_absorb
+    (ascon_xof_state_t *state, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Squeezes output data from an ASCON-XOFA state.
+ *
+ * \param state XOF state to squeeze the output data from.
+ * \param out Points to the output buffer to receive the squeezed data.
+ * \param outlen Number of bytes of data to squeeze out of the state.
+ *
+ * \sa ascon_xofa_init(), ascon_xofa_update()
+ */
+void ascon_xofa_squeeze
+    (ascon_xof_state_t *state, unsigned char *out, size_t outlen);
+
+/**
+ * \brief Absorbs enough zeroes into an ASCON-XOFA state to pad the
+ * input to the next multiple of the block rate.
+ *
+ * \param state XOF state to pad.  Does nothing if the \a state is
+ * already aligned on a multiple of the block rate.
+ *
+ * This function can avoid unnecessary XOR-with-zero operations
+ * to save some time when padding is required.
+ */
+void ascon_xofa_pad(ascon_xof_state_t *state);
 
 #ifdef __cplusplus
 }

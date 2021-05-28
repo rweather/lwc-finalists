@@ -39,7 +39,8 @@
  * \li ASCON-80pq with a 160-bit key, a 128-bit nonce, a 128-bit authentication
  * tag, and a block rate of 64 bits.  This is similar to ASCON-128 but has a
  * 160-bit key instead which may be more resistant against quantum computers.
- * \li ASCON-HASH with a 256-bit hash output.
+ * \li ASCON-HASH and ASCON-HASHA with a 256-bit hash output.
+ * \li ASCON-XOF and ASCON-XOFA with extensible hash output (XOF mode).
  *
  * References: https://ascon.iaik.tugraz.at/
  */

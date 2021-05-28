@@ -71,7 +71,8 @@ fairly similar.  Performance figures for 32-bit platforms can be found
 <tr><td>Esch384 (SPARKLE)</td><td>384</td><td>1.20</td><td>0.96</td><td>1.48</td><td>1.21</td></tr>
 <tr><td><b><i>Xoodyak</i></b></td><td>256</td><td>0.92</td><td>0.83</td><td>1.83</td><td>1.19</td></tr>
 <tr><td><b><i>Romulus-H</i></b></td><td>256</td><td>0.91</td><td>0.75</td><td>1.81</td><td>1.16</td></tr>
-<tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.66</td><td>0.55</td><td>0.91</td><td>0.71</td></tr>
+<tr><td>ASCON-HASHA</td><td>256</td><td>0.98</td><td>0.76</td><td>1.09</td><td>0.94</td></tr>
+<tr><td><b><i>ASCON-HASH</i></b></td><td>256</td><td>0.67</td><td>0.55</td><td>0.92</td><td>0.71</td></tr>
 <tr><td><b><i>PHOTON-Beetle-HASH</i></b></td><td>256</td><td>0.17</td><td>0.18</td><td>1.38</td><td>0.58</td></tr>
 </table>
 

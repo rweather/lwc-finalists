@@ -277,9 +277,19 @@ extern aead_cipher_t const ascon80pq_cipher;
 extern aead_hash_algorithm_t const ascon_hash_algorithm;
 
 /**
+ * \brief Meta-information block for the ASCON-HASHA algorithm.
+ */
+extern aead_hash_algorithm_t const ascon_hasha_algorithm;
+
+/**
  * \brief Meta-information block for the ASCON-XOF algorithm.
  */
 extern aead_hash_algorithm_t const ascon_xof_algorithm;
+
+/**
+ * \brief Meta-information block for the ASCON-XOFA algorithm.
+ */
+extern aead_hash_algorithm_t const ascon_xofa_algorithm;
 
 /**
  * \brief Meta-information block for the masked ASCON-128 cipher.

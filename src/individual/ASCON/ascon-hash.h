@@ -25,7 +25,7 @@
 
 /**
  * \file ascon-hash.h
- * \brief ASCON-HASH hash algorithm.
+ * \brief ASCON-HASH and ASCON-HASHA hash algorithms.
  *
  * References: https://ascon.iaik.tugraz.at/
  */
@@ -37,7 +37,7 @@ extern "C" {
 #endif
 
 /**
- * \brief State information for ASCON-HASH incremental mode.
+ * \brief State information for ASCON-HASH and ASCON-HASHA incremental modes.
  */
 typedef ascon_xof_state_t ascon_hash_state_t;
 
@@ -54,8 +54,7 @@ typedef ascon_xof_state_t ascon_hash_state_t;
  *
  * \sa ascon_hash_init(), ascon_hash_absorb(), ascon_hash_squeeze()
  */
-int ascon_hash
-    (unsigned char *out, const unsigned char *in, size_t inlen);
+int ascon_hash(unsigned char *out, const unsigned char *in, size_t inlen);
 
 /**
  * \brief Initializes the state for an ASCON-HASH hashing operation.
@@ -86,8 +85,53 @@ void ascon_hash_update
  *
  * \sa ascon_hash_init(), ascon_hash_update()
  */
-void ascon_hash_finalize
-    (ascon_hash_state_t *state, unsigned char *out);
+void ascon_hash_finalize(ascon_hash_state_t *state, unsigned char *out);
+
+/**
+ * \brief Hashes a block of input data with ASCON-HASHA.
+ *
+ * \param out Buffer to receive the hash output which must be at least
+ * ASCON_HASH_SIZE bytes in length.
+ * \param in Points to the input data to be hashed.
+ * \param inlen Length of the input data in bytes.
+ *
+ * \return Returns zero on success or -1 if there was an error in the
+ * parameters.
+ *
+ * \sa ascon_hasha_init(), ascon_hasha_absorb(), ascon_hasha_squeeze()
+ */
+int ascon_hasha(unsigned char *out, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Initializes the state for an ASCON-HASHA hashing operation.
+ *
+ * \param state Hash state to be initialized.
+ *
+ * \sa ascon_hasha_update(), ascon_hasha_finalize(), ascon_hasha()
+ */
+void ascon_hasha_init(ascon_hash_state_t *state);
+
+/**
+ * \brief Updates an ASCON-HASHA state with more input data.
+ *
+ * \param state Hash state to be updated.
+ * \param in Points to the input data to be incorporated into the state.
+ * \param inlen Length of the input data to be incorporated into the state.
+ *
+ * \sa ascon_hasha_init(), ascon_hasha_finalize()
+ */
+void ascon_hasha_update
+    (ascon_hash_state_t *state, const unsigned char *in, size_t inlen);
+
+/**
+ * \brief Returns the final hash value from an ASCON-HASHA hashing operation.
+ *
+ * \param state Hash state to be finalized.
+ * \param out Points to the output buffer to receive the 32-byte hash value.
+ *
+ * \sa ascon_hasha_init(), ascon_hasha_update()
+ */
+void ascon_hasha_finalize(ascon_hash_state_t *state, unsigned char *out);
 
 #ifdef __cplusplus
 }

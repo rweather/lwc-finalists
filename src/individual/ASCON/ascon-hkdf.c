@@ -26,6 +26,8 @@
 #include <string.h>
 
 /* The actual implementation is in the common "internal-hkdf.h" file */
+
+/* ASCON-HKDF */
 #define HKDF_ALG_NAME ascon_hkdf
 #define HKDF_STATE ascon_hkdf_state_t
 #define HKDF_HMAC_SIZE ASCON_HMAC_SIZE
@@ -33,4 +35,14 @@
 #define HKDF_HMAC_INIT ascon_hmac_init
 #define HKDF_HMAC_UPDATE ascon_hmac_update
 #define HKDF_HMAC_FINALIZE ascon_hmac_finalize
+#include "internal-hkdf.h"
+
+/* ASCON-HKDFA */
+#define HKDF_ALG_NAME ascon_hkdfa
+#define HKDF_STATE ascon_hkdf_state_t
+#define HKDF_HMAC_SIZE ASCON_HMAC_SIZE
+#define HKDF_HMAC_STATE ascon_hmac_state_t
+#define HKDF_HMAC_INIT ascon_hmaca_init
+#define HKDF_HMAC_UPDATE ascon_hmaca_update
+#define HKDF_HMAC_FINALIZE ascon_hmaca_finalize
 #include "internal-hkdf.h"

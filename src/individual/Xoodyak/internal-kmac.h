@@ -194,6 +194,7 @@ void KMAC_CONCAT(KMAC_ALG_NAME,_finalize)
 #undef KMAC_STATE
 #undef KMAC_RATE
 #undef KMAC_XOF_INIT
+#undef KMAC_XOF_PREINIT
 #undef KMAC_XOF_ABSORB
 #undef KMAC_XOF_SQUEEZE
 #undef KMAC_XOF_PAD

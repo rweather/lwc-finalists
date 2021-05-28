@@ -333,6 +333,25 @@ void test_kmac(void)
                   (kmac_finalize_t)ascon_kmac_finalize,
                   &testVectorNIST_2);
 
+    test_kmac_alg("ASCON-A KMAC", &ascon_xofa_algorithm,
+                  ASCON_XOF_RATE, sizeof(ascon_kmac_state_t),
+                  (kmac_allinone_t)ascon_kmaca,
+                  (kmac_init_t)ascon_kmaca_init,
+                  (kmac_absorb_t)ascon_kmaca_absorb,
+                  (kmac_squeeze_t)ascon_kmaca_squeeze,
+                  (kmac_set_output_length_t)ascon_kmaca_set_output_length,
+                  (kmac_finalize_t)ascon_kmaca_finalize,
+                  &testVectorNIST_1);
+    test_kmac_alg("ASCON-A KMAC", &ascon_xofa_algorithm,
+                  ASCON_XOF_RATE, sizeof(ascon_kmac_state_t),
+                  (kmac_allinone_t)ascon_kmaca,
+                  (kmac_init_t)ascon_kmaca_init,
+                  (kmac_absorb_t)ascon_kmaca_absorb,
+                  (kmac_squeeze_t)ascon_kmaca_squeeze,
+                  (kmac_set_output_length_t)ascon_kmaca_set_output_length,
+                  (kmac_finalize_t)ascon_kmaca_finalize,
+                  &testVectorNIST_2);
+
     test_kmac_alg("Xoodyak KMAC", &xoodyak_hash_algorithm,
                   XOODYAK_HASH_RATE, sizeof(xoodyak_kmac_state_t),
                   (kmac_allinone_t)xoodyak_kmac,
