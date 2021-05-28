@@ -166,17 +166,20 @@ static void grain_prng_setup_key
     /* Initialize the NFSR state with the first 128 bits of the key */
     memcpy(state->nfsr, key, 16);
 
-    /* Perform 256 rounds of Grain-128 to mix up the initial state.
-     * The rounds can be performed 32 at a time: 32 * 8 = 256 */
-    for (round = 0; round < 8; ++round) {
+    /* Perform 320 rounds of Grain-128 to mix up the initial state.
+     * The rounds can be performed 32 at a time: 32 * 10 = 320 */
+    for (round = 0; round < 10; ++round) {
         y = grain128_preoutput(state);
         grain128_core(state, y, y);
     }
 
-    /* Absorb the entire key into the state */
-    for (round = 0; round < 8; ++round) {
-        grain128_core(GRAIN128_STATE(&state), key[round], 0);
-    }
+    /* Re-introduce the key into the LFSR and NFSR state */
+    y = grain128_preoutput(state);
+    grain128_core
+        (state, y ^ le_load_word32(key + 8), y ^ le_load_word32(key));
+    y = grain128_preoutput(state);
+    grain128_core
+        (state, y ^ le_load_word32(key + 12), y ^ le_load_word32(key + 4));
 
     /* Perform another 256 rounds of Grain-128 to mix up the state some more */
     for (round = 0; round < 8; ++round) {

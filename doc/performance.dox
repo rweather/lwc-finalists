@@ -97,8 +97,8 @@ assembly code.
 <tr><td><b><i>GIFT-COFB</i></b><td>128</td><td>128</td><td>128</td><td>1.01</td><td>1.01</td><td>1.16</td><td>1.15</td><td>1.08</td></tr>
 <tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.73</td><td>0.76</td><td>1.35</td><td>1.36</td><td>1.00</td></tr>
 <tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>0.67</td><td>0.70</td><td>1.27</td><td>1.28</td><td>0.93</td></tr>
+<tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.30</td><td>0.33</td><td>0.63</td><td>0.67</td><td>0.45</td></tr>
 <tr><td>AES-128-GCM</td><td>128</td><td>96</td><td>128</td><td>0.36</td><td>0.38</td><td>0.50</td><td>0.52</td><td>0.44</td></tr>
-<tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.28</td><td>0.34</td><td>0.61</td><td>0.67</td><td>0.43</td></tr>
 <tr><td>AES-192-GCM</td><td>192</td><td>96</td><td>128</td><td>0.34</td><td>0.35</td><td>0.46</td><td>0.48</td><td>0.40</td></tr>
 <tr><td>AES-256-GCM</td><td>256</td><td>96</td><td>128</td><td>0.31</td><td>0.33</td><td>0.42</td><td>0.44</td><td>0.37</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33</td></tr>
@@ -142,6 +142,7 @@ would be more like this:
 
 <table>
 <tr><td>Algorithm</td><td>Average</td><td>Rate</td><td>Average / Rate</td></tr>
+<tr><td>ASCON-HASHA</td><td>0.56</td><td>8</td><td>0.0700</td></tr>
 <tr><td>Esch256 (SPARKLE)</td><td>1.07</td><td>16</td><td>0.0669</td></tr>
 <tr><td>ASCON-HASH</td><td>0.52</td><td>8</td><td>0.0650</td></tr>
 <tr><td>Xoodyak</td><td>0.93</td><td>16</td><td>0.0581</td></tr>
@@ -175,7 +176,7 @@ where the architectural differences gives some algorithms an added advantage.
 <tr><td><b><i>ASCON-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.67</td><td>0.46</td><td>0.86</td><td>0.66</td><td>0.63</td></tr>
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>0.67</td><td>0.44</td><td>0.84</td><td>0.61</td><td>0.61</td></tr>
 <tr><td>AES-256-GCM</td><td>256</td><td>96</td><td>128</td><td>0.50</td><td>0.52</td><td>0.68</td><td>0.69</td><td>0.59</td></tr>
-<tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.33</td><td>0.30</td><td>0.65</td><td>0.59</td><td>0.43</td></tr>
+<tr><td><b><i>Grain-128AEAD</i></b><td>128</td><td>96</td><td>64</td></td><td>0.33</td><td>0.32</td><td>0.60</td><td>0.59</td><td>0.43</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23</td></tr>
 <tr><td><b><i>Romulus-N</i></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.21</td><td>0.20</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.22</td><td>0.24</td><td>0.19</td></tr>
@@ -274,7 +275,7 @@ ordered from highest to lowest "New" ChaChaPoly values:
 <tr><td>ASCON</td><td>1.11</td><td>1.61</td><td> </td></tr>
 <tr><td>TinyJAMBU</td><td>0.81</td><td>1.17</td><td> </td></tr>
 <tr><td>GIFT-COFB</td><td>1.05</td><td>1.08</td><td> </td></tr>
-<tr><td>Grain128-AEAD</td><td>0.37</td><td>0.43</td><td> </td></tr>
+<tr><td>Grain128-AEAD</td><td>0.37</td><td>0.45</td><td> </td></tr>
 <tr><td>Romulus</td><td>0.19</td><td>0.32</td><td>Switched to fixsliced SKINNY-128-384+</td></tr>
 <tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.25</td><td>Highly unrolled 32-bit version in C</td></tr>
 <tr><td>Elephant (Delirium)</td><td>0.05</td><td>0.19</td><td>Optimised 32-bit and 64-bit versions of Keccak-p[200] in C</td></tr>

@@ -208,6 +208,7 @@ void grain128_setup
      const unsigned char *nonce)
 {
     uint32_t k[4];
+    uint32_t y;
     uint8_t round;
 
     /* Internally, the Grain-128 stream cipher uses big endian bit
@@ -252,23 +253,28 @@ void grain128_setup
     state->nfsr[2] = k[2];
     state->nfsr[3] = k[3];
 
-    /* Perform 256 rounds of Grain-128 to mix up the initial state.
-     * The rounds can be performed 32 at a time: 32 * 8 = 256 */
-    for (round = 0; round < 8; ++round) {
-        uint32_t y = grain128_preoutput(state);
+    /* Perform 320 rounds of Grain-128 to mix up the initial state.
+     * The rounds can be performed 32 at a time: 32 * 10 = 320 */
+    for (round = 0; round < 10; ++round) {
+        y = grain128_preoutput(state);
         grain128_core(state, y, y);
     }
 
-    /* Absorb the key into the state again and generate the initial
-     * state of the accumulator and the shift register */
+    /* Re-introduce the key into the LFSR and NFSR state */
+    y = grain128_preoutput(state);
+    grain128_core(state, y ^ k[2], y ^ k[0]);
+    y = grain128_preoutput(state);
+    grain128_core(state, y ^ k[3], y ^ k[1]);
+
+    /* Generate the initial state of the accumulator and the shift register */
     state->accum = ((uint64_t)(grain128_preoutput(state))) << 32;
-    grain128_core(state, k[0], 0);
+    grain128_core(state, 0, 0);
     state->accum |= grain128_preoutput(state);
-    grain128_core(state, k[1], 0);
+    grain128_core(state, 0, 0);
     state->sr = ((uint64_t)(grain128_preoutput(state))) << 32;
-    grain128_core(state, k[2], 0);
+    grain128_core(state, 0, 0);
     state->sr |= grain128_preoutput(state);
-    grain128_core(state, k[3], 0);
+    grain128_core(state, 0, 0);
 
     /* No keystream data has been generated yet */
     state->posn = sizeof(state->ks);

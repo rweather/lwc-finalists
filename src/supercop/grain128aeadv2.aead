@@ -1,5 +1,5 @@
 aead_family=grain-128aead
-aead_name=grain128aead
+aead_name=grain128aeadv2
 aead_meta_name=Grain-128AEAD
 aead_srcdir=Grain-128AEAD
 aead_key_size=16
