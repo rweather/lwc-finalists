@@ -93,7 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Keyed Message Authentication Code (KMAC) based on ASCON.  
+<p>Keyed Message Authentication Code (KMAC) based on ASCON-XOF.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;ascon-xof.h&quot;</code><br/>
 </div>
@@ -103,23 +103,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Macros</h2></td></tr>
 <tr class="memitem:a7cd133c2679a76220bb714e6f1825a9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cd133c2679a76220bb714e6f1825a9c"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#a7cd133c2679a76220bb714e6f1825a9c">ASCON_KMAC_SIZE</a>&#160;&#160;&#160;ASCON_HASH_SIZE</td></tr>
-<tr class="memdesc:a7cd133c2679a76220bb714e6f1825a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the output for ASCON-KMAC. <br/></td></tr>
+<tr class="memdesc:a7cd133c2679a76220bb714e6f1825a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the output for ASCON-KMAC and ASCON-KMACA. <br/></td></tr>
 <tr class="separator:a7cd133c2679a76220bb714e6f1825a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ab5aa93aed3ce3a309835dde0ad32887a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5aa93aed3ce3a309835dde0ad32887a"></a>
 typedef <a class="el" href="unionascon__xof__state__t.html">ascon_xof_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a></td></tr>
-<tr class="memdesc:ab5aa93aed3ce3a309835dde0ad32887a"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the ASCON-KMAC incremental mode. <br/></td></tr>
+<tr class="memdesc:ab5aa93aed3ce3a309835dde0ad32887a"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the ASCON-KMAC and ASCON-KMACA incremental modes. <br/></td></tr>
 <tr class="separator:ab5aa93aed3ce3a309835dde0ad32887a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af77d295266b216a6c2573d209ccaa167"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#af77d295266b216a6c2573d209ccaa167">ascon_kmac</a> (const unsigned char *key, size_t keylen, const unsigned char *in, size_t inlen, const unsigned char *custom, size_t customlen, unsigned char *out, size_t outlen)</td></tr>
-<tr class="memdesc:af77d295266b216a6c2573d209ccaa167"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a KMAC value using the ASCON permutation.  <a href="#af77d295266b216a6c2573d209ccaa167">More...</a><br/></td></tr>
+<tr class="memdesc:af77d295266b216a6c2573d209ccaa167"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a KMAC value using ASCON-XOF.  <a href="#af77d295266b216a6c2573d209ccaa167">More...</a><br/></td></tr>
 <tr class="separator:af77d295266b216a6c2573d209ccaa167"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1df25dd7b8c1f50c703ed535c4416ff5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#a1df25dd7b8c1f50c703ed535c4416ff5">ascon_kmac_init</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, const unsigned char *key, size_t keylen, const unsigned char *custom, size_t customlen)</td></tr>
-<tr class="memdesc:a1df25dd7b8c1f50c703ed535c4416ff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental KMAC state using the ASCON permutation.  <a href="#a1df25dd7b8c1f50c703ed535c4416ff5">More...</a><br/></td></tr>
+<tr class="memdesc:a1df25dd7b8c1f50c703ed535c4416ff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental KMAC state using ASCON-XOF.  <a href="#a1df25dd7b8c1f50c703ed535c4416ff5">More...</a><br/></td></tr>
 <tr class="separator:a1df25dd7b8c1f50c703ed535c4416ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6344772e6b64962e2ea64e4e1c6a7f78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#a6344772e6b64962e2ea64e4e1c6a7f78">ascon_kmac_absorb</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a6344772e6b64962e2ea64e4e1c6a7f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absorbs more input data into an incremental ASCON-KMAC state.  <a href="#a6344772e6b64962e2ea64e4e1c6a7f78">More...</a><br/></td></tr>
@@ -133,11 +133,30 @@ Functions</h2></td></tr>
 <tr class="memitem:aa7f57270ced4f45a146bce27f1dbe9f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#aa7f57270ced4f45a146bce27f1dbe9f4">ascon_kmac_finalize</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, unsigned char out[<a class="el" href="ascon-kmac_8h.html#a7cd133c2679a76220bb714e6f1825a9c">ASCON_KMAC_SIZE</a>])</td></tr>
 <tr class="memdesc:aa7f57270ced4f45a146bce27f1dbe9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes fixed-length data from an incremental ASCON-KMAC state and finalizes the KMAC process.  <a href="#aa7f57270ced4f45a146bce27f1dbe9f4">More...</a><br/></td></tr>
 <tr class="separator:aa7f57270ced4f45a146bce27f1dbe9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c6fce18c0ed5e04a6e0b36e31b1b9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#aa7c6fce18c0ed5e04a6e0b36e31b1b9f">ascon_kmaca</a> (const unsigned char *key, size_t keylen, const unsigned char *in, size_t inlen, const unsigned char *custom, size_t customlen, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:aa7c6fce18c0ed5e04a6e0b36e31b1b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a KMAC value using ASCON-XOFA.  <a href="#aa7c6fce18c0ed5e04a6e0b36e31b1b9f">More...</a><br/></td></tr>
+<tr class="separator:aa7c6fce18c0ed5e04a6e0b36e31b1b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad34b548f64eb0ec9b8e6f9897eb398d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#ad34b548f64eb0ec9b8e6f9897eb398d8">ascon_kmaca_init</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, const unsigned char *key, size_t keylen, const unsigned char *custom, size_t customlen)</td></tr>
+<tr class="memdesc:ad34b548f64eb0ec9b8e6f9897eb398d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental KMAC state using ASCON-XOFA.  <a href="#ad34b548f64eb0ec9b8e6f9897eb398d8">More...</a><br/></td></tr>
+<tr class="separator:ad34b548f64eb0ec9b8e6f9897eb398d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cc78b4398ec8a81da0d24ef70ea0b97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#a5cc78b4398ec8a81da0d24ef70ea0b97">ascon_kmaca_absorb</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a5cc78b4398ec8a81da0d24ef70ea0b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absorbs more input data into an incremental ASCON-KMACA state.  <a href="#a5cc78b4398ec8a81da0d24ef70ea0b97">More...</a><br/></td></tr>
+<tr class="separator:a5cc78b4398ec8a81da0d24ef70ea0b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b19dd9d16bcea29f478967c2ec720f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#ae6b19dd9d16bcea29f478967c2ec720f">ascon_kmaca_set_output_length</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, size_t outlen)</td></tr>
+<tr class="memdesc:ae6b19dd9d16bcea29f478967c2ec720f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the desired output length for an incremental ASCON-KMACA state.  <a href="#ae6b19dd9d16bcea29f478967c2ec720f">More...</a><br/></td></tr>
+<tr class="separator:ae6b19dd9d16bcea29f478967c2ec720f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f6a5ed9594b4cddd41d0afe9ab95a14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#a7f6a5ed9594b4cddd41d0afe9ab95a14">ascon_kmaca_squeeze</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:a7f6a5ed9594b4cddd41d0afe9ab95a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes output data from an incremental ASCON-KMACA state.  <a href="#a7f6a5ed9594b4cddd41d0afe9ab95a14">More...</a><br/></td></tr>
+<tr class="separator:a7f6a5ed9594b4cddd41d0afe9ab95a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8401ee8de2115ae568c757e5fd057cc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-kmac_8h.html#a8401ee8de2115ae568c757e5fd057cc2">ascon_kmaca_finalize</a> (<a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *state, unsigned char out[<a class="el" href="ascon-kmac_8h.html#a7cd133c2679a76220bb714e6f1825a9c">ASCON_KMAC_SIZE</a>])</td></tr>
+<tr class="memdesc:a8401ee8de2115ae568c757e5fd057cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Squeezes fixed-length data from an incremental ASCON-KMACA state and finalizes the KMAC process.  <a href="#a8401ee8de2115ae568c757e5fd057cc2">More...</a><br/></td></tr>
+<tr class="separator:a8401ee8de2115ae568c757e5fd057cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Keyed Message Authentication Code (KMAC) based on ASCON. </p>
+<div class="textblock"><p>Keyed Message Authentication Code (KMAC) based on ASCON-XOF. </p>
 <p>The KMAC mode provides a method to authenticate a sequence of bytes using ASCON in hashing mode. The output is essentially equivalent to hashing the key followed by the data.</p>
 <p>NIST SP 800-185 is an extension of the XOF modes SHAKE128 and SHAKE256. The nearest equivalent for us is ASCON-XOF. We use the same encoding as NIST SP 800-185 to provide domain separation between the key and data.</p>
+<p>Two versions of KMAC are provided: ASCON-KMAC based around ASCON-XOF, and ASCON-KMACA based around ASCON-XOFA.</p>
 <p>References: NIST SP 800-185 </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="af77d295266b216a6c2573d209ccaa167"></a>
@@ -200,7 +219,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes a KMAC value using the ASCON permutation. </p>
+<p>Computes a KMAC value using ASCON-XOF. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
@@ -257,7 +276,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#a1df25dd7b8c1f50c703ed535c4416ff5" title="Initializes an incremental KMAC state using the ASCON permutation. ">ascon_kmac_init()</a>, <a class="el" href="ascon-kmac_8h.html#a7fe5157f6574cc449e84abddac2cf1f9" title="Squeezes output data from an incremental ASCON-KMAC state. ">ascon_kmac_squeeze()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#a1df25dd7b8c1f50c703ed535c4416ff5" title="Initializes an incremental KMAC state using ASCON-XOF. ">ascon_kmac_init()</a>, <a class="el" href="ascon-kmac_8h.html#a7fe5157f6574cc449e84abddac2cf1f9" title="Squeezes output data from an incremental ASCON-KMAC state. ">ascon_kmac_squeeze()</a> </dd></dl>
 
 </div>
 </div>
@@ -340,7 +359,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes an incremental KMAC state using the ASCON permutation. </p>
+<p>Initializes an incremental KMAC state using ASCON-XOF. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Points to the state to be initialized. </td></tr>
@@ -431,14 +450,309 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>The application should call <a class="el" href="ascon-kmac_8h.html#a95d5029c672a5b34889afaf2994d2335" title="Sets the desired output length for an incremental ASCON-KMAC state. ">ascon_kmac_set_output_length()</a> before this function to set the desured output length. If that function has not been called, then this function will assume that the application wants arbitrary-length output.</p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#a1df25dd7b8c1f50c703ed535c4416ff5" title="Initializes an incremental KMAC state using the ASCON permutation. ">ascon_kmac_init()</a>, ascon_kmac_update(), <a class="el" href="ascon-kmac_8h.html#aa7f57270ced4f45a146bce27f1dbe9f4" title="Squeezes fixed-length data from an incremental ASCON-KMAC state and finalizes the KMAC process...">ascon_kmac_finalize()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#a1df25dd7b8c1f50c703ed535c4416ff5" title="Initializes an incremental KMAC state using ASCON-XOF. ">ascon_kmac_init()</a>, ascon_kmac_update(), <a class="el" href="ascon-kmac_8h.html#aa7f57270ced4f45a146bce27f1dbe9f4" title="Squeezes fixed-length data from an incremental ASCON-KMAC state and finalizes the KMAC process...">ascon_kmac_finalize()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa7c6fce18c0ed5e04a6e0b36e31b1b9f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_kmaca </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>custom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>customlen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes a KMAC value using ASCON-XOFA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the data to authenticate. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Number of bytes of data to authenticate. </td></tr>
+    <tr><td class="paramname">custom</td><td>Points to the customization string. </td></tr>
+    <tr><td class="paramname">customlen</td><td>Number of bytes in the customization string. </td></tr>
+    <tr><td class="paramname">out</td><td>Buffer to receive the output KMAC value. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Length of the output KMAC value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The customization string allows the application to perform domain separation between different uses of the KMAC algorithm. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5cc78b4398ec8a81da0d24ef70ea0b97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_kmaca_absorb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absorbs more input data into an incremental ASCON-KMACA state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>KMAC state to be updated. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be absorbed into the state. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data to be absorbed into the state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#ad34b548f64eb0ec9b8e6f9897eb398d8" title="Initializes an incremental KMAC state using ASCON-XOFA. ">ascon_kmaca_init()</a>, <a class="el" href="ascon-kmac_8h.html#a7f6a5ed9594b4cddd41d0afe9ab95a14" title="Squeezes output data from an incremental ASCON-KMACA state. ">ascon_kmaca_squeeze()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8401ee8de2115ae568c757e5fd057cc2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_kmaca_finalize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>out</em>[ASCON_KMAC_SIZE]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Squeezes fixed-length data from an incremental ASCON-KMACA state and finalizes the KMAC process. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>KMAC state to squeeze the output data from. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the ASCON_KMAC_SIZE bytes of squeezed data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function combines the effect of <a class="el" href="ascon-kmac_8h.html#ae6b19dd9d16bcea29f478967c2ec720f" title="Sets the desired output length for an incremental ASCON-KMACA state. ">ascon_kmaca_set_output_length()</a> and <a class="el" href="ascon-kmac_8h.html#a7f6a5ed9594b4cddd41d0afe9ab95a14" title="Squeezes output data from an incremental ASCON-KMACA state. ">ascon_kmaca_squeeze()</a> for convenience.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#a7f6a5ed9594b4cddd41d0afe9ab95a14" title="Squeezes output data from an incremental ASCON-KMACA state. ">ascon_kmaca_squeeze()</a>, <a class="el" href="ascon-kmac_8h.html#ae6b19dd9d16bcea29f478967c2ec720f" title="Sets the desired output length for an incremental ASCON-KMACA state. ">ascon_kmaca_set_output_length()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad34b548f64eb0ec9b8e6f9897eb398d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_kmaca_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>custom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>customlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes an incremental KMAC state using ASCON-XOFA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Points to the state to be initialized. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">custom</td><td>Points to the customization string. </td></tr>
+    <tr><td class="paramname">customlen</td><td>Number of bytes in the customization string.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd>ascon_kmaca_update(), <a class="el" href="ascon-kmac_8h.html#a7f6a5ed9594b4cddd41d0afe9ab95a14" title="Squeezes output data from an incremental ASCON-KMACA state. ">ascon_kmaca_squeeze()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae6b19dd9d16bcea29f478967c2ec720f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_kmaca_set_output_length </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the desired output length for an incremental ASCON-KMACA state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>KMAC state to squeeze the output data from after the desired output length has been set. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Desired output length, or zero for arbitrary-length output.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#a7f6a5ed9594b4cddd41d0afe9ab95a14" title="Squeezes output data from an incremental ASCON-KMACA state. ">ascon_kmaca_squeeze()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7f6a5ed9594b4cddd41d0afe9ab95a14"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_kmaca_squeeze </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-kmac_8h.html#ab5aa93aed3ce3a309835dde0ad32887a">ascon_kmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Squeezes output data from an incremental ASCON-KMACA state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>KMAC state to squeeze the output data from. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the squeezed data. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Number of bytes of data to squeeze out of the state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The application should call <a class="el" href="ascon-kmac_8h.html#ae6b19dd9d16bcea29f478967c2ec720f" title="Sets the desired output length for an incremental ASCON-KMACA state. ">ascon_kmaca_set_output_length()</a> before this function to set the desured output length. If that function has not been called, then this function will assume that the application wants arbitrary-length output.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-kmac_8h.html#ad34b548f64eb0ec9b8e6f9897eb398d8" title="Initializes an incremental KMAC state using ASCON-XOFA. ">ascon_kmaca_init()</a>, ascon_kmaca_update(), <a class="el" href="ascon-kmac_8h.html#a8401ee8de2115ae568c757e5fd057cc2" title="Squeezes fixed-length data from an incremental ASCON-KMACA state and finalizes the KMAC process...">ascon_kmaca_finalize()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:11 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -101,17 +101,17 @@ Performance of AEAD algorithms on AVR</h1>
 <tr>
 <td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>2.05</td><td>1.95</td><td>3.65</td><td>3.52</td><td>2.36 </td></tr>
 <tr>
-<td><b><em>TinyJAMBU-128</em></b></td><td>128</td><td>96</td><td>64</td><td>1.82</td><td>1.77</td><td>4.37</td><td>4.20</td><td>2.25 </td></tr>
+<td><b><em>TinyJAMBU-128</em></b></td><td>128</td><td>96</td><td>64</td><td>1.79</td><td>1.78</td><td>4.02</td><td>3.99</td><td>2.21 </td></tr>
 <tr>
 <td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>1.89</td><td>1.77</td><td>3.60</td><td>3.52</td><td>2.20 </td></tr>
 <tr>
-<td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>1.65</td><td>1.60</td><td>4.03</td><td>3.88</td><td>2.04 </td></tr>
+<td><b><em>Xoodyak</em></b></td><td>128</td><td>128</td><td>128</td><td>1.81</td><td>1.80</td><td>2.58</td><td>2.57</td><td>2.01 </td></tr>
+<tr>
+<td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>1.62</td><td>1.61</td><td>3.72</td><td>3.69</td><td>2.00 </td></tr>
 <tr>
 <td><b><em>Romulus-N</em></b></td><td>128</td><td>128</td><td>128</td><td>1.57</td><td>1.53</td><td>3.65</td><td>3.52</td><td>1.93 </td></tr>
 <tr>
-<td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>1.50</td><td>1.47</td><td>3.73</td><td>3.59</td><td>1.87 </td></tr>
-<tr>
-<td><b><em>Xoodyak</em></b></td><td>128</td><td>128</td><td>128</td><td>1.64</td><td>1.58</td><td>1.99</td><td>1.95</td><td>1.72 </td></tr>
+<td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>1.47</td><td>1.47</td><td>3.46</td><td>3.44</td><td>1.83 </td></tr>
 <tr>
 <td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>1.16</td><td>1.15</td><td>2.82</td><td>2.76</td><td>1.45 </td></tr>
 <tr>
@@ -123,7 +123,7 @@ Performance of AEAD algorithms on AVR</h1>
 <tr>
 <td>AES-256-GCM</td><td>256</td><td>96</td><td>128</td><td>0.96</td><td>0.96</td><td>2.04</td><td>2.03</td><td>1.18 </td></tr>
 <tr>
-<td><b><em>Grain-128AEAD</em></b></td><td>128</td><td>96</td><td>64</td><td>0.64</td><td>0.62</td><td>1.81</td><td>1.74</td><td>0.81 </td></tr>
+<td><b><em>Grain-128AEAD</em></b></td><td>128</td><td>96</td><td>64</td><td>0.83</td><td>0.70</td><td>1.96</td><td>1.78</td><td>0.96 </td></tr>
 <tr>
 <td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.38</td><td>0.39</td><td>0.82</td><td>0.83</td><td>0.47 </td></tr>
 <tr>
@@ -155,7 +155,9 @@ Performance of hash algorithms on AVR</h1>
 <tr>
 <td><b><em>Romulus-H</em></b></td><td>256</td><td>0.91</td><td>0.75</td><td>1.81</td><td>1.16 </td></tr>
 <tr>
-<td><b><em>ASCON-HASH</em></b></td><td>256</td><td>0.66</td><td>0.55</td><td>0.91</td><td>0.71 </td></tr>
+<td>ASCON-HASHA</td><td>256</td><td>0.98</td><td>0.76</td><td>1.09</td><td>0.94 </td></tr>
+<tr>
+<td><b><em>ASCON-HASH</em></b></td><td>256</td><td>0.67</td><td>0.55</td><td>0.92</td><td>0.71 </td></tr>
 <tr>
 <td><b><em>PHOTON-Beetle-HASH</em></b></td><td>256</td><td>0.17</td><td>0.18</td><td>1.38</td><td>0.58 </td></tr>
 </table>
@@ -175,15 +177,15 @@ Overall group rankings for AVR</h1>
 <tr>
 <td>22</td><td>TinyJAMBU </td></tr>
 <tr>
-<td>19</td><td>Romulus </td></tr>
+<td>20</td><td>Xoodyak </td></tr>
 <tr>
-<td>17</td><td>Xoodyak </td></tr>
+<td>19</td><td>Romulus </td></tr>
 <tr>
 <td>14</td><td>PHOTON-Beetle </td></tr>
 <tr>
 <td>12</td><td>AES-128-GCM </td></tr>
 <tr>
-<td>8</td><td>Grain-128AEAD </td></tr>
+<td>9</td><td>Grain-128AEAD </td></tr>
 <tr>
 <td>4</td><td>Elephant </td></tr>
 <tr>
@@ -207,7 +209,7 @@ Overall group rankings for AVR</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:12 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

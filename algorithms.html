@@ -161,7 +161,7 @@ ASCON</h1>
 <li>ASCON-80pq with a 160-bit key, a 128-bit nonce, and a 128-bit tag.</li>
 </ul>
 <p>ASCON-128 is the recommended algorithm from the NIST submission. ASCON-128-a is faster but does not mix the input state quite as much as ASCON-128. ASCON-80pq is essentially the same as ASCON-128 but it has a 160-bit key which may give added resistance against quantum computers.</p>
-<p>The library also implements the ASCON-HASH and ASCON-XOF hashing algorithms as companions to the AEAD mode.</p>
+<p>The library also implements the ASCON-HASH, ASCON-HASHA, ASCON-XOF, and ASCON-XOFA hashing algorithms as companions to the AEAD mode.</p>
 <p>This library also provides a masked implementation of ASCON.</p>
 <p><b>Recommendation:</b> Use ASCON-128 for now unless you consider the 128-bit key length to be too short, in which case you should use ASCON-80pq.</p>
 <h1><a class="anchor" id="alg_elephant"></a>
@@ -263,7 +263,7 @@ Internal block operations</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:12 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

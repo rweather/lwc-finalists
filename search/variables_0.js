@@ -17,5 +17,7 @@ var searchData=
   ['ascon80pq_5fmasked_5fcipher',['ascon80pq_masked_cipher',['../aead-metadata_8h.html#adc2933e7761cd05a663a4d467fb09c1f',1,'aead-metadata.c']]],
   ['ascon80pq_5fsiv_5fcipher',['ascon80pq_siv_cipher',['../aead-metadata_8h.html#aaeabac90c80a3ecd3aa8fa01010cfbdd',1,'aead-metadata.c']]],
   ['ascon_5fhash_5falgorithm',['ascon_hash_algorithm',['../aead-metadata_8h.html#a85a83e8916bd69248e93351c0e8b8f42',1,'aead-metadata.c']]],
-  ['ascon_5fxof_5falgorithm',['ascon_xof_algorithm',['../aead-metadata_8h.html#ae7e2e976c1c6e2eda55ff73361c3320c',1,'aead-metadata.c']]]
+  ['ascon_5fhasha_5falgorithm',['ascon_hasha_algorithm',['../aead-metadata_8h.html#afd8e669290310d9a68ae36383c461805',1,'aead-metadata.c']]],
+  ['ascon_5fxof_5falgorithm',['ascon_xof_algorithm',['../aead-metadata_8h.html#ae7e2e976c1c6e2eda55ff73361c3320c',1,'aead-metadata.c']]],
+  ['ascon_5fxofa_5falgorithm',['ascon_xofa_algorithm',['../aead-metadata_8h.html#a5db39c32085c53eb6a6fea22a8171069',1,'aead-metadata.c']]]
 ];

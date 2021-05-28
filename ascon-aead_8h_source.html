@@ -115,69 +115,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a74d1e46abe6ab08aeb2c431344f2107f">   54</a></span>&#160;<span class="preprocessor">#define ASCON128_KEY_SIZE 16</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a719b55b7f6d255c5238b5c76c5fbde7f">   59</a></span>&#160;<span class="preprocessor">#define ASCON128_NONCE_SIZE 16</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a6f9d05f371fe172865b0b1ef476f54ba">   64</a></span>&#160;<span class="preprocessor">#define ASCON128_TAG_SIZE 16</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a839c776af8455ee2eafce31c0e2d970d">   69</a></span>&#160;<span class="preprocessor">#define ASCON80PQ_KEY_SIZE 20</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a37185e244aa5e8804cb9a73256bf585e">   74</a></span>&#160;<span class="preprocessor">#define ASCON80PQ_NONCE_SIZE 16</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a450d7deb3267a5767c2792fb32bdc912">   79</a></span>&#160;<span class="preprocessor">#define ASCON80PQ_TAG_SIZE 16</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a547f25e5d730e81bbf33e2a903f247da">ascon128_aead_encrypt</a></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a7aa0c3e569e9aad6045bdacc48938f9b">ascon128_aead_decrypt</a></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a204673a9c38094e3573422daf3e30be6">ascon128a_aead_encrypt</a></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#acac2fc9074f6d3a9f5e04e93d1456f23">ascon128a_aead_decrypt</a></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a968661fd99f65f0ba50e919e6194f324">ascon80pq_aead_encrypt</a></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a50666411e58c11c2805f1ae47981c204">ascon80pq_aead_decrypt</a></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor"></span>}</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a74d1e46abe6ab08aeb2c431344f2107f">   55</a></span>&#160;<span class="preprocessor">#define ASCON128_KEY_SIZE 16</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a719b55b7f6d255c5238b5c76c5fbde7f">   60</a></span>&#160;<span class="preprocessor">#define ASCON128_NONCE_SIZE 16</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a6f9d05f371fe172865b0b1ef476f54ba">   65</a></span>&#160;<span class="preprocessor">#define ASCON128_TAG_SIZE 16</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a839c776af8455ee2eafce31c0e2d970d">   70</a></span>&#160;<span class="preprocessor">#define ASCON80PQ_KEY_SIZE 20</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a37185e244aa5e8804cb9a73256bf585e">   75</a></span>&#160;<span class="preprocessor">#define ASCON80PQ_NONCE_SIZE 16</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="ascon-aead_8h.html#a450d7deb3267a5767c2792fb32bdc912">   80</a></span>&#160;<span class="preprocessor">#define ASCON80PQ_TAG_SIZE 16</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a547f25e5d730e81bbf33e2a903f247da">ascon128_aead_encrypt</a></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a7aa0c3e569e9aad6045bdacc48938f9b">ascon128_aead_decrypt</a></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a204673a9c38094e3573422daf3e30be6">ascon128a_aead_encrypt</a></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#acac2fc9074f6d3a9f5e04e93d1456f23">ascon128a_aead_decrypt</a></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a968661fd99f65f0ba50e919e6194f324">ascon80pq_aead_encrypt</a></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> *clen,</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> mlen,</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ascon-aead_8h.html#a50666411e58c11c2805f1ae47981c204">ascon80pq_aead_decrypt</a></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">size_t</span> *mlen,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *c, <span class="keywordtype">size_t</span> clen,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ad, <span class="keywordtype">size_t</span> adlen,</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *npub,</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *k);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor"></span>}</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="ascon-aead_8h_html_acac2fc9074f6d3a9f5e04e93d1456f23"><div class="ttname"><a href="ascon-aead_8h.html#acac2fc9074f6d3a9f5e04e93d1456f23">ascon128a_aead_decrypt</a></div><div class="ttdeci">int ascon128a_aead_decrypt(unsigned char *m, size_t *mlen, const unsigned char *c, size_t clen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Decrypts and authenticates a packet with ASCON-128a. </div><div class="ttdef"><b>Definition:</b> ascon-aead.c:451</div></div>
 <div class="ttc" id="ascon-aead_8h_html_a204673a9c38094e3573422daf3e30be6"><div class="ttname"><a href="ascon-aead_8h.html#a204673a9c38094e3573422daf3e30be6">ascon128a_aead_encrypt</a></div><div class="ttdeci">int ascon128a_aead_encrypt(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with ASCON-128a. </div><div class="ttdef"><b>Definition:</b> ascon-aead.c:401</div></div>
 <div class="ttc" id="ascon-aead_8h_html_a547f25e5d730e81bbf33e2a903f247da"><div class="ttname"><a href="ascon-aead_8h.html#a547f25e5d730e81bbf33e2a903f247da">ascon128_aead_encrypt</a></div><div class="ttdeci">int ascon128_aead_encrypt(unsigned char *c, size_t *clen, const unsigned char *m, size_t mlen, const unsigned char *ad, size_t adlen, const unsigned char *npub, const unsigned char *k)</div><div class="ttdoc">Encrypts and authenticates a packet with ASCON-128. </div><div class="ttdef"><b>Definition:</b> ascon-aead.c:298</div></div>
@@ -187,7 +187,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:11 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

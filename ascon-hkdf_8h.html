@@ -109,7 +109,7 @@ Data Structures</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ac79be9d364874170d219a783fd81ffdd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac79be9d364874170d219a783fd81ffdd"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hkdf_8h.html#ac79be9d364874170d219a783fd81ffdd">ASCON_HKDF_OUTPUT_SIZE</a>&#160;&#160;&#160;32</td></tr>
-<tr class="memdesc:ac79be9d364874170d219a783fd81ffdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default output block size for ASCON-HKDF. Key material is generated in blocks of this size. <br/></td></tr>
+<tr class="memdesc:ac79be9d364874170d219a783fd81ffdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default output block size for ASCON-HKDF and ASCON-HKDFA. Key material is generated in blocks of this size. <br/></td></tr>
 <tr class="separator:ac79be9d364874170d219a783fd81ffdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -126,6 +126,18 @@ Functions</h2></td></tr>
 <tr class="memitem:abd84e3ea9cfea6581d74857c4c29dcd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hkdf_8h.html#abd84e3ea9cfea6581d74857c4c29dcd4">ascon_hkdf_free</a> (<a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *state)</td></tr>
 <tr class="memdesc:abd84e3ea9cfea6581d74857c4c29dcd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all sensitive material in a ASCON-HKDF state.  <a href="#abd84e3ea9cfea6581d74857c4c29dcd4">More...</a><br/></td></tr>
 <tr class="separator:abd84e3ea9cfea6581d74857c4c29dcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe37d70a88454a51ab3474cca3aea29e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hkdf_8h.html#afe37d70a88454a51ab3474cca3aea29e">ascon_hkdfa</a> (unsigned char *out, size_t outlen, const unsigned char *key, size_t keylen, const unsigned char *salt, size_t saltlen, const unsigned char *info, size_t infolen)</td></tr>
+<tr class="memdesc:afe37d70a88454a51ab3474cca3aea29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derives key material using ASCON-HKDFA.  <a href="#afe37d70a88454a51ab3474cca3aea29e">More...</a><br/></td></tr>
+<tr class="separator:afe37d70a88454a51ab3474cca3aea29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e50a8131739153438027d0d02691e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hkdf_8h.html#a62e50a8131739153438027d0d02691e0">ascon_hkdfa_extract</a> (<a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *state, const unsigned char *key, size_t keylen, const unsigned char *salt, size_t saltlen)</td></tr>
+<tr class="memdesc:a62e50a8131739153438027d0d02691e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts entropy from a key and salt for ASCON-HKDFA.  <a href="#a62e50a8131739153438027d0d02691e0">More...</a><br/></td></tr>
+<tr class="separator:a62e50a8131739153438027d0d02691e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b847d5df6937ca2e78b7611460b685"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hkdf_8h.html#a04b847d5df6937ca2e78b7611460b685">ascon_hkdfa_expand</a> (<a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *state, const unsigned char *info, size_t infolen, unsigned char *out, size_t outlen)</td></tr>
+<tr class="memdesc:a04b847d5df6937ca2e78b7611460b685"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands key material using a ASCON-HKDFA state.  <a href="#a04b847d5df6937ca2e78b7611460b685">More...</a><br/></td></tr>
+<tr class="separator:a04b847d5df6937ca2e78b7611460b685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c7afcd853cae72025aea819ded44ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hkdf_8h.html#a95c7afcd853cae72025aea819ded44ec">ascon_hkdfa_free</a> (<a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *state)</td></tr>
+<tr class="memdesc:a95c7afcd853cae72025aea819ded44ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all sensitive material in a ASCON-HKDFA state.  <a href="#a95c7afcd853cae72025aea819ded44ec">More...</a><br/></td></tr>
+<tr class="separator:a95c7afcd853cae72025aea819ded44ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>HMAC-based key derivation function based on ASCON-HMAC. </p>
@@ -348,10 +360,227 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="afe37d70a88454a51ab3474cca3aea29e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ascon_hkdfa </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>salt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>saltlen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>infolen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Derives key material using ASCON-HKDFA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the key material. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Number of bytes of key material to generate, maximum of ASCON_HKDF_OUTPUT_SIZE * 255 bytes. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the bytes of the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">salt</td><td>Points to the bytes of the salt. </td></tr>
+    <tr><td class="paramname">saltlen</td><td>Number of bytes in the salt. </td></tr>
+    <tr><td class="paramname">info</td><td>Points to the bytes of the informational data. </td></tr>
+    <tr><td class="paramname">infolen</td><td>Number of bytes in the informational data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success or -1 if <em>outlen</em> is out of range.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hkdf_8h.html#a62e50a8131739153438027d0d02691e0" title="Extracts entropy from a key and salt for ASCON-HKDFA. ">ascon_hkdfa_extract()</a>, <a class="el" href="ascon-hkdf_8h.html#a04b847d5df6937ca2e78b7611460b685" title="Expands key material using a ASCON-HKDFA state. ">ascon_hkdfa_expand()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a04b847d5df6937ca2e78b7611460b685"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ascon_hkdfa_expand </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>infolen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Expands key material using a ASCON-HKDFA state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HKDF state to use to expand key material. </td></tr>
+    <tr><td class="paramname">info</td><td>Points to the bytes of the informational data. </td></tr>
+    <tr><td class="paramname">infolen</td><td>Number of bytes in the informational data. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the key material. </td></tr>
+    <tr><td class="paramname">outlen</td><td>Number of bytes of key material to generate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success or -1 if too many bytes have been generated so far. There is a limit of ASCON_HKDF_OUTPUT_SIZE * 255 bytes. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a62e50a8131739153438027d0d02691e0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hkdfa_extract </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>salt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>saltlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extracts entropy from a key and salt for ASCON-HKDFA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HKDF state to be initialized. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the bytes of the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">salt</td><td>Points to the bytes of the salt. </td></tr>
+    <tr><td class="paramname">saltlen</td><td>Number of bytes in the salt.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hkdf_8h.html#a04b847d5df6937ca2e78b7611460b685" title="Expands key material using a ASCON-HKDFA state. ">ascon_hkdfa_expand()</a>, <a class="el" href="ascon-hkdf_8h.html#afe37d70a88454a51ab3474cca3aea29e" title="Derives key material using ASCON-HKDFA. ">ascon_hkdfa()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a95c7afcd853cae72025aea819ded44ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hkdfa_free </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structascon__hkdf__state__t.html">ascon_hkdf_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees all sensitive material in a ASCON-HKDFA state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Points to the HKDF state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:11 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>ASCON-HASH hash algorithm.  
+<p>ASCON-HASH and ASCON-HASHA hash algorithms.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;ascon-xof.h&quot;</code><br/>
 </div>
@@ -102,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Typedefs</h2></td></tr>
 <tr class="memitem:a24d54ca18c4cdc47c1094828a87e8760"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a24d54ca18c4cdc47c1094828a87e8760"></a>
 typedef <a class="el" href="unionascon__xof__state__t.html">ascon_xof_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a></td></tr>
-<tr class="memdesc:a24d54ca18c4cdc47c1094828a87e8760"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for ASCON-HASH incremental mode. <br/></td></tr>
+<tr class="memdesc:a24d54ca18c4cdc47c1094828a87e8760"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for ASCON-HASH and ASCON-HASHA incremental modes. <br/></td></tr>
 <tr class="separator:a24d54ca18c4cdc47c1094828a87e8760"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -119,10 +119,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a6acc6df761756d14f1b58ea25645c0f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a6acc6df761756d14f1b58ea25645c0f7">ascon_hash_finalize</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state, unsigned char *out)</td></tr>
 <tr class="memdesc:a6acc6df761756d14f1b58ea25645c0f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from an ASCON-HASH hashing operation.  <a href="#a6acc6df761756d14f1b58ea25645c0f7">More...</a><br/></td></tr>
 <tr class="separator:a6acc6df761756d14f1b58ea25645c0f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a785151948151952d5d69b5aaecedcd6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a785151948151952d5d69b5aaecedcd6f">ascon_hasha</a> (unsigned char *out, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a785151948151952d5d69b5aaecedcd6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashes a block of input data with ASCON-HASHA.  <a href="#a785151948151952d5d69b5aaecedcd6f">More...</a><br/></td></tr>
+<tr class="separator:a785151948151952d5d69b5aaecedcd6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f">ascon_hasha_init</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state)</td></tr>
+<tr class="memdesc:a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the state for an ASCON-HASHA hashing operation.  <a href="#a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f">More...</a><br/></td></tr>
+<tr class="separator:a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b19a6819e29e240d712ec289f52475c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#a7b19a6819e29e240d712ec289f52475c">ascon_hasha_update</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a7b19a6819e29e240d712ec289f52475c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an ASCON-HASHA state with more input data.  <a href="#a7b19a6819e29e240d712ec289f52475c">More...</a><br/></td></tr>
+<tr class="separator:a7b19a6819e29e240d712ec289f52475c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8aeef6bef97dc8163af02b0fe80827f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hash_8h.html#ad8aeef6bef97dc8163af02b0fe80827f">ascon_hasha_finalize</a> (<a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *state, unsigned char *out)</td></tr>
+<tr class="memdesc:ad8aeef6bef97dc8163af02b0fe80827f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the final hash value from an ASCON-HASHA hashing operation.  <a href="#ad8aeef6bef97dc8163af02b0fe80827f">More...</a><br/></td></tr>
+<tr class="separator:ad8aeef6bef97dc8163af02b0fe80827f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ASCON-HASH hash algorithm. </p>
-<p>ASCON-XOF extensible output function (XOF).</p>
+<div class="textblock"><p>ASCON-HASH and ASCON-HASHA hash algorithms. </p>
+<p>ASCON-XOF and ASCON-XOFA extensible output functions (XOF's).</p>
 <p>References: <a href="https://ascon.iaik.tugraz.at/">https://ascon.iaik.tugraz.at/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a9dcda54d9402c14917be5752033f76c4"></a>
@@ -273,10 +285,158 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a785151948151952d5d69b5aaecedcd6f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ascon_hasha </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hashes a block of input data with ASCON-HASHA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Buffer to receive the hash output which must be at least ASCON_HASH_SIZE bytes in length. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be hashed. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data in bytes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns zero on success or -1 if there was an error in the parameters.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f" title="Initializes the state for an ASCON-HASHA hashing operation. ">ascon_hasha_init()</a>, ascon_hasha_absorb(), ascon_hasha_squeeze() </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad8aeef6bef97dc8163af02b0fe80827f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hasha_finalize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the final hash value from an ASCON-HASHA hashing operation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Hash state to be finalized. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the 32-byte hash value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f" title="Initializes the state for an ASCON-HASHA hashing operation. ">ascon_hasha_init()</a>, <a class="el" href="ascon-hash_8h.html#a7b19a6819e29e240d712ec289f52475c" title="Updates an ASCON-HASHA state with more input data. ">ascon_hasha_update()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hasha_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the state for an ASCON-HASHA hashing operation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Hash state to be initialized.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a7b19a6819e29e240d712ec289f52475c" title="Updates an ASCON-HASHA state with more input data. ">ascon_hasha_update()</a>, <a class="el" href="ascon-hash_8h.html#ad8aeef6bef97dc8163af02b0fe80827f" title="Returns the final hash value from an ASCON-HASHA hashing operation. ">ascon_hasha_finalize()</a>, <a class="el" href="ascon-hash_8h.html#a785151948151952d5d69b5aaecedcd6f" title="Hashes a block of input data with ASCON-HASHA. ">ascon_hasha()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7b19a6819e29e240d712ec289f52475c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hasha_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-hash_8h.html#a24d54ca18c4cdc47c1094828a87e8760">ascon_hash_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates an ASCON-HASHA state with more input data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Hash state to be updated. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be incorporated into the state. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data to be incorporated into the state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hash_8h.html#a40d4e73c2dd6c7d2a7cf7fe6dedb7a6f" title="Initializes the state for an ASCON-HASHA hashing operation. ">ascon_hasha_init()</a>, <a class="el" href="ascon-hash_8h.html#ad8aeef6bef97dc8163af02b0fe80827f" title="Returns the final hash value from an ASCON-HASHA hashing operation. ">ascon_hasha_finalize()</a> </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:11 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

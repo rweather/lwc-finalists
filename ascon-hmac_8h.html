@@ -103,14 +103,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Macros</h2></td></tr>
 <tr class="memitem:a37abe53f04723f82c22152f16cd9ca85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37abe53f04723f82c22152f16cd9ca85"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#a37abe53f04723f82c22152f16cd9ca85">ASCON_HMAC_SIZE</a>&#160;&#160;&#160;ASCON_HASH_SIZE</td></tr>
-<tr class="memdesc:a37abe53f04723f82c22152f16cd9ca85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the output for ASCON-HMAC. <br/></td></tr>
+<tr class="memdesc:a37abe53f04723f82c22152f16cd9ca85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the output for ASCON-HMAC and ASCON-HMACA. <br/></td></tr>
 <tr class="separator:a37abe53f04723f82c22152f16cd9ca85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a009177e7f6b8c5e21d5e6e192479fedd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a009177e7f6b8c5e21d5e6e192479fedd"></a>
 typedef <a class="el" href="unionascon__xof__state__t.html">ascon_xof_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a></td></tr>
-<tr class="memdesc:a009177e7f6b8c5e21d5e6e192479fedd"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the ASCON-HMAC incremental mode. <br/></td></tr>
+<tr class="memdesc:a009177e7f6b8c5e21d5e6e192479fedd"><td class="mdescLeft">&#160;</td><td class="mdescRight">State information for the ASCON-HMAC and ASCON-HMACA incremental modes. <br/></td></tr>
 <tr class="separator:a009177e7f6b8c5e21d5e6e192479fedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -127,10 +127,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a52d97e7add33327dc73a47a7a99aeead"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#a52d97e7add33327dc73a47a7a99aeead">ascon_hmac_finalize</a> (<a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *state, const unsigned char *key, size_t keylen, unsigned char *out)</td></tr>
 <tr class="memdesc:a52d97e7add33327dc73a47a7a99aeead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes an incremental ASCON-HMAC state.  <a href="#a52d97e7add33327dc73a47a7a99aeead">More...</a><br/></td></tr>
 <tr class="separator:a52d97e7add33327dc73a47a7a99aeead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc293e8ba209c72abb188cda63439f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#a6dc293e8ba209c72abb188cda63439f9">ascon_hmaca</a> (unsigned char *out, const unsigned char *key, size_t keylen, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a6dc293e8ba209c72abb188cda63439f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a HMAC value using ASCON-HASHA.  <a href="#a6dc293e8ba209c72abb188cda63439f9">More...</a><br/></td></tr>
+<tr class="separator:a6dc293e8ba209c72abb188cda63439f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a67b27f238513e5d9d02ebbe9d9706"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#ae4a67b27f238513e5d9d02ebbe9d9706">ascon_hmaca_init</a> (<a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *state, const unsigned char *key, size_t keylen)</td></tr>
+<tr class="memdesc:ae4a67b27f238513e5d9d02ebbe9d9706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental HMAC state using ASCON-HASHA.  <a href="#ae4a67b27f238513e5d9d02ebbe9d9706">More...</a><br/></td></tr>
+<tr class="separator:ae4a67b27f238513e5d9d02ebbe9d9706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4220fb4be9a0970c604ef8defb95ee56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#a4220fb4be9a0970c604ef8defb95ee56">ascon_hmaca_update</a> (<a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
+<tr class="memdesc:a4220fb4be9a0970c604ef8defb95ee56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an incremental ASCON-HMACA state with more input data.  <a href="#a4220fb4be9a0970c604ef8defb95ee56">More...</a><br/></td></tr>
+<tr class="separator:a4220fb4be9a0970c604ef8defb95ee56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeea97d5165b5e365471611832f3a615c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ascon-hmac_8h.html#aeea97d5165b5e365471611832f3a615c">ascon_hmaca_finalize</a> (<a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *state, const unsigned char *key, size_t keylen, unsigned char *out)</td></tr>
+<tr class="memdesc:aeea97d5165b5e365471611832f3a615c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes an incremental ASCON-HMACA state.  <a href="#aeea97d5165b5e365471611832f3a615c">More...</a><br/></td></tr>
+<tr class="separator:aeea97d5165b5e365471611832f3a615c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Hashed Message Authentication Code (HMAC) based on ASCON-HASH. </p>
-<p>The HMAC mode provides a method to authenticate a sequence of bytes using ASCON-HASH as the underlying digest algorithm.</p>
+<p>The HMAC mode provides a method to authenticate a sequence of bytes using ASCON-HASH or ASCON-HASHA as the underlying digest algorithm.</p>
 <p>HMAC uses an underlying block size to pad the key data. The ASCON-HASH block absorption rate of 8 bytes is too short so we use the HMAC-SHA-256 block size of 64 instead.</p>
 <dl class="section note"><dt>Note</dt><dd>The KMAC construction is preferable for sponge-based hash algorithms as it is simpler and more efficient. HMAC mode is provided for drop-in compatibility with existing designs.</dd></dl>
 <p>Reference: <a href="https://tools.ietf.org/html/rfc2104">https://tools.ietf.org/html/rfc2104</a> </p>
@@ -328,10 +340,203 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a6dc293e8ba209c72abb188cda63439f9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hmaca </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes a HMAC value using ASCON-HASHA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Buffer to receive the output HMAC value; must be at least ASCON_HMAC_SIZE bytes in length. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the data to authenticate. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Number of bytes of data to authenticate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aeea97d5165b5e365471611832f3a615c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hmaca_finalize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finalizes an incremental ASCON-HMACA state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HMAC state to squeeze the output data from. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key. </td></tr>
+    <tr><td class="paramname">out</td><td>Points to the output buffer to receive the HMAC value; must be at least ASCON_HMAC_SIZE bytes in length.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hmac_8h.html#ae4a67b27f238513e5d9d02ebbe9d9706" title="Initializes an incremental HMAC state using ASCON-HASHA. ">ascon_hmaca_init()</a>, <a class="el" href="ascon-hmac_8h.html#a4220fb4be9a0970c604ef8defb95ee56" title="Updates an incremental ASCON-HMACA state with more input data. ">ascon_hmaca_update()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae4a67b27f238513e5d9d02ebbe9d9706"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hmaca_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>keylen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes an incremental HMAC state using ASCON-HASHA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Points to the state to be initialized. </td></tr>
+    <tr><td class="paramname">key</td><td>Points to the key. </td></tr>
+    <tr><td class="paramname">keylen</td><td>Number of bytes in the key.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <em>key</em> needs to be preserved until the <a class="el" href="ascon-hmac_8h.html#aeea97d5165b5e365471611832f3a615c" title="Finalizes an incremental ASCON-HMACA state. ">ascon_hmaca_finalize()</a> call to provide the outer HMAC hashing key.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hmac_8h.html#a4220fb4be9a0970c604ef8defb95ee56" title="Updates an incremental ASCON-HMACA state with more input data. ">ascon_hmaca_update()</a>, <a class="el" href="ascon-hmac_8h.html#aeea97d5165b5e365471611832f3a615c" title="Finalizes an incremental ASCON-HMACA state. ">ascon_hmaca_finalize()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4220fb4be9a0970c604ef8defb95ee56"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ascon_hmaca_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ascon-hmac_8h.html#a009177e7f6b8c5e21d5e6e192479fedd">ascon_hmac_state_t</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates an incremental ASCON-HMACA state with more input data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HMAC state to be updated. </td></tr>
+    <tr><td class="paramname">in</td><td>Points to the input data to be incorporated into the state. </td></tr>
+    <tr><td class="paramname">inlen</td><td>Length of the input data to be incorporated into the state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="ascon-hmac_8h.html#ae4a67b27f238513e5d9d02ebbe9d9706" title="Initializes an incremental HMAC state using ASCON-HASHA. ">ascon_hmaca_init()</a>, <a class="el" href="ascon-hmac_8h.html#aeea97d5165b5e365471611832f3a615c" title="Finalizes an incremental ASCON-HMACA state. ">ascon_hmaca_finalize()</a> </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 27 2021 04:52:11 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
