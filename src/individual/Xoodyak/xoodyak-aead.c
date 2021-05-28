@@ -94,15 +94,17 @@ int xoodyak_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + XOODYAK_TAG_SIZE;
 
-    /* Initialize the state with the key */
+    /* Initialize the state with the key and nonce */
     memcpy(state.B, k, XOODYAK_KEY_SIZE);
-    memset(state.B + XOODYAK_KEY_SIZE, 0, sizeof(state.B) - XOODYAK_KEY_SIZE);
-    state.B[XOODYAK_KEY_SIZE + 1] = 0x01; /* Padding */
+    memcpy(state.B + XOODYAK_KEY_SIZE, npub, XOODYAK_NONCE_SIZE);
+    state.B[XOODYAK_KEY_SIZE + XOODYAK_NONCE_SIZE] = XOODYAK_NONCE_SIZE;
+    state.B[XOODYAK_KEY_SIZE + XOODYAK_NONCE_SIZE + 1] = 0x01; /* Padding */
+    memset(state.B + XOODYAK_KEY_SIZE + XOODYAK_NONCE_SIZE + 2, 0,
+           sizeof(state.B) - XOODYAK_KEY_SIZE - XOODYAK_NONCE_SIZE - 3);
     state.B[sizeof(state.B) - 1] = 0x02;  /* Domain separation */
     phase = XOODYAK_PHASE_DOWN;
 
-    /* Absorb the nonce and associated data */
-    xoodyak_absorb(&state, &phase, npub, XOODYAK_NONCE_SIZE);
+    /* Absorb the associated data */
     xoodyak_absorb(&state, &phase, ad, adlen);
 
     /* Encrypt the plaintext to produce the ciphertext */
@@ -148,15 +150,17 @@ int xoodyak_aead_decrypt
         return -1;
     *mlen = clen - XOODYAK_TAG_SIZE;
 
-    /* Initialize the state with the key */
+    /* Initialize the state with the key and nonce */
     memcpy(state.B, k, XOODYAK_KEY_SIZE);
-    memset(state.B + XOODYAK_KEY_SIZE, 0, sizeof(state.B) - XOODYAK_KEY_SIZE);
-    state.B[XOODYAK_KEY_SIZE + 1] = 0x01; /* Padding */
+    memcpy(state.B + XOODYAK_KEY_SIZE, npub, XOODYAK_NONCE_SIZE);
+    state.B[XOODYAK_KEY_SIZE + XOODYAK_NONCE_SIZE] = XOODYAK_NONCE_SIZE;
+    state.B[XOODYAK_KEY_SIZE + XOODYAK_NONCE_SIZE + 1] = 0x01; /* Padding */
+    memset(state.B + XOODYAK_KEY_SIZE + XOODYAK_NONCE_SIZE + 2, 0,
+           sizeof(state.B) - XOODYAK_KEY_SIZE - XOODYAK_NONCE_SIZE - 3);
     state.B[sizeof(state.B) - 1] = 0x02;  /* Domain separation */
     phase = XOODYAK_PHASE_DOWN;
 
-    /* Absorb the nonce and associated data */
-    xoodyak_absorb(&state, &phase, npub, XOODYAK_NONCE_SIZE);
+    /* Absorb the associated data */
     xoodyak_absorb(&state, &phase, ad, adlen);
 
     /* Decrypt the ciphertext to produce the plaintext */

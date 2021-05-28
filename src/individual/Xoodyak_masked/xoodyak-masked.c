@@ -43,64 +43,53 @@
  * \param state The state after the key and nonce have been absorbed.
  * \param k Points to the key.
  * \param npub Points to the nonce.
+ * \param ad Points to the associated data to be absorbed.
+ * \param len Length of the associated data to be absorbed.
  */
 static void xoodyak_init_masked
     (xoodoo_state_t *state, const unsigned char *k,
-     const unsigned char *npub)
+     const unsigned char *npub, const unsigned char *ad, size_t len)
 {
     mask_uint32_t mstate[12];
-    int index;
+    unsigned char padded[48];
+    uint32_t domain = 0x03000000U;
+    unsigned temp;
 
-    /* Mask the key and initialize the state */
+    /* Mask the key and nonce to initialize the state */
     aead_random_init();
     mask_input(mstate[0], le_load_word32(k));
     mask_input(mstate[1], le_load_word32(k + 4));
     mask_input(mstate[2], le_load_word32(k + 8));
     mask_input(mstate[3], le_load_word32(k + 12));
-    mask_input(mstate[4], 0x00000100U); /* Padding */
-    for (index = 5; index < 11; ++index)
-        mask_input(mstate[index], 0);
+    mask_input(mstate[4], le_load_word32(npub));
+    mask_input(mstate[5], le_load_word32(npub + 4));
+    mask_input(mstate[6], le_load_word32(npub + 8));
+    mask_input(mstate[7], le_load_word32(npub + 12));
+    mask_input(mstate[8], 0x00000110U); /* Nonce length and padding */
+    for (temp = 9; temp < 11; ++temp)
+        mask_input(mstate[temp], 0);
     mask_input(mstate[11], 0x02000000U); /* Domain separation */
 
-    /* Absorb the nonce into the masked state */
+    /* Absorb the associated data in masked form */
+    while (len > XOODYAK_MASKED_ABSORB_RATE) {
+        xoodoo_permute_masked(mstate);
+        for (temp = 0; temp < 11; ++temp)
+            mask_xor_const(mstate[temp], le_load_word32(ad + temp * 4));
+        mask_xor_const(mstate[11], domain | 0x01); /* Padding and domain */
+        ad += XOODYAK_MASKED_ABSORB_RATE;
+        len -= XOODYAK_MASKED_ABSORB_RATE;
+        domain = 0;
+    }
     xoodoo_permute_masked(mstate);
-    mask_xor_const(mstate[0], le_load_word32(npub));
-    mask_xor_const(mstate[1], le_load_word32(npub + 4));
-    mask_xor_const(mstate[2], le_load_word32(npub + 8));
-    mask_xor_const(mstate[3], le_load_word32(npub + 12));
-    mask_xor_const(mstate[4],  0x00000001U); /* Padding */
-    mask_xor_const(mstate[11], 0x03000000U); /* Domain separation */
+    memcpy(padded, ad, len);
+    padded[len] = 0x01; /* Padding */
+    memset(padded + len + 1, 0, sizeof(padded) - (len + 2));
+    padded[sizeof(padded) - 1] = (unsigned char)(domain >> 24);
+    for (temp = 0; temp < 12; ++temp)
+        mask_xor_const(mstate[temp], le_load_word32(padded + temp * 4));
 
     /* Convert the state into unmasked form */
     xoodoo_unmask(state->W, mstate);
-}
-
-/**
- * \brief Absorbs data into the Xoodoo permutation state.
- *
- * \param state Xoodoo permutation state.
- * \param data Points to the data to be absorbed.
- * \param len Length of the data to be absorbed.
- */
-static void xoodyak_absorb_masked
-    (xoodoo_state_t *state, const unsigned char *data, size_t len)
-{
-    uint8_t domain = 0x03;
-    unsigned temp;
-    while (len > XOODYAK_MASKED_ABSORB_RATE) {
-        xoodoo_permute(state);
-        lw_xor_block(state->B, data, XOODYAK_MASKED_ABSORB_RATE);
-        state->B[XOODYAK_MASKED_ABSORB_RATE] ^= 0x01; /* Padding */
-        state->B[sizeof(state->B) - 1] ^= domain;
-        data += XOODYAK_MASKED_ABSORB_RATE;
-        len -= XOODYAK_MASKED_ABSORB_RATE;
-        domain = 0x00;
-    }
-    temp = (unsigned)len;
-    xoodoo_permute(state);
-    lw_xor_block(state->B, data, temp);
-    state->B[temp] ^= 0x01; /* Padding */
-    state->B[sizeof(state->B) - 1] ^= domain;
 }
 
 int xoodyak_masked_aead_encrypt
@@ -117,11 +106,8 @@ int xoodyak_masked_aead_encrypt
     /* Set the length of the returned ciphertext */
     *clen = mlen + XOODYAK_MASKED_TAG_SIZE;
 
-    /* Initialize the state with the key and nonce */
-    xoodyak_init_masked(&state, k, npub);
-
-    /* Absorb the associated data */
-    xoodyak_absorb_masked(&state, ad, adlen);
+    /* Initialize the state with the key, nonce, and associated data */
+    xoodyak_init_masked(&state, k, npub, ad, adlen);
 
     /* Encrypt the plaintext to produce the ciphertext */
     domain = 0x80;
@@ -167,11 +153,8 @@ int xoodyak_masked_aead_decrypt
         return -1;
     *mlen = clen - XOODYAK_MASKED_TAG_SIZE;
 
-    /* Initialize the state with the key and nonce */
-    xoodyak_init_masked(&state, k, npub);
-
-    /* Absorb the associated data */
-    xoodyak_absorb_masked(&state, ad, adlen);
+    /* Initialize the state with the key, nonce, and associated data */
+    xoodyak_init_masked(&state, k, npub, ad, adlen);
 
     /* Decrypt the ciphertext to produce the plaintext */
     domain = 0x80;
@@ -215,25 +198,20 @@ static void xoodyak_init_masked
 {
     int index;
 
-    /* Mask the key and initialize the state */
+    /* Mask the key and nonce to initialize the state */
     aead_random_init();
     mask_input(state[0], le_load_word32(k));
     mask_input(state[1], le_load_word32(k + 4));
     mask_input(state[2], le_load_word32(k + 8));
     mask_input(state[3], le_load_word32(k + 12));
-    mask_input(state[4], 0x00000100U); /* Padding */
-    for (index = 5; index < 11; ++index)
+    mask_input(state[4], le_load_word32(npub));
+    mask_input(state[5], le_load_word32(npub + 4));
+    mask_input(state[6], le_load_word32(npub + 8));
+    mask_input(state[7], le_load_word32(npub + 12));
+    mask_input(state[8], 0x00000110U); /* Nonce length and padding */
+    for (index = 9; index < 11; ++index)
         mask_input(state[index], 0);
     mask_input(state[11], 0x02000000U); /* Domain separation */
-
-    /* Absorb the nonce into the masked state */
-    xoodoo_permute_masked(state);
-    mask_xor_const(state[0], le_load_word32(npub));
-    mask_xor_const(state[1], le_load_word32(npub + 4));
-    mask_xor_const(state[2], le_load_word32(npub + 8));
-    mask_xor_const(state[3], le_load_word32(npub + 12));
-    mask_xor_const(state[4],  0x00000001U); /* Padding */
-    mask_xor_const(state[11], 0x03000000U); /* Domain separation */
 }
 
 /**

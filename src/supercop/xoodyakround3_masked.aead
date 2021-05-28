@@ -1,5 +1,5 @@
 aead_family=xoodyak
-aead_name=xoodyakv1
+aead_name=xoodyakround3
 aead_meta_name=Xoodyak-Masked
 aead_srcdir=Xoodyak_masked
 aead_key_size=16

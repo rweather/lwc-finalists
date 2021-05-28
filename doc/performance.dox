@@ -86,10 +86,10 @@ assembly code.
 <table>
 <tr><td>Algorithm</td><td>Key Bits</td><td>Nonce Bits</td><td>Tag Bits</td><td>Encrypt 128 bytes</td><td>Decrypt 128 bytes</td><td>Encrypt 16 bytes</td><td>Decrypt 16 bytes</td><td>Average</td></tr>
 <tr><td>Schwaemm128-128 (SPARKLE)</td><td>128</td><td>128</td><td>128</td><td>1.66</td><td>1.62</td><td>3.08</td><td>2.53</td><td>2.11</td></tr>
+<tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>1.77</td><td>1.66</td><td>2.34</td><td>2.16</td><td>1.97</td></tr>
 <tr><td><b><i>Schwaemm256-128</i></b> (SPARKLE)</td><td>128</td><td>256</td><td>128</td><td>1.93</td><td>1.61</td><td>2.13</td><td>1.97</td><td>1.90</td></tr>
 <tr><td>Schwaemm192-192 (SPARKLE)</td><td>192</td><td>192</td><td>192</td><td>1.75</td><td>1.52</td><td>2.12</td><td>1.88</td><td>1.80</td></tr>
 <tr><td>ASCON-128a</td><td>128</td><td>128</td><td>128</td><td>1.86</td><td>1.70</td><td>1.80</td><td>1.78</td><td>1.78</td></tr>
-<tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>1.66</td><td>1.51</td><td>1.73</td><td>1.60</td><td>1.62</td></tr>
 <tr><td><b><i>ASCON-128</i></b></td><td>128</td><td>128</td><td>128</td><td>1.54</td><td>1.44</td><td>1.78</td><td>1.68</td><td>1.61</td></tr>
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>1.52</td><td>1.43</td><td>1.71</td><td>1.65</td><td>1.57</td></tr>
 <tr><td>Schwaemm256-256 (SPARKLE)</td><td>256</td><td>256</td><td>256</td><td>1.23</td><td>1.16</td><td>1.22</td><td>1.11</td><td>1.18</td></tr>
@@ -162,10 +162,10 @@ where the architectural differences gives some algorithms an added advantage.
 <tr><td>Algorithm</td><td>Key Bits</td><td>Nonce Bits</td><td>Tag Bits</td><td>Encrypt 128 bytes</td><td>Decrypt 128 bytes</td><td>Encrypt 16 bytes</td><td>Decrypt 16 bytes</td><td>Average</td></tr>
 <tr><td>Schwaemm128-128 (SPARKLE)</td><td>128</td><td>128</td><td>128</td><td>1.07</td><td>1.06</td><td>1.68</td><td>1.60</td><td>1.32</td></tr>
 <tr><td><b><i>Schwaemm256-128</i></b> (SPARKLE)</td><td>128</td><td>256</td><td>128</td><td>1.11</td><td>1.09</td><td>1.04</td><td>1.04</td><td>1.06</td></tr>
+<tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>0.91</td><td>0.92</td><td>1.06</td><td>1.07</td><td>0.99</td></tr>
 <tr><td>Schwaemm192-192 (SPARKLE)</td><td>192</td><td>192</td><td>192</td><td>0.87</td><td>0.90</td><td>1.02</td><td>1.00</td><td>0.95</td></tr>
 <tr><td>ASCON-128a</td><td>128</td><td>128</td><td>128</td><td>0.86</td><td>0.88</td><td>0.92</td><td>0.93</td><td>0.90</td></tr>
 <tr><td><b><i>GIFT-COFB</i></b></td><td>128</td><td>128</td><td>128</td><td>0.80</td><td>0.83</td><td>0.90</td><td>0.90</td><td>0.86</td></tr>
-<tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>0.84</td><td>0.86</td><td>0.80</td><td>0.82</td><td>0.83</td></tr>
 <tr><td><b><i>TinyJAMBU-128</i></b></td><td>128</td><td>96</td><td>64</td><td>0.62</td><td>0.64</td><td>1.12</td><td>1.12</td><td>0.83</td></tr>
 <tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>0.55</td><td>0.57</td><td>1.01</td><td>1.02</td><td>0.75</td></tr>
 <tr><td>Schwaemm256-256 (SPARKLE)</td><td>256</td><td>256</td><td>256</td><td>0.77</td><td>0.78</td><td>0.70</td><td>0.70</td><td>0.73</td></tr>
@@ -229,8 +229,7 @@ AEAD algorithm rankings:
 
 <table>
 <tr><td>Rank</td><td>Algorithms</td></tr>
-<tr><td>14</td><td>SPARKLE</td></tr>
-<tr><td>12</td><td>Xoodyak</td></tr>
+<tr><td>14</td><td>SPARKLE, Xoodyak</td></tr>
 <tr><td>11</td><td>ASCON</td></tr>
 <tr><td>10</td><td>TinyJAMBU</td></tr>
 <tr><td>9</td><td>GIFT-COFB</td></tr>
@@ -270,8 +269,8 @@ ordered from highest to lowest "New" ChaChaPoly values:
 
 <table>
 <tr><td>Algorithm</td><td>Round 2</td><td>New</td><td>Notable changes other than the use of assembly code</td></tr>
+<tr><td>Xoodyak</td><td>0.86</td><td>1.97</td><td>Final round tweak improved performance on small packets</td></tr>
 <tr><td>SPARKLE</td><td>1.09</td><td>1.90</td><td> </td></tr>
-<tr><td>Xoodyak</td><td>0.86</td><td>1.62</td><td> </td></tr>
 <tr><td>ASCON</td><td>1.11</td><td>1.61</td><td> </td></tr>
 <tr><td>TinyJAMBU</td><td>0.81</td><td>1.17</td><td> </td></tr>
 <tr><td>GIFT-COFB</td><td>1.05</td><td>1.08</td><td> </td></tr>
@@ -306,9 +305,9 @@ the AEAD encryption schemes were more modest with a few notable changes:
 <table>
 <tr><td>Algorithm</td><td>Round 2</td><td>New</td><td>Notable changes</td></tr>
 <tr><td>SPARKLE</td><td>1.06</td><td>1.06</td><td> </td></tr>
+<tr><td>Xoodyak</td><td>0.83</td><td>0.99</td><td>Final round tweak improved performance on small packets</td></tr>
 <tr><td>TinyJAMBU</td><td>0.71</td><td>0.83</td><td>Separate the permutations for 128, 192, and 256 bit key sizes and unroll</td></tr>
 <tr><td>GIFT-COFB</td><td>0.86</td><td>0.86</td><td> </td></tr>
-<tr><td>Xoodyak</td><td>0.83</td><td>0.83</td><td> </td></tr>
 <tr><td>ASCON</td><td>0.63</td><td>0.63</td><td> </td></tr>
 <tr><td>Grain128-AEAD</td><td>0.43</td><td>0.43</td><td> </td></tr>
 <tr><td>PHOTON-Beetle</td><td>0.08</td><td>0.23</td><td>Highly unrolled 32-bit version in C</td></tr>

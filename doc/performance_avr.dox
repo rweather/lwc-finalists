@@ -43,10 +43,10 @@ fairly similar.  Performance figures for 32-bit platforms can be found
 <tr><td>ASCON-80pq</td><td>160</td><td>128</td><td>128</td><td>2.05</td><td>1.95</td><td>3.65</td><td>3.52</td><td>2.36</td></tr>
 <tr><td><b><i>TinyJAMBU-128</i></b></td><td>128</td><td>96</td><td>64</td><td>1.79</td><td>1.78</td><td>4.02</td><td>3.99</td><td>2.21</td></tr>
 <tr><td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>1.89</td><td>1.77</td><td>3.60</td><td>3.52</td><td>2.20</td></tr>
+<tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>1.81</td><td>1.80</td><td>2.58</td><td>2.57</td><td>2.01</td></tr>
 <tr><td>TinyJAMBU-192</td><td>192</td><td>96</td><td>64</td><td>1.62</td><td>1.61</td><td>3.72</td><td>3.69</td><td>2.00</td></tr>
 <tr><td><b><i>Romulus-N</i></b></td><td>128</td><td>128</td><td>128</td><td>1.57</td><td>1.53</td><td>3.65</td><td>3.52</td><td>1.93</td></tr>
 <tr><td>TinyJAMBU-256</td><td>256</td><td>96</td><td>64</td><td>1.47</td><td>1.47</td><td>3.46</td><td>3.44</td><td>1.83</td></tr>
-<tr><td><b><i>Xoodyak</i></b></td><td>128</td><td>128</td><td>128</td><td>1.64</td><td>1.58</td><td>1.99</td><td>1.95</td><td>1.72</td></tr>
 <tr><td><b><i>PHOTON-Beetle-AEAD-ENC-128</i></b></td><td>128</td><td>128</td><td>128</td><td>1.16</td><td>1.15</td><td>2.82</td><td>2.76</td><td>1.45</td></tr>
 <tr><td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>1.10</td><td>1.09</td><td>2.48</td><td>2.42</td><td>1.35</td></tr>
 <tr><td>AES-128-GCM</td><td>128</td><td>96</td><td>128</td><td>1.02</td><td>1.02</td><td>2.23</td><td>2.22</td><td>1.26</td></tr>
@@ -89,8 +89,8 @@ AEAD algorithm rankings:
 <tr><td>28</td><td>GIFT-COFB</td></tr>
 <tr><td>23</td><td>ASCON</td></tr>
 <tr><td>22</td><td>TinyJAMBU</td></tr>
+<tr><td>20</td><td>Xoodyak</td></tr>
 <tr><td>19</td><td>Romulus</td></tr>
-<tr><td>17</td><td>Xoodyak</td></tr>
 <tr><td>14</td><td>PHOTON-Beetle</td></tr>
 <tr><td>12</td><td>AES-128-GCM</td></tr>
 <tr><td>8</td><td>Grain-128AEAD</td></tr>
