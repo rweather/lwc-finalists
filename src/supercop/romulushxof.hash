@@ -1,8 +1,8 @@
 hash_family=romulus
-hash_name=romulushv1
-hash_meta_name=Romulus-H
+hash_name=romulushxof
+hash_meta_name=Romulus-H-XOF
 hash_srcdir=Romulus
 hash_size=32
-hash_function=romulus_hash
+hash_function=romulus_xof
 hash_exclude="romulus-aead.c romulus-aead.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c romulus-hkdf.c romulus-hkdf.h internal-hkdf.h romulus-pbkdf2.c romulus-pbkdf2.h internal-pbkdf2.h"
-hash_header=romulus-hash.h
+hash_header=romulus-xof.h

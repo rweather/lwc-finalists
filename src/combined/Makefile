@@ -47,6 +47,7 @@ OBJS = \
         romulus-hmac.o \
         romulus-pbkdf2.o \
         romulus-prng.o \
+        romulus-xof.o \
         sparkle-aead.o \
         sparkle-hash.o \
         sparkle-hkdf.o \
@@ -142,7 +143,7 @@ aead-metadata.o: \
 	grain-aead.h \
 	isap-aead.h isap-aead-pk.h \
 	photon-beetle-aead.h photon-beetle-hash.h \
-	romulus-aead.h romulus-hash.h \
+	romulus-aead.h romulus-hash.h romulus-xof.h \
 	sparkle-aead.h sparkle-hash.h \
 	tinyjambu-aead.h tinyjambu-aead-masked.h \
 	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
@@ -184,6 +185,7 @@ romulus-hkdf.o: romulus-hkdf.h romulus-hmac.h romulus-hash.h internal-util.h int
 romulus-hmac.o: romulus-hmac.h romulus-hash.h internal-util.h internal-hmac.h
 romulus-pbkdf2.o: romulus-pbkdf2.h romulus-hmac.h romulus-hash.h internal-util.h internal-pbkdf2.h
 romulus-prng.o: romulus-prng.h romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
+romulus-xof.o: romulus-xof.h romulus-hash.h internal-util.h
 sparkle-aead.o: sparkle-aead.h internal-sparkle.h internal-util.h
 sparkle-hash.o: sparkle-hash.h internal-sparkle.h internal-util.h
 sparkle-hkdf.o: sparkle-hkdf.h sparkle-hmac.h sparkle-hash.h internal-hkdf.h internal-util.h

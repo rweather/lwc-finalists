@@ -39,6 +39,7 @@ void test_kmac(void);
 void test_masking(void);
 void test_pbkdf2(void);
 void test_photon256(void);
+void test_romulus_xof(void);
 void test_sha256(void);
 void test_sha3(void);
 void test_skinny128(void);
@@ -66,6 +67,7 @@ int main(int argc, char *argv[])
     test_masking();
     test_pbkdf2();
     test_photon256();
+    test_romulus_xof();
     test_sha256();
     test_sha3();
     test_skinny128();

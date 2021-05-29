@@ -178,6 +178,8 @@ ROMULUS_FILES = \
     romulus-pbkdf2.h \
     romulus-prng.c \
     romulus-prng.h \
+    romulus-xof.c \
+    romulus-xof.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
     internal-skinny-full-armv7m.S \

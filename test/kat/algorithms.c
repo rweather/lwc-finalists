@@ -83,6 +83,7 @@ static const aead_hash_algorithm_t *const hashes[] = {
     &esch_384_xof_algorithm,
     &photon_beetle_hash_algorithm,
     &romulus_hash_algorithm,
+    &romulus_xof_algorithm,
     &xoodyak_hash_algorithm,
     0
 };

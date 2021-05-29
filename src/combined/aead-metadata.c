@@ -40,6 +40,7 @@
 #include "photon-beetle-hash.h"
 #include "romulus-aead.h"
 #include "romulus-hash.h"
+#include "romulus-xof.h"
 #include "sparkle-aead.h"
 #include "sparkle-hash.h"
 #include "tinyjambu-aead.h"
@@ -486,6 +487,19 @@ aead_hash_algorithm_t const romulus_hash_algorithm = {
     (aead_hash_finalize_t)romulus_hash_finalize,
     (aead_xof_absorb_t)0,
     (aead_xof_squeeze_t)0
+};
+
+aead_hash_algorithm_t const romulus_xof_algorithm = {
+    "Romulus-H-XOF",
+    sizeof(romulus_xof_state_t),
+    ROMULUS_HASH_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    romulus_xof,
+    (aead_hash_init_t)romulus_xof_init,
+    (aead_hash_update_t)0,
+    (aead_hash_finalize_t)0,
+    (aead_xof_absorb_t)romulus_xof_absorb,
+    (aead_xof_squeeze_t)romulus_xof_squeeze
 };
 
 /*------------------------ SPARKLE ------------------------*/

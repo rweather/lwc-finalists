@@ -46,6 +46,11 @@ extern "C" {
 #define ROMULUS_HASH_SIZE 32
 
 /**
+ * \brief Number of bytes in a rate block for Romulus-H.
+ */
+#define ROMULUS_HASH_RATE 32
+
+/**
  * \brief State information for Romulus-H incremental modes.
  */
 typedef union

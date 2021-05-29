@@ -433,6 +433,11 @@ extern aead_cipher_t const romulus_m_cipher;
  */
 extern aead_hash_algorithm_t const romulus_hash_algorithm;
 
+/**
+ * \brief Meta-information block for the Romulus-H based XOF algorithm.
+ */
+extern aead_hash_algorithm_t const romulus_xof_algorithm;
+
 /*------------------------ SPARKLE ------------------------*/
 
 /**

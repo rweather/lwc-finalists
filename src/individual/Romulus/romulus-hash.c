@@ -41,11 +41,6 @@
 #define ROMULUS_HASH_KEY_SCHEDULE 0
 #endif
 
-/**
- * \brief Number of bytes in a rate block for Romulus-H.
- */
-#define ROMULUS_HASH_RATE 32
-
 int romulus_hash
     (unsigned char *out, const unsigned char *in, size_t inlen)
 {
@@ -66,7 +61,7 @@ void romulus_hash_init(romulus_hash_state_t *state)
  *
  * \param Points to the Romulus-H hash state.
  */
-static void romulus_hash_process_chunk(romulus_hash_state_t *state)
+void romulus_hash_process_chunk(romulus_hash_state_t *state)
 {
     /*
      * TK = g + M where g is TK1 and TK23 = M is the 32 bytes of the message.
