@@ -29,7 +29,7 @@
 /* XOEsch256-KMAC */
 static void esch_256_hash_pad(esch_256_hash_state_t *state)
 {
-    static unsigned char padding[ESCH_256_RATE] = {0};
+    static unsigned char const padding[ESCH_256_RATE] = {0};
     if (state->s.count != 0)
         esch_256_hash_update(state, padding, ESCH_256_RATE - state->s.count);
 }
@@ -47,7 +47,7 @@ static void esch_256_hash_pad(esch_256_hash_state_t *state)
 /* XOEsch384-KMAC */
 static void esch_384_hash_pad(esch_384_hash_state_t *state)
 {
-    static unsigned char padding[ESCH_384_RATE] = {0};
+    static unsigned char const padding[ESCH_384_RATE] = {0};
     if (state->s.count != 0)
         esch_384_hash_update(state, padding, ESCH_384_RATE - state->s.count);
 }

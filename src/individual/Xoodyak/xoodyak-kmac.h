@@ -78,7 +78,7 @@ void xoodyak_kmac
 
 /**
  * \brief Initializes an incremental KMAC state using the Xoodyak
- * hash algorithm.permutation
+ * hash algorithm.
  *
  * \param state Points to the state to be initialized.
  * \param key Points to the key.

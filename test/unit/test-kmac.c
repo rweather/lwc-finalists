@@ -22,6 +22,7 @@
 
 #include "aead-metadata.h"
 #include "ascon-kmac.h"
+#include "romulus-kmac.h"
 #include "sparkle-kmac.h"
 #include "xoodyak-kmac.h"
 #include "test-cipher.h"
@@ -350,6 +351,25 @@ void test_kmac(void)
                   (kmac_squeeze_t)ascon_kmaca_squeeze,
                   (kmac_set_output_length_t)ascon_kmaca_set_output_length,
                   (kmac_finalize_t)ascon_kmaca_finalize,
+                  &testVectorNIST_2);
+
+    test_kmac_alg("Romulus-H KMAC", &romulus_xof_algorithm,
+                  ROMULUS_HASH_RATE, sizeof(romulus_kmac_state_t),
+                  (kmac_allinone_t)romulus_kmac,
+                  (kmac_init_t)romulus_kmac_init,
+                  (kmac_absorb_t)romulus_kmac_absorb,
+                  (kmac_squeeze_t)romulus_kmac_squeeze,
+                  (kmac_set_output_length_t)romulus_kmac_set_output_length,
+                  (kmac_finalize_t)romulus_kmac_finalize,
+                  &testVectorNIST_1);
+    test_kmac_alg("Romulus-H KMAC", &romulus_xof_algorithm,
+                  ROMULUS_HASH_RATE, sizeof(romulus_kmac_state_t),
+                  (kmac_allinone_t)romulus_kmac,
+                  (kmac_init_t)romulus_kmac_init,
+                  (kmac_absorb_t)romulus_kmac_absorb,
+                  (kmac_squeeze_t)romulus_kmac_squeeze,
+                  (kmac_set_output_length_t)romulus_kmac_set_output_length,
+                  (kmac_finalize_t)romulus_kmac_finalize,
                   &testVectorNIST_2);
 
     test_kmac_alg("Xoodyak KMAC", &xoodyak_hash_algorithm,

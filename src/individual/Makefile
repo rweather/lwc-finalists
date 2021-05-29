@@ -174,6 +174,8 @@ ROMULUS_FILES = \
     romulus-hkdf.h \
     romulus-hmac.c \
     romulus-hmac.h \
+    romulus-kmac.c \
+    romulus-kmac.h \
     romulus-pbkdf2.c \
     romulus-pbkdf2.h \
     romulus-prng.c \
@@ -189,6 +191,7 @@ ROMULUS_FILES = \
     internal-skinny-plus-config.h \
     internal-hkdf.h \
     internal-hmac.h \
+    internal-kmac.h \
     internal-pbkdf2.h \
     aead-random-system.c \
     $(COMMON_FILES)

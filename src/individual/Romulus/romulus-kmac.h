@@ -20,22 +20,21 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_XOODYAK_KMAC_H
-#define LWCRYPTO_XOODYAK_KMAC_H
+#ifndef LWCRYPTO_ROMULUS_KMAC_H
+#define LWCRYPTO_ROMULUS_KMAC_H
 
-#include "xoodyak-hash.h"
-#include <stddef.h>
+#include "romulus-xof.h"
 
 /**
- * \file xoodyak-kmac.h
- * \brief Keyed Message Authentication Code (KMAC) based on Xoodyak.
+ * \file romulus-kmac.h
+ * \brief Keyed Message Authentication Code (KMAC) based on Romulus-H.
  *
  * The KMAC mode provides a method to authenticate a sequence of bytes
- * using Xoodyak in hashing mode.  The output is essentially equivalent to
+ * using Romulus-H in hashing mode.  The output is essentially equivalent to
  * hashing the key followed by the data.
  *
  * NIST SP 800-185 is an extension of the XOF modes SHAKE128 and SHAKE256.
- * The nearest equivalent for us is Xoodyak-XOF.  We use the same encoding
+ * The nearest equivalent for us is Romulus-H-XOF.  We use the same encoding
  * as NIST SP 800-185 to provide domain separation between the key and data.
  *
  * References: NIST SP 800-185
@@ -46,17 +45,17 @@ extern "C" {
 #endif
 
 /**
- * \brief Default size of the output for Xoodyak-KMAC.
+ * \brief Default size of the output for Romulus-H-KMAC.
  */
-#define XOODYAK_KMAC_SIZE XOODYAK_HASH_SIZE
+#define ROMULUS_KMAC_SIZE ROMULUS_HASH_SIZE
 
 /**
- * \brief State information for the Xoodyak-KMAC incremental mode.
+ * \brief State information for the Romulus-H-KMAC incremental mode.
  */
-typedef xoodyak_hash_state_t xoodyak_kmac_state_t;
+typedef romulus_xof_state_t romulus_kmac_state_t;
 
 /**
- * \brief Computes a KMAC value using the Xoodyak hash algorithm.
+ * \brief Computes a KMAC value using the Romulus-H hash algorithm.
  *
  * \param key Points to the key.
  * \param keylen Number of bytes in the key.
@@ -70,14 +69,14 @@ typedef xoodyak_hash_state_t xoodyak_kmac_state_t;
  * The customization string allows the application to perform domain
  * separation between different uses of the KMAC algorithm.
  */
-void xoodyak_kmac
+void romulus_kmac
     (const unsigned char *key, size_t keylen,
      const unsigned char *in, size_t inlen,
      const unsigned char *custom, size_t customlen,
      unsigned char *out, size_t outlen);
 
 /**
- * \brief Initializes an incremental KMAC state using the Xoodyak
+ * \brief Initializes an incremental KMAC state using the Romulus-H
  * hash algorithm.
  *
  * \param state Points to the state to be initialized.
@@ -86,68 +85,68 @@ void xoodyak_kmac
  * \param custom Points to the customization string.
  * \param customlen Number of bytes in the customization string.
  *
- * \sa xoodyak_kmac_update(), xoodyak_kmac_squeeze()
+ * \sa romulus_kmac_update(), romulus_kmac_squeeze()
  */
-void xoodyak_kmac_init
-    (xoodyak_kmac_state_t *state, const unsigned char *key, size_t keylen,
+void romulus_kmac_init
+    (romulus_kmac_state_t *state, const unsigned char *key, size_t keylen,
      const unsigned char *custom, size_t customlen);
 
 /**
- * \brief Absorbs more input data into an incremental Xoodyak-KMAC state.
+ * \brief Absorbs more input data into an incremental Romulus-H-KMAC state.
  *
  * \param state KMAC state to be updated.
  * \param in Points to the input data to be absorbed into the state.
  * \param inlen Length of the input data to be absorbed into the state.
  *
- * \sa xoodyak_kmac_init(), xoodyak_kmac_squeeze()
+ * \sa romulus_kmac_init(), romulus_kmac_squeeze()
  */
-void xoodyak_kmac_absorb
-    (xoodyak_kmac_state_t *state, const unsigned char *in, size_t inlen);
+void romulus_kmac_absorb
+    (romulus_kmac_state_t *state, const unsigned char *in, size_t inlen);
 
 /**
- * \brief Sets the desired output length for an incremental Xoodyak-KMAC state.
+ * \brief Sets the desired output length for an incremental Romulus-H-KMAC state.
  *
  * \param state KMAC state to squeeze the output data from after the
  * desired output length has been set.
  * \param outlen Desired output length, or zero for arbitrary-length output.
  *
- * \sa xoodyak_kmac_squeeze()
+ * \sa romulus_kmac_squeeze()
  */
-void xoodyak_kmac_set_output_length
-    (xoodyak_kmac_state_t *state, size_t outlen);
+void romulus_kmac_set_output_length
+    (romulus_kmac_state_t *state, size_t outlen);
 
 /**
- * \brief Squeezes output data from an incremental Xoodyak-KMAC state.
+ * \brief Squeezes output data from an incremental Romulus-H-KMAC state.
  *
  * \param state KMAC state to squeeze the output data from.
  * \param out Points to the output buffer to receive the squeezed data.
  * \param outlen Number of bytes of data to squeeze out of the state.
  *
- * The application should call xoodyak_kmac_set_output_length() before
+ * The application should call romulus_kmac_set_output_length() before
  * this function to set the desired output length.  If that function
  * has not been called, then this function will assume that the application
  * wants arbitrary-length output.
  *
- * \sa xoodyak_kmac_init(), xoodyak_kmac_update(), xoodyak_kmac_finalize()
+ * \sa romulus_kmac_init(), romulus_kmac_update(), romulus_kmac_finalize()
  */
-void xoodyak_kmac_squeeze
-    (xoodyak_kmac_state_t *state, unsigned char *out, size_t outlen);
+void romulus_kmac_squeeze
+    (romulus_kmac_state_t *state, unsigned char *out, size_t outlen);
 
 /**
- * \brief Squeezes fixed-length data from an incremental Xoodyak-KMAC
+ * \brief Squeezes fixed-length data from an incremental Romulus-H-KMAC
  * state and finalizes the KMAC process.
  *
  * \param state KMAC state to squeeze the output data from.
  * \param out Points to the output buffer to receive the
- * XOODYAK_KMAC_SIZE bytes of squeezed data.
+ * ROMULUS_KMAC_SIZE bytes of squeezed data.
  *
- * This function combines the effect of xoodyak_kmac_set_output_length()
- * and xoodyak_kmac_squeeze() for convenience.
+ * This function combines the effect of romulus_kmac_set_output_length()
+ * and romulus_kmac_squeeze() for convenience.
  *
- * \sa xoodyak_kmac_squeeze(), xoodyak_kmac_set_output_length()
+ * \sa romulus_kmac_squeeze(), romulus_kmac_set_output_length()
  */
-void xoodyak_kmac_finalize
-    (xoodyak_kmac_state_t *state, unsigned char out[XOODYAK_KMAC_SIZE]);
+void romulus_kmac_finalize
+    (romulus_kmac_state_t *state, unsigned char out[ROMULUS_KMAC_SIZE]);
 
 #ifdef __cplusplus
 }

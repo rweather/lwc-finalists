@@ -45,6 +45,7 @@ OBJS = \
         romulus-hash.o \
         romulus-hkdf.o \
         romulus-hmac.o \
+        romulus-kmac.o \
         romulus-pbkdf2.o \
         romulus-prng.o \
         romulus-xof.o \
@@ -183,6 +184,7 @@ romulus-aead.o: romulus-aead.h internal-skinny-plus.h internal-util.h
 romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-hkdf.o: romulus-hkdf.h romulus-hmac.h romulus-hash.h internal-util.h internal-hkdf.h
 romulus-hmac.o: romulus-hmac.h romulus-hash.h internal-util.h internal-hmac.h
+romulus-kmac.o: romulus-kmac.h romulus-xof.h romulus-hash.h internal-util.h internal-kmac.h
 romulus-pbkdf2.o: romulus-pbkdf2.h romulus-hmac.h romulus-hash.h internal-util.h internal-pbkdf2.h
 romulus-prng.o: romulus-prng.h romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-xof.o: romulus-xof.h romulus-hash.h internal-util.h
