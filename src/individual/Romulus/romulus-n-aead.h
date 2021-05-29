@@ -20,30 +20,19 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef LWCRYPTO_ROMULUS_AEAD_H
-#define LWCRYPTO_ROMULUS_AEAD_H
+#ifndef LWCRYPTO_ROMULUS_N_AEAD_H
+#define LWCRYPTO_ROMULUS_N_AEAD_H
 
 #include <stddef.h>
 
 /**
- * \file romulus-aead.h
- * \brief Romulus authenticated encryption algorithm family.
+ * \file romulus-n-aead.h
+ * \brief Romulus-N authenticated encryption algorithm.
  *
  * Romulus is a family of authenticated encryption algorithms that
- * are built around the SKINNY-128-384+ tweakable block cipher.  There
- * are two members in the family:
- *
- * \li Romulus-N has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
- * based around the SKINNY-128-384+ tweakable block cipher.  This is the
- * primary member of the family.
- * \li Romulus-M has a 128-bit key, a 128-bit nonce, and a 128-bit tag,
- * based around the SKINNY-128-384+ tweakable block cipher.
- *
- * The Romulus-M variants are resistant to nonce reuse as long as the
- * combination of the associated data and plaintext is unique.  If the
- * same associated data and plaintext are reused under the same nonce,
- * then the scheme will leak that the same plaintext has been sent for a
- * second time but will not reveal the plaintext itself.
+ * are built around the SKINNY-128-384+ tweakable block cipher.
+ * This API implements the Romulus-N variant which has a 128-bit key,
+ * a 128-bit nonce, and a 128-bit tag.
  *
  * References: https://romulusae.github.io/romulus/
  */
@@ -53,19 +42,19 @@ extern "C" {
 #endif
 
 /**
- * \brief Size of the key for all Romulus family members.
+ * \brief Size of the key for Romulus-N.
  */
-#define ROMULUS_KEY_SIZE 16
+#define ROMULUS_N_KEY_SIZE 16
 
 /**
- * \brief Size of the authentication tag for all Romulus family members.
+ * \brief Size of the authentication tag for Romulus-N.
  */
-#define ROMULUS_TAG_SIZE 16
+#define ROMULUS_N_TAG_SIZE 16
 
 /**
- * \brief Size of the nonce for Romulus-N and Romulus-M.
+ * \brief Size of the nonce for Romulus-N.
  */
-#define ROMULUS_NONCE_SIZE 16
+#define ROMULUS_N_NONCE_SIZE 16
 
 /**
  * \brief Encrypts and authenticates a packet with Romulus-N.
@@ -116,61 +105,6 @@ int romulus_n_aead_encrypt
  * \sa romulus_n_aead_encrypt()
  */
 int romulus_n_aead_decrypt
-    (unsigned char *m, size_t *mlen,
-     const unsigned char *c, size_t clen,
-     const unsigned char *ad, size_t adlen,
-     const unsigned char *npub,
-     const unsigned char *k);
-
-/**
- * \brief Encrypts and authenticates a packet with Romulus-M.
- *
- * \param c Buffer to receive the output.
- * \param clen On exit, set to the length of the output which includes
- * the ciphertext and the 16 byte authentication tag.
- * \param m Buffer that contains the plaintext message to encrypt.
- * \param mlen Length of the plaintext message in bytes.
- * \param ad Buffer that contains associated data to authenticate
- * along with the packet but which does not need to be encrypted.
- * \param adlen Length of the associated data in bytes.
- * \param npub Points to the public nonce for the packet which must
- * be 16 bytes in length.
- * \param k Points to the 16 bytes of the key to use to encrypt the packet.
- *
- * \return 0 on success, or a negative value if there was an error in
- * the parameters.
- *
- * \sa romulus_m_aead_decrypt()
- */
-int romulus_m_aead_encrypt
-    (unsigned char *c, size_t *clen,
-     const unsigned char *m, size_t mlen,
-     const unsigned char *ad, size_t adlen,
-     const unsigned char *npub,
-     const unsigned char *k);
-
-/**
- * \brief Decrypts and authenticates a packet with Romulus-M.
- *
- * \param m Buffer to receive the plaintext message on output.
- * \param mlen Receives the length of the plaintext message on output.
- * \param c Buffer that contains the ciphertext and authentication
- * tag to decrypt.
- * \param clen Length of the input data in bytes, which includes the
- * ciphertext and the 16 byte authentication tag.
- * \param ad Buffer that contains associated data to authenticate
- * along with the packet but which does not need to be encrypted.
- * \param adlen Length of the associated data in bytes.
- * \param npub Points to the public nonce for the packet which must
- * be 16 bytes in length.
- * \param k Points to the 16 bytes of the key to use to decrypt the packet.
- *
- * \return 0 on success, -1 if the authentication tag was incorrect,
- * or some other negative number if there was an error in the parameters.
- *
- * \sa romulus_m_aead_encrypt()
- */
-int romulus_m_aead_decrypt
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,

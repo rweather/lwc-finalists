@@ -166,8 +166,10 @@ PHOTON_BEETLE_FILES = \
     aead-random-system.c \
     $(COMMON_FILES)
 ROMULUS_FILES = \
-    romulus-aead.c \
-    romulus-aead.h \
+    romulus-m-aead.c \
+    romulus-m-aead.h \
+    romulus-n-aead.c \
+    romulus-n-aead.h \
     romulus-hash.c \
     romulus-hash.h \
     romulus-hkdf.c \
@@ -182,6 +184,8 @@ ROMULUS_FILES = \
     romulus-prng.h \
     romulus-xof.c \
     romulus-xof.h \
+    internal-romulus.c \
+    internal-romulus.h \
     internal-skinny-plus.c \
     internal-skinny-plus.h \
     internal-skinny-full-armv7m.S \

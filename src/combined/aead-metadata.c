@@ -38,7 +38,8 @@
 #include "isap-aead-pk.h"
 #include "photon-beetle-aead.h"
 #include "photon-beetle-hash.h"
-#include "romulus-aead.h"
+#include "romulus-m-aead.h"
+#include "romulus-n-aead.h"
 #include "romulus-hash.h"
 #include "romulus-xof.h"
 #include "sparkle-aead.h"
@@ -456,9 +457,9 @@ aead_hash_algorithm_t const photon_beetle_hash_algorithm = {
 
 aead_cipher_t const romulus_n_cipher = {
     "Romulus-N",
-    ROMULUS_KEY_SIZE,
-    ROMULUS_NONCE_SIZE,
-    ROMULUS_TAG_SIZE,
+    ROMULUS_N_KEY_SIZE,
+    ROMULUS_N_NONCE_SIZE,
+    ROMULUS_N_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     romulus_n_aead_encrypt,
     romulus_n_aead_decrypt,
@@ -467,9 +468,9 @@ aead_cipher_t const romulus_n_cipher = {
 
 aead_cipher_t const romulus_m_cipher = {
     "Romulus-M",
-    ROMULUS_KEY_SIZE,
-    ROMULUS_NONCE_SIZE,
-    ROMULUS_TAG_SIZE,
+    ROMULUS_M_KEY_SIZE,
+    ROMULUS_M_NONCE_SIZE,
+    ROMULUS_M_TAG_SIZE,
     AEAD_FLAG_LITTLE_ENDIAN,
     romulus_m_aead_encrypt,
     romulus_m_aead_decrypt,

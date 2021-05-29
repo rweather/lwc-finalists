@@ -41,7 +41,8 @@ OBJS = \
         photon-beetle-hmac.o \
         photon-beetle-pbkdf2.o \
         photon-beetle-prng.o \
-        romulus-aead.o \
+        romulus-m-aead.o \
+        romulus-n-aead.o \
         romulus-hash.o \
         romulus-hkdf.o \
         romulus-hmac.o \
@@ -97,6 +98,7 @@ OBJS = \
 	internal-photon256.o \
 	internal-photon256-armv7m.o \
 	internal-photon256-avr.o \
+	internal-romulus.o \
 	internal-sha256.o \
 	internal-sha256-armv7m.o \
 	internal-sha256-avr.o \
@@ -144,7 +146,7 @@ aead-metadata.o: \
 	grain-aead.h \
 	isap-aead.h isap-aead-pk.h \
 	photon-beetle-aead.h photon-beetle-hash.h \
-	romulus-aead.h romulus-hash.h romulus-xof.h \
+	romulus-n-aead.h romulus-m-aead.h romulus-hash.h romulus-xof.h \
 	sparkle-aead.h sparkle-hash.h \
 	tinyjambu-aead.h tinyjambu-aead-masked.h \
 	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
@@ -180,7 +182,8 @@ photon-beetle-hkdf.o: photon-beetle-hkdf.h photon-beetle-hmac.h photon-beetle-ha
 photon-beetle-hmac.o: photon-beetle-hmac.h photon-beetle-hash.h internal-hmac.h internal-util.h
 photon-beetle-pbkdf2.o: photon-beetle-pbkdf2.h photon-beetle-hmac.h photon-beetle-hash.h internal-pbkdf2.h internal-util.h
 photon-beetle-prng.o: photon-beetle-prng.h photon-beetle-hash.h internal-photon256.h internal-util.h
-romulus-aead.o: romulus-aead.h internal-skinny-plus.h internal-util.h
+romulus-m-aead.o: romulus-m-aead.h internal-romulus.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
+romulus-n-aead.o: romulus-n-aead.h internal-romulus.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-hkdf.o: romulus-hkdf.h romulus-hmac.h romulus-hash.h internal-util.h internal-hkdf.h
 romulus-hmac.o: romulus-hmac.h romulus-hash.h internal-util.h internal-hmac.h
@@ -224,6 +227,7 @@ internal-grain128.o: internal-grain128.h internal-util.h
 internal-keccakp-200.o: internal-keccakp-200.h internal-util.h
 internal-keccakp-400.o: internal-keccakp-400.h internal-util.h
 internal-photon256.o: internal-photon256.h internal-photon256-mix.h internal-util.h
+internal-romulus.o: internal-romulus.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-sha256.o: internal-sha256.h internal-util.h aead-metadata.h internal-hmac.h
 internal-skinny-plus.o: internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 internal-skinny-full-armv7m.o: internal-skinny-plus-config.h
