@@ -35,6 +35,12 @@
  */
 #if defined(ISAP_ALG_NAME)
 
+#if !defined(ISAP_KEY_SIZE)
+#define ISAP_KEY_SIZE 16
+#define ISAP_NONCE_SIZE 16
+#define ISAP_TAG_SIZE 16
+#endif
+
 #define ISAP_CONCAT_INNER(name,suffix) name##suffix
 #define ISAP_CONCAT(name,suffix) ISAP_CONCAT_INNER(name,suffix)
 

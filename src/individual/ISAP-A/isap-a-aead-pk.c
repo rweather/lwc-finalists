@@ -20,24 +20,13 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "isap-aead.h"
-#include "internal-keccakp-400.h"
+#include "isap-a-aead-pk.h"
 #include "internal-ascon.h"
 #include <string.h>
 
-/* ISAP-K-128A */
-#define ISAP_ALG_NAME isap_keccak_128a
-#define ISAP_RATE (144 / 8)
-#define ISAP_sH 16
-#define ISAP_sE 8
-#define ISAP_sB 1
-#define ISAP_sK 8
-#define ISAP_STATE keccakp_400_state_t
-#define ISAP_PERMUTE(s,r) keccakp_400_permute((s), (r))
-#include "internal-isap.h"
-
 /* ISAP-A-128A */
 #define ISAP_ALG_NAME isap_ascon_128a
+#define ISAP_KEY_STATE isap_ascon_128a_key_t
 #define ISAP_RATE (64 / 8)
 #define ISAP_sH 12
 #define ISAP_sE 6
@@ -48,21 +37,11 @@
 #if ASCON_SLICED
 #define ISAP_PERMUTE_SLICED(s,r) ascon_permute_sliced((s), 12 - (r))
 #endif
-#include "internal-isap.h"
-
-/* ISAP-K-128 */
-#define ISAP_ALG_NAME isap_keccak_128
-#define ISAP_RATE (144 / 8)
-#define ISAP_sH 20
-#define ISAP_sE 12
-#define ISAP_sB 12
-#define ISAP_sK 12
-#define ISAP_STATE keccakp_400_state_t
-#define ISAP_PERMUTE(s,r) keccakp_400_permute((s), (r))
-#include "internal-isap.h"
+#include "internal-isap-pk.h"
 
 /* ISAP-A-128 */
 #define ISAP_ALG_NAME isap_ascon_128
+#define ISAP_KEY_STATE isap_ascon_128_key_t
 #define ISAP_RATE (64 / 8)
 #define ISAP_sH 12
 #define ISAP_sE 12
@@ -73,4 +52,4 @@
 #if ASCON_SLICED
 #define ISAP_PERMUTE_SLICED(s,r) ascon_permute_sliced((s), 12 - (r))
 #endif
-#include "internal-isap.h"
+#include "internal-isap-pk.h"

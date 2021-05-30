@@ -24,7 +24,6 @@
  * is included to configure the underlying ISAP variant.
  *
  * ISAP_ALG_NAME        Name of the ISAP algorithm; e.g. isap_keccak_128
- * ISAP_KEY_STATE       Type for the pre-computed key state
  * ISAP_RATE            Number of bytes in the rate for hashing and encryption.
  * ISAP_sH              Number of rounds for hashing.
  * ISAP_sE              Number of rounds for encryption.
@@ -36,25 +35,31 @@
  */
 #if defined(ISAP_ALG_NAME)
 
+#if !defined(ISAP_KEY_SIZE)
+#define ISAP_KEY_SIZE 16
+#define ISAP_NONCE_SIZE 16
+#define ISAP_TAG_SIZE 16
+#endif
+
 #define ISAP_CONCAT_INNER(name,suffix) name##suffix
 #define ISAP_CONCAT(name,suffix) ISAP_CONCAT_INNER(name,suffix)
 
 /* IV string for initialising the associated data */
-static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_A)
+static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_IV_A)
         [sizeof(ISAP_STATE) - ISAP_NONCE_SIZE] = {
     0x01, ISAP_KEY_SIZE * 8, ISAP_RATE * 8, 1,
     ISAP_sH, ISAP_sB, ISAP_sE, ISAP_sK
 };
 
 /* IV string for authenticating associated data */
-static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KA)
+static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA)
         [sizeof(ISAP_STATE) - ISAP_KEY_SIZE] = {
     0x02, ISAP_KEY_SIZE * 8, ISAP_RATE * 8, 1,
     ISAP_sH, ISAP_sB, ISAP_sE, ISAP_sK
 };
 
 /* IV string for encrypting payload data */
-static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KE)
+static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE)
         [sizeof(ISAP_STATE) - ISAP_KEY_SIZE] = {
     0x03, ISAP_KEY_SIZE * 8, ISAP_RATE * 8, 1,
     ISAP_sH, ISAP_sB, ISAP_sE, ISAP_sK
@@ -64,21 +69,25 @@ static unsigned char const ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KE)
  * \brief Re-keys the ISAP permutation state.
  *
  * \param state The permutation state to be re-keyed.
- * \param pk Points to the pre-computed key information.
+ * \param k Points to the 128-bit key for the ISAP cipher.
+ * \param iv Points to the initialization vector for this re-keying operation.
  * \param data Points to the data to be absorbed to perform the re-keying.
  * \param data_len Length of the data to be absorbed.
  *
  * The output key will be left in the leading bytes of \a state.
  */
-static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)
-    (ISAP_STATE *state, const unsigned char *pk,
+static void ISAP_CONCAT(ISAP_ALG_NAME,_rekey)
+    (ISAP_STATE *state, const unsigned char *k, const unsigned char *iv,
      const unsigned char *data, unsigned data_len)
 {
 #if defined(ISAP_PERMUTE_SLICED)
     unsigned bit, num_bits;
 
-    /* Initialize the state with the key and IV (already pre-sliced) */
-    memcpy(state->B, pk, sizeof(state->B));
+    /* Initialize the state with the key and IV */
+    memcpy(state->B, k, ISAP_KEY_SIZE);
+    memcpy(state->B + ISAP_KEY_SIZE, iv, sizeof(state->B) - ISAP_KEY_SIZE);
+    ascon_to_sliced(state);
+    ISAP_PERMUTE_SLICED(state, ISAP_sK);
 
     /* Absorb all of the bits of the data buffer one by one */
     num_bits = data_len * 8 - 1;
@@ -94,7 +103,9 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)
     unsigned bit, num_bits;
 
     /* Initialize the state with the key and IV */
-    memcpy(state->B, pk, sizeof(state->B));
+    memcpy(state->B, k, ISAP_KEY_SIZE);
+    memcpy(state->B + ISAP_KEY_SIZE, iv, sizeof(state->B) - ISAP_KEY_SIZE);
+    ISAP_PERMUTE(state, ISAP_sK);
 
     /* Absorb all of the bits of the data buffer one by one */
     num_bits = data_len * 8 - 1;
@@ -111,21 +122,22 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)
  * \brief Encrypts (or decrypts) a message payload with ISAP.
  *
  * \param state ISAP permutation state.
- * \param pk Points to the pre-computed key information.
+ * \param k Points to the 128-bit key for the ISAP cipher.
  * \param npub Points to the 128-bit nonce for the ISAP cipher.
  * \param c Buffer to receive the output ciphertext.
  * \param m Buffer to receive the input plaintext.
  * \param mlen Length of the input plaintext.
  */
-static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_encrypt)
-    (ISAP_STATE *state, const ISAP_KEY_STATE *pk, const unsigned char *npub,
+static void ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)
+    (ISAP_STATE *state, const unsigned char *k, const unsigned char *npub,
      unsigned char *c, const unsigned char *m, size_t mlen)
 {
 #if defined(ISAP_PERMUTE_SLICED)
     unsigned char block[ISAP_RATE];
 
     /* Set up the re-keyed encryption key and nonce in the state */
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)(state, pk->ke, npub, ISAP_NONCE_SIZE);
+    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)
+        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE), npub, ISAP_NONCE_SIZE);
     ascon_set_sliced(state, npub, 3);
     ascon_set_sliced(state, npub + 8, 4);
 
@@ -145,7 +157,8 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_encrypt)
     }
 #else
     /* Set up the re-keyed encryption key and nonce in the state */
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)(state, pk->ke, npub, ISAP_NONCE_SIZE);
+    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)
+        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KE), npub, ISAP_NONCE_SIZE);
     memcpy(state->B + sizeof(ISAP_STATE) - ISAP_NONCE_SIZE,
            npub, ISAP_NONCE_SIZE);
 
@@ -168,16 +181,15 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_encrypt)
  * \brief Authenticates the associated data and ciphertext using ISAP.
  *
  * \param state ISAP permutation state.
- * \param pk Points to the pre-computed key information.
+ * \param k Points to the 128-bit key for the ISAP cipher.
  * \param npub Points to the 128-bit nonce for the ISAP cipher.
  * \param ad Buffer containing the associated data.
  * \param adlen Length of the associated data.
  * \param c Buffer containing the ciphertext.
  * \param clen Length of the ciphertext.
  */
-static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
-    (ISAP_STATE *state, const ISAP_KEY_STATE *pk,
-     const unsigned char *npub,
+static void ISAP_CONCAT(ISAP_ALG_NAME,_mac)
+    (ISAP_STATE *state, const unsigned char *k, const unsigned char *npub,
      const unsigned char *ad, size_t adlen,
      const unsigned char *c, size_t clen,
      unsigned char *tag)
@@ -189,7 +201,7 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
 
     /* Absorb the associated data */
     memcpy(state->B, npub, ISAP_NONCE_SIZE);
-    memcpy(state->B + ISAP_NONCE_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_A),
+    memcpy(state->B + ISAP_NONCE_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_IV_A),
            sizeof(state->B) - ISAP_NONCE_SIZE);
     ascon_to_sliced(state);
     ISAP_PERMUTE_SLICED(state, ISAP_sH);
@@ -225,7 +237,8 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
     ascon_from_sliced(state);
     memcpy(tag, state->B, ISAP_TAG_SIZE);
     memcpy(preserve, state->B + ISAP_TAG_SIZE, sizeof(preserve));
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)(state, pk->ka, tag, ISAP_TAG_SIZE);
+    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)
+        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA), tag, ISAP_TAG_SIZE);
     ascon_from_sliced(state);
     memcpy(state->B + ISAP_TAG_SIZE, preserve, sizeof(preserve));
     ascon_to_sliced(state);
@@ -238,7 +251,7 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
 
     /* Absorb the associated data */
     memcpy(state->B, npub, ISAP_NONCE_SIZE);
-    memcpy(state->B + ISAP_NONCE_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_A),
+    memcpy(state->B + ISAP_NONCE_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_IV_A),
            sizeof(state->B) - ISAP_NONCE_SIZE);
     ISAP_PERMUTE(state, ISAP_sH);
     while (adlen >= ISAP_RATE) {
@@ -268,72 +281,20 @@ static void ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
     /* Re-key the state and generate the authentication tag */
     memcpy(tag, state->B, ISAP_TAG_SIZE);
     memcpy(preserve, state->B + ISAP_TAG_SIZE, sizeof(preserve));
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_rekey)(state, pk->ka, tag, ISAP_TAG_SIZE);
+    ISAP_CONCAT(ISAP_ALG_NAME,_rekey)
+        (state, k, ISAP_CONCAT(ISAP_ALG_NAME,_IV_KA), tag, ISAP_TAG_SIZE);
     memcpy(state->B + ISAP_TAG_SIZE, preserve, sizeof(preserve));
     ISAP_PERMUTE(state, ISAP_sH);
     memcpy(tag, state->B, ISAP_TAG_SIZE);
 #endif
 }
 
-/**
- * \brief Initializes a pre-computed key for ISAP.
- *
- * \param pk Points to the object to receive the pre-computed key value.
- * \param k Points to the bytes of the key.
- *
- * \return 0 on success, or a negative value if there was an error in
- * the parameters.
- */
-int ISAP_CONCAT(ISAP_ALG_NAME,_aead_pk_init)
-    (ISAP_KEY_STATE *pk, const unsigned char *k)
-{
-#if defined(ISAP_PERMUTE_SLICED)
-    ISAP_STATE state;
-
-    /* Expand the encryption key */
-    memcpy(state.B, k, ISAP_KEY_SIZE);
-    memcpy(state.B + ISAP_KEY_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KE),
-           sizeof(state.B) - ISAP_KEY_SIZE);
-    ascon_to_sliced(&state);
-    ISAP_PERMUTE_SLICED(&state, ISAP_sK);
-    memcpy(pk->ke, state.B, sizeof(state.B));
-
-    /* Expand the authentication key */
-    memcpy(state.B, k, ISAP_KEY_SIZE);
-    memcpy(state.B + ISAP_KEY_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KA),
-           sizeof(state.B) - ISAP_KEY_SIZE);
-    ascon_to_sliced(&state);
-    ISAP_PERMUTE_SLICED(&state, ISAP_sK);
-    memcpy(pk->ka, state.B, sizeof(state.B));
-
-    return 0;
-#else
-    ISAP_STATE state;
-
-    /* Expand the encryption key */
-    memcpy(state.B, k, ISAP_KEY_SIZE);
-    memcpy(state.B + ISAP_KEY_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KE),
-           sizeof(state.B) - ISAP_KEY_SIZE);
-    ISAP_PERMUTE(&state, ISAP_sK);
-    memcpy(pk->ke, state.B, sizeof(state.B));
-
-    /* Expand the authentication key */
-    memcpy(state.B, k, ISAP_KEY_SIZE);
-    memcpy(state.B + ISAP_KEY_SIZE, ISAP_CONCAT(ISAP_ALG_NAME,_pk_IV_KA),
-           sizeof(state.B) - ISAP_KEY_SIZE);
-    ISAP_PERMUTE(&state, ISAP_sK);
-    memcpy(pk->ka, state.B, sizeof(state.B));
-
-    return 0;
-#endif
-}
-
-int ISAP_CONCAT(ISAP_ALG_NAME,_aead_pk_encrypt)
+int ISAP_CONCAT(ISAP_ALG_NAME,_aead_encrypt)
     (unsigned char *c, size_t *clen,
      const unsigned char *m, size_t mlen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
-     const ISAP_KEY_STATE *pk)
+     const unsigned char *k)
 {
     ISAP_STATE state;
 
@@ -341,20 +302,20 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_pk_encrypt)
     *clen = mlen + ISAP_TAG_SIZE;
 
     /* Encrypt the plaintext to produce the ciphertext */
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_encrypt)(&state, pk, npub, c, m, mlen);
+    ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)(&state, k, npub, c, m, mlen);
 
     /* Authenticate the associated data and ciphertext to generate the tag */
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
-        (&state, pk, npub, ad, adlen, c, mlen, c + mlen);
+    ISAP_CONCAT(ISAP_ALG_NAME,_mac)
+        (&state, k, npub, ad, adlen, c, mlen, c + mlen);
     return 0;
 }
 
-int ISAP_CONCAT(ISAP_ALG_NAME,_aead_pk_decrypt)
+int ISAP_CONCAT(ISAP_ALG_NAME,_aead_decrypt)
     (unsigned char *m, size_t *mlen,
      const unsigned char *c, size_t clen,
      const unsigned char *ad, size_t adlen,
      const unsigned char *npub,
-     const ISAP_KEY_STATE *pk)
+     const unsigned char *k)
 {
     ISAP_STATE state;
     unsigned char tag[ISAP_TAG_SIZE];
@@ -365,11 +326,10 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_pk_decrypt)
     *mlen = clen - ISAP_TAG_SIZE;
 
     /* Authenticate the associated data and ciphertext to generate the tag */
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_mac)
-        (&state, pk, npub, ad, adlen, c, *mlen, tag);
+    ISAP_CONCAT(ISAP_ALG_NAME,_mac)(&state, k, npub, ad, adlen, c, *mlen, tag);
 
     /* Decrypt the ciphertext to produce the plaintext */
-    ISAP_CONCAT(ISAP_ALG_NAME,_pk_encrypt)(&state, pk, npub, m, c, *mlen);
+    ISAP_CONCAT(ISAP_ALG_NAME,_encrypt)(&state, k, npub, m, c, *mlen);
 
     /* Check the authentication tag */
     return aead_check_tag(m, *mlen, tag, c + *mlen, ISAP_TAG_SIZE);
@@ -380,7 +340,6 @@ int ISAP_CONCAT(ISAP_ALG_NAME,_aead_pk_decrypt)
 /* Now undefine everything so that we can include this file again for
  * another variant on the ISAP algorithm */
 #undef ISAP_ALG_NAME
-#undef ISAP_KEY_STATE
 #undef ISAP_RATE
 #undef ISAP_sH
 #undef ISAP_sE

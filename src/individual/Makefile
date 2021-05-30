@@ -126,15 +126,23 @@ GRAIN128_FILES = \
     internal-grain128-avr.S \
     aead-random-system.c \
     $(COMMON_FILES)
-ISAP_FILES = \
-    isap-aead.c \
-    isap-aead.h \
-    isap-aead-pk.c \
-    isap-aead-pk.h \
+ISAP_A_FILES = \
+    isap-a-aead.c \
+    isap-a-aead.h \
+    isap-a-aead-pk.c \
+    isap-a-aead-pk.h \
     internal-ascon.c \
     internal-ascon.h \
     internal-ascon-armv7m.S \
     internal-ascon-avr.S \
+    internal-isap.h \
+    internal-isap-pk.h \
+    $(COMMON_FILES)
+ISAP_K_FILES = \
+    isap-k-aead.c \
+    isap-k-aead.h \
+    isap-k-aead-pk.c \
+    isap-k-aead-pk.h \
     internal-isap.h \
     internal-isap-pk.h \
     internal-keccakp-400.c \
@@ -289,7 +297,8 @@ ALL_ALGORITHMS = \
     gift_cofb \
     gift_cofb_masked \
     grain128 \
-    isap \
+    isap_a \
+    isap_k \
     photon_beetle \
     romulus \
     sparkle \
@@ -329,8 +338,11 @@ gift_cofb_masked:
 grain128:
 	cp $(foreach file,$(GRAIN128_FILES),$(SRCDIR)/$(file)) Grain-128AEAD
 
-isap:
-	cp $(foreach file,$(ISAP_FILES),$(SRCDIR)/$(file)) ISAP
+isap_a:
+	cp $(foreach file,$(ISAP_A_FILES),$(SRCDIR)/$(file)) ISAP-A
+
+isap_k:
+	cp $(foreach file,$(ISAP_K_FILES),$(SRCDIR)/$(file)) ISAP-K
 
 photon_beetle:
 	cp $(foreach file,$(PHOTON_BEETLE_FILES),$(SRCDIR)/$(file)) PHOTON-Beetle

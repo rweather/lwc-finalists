@@ -187,7 +187,7 @@ the Grain family of stream ciphers.
 
 \section alg_isap ISAP
 
-<b>Definition:</b> \ref isap-aead.h
+<b>Definition:</b> \ref isap-a-aead.h, \ref isap-k-aead.h
 
 ISAP is a family of authenticated encryption algorithms that are built
 around the Keccak-p[400] or ASCON permutations.  There are four algorithms
