@@ -43,6 +43,7 @@ OBJS = \
         photon-beetle-prng.o \
         romulus-m-aead.o \
         romulus-n-aead.o \
+        romulus-t-aead.o \
         romulus-hash.o \
         romulus-hkdf.o \
         romulus-hmac.o \
@@ -146,7 +147,8 @@ aead-metadata.o: \
 	grain-aead.h \
 	isap-aead.h isap-aead-pk.h \
 	photon-beetle-aead.h photon-beetle-hash.h \
-	romulus-n-aead.h romulus-m-aead.h romulus-hash.h romulus-xof.h \
+	romulus-n-aead.h romulus-m-aead.h romulus-t-aead.h \
+        romulus-hash.h romulus-xof.h \
 	sparkle-aead.h sparkle-hash.h \
 	tinyjambu-aead.h tinyjambu-aead-masked.h \
 	xoodyak-aead.h xoodyak-hash.h xoodyak-masked.h
@@ -184,6 +186,7 @@ photon-beetle-pbkdf2.o: photon-beetle-pbkdf2.h photon-beetle-hmac.h photon-beetl
 photon-beetle-prng.o: photon-beetle-prng.h photon-beetle-hash.h internal-photon256.h internal-util.h
 romulus-m-aead.o: romulus-m-aead.h internal-romulus.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-n-aead.o: romulus-n-aead.h internal-romulus.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
+romulus-t-aead.o: romulus-t-aead.h romulus-hash.h internal-romulus.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-hash.o: romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-hkdf.o: romulus-hkdf.h romulus-hmac.h romulus-hash.h internal-util.h internal-hkdf.h
 romulus-hmac.o: romulus-hmac.h romulus-hash.h internal-util.h internal-hmac.h

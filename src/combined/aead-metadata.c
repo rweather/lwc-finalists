@@ -40,6 +40,7 @@
 #include "photon-beetle-hash.h"
 #include "romulus-m-aead.h"
 #include "romulus-n-aead.h"
+#include "romulus-t-aead.h"
 #include "romulus-hash.h"
 #include "romulus-xof.h"
 #include "sparkle-aead.h"
@@ -474,6 +475,17 @@ aead_cipher_t const romulus_m_cipher = {
     AEAD_FLAG_LITTLE_ENDIAN,
     romulus_m_aead_encrypt,
     romulus_m_aead_decrypt,
+    0, 0
+};
+
+aead_cipher_t const romulus_t_cipher = {
+    "Romulus-T",
+    ROMULUS_T_KEY_SIZE,
+    ROMULUS_T_NONCE_SIZE,
+    ROMULUS_T_TAG_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    romulus_t_aead_encrypt,
+    romulus_t_aead_decrypt,
     0, 0
 };
 

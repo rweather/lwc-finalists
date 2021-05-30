@@ -170,6 +170,8 @@ ROMULUS_FILES = \
     romulus-m-aead.h \
     romulus-n-aead.c \
     romulus-n-aead.h \
+    romulus-t-aead.c \
+    romulus-t-aead.h \
     romulus-hash.c \
     romulus-hash.h \
     romulus-hkdf.c \

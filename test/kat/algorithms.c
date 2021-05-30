@@ -56,6 +56,7 @@ static const aead_cipher_t *const ciphers[] = {
     &photon_beetle_32_cipher,
     &romulus_m_cipher,
     &romulus_n_cipher,
+    &romulus_t_cipher,
     &schwaemm_256_128_cipher,
     &schwaemm_192_192_cipher,
     &schwaemm_128_128_cipher,

@@ -429,6 +429,11 @@ extern aead_cipher_t const romulus_n_cipher;
 extern aead_cipher_t const romulus_m_cipher;
 
 /**
+ * \brief Meta-information block for the Romulus-T cipher.
+ */
+extern aead_cipher_t const romulus_t_cipher;
+
+/**
  * \brief Meta-information block for the Romulus-H hash algorithm.
  */
 extern aead_hash_algorithm_t const romulus_hash_algorithm;
