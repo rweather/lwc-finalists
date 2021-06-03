@@ -68,6 +68,7 @@ ELEPHANT_DELIRIUM_FILES = \
     elephant-delirium.h \
     elephant-prng.c \
     elephant-prng.h \
+    internal-elephant.h \
     internal-keccakp-200.c \
     internal-keccakp-200.h \
     internal-keccakp-200-armv7m.S \
@@ -77,6 +78,7 @@ ELEPHANT_DELIRIUM_FILES = \
 ELEPHANT_DUMBO_FILES = \
     elephant-dumbo.c \
     elephant-dumbo.h \
+    internal-elephant.h \
     internal-spongent.c \
     internal-spongent.h \
     internal-spongent-armv7m.S \
@@ -85,6 +87,7 @@ ELEPHANT_DUMBO_FILES = \
 ELEPHANT_JUMBO_FILES = \
     elephant-jumbo.c \
     elephant-jumbo.h \
+    internal-elephant.h \
     internal-spongent.c \
     internal-spongent.h \
     internal-spongent-armv7m.S \
