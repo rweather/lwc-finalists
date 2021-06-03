@@ -120,7 +120,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:af3af202e93eac563741830b170599294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a KMAC value using the Xoodyak hash algorithm.  <a href="#af3af202e93eac563741830b170599294">More...</a><br/></td></tr>
 <tr class="separator:af3af202e93eac563741830b170599294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a201fb80f4626ad26e714d3274414dd8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-kmac_8h.html#a201fb80f4626ad26e714d3274414dd8d">xoodyak_kmac_init</a> (<a class="el" href="xoodyak-kmac_8h.html#a2f9352444305585b13457dc9e6d78abd">xoodyak_kmac_state_t</a> *state, const unsigned char *key, size_t keylen, const unsigned char *custom, size_t customlen)</td></tr>
-<tr class="memdesc:a201fb80f4626ad26e714d3274414dd8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental KMAC state using the Xoodyak hash algorithm.permutation.  <a href="#a201fb80f4626ad26e714d3274414dd8d">More...</a><br/></td></tr>
+<tr class="memdesc:a201fb80f4626ad26e714d3274414dd8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an incremental KMAC state using the Xoodyak hash algorithm.  <a href="#a201fb80f4626ad26e714d3274414dd8d">More...</a><br/></td></tr>
 <tr class="separator:a201fb80f4626ad26e714d3274414dd8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b7634c706ad337f3c6548aa39d1755f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xoodyak-kmac_8h.html#a6b7634c706ad337f3c6548aa39d1755f">xoodyak_kmac_absorb</a> (<a class="el" href="xoodyak-kmac_8h.html#a2f9352444305585b13457dc9e6d78abd">xoodyak_kmac_state_t</a> *state, const unsigned char *in, size_t inlen)</td></tr>
 <tr class="memdesc:a6b7634c706ad337f3c6548aa39d1755f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absorbs more input data into an incremental Xoodyak-KMAC state.  <a href="#a6b7634c706ad337f3c6548aa39d1755f">More...</a><br/></td></tr>
@@ -258,7 +258,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-kmac_8h.html#a201fb80f4626ad26e714d3274414dd8d" title="Initializes an incremental KMAC state using the Xoodyak hash algorithm.permutation. ">xoodyak_kmac_init()</a>, <a class="el" href="xoodyak-kmac_8h.html#a44be883f8cbbe2e7d63c7c74455c2d21" title="Squeezes output data from an incremental Xoodyak-KMAC state. ">xoodyak_kmac_squeeze()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-kmac_8h.html#a201fb80f4626ad26e714d3274414dd8d" title="Initializes an incremental KMAC state using the Xoodyak hash algorithm. ">xoodyak_kmac_init()</a>, <a class="el" href="xoodyak-kmac_8h.html#a44be883f8cbbe2e7d63c7c74455c2d21" title="Squeezes output data from an incremental Xoodyak-KMAC state. ">xoodyak_kmac_squeeze()</a> </dd></dl>
 
 </div>
 </div>
@@ -341,7 +341,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes an incremental KMAC state using the Xoodyak hash algorithm.permutation. </p>
+<p>Initializes an incremental KMAC state using the Xoodyak hash algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Points to the state to be initialized. </td></tr>
@@ -432,14 +432,14 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>The application should call <a class="el" href="xoodyak-kmac_8h.html#a3809c4bcad1788232a45c3f4657e55f2" title="Sets the desired output length for an incremental Xoodyak-KMAC state. ">xoodyak_kmac_set_output_length()</a> before this function to set the desired output length. If that function has not been called, then this function will assume that the application wants arbitrary-length output.</p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-kmac_8h.html#a201fb80f4626ad26e714d3274414dd8d" title="Initializes an incremental KMAC state using the Xoodyak hash algorithm.permutation. ">xoodyak_kmac_init()</a>, xoodyak_kmac_update(), <a class="el" href="xoodyak-kmac_8h.html#ae13471430888d5bb6946e60c5387c332" title="Squeezes fixed-length data from an incremental Xoodyak-KMAC state and finalizes the KMAC process...">xoodyak_kmac_finalize()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="xoodyak-kmac_8h.html#a201fb80f4626ad26e714d3274414dd8d" title="Initializes an incremental KMAC state using the Xoodyak hash algorithm. ">xoodyak_kmac_init()</a>, xoodyak_kmac_update(), <a class="el" href="xoodyak-kmac_8h.html#ae13471430888d5bb6946e60c5387c332" title="Squeezes fixed-length data from an incremental Xoodyak-KMAC state and finalizes the KMAC process...">xoodyak_kmac_finalize()</a> </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 3 2021 17:31:17 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

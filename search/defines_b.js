@@ -1,10 +1,19 @@
 var searchData=
 [
+  ['romulus_5fhash_5frate',['ROMULUS_HASH_RATE',['../romulus-hash_8h.html#ae7d784b87820b24bc98b95b7e3578208',1,'romulus-hash.h']]],
   ['romulus_5fhash_5fsize',['ROMULUS_HASH_SIZE',['../romulus-hash_8h.html#ac11aa13a1726975171f0e8fc95b61e2c',1,'romulus-hash.h']]],
   ['romulus_5fhkdf_5foutput_5fsize',['ROMULUS_HKDF_OUTPUT_SIZE',['../romulus-hkdf_8h.html#a7dcb431eb4d4a3b0ed0f47ebc3b3ac1e',1,'romulus-hkdf.h']]],
   ['romulus_5fhmac_5fsize',['ROMULUS_HMAC_SIZE',['../romulus-hmac_8h.html#a7bf812f3bc61535f10d1a01f6e7f6318',1,'romulus-hmac.h']]],
-  ['romulus_5fkey_5fsize',['ROMULUS_KEY_SIZE',['../romulus-aead_8h.html#a1e059517cead8027116deb8167b2b37d',1,'romulus-aead.h']]],
-  ['romulus_5fnonce_5fsize',['ROMULUS_NONCE_SIZE',['../romulus-aead_8h.html#a66d4736e84d9383ce86af4ad3d9028c3',1,'romulus-aead.h']]],
+  ['romulus_5fkmac_5fsize',['ROMULUS_KMAC_SIZE',['../romulus-kmac_8h.html#a0c6e718014bee82b7ac0ecd0afe255c0',1,'romulus-kmac.h']]],
+  ['romulus_5fm_5fkey_5fsize',['ROMULUS_M_KEY_SIZE',['../romulus-m-aead_8h.html#a7099a53bed46444ee446582b9c07ead2',1,'romulus-m-aead.h']]],
+  ['romulus_5fm_5fnonce_5fsize',['ROMULUS_M_NONCE_SIZE',['../romulus-m-aead_8h.html#a4eeb30c8c7bca5a5dcff1c9adcb16448',1,'romulus-m-aead.h']]],
+  ['romulus_5fm_5ftag_5fsize',['ROMULUS_M_TAG_SIZE',['../romulus-m-aead_8h.html#ae61c8f15ad6bf4d1a72070ecbf0983ba',1,'romulus-m-aead.h']]],
+  ['romulus_5fn_5fkey_5fsize',['ROMULUS_N_KEY_SIZE',['../romulus-n-aead_8h.html#a698c7917e2325ebff15d4c93e345069d',1,'romulus-n-aead.h']]],
+  ['romulus_5fn_5fnonce_5fsize',['ROMULUS_N_NONCE_SIZE',['../romulus-n-aead_8h.html#a579156d391e5e37c74d599f17d2d1124',1,'romulus-n-aead.h']]],
+  ['romulus_5fn_5ftag_5fsize',['ROMULUS_N_TAG_SIZE',['../romulus-n-aead_8h.html#a9d688e68de1705624a7209046f8e31de',1,'romulus-n-aead.h']]],
   ['romulus_5fpbkdf2_5fsize',['ROMULUS_PBKDF2_SIZE',['../romulus-pbkdf2_8h.html#ab9d89df74194fa9f6e1b660eb245a343',1,'romulus-pbkdf2.h']]],
-  ['romulus_5ftag_5fsize',['ROMULUS_TAG_SIZE',['../romulus-aead_8h.html#a9188c93a0975d91f0cf7052601cf7a1c',1,'romulus-aead.h']]]
+  ['romulus_5fset_5fdomain',['romulus_set_domain',['../internal-romulus_8h.html#a1e7c00f8ca47100e0f9da964e06c76e3',1,'internal-romulus.h']]],
+  ['romulus_5ft_5fkey_5fsize',['ROMULUS_T_KEY_SIZE',['../romulus-t-aead_8h.html#ad538883f2cbdd5211cdced5cd10fdb23',1,'romulus-t-aead.h']]],
+  ['romulus_5ft_5fnonce_5fsize',['ROMULUS_T_NONCE_SIZE',['../romulus-t-aead_8h.html#a5c0f04487a4cf55a63d25a2a1546c21e',1,'romulus-t-aead.h']]],
+  ['romulus_5ft_5ftag_5fsize',['ROMULUS_T_TAG_SIZE',['../romulus-t-aead_8h.html#afe5f3404a7a4e3829c8733c2363aad43',1,'romulus-t-aead.h']]]
 ];

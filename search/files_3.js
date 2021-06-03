@@ -15,6 +15,7 @@ var searchData=
   ['internal_2dmasking_2eh',['internal-masking.h',['../internal-masking_8h.html',1,'']]],
   ['internal_2dphoton256_2dmix_2eh',['internal-photon256-mix.h',['../internal-photon256-mix_8h.html',1,'']]],
   ['internal_2dphoton256_2eh',['internal-photon256.h',['../internal-photon256_8h.html',1,'']]],
+  ['internal_2dromulus_2eh',['internal-romulus.h',['../internal-romulus_8h.html',1,'']]],
   ['internal_2dsha256_2eh',['internal-sha256.h',['../internal-sha256_8h.html',1,'']]],
   ['internal_2dskinny_2dplus_2dconfig_2eh',['internal-skinny-plus-config.h',['../internal-skinny-plus-config_8h.html',1,'']]],
   ['internal_2dskinny_2dplus_2eh',['internal-skinny-plus.h',['../internal-skinny-plus_8h.html',1,'']]],
@@ -24,6 +25,8 @@ var searchData=
   ['internal_2dtinyjambu_2eh',['internal-tinyjambu.h',['../internal-tinyjambu_8h.html',1,'']]],
   ['internal_2dxoodoo_2dm_2eh',['internal-xoodoo-m.h',['../internal-xoodoo-m_8h.html',1,'']]],
   ['internal_2dxoodoo_2eh',['internal-xoodoo.h',['../internal-xoodoo_8h.html',1,'']]],
-  ['isap_2daead_2dpk_2eh',['isap-aead-pk.h',['../isap-aead-pk_8h.html',1,'']]],
-  ['isap_2daead_2eh',['isap-aead.h',['../isap-aead_8h.html',1,'']]]
+  ['isap_2da_2daead_2dpk_2eh',['isap-a-aead-pk.h',['../isap-a-aead-pk_8h.html',1,'']]],
+  ['isap_2da_2daead_2eh',['isap-a-aead.h',['../isap-a-aead_8h.html',1,'']]],
+  ['isap_2dk_2daead_2dpk_2eh',['isap-k-aead-pk.h',['../isap-k-aead-pk_8h.html',1,'']]],
+  ['isap_2dk_2daead_2eh',['isap-k-aead.h',['../isap-k-aead_8h.html',1,'']]]
 ];

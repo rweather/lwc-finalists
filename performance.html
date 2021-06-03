@@ -140,15 +140,17 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>AES-256-GCM</td><td>256</td><td>96</td><td>128</td><td>0.31</td><td>0.33</td><td>0.42</td><td>0.44</td><td>0.37 </td></tr>
 <tr>
-<td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.26</td><td>0.29</td><td>0.38</td><td>0.41</td><td>0.33 </td></tr>
+<td><b><em>Romulus-N</em></b></td><td>128</td><td>128</td><td>128</td><td>0.27</td><td>0.29</td><td>0.32</td><td>0.34</td><td>0.31 </td></tr>
 <tr>
-<td><b><em>Romulus-N</em></b></td><td>128</td><td>128</td><td>128</td><td>0.29</td><td>0.32</td><td>0.32</td><td>0.34</td><td>0.32 </td></tr>
+<td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.23</td><td>0.25</td><td>0.38</td><td>0.39</td><td>0.30 </td></tr>
 <tr>
 <td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.33</td><td>0.35</td><td>0.25 </td></tr>
 <tr>
-<td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>0.17</td><td>0.19</td><td>0.22</td><td>0.23</td><td>0.20 </td></tr>
+<td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.17</td><td>0.22</td><td>0.23</td><td>0.19 </td></tr>
 <tr>
 <td><b><em>ISAP-A-128A</em></b></td><td>128</td><td>128</td><td>128</td><td>0.24</td><td>0.26</td><td>0.13</td><td>0.14</td><td>0.18 </td></tr>
+<tr>
+<td>Romulus-T</td><td>128</td><td>128</td><td>128</td><td>0.07</td><td>0.07</td><td>0.10</td><td>0.11</td><td>0.09 </td></tr>
 <tr>
 <td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.05</td><td>0.06</td><td>0.13</td><td>0.14</td><td>0.08 </td></tr>
 <tr>
@@ -156,7 +158,7 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>ISAP-K-128A</td><td>128</td><td>128</td><td>128</td><td>0.07</td><td>0.07</td><td>0.04</td><td>0.04</td><td>0.05 </td></tr>
 <tr>
-<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.03</td><td>0.04</td><td>0.04</td><td>0.03 </td></tr>
+<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.02</td><td>0.04</td><td>0.04</td><td>0.03 </td></tr>
 <tr>
 <td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.03 </td></tr>
 <tr>
@@ -250,23 +252,25 @@ Performance on ESP32</h1>
 <tr>
 <td><b><em>PHOTON-Beetle-AEAD-ENC-128</em></b></td><td>128</td><td>128</td><td>128</td><td>0.16</td><td>0.18</td><td>0.30</td><td>0.32</td><td>0.23 </td></tr>
 <tr>
-<td><b><em>Romulus-N</em></b></td><td>128</td><td>128</td><td>128</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.21</td><td>0.20 </td></tr>
+<td><b><em>Romulus-N</em></b></td><td>128</td><td>128</td><td>128</td><td>0.17</td><td>0.20</td><td>0.18</td><td>0.24</td><td>0.20 </td></tr>
 <tr>
-<td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.15</td><td>0.17</td><td>0.22</td><td>0.24</td><td>0.19 </td></tr>
+<td>Delirium (Elephant)</td><td>128</td><td>96</td><td>128</td><td>0.14</td><td>0.15</td><td>0.22</td><td>0.23</td><td>0.18 </td></tr>
 <tr>
-<td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>0.11</td><td>0.13</td><td>0.15</td><td>0.16</td><td>0.14 </td></tr>
+<td>Romulus-M</td><td>128</td><td>128</td><td>128</td><td>0.09</td><td>0.11</td><td>0.12</td><td>0.17</td><td>0.12 </td></tr>
 <tr>
 <td><b><em>ISAP-A-128A</em></b></td><td>128</td><td>128</td><td>128</td><td>0.13</td><td>0.15</td><td>0.08</td><td>0.09</td><td>0.10 </td></tr>
 <tr>
 <td>PHOTON-Beetle-AEAD-ENC-32</td><td>128</td><td>128</td><td>128</td><td>0.04</td><td>0.05</td><td>0.12</td><td>0.13</td><td>0.07 </td></tr>
 <tr>
+<td>Romulus-T</td><td>128</td><td>128</td><td>128</td><td>0.04</td><td>0.05</td><td>0.07</td><td>0.09</td><td>0.06 </td></tr>
+<tr>
 <td>ISAP-K-128A</td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
 <td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.01</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
-<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
+<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.01 </td></tr>
 <tr>
-<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.01 </td></tr>
+<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02</td><td>0.01 </td></tr>
 <tr>
 <td>ISAP-K-128</td><td>128</td><td>128</td><td>128</td><td>0.0040</td><td>0.0047</td><td>0.0018</td><td>0.0020</td><td>0.0025 </td></tr>
 </table>
@@ -353,11 +357,11 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <tr>
 <td>Grain128-AEAD</td><td>0.37</td><td>0.45</td><td></td></tr>
 <tr>
-<td>Romulus</td><td>0.19</td><td>0.32</td><td>Switched to fixsliced SKINNY-128-384+ </td></tr>
+<td>Romulus</td><td>0.19</td><td>0.31</td><td>Switched to fixsliced SKINNY-128-384+ </td></tr>
+<tr>
+<td>Elephant (Delirium)</td><td>0.05</td><td>0.30</td><td>Optimised 32-bit and 64-bit versions of Keccak-p[200] in C </td></tr>
 <tr>
 <td>PHOTON-Beetle</td><td>0.08</td><td>0.25</td><td>Highly unrolled 32-bit version in C </td></tr>
-<tr>
-<td>Elephant (Delirium)</td><td>0.05</td><td>0.19</td><td>Optimised 32-bit and 64-bit versions of Keccak-p[200] in C </td></tr>
 <tr>
 <td>ISAP-A</td><td>0.13</td><td>0.18</td><td></td></tr>
 <tr>
@@ -404,13 +408,13 @@ Changes in ESP32 performance since Round 2</h1>
 <tr>
 <td>Romulus</td><td>0.11</td><td>0.20</td><td>Switched to fixsliced SKINNY-128-384+ </td></tr>
 <tr>
-<td>Elephant (Delirium)</td><td>0.06</td><td>0.19</td><td>Optimised 32-bit version of Keccak-p[200] in C </td></tr>
+<td>Elephant (Delirium)</td><td>0.06</td><td>0.18</td><td>Optimised 32-bit version of Keccak-p[200] in C </td></tr>
 <tr>
 <td>ISAP-A</td><td>0.10</td><td>0.10</td><td></td></tr>
 <tr>
 <td>ISAP-K</td><td>0.02</td><td>0.02</td><td></td></tr>
 <tr>
-<td>Elephant (Dumbo)</td><td>0.02</td><td>0.02</td><td></td></tr>
+<td>Elephant (Dumbo)</td><td>0.02</td><td>0.01</td><td>Version 2 mask management slowed Dumbo down slightly </td></tr>
 </table>
 <p>Changes in the primary hash algorithm performance for ESP32:</p>
 <table class="doxtable">
@@ -440,7 +444,7 @@ Algorithms with native 64-bit support</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 29 2021 09:39:57 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 3 2021 17:31:17 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
