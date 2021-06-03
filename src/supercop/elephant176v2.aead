@@ -1,5 +1,5 @@
 aead_family=elephant
-aead_name=elephant176v1
+aead_name=elephant176v2
 aead_meta_name=Jumbo
 aead_srcdir=Elephant-Jumbo
 aead_key_size=16

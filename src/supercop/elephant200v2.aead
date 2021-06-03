@@ -1,5 +1,5 @@
 aead_family=elephant
-aead_name=elephant200v1
+aead_name=elephant200v2
 aead_meta_name=Delirium
 aead_srcdir=Elephant-Delirium
 aead_key_size=16
