@@ -18,6 +18,7 @@ TARGETS = \
 	bin/skinny128_armv7m \
 	bin/sparkle_armv7m \
 	bin/spongent_armv7m \
+	bin/spongent_2_armv7m \
 	bin/xoodoo_armv7m
 
 all: $(TARGETS)
@@ -62,6 +63,10 @@ bin/spongent_armv7m: spongent_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
+bin/spongent_2_armv7m: spongent_2_armv7m.c copyright.h
+	@mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 bin/tinyjambu_armv7m: tinyjambu_armv7m.c copyright.h
 	@mkdir -p bin
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
@@ -90,5 +95,5 @@ generate: all
 	bin/skinny128_armv7m small plus >../combined/internal-skinny-small-armv7m.S
 	bin/skinny128_armv7m tiny plus >../combined/internal-skinny-tiny-armv7m.S
 	bin/sparkle_armv7m >../combined/internal-sparkle-armv7m.S
-	bin/spongent_armv7m >../combined/internal-spongent-armv7m.S
+	bin/spongent_2_armv7m >../combined/internal-spongent-armv7m.S
 	bin/xoodoo_armv7m >../combined/internal-xoodoo-armv7m.S
