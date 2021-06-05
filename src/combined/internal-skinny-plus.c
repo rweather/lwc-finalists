@@ -165,6 +165,29 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
     } while (0)
 
 /**
+ * \brief Applies the inverse of the first S-box to the fix-sliced state.
+ *
+ * \param s0 First 32-bit word of the state.
+ * \param s1 Second 32-bit word of the state.
+ * \param s2 Third 32-bit word of the state.
+ * \param s3 Fourth 32-bit word of the state.
+ */
+#define skinny_inv_fixsliced_sbox_1(s0, s1, s2, s3) \
+    do { \
+        skinny_swap_move((s3), (s0), 0x55555555U, 0); \
+        (s1) ^= ((s2) | (s3)); \
+        skinny_swap_move((s3), (s2), 0x55555555U, 1); \
+        skinny_swap_move((s2), (s1), 0x55555555U, 1); \
+        (s3) ^= ~((s0) | (s1)); \
+        skinny_swap_move((s0), (s3), 0x55555555U, 1); \
+        skinny_swap_move((s1), (s0), 0x55555555U, 1); \
+        (s1) ^= ~((s2) | (s3)); \
+        skinny_swap_move((s3), (s2), 0x55555555U, 1); \
+        skinny_swap_move((s2), (s1), 0x55555555U, 1); \
+        (s3) ^= ~((s0) | (s1)); \
+    } while (0)
+
+/**
  * \brief Applies the second S-box to the fix-sliced state.
  *
  * \param s0 First 32-bit word of the state.
@@ -188,6 +211,29 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
     } while (0)
 
 /**
+ * \brief Applies the inverse of the second S-box to the fix-sliced state.
+ *
+ * \param s0 First 32-bit word of the state.
+ * \param s1 Second 32-bit word of the state.
+ * \param s2 Third 32-bit word of the state.
+ * \param s3 Fourth 32-bit word of the state.
+ */
+#define skinny_inv_fixsliced_sbox_2(s0, s1, s2, s3) \
+    do { \
+        skinny_swap_move((s1), (s2), 0x55555555U, 0); \
+        (s3) ^= ((s0) | (s1)); \
+        skinny_swap_move((s0), (s3), 0x55555555U, 1); \
+        skinny_swap_move((s1), (s0), 0x55555555U, 1); \
+        (s1) ^= ~((s2) | (s3)); \
+        skinny_swap_move((s3), (s2), 0x55555555U, 1); \
+        skinny_swap_move((s2), (s1), 0x55555555U, 1); \
+        (s3) ^= ~((s0) | (s1)); \
+        skinny_swap_move((s0), (s3), 0x55555555U, 1); \
+        skinny_swap_move((s1), (s0), 0x55555555U, 1); \
+        (s1) ^= ~((s2) | (s3)); \
+    } while (0)
+
+/**
  * \brief Mixes the columns for the first round of 4 in the fix-sliced state.
  *
  * \param s State word to be mixed.
@@ -200,6 +246,22 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
         (s) ^= rightRotate4(t); \
         t = rightRotate8((s)) & 0x0C0C0C0CU; \
         (s) ^= rightRotate2(t); \
+    } while (0)
+
+/**
+ * \brief Inverse mix of the columns for the first round of 4 in
+ * the fix-sliced state.
+ *
+ * \param s State word to be mixed.
+ */
+#define skinny_inv_mix_columns_1_of_4(s) \
+    do { \
+        uint32_t t = rightRotate8((s)) & 0x0C0C0C0CU; \
+        (s) ^= rightRotate2(t); \
+        t = rightRotate16((s)) & 0xC0C0C0C0U; \
+        (s) ^= rightRotate4(t); \
+        t = rightRotate24((s)) & 0x0C0C0C0CU; \
+        (s) ^= rightRotate30(t); \
     } while (0)
 
 /**
@@ -218,6 +280,22 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
     } while (0)
 
 /**
+ * \brief Inverse mix of the columns for the second round of 4
+ * in the fix-sliced state.
+ *
+ * \param s State word to be mixed.
+ */
+#define skinny_inv_mix_columns_2_of_4(s) \
+    do { \
+        uint32_t t = rightRotate16((s)) & 0x30303030U; \
+        (s) ^= rightRotate2(t); \
+        t = (s) & 0x03030303U; \
+        (s) ^= rightRotate28(t); \
+        t = rightRotate16((s)) & 0x30303030U; \
+        (s) ^= rightRotate30(t); \
+    } while (0)
+
+/**
  * \brief Mixes the columns for the third round of 4 in the fix-sliced state.
  *
  * \param s State word to be mixed.
@@ -233,6 +311,22 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
     } while (0)
 
 /**
+ * \brief Inverse mix of the columns for the third round of 4
+ * in the fix-sliced state.
+ *
+ * \param s State word to be mixed.
+ */
+#define skinny_inv_mix_columns_3_of_4(s) \
+    do { \
+        uint32_t t = rightRotate24((s)) & 0xC0C0C0C0U; \
+        (s) ^= rightRotate2(t); \
+        t = rightRotate16((s)) & 0x0C0C0C0CU; \
+        (s) ^= rightRotate28(t); \
+        t = rightRotate8((s)) & 0xC0C0C0C0U; \
+        (s) ^= rightRotate6(t); \
+    } while (0)
+
+/**
  * \brief Mixes the columns for the fourth round of 4 in the fix-sliced state.
  *
  * \param s State word to be mixed.
@@ -245,6 +339,22 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
         (s) ^= rightRotate4(t); \
         t = (s) & 0x03030303U; \
         (s) ^= rightRotate26(t); \
+    } while (0)
+
+/**
+ * \brief Inverse mix of the columns for the fourth round of 4
+ * in the fix-sliced state.
+ *
+ * \param s State word to be mixed.
+ */
+#define skinny_inv_mix_columns_4_of_4(s) \
+    do { \
+        uint32_t t = (s) & 0x03030303U; \
+        (s) ^= rightRotate26(t); \
+        t = (s) & 0x30303030U; \
+        (s) ^= rightRotate4(t); \
+        t = (s) & 0x03030303U; \
+        (s) ^= rightRotate30(t); \
     } while (0)
 
 /**
@@ -318,6 +428,79 @@ static uint32_t const skinny_fixsliced_rc[SKINNY_PLUS_ROUNDS * 4] = {
         skinny_mix_columns_4_of_4((s1)); \
         skinny_mix_columns_4_of_4((s2)); \
         skinny_mix_columns_4_of_4((s3)); \
+    } while (0)
+
+/**
+ * \brief Performs four fixsliced decryption rounds using 16 round keys.
+ *
+ * \param s0 First 32-bit word of the state to decrypt.
+ * \param s1 Second 32-bit word of the state to decrypt.
+ * \param s2 Third 32-bit word of the state to decrypt.
+ * \param s3 Fourth 32-bit word of the state to decrypt.
+ * \param tk1 Points to the 16 round keys for the TK1 part of the schedule.
+ * \param tk23 Points to the 16 round keys for the TK2/3 part of the schedule.
+ */
+#define skinny_decrypt_4_rounds(s0, s1, s2, s3, tk1, tk23) \
+    do { \
+        /* Inverse mix of the columns for the fourth round */ \
+        skinny_inv_mix_columns_4_of_4((s0)); \
+        skinny_inv_mix_columns_4_of_4((s1)); \
+        skinny_inv_mix_columns_4_of_4((s2)); \
+        skinny_inv_mix_columns_4_of_4((s3)); \
+        \
+        /* XOR with the key schedule for the fourth round */ \
+        (s0) ^= (tk1)[12] ^ (tk23)[12]; \
+        (s1) ^= (tk1)[13] ^ (tk23)[13]; \
+        (s2) ^= (tk1)[14] ^ (tk23)[14]; \
+        (s3) ^= (tk1)[15] ^ (tk23)[15]; \
+        \
+        /* Apply the inverse of the S-box for the fourth round */ \
+        skinny_inv_fixsliced_sbox_2((s0), (s1), (s2), (s3)); \
+        \
+        /* Inverse mix of the columns for the third round */ \
+        skinny_inv_mix_columns_3_of_4((s0)); \
+        skinny_inv_mix_columns_3_of_4((s1)); \
+        skinny_inv_mix_columns_3_of_4((s2)); \
+        skinny_inv_mix_columns_3_of_4((s3)); \
+        \
+        /* XOR with the key schedule for the third round */ \
+        (s0) ^= (tk1)[8]  ^ (tk23)[8]; \
+        (s1) ^= (tk1)[9]  ^ (tk23)[9]; \
+        (s2) ^= (tk1)[10] ^ (tk23)[10]; \
+        (s3) ^= (tk1)[11] ^ (tk23)[11]; \
+        \
+        /* Apply the inverse of the S-box for the third round */ \
+        skinny_inv_fixsliced_sbox_1((s0), (s1), (s2), (s3)); \
+        \
+        /* Inverse mix of the columns for the second round */ \
+        skinny_inv_mix_columns_2_of_4((s0)); \
+        skinny_inv_mix_columns_2_of_4((s1)); \
+        skinny_inv_mix_columns_2_of_4((s2)); \
+        skinny_inv_mix_columns_2_of_4((s3)); \
+        \
+        /* XOR with the key schedule for the second round */ \
+        (s0) ^= (tk1)[4] ^ (tk23)[4]; \
+        (s1) ^= (tk1)[5] ^ (tk23)[5]; \
+        (s2) ^= (tk1)[6] ^ (tk23)[6]; \
+        (s3) ^= (tk1)[7] ^ (tk23)[7]; \
+        \
+        /* Apply the inverse of the S-box for the second round */ \
+        skinny_inv_fixsliced_sbox_2((s0), (s1), (s2), (s3)); \
+        \
+        /* Inverse mix of the columns for the first round */ \
+        skinny_inv_mix_columns_1_of_4((s0)); \
+        skinny_inv_mix_columns_1_of_4((s1)); \
+        skinny_inv_mix_columns_1_of_4((s2)); \
+        skinny_inv_mix_columns_1_of_4((s3)); \
+        \
+        /* XOR with the key schedule for the first round */ \
+        (s0) ^= (tk1)[0] ^ (tk23)[0]; \
+        (s1) ^= (tk1)[1] ^ (tk23)[1]; \
+        (s2) ^= (tk1)[2] ^ (tk23)[2]; \
+        (s3) ^= (tk1)[3] ^ (tk23)[3]; \
+        \
+        /* Apply the inverse of the S-box for the first round */ \
+        skinny_inv_fixsliced_sbox_1((s0), (s1), (s2), (s3)); \
     } while (0)
 
 /**
@@ -665,6 +848,30 @@ void skinny_plus_encrypt
     skinny_from_fixsliced(output, s0, s1, s2, s3);
 }
 
+void skinny_plus_decrypt
+    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    uint32_t tk1[16 * 4] = {0};
+    uint32_t s0, s1, s2, s3;
+    int r;
+
+    /* Convert TK1 into fixsliced form and expand it to 16 rounds.
+     * TK1 repeats after 16 rounds, so no need to go further. */
+    skinny_to_fixsliced(s0, s1, s2, s3, ks->TK1);
+    skinny_permute_and_expand_tk(tk1, s0, s1, s2, s3, 16);
+
+    /* Load the ciphertext and convert into fixsliced form */
+    skinny_to_fixsliced(s0, s1, s2, s3, input);
+
+    /* Perform the 40 decryption rounds four at a time */
+    for (r = (SKINNY_PLUS_ROUNDS * 4) - 16; r >= 0; r -= 16)
+        skinny_decrypt_4_rounds(s0, s1, s2, s3, tk1 + (r & 63), ks->k + r);
+
+    /* Convert the plaintext from fixsliced form and store */
+    skinny_from_fixsliced(output, s0, s1, s2, s3);
+}
+
 void skinny_plus_encrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
      const unsigned char *input)
@@ -687,6 +894,31 @@ void skinny_plus_encrypt_tk_full
         skinny_encrypt_4_rounds(s0, s1, s2, s3, tk1 + (r & 63), k + r);
 
     /* Convert the ciphertext from fixsliced form and store */
+    skinny_from_fixsliced(output, s0, s1, s2, s3);
+}
+
+void skinny_plus_decrypt_tk_full
+    (const unsigned char key[48], unsigned char *output,
+     const unsigned char *input)
+{
+    uint32_t tk1[16 * 4] = {0};
+    uint32_t k[SKINNY_PLUS_ROUNDS * 4];
+    uint32_t s0, s1, s2, s3;
+    int r;
+
+    /* Expand the key into a full key schedule */
+    skinny_to_fixsliced(s0, s1, s2, s3, key);
+    skinny_permute_and_expand_tk(tk1, s0, s1, s2, s3, 16);
+    skinny_plus_init_schedule(k, key + 16, key + 32);
+
+    /* Load the ciphertext and convert into fixsliced form */
+    skinny_to_fixsliced(s0, s1, s2, s3, input);
+
+    /* Perform the 40 decryption rounds four at a time */
+    for (r = (SKINNY_PLUS_ROUNDS * 4) - 16; r >= 0; r -= 16)
+        skinny_decrypt_4_rounds(s0, s1, s2, s3, tk1 + (r & 63), k + r);
+
+    /* Convert the plaintext from fixsliced form and store */
     skinny_from_fixsliced(output, s0, s1, s2, s3);
 }
 
@@ -724,6 +956,21 @@ void skinny_plus_encrypt_tk_full
                (row2        & 0xFF000000U) | \
               ((row3 <<  8) & 0x0000FF00U) | \
               ( row3        & 0x00FF0000U); \
+    } while (0)
+
+#define skinny128_inv_permute_tk_half(tk0, tk1) \
+    do { \
+        /* Permute the top half of the tweakey state in place, no swap */ \
+        uint32_t row0 = tk0; \
+        uint32_t row1 = tk1; \
+        tk0 = ((row0 >> 16) & 0x000000FFU) | \
+              ((row0 <<  8) & 0x0000FF00U) | \
+              ((row1 << 16) & 0x00FF0000U) | \
+              ( row1        & 0xFF000000U); \
+        tk1 = ((row0 >> 16) & 0x0000FF00U) | \
+              ((row0 << 16) & 0xFF000000U) | \
+              ((row1 >> 16) & 0x000000FFU) | \
+              ((row1 <<  8) & 0x00FF0000U); \
     } while (0)
 
 /*
@@ -780,6 +1027,90 @@ do { \
         ((x & 0x40404040U) >> 4) | \
         ((x & 0x04040404U) >> 2); \
 } while (0)
+
+/*
+ * Apply the inverse of the SKINNY sbox.  The original version from the
+ * specification is equivalent to:
+ *
+ * #define SBOX_MIX(x)
+ *     (((~((((x) >> 1) | (x)) >> 2)) & 0x11111111U) ^ (x))
+ * #define SBOX_SWAP(x)
+ *     (((x) & 0xF9F9F9F9U) |
+ *     (((x) >> 1) & 0x02020202U) |
+ *     (((x) << 1) & 0x04040404U))
+ * #define SBOX_PERMUTE_INV(x)
+ *     ((((x) & 0x08080808U) << 1) |
+ *      (((x) & 0x32323232U) << 2) |
+ *      (((x) & 0x01010101U) << 5) |
+ *      (((x) & 0xC0C0C0C0U) >> 5) |
+ *      (((x) & 0x04040404U) >> 2))
+ *
+ * x = SBOX_SWAP(x);
+ * x = SBOX_MIX(x);
+ * x = SBOX_PERMUTE_INV(x);
+ * x = SBOX_MIX(x);
+ * x = SBOX_PERMUTE_INV(x);
+ * x = SBOX_MIX(x);
+ * x = SBOX_PERMUTE_INV(x);
+ * return SBOX_MIX(x);
+ *
+ * However, we can mix the bits in their original positions and then
+ * delay the SBOX_PERMUTE_INV and SBOX_SWAP steps to be performed with one
+ * final permuatation.  This reduces the number of shift operations.
+ */
+#define skinny128_inv_sbox(x) \
+do { \
+    uint32_t y; \
+    \
+    /* Mix the bits */ \
+    x = ~x; \
+    y  = (((x >> 1) & (x >> 3)) & 0x01010101U); \
+    x ^= (((x >> 2) & (x >> 3)) & 0x10101010U) ^ y; \
+    y  = (((x >> 6) & (x >> 1)) & 0x02020202U); \
+    x ^= (((x >> 1) & (x >> 2)) & 0x08080808U) ^ y; \
+    y  = (((x << 2) & (x << 1)) & 0x80808080U); \
+    x ^= (((x >> 1) & (x << 2)) & 0x04040404U) ^ y; \
+    y  = (((x << 5) & (x << 1)) & 0x20202020U); \
+    x ^= (((x << 4) & (x << 5)) & 0x40404040U) ^ y; \
+    x = ~x; \
+    \
+    /* Permutation generated by http://programming.sirrida.de/calcperm.php */ \
+    /* The final permutation for each byte is [5 3 0 4 6 7 2 1] */ \
+    x = ((x & 0x01010101U) << 2) | \
+        ((x & 0x04040404U) << 4) | \
+        ((x & 0x02020202U) << 6) | \
+        ((x & 0x20202020U) >> 5) | \
+        ((x & 0xC8C8C8C8U) >> 2) | \
+        ((x & 0x10101010U) >> 1); \
+} while (0)
+
+STATIC_INLINE void skinny128_fast_forward_tk(uint32_t *tk)
+{
+    /* This function is used to fast-forward the TK1 tweak value
+     * to the value at the end of the key schedule for decryption.
+     *
+     * The tweak permutation repeats every 16 rounds, so SKINNY-128-384+
+     * with 40 rounds is equivalent to applying the permutation 8 times:
+     *
+     * PT*8 = [5, 6, 3, 2, 7, 0, 1, 4, 13, 14, 11, 10, 15, 8, 9, 12]
+     */
+    uint32_t row0 = tk[0];
+    uint32_t row1 = tk[1];
+    uint32_t row2 = tk[2];
+    uint32_t row3 = tk[3];
+    tk[0] = ((row1 >>  8) & 0x0000FFFFU) |
+            ((row0 >>  8) & 0x00FF0000U) |
+            ((row0 <<  8) & 0xFF000000U);
+    tk[1] = ((row1 >> 24) & 0x000000FFU) |
+            ((row0 <<  8) & 0x00FFFF00U) |
+            ((row1 << 24) & 0xFF000000U);
+    tk[2] = ((row3 >>  8) & 0x0000FFFFU) |
+            ((row2 >>  8) & 0x00FF0000U) |
+            ((row2 <<  8) & 0xFF000000U);
+    tk[3] = ((row3 >> 24) & 0x000000FFU) |
+            ((row2 <<  8) & 0x00FFFF00U) |
+            ((row3 << 24) & 0xFF000000U);
+}
 
 /** @endcond */
 
@@ -862,7 +1193,7 @@ void skinny_plus_init_without_tk1
 }
 
 /**
- * \brief Performs an unrolled round for Skinny-128-384 when only TK1 is
+ * \brief Performs an unrolled round for Skinny-128-384+ when only TK1 is
  * computed on the fly.
  *
  * \param s0 First word of the state.
@@ -903,7 +1234,7 @@ void skinny_plus_init_without_tk1
     } while (0)
 
 /**
- * \brief Performs an unrolled round for Skinny-128-384 when the entire
+ * \brief Performs an unrolled round for Skinny-128-384+ when the entire
  * tweakey schedule is computed on the fly.
  *
  * \param s0 First word of the state.
@@ -951,6 +1282,93 @@ void skinny_plus_init_without_tk1
         skinny128_LFSR2(TK2[(1 - half) * 2 + 1]); \
         skinny128_LFSR3(TK3[(1 - half) * 2]); \
         skinny128_LFSR3(TK3[(1 - half) * 2 + 1]); \
+    } while (0)
+
+/**
+ * \brief Performs an unrolled inverse round for Skinny-128-384+ when
+ * only TK1 is computed on the fly.
+ *
+ * \param s0 First word of the state.
+ * \param s1 Second word of the state.
+ * \param s2 Third word of the state.
+ * \param s3 Fourth word of the state.
+ * \param half 0 for the bottom half and 1 for the top half of the TK values.
+ * \param offset Offset between 0 and 3 of the current unrolled round.
+ */
+#define skinny_plus_inv_round(s0, s1, s2, s3, half, offset) \
+    do { \
+        /* Inverse permutation on TK1 for this round */ \
+        skinny128_inv_permute_tk_half \
+            (TK1[(1 - half) * 2], TK1[(1 - half) * 2 + 1]); \
+        \
+        /* Inverse mix of the columns, without word rotation */ \
+        s0 ^= s3; \
+        s3 ^= s1; \
+        s2 ^= s3; \
+        \
+        /* Inverse shift of the rows */ \
+        s2 = leftRotate24(s2); \
+        s3 = leftRotate16(s3); \
+        s0 = leftRotate8(s0); \
+        \
+        /* Apply the subkey for this round */ \
+        s1 ^= schedule[offset * 2]     ^ TK1[half * 2]; \
+        s2 ^= schedule[offset * 2 + 1] ^ TK1[half * 2 + 1]; \
+        s3 ^= 0x02; \
+        \
+        /* Apply the inverse of the S-box to all bytes in the state */ \
+        skinny128_inv_sbox(s0); \
+        skinny128_inv_sbox(s1); \
+        skinny128_inv_sbox(s2); \
+        skinny128_inv_sbox(s3); \
+    } while (0)
+
+/**
+ * \brief Performs an unrolled inverse round for Skinny-128-384+ when the
+ * entire tweakey schedule is computed on the fly.
+ *
+ * \param s0 First word of the state.
+ * \param s1 Second word of the state.
+ * \param s2 Third word of the state.
+ * \param s3 Fourth word of the state.
+ * \param half 0 for the bottom half and 1 for the top half of the TK values.
+ */
+#define skinny_plus_inv_round_tk_full(s0, s1, s2, s3, half) \
+    do { \
+        /* Inverse permutation on the tweakey for this round */ \
+        skinny128_inv_permute_tk_half \
+            (TK1[(1 - half) * 2], TK1[(1 - half) * 2 + 1]); \
+        skinny128_inv_permute_tk_half \
+            (TK2[(1 - half) * 2], TK2[(1 - half) * 2 + 1]); \
+        skinny128_inv_permute_tk_half \
+            (TK3[(1 - half) * 2], TK3[(1 - half) * 2 + 1]); \
+        skinny128_LFSR3(TK2[(1 - half) * 2]); \
+        skinny128_LFSR3(TK2[(1 - half) * 2 + 1]); \
+        skinny128_LFSR2(TK3[(1 - half) * 2]); \
+        skinny128_LFSR2(TK3[(1 - half) * 2 + 1]); \
+        \
+        /* Inverse mix of the columns, without word rotation */ \
+        s0 ^= s3; \
+        s3 ^= s1; \
+        s2 ^= s3; \
+        \
+        /* Inverse shift of the rows */ \
+        s2 = leftRotate24(s2); \
+        s3 = leftRotate16(s3); \
+        s0 = leftRotate8(s0); \
+        \
+        /* Apply the subkey for this round */ \
+        rc = (rc >> 1) ^ (((rc << 5) ^ rc ^ 0x20) & 0x20); \
+        s1 ^= TK1[half * 2] ^ TK2[half * 2] ^ TK3[half * 2] ^ (rc & 0x0F); \
+        s2 ^= TK1[half * 2 + 1] ^ TK2[half * 2 + 1] ^ TK3[half * 2 + 1] ^ \
+              (rc >> 4); \
+        s3 ^= 0x02; \
+        \
+        /* Apply the inverse of the S-box to all bytes in the state */ \
+        skinny128_inv_sbox(s0); \
+        skinny128_inv_sbox(s1); \
+        skinny128_inv_sbox(s2); \
+        skinny128_inv_sbox(s3); \
     } while (0)
 
 void skinny_plus_encrypt
@@ -1013,6 +1431,84 @@ void skinny_plus_encrypt
     le_store_word32(output + 12, s3);
 }
 
+void skinny_plus_decrypt
+    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    uint32_t s0, s1, s2, s3;
+    uint32_t TK1[4];
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+    uint32_t TK2[4];
+    uint32_t TK3[4];
+    uint8_t rc = 0x34;
+#else
+    const uint32_t *schedule = &(ks->k[SKINNY_PLUS_ROUNDS * 2 - 8]);
+#endif
+    unsigned round;
+
+    /* Unpack the input block into the state array */
+    s0 = le_load_word32(input);
+    s1 = le_load_word32(input + 4);
+    s2 = le_load_word32(input + 8);
+    s3 = le_load_word32(input + 12);
+
+    /* Make a local copy of the tweakable part of the state, TK1 */
+    TK1[0] = le_load_word32(ks->TK1);
+    TK1[1] = le_load_word32(ks->TK1 + 4);
+    TK1[2] = le_load_word32(ks->TK1 + 8);
+    TK1[3] = le_load_word32(ks->TK1 + 12);
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+    TK2[0] = le_load_word32(ks->TK2);
+    TK2[1] = le_load_word32(ks->TK2 + 4);
+    TK2[2] = le_load_word32(ks->TK2 + 8);
+    TK2[3] = le_load_word32(ks->TK2 + 12);
+    TK3[0] = le_load_word32(ks->TK3);
+    TK3[1] = le_load_word32(ks->TK3 + 4);
+    TK3[2] = le_load_word32(ks->TK3 + 8);
+    TK3[3] = le_load_word32(ks->TK3 + 12);
+#endif
+
+    /* Permute TK1 to fast-forward it to the end of the key schedule */
+    skinny128_fast_forward_tk(TK1);
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+    skinny128_fast_forward_tk(TK2);
+    skinny128_fast_forward_tk(TK3);
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 2) {
+        /* Also fast-forward the LFSR's on every byte of TK2 and TK3 */
+        skinny128_LFSR2(TK2[0]);
+        skinny128_LFSR2(TK2[1]);
+        skinny128_LFSR2(TK2[2]);
+        skinny128_LFSR2(TK2[3]);
+        skinny128_LFSR3(TK3[0]);
+        skinny128_LFSR3(TK3[1]);
+        skinny128_LFSR3(TK3[2]);
+        skinny128_LFSR3(TK3[3]);
+    }
+#endif
+
+    /* Perform all decryption rounds four at a time */
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_TINY
+        skinny_plus_inv_round_tk_full(s0, s1, s2, s3, 1);
+        skinny_plus_inv_round_tk_full(s1, s2, s3, s0, 0);
+        skinny_plus_inv_round_tk_full(s2, s3, s0, s1, 1);
+        skinny_plus_inv_round_tk_full(s3, s0, s1, s2, 0);
+#else
+        skinny_plus_inv_round(s0, s1, s2, s3, 1, 3);
+        skinny_plus_inv_round(s1, s2, s3, s0, 0, 2);
+        skinny_plus_inv_round(s2, s3, s0, s1, 1, 1);
+        skinny_plus_inv_round(s3, s0, s1, s2, 0, 0);
+        schedule -= 8;
+#endif
+    }
+
+    /* Pack the result into the output buffer */
+    le_store_word32(output,      s0);
+    le_store_word32(output + 4,  s1);
+    le_store_word32(output + 8,  s2);
+    le_store_word32(output + 12, s3);
+}
+
 void skinny_plus_encrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
      const unsigned char *input)
@@ -1050,6 +1546,68 @@ void skinny_plus_encrypt_tk_full
         skinny_plus_round_tk_full(s3, s0, s1, s2, 1);
         skinny_plus_round_tk_full(s2, s3, s0, s1, 0);
         skinny_plus_round_tk_full(s1, s2, s3, s0, 1);
+    }
+
+    /* Pack the result into the output buffer */
+    le_store_word32(output,      s0);
+    le_store_word32(output + 4,  s1);
+    le_store_word32(output + 8,  s2);
+    le_store_word32(output + 12, s3);
+}
+
+void skinny_plus_decrypt_tk_full
+    (const unsigned char key[48], unsigned char *output,
+     const unsigned char *input)
+{
+    uint32_t s0, s1, s2, s3;
+    uint32_t TK1[4];
+    uint32_t TK2[4];
+    uint32_t TK3[4];
+    uint8_t rc = 0x34;
+    unsigned round;
+
+    /* Unpack the input block into the state array */
+    s0 = le_load_word32(input);
+    s1 = le_load_word32(input + 4);
+    s2 = le_load_word32(input + 8);
+    s3 = le_load_word32(input + 12);
+
+    /* Make a local copy of the tweakey */
+    TK1[0] = le_load_word32(key);
+    TK1[1] = le_load_word32(key + 4);
+    TK1[2] = le_load_word32(key + 8);
+    TK1[3] = le_load_word32(key + 12);
+    TK2[0] = le_load_word32(key + 16);
+    TK2[1] = le_load_word32(key + 20);
+    TK2[2] = le_load_word32(key + 24);
+    TK2[3] = le_load_word32(key + 28);
+    TK3[0] = le_load_word32(key + 32);
+    TK3[1] = le_load_word32(key + 36);
+    TK3[2] = le_load_word32(key + 40);
+    TK3[3] = le_load_word32(key + 44);
+
+    /* Permute the tweakey to fast-forward it to the end of the key schedule */
+    skinny128_fast_forward_tk(TK1);
+    skinny128_fast_forward_tk(TK2);
+    skinny128_fast_forward_tk(TK3);
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 2) {
+        /* Also fast-forward the LFSR's on every byte of TK2 and TK3 */
+        skinny128_LFSR2(TK2[0]);
+        skinny128_LFSR2(TK2[1]);
+        skinny128_LFSR2(TK2[2]);
+        skinny128_LFSR2(TK2[3]);
+        skinny128_LFSR3(TK3[0]);
+        skinny128_LFSR3(TK3[1]);
+        skinny128_LFSR3(TK3[2]);
+        skinny128_LFSR3(TK3[3]);
+    }
+
+    /* Perform all decryption rounds four at a time */
+    for (round = 0; round < SKINNY_PLUS_ROUNDS; round += 4) {
+        skinny_plus_inv_round_tk_full(s0, s1, s2, s3, 1);
+        skinny_plus_inv_round_tk_full(s1, s2, s3, s0, 0);
+        skinny_plus_inv_round_tk_full(s2, s3, s0, s1, 1);
+        skinny_plus_inv_round_tk_full(s3, s0, s1, s2, 0);
     }
 
     /* Pack the result into the output buffer */

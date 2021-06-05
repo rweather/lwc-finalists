@@ -1151,6 +1151,7 @@ static bool skinny128_384_decrypt(enum Mode mode, int rounds = 56)
     gen_skinny128_384_decrypt(code, rounds);
     if (mode == Generate) {
         code.write(std::cout);
+        code.write_alias(std::cout, "skinny_plus_decrypt_tk_full");
     } else {
         if (!test_skinny128_384_decrypt(code)) {
             std::cout << "SKINNY-128-384 decrypt tests FAILED" << std::endl;
@@ -1247,6 +1248,8 @@ static bool skinny_plus(enum Mode mode)
     if (!skinny128_384_setup_key(mode, 40))
         ok = false;
     if (!skinny128_384_encrypt(mode, 40))
+        ok = false;
+    if (!skinny128_384_decrypt(mode, 40))
         ok = false;
     return ok;
 }

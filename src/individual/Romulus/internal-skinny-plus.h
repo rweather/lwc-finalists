@@ -108,6 +108,20 @@ void skinny_plus_encrypt
      const unsigned char *input);
 
 /**
+ * \brief Decrypts a 128-bit block with SKINNY-128-384+.
+ *
+ * \param ks Points to the SKINNY-128-384+ key schedule.
+ * \param output Output buffer which must be at least 16 bytes in length.
+ * \param input Input buffer which must be at least 16 bytes in length.
+ *
+ * The \a input and \a output buffers can be the same buffer for
+ * in-place decryption.
+ */
+void skinny_plus_decrypt
+    (const skinny_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input);
+
+/**
  * \brief Encrypts a 128-bit block with SKINNY-128-384+ and a
  * fully specified tweakey value.
  *
@@ -123,6 +137,25 @@ void skinny_plus_encrypt
  * more memory-efficient.
  */
 void skinny_plus_encrypt_tk_full
+    (const unsigned char key[48], unsigned char *output,
+     const unsigned char *input);
+
+/**
+ * \brief Decrypts a 128-bit block with SKINNY-128-384+ and a
+ * fully specified tweakey value.
+ *
+ * \param key Points to the 384-bit tweakey value.
+ * \param output Output buffer which must be at least 16 bytes in length.
+ * \param input Input buffer which must be at least 16 bytes in length.
+ *
+ * The \a input and \a output buffers can be the same buffer for
+ * in-place decryption.
+ *
+ * This version is useful when the entire tweakey changes from block to
+ * block.  It is slower than the other versions of SKINNY-128-384+ but
+ * more memory-efficient.
+ */
+void skinny_plus_decrypt_tk_full
     (const unsigned char key[48], unsigned char *output,
      const unsigned char *input);
 

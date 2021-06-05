@@ -31,7 +31,7 @@ static block_cipher_t const skinny_plus = {
     sizeof(skinny_plus_key_schedule_t),
     (block_cipher_init_t)skinny_plus_init,
     (block_cipher_encrypt_t)skinny_plus_encrypt,
-    (block_cipher_decrypt_t)0
+    (block_cipher_decrypt_t)skinny_plus_decrypt
 };
 
 /* Test vectors for SKINNY-128-384+ */
@@ -61,7 +61,7 @@ static block_cipher_t const skinny_plus_tk_full = {
     48,
     (block_cipher_init_t)tk_full_skinny_plus_init,
     (block_cipher_encrypt_t)skinny_plus_encrypt_tk_full,
-    (block_cipher_decrypt_t)0
+    (block_cipher_decrypt_t)skinny_plus_decrypt_tk_full
 };
 
 void test_skinny128(void)
