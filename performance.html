@@ -158,9 +158,9 @@ Performance on ARM Cortex M3</h1>
 <tr>
 <td>ISAP-K-128A</td><td>128</td><td>128</td><td>128</td><td>0.07</td><td>0.07</td><td>0.04</td><td>0.04</td><td>0.05 </td></tr>
 <tr>
-<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.02</td><td>0.04</td><td>0.04</td><td>0.03 </td></tr>
+<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.03</td><td>0.03</td><td>0.05</td><td>0.05</td><td>0.04 </td></tr>
 <tr>
-<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.02</td><td>0.02</td><td>0.03</td><td>0.03</td><td>0.03 </td></tr>
+<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.03</td><td>0.03</td><td>0.04</td><td>0.04</td><td>0.04 </td></tr>
 <tr>
 <td>ISAP-K-128</td><td>128</td><td>128</td><td>128</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01 </td></tr>
 </table>
@@ -268,9 +268,9 @@ Performance on ESP32</h1>
 <tr>
 <td>ISAP-A-128</td><td>128</td><td>128</td><td>128</td><td>0.03</td><td>0.03</td><td>0.01</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
-<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.01 </td></tr>
+<td><b><em>Dumbo</em></b> (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
-<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02</td><td>0.01 </td></tr>
+<td>Jumbo (Elephant)</td><td>128</td><td>96</td><td>64</td><td>0.01</td><td>0.02</td><td>0.02</td><td>0.02</td><td>0.02 </td></tr>
 <tr>
 <td>ISAP-K-128</td><td>128</td><td>128</td><td>128</td><td>0.0040</td><td>0.0047</td><td>0.0018</td><td>0.0020</td><td>0.0025 </td></tr>
 </table>
@@ -367,7 +367,7 @@ Changes in ARM Cortex M3 performance since Round 2</h1>
 <tr>
 <td>ISAP-K</td><td>0.02</td><td>0.05</td><td>Optimised 64-bit version of Keccak-p[400] in C </td></tr>
 <tr>
-<td>Elephant (Dumbo)</td><td>0.02</td><td>0.03</td><td></td></tr>
+<td>Elephant (Dumbo)</td><td>0.02</td><td>0.04</td><td>Improved bit-sliced implementation of Spongent </td></tr>
 </table>
 <p>Note: The primary version of Elephant is the Spongent-based Dumbo, but the Keccak-based Delirium has improved significantly so I included that as well.</p>
 <p>Changes in the primary hash algorithm performance for ARM Cortex M3:</p>
@@ -414,7 +414,7 @@ Changes in ESP32 performance since Round 2</h1>
 <tr>
 <td>ISAP-K</td><td>0.02</td><td>0.02</td><td></td></tr>
 <tr>
-<td>Elephant (Dumbo)</td><td>0.02</td><td>0.01</td><td>Version 2 mask management slowed Dumbo down slightly </td></tr>
+<td>Elephant (Dumbo)</td><td>0.02</td><td>0.02</td><td>Improved bit-sliced implementation of Spongent </td></tr>
 </table>
 <p>Changes in the primary hash algorithm performance for ESP32:</p>
 <table class="doxtable">
@@ -444,7 +444,7 @@ Algorithms with native 64-bit support</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 3 2021 17:31:17 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 5 2021 17:50:54 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
