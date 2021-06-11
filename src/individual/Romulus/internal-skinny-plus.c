@@ -1633,4 +1633,30 @@ void skinny_plus_init
     skinny_plus_init_without_tk1(ks, key + 16, key + 32);
 }
 
+#if SKINNY_PLUS_VARIANT == SKINNY_PLUS_VARIANT_FULL
+
+/* Define the tk_full() functions in terms of the basic assembly functions */
+
+void skinny_plus_encrypt_tk_full
+    (const unsigned char key[48], unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_key_schedule_t ks;
+    memcpy(ks.TK1, key, 16);
+    skinny_plus_init_without_tk1(&ks, key + 16, key + 32);
+    skinny_plus_encrypt(&ks, output, input);
+}
+
+void skinny_plus_decrypt_tk_full
+    (const unsigned char key[48], unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_key_schedule_t ks;
+    memcpy(ks.TK1, key, 16);
+    skinny_plus_init_without_tk1(&ks, key + 16, key + 32);
+    skinny_plus_decrypt(&ks, output, input);
+}
+
+#endif
+
 #endif /* SKINNY_PLUS_VARIANT_ASM */
