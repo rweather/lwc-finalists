@@ -53,6 +53,7 @@ OBJS = \
         romulus-pbkdf2.o \
         romulus-prng.o \
         romulus-xof.o \
+        skinny-plus-bc.o \
         sparkle-aead.o \
         sparkle-hash.o \
         sparkle-hkdf.o \
@@ -199,6 +200,7 @@ romulus-kmac.o: romulus-kmac.h romulus-xof.h romulus-hash.h internal-util.h inte
 romulus-pbkdf2.o: romulus-pbkdf2.h romulus-hmac.h romulus-hash.h internal-util.h internal-pbkdf2.h
 romulus-prng.o: romulus-prng.h romulus-hash.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 romulus-xof.o: romulus-xof.h romulus-hash.h internal-util.h
+skinny-plus-bc.o: skinny-plus-bc.h internal-skinny-plus.h internal-skinny-plus-config.h internal-util.h
 sparkle-aead.o: sparkle-aead.h internal-sparkle.h internal-util.h
 sparkle-hash.o: sparkle-hash.h internal-sparkle.h internal-util.h
 sparkle-hkdf.o: sparkle-hkdf.h sparkle-hmac.h sparkle-hash.h internal-hkdf.h internal-util.h

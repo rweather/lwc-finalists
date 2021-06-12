@@ -197,6 +197,8 @@ ROMULUS_FILES = \
     romulus-prng.h \
     romulus-xof.c \
     romulus-xof.h \
+    skinny-plus-bc.c \
+    skinny-plus-bc.h \
     internal-romulus.c \
     internal-romulus.h \
     internal-skinny-plus.c \

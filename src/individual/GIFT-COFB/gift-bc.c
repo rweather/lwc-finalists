@@ -201,5 +201,5 @@ void gift128b_ecb_decrypt
 void gift128_free_schedule(gift128_key_schedule_t *ks)
 {
     if (ks)
-        aead_clean(ks, sizeof(gift128_key_schedule_t));
+        aead_clean(ks, sizeof(gift128b_key_schedule_t));
 }

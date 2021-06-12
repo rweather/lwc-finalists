@@ -21,6 +21,7 @@
  */
 
 #include "internal-skinny-plus.h"
+#include "skinny-plus-bc.h"
 #include "test-cipher.h"
 #include <stdio.h>
 #include <string.h>
@@ -64,6 +65,167 @@ static block_cipher_t const skinny_plus_tk_full = {
     (block_cipher_decrypt_t)skinny_plus_decrypt_tk_full
 };
 
+/* Number of blocks to use when testing parallel encryption */
+#define NUM_BLOCKS 13
+
+/* Test single and parallel versions of SKINNY-128-384+ encryption */
+typedef void (*skinny_plus_parallel_func_t)
+    (const skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input, size_t len);
+static void skinny_plus_ecb_parallel
+    (const skinny_128_384_plus_key_schedule_t *ks,
+     skinny_plus_parallel_func_t func,
+     unsigned char *output, const unsigned char *input)
+{
+    unsigned char multiple_input[SKINNY_128_384_PLUS_BLOCK_SIZE * NUM_BLOCKS];
+    unsigned char multiple_output[SKINNY_128_384_PLUS_BLOCK_SIZE * NUM_BLOCKS];
+    unsigned index;
+
+    /* Process multiple blocks */
+    for (index = 0; index < NUM_BLOCKS; ++index) {
+        memcpy(multiple_input + index * SKINNY_128_384_PLUS_BLOCK_SIZE,
+               input, SKINNY_128_384_PLUS_BLOCK_SIZE);
+    }
+    memset(multiple_output, 0xAA, sizeof(multiple_output));
+    (*func)(ks, multiple_output, multiple_input, sizeof(multiple_input));
+
+    /* Process a single block */
+    (*func)(ks, output, input, SKINNY_128_384_PLUS_BLOCK_SIZE);
+
+    /* Check that the multiple block version produced the same output */
+    for (index = 0; index < NUM_BLOCKS; ++index) {
+        if (memcmp(multiple_output + index * SKINNY_128_384_PLUS_BLOCK_SIZE,
+                   output, SKINNY_128_384_PLUS_BLOCK_SIZE) != 0) {
+            /* Destroy the regular output to cause the test to fail */
+            memset(output, 0x55, SKINNY_128_384_PLUS_BLOCK_SIZE);
+            break;
+        }
+    }
+}
+
+/* Test single and parallel versions of SKINNY-128-384+ encryption with TK1 */
+typedef void (*skinny_plus_parallel_tk1_func_t)
+    (skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input, const unsigned char *tk1, size_t len);
+static void skinny_plus_ecb_tk1_parallel
+    (skinny_128_384_plus_key_schedule_t *ks,
+     skinny_plus_parallel_tk1_func_t func,
+     unsigned char *output, const unsigned char *input)
+{
+    unsigned char multiple_input[SKINNY_128_384_PLUS_BLOCK_SIZE * NUM_BLOCKS];
+    unsigned char multiple_output[SKINNY_128_384_PLUS_BLOCK_SIZE * NUM_BLOCKS];
+    unsigned char multiple_tk1[SKINNY_128_384_PLUS_BLOCK_SIZE * NUM_BLOCKS];
+    unsigned char saved_tk1[SKINNY_128_384_PLUS_BLOCK_SIZE];
+    unsigned index;
+
+    /* Process multiple blocks */
+    memcpy(saved_tk1, ks->TK1, SKINNY_128_384_PLUS_BLOCK_SIZE);
+    for (index = 0; index < NUM_BLOCKS; ++index) {
+        memcpy(multiple_input + index * SKINNY_128_384_PLUS_BLOCK_SIZE,
+               input, SKINNY_128_384_PLUS_BLOCK_SIZE);
+        memcpy(multiple_tk1 + index * SKINNY_128_384_PLUS_BLOCK_SIZE,
+               ks->TK1, SKINNY_128_384_PLUS_BLOCK_SIZE);
+    }
+    memset(multiple_output, 0xAA, sizeof(multiple_output));
+    memset(ks->TK1, 0x55, sizeof(ks->TK1));
+    (*func)(ks, multiple_output, multiple_input, multiple_tk1,
+            sizeof(multiple_input));
+
+    /* Process a single block */
+    (*func)(ks, output, input, multiple_tk1, SKINNY_128_384_PLUS_BLOCK_SIZE);
+    memcpy(ks->TK1, saved_tk1, SKINNY_128_384_PLUS_BLOCK_SIZE);
+
+    /* Check that the multiple block version produced the same output */
+    for (index = 0; index < NUM_BLOCKS; ++index) {
+        if (memcmp(multiple_output + index * SKINNY_128_384_PLUS_BLOCK_SIZE,
+                   output, SKINNY_128_384_PLUS_BLOCK_SIZE) != 0) {
+            /* Destroy the regular output to cause the test to fail */
+            memset(output, 0x55, SKINNY_128_384_PLUS_BLOCK_SIZE);
+            break;
+        }
+    }
+}
+
+/* Information block for the parallel encryption API for SKINNY-128-384+ */
+static void skinny_plus_ecb_encrypt_wrapper
+    (const skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_ecb_parallel
+        (ks, skinny_128_384_plus_ecb_encrypt, output, input);
+}
+static void skinny_plus_ecb_decrypt_wrapper
+    (const skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_ecb_parallel
+        (ks, skinny_128_384_plus_ecb_decrypt, output, input);
+}
+static block_cipher_t const skinny_plus_parallel = {
+    "SKINNY-128-384+ Parallel",
+    sizeof(skinny_128_384_plus_key_schedule_t),
+    (block_cipher_init_t)skinny_128_384_plus_setup_key,
+    (block_cipher_encrypt_t)skinny_plus_ecb_encrypt_wrapper,
+    (block_cipher_decrypt_t)skinny_plus_ecb_decrypt_wrapper
+};
+
+/* Information block for the parallel encryption API for SKINNY-128-384+ */
+static void skinny_plus_tk1_setup_wrapper
+    (skinny_128_384_plus_key_schedule_t *ks, const unsigned char *k)
+{
+    skinny_128_384_plus_setup_tk23(ks, k + 16, k + 32);
+    memcpy(ks->TK1, k, 16);
+}
+static void skinny_plus_ecb_tk1_encrypt_wrapper
+    (skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_ecb_tk1_parallel
+        (ks, skinny_128_384_plus_ecb_encrypt_tk1, output, input);
+}
+static void skinny_plus_ecb_tk1_decrypt_wrapper
+    (skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_ecb_tk1_parallel
+        (ks, skinny_128_384_plus_ecb_decrypt_tk1, output, input);
+}
+static block_cipher_t const skinny_plus_parallel_tk1 = {
+    "SKINNY-128-384+ Parallel TK1",
+    sizeof(skinny_128_384_plus_key_schedule_t),
+    (block_cipher_init_t)skinny_plus_tk1_setup_wrapper,
+    (block_cipher_encrypt_t)skinny_plus_ecb_tk1_encrypt_wrapper,
+    (block_cipher_decrypt_t)skinny_plus_ecb_tk1_decrypt_wrapper
+};
+
+/* Information block for the parallel full encryption API for SKINNY-128-384+ */
+static void skinny_plus_full_setup_wrapper
+    (unsigned char *ks, const unsigned char *k)
+{
+    memcpy(ks, k, SKINNY_128_384_PLUS_KEY_SIZE);
+}
+static void skinny_plus_ecb_full_encrypt_wrapper
+    (const skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_ecb_parallel
+        (ks, (skinny_plus_parallel_func_t)skinny_128_384_plus_expand_and_encrypt, output, input);
+}
+static void skinny_plus_ecb_full_decrypt_wrapper
+    (const skinny_128_384_plus_key_schedule_t *ks, unsigned char *output,
+     const unsigned char *input)
+{
+    skinny_plus_ecb_parallel
+        (ks, (skinny_plus_parallel_func_t)skinny_128_384_plus_expand_and_decrypt, output, input);
+}
+static block_cipher_t const skinny_plus_parallel_full = {
+    "SKINNY-128-384+ Parallel Full",
+    SKINNY_128_384_PLUS_KEY_SIZE,
+    (block_cipher_init_t)skinny_plus_full_setup_wrapper,
+    (block_cipher_encrypt_t)skinny_plus_ecb_full_encrypt_wrapper,
+    (block_cipher_decrypt_t)skinny_plus_ecb_full_decrypt_wrapper
+};
+
 void test_skinny128(void)
 {
     test_block_cipher_start(&skinny_plus);
@@ -73,4 +235,16 @@ void test_skinny128(void)
     test_block_cipher_start(&skinny_plus_tk_full);
     test_block_cipher_128(&skinny_plus_tk_full, &skinny_plus_1);
     test_block_cipher_end(&skinny_plus_tk_full);
+
+    test_block_cipher_start(&skinny_plus_parallel);
+    test_block_cipher_128(&skinny_plus_parallel, &skinny_plus_1);
+    test_block_cipher_end(&skinny_plus_parallel);
+
+    test_block_cipher_start(&skinny_plus_parallel_tk1);
+    test_block_cipher_128(&skinny_plus_parallel_tk1, &skinny_plus_1);
+    test_block_cipher_end(&skinny_plus_parallel_tk1);
+
+    test_block_cipher_start(&skinny_plus_parallel_full);
+    test_block_cipher_128(&skinny_plus_parallel_full, &skinny_plus_1);
+    test_block_cipher_end(&skinny_plus_parallel_full);
 }
