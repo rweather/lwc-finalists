@@ -56,5 +56,5 @@ var searchData=
   ['tinyjambu_5fprng_5fstate_5ft',['tinyjambu_prng_state_t',['../uniontinyjambu__prng__state__t.html',1,'']]],
   ['tinyjambu_5frounds',['TINYJAMBU_ROUNDS',['../internal-tinyjambu_8h.html#ab20aad70de3206ce2707aa66f8c1e6ac',1,'internal-tinyjambu.h']]],
   ['tk',['tk',['../unionromulus__hash__state__t.html#a12c6d40663e51b8a19df647210b18017',1,'romulus_hash_state_t']]],
-  ['tk1',['TK1',['../structskinny__plus__key__schedule__t.html#a664c568427bea744f9c34e4eef8af779',1,'skinny_plus_key_schedule_t']]]
+  ['tk1',['TK1',['../structskinny__plus__key__schedule__t.html#a664c568427bea744f9c34e4eef8af779',1,'skinny_plus_key_schedule_t::TK1()'],['../structskinny__128__384__plus__key__schedule__t.html#ab6da3b107e93342cdbcb2016cecb54f4',1,'skinny_128_384_plus_key_schedule_t::TK1()']]]
 ];

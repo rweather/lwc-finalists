@@ -129,14 +129,107 @@ Functions</h2></td></tr>
 <tr class="memitem:a0ffea345556e8ba9ebc7b631dbf22c73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#a0ffea345556e8ba9ebc7b631dbf22c73">skinny_plus_encrypt</a> (const <a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *ks, unsigned char *output, const unsigned char *input)</td></tr>
 <tr class="memdesc:a0ffea345556e8ba9ebc7b631dbf22c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts a 128-bit block with SKINNY-128-384+.  <a href="#a0ffea345556e8ba9ebc7b631dbf22c73">More...</a><br/></td></tr>
 <tr class="separator:a0ffea345556e8ba9ebc7b631dbf22c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa8f2d93be854fbfba0401f3c23181df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#afa8f2d93be854fbfba0401f3c23181df">skinny_plus_decrypt</a> (const <a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *ks, unsigned char *output, const unsigned char *input)</td></tr>
+<tr class="memdesc:afa8f2d93be854fbfba0401f3c23181df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts a 128-bit block with SKINNY-128-384+.  <a href="#afa8f2d93be854fbfba0401f3c23181df">More...</a><br/></td></tr>
+<tr class="separator:afa8f2d93be854fbfba0401f3c23181df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe7f335fe95499b2c56a2f74c0405626"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#abe7f335fe95499b2c56a2f74c0405626">skinny_plus_encrypt_tk_full</a> (const unsigned char key[48], unsigned char *output, const unsigned char *input)</td></tr>
 <tr class="memdesc:abe7f335fe95499b2c56a2f74c0405626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypts a 128-bit block with SKINNY-128-384+ and a fully specified tweakey value.  <a href="#abe7f335fe95499b2c56a2f74c0405626">More...</a><br/></td></tr>
 <tr class="separator:abe7f335fe95499b2c56a2f74c0405626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55913852cb11672e800c11a1f1ad809a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="internal-skinny-plus_8h.html#a55913852cb11672e800c11a1f1ad809a">skinny_plus_decrypt_tk_full</a> (const unsigned char key[48], unsigned char *output, const unsigned char *input)</td></tr>
+<tr class="memdesc:a55913852cb11672e800c11a1f1ad809a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypts a 128-bit block with SKINNY-128-384+ and a fully specified tweakey value.  <a href="#a55913852cb11672e800c11a1f1ad809a">More...</a><br/></td></tr>
+<tr class="separator:a55913852cb11672e800c11a1f1ad809a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>SKINNY-128-384+ block cipher. </p>
 <p>References: <a href="https://eprint.iacr.org/2016/660.pdf,">https://eprint.iacr.org/2016/660.pdf,</a> <a href="https://romulusae.github.io/romulus/">https://romulusae.github.io/romulus/</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="afa8f2d93be854fbfba0401f3c23181df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void skinny_plus_decrypt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structskinny__plus__key__schedule__t.html">skinny_plus_key_schedule_t</a> *&#160;</td>
+          <td class="paramname"><em>ks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decrypts a 128-bit block with SKINNY-128-384+. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ks</td><td>Points to the SKINNY-128-384+ key schedule. </td></tr>
+    <tr><td class="paramname">output</td><td>Output buffer which must be at least 16 bytes in length. </td></tr>
+    <tr><td class="paramname">input</td><td>Input buffer which must be at least 16 bytes in length.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <em>input</em> and <em>output</em> buffers can be the same buffer for in-place decryption. </p>
+
+</div>
+</div>
+<a class="anchor" id="a55913852cb11672e800c11a1f1ad809a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void skinny_plus_decrypt_tk_full </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char&#160;</td>
+          <td class="paramname"><em>key</em>[48], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decrypts a 128-bit block with SKINNY-128-384+ and a fully specified tweakey value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>Points to the 384-bit tweakey value. </td></tr>
+    <tr><td class="paramname">output</td><td>Output buffer which must be at least 16 bytes in length. </td></tr>
+    <tr><td class="paramname">input</td><td>Input buffer which must be at least 16 bytes in length.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <em>input</em> and <em>output</em> buffers can be the same buffer for in-place decryption.</p>
+<p>This version is useful when the entire tweakey changes from block to block. It is slower than the other versions of SKINNY-128-384+ but more memory-efficient. </p>
+
+</div>
+</div>
 <a class="anchor" id="a0ffea345556e8ba9ebc7b631dbf22c73"></a>
 <div class="memitem">
 <div class="memproto">
@@ -304,7 +397,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 5 2021 17:50:54 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 12 2021 16:48:38 for Lightweight Cryptography Primitives by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -8,5 +8,5 @@ var searchData=
   ['tiny_5fjambu_5f256_5fcipher',['tiny_jambu_256_cipher',['../aead-metadata_8h.html#a1ae08c5ead92b7ee1426f5c700417917',1,'aead-metadata.c']]],
   ['tiny_5fjambu_5f256_5fmasked_5fcipher',['tiny_jambu_256_masked_cipher',['../aead-metadata_8h.html#a5be224aab7899c558e3c221b96134cc3',1,'aead-metadata.c']]],
   ['tk',['tk',['../unionromulus__hash__state__t.html#a12c6d40663e51b8a19df647210b18017',1,'romulus_hash_state_t']]],
-  ['tk1',['TK1',['../structskinny__plus__key__schedule__t.html#a664c568427bea744f9c34e4eef8af779',1,'skinny_plus_key_schedule_t']]]
+  ['tk1',['TK1',['../structskinny__plus__key__schedule__t.html#a664c568427bea744f9c34e4eef8af779',1,'skinny_plus_key_schedule_t::TK1()'],['../structskinny__128__384__plus__key__schedule__t.html#ab6da3b107e93342cdbcb2016cecb54f4',1,'skinny_128_384_plus_key_schedule_t::TK1()']]]
 ];
