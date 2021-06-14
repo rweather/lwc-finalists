@@ -76,6 +76,7 @@ OBJS = \
 	internal-aes-avr.o \
 	internal-ascon.o \
 	internal-ascon-m.o \
+	internal-ascon-m2.o \
 	internal-ascon-armv7m.o \
 	internal-ascon-avr.o \
 	internal-blake2s.o \
@@ -222,6 +223,7 @@ xoodyak-prng.o: xoodyak-prng.h xoodyak-hash.h internal-xoodoo.h internal-util.h
 internal-aes.o: internal-aes.h internal-util.h
 internal-ascon.o: internal-ascon.h internal-util.h
 internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
+internal-ascon-m2.o: internal-ascon-m2.h internal-ascon.h aead-random.h internal-util.h
 internal-blake2s.o: internal-blake2s.h internal-util.h aead-metadata.h
 internal-chachapoly.o: internal-chachapoly.h internal-util.h aead-metadata.h
 internal-ghash.o: internal-ghash.h internal-util.h

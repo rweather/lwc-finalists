@@ -24,9 +24,12 @@
 #include "ascon-permutation.h"
 #include "internal-ascon.h"
 #include "internal-ascon-m.h"
+#include "internal-ascon-m2.h"
 #include "test-cipher.h"
 #include <stdio.h>
 #include <string.h>
+
+#define ASCON128_IV 0x80400c0600000000ULL
 
 /* Test vectors generated with the reference code */
 static uint8_t const ascon_input[40] = {
@@ -148,6 +151,76 @@ static void test_ascon_masked(void)
     ascon_unmask(&unmasked, &state);
 #endif
     if (memcmp(unmasked.B, ascon_output_8, sizeof(ascon_output_8)) != 0) {
+        printf("failed\n");
+        test_exit_result = 1;
+    } else {
+        printf("ok\n");
+    }
+}
+
+static void test_ascon_masked_m2(void)
+{
+    ascon_masked_state_2_t state;
+    ascon_state_t unmasked;
+    ascon_state_t unmasked2;
+
+    printf("    Masked Permutation 12, 2-share ... ");
+    fflush(stdout);
+    memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
+    ascon_mask_2(&state, &unmasked);
+    ascon_permute_masked_2(&state, 0);
+    ascon_unmask_2(&unmasked, &state);
+    if (test_memcmp(unmasked.B, ascon_output_12, sizeof(ascon_output_12)) != 0) {
+        printf("failed\n");
+        test_exit_result = 1;
+    } else {
+        printf("ok\n");
+    }
+
+    printf("    Masked Permutation 8, 2-share ... ");
+    fflush(stdout);
+    memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
+    ascon_mask_2(&state, &unmasked);
+    ascon_permute_masked_2(&state, 4);
+    ascon_unmask_2(&unmasked, &state);
+#if 0
+#if ASCON_SLICED
+    ascon_to_sliced(&unmasked);
+    ascon_mask_sliced(&state, &unmasked);
+    ascon_permute_masked(&state, 4);
+    ascon_unmask_sliced(&unmasked, &state);
+    ascon_from_sliced(&unmasked);
+#else
+    ascon_mask(&state, &unmasked);
+    ascon_permute_masked(&state, 4);
+    ascon_unmask(&unmasked, &state);
+#endif
+#endif
+    if (test_memcmp(unmasked.B, ascon_output_8, sizeof(ascon_output_8)) != 0) {
+        printf("failed\n");
+        test_exit_result = 1;
+    } else {
+        printf("ok\n");
+    }
+
+    /* Test masked initialization */
+    printf("    Masked Init, 128-bit key, 2-share ... ");
+    fflush(stdout);
+    ascon_init_key_128_masked_2
+        (&state, ASCON128_IV, ascon_input, ascon_output_12);
+    be_store_word64(unmasked.B, ASCON128_IV);
+    memcpy(unmasked.B + 8, ascon_input, 16);
+    memcpy(unmasked.B + 24, ascon_output_12, 16);
+#if ASCON_SLICED
+    ascon_to_sliced(&unmasked);
+    ascon_permute_sliced(&unmasked, 0);
+    ascon_from_sliced(&unmasked);
+#else
+    ascon_permute(&unmasked, 0);
+#endif
+    lw_xor_block(unmasked.B + 24, ascon_input, 16);
+    ascon_unmask_2(&unmasked2, &state);
+    if (test_memcmp(unmasked.B, unmasked2.B, sizeof(unmasked.B)) != 0) {
         printf("failed\n");
         test_exit_result = 1;
     } else {
@@ -370,11 +443,14 @@ static void test_ascon_snp(void)
 void test_ascon(void)
 {
     printf("ASCON:\n");
+    aead_random_init();
     test_ascon_permutation();
 #if ASCON_SLICED
     test_ascon_sliced();
 #endif
     test_ascon_masked();
+    test_ascon_masked_m2();
     test_ascon_snp();
+    aead_random_finish();
     printf("\n");
 }
