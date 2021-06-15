@@ -12,4 +12,4 @@ hash_meta_name=Esch256
 hash_size=32
 hash_function=esch_256_hash
 hash_header=sparkle-hash.h
-aead_exclude="sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random-system.c sparkle-hkdf.c sparkle-hkdf.h internal-hkdf.h sparkle-pbkdf2.c sparkle-pbkdf2.h internal-pbkdf2.h sparkle-kmac.c sparkle-kmac.h internal-kmac.h"
+aead_exclude="sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random.c aead-random.h sparkle-hkdf.c sparkle-hkdf.h internal-hkdf.h sparkle-pbkdf2.c sparkle-pbkdf2.h internal-pbkdf2.h sparkle-kmac.c sparkle-kmac.h internal-kmac.h"

@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=schwaemm_128_128_aead_encrypt
 aead_decrypt=schwaemm_128_128_aead_decrypt
-aead_exclude="sparkle-hash.c sparkle-hash.h sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random-system.c sparkle-hkdf.c sparkle-hkdf.h internal-hkdf.h sparkle-pbkdf2.c sparkle-pbkdf2.h internal-pbkdf2.h sparkle-kmac.c sparkle-kmac.h internal-kmac.h"
+aead_exclude="sparkle-hash.c sparkle-hash.h sparkle-hmac.c sparkle-hmac.h internal-hmac.h sparkle-prng.c sparkle-prng.h aead-random.c aead-random.h sparkle-hkdf.c sparkle-hkdf.h internal-hkdf.h sparkle-pbkdf2.c sparkle-pbkdf2.h internal-pbkdf2.h sparkle-kmac.c sparkle-kmac.h internal-kmac.h"
 aead_header=sparkle-aead.h

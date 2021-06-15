@@ -7,5 +7,5 @@ aead_nonce_size=16
 aead_tag_size=16
 aead_encrypt=isap_ascon_128_aead_encrypt
 aead_decrypt=isap_ascon_128_aead_decrypt
-aead_exclude="isap-a-aead-pk.c isap-a-aead-pk.h internal-isap-pk.h"
+aead_exclude="isap-a-aead-pk.c isap-a-aead-pk.h internal-isap-pk.h aead-random.c aead-random.h"
 aead_header=isap-a-aead.h

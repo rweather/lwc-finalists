@@ -8,4 +8,4 @@ aead_tag_size=16
 aead_encrypt=photon_beetle_128_aead_encrypt
 aead_decrypt=photon_beetle_128_aead_decrypt
 aead_header=photon-beetle-aead.h
-aead_exclude="photon-beetle-hash.c photon-beetle-hash.h photon-beetle-hmac.c photon-beetle-hmac.h internal-hmac.h photon-beetle-prng.c photon-beetle-prng.h aead-random-system.c photon-beetle-hkdf.c photon-beetle-hkdf.h internal-hkdf.h photon-beetle-pbkdf2.c photon-beetle-pbkdf2.h internal-pbkdf2.h"
+aead_exclude="photon-beetle-hash.c photon-beetle-hash.h photon-beetle-hmac.c photon-beetle-hmac.h internal-hmac.h photon-beetle-prng.c photon-beetle-prng.h aead-random.c aead-random.h photon-beetle-hkdf.c photon-beetle-hkdf.h internal-hkdf.h photon-beetle-pbkdf2.c photon-beetle-pbkdf2.h internal-pbkdf2.h"

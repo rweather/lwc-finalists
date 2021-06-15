@@ -7,5 +7,5 @@ aead_nonce_size=12
 aead_tag_size=8
 aead_encrypt=tiny_jambu_128_aead_encrypt
 aead_decrypt=tiny_jambu_128_aead_decrypt
-aead_exclude="tinyjambu-prng.c tinyjambu-prng.h aead-random-system.c"
+aead_exclude="tinyjambu-prng.c tinyjambu-prng.h aead-random.c aead-random.h"
 aead_header=tinyjambu-aead.h

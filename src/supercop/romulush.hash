@@ -4,5 +4,5 @@ hash_meta_name=Romulus-H
 hash_srcdir=Romulus
 hash_size=32
 hash_function=romulus_hash
-hash_exclude="romulus-m-aead.c romulus-m-aead.h romulus-n-aead.c romulus-n-aead.h romulus-t-aead.c romulus-t-aead.h internal-romulus.c internal-romulus.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random-system.c romulus-hkdf.c romulus-hkdf.h internal-hkdf.h romulus-pbkdf2.c romulus-pbkdf2.h internal-pbkdf2.h romulus-xof.c romulus-xof.h romulus-kmac.c romulus-kmac.h internal-kmac.h skinny-plus-bc.c skinny-plus-bc.h"
+hash_exclude="romulus-m-aead.c romulus-m-aead.h romulus-n-aead.c romulus-n-aead.h romulus-t-aead.c romulus-t-aead.h internal-romulus.c internal-romulus.h romulus-hmac.c romulus-hmac.h internal-hmac.h romulus-prng.c romulus-prng.h aead-random.c aead-random.h romulus-hkdf.c romulus-hkdf.h internal-hkdf.h romulus-pbkdf2.c romulus-pbkdf2.h internal-pbkdf2.h romulus-xof.c romulus-xof.h romulus-kmac.c romulus-kmac.h internal-kmac.h skinny-plus-bc.c skinny-plus-bc.h"
 hash_header=romulus-hash.h

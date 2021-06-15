@@ -7,5 +7,5 @@ aead_nonce_size=12
 aead_tag_size=8
 aead_encrypt=grain128_aead_encrypt
 aead_decrypt=grain128_aead_decrypt
-aead_exclude="grain-prng.c grain-prng.h aead-random-system.c"
+aead_exclude="grain-prng.c grain-prng.h aead-random.c aead-random.h"
 aead_header=grain-aead.h

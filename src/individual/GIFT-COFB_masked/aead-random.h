@@ -27,7 +27,7 @@
 
 /**
  * \file aead-random.h
- * \brief Utilities that help with the generation of random data.
+ * \brief Utilities that help with the generation of random masking data.
  */
 
 #ifdef __cplusplus
@@ -61,25 +61,6 @@ uint32_t aead_random_generate_32(void);
  * \return The random word.
  */
 uint64_t aead_random_generate_64(void);
-
-/**
- * \brief Generates a number of bytes into a buffer.
- *
- * \param buffer The buffer to generate into.
- * \param size The number of bytes to be generated.
- */
-void aead_random_generate(void *buffer, unsigned size);
-
-/**
- * \brief Reseeds the random number generator from the system TRNG.
- *
- * This function does nothing if the random API is using the
- * system TRNG directly.
- *
- * This function is called implicitly by aead_random_init() and then
- * called again every 64K of output data.
- */
-void aead_random_reseed(void);
 
 #ifdef __cplusplus
 }

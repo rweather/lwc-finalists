@@ -12,4 +12,4 @@ hash_meta_name=Xoodyak-Hash
 hash_size=32
 hash_function=xoodyak_hash
 hash_header=xoodyak-hash.h
-aead_exclude="xoodyak-hmac.c xoodyak-hmac.h internal-hmac.h xoodyak-kmac.c xoodyak-kmac.h internal-kmac.h xoodyak-prng.c xoodyak-prng.h aead-random-system.c xoodyak-hkdf.c xoodyak-hkdf.h internal-hkdf.h xoodyak-pbkdf2.c xoodyak-pbkdf2.h internal-pbkdf2.h"
+aead_exclude="xoodyak-hmac.c xoodyak-hmac.h internal-hmac.h xoodyak-kmac.c xoodyak-kmac.h internal-kmac.h xoodyak-prng.c xoodyak-prng.h aead-random.c aead-random.h xoodyak-hkdf.c xoodyak-hkdf.h internal-hkdf.h xoodyak-pbkdf2.c xoodyak-pbkdf2.h internal-pbkdf2.h"

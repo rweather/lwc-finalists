@@ -8,3 +8,4 @@ aead_tag_size=8
 aead_encrypt=jumbo_aead_encrypt
 aead_decrypt=jumbo_aead_decrypt
 aead_header=elephant-jumbo.h
+aead_exclude="aead-random.c aead-random.h"

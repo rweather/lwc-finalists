@@ -12,4 +12,4 @@ hash_meta_name=ASCON-HASH
 hash_size=32
 hash_function=ascon_hash
 hash_header=ascon-hash.h
-aead_exclude="ascon-hmac.c ascon-hmac.h internal-hmac.h ascon-kmac.c ascon-kmac.h internal-kmac.h ascon-prng.c ascon-prng.h aead-random-system.c ascon-siv.c ascon-siv.h ascon-hkdf.c ascon-hkdf.h internal-hkdf.h ascon-pbkdf2.c ascon-pbkdf2.h internal-pbkdf2.h ascon-permutation.c ascon-permutation.h"
+aead_exclude="ascon-hmac.c ascon-hmac.h internal-hmac.h ascon-kmac.c ascon-kmac.h internal-kmac.h ascon-prng.c ascon-prng.h aead-random.c aead-random.h ascon-siv.c ascon-siv.h ascon-hkdf.c ascon-hkdf.h internal-hkdf.h ascon-pbkdf2.c ascon-pbkdf2.h internal-pbkdf2.h ascon-permutation.c ascon-permutation.h"
