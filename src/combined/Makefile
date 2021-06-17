@@ -74,7 +74,6 @@ OBJS = \
 	internal-aes.o \
 	internal-aes-avr.o \
 	internal-ascon.o \
-	internal-ascon-m.o \
 	internal-ascon-m2.o \
 	internal-ascon-armv7m.o \
 	internal-ascon-avr.o \
@@ -158,7 +157,7 @@ aead-metadata.o: \
 aead-random.o: aead-random.h internal-util.h
 aesgcm-aead.o: aesgcm-aead.h internal-aes.h internal-util.h internal-ghash.h aead-metadata.h
 ascon-aead.o: ascon-aead.h internal-ascon.h internal-util.h
-ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m.h aead-random.h internal-masking.h internal-util.h
+ascon-aead-masked.o: ascon-aead-masked.h internal-ascon.h internal-ascon-m2.h aead-random.h internal-util.h
 ascon-hash.o: ascon-hash.h ascon-xof.h
 ascon-hkdf.o: ascon-hkdf.h ascon-hmac.h ascon-hash.h ascon-xof.h internal-hkdf.h internal-util.h
 ascon-hmac.o: ascon-hmac.h ascon-hash.h ascon-xof.h internal-hmac.h internal-util.h
@@ -220,7 +219,6 @@ xoodyak-masked.o: xoodyak-masked.h internal-xoodoo.h internal-xoodoo-m.h aead-ra
 xoodyak-prng.o: xoodyak-prng.h xoodyak-hash.h internal-xoodoo.h internal-util.h
 internal-aes.o: internal-aes.h internal-util.h
 internal-ascon.o: internal-ascon.h internal-util.h
-internal-ascon-m.o: internal-ascon-m.h internal-ascon.h aead-random.h internal-masking.h internal-util.h
 internal-ascon-m2.o: internal-ascon-m2.h internal-ascon.h aead-random.h internal-util.h
 internal-blake2s.o: internal-blake2s.h internal-util.h aead-metadata.h
 internal-chachapoly.o: internal-chachapoly.h internal-util.h aead-metadata.h

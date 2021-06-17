@@ -47,6 +47,21 @@ extern "C" {
 #endif
 
 /**
+ * \brief Initialization vector for ASCON-128.
+ */
+#define ASCON128_IV     0x80400c0600000000ULL
+
+/**
+ * \brief Initialization vector for ASCON-128a.
+ */
+#define ASCON128a_IV    0x80800c0800000000ULL
+
+/**
+ * \brief Initialization vector for ASCON-80pq.
+ */
+#define ASCON80PQ_IV    0xa0400c06U
+
+/**
  * \brief Structure of the internal state of the ASCON permutation.
  */
 typedef union

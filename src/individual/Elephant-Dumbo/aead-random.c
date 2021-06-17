@@ -563,3 +563,58 @@ uint64_t aead_random_generate_64(void)
     return x | (((uint64_t)y) << 32);
 #endif
 }
+
+void aead_random_generate_32_multiple(uint32_t *out, unsigned count)
+{
+#if defined(aead_system_random)
+    aead_system_type x;
+    int ready = 1;
+    while (sizeof(aead_system_type) == 8 && count >= 2) {
+        aead_system_random(x, ready);
+        out[0] = (uint32_t)x;
+        out[1] = (uint32_t)(x >> 32);
+        out += 2;
+        count -= 2;
+    }
+    while (count > 0) {
+        aead_system_random(x, ready);
+        *out++ = (uint32_t)x;
+        --count;
+    }
+    (void)ready;
+#else
+    while (count > 0) {
+        *out++ = aead_random_generate_32();
+        --count;
+    }
+#endif
+}
+
+void aead_random_generate_64_multiple(uint64_t *out, unsigned count)
+{
+#if defined(aead_system_random)
+    aead_system_type x;
+    int ready = 1;
+    if (sizeof(aead_system_type) == 8) {
+        while (count > 0) {
+            aead_system_random(x, ready);
+            *out++ = x;
+            --count;
+        }
+    } else {
+        aead_system_type y;
+        while (count > 0) {
+            aead_system_random(x, ready);
+            aead_system_random(y, ready);
+            *out++ = (((uint64_t)y) << 32) | x;
+            --count;
+        }
+    }
+    (void)ready;
+#else
+    while (count > 0) {
+        *out++ = aead_random_generate_64();
+        --count;
+    }
+#endif
+}

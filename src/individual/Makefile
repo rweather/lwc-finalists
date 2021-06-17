@@ -58,11 +58,11 @@ ASCON_MASKED_FILES = \
     ascon-aead-masked.h \
     internal-ascon.c \
     internal-ascon.h \
-    internal-ascon-m.c \
-    internal-ascon-m.h \
+    internal-ascon-m2.c \
+    internal-ascon-m2.h \
     internal-ascon-armv7m.S \
     internal-ascon-avr.S \
-    $(COMMON_MASKING_FILES)
+    $(COMMON_FILES)
 ELEPHANT_DELIRIUM_FILES = \
     elephant-delirium.c \
     elephant-delirium.h \

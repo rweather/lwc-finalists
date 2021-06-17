@@ -55,7 +55,7 @@ TEST_CIPHER_MASKING_INC = test-cipher.h $(LIBSRC_DIR)/aead-metadata.h $(LIBSRC_D
 
 test-aes.o: $(LIBSRC_DIR)/internal-aes.h $(LIBSRC_DIR)/internal-util.h $(TEST_CIPHER_INC)
 test-aesgcm.o: $(LIBSRC_DIR)/aesgcm-aead.h $(LIBSRC_DIR)/internal-util.h $(TEST_CIPHER_INC)
-test-ascon.o: $(LIBSRC_DIR)/ascon-aead.h $(LIBSRC_DIR)/ascon-permutation.h $(LIBSRC_DIR)/internal-ascon.h $(LIBSRC_DIR)/internal-ascon-m.h $(LIBSRC_DIR)/internal-ascon-m2.h $(TEST_CIPHER_MASKING_INC)
+test-ascon.o: $(LIBSRC_DIR)/ascon-aead.h $(LIBSRC_DIR)/ascon-permutation.h $(LIBSRC_DIR)/internal-ascon.h $(LIBSRC_DIR)/internal-ascon-m2.h $(LIBSRC_DIR)/aead-random.h $(TEST_CIPHER_INC)
 test-blake2s.o: $(LIBSRC_DIR)/internal-blake2s.h $(TEST_CIPHER_INC)
 test-chachapoly.o: $(LIBSRC_DIR)/internal-chachapoly.h $(TEST_CIPHER_INC)
 test-ghash.o: $(LIBSRC_DIR)/internal-ghash.h $(LIBSRC_DIR)/internal-util.h $(TEST_CIPHER_INC)

@@ -23,13 +23,11 @@
 #include "ascon-aead.h"
 #include "ascon-permutation.h"
 #include "internal-ascon.h"
-#include "internal-ascon-m.h"
 #include "internal-ascon-m2.h"
 #include "test-cipher.h"
+#include "aead-random.h"
 #include <stdio.h>
 #include <string.h>
-
-#define ASCON128_IV 0x80400c0600000000ULL
 
 /* Test vectors generated with the reference code */
 static uint8_t const ascon_input[40] = {
@@ -118,58 +116,50 @@ static void test_ascon_sliced(void)
 
 #endif
 
-static void test_ascon_masked(void)
+static void ascon_mask_x2
+    (ascon_masked_state_x2_t *output, const ascon_state_t *input)
 {
-    ascon_masked_state_t state;
-    ascon_state_t unmasked;
+    aead_random_generate_64_multiple(output->b.S, 5);
+    output->a.S[0] = be_load_word64((const unsigned char *)&(input->S[0])) ^
+                     output->b.S[0];
+    output->a.S[1] = be_load_word64((const unsigned char *)&(input->S[1])) ^
+                     output->b.S[1];
+    output->a.S[2] = be_load_word64((const unsigned char *)&(input->S[2])) ^
+                     output->b.S[2];
+    output->a.S[3] = be_load_word64((const unsigned char *)&(input->S[3])) ^
+                     output->b.S[3];
+    output->a.S[4] = be_load_word64((const unsigned char *)&(input->S[4])) ^
+                     output->b.S[4];
+}
 
-    printf("    Masked Permutation 12 ... ");
-    fflush(stdout);
-    memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
-    ascon_mask(&state, &unmasked);
-    ascon_permute_masked(&state, 0);
-    ascon_unmask(&unmasked, &state);
-    if (memcmp(unmasked.B, ascon_output_12, sizeof(ascon_output_12)) != 0) {
-        printf("failed\n");
-        test_exit_result = 1;
-    } else {
-        printf("ok\n");
-    }
-
-    printf("    Masked Permutation 8 ... ");
-    fflush(stdout);
-    memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
-#if ASCON_SLICED
-    ascon_to_sliced(&unmasked);
-    ascon_mask_sliced(&state, &unmasked);
-    ascon_permute_masked(&state, 4);
-    ascon_unmask_sliced(&unmasked, &state);
-    ascon_from_sliced(&unmasked);
-#else
-    ascon_mask(&state, &unmasked);
-    ascon_permute_masked(&state, 4);
-    ascon_unmask(&unmasked, &state);
-#endif
-    if (memcmp(unmasked.B, ascon_output_8, sizeof(ascon_output_8)) != 0) {
-        printf("failed\n");
-        test_exit_result = 1;
-    } else {
-        printf("ok\n");
-    }
+static void ascon_unmask_x2
+    (ascon_state_t *output, const ascon_masked_state_x2_t *input)
+{
+    be_store_word64((unsigned char *)&(output->S[0]),
+                    input->a.S[0] ^ input->b.S[0]);
+    be_store_word64((unsigned char *)&(output->S[1]),
+                    input->a.S[1] ^ input->b.S[1]);
+    be_store_word64((unsigned char *)&(output->S[2]),
+                    input->a.S[2] ^ input->b.S[2]);
+    be_store_word64((unsigned char *)&(output->S[3]),
+                    input->a.S[3] ^ input->b.S[3]);
+    be_store_word64((unsigned char *)&(output->S[4]),
+                    input->a.S[4] ^ input->b.S[4]);
 }
 
 static void test_ascon_masked_m2(void)
 {
-    ascon_masked_state_2_t state;
+    ascon_masked_state_x2_t state;
+    ascon_masked_key_x2_t mk;
     ascon_state_t unmasked;
     ascon_state_t unmasked2;
 
     printf("    Masked Permutation 12, 2-share ... ");
     fflush(stdout);
     memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
-    ascon_mask_2(&state, &unmasked);
-    ascon_permute_masked_2(&state, 0);
-    ascon_unmask_2(&unmasked, &state);
+    ascon_mask_x2(&state, &unmasked);
+    ascon_permute_masked_x2(&state, 0);
+    ascon_unmask_x2(&unmasked, &state);
     if (test_memcmp(unmasked.B, ascon_output_12, sizeof(ascon_output_12)) != 0) {
         printf("failed\n");
         test_exit_result = 1;
@@ -180,9 +170,9 @@ static void test_ascon_masked_m2(void)
     printf("    Masked Permutation 8, 2-share ... ");
     fflush(stdout);
     memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
-    ascon_mask_2(&state, &unmasked);
-    ascon_permute_masked_2(&state, 4);
-    ascon_unmask_2(&unmasked, &state);
+    ascon_mask_x2(&state, &unmasked);
+    ascon_permute_masked_x2(&state, 4);
+    ascon_unmask_x2(&unmasked, &state);
 #if 0
 #if ASCON_SLICED
     ascon_to_sliced(&unmasked);
@@ -206,8 +196,8 @@ static void test_ascon_masked_m2(void)
     /* Test masked initialization */
     printf("    Masked Init, 128-bit key, 2-share ... ");
     fflush(stdout);
-    ascon_init_key_128_masked_2
-        (&state, ASCON128_IV, ascon_input, ascon_output_12);
+    ascon_mask_key_128_x2(&mk, ASCON128_IV, ascon_input);
+    ascon_masked_init_key_x2(&state, &mk, ascon_output_12, 0);
     be_store_word64(unmasked.B, ASCON128_IV);
     memcpy(unmasked.B + 8, ascon_input, 16);
     memcpy(unmasked.B + 24, ascon_output_12, 16);
@@ -219,7 +209,29 @@ static void test_ascon_masked_m2(void)
     ascon_permute(&unmasked, 0);
 #endif
     lw_xor_block(unmasked.B + 24, ascon_input, 16);
-    ascon_unmask_2(&unmasked2, &state);
+    ascon_unmask_x2(&unmasked2, &state);
+    if (test_memcmp(unmasked.B, unmasked2.B, sizeof(unmasked.B)) != 0) {
+        printf("failed\n");
+        test_exit_result = 1;
+    } else {
+        printf("ok\n");
+    }
+    printf("    Masked Init, 160-bit key, 2-share ... ");
+    fflush(stdout);
+    ascon_mask_key_160_x2(&mk, ASCON80PQ_IV, ascon_input);
+    ascon_masked_init_key_x2(&state, &mk, ascon_output_12, 1);
+    be_store_word32(unmasked.B, ASCON80PQ_IV);
+    memcpy(unmasked.B + 4, ascon_input, 20);
+    memcpy(unmasked.B + 24, ascon_output_12, 16);
+#if ASCON_SLICED
+    ascon_to_sliced(&unmasked);
+    ascon_permute_sliced(&unmasked, 0);
+    ascon_from_sliced(&unmasked);
+#else
+    ascon_permute(&unmasked, 0);
+#endif
+    lw_xor_block(unmasked.B + 20, ascon_input, 20);
+    ascon_unmask_x2(&unmasked2, &state);
     if (test_memcmp(unmasked.B, unmasked2.B, sizeof(unmasked.B)) != 0) {
         printf("failed\n");
         test_exit_result = 1;
@@ -448,7 +460,6 @@ void test_ascon(void)
 #if ASCON_SLICED
     test_ascon_sliced();
 #endif
-    test_ascon_masked();
     test_ascon_masked_m2();
     test_ascon_snp();
     aead_random_finish();

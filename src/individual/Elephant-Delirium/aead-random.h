@@ -62,6 +62,22 @@ uint32_t aead_random_generate_32(void);
  */
 uint64_t aead_random_generate_64(void);
 
+/**
+ * \brief Generates multiple random 32-bit words for masking purposes.
+ *
+ * \param out Output buffer to receive the words.
+ * \param count Number of words to generate.
+ */
+void aead_random_generate_32_multiple(uint32_t *out, unsigned count);
+
+/**
+ * \brief Generates multiple random 64-bit words for masking purposes.
+ *
+ * \param out Output buffer to receive the words.
+ * \param count Number of words to generate.
+ */
+void aead_random_generate_64_multiple(uint64_t *out, unsigned count);
+
 #ifdef __cplusplus
 }
 #endif
