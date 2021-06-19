@@ -97,6 +97,11 @@
         (ptr)[3] = (uint8_t)(_x >> 24); \
     } while (0)
 
+/* Reverses the bytes in a 32-bit word */
+#define reverse_word32(x) \
+    (((x) >> 24) | (((x) >> 8) & 0x0000FF00U) | \
+     (((x) << 8) & 0x00FF0000U) | ((x) << 24))
+
 /* Load a big-endian 64-bit word from a byte buffer */
 #define be_load_word64(ptr) \
     ((((uint64_t)((ptr)[0])) << 56) | \

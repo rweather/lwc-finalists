@@ -114,7 +114,24 @@ static void test_ascon_sliced(void)
     }
 }
 
-#endif
+static void ascon_mask_x2_sliced
+    (ascon_masked_state_x2_t *output, const ascon_state_t *input)
+{
+    int index;
+    aead_random_generate_32_multiple(output->b.W, 10);
+    for (index = 0; index < 10; ++index)
+        output->a.W[index] = input->W[index] ^ output->b.W[index];
+}
+
+static void ascon_unmask_x2_sliced
+    (ascon_state_t *output, const ascon_masked_state_x2_t *input)
+{
+    int index;
+    for (index = 0; index < 10; ++index)
+        output->W[index] = input->a.W[index] ^ input->b.W[index];
+}
+
+#else /* !ASCON_SLICED */
 
 static void ascon_mask_x2
     (ascon_masked_state_x2_t *output, const ascon_state_t *input)
@@ -147,6 +164,8 @@ static void ascon_unmask_x2
                     input->a.S[4] ^ input->b.S[4]);
 }
 
+#endif /* !ASCON_SLICED */
+
 static void test_ascon_masked_m2(void)
 {
     ascon_masked_state_x2_t state;
@@ -157,9 +176,17 @@ static void test_ascon_masked_m2(void)
     printf("    Masked Permutation 12, 2-share ... ");
     fflush(stdout);
     memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
+#if ASCON_SLICED
+    ascon_to_sliced(&unmasked);
+    ascon_mask_x2_sliced(&state, &unmasked);
+    ascon_permute_masked_x2(&state, 0);
+    ascon_unmask_x2_sliced(&unmasked, &state);
+    ascon_from_sliced(&unmasked);
+#else
     ascon_mask_x2(&state, &unmasked);
     ascon_permute_masked_x2(&state, 0);
     ascon_unmask_x2(&unmasked, &state);
+#endif
     if (test_memcmp(unmasked.B, ascon_output_12, sizeof(ascon_output_12)) != 0) {
         printf("failed\n");
         test_exit_result = 1;
@@ -170,21 +197,16 @@ static void test_ascon_masked_m2(void)
     printf("    Masked Permutation 8, 2-share ... ");
     fflush(stdout);
     memcpy(unmasked.B, ascon_input, sizeof(ascon_input));
+#if ASCON_SLICED
+    ascon_to_sliced(&unmasked);
+    ascon_mask_x2_sliced(&state, &unmasked);
+    ascon_permute_masked_x2(&state, 4);
+    ascon_unmask_x2_sliced(&unmasked, &state);
+    ascon_from_sliced(&unmasked);
+#else
     ascon_mask_x2(&state, &unmasked);
     ascon_permute_masked_x2(&state, 4);
     ascon_unmask_x2(&unmasked, &state);
-#if 0
-#if ASCON_SLICED
-    ascon_to_sliced(&unmasked);
-    ascon_mask_sliced(&state, &unmasked);
-    ascon_permute_masked(&state, 4);
-    ascon_unmask_sliced(&unmasked, &state);
-    ascon_from_sliced(&unmasked);
-#else
-    ascon_mask(&state, &unmasked);
-    ascon_permute_masked(&state, 4);
-    ascon_unmask(&unmasked, &state);
-#endif
 #endif
     if (test_memcmp(unmasked.B, ascon_output_8, sizeof(ascon_output_8)) != 0) {
         printf("failed\n");
@@ -205,17 +227,21 @@ static void test_ascon_masked_m2(void)
     ascon_to_sliced(&unmasked);
     ascon_permute_sliced(&unmasked, 0);
     ascon_from_sliced(&unmasked);
+    lw_xor_block(unmasked.B + 24, ascon_input, 16);
+    ascon_to_sliced(&unmasked);
+    ascon_unmask_x2_sliced(&unmasked2, &state);
 #else
     ascon_permute(&unmasked, 0);
-#endif
     lw_xor_block(unmasked.B + 24, ascon_input, 16);
     ascon_unmask_x2(&unmasked2, &state);
+#endif
     if (test_memcmp(unmasked.B, unmasked2.B, sizeof(unmasked.B)) != 0) {
         printf("failed\n");
         test_exit_result = 1;
     } else {
         printf("ok\n");
     }
+
     printf("    Masked Init, 160-bit key, 2-share ... ");
     fflush(stdout);
     ascon_mask_key_160_x2(&mk, ASCON80PQ_IV, ascon_input);
@@ -227,11 +253,14 @@ static void test_ascon_masked_m2(void)
     ascon_to_sliced(&unmasked);
     ascon_permute_sliced(&unmasked, 0);
     ascon_from_sliced(&unmasked);
+    lw_xor_block(unmasked.B + 20, ascon_input, 20);
+    ascon_to_sliced(&unmasked);
+    ascon_unmask_x2_sliced(&unmasked2, &state);
 #else
     ascon_permute(&unmasked, 0);
-#endif
     lw_xor_block(unmasked.B + 20, ascon_input, 20);
     ascon_unmask_x2(&unmasked2, &state);
+#endif
     if (test_memcmp(unmasked.B, unmasked2.B, sizeof(unmasked.B)) != 0) {
         printf("failed\n");
         test_exit_result = 1;

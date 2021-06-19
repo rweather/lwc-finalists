@@ -227,11 +227,16 @@ void ascon_masked_decrypt_16_x2
      const unsigned char *src, size_t len, uint8_t first_round);
 
 /**
+ * \def ascon_masked_separator_x2(state)
  * \brief Absorb the domain separator between associated data and plaintext.
  *
  * \param state The masked ASCON state.
  */
+#if ASCON_SLICED
+#define ascon_masked_separator_x2(state) ((state)->a.W[8] ^= 0x01)
+#else
 #define ascon_masked_separator_x2(state) ((state)->a.S[4] ^= 0x01)
+#endif
 
 /**
  * \brief Refreshes the randomness in a 2-share masked ASCON state.
@@ -239,6 +244,13 @@ void ascon_masked_decrypt_16_x2
  * \param state The masked ASCON state to be refreshed.
  */
 void ascon_masked_refresh_x2(ascon_masked_state_x2_t *state);
+
+/**
+ * \brief Refreshes the randomness in aa 2-share masked ASCON key.
+ *
+ * \param mk The masked key to be refreshed.
+ */
+void ascon_masked_key_refresh_x2(ascon_masked_key_x2_t *mk);
 
 #ifdef __cplusplus
 }
