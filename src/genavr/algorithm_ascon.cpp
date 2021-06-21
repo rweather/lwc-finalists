@@ -29,6 +29,10 @@
 // Offset of a word in the ASCON state.  Points to the high byte.
 #define ASCON_WORD(word) ((word) * 8)
 
+//Based on the round description of Ascon given in the Bachelor's thesis:
+//"Optimizing Ascon on RISC-V" of Lars Jellema
+//see https://github.com/Lucus16/ascon-riscv/
+
 static void ascon_substitute
     (Code &code, int offset, const Reg &x2, const Reg &x4)
 {
@@ -45,52 +49,37 @@ static void ascon_substitute
     Reg t0 = code.allocateReg(1);
     Reg t1 = code.allocateReg(1);
     Reg t2 = code.allocateReg(1);
-    Reg t3 = code.allocateReg(1);
-    Reg t4 = code.allocateReg(1);
 
-    // x0 ^= x4;   x4 ^= x3;   x2 ^= x1;
-    code.logxor(x0, x4);
-    code.logxor(x4, x3);
-    code.logxor(x2, x1);
-
-    // t0 = ~x0;   t1 = ~x1;   t2 = ~x2;   t3 = ~x3;   t4 = ~x4;
-    code.move(t0, x0);
-    code.move(t1, x1);
-    code.move(t2, x2);
-    code.move(t3, x3);
-    code.move(t4, x4);
-    code.lognot(t0);
-    code.lognot(t1);
-    code.lognot(t2);
-    code.lognot(t3);
-    code.lognot(t4);
-
-    // t0 &= x1;   t1 &= x2;   t2 &= x3;   t3 &= x4;   t4 &= x0;
-    code.logand(t0, x1);
-    code.logand(t1, x2);
-    code.logand(t2, x3);
-    code.logand(t3, x4);
-    code.logand(t4, x0);
-
-    // x0 ^= t1;   x1 ^= t2;   x2 ^= t3;   x3 ^= t4;   x4 ^= t0;
-    code.logxor(x0, t1);
-    code.logxor(x1, t2);
-    code.logxor(x2, t3);
-    code.logxor(x3, t4);
+    // process S-box
+    code.move(t0, x1);
+    code.move(t1, x0);
+    code.move(t2, x3);
+    code.logxor(t0, x2);
+    code.logxor(t1, x4);
+    code.logxor(t2, x4);
+    code.lognot(x4);
+    code.logor(x4, x3);
     code.logxor(x4, t0);
+    code.logxor(x3, x1);
+    code.logor(x3, t0);
+    code.logxor(x3, t1);
+    code.logxor(x2, t1);
+    code.logor(x2, x1);
+    code.logxor(x2, t2);
+    code.lognot(t1);
+    code.logand(x1, t1);
+    code.logxor(x1, t2);
+    code.logor(x0, t2);
+    code.logxor(x0, t0);
 
-    // x1 ^= x0;   x0 ^= x4;   x3 ^= x2;   x2 = ~x2;
-    code.logxor(x1, x0);
-    code.logxor(x0, x4);
-    code.logxor(x3, x2);
-    code.lognot(x2);
-
-    // Write x0, x1, x3, and x4 back to the state.  We keep x2 in a
-    // register in preparation for the diffusion step that follows.
-    code.stz(x0, ASCON_BYTE(0, offset));
-    code.stz(x1, ASCON_BYTE(1, offset));
-    code.stz(x3, ASCON_BYTE(3, offset));
-    code.stz(x4, ASCON_BYTE(4, offset));
+    // After substitution, x2 contains x0, x4 contains x2, x1 contains x4, x3
+    // contains x1, and x0 contains x3. Write conents of x0, x1, x3, and x4
+    // back to the state.  We keep content of x2 in a register in preparation for
+    // the diffusion step that follows.
+    code.stz(x0, ASCON_BYTE(3, offset));
+    code.stz(x1, ASCON_BYTE(4, offset));
+    code.stz(x3, ASCON_BYTE(1, offset));
+    code.stz(x4, ASCON_BYTE(2, offset));
 
     // Release all registers except x2 and x4.
     code.releaseReg(x0);
@@ -99,8 +88,6 @@ static void ascon_substitute
     code.releaseReg(t0);
     code.releaseReg(t1);
     code.releaseReg(t2);
-    code.releaseReg(t3);
-    code.releaseReg(t4);
 }
 
 static void ascon_diffuse
@@ -108,7 +95,7 @@ static void ascon_diffuse
 {
     // Compute "x ^= (x >>> shift1) ^ (x >>> shift2)".
     Reg t = code.allocateReg(8);
-    if (word != 2)
+    if (word != 0)
         code.ldz(x.reversed(), ASCON_WORD(word));
     code.move(t, x);
     code.ror(t, shift1);
@@ -157,7 +144,7 @@ void gen_ascon_permutation(Code &code)
     // We spilled "x4" out to the state during the substitution layer,
     // so we can use that as a temporary register.  We diffuse the "x4"
     // row last so that it is ready in registers for the next round.
-    ascon_diffuse(code, x4, 0, 19, 28);
+    ascon_diffuse(code, x2, 0, 19, 28);
     ascon_diffuse(code, x4, 1, 61, 39);
     ascon_diffuse(code, x2, 2,  1,  6);
     ascon_diffuse(code, x4, 3, 10, 17);
