@@ -106,7 +106,7 @@ void ascon_masked_init_key_x2
  * \brief Finalizes the 2-share version of a masked ASCON state and
  * computes the final authentication tag for ASCON-128.
  *
- * \param The masked ASCON state to be finalized.
+ * \param state The masked ASCON state to be finalized.
  * \param mk Points to the masked key value.
  * \param tag Points to the buffer to receive the authentication tag.
  */
@@ -118,7 +118,7 @@ void ascon_masked_finalize_128_x2
  * \brief Finalizes the 2-share version of a masked ASCON state and
  * computes the final authentication tag for ASCON-128a.
  *
- * \param The masked ASCON state to be finalized.
+ * \param state The masked ASCON state to be finalized.
  * \param mk Points to the masked key value.
  * \param tag Points to the buffer to receive the authentication tag.
  */
@@ -130,7 +130,7 @@ void ascon_masked_finalize_128a_x2
  * \brief Finalizes the 2-share version of a masked ASCON state and
  * computes the final authentication tag for ASCON-80pq.
  *
- * \param The masked ASCON state to be finalized.
+ * \param state The masked ASCON state to be finalized.
  * \param mk Points to the masked key value.
  * \param tag Points to the buffer to receive the authentication tag.
  */
