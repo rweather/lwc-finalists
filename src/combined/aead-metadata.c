@@ -49,6 +49,7 @@
 #include "sparkle-hash.h"
 #include "tinyjambu-aead.h"
 #include "tinyjambu-aead-masked.h"
+#include "tinyjambu-siv.h"
 #include "xoodyak-aead.h"
 #include "xoodyak-hash.h"
 #include "xoodyak-masked.h"
@@ -680,6 +681,39 @@ aead_cipher_t const tiny_jambu_256_masked_cipher = {
     AEAD_FLAG_LITTLE_ENDIAN | AEAD_FLAG_SC_PROTECT_ALL | AEAD_FLAG_MASKED,
     tiny_jambu_256_masked_aead_encrypt,
     tiny_jambu_256_masked_aead_decrypt,
+    0, 0
+};
+
+aead_cipher_t const tiny_jambu_128_siv_cipher = {
+    "TinyJAMBU-128-SIV",
+    TINY_JAMBU_128_KEY_SIZE,
+    TINY_JAMBU_NONCE_SIZE,
+    TINY_JAMBU_TAG_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    tiny_jambu_128_siv_encrypt,
+    tiny_jambu_128_siv_decrypt,
+    0, 0
+};
+
+aead_cipher_t const tiny_jambu_192_siv_cipher = {
+    "TinyJAMBU-192-SIV",
+    TINY_JAMBU_192_KEY_SIZE,
+    TINY_JAMBU_NONCE_SIZE,
+    TINY_JAMBU_TAG_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    tiny_jambu_192_siv_encrypt,
+    tiny_jambu_192_siv_decrypt,
+    0, 0
+};
+
+aead_cipher_t const tiny_jambu_256_siv_cipher = {
+    "TinyJAMBU-256-SIV",
+    TINY_JAMBU_256_KEY_SIZE,
+    TINY_JAMBU_NONCE_SIZE,
+    TINY_JAMBU_TAG_SIZE,
+    AEAD_FLAG_LITTLE_ENDIAN,
+    tiny_jambu_256_siv_encrypt,
+    tiny_jambu_256_siv_decrypt,
     0, 0
 };
 

@@ -62,6 +62,7 @@ OBJS = \
         sparkle-prng.o \
         tinyjambu-aead.o \
         tinyjambu-aead-masked.o \
+        tinyjambu-siv.o \
         tinyjambu-prng.o \
         xoodyak-aead.o \
         xoodyak-hash.o \

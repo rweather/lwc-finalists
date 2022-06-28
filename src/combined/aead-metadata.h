@@ -517,6 +517,21 @@ extern aead_cipher_t const tiny_jambu_192_masked_cipher;
  */
 extern aead_cipher_t const tiny_jambu_256_masked_cipher;
 
+/**
+ * \brief Meta-information block for the TinyJAMBU-128-SIV cipher.
+ */
+extern aead_cipher_t const tiny_jambu_128_siv_cipher;
+
+/**
+ * \brief Meta-information block for the TinyJAMBU-192-SIV cipher.
+ */
+extern aead_cipher_t const tiny_jambu_192_siv_cipher;
+
+/**
+ * \brief Meta-information block for the TinyJAMBU-256-SIV cipher.
+ */
+extern aead_cipher_t const tiny_jambu_256_siv_cipher;
+
 /*------------------------ Xoodyak ------------------------*/
 
 /**

@@ -67,6 +67,9 @@ static const aead_cipher_t *const ciphers[] = {
     &tiny_jambu_128_masked_cipher,
     &tiny_jambu_192_masked_cipher,
     &tiny_jambu_256_masked_cipher,
+    &tiny_jambu_128_siv_cipher,
+    &tiny_jambu_192_siv_cipher,
+    &tiny_jambu_256_siv_cipher,
     &xoodyak_cipher,
     &xoodyak_masked_cipher,
     0
